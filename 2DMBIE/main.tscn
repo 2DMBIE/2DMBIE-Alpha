@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/agent1/foot_right.png" type="Texture" id=1]
 [ext_resource path="res://assets/agent1/lowerleg_left.png" type="Texture" id=2]
@@ -232,6 +232,57 @@ tracks/20/keys = {
 "times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "wave"
+tracks/0/type = "value"
+tracks/0/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2.46821, 9.84099 ), Vector2( 2.46821, 9.84099 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 5.70469, 9.29776 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("torso:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3.61438, -74.9716 ), Vector2( 3.61438, -74.9716 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("torso:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
 [node name="Node2D" type="Node2D"]
 position = Vector2( 65.0658, 13.5528 )
 
@@ -262,16 +313,17 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="torso/legs"]
 position = Vector2( -7.13142, 3.21576 )
-rotation = 0.547091
+rotation = -0.877386
 texture = ExtResource( 5 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
-"_edit_bone_": true
+"_edit_bone_": true,
+"_edit_ik_": true
 }
 
 [node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
 position = Vector2( -4.78177, 19.7605 )
-rotation = 0.815528
+rotation = 0.492953
 texture = ExtResource( 4 )
 offset = Vector2( 1.13898, 5.86415 )
 __meta__ = {
@@ -280,7 +332,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
 position = Vector2( 2.46821, 9.84099 )
-rotation = -0.270868
+rotation = 0.0995656
 texture = ExtResource( 1 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -295,7 +347,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="torso/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.482105
+rotation = 1.29171
 z_index = -1
 texture = ExtResource( 10 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -306,7 +358,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 1.01921
+rotation = -0.0526917
 texture = ExtResource( 2 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -315,7 +367,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.546464
+rotation = 0.435316
 texture = ExtResource( 3 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -392,3 +444,4 @@ texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/walk = SubResource( 1 )
+anims/wave = SubResource( 2 )
