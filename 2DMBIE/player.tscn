@@ -1,0 +1,191 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/animations/walk-animation.tres" type="Animation" id=1]
+[ext_resource path="res://assets/agent1/lowerleg_right.png" type="Texture" id=2]
+[ext_resource path="res://assets/agent1/lowerarm_right.png" type="Texture" id=3]
+[ext_resource path="res://assets/agent1/hand_left.png" type="Texture" id=4]
+[ext_resource path="res://assets/agent1/thigh_left.png" type="Texture" id=5]
+[ext_resource path="res://assets/agent1/torso.png" type="Texture" id=6]
+[ext_resource path="res://assets/agent1/head.png" type="Texture" id=7]
+[ext_resource path="res://assets/agent1/lowerarm_left.png" type="Texture" id=8]
+[ext_resource path="res://assets/agent1/gun.png" type="Texture" id=9]
+[ext_resource path="res://assets/agent1/foot_right.png" type="Texture" id=10]
+[ext_resource path="res://assets/agent1/thigh_right.png" type="Texture" id=11]
+[ext_resource path="res://assets/agent1/upperarm_left.png" type="Texture" id=12]
+[ext_resource path="res://assets/agent1/upperarm_right.png" type="Texture" id=13]
+[ext_resource path="res://assets/agent1/foot_left.png" type="Texture" id=14]
+[ext_resource path="res://assets/agent1/hand_right.png" type="Texture" id=15]
+[ext_resource path="res://assets/agent1/lowerleg_left.png" type="Texture" id=16]
+[ext_resource path="res://player.gd" type="Script" id=17]
+[ext_resource path="res://assets/groundsprites.png" type="Texture" id=18]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 26.2156
+height = 81.4238
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 17 )
+
+[node name="torso" type="Sprite" parent="."]
+position = Vector2( 3.80419, -75.6688 )
+texture = ExtResource( 6 )
+offset = Vector2( -3.4807, -0.343582 )
+
+[node name="head" type="Sprite" parent="torso"]
+position = Vector2( -0.0163317, -24.4058 )
+texture = ExtResource( 7 )
+offset = Vector2( 3.61706, -20.7686 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="legs" type="Position2D" parent="torso"]
+position = Vector2( -0.00668335, 18.6922 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="thigh_right" type="Sprite" parent="torso/legs"]
+position = Vector2( -6.18385, 3.40305 )
+rotation = 0.281092
+texture = ExtResource( 11 )
+offset = Vector2( -0.569733, 9.51619 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
+position = Vector2( -1.00315, 16.9141 )
+rotation = 0.932737
+texture = ExtResource( 2 )
+offset = Vector2( 1.15935, 6.17796 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
+position = Vector2( 0.506659, 14.2129 )
+rotation = -0.348273
+texture = ExtResource( 10 )
+offset = Vector2( 6.97537, 2.76973 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="toes_right" type="Position2D" parent="torso/legs/thigh_right/lowerleg_right/foot_right"]
+position = Vector2( 15.1624, 5.05409 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="thigh_left" type="Sprite" parent="torso/legs"]
+position = Vector2( 3.28812, 3.49881 )
+rotation = -0.593578
+z_index = -1
+texture = ExtResource( 5 )
+offset = Vector2( -0.0710678, 9.22731 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
+position = Vector2( 1.05579, 17.9436 )
+rotation = 0.344982
+texture = ExtResource( 16 )
+offset = Vector2( 0.816467, 5.62079 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
+position = Vector2( 0.074131, 13.4046 )
+rotation = -0.361747
+texture = ExtResource( 14 )
+offset = Vector2( 6.562, 2.194 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="toes_left" type="Position2D" parent="torso/legs/thigh_left/lowerleg_left/foot_left"]
+position = Vector2( 12.9359, 4.65146 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="upperarm_left" type="Sprite" parent="torso"]
+position = Vector2( 12.6409, -10.4768 )
+rotation = 0.324524
+z_index = -1
+texture = ExtResource( 12 )
+offset = Vector2( -0.0147476, 7.05466 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="lowerarm_left" type="Sprite" parent="torso/upperarm_left"]
+position = Vector2( -0.938873, 18.0288 )
+rotation = -1.94903
+texture = ExtResource( 8 )
+offset = Vector2( 0.949958, 6.18722 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="hand_left" type="Sprite" parent="torso/upperarm_left/lowerarm_left"]
+position = Vector2( 0, 18.566 )
+rotation = 1.4308
+z_index = 2
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="upperarm_right" type="Sprite" parent="torso"]
+position = Vector2( -14.969, -10.6482 )
+rotation = 0.171752
+z_index = 1
+texture = ExtResource( 13 )
+offset = Vector2( -0.0279083, 8.82368 )
+__meta__ = {
+"_edit_bone_": true,
+"_edit_ik_": true
+}
+
+[node name="lowerarm_right" type="Sprite" parent="torso/upperarm_right"]
+position = Vector2( -1.01368, 20.0398 )
+rotation = -1.65516
+z_index = 1
+texture = ExtResource( 3 )
+offset = Vector2( 0.498055, 6.75774 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="hand_right" type="Sprite" parent="torso/upperarm_right/lowerarm_right"]
+position = Vector2( 1.33635, 15.2045 )
+rotation = -0.0794197
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_bone_": true
+}
+
+[node name="gun" type="Sprite" parent="torso"]
+position = Vector2( 11.1685, 4.68671 )
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -78.103 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/walk = ExtResource( 1 )
+
+[node name="ground" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 7.08516, -8.38797 )
+scale = Vector2( 1, 0.139654 )
+z_index = -3
+texture = ExtResource( 18 )
