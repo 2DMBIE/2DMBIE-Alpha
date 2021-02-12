@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/agent1/foot_right.png" type="Texture" id=1]
 [ext_resource path="res://assets/agent1/lowerleg_left.png" type="Texture" id=2]
@@ -18,287 +18,243 @@
 [ext_resource path="res://background.png" type="Texture" id=16]
 
 [sub_resource type="Animation" id=1]
-resource_name = "walk"
-length = 2.0
+resource_name = "walk (final) "
+length = 1.6
 loop = true
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left/toes_left:position:x")
-tracks/0/interp = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("torso/legs/thigh_left:position")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 12.9359, -0.25, 0, 0.25, 0, 12.9359, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ) ]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left/toes_left:position:y")
-tracks/1/interp = 1
+tracks/1/type = "value"
+tracks/1/path = NodePath("torso/legs/thigh_left:rotation_degrees")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 4.65146, -0.25, 0, 0.25, 0, 4.65146, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.7 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -47.8029, 3.34831, 23.2408, 38.4009, 21.1167, 6.80633, -25.8629, -67.9169, -47.8029 ]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left/toes_left:rotation_degrees")
-tracks/2/interp = 1
+tracks/2/type = "value"
+tracks/2/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:position")
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ), Vector2( 0.506659, 14.2129 ) ]
 }
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left:position:x")
-tracks/3/interp = 1
+tracks/3/type = "value"
+tracks/3/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 0.074131, -0.25, 0, 0.25, 0, 0.074131, -0.25, 0, 0.25, 0, 0.074131, -0.25, 0, 0.25, 0, 0.074131, -0.25, 0, 0.25, 0, 0.074131, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -26.6866, -2.31802, 2.58653, 1.28009, -4.05807, -14.6937, -25.465, -22.2248, -26.6866 ]
 }
-tracks/4/type = "bezier"
-tracks/4/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left:position:y")
-tracks/4/interp = 1
+tracks/4/type = "value"
+tracks/4/path = NodePath("torso/legs/thigh_right/lowerleg_right:position")
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 13.4046, -0.25, 0, 0.25, 0, 13.4046, -0.25, 0, 0.25, 0, 13.4046, -0.25, 0, 0.25, 0, 13.4046, -0.25, 0, 0.25, 0, 13.4046, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ) ]
 }
-tracks/5/type = "bezier"
-tracks/5/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left:rotation_degrees")
-tracks/5/interp = 1
+tracks/5/type = "value"
+tracks/5/path = NodePath("torso/legs/thigh_right/lowerleg_right:rotation_degrees")
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( -31.3101, -0.25, 0, 0.25, 0, 17.5327, -0.25, 0, 0.25, 0, -4.07738, -0.25, 0, 0.25, 0, 8.98098, -0.25, 0, 0.25, 0, -10.9859, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 52.0196, 63.1127, 112.031, 90.9458, 17.5642, 38.757, 18.3131, 18.0928, 52.0196 ]
 }
-tracks/6/type = "bezier"
-tracks/6/path = NodePath("torso/legs/thigh_left/lowerleg_left:position:x")
-tracks/6/interp = 1
+tracks/6/type = "value"
+tracks/6/path = NodePath("torso/legs/thigh_right:position")
+tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 1.05579, -0.25, 0, 0.25, 0, 1.05579, -0.25, 0, 0.25, 0, 1.05579, -0.25, 0, 0.25, 0, 1.05579, -0.25, 0, 0.25, 0, 1.05579, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ) ]
 }
-tracks/7/type = "bezier"
-tracks/7/path = NodePath("torso/legs/thigh_left/lowerleg_left:position:y")
-tracks/7/interp = 1
+tracks/7/type = "value"
+tracks/7/path = NodePath("torso/legs/thigh_right:rotation_degrees")
+tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 17.9436, -0.25, 0, 0.25, 0, 17.9436, -0.25, 0, 0.25, 0, 17.9436, -0.25, 0, 0.25, 0, 17.9436, -0.25, 0, 0.25, 0, 17.9436, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 12.2992, 18.9153, -35.995, -74.6254, -56.7465, -23.6246, 8.31296, 13.82, 12.2992 ]
 }
-tracks/8/type = "bezier"
-tracks/8/path = NodePath("torso/legs/thigh_left/lowerleg_left:rotation_degrees")
-tracks/8/interp = 1
+tracks/8/type = "value"
+tracks/8/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left:position")
+tracks/8/interp = 2
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( 58.3967, -0.25, 0, 0.25, 0, -2.33878, -0.25, 0, 0.25, 0, -3.05199, -0.25, 0, 0.25, 0, -2.96923, -0.25, 0, 0.25, 0, -2.94269, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ) ]
 }
-tracks/9/type = "bezier"
-tracks/9/path = NodePath("torso/legs/thigh_left:position:x")
-tracks/9/interp = 1
+tracks/9/type = "value"
+tracks/9/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left:rotation_degrees")
+tracks/9/interp = 2
 tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
 tracks/9/keys = {
-"points": PoolRealArray( 3.28812, -0.25, 0, 0.25, 0, 3.28812, -0.25, 0, 0.25, 0, 3.28812, -0.25, 0, 0.25, 0, 3.28812, -0.25, 0, 0.25, 0, 3.28812, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -30.111, 0.52057, -19.5295, -10.4675, -19.7026, 5.27137, -1.86615, 8.27258, -30.111 ]
 }
-tracks/10/type = "bezier"
-tracks/10/path = NodePath("torso/legs/thigh_left:position:y")
-tracks/10/interp = 1
+tracks/10/type = "value"
+tracks/10/path = NodePath("torso/legs/thigh_left/lowerleg_left:position")
+tracks/10/interp = 2
 tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"points": PoolRealArray( 3.49881, -0.25, 0, 0.25, 0, 3.49881, -0.25, 0, 0.25, 0, 3.49881, -0.25, 0, 0.25, 0, 3.49881, -0.25, 0, 0.25, 0, 3.49881, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ) ]
 }
-tracks/11/type = "bezier"
-tracks/11/path = NodePath("torso/legs/thigh_left:rotation_degrees")
-tracks/11/interp = 1
+tracks/11/type = "value"
+tracks/11/path = NodePath("torso/legs/thigh_left/lowerleg_left:rotation_degrees")
+tracks/11/interp = 2
 tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
 tracks/11/keys = {
-"points": PoolRealArray( -27.6226, -0.25, 0, 0.25, 0, -14.8637, -0.25, 0, 0.25, 0, 64.2413, -0.25, 0, 0.25, 0, -30.5204, -0.25, 0, 0.25, 0, 51.5789, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 28.7843, -3.04501, -3.05015, 4.9814, 56.882, 88.844, 107.397, 89.663, 28.7843 ]
 }
-tracks/12/type = "bezier"
-tracks/12/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:position:x")
-tracks/12/interp = 1
+tracks/12/type = "value"
+tracks/12/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right/toes_right:position")
+tracks/12/interp = 2
 tracks/12/loop_wrap = true
 tracks/12/imported = false
 tracks/12/enabled = true
 tracks/12/keys = {
-"points": PoolRealArray( 2.46821, -0.25, 0, 0.25, 0, 2.46821, -0.25, 0, 0.25, 0, 1.91495, -0.25, 0, 0.25, 0, 2.46821, -0.25, 0, 0.25, 0, 2.46821, -0.25, 0, 0.25, 0, 2.46821, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.1, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15.1624, 5.05409 ), Vector2( 15.1624, 5.05409 ) ]
 }
-tracks/13/type = "bezier"
-tracks/13/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:position:y")
-tracks/13/interp = 1
+tracks/13/type = "value"
+tracks/13/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right/toes_right:rotation_degrees")
+tracks/13/interp = 2
 tracks/13/loop_wrap = true
 tracks/13/imported = false
 tracks/13/enabled = true
 tracks/13/keys = {
-"points": PoolRealArray( 9.84099, -0.25, 0, 0.25, 0, 14.9406, -0.25, 0, 0.25, 0, 9.84099, -0.25, 0, 0.25, 0, 9.84099, -0.25, 0, 0.25, 0, 9.84099, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
 }
-tracks/14/type = "bezier"
-tracks/14/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
-tracks/14/interp = 1
+tracks/14/type = "value"
+tracks/14/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left/toes_left:position")
+tracks/14/interp = 2
 tracks/14/loop_wrap = true
 tracks/14/imported = false
 tracks/14/enabled = true
 tracks/14/keys = {
-"points": PoolRealArray( -15.5196, -0.25, 0, 0.25, 0, -3.1033, -0.25, 0, 0.25, 0, -17.297, -0.25, 0, 0.25, 0, 1.79217, -0.25, 0, 0.25, 0, -5.35118, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 12.9359, 4.65146 ), Vector2( 12.9359, 4.65146 ) ]
 }
-tracks/15/type = "bezier"
-tracks/15/path = NodePath("torso/legs/thigh_right/lowerleg_right:position:x")
-tracks/15/interp = 1
+tracks/15/type = "value"
+tracks/15/path = NodePath("torso/legs/thigh_left/lowerleg_left/foot_left/toes_left:rotation_degrees")
+tracks/15/interp = 2
 tracks/15/loop_wrap = true
 tracks/15/imported = false
 tracks/15/enabled = true
 tracks/15/keys = {
-"points": PoolRealArray( -4.78177, -0.25, 0, 0.25, 0, -0.899626, -0.25, 0, 0.25, 0, -4.78177, -0.25, 0, 0.25, 0, -4.78177, -0.25, 0, 0.25, 0, -4.78177, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
 }
-tracks/16/type = "bezier"
-tracks/16/path = NodePath("torso/legs/thigh_right/lowerleg_right:position:y")
-tracks/16/interp = 1
+tracks/16/type = "value"
+tracks/16/path = NodePath("torso:position")
+tracks/16/interp = 2
 tracks/16/loop_wrap = true
 tracks/16/imported = false
 tracks/16/enabled = true
 tracks/16/keys = {
-"points": PoolRealArray( 19.7605, -0.25, 0, 0.25, 0, 16.6413, -0.25, 0, 0.25, 0, 19.7605, -0.25, 0, 0.25, 0, 19.7605, -0.25, 0, 0.25, 0, 19.7605, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 0.116629, 1, 1, 1, 0.116629, 1, 1.10957, 1 ),
+"update": 0,
+"values": [ Vector2( 3.87924, -74.9716 ), Vector2( 3.61438, -77.0905 ), Vector2( 3.61438, -74.3385 ), Vector2( 3.61438, -76.2057 ), Vector2( 3.08464, -72.2204 ), Vector2( 3.16893, -75.095 ), Vector2( 3.87924, -74.9716 ), Vector2( 4.49002, -76.1162 ), Vector2( 3.87924, -74.9716 ) ]
 }
-tracks/17/type = "bezier"
-tracks/17/path = NodePath("torso/legs/thigh_right/lowerleg_right:rotation_degrees")
-tracks/17/interp = 1
+tracks/17/type = "value"
+tracks/17/path = NodePath("torso:rotation_degrees")
+tracks/17/interp = 2
 tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
-"points": PoolRealArray( 46.7263, -0.25, 0, 0.25, 0, 26.3575, -0.25, 0, 0.25, 0, 28.6487, -0.25, 0, 0.25, 0, 27.7549, -0.25, 0, 0.25, 0, 26.4991, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
-}
-tracks/18/type = "bezier"
-tracks/18/path = NodePath("torso/legs/thigh_right:position:x")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
-"points": PoolRealArray( -7.13142, -0.25, 0, 0.25, 0, -7.63142, -0.25, 0, 0.25, 0, -7.13142, -0.25, 0, 0.25, 0, -7.13142, -0.25, 0, 0.25, 0, -7.13142, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
-}
-tracks/19/type = "bezier"
-tracks/19/path = NodePath("torso/legs/thigh_right:position:y")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
-"points": PoolRealArray( 3.21576, -0.25, 0, 0.25, 0, 3.96576, -0.25, 0, 0.25, 0, 3.21576, -0.25, 0, 0.25, 0, 3.21576, -0.25, 0, 0.25, 0, 3.21576, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
-}
-tracks/20/type = "bezier"
-tracks/20/path = NodePath("torso/legs/thigh_right:rotation_degrees")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
-"points": PoolRealArray( 31.346, -0.25, 0, 0.25, 0, 10.4758, -0.25, 0, 0.25, 0, -44.5688, -0.25, 0, 0.25, 0, 33.9593, -0.25, 0, 0.25, 0, -63.3866, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.523054, 0.7, 1, 2 )
+"times": PoolRealArray( 0.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "wave"
-tracks/0/type = "value"
-tracks/0/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 2.46821, 9.84099 ), Vector2( 2.46821, 9.84099 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("torso/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 5.70469, 9.29776 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("torso:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3.61438, -74.9716 ), Vector2( 3.61438, -74.9716 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("torso:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-
-[node name="Node2D" type="Node2D"]
-position = Vector2( 65.0658, 13.5528 )
+[node name="Player" type="Node2D"]
+position = Vector2( 45.006, 12.487 )
 
 [node name="background" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.521569 )
-position = Vector2( -145.626, -74.2056 )
+position = Vector2( -420.584, -105.463 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 16 )
 
 [node name="torso" type="Sprite" parent="."]
-position = Vector2( 3.61438, -74.9716 )
+position = Vector2( 3.17976, -72.8215 )
 texture = ExtResource( 11 )
 offset = Vector2( -3.4807, -0.343582 )
 
 [node name="head" type="Sprite" parent="torso"]
-position = Vector2( 0.374568, -25.4558 )
+position = Vector2( -0.0163317, -24.4058 )
 texture = ExtResource( 12 )
 offset = Vector2( 3.61706, -20.7686 )
 __meta__ = {
@@ -312,8 +268,8 @@ __meta__ = {
 }
 
 [node name="thigh_right" type="Sprite" parent="torso/legs"]
-position = Vector2( -7.13142, 3.21576 )
-rotation = -0.877386
+position = Vector2( -6.18385, 3.40305 )
+rotation = -1.10438
 texture = ExtResource( 5 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -322,17 +278,17 @@ __meta__ = {
 }
 
 [node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
-position = Vector2( -4.78177, 19.7605 )
-rotation = 0.492953
+position = Vector2( -1.00315, 16.9141 )
+rotation = 0.517098
 texture = ExtResource( 4 )
-offset = Vector2( 1.13898, 5.86415 )
+offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
-position = Vector2( 2.46821, 9.84099 )
-rotation = 0.0995656
+position = Vector2( 0.506659, 14.2129 )
+rotation = -0.040738
 texture = ExtResource( 1 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -347,7 +303,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="torso/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = 1.29171
+rotation = 0.449012
 z_index = -1
 texture = ExtResource( 10 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -358,7 +314,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = -0.0526917
+rotation = 0.784646
 texture = ExtResource( 2 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -367,7 +323,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = 0.435316
+rotation = -0.339867
 texture = ExtResource( 3 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -438,10 +394,9 @@ __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="gun" type="Sprite" parent="."]
-position = Vector2( 12.781, -68.9974 )
+[node name="gun" type="Sprite" parent="torso"]
+position = Vector2( 11.1734, 4.6855 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/walk = SubResource( 1 )
-anims/wave = SubResource( 2 )
+"anims/walk (final) " = SubResource( 1 )
