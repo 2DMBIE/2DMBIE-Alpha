@@ -2726,7 +2726,7 @@ node_connections = [ "output", 0, "walk-idle", "walk-idle", 0, "Animation 2", "w
 script = ExtResource( 17 )
 
 [node name="torso" type="Sprite" parent="."]
-position = Vector2( 3.80419, -75.6688 )
+position = Vector2( 3.879, -74.219 )
 texture = ExtResource( 6 )
 offset = Vector2( -3.4807, -0.343582 )
 
@@ -2746,7 +2746,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="torso/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.281092
+rotation = 0.233768
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -2756,7 +2756,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.932737
+rotation = 0.278616
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -2764,8 +2764,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.506659, 14.2129 )
-rotation = -0.348273
+position = Vector2( 0.506893, 14.3504 )
+rotation = -0.511034
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -2780,7 +2780,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="torso/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.593578
+rotation = -0.328799
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -2791,7 +2791,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.344982
+rotation = 0.7062
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -2800,7 +2800,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.361747
+rotation = -0.361546
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -2897,6 +2897,7 @@ anims/no_aim = SubResource( 13 )
 anims/walk = ExtResource( 1 )
 
 [node name="ground" type="Sprite" parent="."]
+visible = false
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 7.08516, -8.38797 )
 scale = Vector2( 1, 0.139654 )
