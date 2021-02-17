@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/groundsprites.png" type="Texture" id=1]
 [ext_resource path="res://player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://assets/crosshair2.png" type="Texture" id=4]
+[ext_resource path="res://map.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160.121, 22.354 )
@@ -11,6 +13,7 @@ extents = Vector2( 160.121, 22.354 )
 extents = Vector2( 31.4912, 32.3642 )
 
 [node name="Level" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="floor" type="StaticBody2D" parent="."]
 position = Vector2( 448, 512 )
@@ -84,3 +87,8 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 299.693, 497.281 )
+
+[node name="Cursor" type="Sprite" parent="."]
+position = Vector2( -64, 64 )
+scale = Vector2( 0.036, 0.036 )
+texture = ExtResource( 4 )
