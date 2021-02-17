@@ -2723,6 +2723,7 @@ nodes/walk-idle/position = Vector2( 20, 140 )
 node_connections = [ "output", 0, "walk-idle", "walk-idle", 0, "Animation 2", "walk-idle", 1, "Animation" ]
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 204.338, 210.645 )
 script = ExtResource( 17 )
 
 [node name="torso" type="Sprite" parent="."]
@@ -2874,6 +2875,14 @@ __meta__ = {
 [node name="gun" type="Sprite" parent="torso"]
 position = Vector2( 11.1685, 4.68671 )
 texture = ExtResource( 9 )
+script = ExtResource( 19 )
+bullet_delay = 0.2
+
+[node name="BulletDelayTimer" type="Timer" parent="torso/gun"]
+one_shot = true
+
+[node name="BulletPoint" type="Node2D" parent="torso/gun"]
+position = Vector2( 42.463, -8.33386 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
