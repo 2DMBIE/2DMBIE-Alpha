@@ -15,7 +15,7 @@ func _process(delta):
 	if (Input.is_action_pressed("shoot") and bulletDelayTimer.is_stopped()):
 		bulletDelayTimer.start(bullet_delay)
 		var bullet := plBullet.instance()
-		bullet.position = get_global_position()
+		bullet.position = $BulletPoint.get_global_position()
 		bullet.rotation_degrees = rotation_degrees 
 		bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 		get_tree().current_scene.add_child(bullet)

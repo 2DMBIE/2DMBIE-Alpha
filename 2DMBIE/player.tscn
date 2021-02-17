@@ -183,6 +183,9 @@ bullet_delay = 0.2
 [node name="BulletDelayTimer" type="Timer" parent="torso/gun"]
 one_shot = true
 
+[node name="BulletPoint" type="Node2D" parent="torso/gun"]
+position = Vector2( 42.463, -8.33386 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -78.103 )
 shape = SubResource( 1 )
