@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation.tres" type="Animation" id=1]
 [ext_resource path="res://assets/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://player.gd" type="Script" id=17]
 [ext_resource path="res://assets/groundsprites.png" type="Texture" id=18]
 [ext_resource path="res://assets/animations/idle-animation.tres" type="Animation" id=19]
+[ext_resource path="res://gun.gd" type="Script" id=20]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.2156
@@ -2727,7 +2728,7 @@ position = Vector2( 204.338, 210.645 )
 script = ExtResource( 17 )
 
 [node name="torso" type="Sprite" parent="."]
-position = Vector2( 3.879, -74.219 )
+position = Vector2( 3.879, -73.6951 )
 texture = ExtResource( 6 )
 offset = Vector2( -3.4807, -0.343582 )
 
@@ -2747,7 +2748,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="torso/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.233768
+rotation = 0.168649
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -2757,7 +2758,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.278616
+rotation = 0.428246
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -2765,8 +2766,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.506893, 14.3504 )
-rotation = -0.511034
+position = Vector2( 0.506807, 14.3 )
+rotation = -0.595206
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -2781,7 +2782,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="torso/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.328799
+rotation = -0.369831
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -2792,7 +2793,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.7062
+rotation = 0.800872
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -2801,7 +2802,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.361546
+rotation = -0.411351
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -2875,7 +2876,7 @@ __meta__ = {
 [node name="gun" type="Sprite" parent="torso"]
 position = Vector2( 11.1685, 4.68671 )
 texture = ExtResource( 9 )
-script = ExtResource( 19 )
+script = ExtResource( 20 )
 bullet_delay = 0.2
 
 [node name="BulletDelayTimer" type="Timer" parent="torso/gun"]
