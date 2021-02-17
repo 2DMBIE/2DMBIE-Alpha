@@ -83,7 +83,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 355.82, 303.065 )
+position = Vector2( 355.82, 302.065 )
 
 [node name="PlayerProtoAnton" type="KinematicBody2D" parent="."]
 position = Vector2( 472.115, 42.8115 )

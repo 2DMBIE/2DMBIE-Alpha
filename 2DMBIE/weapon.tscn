@@ -5,3 +5,6 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Gun" parent="." instance=ExtResource( 1 )]
+position = Vector2( 92.8252, 148.84 )
+bullet_speed = 9000
+bullet_delay = 0.5
