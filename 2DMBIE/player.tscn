@@ -2723,12 +2723,14 @@ nodes/walk-idle/node = SubResource( 17 )
 nodes/walk-idle/position = Vector2( 20, 140 )
 node_connections = [ "output", 0, "walk-idle", "walk-idle", 0, "Animation 2", "walk-idle", 1, "Animation" ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 position = Vector2( 204.338, 210.645 )
 script = ExtResource( 17 )
 
 [node name="torso" type="Sprite" parent="."]
-position = Vector2( 3.879, -73.6951 )
+position = Vector2( 3.879, -74.7248 )
 texture = ExtResource( 6 )
 offset = Vector2( -3.4807, -0.343582 )
 
@@ -2748,7 +2750,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="torso/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.168649
+rotation = 0.29664
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -2758,7 +2760,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="torso/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.428246
+rotation = 0.134151
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -2766,8 +2768,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="torso/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.506807, 14.3 )
-rotation = -0.595206
+position = Vector2( 0.506976, 14.399 )
+rotation = -0.429768
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -2782,7 +2784,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="torso/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.369831
+rotation = -0.289184
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -2793,7 +2795,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="torso/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.800872
+rotation = 0.614796
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -2802,7 +2804,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="torso/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.411351
+rotation = -0.31346
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
