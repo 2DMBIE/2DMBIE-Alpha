@@ -8,6 +8,7 @@ const ACCELERATION = 20
 const MAX_SPEED = 110 #500
 const JUMP_HEIGHT = -600
 
+
 var motion = Vector2()
 
 func _ready():
@@ -73,3 +74,5 @@ func walk_idle_transition():
 	elif (speed < 0.00005) && (speed > 0.000001): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 1)
 		return
+
+
