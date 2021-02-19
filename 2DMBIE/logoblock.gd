@@ -7,12 +7,12 @@ export (float) var maxHealth = 500
 
 onready var health = maxHealth setget _set_health
 
-
 func kill():
 	queue_free()
 	
-func _damage(amount):
-	_set_health(health - amount)
+func _damage(damage):
+	_set_health(health - damage)
+	print(health)
 
 func _set_health(value):
 	var prevHealth = health

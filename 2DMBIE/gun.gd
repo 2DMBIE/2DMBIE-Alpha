@@ -6,8 +6,7 @@ var plBullet := preload("res://weapon/scene's/bullet.tscn")
 onready var bulletDelayTimer := $BulletDelayTimer
 
 #bullet variables
-export var bullet_speed = 1500 
-export var damage = 100
+export var bullet_speed = 1500
 export var bullet_delay: float = 1 
 
 
@@ -17,6 +16,7 @@ func _process(delta):
 		bulletDelayTimer.start(bullet_delay)
 		var bullet := plBullet.instance()
 		bullet.position = $BulletPoint.get_global_position()
+		bullet.rotation = get_angle_to(get_global_mouse_position())
 		bullet.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
 		get_tree().current_scene.add_child(bullet)
 
