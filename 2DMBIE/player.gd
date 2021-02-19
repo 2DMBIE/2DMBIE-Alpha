@@ -21,16 +21,22 @@ func _physics_process(delta):
 		motion.x -= ACCELERATION
 		motion.x = max(motion.x, -MAX_SPEED)
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-		aim()
-		direction("left")
-		
-		
+		if (aim() == false):
+			direction("left")
+		if (get_direction() == "right") && (motion.x < 0):
+			$AnimationTree.set("parameters/moonwalking/current", 0)
+		else: 
+			$AnimationTree.set("parameters/moonwalking/current", 1)
 	elif Input.is_action_pressed("right"):
 		motion.x += ACCELERATION
 		motion.x = min(motion.x, MAX_SPEED)
+		if (get_direction() == "left") && (motion.x > 0):
+			$AnimationTree.set("parameters/moonwalking/current", 0)
+		else: 
+			$AnimationTree.set("parameters/moonwalking/current", 1)
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-		aim()
-		direction("right")
+		if (aim() == false):
+			direction("right")
 	else:
 		aim()
 		friction = true
@@ -59,7 +65,14 @@ func direction(x):
 	elif (x == "right") && !($body.scale == Vector2(1,1)):
 		$body.scale = Vector2(1,1)
 	else: pass
-		
+
+func get_direction():
+	if ($body.scale == Vector2(-1,1)):
+		return "left"
+	elif ($body.scale == Vector2(1,1)):
+		return "right"
+	return "null"
+	
 func walk_idle_transition():
 	var speed = motion.x
 	if speed < 0:
@@ -97,15 +110,19 @@ func aim():
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
 			$AnimationTree.set("parameters/aim/blend_position", angle_degrees)
 			direction("left")
+			return true
 		elif (angle_degrees > 90) && (angle_degrees < 180):
 			var x = 90-angle_degrees
 			x = 90+x 
 			$AnimationTree.set("parameters/aim/blend_position", x)
 			direction("right")
+			return true
 		elif (angle_degrees > -180) && (angle_degrees < -90):
 			var y = -180-angle_degrees
 			$AnimationTree.set("parameters/aim/blend_position", y)
 			direction("right")
+			return true
 	else:
 		$AnimationTree.set("parameters/aim_state/current", 1)
+		return false
 
