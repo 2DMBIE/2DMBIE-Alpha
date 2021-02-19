@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://weapon/scene's/Gun.tscn" type="PackedScene" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Gun" parent="." instance=ExtResource( 1 )]
+position = Vector2( 92.8252, 148.84 )
+bullet_speed = 9000
+bullet_delay = 0.5
