@@ -16,7 +16,7 @@ func _process(_delta):
 		var mousePosition = get_global_mouse_position()
 		bullet.position = $BulletPoint.get_global_position()
 		bullet.rotation = $BulletPoint.get_angle_to(mousePosition)
-		var mouseDirection = bullet.global_position.direction_to(mousePosition).normalized()
+		var mouseDirection = bullet.position.direction_to(mousePosition).normalized()
 		bullet.set_direction(mouseDirection)
 		get_tree().current_scene.add_child(bullet)
 
