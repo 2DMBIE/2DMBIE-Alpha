@@ -11,6 +11,8 @@ const MAX_RUN_SPEED = 330
 const JUMP_HEIGHT = -500
 
 var motion = Vector2()
+var is_running = false
+var facing = "right"
 
 func _ready():
 	$AnimationTree.active = true
@@ -19,8 +21,8 @@ func _physics_process(_delta):
 	motion.y += GRAVITY
 	var friction = false
 
-	if Input.is_action_pressed("left"):
-		if is_running():
+	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+		if is_running:
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("left")
 			motion.x -= RUN_ACCELERATION
@@ -29,7 +31,7 @@ func _physics_process(_delta):
 				motion.x = 50
 			if (aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
-		else:
+		elif is_running == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
 			motion.x = max(motion.x, -MAX_WALK_SPEED)
@@ -41,8 +43,8 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
-	elif Input.is_action_pressed("right"):
-		if is_running():
+	elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+		if is_running:
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("right")
 			if (motion.x < -50):
@@ -51,7 +53,7 @@ func _physics_process(_delta):
 			motion.x = min(motion.x, MAX_RUN_SPEED)
 			if(aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
-		else: 
+		elif is_running == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
 			motion.x = min(motion.x, MAX_WALK_SPEED)
@@ -63,25 +65,28 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
-	else:
+	elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if (aim("walking") == false): 
 			$AnimationTree.set("parameters/aim/blend_position", 0)
 		friction = true
 		walk_idle_transition()
-		motion.x = lerp(motion.x, 0, 0.3)	
+		motion.x = lerp(motion.x, 0, 0.3)
+		is_running = false
 		
 	if is_on_floor():
 		$AnimationTree.set("parameters/in_air_state/current", 0)
-		if Input.is_action_just_pressed("up"):
+		if Input.is_action_just_pressed("jump"):
 			aim("walking")
 			motion.y = JUMP_HEIGHT
 			$AnimationTree.set("parameters/in_air_state/current", 1)
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.3)
+		running()
 	else:
 		#aim("walking")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
+			
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -90,8 +95,10 @@ func _physics_process(_delta):
 func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):
 		$body.scale = Vector2(-1,1)
+		facing = "left"
 	elif (x == "right") && !($body.scale == Vector2(1,1)):
 		$body.scale = Vector2(1,1)
+		facing = "right"
 	else: pass
 
 func get_direction():
@@ -101,8 +108,14 @@ func get_direction():
 		return "right"
 	return "null"
 	
-func is_running():	
-	return Input.is_action_pressed("shift-ctrl") #|| stickykey_shiftctrl
+func running():	
+	if Input.is_action_just_pressed("sprint") and is_running == false:
+		is_running = true
+	elif Input.is_action_just_pressed("sprint") and is_running:
+		is_running = false
+		
+	if Input.is_action_pressed("sprint"):
+		is_running = true
 			
 func walk_idle_transition():
 	var speed = motion.x
@@ -137,7 +150,7 @@ func aim(string):
 	var walking = false
 	if (string == "walking"):
 		walking = true
-	if Input.is_action_pressed("right_mousebutton"):
+	if Input.is_action_pressed("aim"):
 		$AnimationTree.set("parameters/aim_state/current", 0)
 		var positionA = $ShootVector.position
 		var positionB = get_local_mouse_position()
