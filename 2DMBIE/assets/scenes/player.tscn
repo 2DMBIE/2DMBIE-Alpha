@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/animations/walk-animation.tres" type="Animation" id=31]
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/gun.gd" type="Script" id=33]
+[ext_resource path="res://assets/scenes/Pivot.gd" type="Script" id=34]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.0467
@@ -568,10 +569,22 @@ modulate = Color( 1, 1, 1, 0.305882 )
 position = Vector2( -8.656, -5.013 )
 z_index = -3
 texture = ExtResource( 21 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="ShootVector" type="Position2D" parent="."]
 visible = false
 position = Vector2( 0, -14.763 )
+
+[node name="Pivot" type="Position2D" parent="."]
+position = Vector2( -5.04538, 3.36359 )
+script = ExtResource( 34 )
+
+[node name="Timer" type="Timer" parent="Pivot"]
+
+[node name="CameraOffset" type="Position2D" parent="Pivot"]
+
+[node name="Camera2D" type="Camera2D" parent="Pivot/CameraOffset"]
+current = true
+zoom = Vector2( 0.9, 0.9 )
+smoothing_enabled = true
+editor_draw_drag_margin = true
+[connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
