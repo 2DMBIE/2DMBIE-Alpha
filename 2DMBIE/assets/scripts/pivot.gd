@@ -3,14 +3,15 @@ extends Position2D
 onready var parent = get_parent()
 onready var cameraOffset = $CameraOffset
 onready var timer = $Timer
-var mouseAngle = get_global_mouse_position().angle()
+onready var mouseAngle = get_global_mouse_position().angle()
 var lookDir = "right"
 var timeout = true
 
 func _ready():
 	updatePivotAngle()
 	
-func _physics_process(delta):
+	
+func _physics_process(_delta):
 	timerTimeout()
 	
 func updatePivotAngle():
