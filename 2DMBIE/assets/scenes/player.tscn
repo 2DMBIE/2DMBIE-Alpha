@@ -33,7 +33,7 @@
 [ext_resource path="res://assets/animations/walk-animation.tres" type="Animation" id=31]
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/gun.gd" type="Script" id=33]
-[ext_resource path="res://assets/scenes/Pivot.gd" type="Script" id=34]
+[ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.0467
@@ -172,7 +172,7 @@ nodes/running/node = SubResource( 23 )
 nodes/running/position = Vector2( 200, 20 )
 nodes/walk-idle/node = SubResource( 24 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "in_air_state", 0, "running", "in_air_state", 1, "Animation 3", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "TimeScale", 0, "Animation 5" ]
+node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "in_air_state", 0, "running", "in_air_state", 1, "Animation 3", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale", 0, "Animation 5" ]
 
 [sub_resource type="Animation" id=26]
 tracks/0/type = "value"
@@ -362,7 +362,6 @@ offset = Vector2( -1.59697, -3.48996 )
 position = Vector2( 22.0728, -1.75482 )
 texture = ExtResource( 9 )
 script = ExtResource( 33 )
-bullet_delay = 0.2
 
 [node name="laser" type="Sprite" parent="body/chest/torso/gun"]
 visible = false
