@@ -177,7 +177,6 @@ func aim(string):
 	else:
 		$AnimationTree.set("parameters/aim_state/current", 1)
 		return false
-git s
 #health system
 export (float) var maxHealth = 1200
 export (float) var enemyDamage = 300
