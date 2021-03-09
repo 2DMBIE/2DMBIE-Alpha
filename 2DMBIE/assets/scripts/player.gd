@@ -177,4 +177,27 @@ func aim(string):
 	else:
 		$AnimationTree.set("parameters/aim_state/current", 1)
 		return false
+git s
+#health system
+export (float) var maxHealth = 1200
+export (float) var enemyDamage = 300
 
+onready var health = maxHealth setget setHealth
+
+signal health_updated(health)
+
+func setHealth(value):
+	var prevHealth = health
+	health = clamp(value, 0, maxHealth)
+	if health != prevHealth:
+		emit_signal("health_updated", health)
+		if health == 0:
+			queue_free()
+
+func takenDamage(enemyDamage):
+	setHealth(health - enemyDamage)
+	print(health)
+
+func _on_Hitbox_body_entered(body):
+	if body.is_in_group("enemies"):
+		takenDamage(enemyDamage)
