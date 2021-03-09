@@ -3,7 +3,7 @@ extends StaticBody2D
 signal health_updated(health)
 
 export (float) var maxHealth = 500
-
+export (float) var enemyDamage = 300
 
 onready var health = maxHealth setget _set_health
 
