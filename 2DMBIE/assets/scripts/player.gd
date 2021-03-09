@@ -180,7 +180,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var enemyDamage = get_node("../logoblock").enemyDamage
+onready var EnemyDamage = get_node("../logoblock").enemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -199,4 +199,4 @@ func takenDamage(enemyDamage):
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies"):
-		takenDamage(enemyDamage)
+		takenDamage(EnemyDamage)

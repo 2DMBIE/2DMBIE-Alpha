@@ -1,17 +1,17 @@
 extends Node2D
 
-const FACE = preload("res://face.tscn")
+const FACE = preload("res://assets/scenes/face.tscn")
 
 var jumpHeight = 1
 
 var tileMap
 var graph
 
-var cell_size = 16
+var cell_size = 64
 
 func _ready():
 	graph = AStar2D.new()
-	tileMap = find_parent("Level").find_node("TileMap")
+	tileMap = find_parent("Node2D").find_node("Blocks")
 	createMap()
 #	connectPoints()
 	
