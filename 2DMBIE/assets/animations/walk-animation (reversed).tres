@@ -1,8 +1,10 @@
 [gd_resource type="Animation" format=2]
 
 [resource]
+resource_name = "walk (reversed)"
 length = 1.6
 loop = true
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/legs/thigh_left:position")
 tracks/0/interp = 2
@@ -25,7 +27,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -47.8029, 3.34831, 23.2408, 38.4009, 21.1167, 6.80633, -25.8629, -67.9169, -47.8029 ]
+"values": [ -47.8029, -67.9169, -25.8629, 6.80633, 21.1167, 38.4009, 23.2408, 3.34831, -47.8029 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right:position")
@@ -49,7 +51,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -26.6866, -2.31802, 2.58653, 1.28009, -4.05807, -14.6937, -25.465, -22.2248, -26.6866 ]
+"values": [ -26.6866, -22.2248, -25.465, -14.6937, -4.05807, 1.28009, 2.58653, -2.31802, -26.6866 ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("body/legs/thigh_right/lowerleg_right:position")
@@ -73,7 +75,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 52.0196, 63.1127, 112.031, 90.9458, 17.5642, 38.757, 18.3131, 18.0928, 52.0196 ]
+"values": [ 52.0196, 18.0928, 18.3131, 38.757, 17.5642, 90.9458, 112.031, 63.1127, 52.0196 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("body/legs/thigh_right:position")
@@ -97,7 +99,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 12.2992, 18.9153, -35.995, -74.6254, -56.7465, -23.6246, 8.31296, 13.82, 12.2992 ]
+"values": [ 12.2992, 13.82, 8.31296, -23.6246, -56.7465, -74.6254, -35.995, 18.9153, 12.2992 ]
 }
 tracks/8/type = "value"
 tracks/8/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left:position")
@@ -121,7 +123,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ -30.111, 0.52057, -19.5295, -10.4675, -19.7026, 5.27137, -1.86615, 8.27258, -30.111 ]
+"values": [ -30.111, 8.27258, -1.86615, 5.27137, -19.7026, -10.4675, -19.5295, 0.52057, -30.111 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("body/legs/thigh_left/lowerleg_left:position")
@@ -145,7 +147,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 28.7843, -3.04501, -3.05015, 4.9814, 56.882, 88.844, 107.397, 89.663, 28.7843 ]
+"values": [ 28.7843, 89.663, 107.397, 88.844, 56.882, 4.9814, -3.05015, -3.04501, 28.7843 ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right/toes_right:position")
@@ -205,7 +207,7 @@ tracks/16/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 2 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 2 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, -3 ), Vector2( 0, 0 ) ]
 }
 tracks/17/type = "value"
 tracks/17/path = NodePath("body:rotation_degrees")
@@ -214,7 +216,7 @@ tracks/17/loop_wrap = true
 tracks/17/imported = false
 tracks/17/enabled = true
 tracks/17/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
+"times": PoolRealArray( 1.2, 1.4, 1.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0 ]
