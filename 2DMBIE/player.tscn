@@ -136,7 +136,7 @@ nodes/in_air_state/position = Vector2( 340, 160 )
 nodes/output/position = Vector2( 780, 160 )
 nodes/walk-idle/node = SubResource( 19 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "walk-idle", 0, "Animation 2", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "in_air_state", 0, "walk-idle", "in_air_state", 1, "Animation 3" ]
+node_connections = [ "output", 0, "Add2", "walk-idle", 0, "Animation 2", "walk-idle", 1, "Animation", "in_air_state", 0, "walk-idle", "in_air_state", 1, "Animation 3", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "aim_state", 0, "aim", "aim_state", 1, "Animation 6" ]
 
 [sub_resource type="Animation" id=21]
 resource_name = "idle2"
