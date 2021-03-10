@@ -448,7 +448,7 @@ texture = ExtResource( 3 )
 hframes = 21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 256, 400 )
+position = Vector2( 232, 424 )
 
 [node name="logoblock" parent="." instance=ExtResource( 7 )]
 

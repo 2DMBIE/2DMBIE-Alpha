@@ -195,8 +195,15 @@ func setHealth(value):
 
 func takenDamage(enemyDamage):
 	setHealth(health - enemyDamage)
-	get_node("Control/TextureProgress").value = int((float(health) / maxHealth * 100))
-	print(health)
+	var percentageHP = int((float(health) / maxHealth * 100))
+	get_node("healthbar/TextureProgress").value = percentageHP
+	if percentageHP >= 70:
+		get_node("healthbar/TextureProgress").set_tint_progress("14e114")
+	elif percentageHP <= 70 and percentageHP >= 30:
+		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
+	else:
+		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
+	
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies"):

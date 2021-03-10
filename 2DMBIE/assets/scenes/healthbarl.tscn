@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sprites/healthbar/underlayer.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/healthbar/overlayer.png" type="Texture" id=3]
 
-[node name="Control" type="Control"]
+[node name="healthbar" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
