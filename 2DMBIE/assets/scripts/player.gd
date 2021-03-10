@@ -195,6 +195,7 @@ func setHealth(value):
 
 func takenDamage(enemyDamage):
 	setHealth(health - enemyDamage)
+	get_node("Control/TextureProgress").value = int((float(health) / maxHealth * 100))
 	print(health)
 
 func _on_Hitbox_body_entered(body):
