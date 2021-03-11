@@ -22,3 +22,5 @@ tint_progress = Color( 0.0784314, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="TextureProgress"]
