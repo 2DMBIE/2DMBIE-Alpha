@@ -94,9 +94,6 @@ func _physics_process(_delta):
 		
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
-		print(i)
-		print("Collided with: ", collision.collider.name)
-		print(is_on_floor())
 		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 			GRAVITY = 0
 		else:
@@ -217,7 +214,7 @@ func takenDamage(enemyDamage):
 		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
 	else:
 		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
-	$Timer.start(2)
+	$Timer.start(10)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
@@ -234,9 +231,9 @@ func _on_Timer_timeout():
 	$Timer.start(2)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies"):
-		takenDamage(EnemyDamage)
+	takenDamage(EnemyDamage)
+	print(body.name)
 
 
-func _on_GroundChecker_body_exited(body):
+func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
