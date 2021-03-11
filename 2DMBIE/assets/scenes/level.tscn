@@ -452,6 +452,7 @@ position = Vector2( 232, 424 )
 maxHealth = 1200.0
 
 [node name="logoblock" parent="." instance=ExtResource( 7 )]
+position = Vector2( 448, 480 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 29 )
