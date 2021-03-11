@@ -34,6 +34,7 @@
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/gun.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
+[ext_resource path="res://assets/scenes/healthbarl.tscn" type="PackedScene" id=35]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 29.4319
@@ -350,6 +351,7 @@ tracks/13/keys = {
 collision_layer = 4
 collision_mask = 2147483678
 script = ExtResource( 17 )
+maxHealth = 1000.0
 
 [node name="body" type="Position2D" parent="."]
 position = Vector2( 0, -0.0808167 )
@@ -609,3 +611,15 @@ shape = SubResource( 27 )
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
+[node name="healthbar" parent="." instance=ExtResource( 35 )]
+margin_left = -64.0
+margin_top = -112.0
+margin_right = -64.0
+margin_bottom = -112.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

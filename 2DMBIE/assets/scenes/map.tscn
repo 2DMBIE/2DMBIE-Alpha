@@ -36,7 +36,8 @@ position = Vector2( 1760, 536 )
 position = Vector2( 1440, 536 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 275.727, 432.112 )
+position = Vector2( 251.227, 431.667 )
+maxHealth = 1200.0
 
 [node name="cursor" type="Sprite" parent="."]
 position = Vector2( 522.057, 324.117 )
