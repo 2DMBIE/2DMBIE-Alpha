@@ -3,12 +3,13 @@ extends KinematicBody2D
 var velocity = Vector2(0,0)
 
 const UP = Vector2(0, -1)
-const GRAVITY = 20
+var GRAVITY = 20
 const WALK_ACCELERATION = 25 #old 20
 const RUN_ACCELERATION = 20
 const MAX_WALK_SPEED = 130 #old 110 
 const MAX_RUN_SPEED = 330
-const JUMP_HEIGHT = -500
+const JUMP_HEIGHT = -550
+const dropthroughBit = 5
 
 var motion = Vector2()
 var is_running = false
@@ -74,6 +75,9 @@ func _physics_process(_delta):
 		is_running = false
 		
 	if is_on_floor():
+		if Input.is_action_just_pressed("move_down"):
+			if get_slide_collision(0).collider.name == "Floor":
+				set_collision_mask_bit(dropthroughBit, false)
 		$AnimationTree.set("parameters/in_air_state/current", 0)
 		if Input.is_action_just_pressed("jump"):
 			aim("walking")
@@ -87,6 +91,16 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 			
+		
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		print(i)
+		print("Collided with: ", collision.collider.name)
+		print(is_on_floor())
+		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+			GRAVITY = 0
+		else:
+			GRAVITY = 20
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -200,3 +214,7 @@ func takenDamage(enemyDamage):
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies"):
 		takenDamage(EnemyDamage)
+
+
+func _on_GroundChecker_body_exited(body):
+	set_collision_mask_bit(dropthroughBit, true)
