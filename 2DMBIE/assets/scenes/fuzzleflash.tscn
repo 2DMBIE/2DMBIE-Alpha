@@ -1,0 +1,24 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/Muzzlfe flash/explosion4.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Muzzlfe flash/explosion1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/Muzzlfe flash/explosion3.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/Muzzlfe flash/explosion2.png" type="Texture" id=4]
+[ext_resource path="res://assets/scripts/fuzzleflash.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="fuzzleflash" type="AnimatedSprite"]
+position = Vector2( 43.2659, -8.62711 )
+frames = SubResource( 1 )
+frame = 1
+speed_scale = 1.5
+playing = true
+script = ExtResource( 5 )
+[connection signal="animation_finished" from="." to="." method="_on_fuzzleflash_animation_finished"]
