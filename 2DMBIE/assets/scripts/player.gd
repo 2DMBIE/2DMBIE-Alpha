@@ -211,9 +211,9 @@ func takenDamage(enemyDamage):
 
 func _on_Timer_timeout():
 	if health < maxHealth:
-		health += 100
+		health += 25
 	updatHealtbar()
-	$Timer.start(2)
+	$Timer.start(0.2)
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies"):
@@ -230,11 +230,6 @@ func updatHealtbar():
 		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
 		emit_signal("health_updated", health)
 	$Timer.start(2)
-
-func _on_Hitbox_body_entered(body):
-	takenDamage(EnemyDamage)
-	print(body.name)
-
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)

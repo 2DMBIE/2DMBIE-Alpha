@@ -465,7 +465,7 @@ texture = ExtResource( 3 )
 hframes = 21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 288, -96 )
+position = Vector2( 352, -72 )
 collision_mask = 58
 maxHealth = 1200.0
 
