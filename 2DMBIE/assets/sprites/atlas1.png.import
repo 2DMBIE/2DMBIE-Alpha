@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explosion2.png-0d8b50a920bedd97f2423abbdccd8d97.stex"
+path="res://.import/atlas1.png-6a1cc429ac92d2df7ee23bb5e5474f25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/muzzle_flash/explosion2.png"
-dest_files=[ "res://.import/explosion2.png-0d8b50a920bedd97f2423abbdccd8d97.stex" ]
+source_file="res://assets/sprites/atlas1.png"
+dest_files=[ "res://.import/atlas1.png-6a1cc429ac92d2df7ee23bb5e5474f25.stex" ]
 
 [params]
 
