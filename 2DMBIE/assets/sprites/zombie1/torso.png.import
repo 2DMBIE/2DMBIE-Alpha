@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blocks_tileset_1.png-bdee7d31701a6230a0e3cf7c4ce00403.stex"
+path="res://.import/torso.png-30e460ad6998ab05cf0548eee7a04fc5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/blocks_tileset_1.png"
-dest_files=[ "res://.import/blocks_tileset_1.png-bdee7d31701a6230a0e3cf7c4ce00403.stex" ]
+source_file="res://assets/sprites/zombie1/torso.png"
+dest_files=[ "res://.import/torso.png-30e460ad6998ab05cf0548eee7a04fc5.stex" ]
 
 [params]
 

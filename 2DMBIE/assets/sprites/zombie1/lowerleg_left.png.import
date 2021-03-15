@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/blocks_tileset_1.png-bdee7d31701a6230a0e3cf7c4ce00403.stex"
+path="res://.import/lowerleg_left.png-4ed15b5308f7e35164bde886ad77ec35.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/blocks_tileset_1.png"
-dest_files=[ "res://.import/blocks_tileset_1.png-bdee7d31701a6230a0e3cf7c4ce00403.stex" ]
+source_file="res://assets/sprites/zombie1/lowerleg_left.png"
+dest_files=[ "res://.import/lowerleg_left.png-4ed15b5308f7e35164bde886ad77ec35.stex" ]
 
 [params]
 

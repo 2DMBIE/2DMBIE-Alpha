@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-904e192c468905587a7c80cdaae115ed.stex"
+path="res://.import/underlayer.png-080192ccc933b1e49721bfd48f0b5467.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/agent1/icon.png"
-dest_files=[ "res://.import/icon.png-904e192c468905587a7c80cdaae115ed.stex" ]
+source_file="res://assets/sprites/healthbar/underlayer.png"
+dest_files=[ "res://.import/underlayer.png-080192ccc933b1e49721bfd48f0b5467.stex" ]
 
 [params]
 

@@ -1,6 +1,7 @@
 extends Sprite
 
 var plBullet := preload("res://assets/scenes/bullet.tscn")
+var muzzleflash := preload("res://assets/scenes/muzzleflash.tscn")
 
 #onready variables
 onready var bulletDelayTimer := $BulletDelayTimer
@@ -27,6 +28,11 @@ func _process(_delta):
 			elif facing == "left":
 				facingDir = -10
 			bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
+		
+		var muzzleflashInstance = muzzleflash.instance()
+		muzzleflashInstance.position = $BulletPoint.get_global_position()
+		get_tree().get_root().add_child(muzzleflashInstance)
+		
 		
 		get_tree().current_scene.add_child(bullet)
 
