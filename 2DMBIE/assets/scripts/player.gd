@@ -93,10 +93,10 @@ func _physics_process(_delta):
 			
 	
 	if Input.is_action_pressed("crouch"):
-		scale.y = .5
-		$CollisionShape2D.scale.y = 1
+		scale.y = lerp(scale.y, .6, .2)
+		motion.x = lerp(motion.x, motion.x/10, .3)
 	else:
-		scale.y = 1
+		scale.y = lerp(scale.y, 1, .1)
 		
 			
 	for i in get_slide_count():

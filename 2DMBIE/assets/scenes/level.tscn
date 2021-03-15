@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scripts/map.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/scenes/logoblock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/Pathfinder.gd" type="Script" id=9]
+[ext_resource path="res://assets/scenes/DebugOverlay.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -286,7 +287,7 @@ texture = ExtResource( 3 )
 hframes = 21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 352, -72 )
+position = Vector2( 504, -96 )
 collision_mask = 58
 maxHealth = 1200.0
 
@@ -299,3 +300,5 @@ script = ExtResource( 9 )
 
 [node name="Node2D" parent="." instance=ExtResource( 8 )]
 position = Vector2( 352, 480 )
+
+[node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
