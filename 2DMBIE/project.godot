@@ -19,6 +19,10 @@ config/name="2DMBIE"
 run/main_scene="res://assets/scenes/level.tscn"
 config/icon="res://assets/sprites/icon.png"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [input]
 
 move_left={
@@ -73,4 +77,5 @@ crouch={
 
 [rendering]
 
+environment/default_clear_color=Color( 0.529412, 0.807843, 0.921569, 1 )
 environment/default_environment="res://default_env.tres"

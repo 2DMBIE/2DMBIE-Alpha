@@ -34,7 +34,8 @@
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/gun.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
-[ext_resource path="res://assets/scenes/healthbarl.tscn" type="PackedScene" id=35]
+[ext_resource path="res://assets/scenes/healthbar.tscn" type="PackedScene" id=35]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 65 )

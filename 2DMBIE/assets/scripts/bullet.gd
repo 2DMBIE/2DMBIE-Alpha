@@ -14,7 +14,7 @@ func _on_bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.Hurt(damage)
 		queue_free()
-	elif body.is_in_group("environment"):
+	else:
 		queue_free()
 
 func set_direction(directionx: Vector2):

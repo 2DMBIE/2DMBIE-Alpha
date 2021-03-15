@@ -1,7 +1,7 @@
 extends Sprite
 
 var plBullet := preload("res://assets/scenes/bullet.tscn")
-var muzzleflash := preload("res://assets/scenes/fuzzleflash.tscn")
+var muzzleflash := preload("res://assets/scenes/muzzleflash.tscn")
 
 #onready variables
 onready var bulletDelayTimer := $BulletDelayTimer
