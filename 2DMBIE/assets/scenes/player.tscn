@@ -39,97 +39,90 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 65 )
 
-[sub_resource type="AnimationNodeAdd2" id=2]
-
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "walk"
+[sub_resource type="AnimationNodeAdd2" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=4]
-animation = "jump"
+animation = "walk"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "walk (reversed)"
+animation = "jump"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
-animation = "run"
+animation = "walk (reversed)"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
-animation = "no_aim"
+animation = "run"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
+animation = "no_aim"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "idle"
 
-[sub_resource type="AnimationNodeTimeScale" id=9]
-
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "aim_minus_90_degrees"
+[sub_resource type="AnimationNodeTimeScale" id=10]
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "aim_90_degrees"
+animation = "aim_minus_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
-animation = "aim_45_degrees"
+animation = "aim_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "aim_60_degrees"
+animation = "aim_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=14]
-animation = "aim_minus_30_degrees"
+animation = "aim_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "aim_minus_45_degrees"
+animation = "aim_minus_30_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "aim_minus_60_degrees"
+animation = "aim_minus_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
-animation = "aim_0_degrees"
+animation = "aim_minus_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
+animation = "aim_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=19]
-blend_point_0/node = SubResource( 10 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=20]
+blend_point_0/node = SubResource( 11 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 11 )
+blend_point_1/node = SubResource( 12 )
 blend_point_1/pos = 90.0
-blend_point_2/node = SubResource( 12 )
+blend_point_2/node = SubResource( 13 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 13 )
+blend_point_3/node = SubResource( 14 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 14 )
+blend_point_4/node = SubResource( 15 )
 blend_point_4/pos = -30.0
-blend_point_5/node = SubResource( 15 )
+blend_point_5/node = SubResource( 16 )
 blend_point_5/pos = -45.0
-blend_point_6/node = SubResource( 16 )
+blend_point_6/node = SubResource( 17 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 17 )
+blend_point_7/node = SubResource( 18 )
 blend_point_7/pos = 0.0
-blend_point_8/node = SubResource( 18 )
+blend_point_8/node = SubResource( 19 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 
-[sub_resource type="AnimationNodeTransition" id=20]
+[sub_resource type="AnimationNodeTransition" id=21]
 input_count = 2
 input_0/name = "aiming"
 input_0/auto_advance = false
 input_1/name = "not_aiming"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=21]
+[sub_resource type="AnimationNodeTransition" id=22]
 input_count = 2
 input_0/name = "ground"
 input_0/auto_advance = false
 input_1/name = "air"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeTransition" id=22]
-input_count = 2
-input_0/name = "yes"
-input_0/auto_advance = false
-input_1/name = "no"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeTransition" id=23]
@@ -139,42 +132,49 @@ input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=24]
+[sub_resource type="AnimationNodeTransition" id=24]
+input_count = 2
+input_0/name = "yes"
+input_0/auto_advance = false
+input_1/name = "no"
+input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlendTree" id=25]
+[sub_resource type="AnimationNodeBlend2" id=25]
+
+[sub_resource type="AnimationNodeBlendTree" id=26]
 graph_offset = Vector2( -242, -64.75 )
-nodes/Add2/node = SubResource( 2 )
+nodes/Add2/node = SubResource( 3 )
 nodes/Add2/position = Vector2( 580, 160 )
-nodes/Animation/node = SubResource( 8 )
+nodes/Animation/node = SubResource( 9 )
 nodes/Animation/position = Vector2( -260, 280 )
-"nodes/Animation 2/node" = SubResource( 3 )
+"nodes/Animation 2/node" = SubResource( 4 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
-"nodes/Animation 3/node" = SubResource( 4 )
+"nodes/Animation 3/node" = SubResource( 5 )
 "nodes/Animation 3/position" = Vector2( 20, 340 )
-"nodes/Animation 4/node" = SubResource( 5 )
+"nodes/Animation 4/node" = SubResource( 6 )
 "nodes/Animation 4/position" = Vector2( -480, 20 )
-"nodes/Animation 5/node" = SubResource( 6 )
+"nodes/Animation 5/node" = SubResource( 7 )
 "nodes/Animation 5/position" = Vector2( -220, -80 )
-"nodes/Animation 6/node" = SubResource( 7 )
+"nodes/Animation 6/node" = SubResource( 8 )
 "nodes/Animation 6/position" = Vector2( 60, 620 )
-nodes/TimeScale/node = SubResource( 9 )
+nodes/TimeScale/node = SubResource( 10 )
 nodes/TimeScale/position = Vector2( 0, -60 )
-nodes/aim/node = SubResource( 19 )
+nodes/aim/node = SubResource( 20 )
 nodes/aim/position = Vector2( 40, 460 )
-nodes/aim_state/node = SubResource( 20 )
+nodes/aim_state/node = SubResource( 21 )
 nodes/aim_state/position = Vector2( 380, 360 )
-nodes/in_air_state/node = SubResource( 21 )
+nodes/in_air_state/node = SubResource( 22 )
 nodes/in_air_state/position = Vector2( 380, 160 )
-nodes/moonwalking/node = SubResource( 22 )
+nodes/moonwalking/node = SubResource( 23 )
 nodes/moonwalking/position = Vector2( -240, 80 )
 nodes/output/position = Vector2( 780, 160 )
-nodes/running/node = SubResource( 23 )
+nodes/running/node = SubResource( 24 )
 nodes/running/position = Vector2( 200, 20 )
-nodes/walk-idle/node = SubResource( 24 )
+nodes/walk-idle/node = SubResource( 25 )
 nodes/walk-idle/position = Vector2( 0, 140 )
 node_connections = [ "output", 0, "Add2", "in_air_state", 0, "running", "in_air_state", 1, "Animation 3", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "TimeScale", 0, "Animation 5", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "running", 0, "TimeScale", "running", 1, "walk-idle" ]
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=27]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -344,13 +344,14 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=27]
+[sub_resource type="CapsuleShape2D" id=28]
 radius = 30.9113
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=29]
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( -160, 0 )
 collision_layer = 4
 collision_mask = 2147483678
 script = ExtResource( 17 )
@@ -531,10 +532,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 25 )
+tree_root = SubResource( 26 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
@@ -557,7 +558,7 @@ anims/aim_minus_60_degrees = ExtResource( 29 )
 anims/aim_minus_90_degrees = ExtResource( 28 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
-anims/no_aim = SubResource( 26 )
+anims/no_aim = SubResource( 27 )
 anims/run = ExtResource( 32 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
@@ -602,7 +603,7 @@ collision_mask = 8
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 27 )
+shape = SubResource( 28 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 collision_layer = 0
@@ -611,7 +612,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 28 )
+shape = SubResource( 29 )
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
