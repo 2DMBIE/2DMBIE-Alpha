@@ -91,7 +91,14 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 			
+	
+	if Input.is_action_pressed("crouch"):
+		scale.y = .5
+		$CollisionShape2D.scale.y = 1
+	else:
+		scale.y = 1
 		
+			
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
