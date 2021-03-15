@@ -1,98 +1,186 @@
 extends Node2D
 
-const FACE = preload("res://assets/scenes/face.tscn")
+var cell_size = 64
 
-var jumpHeight = 1
+var jumpHeight = 3
+var jumpDistance = 2
 
 var tileMap
-var graph
+var graph 
 
-var cell_size = 64
+var showLines = true
+
+const TEST = preload("res://assets/scenes/face.tscn")
+
+
+func findPath(start, end):
+#	var first_point = graph.get_closest_position_in_segment(start)
+#	var finish = graph.get_closest_position_in_segment(end)
+	var first_point = graph.get_closest_point(start)
+	var finish = graph.get_closest_point(end)
+	var path = graph.get_id_path(first_point, finish)
+	
+	if (len(path) == 0):
+		return path
+	
+	var actions = []
+	
+	var lastPos
+	
+	for point in path:
+		var pos = graph.get_point_position(point)
+		var stat = cellType(pos, true, true)
+		
+		if lastPos and lastPos[1] >= pos[1] - (cell_size * jumpHeight) and ((lastPos[0] < pos[0] and stat[0] < 0) or (lastPos[0] > pos[0] and stat[1] < 0)):
+			actions.append(null)
+
+		lastPos = pos
+		
+		if point == path[0] and len(path) > 1:
+			var nextPos = graph.get_point_position(path[1])
+			if start.distance_to(nextPos) > pos.distance_to(nextPos): 
+				actions.append(pos)
+		elif point == path[-1] and len(path) > 1:
+			if (graph.get_point_position(path[-2]).distance_to(end) < pos.distance_to(end)):
+				actions.append(pos)
+		else:
+			actions.append(pos)
+	actions.append(end)
+	return actions
 
 func _ready():
 	graph = AStar2D.new()
 	tileMap = find_parent("Node2D").find_node("Blocks")
 	createMap()
-#	connectPoints()
-	
-#func connectPoints():
-func _draw():
+	createConections()
+
+func createConections():
 	var points = graph.get_points()
 	for point in points:
-		var closeRight = -1
-		var closeLeftDrop = -1
-		var closeRightDrop = -1
-		var pos = graph.get_point_position(point)
-		var type = cellType(pos, true, true)
-		
+		var closestRight = -1
+		var closestLeftDrop = -1
+		var closestRightDrop = -1
+		var pos = graph.get_point_position(point)	
+		var stat = cellType(pos, true, true)
+
 		var pointsToJoin = []
 		var noBiJoin = []
-		
+
 		for newPoint in points:
 			var newPos = graph.get_point_position(newPoint)
-			if (type[1] == 0 and newPos[1] == pos[1] and newPos[0] > pos[0]):
-				if closeRight < 0 or newPos[0] < graph.get_point_position(closeRight)[0]:
-					closeRight = newPoint
-			if (type[0] == -1):
+			if (stat[1] == 0 and newPos[1] == pos[1] and newPos[0] > pos[0]):
+				if closestRight < 0 or newPos[0] < graph.get_point_position(closestRight)[0]: 
+					closestRight = newPoint
+			if (stat[0] == -1):
 				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
-					if closeLeftDrop < 0 or newPos[1] < graph.get_point_position(closeLeftDrop)[1]:
-						closeLeftDrop = newPoint
-						
-			if (type[1] == -1):
+					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+						closestLeftDrop = newPoint
+				if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
+					newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
+						pointsToJoin.append(newPoint)
+			if (stat[1] == -1):
 				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
-					if closeLeftDrop < 0 or newPos[1] < graph.get_point_position(closeLeftDrop)[1]:
-						closeRightDrop = newPoint
-				
-			
-		if closeRight > 0:
-			pointsToJoin.append(closeRight)
-			
-		if closeLeftDrop > 0:
-			if (graph.get_point_position(closeLeftDrop)[1] <= pos[1] + cell_size * jumpHeight):
-				pointsToJoin.append(closeLeftDrop)
+					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+						closestRightDrop = newPoint
+				if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
+					newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1 :
+						pointsToJoin.append(newPoint)
+
+		if (closestRight > 0):
+			pointsToJoin.append(closestRight)
+		if (closestLeftDrop > 0):
+			if (graph.get_point_position(closestLeftDrop)[1] == pos[1] + cell_size):
+				pointsToJoin.append(closestLeftDrop)
 			else:
-				noBiJoin.append(closeLeftDrop)
-			
-			draw_line(pos, graph.get_point_position(closeLeftDrop), Color(255, 0, 0), 1)
-			
-		if closeRightDrop > 0:
-			if (graph.get_point_position(closeLeftDrop)[1] <= pos[1] + cell_size * jumpHeight):
-				pointsToJoin.append(closeRightDrop)
+				noBiJoin.append(closestLeftDrop)
+		if (closestRightDrop > 0):
+			if (graph.get_point_position(closestRightDrop)[1] == pos[1] + cell_size):
+				pointsToJoin.append(closestRightDrop)
 			else:
-				noBiJoin.append(closeRightDrop)
-				
-			draw_line(pos, graph.get_point_position(closeRightDrop), Color(255, 0, 0), 1)
-			
-		for join in pointsToJoin:
-			draw_line(pos,graph.get_point_position(join), Color(255, 0, 0), 1)
-		for join in noBiJoin:
-			draw_line(pos, graph.get_point_position(join), Color(255,0,0), 1)
+				noBiJoin.append(closestRightDrop)
+
+		for joinPoint in pointsToJoin:
+			graph.connect_points (point, joinPoint)
+		for joinPoint in noBiJoin:
+			graph.connect_points (point, joinPoint, false)
+
+func _draw():
+	if !showLines:
+		return
 	
+	var points = graph.get_points()
+	for point in points:
+		var closestRight = -1
+		var closestLeftDrop = -1
+		var closestRightDrop = -1
+		var pos = graph.get_point_position(point)	
+		var stat = cellType(pos, true, true)
+
+		var pointsToJoin = []
+		var noBiJoin = []
+
+		for newPoint in points:
+			var newPos = graph.get_point_position(newPoint)
+			if (stat[1] == 0 and newPos[1] == pos[1] and newPos[0] > pos[0]):
+				if closestRight < 0 or newPos[0] < graph.get_point_position(closestRight)[0]: 
+					closestRight = newPoint
+			if (stat[0] == -1):
+				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
+					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+						closestLeftDrop = newPoint
+				if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
+					newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
+						pointsToJoin.append(newPoint)
+			if (stat[1] == -1):
+				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
+					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+						closestRightDrop = newPoint
+				if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
+					newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1 :
+						pointsToJoin.append(newPoint)
+
+		if (closestRight > 0):
+			pointsToJoin.append(closestRight)
+		if (closestLeftDrop > 0):
+			if (graph.get_point_position(closestLeftDrop)[1] == pos[1] + cell_size):
+				pointsToJoin.append(closestLeftDrop)
+			else:
+				noBiJoin.append(closestLeftDrop)
+		if (closestRightDrop > 0):
+			if (graph.get_point_position(closestRightDrop)[1] == pos[1] + cell_size):
+				pointsToJoin.append(closestRightDrop)
+			else:
+				noBiJoin.append(closestRightDrop)
+
+		for joinPoint in pointsToJoin:
+			draw_line(pos, graph.get_point_position(joinPoint), Color(255, 0, 0), 1)
+		for joinPoint in noBiJoin:
+			draw_line(pos, graph.get_point_position(joinPoint), Color(255, 0, 0), 1)
+			
 func createMap():
 	var space_state = get_world_2d().direct_space_state
 	var cells = tileMap.get_used_cells()
 	
 	for cell in cells:
-		var type = cellType(cell)
-		
-		if (type and type != Vector2(0, 0)):
+		var stat = cellType(cell)
+
+		if (stat and stat != Vector2(0, 0)):
 			createPoint(cell)
 			
-			if type[1] == -1:
+			if stat[1] == -1:
 				var pos = tileMap.map_to_world(Vector2(cell[0] + 1, cell[1]))
-				var posTo = Vector2(pos[0], pos[1] + 10000) #cast array downwards to check for tiles
-				var result = space_state.intersect_ray(pos, posTo)
-				if (result):
-					createPoint(tileMap.world_to_map(result.position)) #map to world and world to map because of different coordinates for the two
-			
-			if type[0] == -1:
+				var pto = Vector2(pos[0], pos[1] + 1000)
+				var result = space_state.intersect_ray(pos, pto)
+				if (result):					
+					createPoint(tileMap.world_to_map(result.position))
+
+			if stat[0] == -1:
 				var pos = tileMap.map_to_world(Vector2(cell[0] - 1, cell[1]))
-				var posTo = Vector2(pos[0], pos[1] + 10000) #cast array downwards to check for tiles
-				var result = space_state.intersect_ray(pos, posTo)
-				if (result):
-					createPoint(tileMap.world_to_map(result.position)) #map to world and world to map because of different coordinates for the two
-	print(graph.get_points().size())
-			
+				var pto = Vector2(pos[0], pos[1] + 1000)
+				var result = space_state.intersect_ray(pos, pto)
+				if (result):					
+					createPoint(tileMap.world_to_map(result.position))
+
 func cellType(pos, global = false, isAbove = false):
 	if (global):
 		pos = tileMap.world_to_map(pos)
@@ -100,19 +188,26 @@ func cellType(pos, global = false, isAbove = false):
 		pos = Vector2(pos[0], pos[1] + 1)
 	var cells = tileMap.get_used_cells()
 	
+	
 	if (Vector2(pos[0], pos[1] - 1) in cells):
+#		If there's a block above the passes one, return null
 		return null
-		
 	var results = Vector2(0, 0)
 	
-	if (Vector2(pos[0] - 1, pos[1] - 1) in cells):
+#	Checking left
+	if Vector2(pos[0] - 1, pos[1] - 1) in cells:
+#		if wall
 		results[0] = 1
 	elif !(Vector2(pos[0] - 1, pos[1]) in cells):
+#		if drop
 		results[0] = -1
 		
-	if (Vector2(pos[0] + 1, pos[1] - 1) in cells):
+#	Checking right
+	if Vector2(pos[0] + 1, pos[1] - 1) in cells:
+#		if wall
 		results[1] = 1
 	elif !(Vector2(pos[0] + 1, pos[1]) in cells):
+#		if drop
 		results[1] = -1
 	return results
 
@@ -121,9 +216,9 @@ func createPoint(cell):
 	var pos = tileMap.map_to_world(above) + Vector2(cell_size/2, cell_size/2)
 	if graph.get_points() and graph.get_point_position(graph.get_closest_point(pos)) == pos:
 		return
-	
-	var face = FACE.instance()
-	face.position = pos
-	add_child(face)
+	if (showLines):
+		var test = TEST.instance()
+		test.set_position(pos)
+		call_deferred("add_child", test)
 	
 	graph.add_point(graph.get_available_point_id(), pos)
