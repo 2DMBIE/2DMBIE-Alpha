@@ -198,7 +198,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../logoblock").enemyDamage
+onready var EnemyDamage = get_node("../Zombie").enemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -214,17 +214,18 @@ func setHealth(value):
 func takenDamage(enemyDamage):
 	setHealth(health - enemyDamage)
 	updatHealtbar()
-	$Timer.start(10)
+	$HealthTimer.start(10)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
 	updatHealtbar()
-	$Timer.start(0.2)
+	$HealthTimer.start(0.2)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") && $InvulnerableTimer.is_stopped():
 		takenDamage(EnemyDamage)
+		$InvulnerableTimer.start(1)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))
@@ -236,7 +237,7 @@ func updatHealtbar():
 	else:
 		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
 		emit_signal("health_updated", health)
-	$Timer.start(2)
+	$HealthTimer.start(2)
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)

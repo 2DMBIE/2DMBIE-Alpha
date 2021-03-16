@@ -8,13 +8,12 @@ func _ready():
 	add_stat("mouse_position", "Player/body/chest/torso/gun", "mouse_position", false)
 	add_stat("bulletpoint_position", "Player/body/chest/torso/gun", "bulletpoint_position", false)
 	add_stat("mouse_direction", "Player/body/chest/torso/gun", "mouse_direction", false)
-	add_stat("bullet_direction", "bullet", "rotation", false)
 	print(get_parent().get_node("Player/body/chest/torso/gun").get("mouse_direction"))
 	
 func add_stat(stat_name, object, stat_ref, is_method):
 	stats.append([stat_name, get_parent().get_node(object), stat_ref, is_method])
 	
-func _process(delta):
+func _process(_delta):
 	var label_text = ""
 	
 	for s in stats:
