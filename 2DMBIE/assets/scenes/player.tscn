@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -37,168 +37,168 @@
 [ext_resource path="res://assets/scenes/healthbar.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/animations/crouching-animation.tres" type="Animation" id=36]
 
-[sub_resource type="CapsuleShape2D" id=29]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
 height = 75.0
 
-[sub_resource type="CapsuleShape2D" id=30]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 26.531
 height = 45.0
 
-[sub_resource type="AnimationNodeAdd2" id=2]
-
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "walk"
+[sub_resource type="AnimationNodeAdd2" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=4]
-animation = "jump"
+animation = "walk"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "walk (reversed)"
+animation = "jump"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
-animation = "run"
+animation = "walk (reversed)"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
-animation = "no_aim"
-
-[sub_resource type="AnimationNodeAnimation" id=29]
-animation = "crouching"
+animation = "run"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
-animation = "idle"
+animation = "no_aim"
 
-[sub_resource type="AnimationNodeTimeScale" id=31]
-
-[sub_resource type="AnimationNodeTimeScale" id=9]
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "crouching"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
-animation = "aim_minus_90_degrees"
+animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "aim_90_degrees"
+[sub_resource type="AnimationNodeTimeScale" id=11]
 
-[sub_resource type="AnimationNodeAnimation" id=12]
-animation = "aim_45_degrees"
+[sub_resource type="AnimationNodeTimeScale" id=12]
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "aim_60_degrees"
+animation = "aim_minus_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=14]
-animation = "aim_minus_30_degrees"
+animation = "aim_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "aim_minus_45_degrees"
+animation = "aim_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "aim_minus_60_degrees"
+animation = "aim_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
-animation = "aim_0_degrees"
+animation = "aim_minus_30_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
+animation = "aim_minus_45_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "aim_minus_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "aim_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=19]
-blend_point_0/node = SubResource( 10 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=22]
+blend_point_0/node = SubResource( 13 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 11 )
+blend_point_1/node = SubResource( 14 )
 blend_point_1/pos = 90.0
-blend_point_2/node = SubResource( 12 )
+blend_point_2/node = SubResource( 15 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 13 )
+blend_point_3/node = SubResource( 16 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 14 )
+blend_point_4/node = SubResource( 17 )
 blend_point_4/pos = -30.0
-blend_point_5/node = SubResource( 15 )
+blend_point_5/node = SubResource( 18 )
 blend_point_5/pos = -45.0
-blend_point_6/node = SubResource( 16 )
+blend_point_6/node = SubResource( 19 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 17 )
+blend_point_7/node = SubResource( 20 )
 blend_point_7/pos = 0.0
-blend_point_8/node = SubResource( 18 )
+blend_point_8/node = SubResource( 21 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 
-[sub_resource type="AnimationNodeTransition" id=20]
+[sub_resource type="AnimationNodeTransition" id=23]
 input_count = 2
 input_0/name = "aiming"
 input_0/auto_advance = false
 input_1/name = "not_aiming"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=30]
+[sub_resource type="AnimationNodeTransition" id=24]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=21]
+[sub_resource type="AnimationNodeTransition" id=25]
 input_count = 2
 input_0/name = "ground"
 input_0/auto_advance = false
 input_1/name = "air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=22]
+[sub_resource type="AnimationNodeTransition" id=26]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=23]
+[sub_resource type="AnimationNodeTransition" id=27]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=24]
+[sub_resource type="AnimationNodeBlend2" id=28]
 
-[sub_resource type="AnimationNodeBlendTree" id=25]
-graph_offset = Vector2( -287, -363 )
-nodes/Add2/node = SubResource( 2 )
+[sub_resource type="AnimationNodeBlendTree" id=29]
+graph_offset = Vector2( -492, -271 )
+nodes/Add2/node = SubResource( 3 )
 nodes/Add2/position = Vector2( 820, 160 )
-nodes/Animation/node = SubResource( 8 )
+nodes/Animation/node = SubResource( 10 )
 nodes/Animation/position = Vector2( -260, 280 )
-"nodes/Animation 2/node" = SubResource( 3 )
+"nodes/Animation 2/node" = SubResource( 4 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
-"nodes/Animation 3/node" = SubResource( 4 )
+"nodes/Animation 3/node" = SubResource( 5 )
 "nodes/Animation 3/position" = Vector2( 220, 240 )
-"nodes/Animation 4/node" = SubResource( 5 )
+"nodes/Animation 4/node" = SubResource( 6 )
 "nodes/Animation 4/position" = Vector2( -480, 20 )
-"nodes/Animation 5/node" = SubResource( 6 )
+"nodes/Animation 5/node" = SubResource( 7 )
 "nodes/Animation 5/position" = Vector2( -220, -80 )
-"nodes/Animation 6/node" = SubResource( 7 )
+"nodes/Animation 6/node" = SubResource( 8 )
 "nodes/Animation 6/position" = Vector2( 260, 520 )
-"nodes/Animation 7/node" = SubResource( 29 )
-"nodes/Animation 7/position" = Vector2( 0, -260 )
-nodes/TimeScale/node = SubResource( 9 )
+"nodes/Animation 7/node" = SubResource( 9 )
+"nodes/Animation 7/position" = Vector2( 80, -220 )
+nodes/TimeScale/node = SubResource( 12 )
 nodes/TimeScale/position = Vector2( 0, -60 )
-"nodes/TimeScale 2/node" = SubResource( 31 )
-"nodes/TimeScale 2/position" = Vector2( 220, -120 )
-nodes/aim/node = SubResource( 19 )
+"nodes/TimeScale 2/node" = SubResource( 11 )
+"nodes/TimeScale 2/position" = Vector2( 280, -140 )
+nodes/aim/node = SubResource( 22 )
 nodes/aim/position = Vector2( 240, 360 )
-nodes/aim_state/node = SubResource( 20 )
+nodes/aim_state/node = SubResource( 23 )
 nodes/aim_state/position = Vector2( 600, 360 )
-nodes/crouching/node = SubResource( 30 )
-nodes/crouching/position = Vector2( 420, 20 )
-nodes/in_air_state/node = SubResource( 21 )
+nodes/crouching/node = SubResource( 24 )
+nodes/crouching/position = Vector2( 440, 40 )
+nodes/in_air_state/node = SubResource( 25 )
 nodes/in_air_state/position = Vector2( 600, 160 )
-nodes/moonwalking/node = SubResource( 22 )
+nodes/moonwalking/node = SubResource( 26 )
 nodes/moonwalking/position = Vector2( -240, 80 )
 nodes/output/position = Vector2( 1020, 160 )
-nodes/running/node = SubResource( 23 )
+nodes/running/node = SubResource( 27 )
 nodes/running/position = Vector2( 180, 20 )
-nodes/walk-idle/node = SubResource( 24 )
+nodes/walk-idle/node = SubResource( 28 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouching", 0, "TimeScale 2", "crouching", 1, "running", "TimeScale 2", 0, "Animation 7" ]
+node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "TimeScale 2", "crouching", 1, "running", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "aim_state", 0, "aim", "aim_state", 1, "Animation 6" ]
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=30]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -368,11 +368,11 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=27]
+[sub_resource type="CapsuleShape2D" id=31]
 radius = 27.3246
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=32]
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( -160, 0 )
@@ -386,6 +386,7 @@ position = Vector2( 0, 17.034 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
+rotation = -0.000515761
 
 [node name="torso" type="Sprite" parent="body/chest"]
 position = Vector2( 0, -15.094 )
@@ -393,7 +394,8 @@ texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
-position = Vector2( 22.0728, -1.75482 )
+position = Vector2( 22.0687, -1.77017 )
+rotation = -0.000929911
 texture = ExtResource( 9 )
 script = ExtResource( 33 )
 
@@ -416,7 +418,7 @@ position = Vector2( -22.0728, -9.54536 )
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = -0.440587
+rotation = -0.441184
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -427,7 +429,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -1.58248
+rotation = -1.58338
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -436,7 +438,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = 1.69921
+rotation = 1.69985
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -445,7 +447,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -13.4064, -14.1956 )
-rotation = -0.324783
+rotation = -0.325428
 z_index = 1
 texture = ExtResource( 13 )
 offset = Vector2( -0.0279083, 8.82368 )
@@ -456,7 +458,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/chest/torso/upperarm_right"]
 position = Vector2( -1.01368, 20.0398 )
-rotation = -1.36206
+rotation = -1.36196
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0.498055, 6.75774 )
@@ -466,7 +468,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right"]
 position = Vector2( 1.33635, 15.2045 )
-rotation = 0.0559495
+rotation = 0.0556031
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_bone_": true
@@ -474,6 +476,7 @@ __meta__ = {
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
+rotation = -0.000326571
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -489,7 +492,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.066347
+rotation = 0.0663469
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -560,22 +563,22 @@ __meta__ = {
 visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 29 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
-position = Vector2( -1.41577, -8.88424 )
+position = Vector2( -1.416, 6.06 )
 z_index = 1
-shape = SubResource( 30 )
+shape = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 25 )
+tree_root = SubResource( 29 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
 "parameters/TimeScale 2/scale" = 1.8
 parameters/aim/blend_position = 0.111
 parameters/aim_state/current = 0
-parameters/crouching/current = 1
+parameters/crouching/current = 0
 parameters/in_air_state/current = 0
 parameters/moonwalking/current = 1
 parameters/running/current = 1
@@ -594,7 +597,7 @@ anims/aim_minus_90_degrees = ExtResource( 28 )
 anims/crouching = ExtResource( 36 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
-anims/no_aim = SubResource( 26 )
+anims/no_aim = SubResource( 30 )
 anims/run = ExtResource( 32 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
@@ -637,7 +640,7 @@ collision_mask = 8
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 27 )
+shape = SubResource( 31 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -647,7 +650,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 28 )
+shape = SubResource( 32 )
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
