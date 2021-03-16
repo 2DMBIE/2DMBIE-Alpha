@@ -93,9 +93,11 @@ func _physics_process(_delta):
 			
 	
 	if Input.is_action_pressed("crouch"):
-		scale.y = .5
-		$CollisionShape2D.scale.y = 1
+		$AnimationTree.set("parameters/crouching/current", 0)
+		#scale.y = .5
+		#$CollisionShape2D.scale.y = 1
 	else:
+		$AnimationTree.set("parameters/crouching/current", 1)
 		scale.y = 1
 		
 			
