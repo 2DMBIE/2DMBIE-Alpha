@@ -14,6 +14,7 @@ const dropthroughBit = 5
 var motion = Vector2()
 var is_running = false
 var facing = "right"
+var collision
 
 func _ready():
 	$AnimationTree.active = true
@@ -93,18 +94,21 @@ func _physics_process(_delta):
 			
 	
 	if Input.is_action_pressed("crouch"):
-		scale.y = lerp(scale.y, .6, .2)
+		$CollisionShape2D.disabled = true
+		$CollisionShape2DCrouch.disabled = false
 		motion.x = lerp(motion.x, motion.x/10, .3)
 	else:
+		$CollisionShape2D.disabled = false
+		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 		
 			
 	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			GRAVITY = 0
-		else:
-			GRAVITY = 20
+		collision = get_slide_collision(i).collider.name
+#		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+#			GRAVITY = 0
+#		else:
+#			GRAVITY = 20
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -170,7 +174,7 @@ func aim(string):
 		walking = true
 	if Input.is_action_pressed("aim"):
 		$AnimationTree.set("parameters/aim_state/current", 0)
-		var positionA = $ShootVector.position
+		var positionA = $body/chest/torso/gun/ShootVector.position
 		var positionB = get_local_mouse_position()
 		var angle_radians = positionA.angle_to_point(positionB)
 		var angle_degrees = angle_radians*180/PI
