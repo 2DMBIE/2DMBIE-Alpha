@@ -15,7 +15,6 @@ animations = [ {
 } ]
 
 [node name="fuzzleflash" type="AnimatedSprite"]
-position = Vector2( 43.2659, -8.62711 )
 frames = SubResource( 1 )
 frame = 1
 speed_scale = 5.0

@@ -8,14 +8,17 @@ extents = Vector2( 160.121, 22.354 )
 [node name="floor" type="StaticBody2D" groups=[
 "environment",
 ]]
-position = Vector2( 448, 512 )
+position = Vector2( 448, 512.315 )
+collision_layer = 2
+collision_mask = 2
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 2.49906, 0.71035 )
+scale = Vector2( 5.1, 0.71 )
 texture = ExtResource( 1 )
+hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
