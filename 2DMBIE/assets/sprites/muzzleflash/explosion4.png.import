@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explosion4.png-e5436bb3b0cafe14206626e011e2aad0.stex"
+path="res://.import/explosion4.png-a9fd985c0a12918ac937c1b9c6bf16ae.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/muzzle_flash/explosion4.png"
-dest_files=[ "res://.import/explosion4.png-e5436bb3b0cafe14206626e011e2aad0.stex" ]
+source_file="res://assets/sprites/muzzleflash/explosion4.png"
+dest_files=[ "res://.import/explosion4.png-a9fd985c0a12918ac937c1b9c6bf16ae.stex" ]
 
 [params]
 

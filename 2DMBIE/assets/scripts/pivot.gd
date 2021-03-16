@@ -6,6 +6,7 @@ onready var timer = $Timer
 onready var mouseAngle = get_global_mouse_position().angle()
 var lookDir = "right"
 var timeout = true
+var pivotOffset = 20
 
 func _ready():
 	updatePivotAngle()
@@ -16,10 +17,10 @@ func _physics_process(_delta):
 	
 func updatePivotAngle():
 	var mousePos = get_global_mouse_position().x
-	if mousePos > (parent.position.x - 100) and lookDir == "left":
+	if mousePos > (parent.position.x - pivotOffset) and lookDir == "left":
 		cameraOffset.position.x = 300
 		lookDir = "right"
-	elif mousePos < (parent.position.x + 100) and lookDir == "right":
+	elif mousePos < (parent.position.x + pivotOffset) and lookDir == "right":
 		cameraOffset.position.x = -300
 		lookDir = "left"
 
@@ -30,7 +31,7 @@ func timerTimeout():
 	elif timeout == false:
 		pass
 	
-	if (get_global_mouse_position().x > parent.position.x - 100 && get_global_mouse_position().x < parent.position.x + 100):
+	if (get_global_mouse_position().x > parent.position.x - pivotOffset && get_global_mouse_position().x < parent.position.x + pivotOffset):
 		timer.set_wait_time(.1)
 		timer.start()
 		timeout = false
