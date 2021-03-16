@@ -92,12 +92,12 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 			
-	
 	if Input.is_action_pressed("crouch"):
 		$AnimationTree.set("parameters/crouching/current", 0)
 		$CollisionShape2D.disabled = true
 		$CollisionShape2DCrouch.disabled = false
-		motion.x = lerp(motion.x, motion.x/10, .3)
+		if is_on_floor():
+			motion.x = 0 
 	else:
 		$AnimationTree.set("parameters/crouching/current", 1)
 		$CollisionShape2D.disabled = false
