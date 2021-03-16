@@ -23,7 +23,7 @@ func _process(_delta):
 		bulletpoint_position = $BulletPoint.get_global_position()
 		bullet.position = bulletpoint_position
 		if Input.is_action_pressed("aim"):
-#			bullet.rotation = $ShootVector.get_angle_to(mouse_position)
+			bullet.rotation = $BulletPoint.get_angle_to(mouse_position)
 			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 			bullet.set_direction(mouse_direction)
 		elif not Input.is_action_pressed("aim"):
@@ -36,6 +36,9 @@ func _process(_delta):
 			bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
 		
 		var muzzleflashInstance = muzzleflash.instance()
-		$BulletPoint.add_child(muzzleflashInstance)
+		muzzleflashInstance.position = $BulletPoint.get_global_position()
+		get_tree().get_root().add_child(muzzleflashInstance)
+		
+		
 		get_tree().current_scene.add_child(bullet)
 
