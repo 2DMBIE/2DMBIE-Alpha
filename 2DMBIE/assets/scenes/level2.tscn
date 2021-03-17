@@ -301,3 +301,6 @@ position = Vector2( -623.739, -125.524 )
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource( 9 )
+
+[node name="Floor" type="TileMap" parent="."]
+format = 1

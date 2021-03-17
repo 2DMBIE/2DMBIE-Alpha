@@ -14,6 +14,7 @@ const dropthroughBit = 5
 var motion = Vector2()
 var is_running = false
 var facing = "right"
+var collision
 
 func _ready():
 	$AnimationTree.active = true
@@ -98,15 +99,18 @@ func _physics_process(_delta):
 		if is_on_floor():
 			motion.x = 0 
 	else:
+		$AnimationTree.set("parameters/crouching/current", 1)
+		$CollisionShape2D.disabled = false
+		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 		
 			
 	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			GRAVITY = 0
-		else:
-			GRAVITY = 20
+		collision = get_slide_collision(i).collider.name
+#		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+#			GRAVITY = 0
+#		else:
+#			GRAVITY = 20
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -172,7 +176,7 @@ func aim(string):
 		walking = true
 	if Input.is_action_pressed("aim"):
 		$AnimationTree.set("parameters/aim_state/current", 0)
-		var positionA = $ShootVector.position
+		var positionA = $body/chest/torso/gun/ShootVector.position
 		var positionB = get_local_mouse_position()
 		var angle_radians = positionA.angle_to_point(positionB)
 		var angle_degrees = angle_radians*180/PI
@@ -200,7 +204,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../Zombie").enemyDamage
+onready var EnemyDamage = get_node("../logoblock").enemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -216,18 +220,17 @@ func setHealth(value):
 func takenDamage(enemyDamage):
 	setHealth(health - enemyDamage)
 	updatHealtbar()
-	$HealthTimer.start(10)
+	$Timer.start(10)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
 	updatHealtbar()
-	$HealthTimer.start(0.2)
+	$Timer.start(0.2)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies") && $InvulnerableTimer.is_stopped():
+	if body.is_in_group("enemies"):
 		takenDamage(EnemyDamage)
-		$InvulnerableTimer.start(1)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))
@@ -239,7 +242,7 @@ func updatHealtbar():
 	else:
 		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
 		emit_signal("health_updated", health)
-	$HealthTimer.start(2)
+	$Timer.start(2)
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
