@@ -1,3 +1,3 @@
 # 2DMBIE
 
-A game made by five students of Hogeschool Utrecht.
+A game made by 5 students of Hogeschool Utrecht.
