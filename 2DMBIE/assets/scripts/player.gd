@@ -204,7 +204,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../logoblock").enemyDamage
+onready var EnemyDamage = get_node("../Zombie").enemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
