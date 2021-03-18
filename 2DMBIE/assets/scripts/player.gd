@@ -237,8 +237,9 @@ func _on_Timer_timeout():
 	$Timer.start(0.2)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
+		$NoDamageTimer.start(1)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))
@@ -258,3 +259,5 @@ func _on_GroundChecker_body_exited(_body):
 func crouch_idle_transition(value):
 	crouch_idle = value
 	#print(crouch_idle)
+
+	
