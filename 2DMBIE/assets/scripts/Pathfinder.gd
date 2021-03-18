@@ -6,7 +6,6 @@ var jumpHeight = 3
 var jumpDistance = 2
 
 var tileMap
-var tileMap1
 var graph 
 
 var showLines = true
@@ -51,8 +50,7 @@ func findPath(start, end):
 
 func _ready():
 	graph = AStar2D.new()
-	tileMap = find_parent("Node2D").get_node("Blocks")
-	tileMap1 = find_parent("Node2D").get_node("Floor")
+	tileMap = find_parent("Node2D").find_node("Blocks")
 	createMap()
 	createConections()
 
@@ -161,8 +159,7 @@ func _draw():
 			
 func createMap():
 	var space_state = get_world_2d().direct_space_state
-	var cells = tileMap.get_used_cells() + tileMap1.get_used_cells()
-	print(cells)
+	var cells = tileMap.get_used_cells()
 	
 	for cell in cells:
 		var stat = cellType(cell)

@@ -13,6 +13,7 @@ var mouse_position
 var bulletpoint_position
 var mouse_direction
 var bullet_direction
+var valid_aim = true
 
 func _process(_delta):
 	#als de player wil schieten, en waarnaartoe
@@ -22,10 +23,13 @@ func _process(_delta):
 		mouse_position = get_global_mouse_position()
 		bulletpoint_position = $BulletPoint.get_global_position()
 		bullet.position = bulletpoint_position
-		if Input.is_action_pressed("aim"):
-#			bullet.rotation = $ShootVector.get_angle_to(mouse_position)
+		if Input.is_action_pressed("aim") and valid_aim:
+			bullet.rotation = (mouse_position - bullet.position).angle()
 			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 			bullet.set_direction(mouse_direction)
+			var muzzleflashInstance = muzzleflash.instance()
+			$BulletPoint.add_child(muzzleflashInstance)
+			get_tree().current_scene.add_child(bullet)
 		elif not Input.is_action_pressed("aim"):
 			var facingDir = 10
 			var facing = get_node("../../../../").facing
@@ -35,7 +39,12 @@ func _process(_delta):
 				facingDir = -10
 			bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
 		
-		var muzzleflashInstance = muzzleflash.instance()
-		$BulletPoint.add_child(muzzleflashInstance)
-		get_tree().current_scene.add_child(bullet)
+			var muzzleflashInstance = muzzleflash.instance()
+			$BulletPoint.add_child(muzzleflashInstance)
+			get_tree().current_scene.add_child(bullet)
 
+func _on_aimzone_exited():
+	valid_aim = true
+
+func _on_aimzone_entered():
+	valid_aim = false

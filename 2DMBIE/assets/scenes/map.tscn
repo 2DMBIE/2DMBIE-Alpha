@@ -49,5 +49,5 @@ frame = 5
 
 [node name="logoblock" parent="." instance=ExtResource( 3 )]
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( -525.355, 431.086 )
+[node name="Zombie" parent="." instance=ExtResource( 6 )]
+position = Vector2( -493.446, 434.415 )
