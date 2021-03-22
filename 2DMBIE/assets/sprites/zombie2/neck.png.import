@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torso.png-30e460ad6998ab05cf0548eee7a04fc5.stex"
+path="res://.import/neck.png-0f05c3d839431c670fed4fa0c8fe20b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/zombie1/torso.png"
-dest_files=[ "res://.import/torso.png-30e460ad6998ab05cf0548eee7a04fc5.stex" ]
+source_file="res://assets/sprites/zombie2/neck.png"
+dest_files=[ "res://.import/neck.png-0f05c3d839431c670fed4fa0c8fe20b2.stex" ]
 
 [params]
 

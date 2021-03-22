@@ -1,6 +1,6 @@
 extends Node2D
 
-var plenemy := preload("res://assets/scenes/zombie.tscn")
+var plenemy := preload("res://assets/scenes/zombie2.tscn")
 
 func _on_Timer_timeout():
 	var enemy := plenemy.instance()
