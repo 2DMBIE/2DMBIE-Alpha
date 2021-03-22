@@ -13,6 +13,7 @@ const dropthroughBit = 5
 
 var motion = Vector2()
 var is_running = false
+var crouch_idle = false
 var facing = "right"
 var collision
 
@@ -94,11 +95,16 @@ func _physics_process(_delta):
 			
 	if Input.is_action_pressed("crouch"):
 		$AnimationTree.set("parameters/crouching/current", 0)
+		if(crouch_idle):
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
+		else: 
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1)
 		$CollisionShape2D.disabled = true
 		$CollisionShape2DCrouch.disabled = false
 		if is_on_floor():
 			motion.x = 0 
 	else:
+		crouch_idle_transition(false)
 		$AnimationTree.set("parameters/crouching/current", 1)
 		$CollisionShape2D.disabled = false
 		$CollisionShape2DCrouch.disabled = true
@@ -176,10 +182,12 @@ func aim(string):
 		walking = true
 	if Input.is_action_pressed("aim"):
 		$AnimationTree.set("parameters/aim_state/current", 0)
-		var positionA = $body/chest/torso/gun/ShootVector.position
+		var positionA = $ShootVector.position
 		var positionB = get_local_mouse_position()
 		var angle_radians = positionA.angle_to_point(positionB)
 		var angle_degrees = angle_radians*180/PI
+		
+		
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
 			$AnimationTree.set("parameters/aim/blend_position", angle_degrees)
 			if (walking) || !is_on_floor(): 
@@ -204,7 +212,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../logoblock").enemyDamage
+onready var EnemyDamage = get_node("../Zombie").enemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -229,8 +237,9 @@ func _on_Timer_timeout():
 	$Timer.start(0.2)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies"):
+	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
+		$NoDamageTimer.start(1)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))
@@ -246,3 +255,9 @@ func updatHealtbar():
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
+
+func crouch_idle_transition(value):
+	crouch_idle = value
+	#print(crouch_idle)
+
+	

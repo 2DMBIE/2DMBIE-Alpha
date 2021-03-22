@@ -7,8 +7,8 @@ var direction := Vector2.ZERO
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		var velocity = direction * speed * delta
-		
 		global_position += velocity
+		
 
 func _on_bullet_body_entered(body):	
 	if body.is_in_group("enemies"):
