@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scripts/level2.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -247,6 +247,9 @@ resource_local_to_scene = true
 } ]
 6/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 3608, 1576 )
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -305,3 +308,10 @@ script = ExtResource( 9 )
 
 [node name="Zombie" parent="." instance=ExtResource( 10 )]
 position = Vector2( -616.485, -256.695 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2344, -1072 )
+shape = SubResource( 12 )
+[connection signal="area_exited" from="Area2D" to="Player" method="_on_Area2D_area_exited"]
