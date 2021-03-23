@@ -2,8 +2,8 @@ extends Node2D
 
 var cell_size = 64
 
-var jumpHeight = 3
-var jumpDistance = 2
+var jumpHeight = 2
+var jumpDistance = 1
 
 var tileMap
 var graph 
