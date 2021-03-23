@@ -16,10 +16,13 @@ var is_running = false
 var crouch_idle = false
 var facing = "right"
 var collision
+var zombie_dam_timer
 
 func _ready():
 	$AnimationTree.active = true
-
+	zombie_dam_timer = Timer.new()
+	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
+	add_child(zombie_dam_timer)
 
 func _physics_process(_delta):
 	motion.y += GRAVITY
@@ -226,21 +229,35 @@ func setHealth(value):
 		if health == 0:
 			queue_free()
 
+var takingDamage = false
+
 func takenDamage(enemyDamage):
 	setHealth(health - enemyDamage)
 	updatHealtbar()
 	$Timer.start(10)
+	zombie_dam_timer.start(1.2)
+	$NoDamageTimer.start(1)
 
-func _on_Timer_timeout():
-	if health < maxHealth:
-		health += 25
-	updatHealtbar()
-	$Timer.start(0.2)
+func _zombie_dam_timout():
+	if takingDamage == true:
+		takenDamage(EnemyDamage)
+		print('commence the damage!')
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
-		$NoDamageTimer.start(1)
+		takingDamage = true
+		print(takingDamage)
+
+func _on_Hitbox_body_exited(body):
+	takingDamage = false
+	print(takingDamage)
+
+func _on_Timer_timeout():
+	if health < maxHealth:
+		health += 25
+		updatHealtbar()
+		$Timer.start(0.2)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))

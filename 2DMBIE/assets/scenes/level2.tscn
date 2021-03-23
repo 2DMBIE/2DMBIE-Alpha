@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/scripts/map.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -249,6 +249,9 @@ points = PoolVector2Array( 65, 12, 0, 12, 0, 0, 65, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 3582.61, 1565.03 )
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -301,7 +304,9 @@ script = ExtResource( 9 )
 position = Vector2( -616.485, -256.695 )
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 372.658, 231.227 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 2344, -1072 )
+position = Vector2( 2075.27, -1233.99 )
+shape = SubResource( 13 )
 [connection signal="area_exited" from="Area2D" to="Player" method="_on_Area2D_area_exited"]
