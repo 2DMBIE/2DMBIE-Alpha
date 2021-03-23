@@ -12,4 +12,3 @@ func _process(delta):
 		get_tree().reload_current_scene()
 	pass
 
-

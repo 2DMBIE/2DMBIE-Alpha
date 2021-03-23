@@ -299,3 +299,9 @@ script = ExtResource( 9 )
 
 [node name="Zombie" parent="." instance=ExtResource( 10 )]
 position = Vector2( -616.485, -256.695 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 2344, -1072 )
+[connection signal="area_exited" from="Area2D" to="Player" method="_on_Area2D_area_exited"]
