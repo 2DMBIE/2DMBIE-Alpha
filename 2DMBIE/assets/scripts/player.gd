@@ -20,6 +20,7 @@ var collision
 func _ready():
 	$AnimationTree.active = true
 
+
 func _physics_process(_delta):
 	motion.y += GRAVITY
 	var friction = false
