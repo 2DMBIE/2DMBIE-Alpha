@@ -299,7 +299,7 @@ collision_mask = 2147483652
 [node name="Pathfinder" type="Node2D" parent="."]
 script = ExtResource( 9 )
 
-[node name="Node2D" parent="." instance=ExtResource( 8 )]
+[node name="Spawnpoint" parent="." instance=ExtResource( 8 )]
 position = Vector2( 352, 480 )
 
 [node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
