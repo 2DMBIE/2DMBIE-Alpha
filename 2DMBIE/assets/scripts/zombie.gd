@@ -50,11 +50,31 @@ func _process(_delta):
 func togglestep():
 	zombiestep = !zombiestep
 	
-func damage_animation(color_index):
-	#var array = [Color(255, 231, 231), Color(255, 203, 203), Color(255, 159, 159), Color(255, 126, 126), Color(255, 88, 88)]
-	var array = [Color("ffcbcb"), Color("ff9f9f"), Color("ff7e7e"), Color("ff5858"), Color("ffffff")] #Color("ffe7e7"), 
-	modulate = array[color_index]
-	pass
+func show_damage_animation(_health_percentage):
+	print(_health_percentage)
+	var _index
+	var _array = [Color("ffcbcb"), Color("ff9f9f"), Color("ff7e7e"), Color("ff5858"), Color("ffe7e7")] #Color("ffcbcb")
+	if _health_percentage < 100 and _health_percentage >= 80:
+		_index = 0
+	elif _health_percentage < 80 and _health_percentage >= 60:
+		_index = 1
+	elif _health_percentage < 60 and _health_percentage >= 40:
+		_index = 2
+	elif _health_percentage < 40 and _health_percentage >= 20:
+		_index = 3
+	elif _health_percentage < 20:
+		_index = 4
+	
+	var _timer = Timer.new()
+	_timer.one_shot = true
+	_timer.wait_time = 0.15
+	_timer.connect("timeout", self, "_reset_module")
+	add_child(_timer)
+	modulate = _array[_index]
+	_timer.start()
+	
+func _reset_module():
+	modulate = Color("ffffff")
 
 signal health_updated(health)
 
@@ -65,8 +85,10 @@ onready var health = maxHealth setget _set_health
 
 func Hurt(damage):
 	_set_health(health - damage)
-	$AnimationTree.set("parameters/OneShot/active", 1)
-	print(health)
+	var percentage = health/maxHealth*100
+	show_damage_animation(percentage)
+	#print(percentage)
+	#print(health)
 
 func kill():
 	queue_free()
