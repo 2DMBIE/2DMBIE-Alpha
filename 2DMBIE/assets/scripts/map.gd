@@ -7,4 +7,6 @@ func _process(_delta):
 	$cursor.position = get_global_mouse_position()
 	if Input.is_action_just_released("game_reset"):
 		get_tree().reload_current_scene()
+		Global.Score = 0
+
 
