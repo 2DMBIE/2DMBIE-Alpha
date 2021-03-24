@@ -72,7 +72,11 @@ func show_damage_animation(_health_percentage):
 	add_child(_timer)
 	modulate = _array[_index]
 	_timer.start()
-	
+	# when hit play reset walk animation
+	# add cursor interaction
+	#	- onhover: change color
+	#	- onhit: cursor animation (big -> small) (sound effect)
+	# score - when a zombie dies: +10 and sound effect
 func _reset_module():
 	modulate = Color("ffffff")
 
