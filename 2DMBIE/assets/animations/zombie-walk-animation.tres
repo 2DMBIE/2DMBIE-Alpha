@@ -267,7 +267,7 @@ tracks/21/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 26.29, 15.2052, -1.44073, 13.892, 7.73644, 2.46733, 26.29 ]
+"values": [ 26.29, 29.2889, 4.603, -8.27885, -0.0485848, -16.3929, 26.29 ]
 }
 tracks/22/type = "value"
 tracks/22/path = NodePath("body/torso/neck:position")
@@ -291,7 +291,7 @@ tracks/23/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 721.466, 736.338, 753.466, 748.687, 734.964, 751.735, 721.466 ]
+"values": [ 721.466, 724.531, 742.04, 756.184, 725.511, 764.198, 721.466 ]
 }
 tracks/24/type = "value"
 tracks/24/path = NodePath("body:position")

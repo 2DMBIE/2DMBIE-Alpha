@@ -65,7 +65,7 @@ onready var health = maxHealth setget _set_health
 
 func Hurt(damage):
 	_set_health(health - damage)
-	#$AnimationPlayer.play("zombie-hurt")
+	$AnimationTree.set("parameters/OneShot/active", 1)
 	print(health)
 
 func kill():
