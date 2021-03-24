@@ -11,7 +11,7 @@ var pathFinder
 var speed = 200
 var jumpForce = 300
 var gravity = 550
-var padding = 4
+var padding = 2
 var finishPadding = 5
 
 var movement
@@ -20,7 +20,22 @@ var movement
 func _ready():
 	pathFinder = find_parent("Node2D").find_node("Pathfinder")
 	movement = Vector2(0, 0)
-	pass # Replace with function body.
+#	var timer = Timer.new()
+#	timer.set_wait_time(.2)
+#	timer.set_one_shot(false)
+#	timer.connect("timeout", self, "repeat_me")
+#	add_child(timer)
+#	timer.start()
+#
+#func repeat_me():
+#	var space_state = get_world_2d().direct_space_state
+#	var playerPos = get_node("../Player").position
+#	var pos = Vector2(playerPos.x, playerPos.y + 32)
+#	var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
+#	if (result):
+#		var goTo = result["position"]
+#		currentPath = pathFinder.findPath(self.position, goTo)
+#		nextPoint()
 
 
 func nextPoint():
@@ -41,15 +56,15 @@ func jump():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	if Input.is_action_just_pressed("left_click"):
-	var space_state = get_world_2d().direct_space_state
-	var playerPos = get_node("../Player").position
-	var pos = Vector2(playerPos.x, playerPos.y + 32)
-	var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
-	if (result):
-		var goTo = result["position"]
-		currentPath = pathFinder.findPath(self.position, goTo)
-		nextPoint()
+	if Input.is_action_just_pressed("left_click"):
+		var space_state = get_world_2d().direct_space_state
+		var playerPos = get_node("../Player").position
+		var pos = Vector2(playerPos.x, playerPos.y + 32)
+		var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
+		if (result):
+			var goTo = result["position"]
+			currentPath = pathFinder.findPath(self.position, goTo)
+			nextPoint()
 	
 	if currentTarget:
 		if (currentTarget[0] - padding > position[0]): # and position.distance_to(currentTarget) > padding:
