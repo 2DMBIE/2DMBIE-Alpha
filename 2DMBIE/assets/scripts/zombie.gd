@@ -59,9 +59,9 @@ onready var health = maxHealth setget _set_health
 
 func Hurt(damage):
 	_set_health(health - damage)
-	print(health)
 
 func kill():
+	Global.Score()
 	queue_free()
 
 func _set_health(value):
