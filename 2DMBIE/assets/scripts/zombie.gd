@@ -20,12 +20,10 @@ func _ready():
 func _process(_delta):
 	
 	if !is_on_floor():
-		$AnimationTree.set("parameters/in_air/current", 1)
-		#$AnimationPlayer.play("zombie-jump")
-		pass
-	else:
 		$AnimationTree.set("parameters/in_air/current", 0)
-		pass
+	else:
+		$AnimationTree.set("parameters/in_air/current", 1)
+
 	if zombiestep:
 		motion.y += GRAVITY
 	
