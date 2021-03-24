@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/scripts/map.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scenes/logoblock.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/pathfinder.gd" type="Script" id=9]
-
+[ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -251,7 +251,7 @@ resource_local_to_scene = true
 script = ExtResource( 1 )
 
 [node name="Walls" type="TileMap" parent="."]
-z_index = -5
+z_index = -15
 tile_set = SubResource( 1 )
 collision_mask = 0
 format = 1
@@ -302,3 +302,6 @@ position = Vector2( -623.739, -125.524 )
 
 [node name="Node2D" type="Node2D" parent="."]
 script = ExtResource( 9 )
+
+[node name="Zombie" parent="." instance=ExtResource( 10 )]
+position = Vector2( -477.472, -165.212 )
