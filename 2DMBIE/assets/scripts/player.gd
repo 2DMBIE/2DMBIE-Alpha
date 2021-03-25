@@ -279,4 +279,4 @@ func crouch_idle_transition(value):
 	#print(crouch_idle)
 
 func _on_Area2D_area_exited(_area):
-	get_tree().reload_current_scene()
+	var _x = get_tree().reload_current_scene()
