@@ -249,7 +249,7 @@ func _on_Hitbox_body_entered(body):
 		takingDamage = true
 		print(takingDamage)
 
-func _on_Hitbox_body_exited(body):
+func _on_Hitbox_body_exited(_body):
 	takingDamage = false
 	print(takingDamage)
 
@@ -278,5 +278,5 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 	#print(crouch_idle)
 
-func _on_Area2D_area_exited(area):
+func _on_Area2D_area_exited(_area):
 	get_tree().reload_current_scene()
