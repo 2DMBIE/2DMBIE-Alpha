@@ -51,7 +51,6 @@ func togglestep():
 	zombiestep = !zombiestep
 	
 func show_damage_animation(_health_percentage):
-	print(_health_percentage)
 	var _index
 	var _array = [Color("ffcbcb"), Color("ff9f9f"), Color("ff7e7e"), Color("ff5858"), Color("ffe7e7")] #Color("ffcbcb")
 	if _health_percentage < 100 and _health_percentage >= 80:
@@ -72,11 +71,7 @@ func show_damage_animation(_health_percentage):
 	add_child(_timer)
 	modulate = _array[_index]
 	_timer.start()
-	# when hit play reset walk animation
-	# add cursor interaction
-	#	- onhover: change color
-	#	- onhit: cursor animation (big -> small) (sound effect)
-	# score - when a zombie dies: +10 and sound effect
+
 func _reset_module():
 	modulate = Color("ffffff")
 
@@ -91,8 +86,6 @@ func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
-	#print(percentage)
-	#print(health)
 
 func kill():
 	queue_free()
