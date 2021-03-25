@@ -689,6 +689,7 @@ shape = SubResource( 35 )
 one_shot = true
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
