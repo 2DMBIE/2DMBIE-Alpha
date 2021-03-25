@@ -241,17 +241,17 @@ func takenDamage(enemyDamage):
 func _zombie_dam_timout():
 	if takingDamage == true:
 		takenDamage(EnemyDamage)
-		print('commence the damage!')
+		#print('commence the damage!')
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
 		takingDamage = true
-		print(takingDamage)
+		#print(takingDamage)
 
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
-	print(takingDamage)
+	#print(takingDamage)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
