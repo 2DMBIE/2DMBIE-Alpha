@@ -8,6 +8,8 @@ onready var bulletDelayTimer := $BulletDelayTimer
 
 #bullet variables
 export var bullet_delay: float = .2 
+signal is_shooting(value)
+signal no_aim_shoot(value)
 
 var mouse_position
 var bulletpoint_position
@@ -24,15 +26,22 @@ func _process(_delta):
 		bulletpoint_position = $BulletPoint.get_global_position()
 		bullet.position = bulletpoint_position
 		if Input.is_action_pressed("aim") and valid_aim:
+			#print("aim")
+			emit_signal("no_aim_shoot", false)
 			bullet.rotation = (mouse_position - bullet.position).angle()
 			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
+			emit_signal("is_shooting", true)
 			bullet.set_direction(mouse_direction)
 			var muzzleflashInstance = muzzleflash.instance()
 			$BulletPoint.add_child(muzzleflashInstance)
 			get_tree().current_scene.add_child(bullet)
+			
 		elif not Input.is_action_pressed("aim"):
+			#print("no aim")
+			emit_signal("no_aim_shoot", true)
 			var facingDir = 10
 			var facing = get_node("../../../../").facing
+			emit_signal("is_shooting", true)
 			if facing == "right":
 				facingDir = 10
 			elif facing == "left":
@@ -42,7 +51,8 @@ func _process(_delta):
 			var muzzleflashInstance = muzzleflash.instance()
 			$BulletPoint.add_child(muzzleflashInstance)
 			get_tree().current_scene.add_child(bullet)
-
+		#emit_signal("is_shooting", false)
+	
 func _on_aimzone_exited():
 	valid_aim = true
 
