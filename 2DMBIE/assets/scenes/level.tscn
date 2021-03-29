@@ -306,3 +306,6 @@ position = Vector2( 352, 480 )
 
 [node name="Zombie" parent="." instance=ExtResource( 11 )]
 position = Vector2( 211, -210 )
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 1
