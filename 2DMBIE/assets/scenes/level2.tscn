@@ -519,7 +519,7 @@ position = Vector2( -623.739, -125.524 )
 script = ExtResource( 9 )
 
 [node name="Zombie" parent="." instance=ExtResource( 10 )]
-position = Vector2( -616.485, -256.695 )
+position = Vector2( -477.472, -165.212 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 372.658, 231.227 )
