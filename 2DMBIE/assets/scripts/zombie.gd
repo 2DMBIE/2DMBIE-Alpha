@@ -10,15 +10,26 @@ const WALK_ACCELERATION_STEP = 80 #old 20
 const GRAVITY = 20
 var motion = Vector2()
 var zombiestep = false
+signal play_sound(library)
+
+export (int) var growl_time_min = 5 
+export (int) var growl_time_max = 12
+var growl_timer = Timer.new()
+var _time_diff = growl_time_max - growl_time_min 
+var _wait_time = randi()%_time_diff + growl_time_min
 
 const UP = Vector2(0, -1)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationTree.active = true
+	growl_timer.wait_time = _wait_time
+	growl_timer.one_shot = false
+	growl_timer.connect("timeout", self, "growl")
+	growl_timer.autostart = true
+	add_child(growl_timer)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	
 	if !is_on_floor():
 		$AnimationTree.set("parameters/in_air/current", 0)
 	else:
@@ -46,6 +57,14 @@ func _process(_delta):
 		else:
 			motion.x = lerp(motion.x, 0, 0.05)
 		motion = move_and_slide(motion, UP)
+		
+		# growl
+		# start timer between 0 5-12
+		# timer ended? growl
+		# start timer
+func growl():
+	emit_signal("play_sound", "growl")
+	 
 		
 func togglestep():
 	zombiestep = !zombiestep
@@ -86,6 +105,7 @@ func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
+	emit_signal("play_sound", "hurt")
 
 func kill():
 	queue_free()

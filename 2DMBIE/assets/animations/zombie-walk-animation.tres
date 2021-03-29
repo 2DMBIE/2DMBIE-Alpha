@@ -490,3 +490,20 @@ tracks/39/keys = {
 "method": "togglestep"
 } ]
 }
+tracks/40/type = "method"
+tracks/40/path = NodePath("sfx")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = false
+tracks/40/keys = {
+"times": PoolRealArray( 0.172779, 0.996251 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "footstep" ],
+"method": "play_sound"
+}, {
+"args": [ "footstep" ],
+"method": "play_sound"
+} ]
+}
