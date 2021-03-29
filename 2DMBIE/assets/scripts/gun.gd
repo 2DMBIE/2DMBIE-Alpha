@@ -10,6 +10,7 @@ onready var bulletDelayTimer := $BulletDelayTimer
 export var bullet_delay: float = .2 
 signal is_shooting(value)
 signal no_aim_shoot(value)
+signal shake_camera(value)
 
 var mouse_position
 var bulletpoint_position
@@ -31,6 +32,7 @@ func _process(_delta):
 			bullet.rotation = (mouse_position - bullet.position).angle()
 			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 			emit_signal("is_shooting", true)
+			emit_signal("shake_camera", 0.25)
 			bullet.set_direction(mouse_direction)
 			var muzzleflashInstance = muzzleflash.instance()
 			$BulletPoint.add_child(muzzleflashInstance)
@@ -42,6 +44,7 @@ func _process(_delta):
 			var facingDir = 10
 			var facing = get_node("../../../../").facing
 			emit_signal("is_shooting", true)
+			emit_signal("shake_camera", 0.25)
 			if facing == "right":
 				facingDir = 10
 			elif facing == "left":

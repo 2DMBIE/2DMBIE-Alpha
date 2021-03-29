@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -46,6 +46,7 @@
 [ext_resource path="res://assets/animations/shoot/shoot_minus_90_degrees.tres" type="Animation" id=44]
 [ext_resource path="res://assets/animations/shoot/shoot_minus_60_degrees.tres" type="Animation" id=45]
 [ext_resource path="res://assets/animations/shoot/no_aim_shoot.tres" type="Animation" id=46]
+[ext_resource path="res://assets/scripts/shakecamera2d.gd" type="Script" id=47]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -289,7 +290,7 @@ nodes/shooting/node = SubResource( 42 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 43 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "crouching", 0, "crouch-idle", "crouching", 1, "running" ]
+node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale 2", 0, "Animation 7", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale", 0, "Animation 5", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9" ]
 
 [sub_resource type="Animation" id=45]
 tracks/0/type = "value"
@@ -686,8 +687,7 @@ texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
-position = Vector2( 11.3475, -0.374093 )
-rotation = -0.0721872
+position = Vector2( 22.0728, -1.75482 )
 texture = ExtResource( 9 )
 script = ExtResource( 33 )
 
@@ -706,7 +706,7 @@ one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = 0.115081
+rotation = -0.440587
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -717,7 +717,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -2.15363
+rotation = -1.58248
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -726,7 +726,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = 1.63466
+rotation = 1.69921
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -735,7 +735,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -13.4064, -14.1956 )
-rotation = 0.207987
+rotation = -0.324783
 z_index = 1
 texture = ExtResource( 13 )
 offset = Vector2( -0.0279083, 8.82368 )
@@ -746,7 +746,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/chest/torso/upperarm_right"]
 position = Vector2( -1.01368, 20.0398 )
-rotation = -1.80771
+rotation = -1.36206
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0.498055, 6.75774 )
@@ -756,7 +756,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right"]
 position = Vector2( 1.33635, 15.2045 )
-rotation = 0.00204575
+rotation = 0.0559495
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_bone_": true
@@ -764,7 +764,6 @@ __meta__ = {
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
-rotation = -0.0860775
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -940,6 +939,7 @@ current = true
 zoom = Vector2( 0.9, 0.9 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
+script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
@@ -981,6 +981,7 @@ shape = SubResource( 49 )
 one_shot = true
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
+[connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
