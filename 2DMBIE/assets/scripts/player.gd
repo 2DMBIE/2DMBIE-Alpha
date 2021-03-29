@@ -27,7 +27,7 @@ func _ready():
 func _physics_process(_delta):
 	motion.y += GRAVITY
 	var friction = false
-	$Label.text = str(Global.Score)
+	$Score.text = str("Score:") + str(Global.Score)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:

@@ -88,7 +88,7 @@ func Hurt(damage):
 	show_damage_animation(percentage)
 
 func kill():
-	Global.Score += 100
+	Global.Score += Global.ScoreIncrement
 	queue_free()
 
 func _set_health(value):
