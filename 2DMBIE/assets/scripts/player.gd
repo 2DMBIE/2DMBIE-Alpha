@@ -17,7 +17,7 @@ var crouch_idle = false
 var facing = "right"
 var collision
 var zombie_dam_timer
-
+# No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
 	zombie_dam_timer = Timer.new()
@@ -38,6 +38,7 @@ func _physics_process(_delta):
 				motion.x = 50
 			if (aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
@@ -46,6 +47,7 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("left")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "right") && (motion.x < 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
@@ -60,6 +62,7 @@ func _physics_process(_delta):
 			motion.x = min(motion.x, MAX_RUN_SPEED)
 			if(aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
@@ -68,6 +71,7 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("right")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "left") && (motion.x > 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
@@ -75,6 +79,7 @@ func _physics_process(_delta):
 	elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if (aim("walking") == false): 
 			$AnimationTree.set("parameters/aim/blend_position", 0)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		friction = true
 		walk_idle_transition()
 		motion.x = lerp(motion.x, 0, 0.3)
@@ -121,10 +126,10 @@ func _physics_process(_delta):
 #			GRAVITY = 0
 #		else:
 #			GRAVITY = 20
-		
 	motion = move_and_slide(motion, UP)
 	pass
-	
+
+
 
 func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):
@@ -194,6 +199,7 @@ func aim(string):
 		
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
 			$AnimationTree.set("parameters/aim/blend_position", angle_degrees)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
 			if (walking) || !is_on_floor(): 
 				direction("left")
 			return true
@@ -201,12 +207,14 @@ func aim(string):
 			var x = 90-angle_degrees
 			x = 90+x 
 			$AnimationTree.set("parameters/aim/blend_position", x)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", x)
 			if (walking) || !is_on_floor(): 
 				direction("right")
 			return true
 		elif (angle_degrees > -180) && (angle_degrees < -90):
 			var y = -180-angle_degrees
 			$AnimationTree.set("parameters/aim/blend_position", y)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", y)
 			if (walking) || !is_on_floor(): 
 				direction("right")
 			return true
@@ -241,17 +249,17 @@ func takenDamage(enemyDamage):
 func _zombie_dam_timout():
 	if takingDamage == true:
 		takenDamage(EnemyDamage)
-		print('commence the damage!')
+		#print('commence the damage!')
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
 		takingDamage = true
-		print(takingDamage)
+		#print(takingDamage)
 
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
-	print(takingDamage)
+	#print(takingDamage)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
@@ -276,7 +284,12 @@ func _on_GroundChecker_body_exited(_body):
 
 func crouch_idle_transition(value):
 	crouch_idle = value
-	#print(crouch_idle)
 
 func _on_Area2D_area_exited(_area):
-	get_tree().reload_current_scene()
+	var _x = get_tree().reload_current_scene()
+
+func _on_gun_is_shooting(value):
+	$AnimationTree.set("parameters/shooting/active", value)
+
+func _on_no_aim_shoot(value):
+	$AnimationTree.set("parameters/fixed_aim/current", value)
