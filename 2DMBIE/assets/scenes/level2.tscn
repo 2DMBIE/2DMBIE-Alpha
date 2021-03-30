@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -7,13 +7,11 @@
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/debugoverlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/scenes/zombieOld.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/pathfinder.gd" type="Script" id=9]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=13]
-[ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -422,10 +420,10 @@ resource_local_to_scene = true
 5/shapes = [  ]
 5/z_index = 0
 
-[sub_resource type="ConvexPolygonShape2D" id=16]
+[sub_resource type="ConvexPolygonShape2D" id=13]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 16, 0, 16 )
 
-[sub_resource type="TileSet" id=17]
+[sub_resource type="TileSet" id=14]
 0/name = "blocks_tileset_1.png 0"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
@@ -436,14 +434,14 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 16, 0, 16 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 16 )
+0/shape = SubResource( 13 )
 0/shape_one_way = true
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
 "one_way_margin": 1.0,
-"shape": SubResource( 16 ),
+"shape": SubResource( 13 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -501,7 +499,7 @@ format = 1
 tile_data = PoolIntArray( -1245172, 0, 0, -1245171, 0, 1, -1245170, 3, 5, -1245169, 0, 2, -983039, 0, 0, -983038, 0, 1, -983037, 0, 2, -983028, 5, 0, -720863, 3, 5, -720853, 3, 5, -720839, 3, 3, -720824, 3, 5 )
 
 [node name="Floor" type="TileMap" parent="."]
-tile_set = SubResource( 17 )
+tile_set = SubResource( 14 )
 collision_layer = 32
 collision_mask = 0
 format = 1
@@ -537,15 +535,11 @@ script = ExtResource( 9 )
 position = Vector2( 372.658, 231.227 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
-visible = false
 position = Vector2( 1939.34, -1063.23 )
 shape = SubResource( 15 )
 
-[node name="ZombieOld" parent="." instance=ExtResource( 8 )]
-position = Vector2( 4171.81, -188.153 )
-
-[node name="Zombie" parent="." instance=ExtResource( 14 )]
-position = Vector2( 333.735, -180.296 )
-
 [node name="DebugOverlay" parent="." instance=ExtResource( 7 )]
+
+[node name="enemyspawnpoint" parent="." instance=ExtResource( 10 )]
+position = Vector2( -637.205, -143.455 )
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
