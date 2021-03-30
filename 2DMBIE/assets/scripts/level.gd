@@ -9,4 +9,5 @@ func _process(_delta):
 		get_tree().reload_current_scene()
 		Global.Score = 0
 
+		var _error = get_tree().reload_current_scene()
 
