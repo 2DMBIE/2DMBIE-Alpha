@@ -429,3 +429,4 @@ tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/in_air/current = 1
 parameters/walk/current = 6
+[connection signal="play_sound" from="." to="sfx" method="play_sound"]

@@ -85,7 +85,6 @@ func _process(delta):
 #			var goTo = result["position"]
 #			currentPath = pathFinder.findPath(self.position, goTo)
 #			nextPoint()
-
 	if !is_on_floor():
 		$AnimationTree.set("parameters/in_air/current", 0)
 	else:
@@ -110,6 +109,11 @@ func _process(delta):
 #		movement[1] = 0
 	
 	self.move_and_slide(movement, Vector2(0, -1))
+	if self.movement.x < 0:
+		direction("left")
+	else:
+		direction("right")
+		
 #	if zombiestep:
 #		motion.y += GRAVITY
 #
@@ -195,3 +199,11 @@ func _set_health(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			kill()
+			
+func direction(x):
+	var body = get_node("body")
+	if (x == "left") && !(body.scale == Vector2(-1,1)):
+		body.scale = Vector2(-1,1)
+	elif (x == "right") && !(body.scale == Vector2(1,1)):
+		body.scale = Vector2(1,1)
+	else: pass
