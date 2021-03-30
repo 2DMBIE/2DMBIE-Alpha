@@ -22,6 +22,7 @@ const UP = Vector2(0, -1)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationTree.active = true
+	$AnimationTree.set("parameters/walk/current", randi()%10)
 	growl_timer.wait_time = _wait_time
 	growl_timer.one_shot = false
 	growl_timer.connect("timeout", self, "growl")
