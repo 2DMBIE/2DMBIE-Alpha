@@ -21,6 +21,13 @@ var padding = 2
 var finishPadding = 90
 
 var movement
+signal play_sound(library)
+
+export (int) var growl_time_min = 5 
+export (int) var growl_time_max = 12
+var growl_timer = Timer.new()
+var _time_diff = growl_time_max - growl_time_min 
+var _wait_time = randi()%_time_diff + growl_time_min
 
 const UP = Vector2(0, -1)
 # Called when the node enters the scene tree for the first time.
@@ -34,6 +41,13 @@ func _ready():
 	timer.connect("timeout", self, "repeat_me")
 	add_child(timer)
 	timer.start()
+	
+	$AnimationTree.set("parameters/walk/current", randi()%10)
+	growl_timer.wait_time = _wait_time
+	growl_timer.one_shot = false
+	growl_timer.connect("timeout", self, "growl")
+	growl_timer.autostart = true
+	add_child(growl_timer)
 
 func repeat_me():
 	var space_state = get_world_2d().direct_space_state
@@ -121,6 +135,16 @@ func _process(delta):
 		
 #func togglestep():
 #	zombiestep = !zombiestep
+		# growl
+		# start timer between 0 5-12
+		# timer ended? growl
+		# start timer
+func growl():
+	emit_signal("play_sound", "growl")
+	 
+		
+func togglestep():
+	zombiestep = !zombiestep
 	
 func show_damage_animation(_health_percentage):
 	var _index
@@ -158,9 +182,11 @@ func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
+	emit_signal("play_sound", "hurt")
 
 func kill():
-	scale.y = .1
+	Global.Score += Global.ScoreIncrement
+	queue_free()
 
 func _set_health(value):
 	var prevHealth = health

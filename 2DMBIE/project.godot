@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Camera2D",
+"class": "ShakeCamera2D",
+"language": "GDScript",
+"path": "res://assets/scripts/shakecamera2d.gd"
+} ]
 _global_script_class_icons={
-
+"ShakeCamera2D": ""
 }
 
 [application]
@@ -18,6 +23,10 @@ _global_script_class_icons={
 config/name="2DMBIE"
 run/main_scene="res://assets/scenes/level2.tscn"
 config/icon="res://assets/sprites/icon.png"
+
+[autoload]
+
+Global="*res://assets/scripts/Global.gd"
 
 [debug]
 

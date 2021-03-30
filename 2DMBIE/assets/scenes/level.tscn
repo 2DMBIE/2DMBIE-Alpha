@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://assets/scripts/map.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
@@ -305,5 +305,4 @@ position = Vector2( 352, 480 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 11 )]
-position = Vector2( 196, -86 )
-scale = Vector2( 0.9, 0.9 )
+position = Vector2( 243.236, -124.719 )
