@@ -287,9 +287,9 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_Area2D_area_exited(_area):
-	get_tree().reload_current_scene()
-	Global.Score = 0
 	var _x = get_tree().reload_current_scene()
+	Global.Score = 0
+	
 
 func _on_gun_is_shooting(value):
 	$AnimationTree.set("parameters/shooting/active", value)

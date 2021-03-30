@@ -305,5 +305,4 @@ position = Vector2( 352, 480 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 11 )]
-position = Vector2( 196, -86 )
-scale = Vector2( 0.9, 0.9 )
+position = Vector2( 243.236, -124.719 )

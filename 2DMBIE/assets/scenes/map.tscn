@@ -51,3 +51,4 @@ frame = 5
 
 [node name="Zombie" parent="." instance=ExtResource( 7 )]
 position = Vector2( -52.0838, 420.808 )
+[connection signal="play_sound" from="Zombie" to="Zombie/sfx" method="play_sound"]

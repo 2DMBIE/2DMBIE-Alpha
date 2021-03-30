@@ -1,10 +1,10 @@
 [gd_resource type="Animation" load_steps=3 format=2]
 
-[ext_resource path="res://assets/sounds/zombie/z_footstep3.wav" type="AudioStream" id=1]
-[ext_resource path="res://assets/sounds/zombie/z_footstep2.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sounds/zombie/z_footstep5.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/zombie/z_footstep4.wav" type="AudioStream" id=2]
 
 [resource]
-resource_name = "walk"
+resource_name = "walk5"
 length = 1.22
 loop = true
 step = 0.2
@@ -493,38 +493,21 @@ tracks/39/keys = {
 "method": "togglestep"
 } ]
 }
-tracks/40/type = "method"
-tracks/40/path = NodePath("sfx")
+tracks/40/type = "audio"
+tracks/40/path = NodePath("sfx/footstep/footstep1")
 tracks/40/interp = 1
 tracks/40/loop_wrap = true
 tracks/40/imported = false
-tracks/40/enabled = false
+tracks/40/enabled = true
 tracks/40/keys = {
-"times": PoolRealArray( 0.172779, 0.996251 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ "footstepA" ],
-"method": "play_sound"
-}, {
-"args": [ "footstepA" ],
-"method": "play_sound"
-} ]
-}
-tracks/41/type = "audio"
-tracks/41/path = NodePath("sfx/footstep/footstep1")
-tracks/41/interp = 1
-tracks/41/loop_wrap = true
-tracks/41/imported = false
-tracks/41/enabled = true
-tracks/41/keys = {
 "clips": [ {
-"end_offset": 0.780895,
-"start_offset": 0.0,
-"stream": ExtResource( 2 )
-}, {
-"end_offset": 0.0,
+"end_offset": 0.713613,
 "start_offset": 0.0,
 "stream": ExtResource( 1 )
+}, {
+"end_offset": 0.781535,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
 } ],
-"times": PoolRealArray( 0.157997, 0.89479 )
+"times": PoolRealArray( 0.190212, 0.8 )
 }
