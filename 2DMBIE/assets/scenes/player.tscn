@@ -979,6 +979,31 @@ shape = SubResource( 49 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Score" type="Label" parent="."]
+margin_left = -8.0
+margin_top = -128.0
+margin_right = 64.0
+margin_bottom = -114.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScorePopup" type="Popup" parent="."]
+margin_left = -8.0
+margin_top = -144.0
+margin_right = 64.0
+margin_bottom = -128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ScorePopup"]
+margin_right = 40.0
+margin_bottom = 14.0
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]

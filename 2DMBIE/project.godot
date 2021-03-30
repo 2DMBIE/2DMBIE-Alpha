@@ -24,6 +24,10 @@ config/name="2DMBIE"
 run/main_scene="res://assets/scenes/level.tscn"
 config/icon="res://assets/sprites/icon.png"
 
+[autoload]
+
+Global="*res://assets/scripts/Global.gd"
+
 [debug]
 
 settings/fps/force_fps=60
