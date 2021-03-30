@@ -18,7 +18,7 @@ var movement
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pathFinder = find_parent("Node2D").find_node("Pathfinder")
+	pathFinder = find_parent("Main").find_node("Pathfinder")
 	movement = Vector2(0, 0)
 	var timer = Timer.new()
 	timer.set_wait_time(4)

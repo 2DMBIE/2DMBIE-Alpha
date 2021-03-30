@@ -3,9 +3,10 @@ extends Node2D
 var cell_size = 64
 
 var jumpHeight = 2
-var jumpDistance = 2
+var jumpDistance = 1
 
 var tileMap
+var tileMap2
 var graph 
 
 var showLines = true
@@ -31,7 +32,7 @@ func findPath(start, end):
 		var pos = graph.get_point_position(point)
 		var stat = cellType(pos, true, true)
 		if lastPos and lastPos[1] >= pos[1] - (cell_size * jumpHeight) and ((lastPos[0] < pos[0] and stat[0] < 0) or (lastPos[0] > pos[0] and stat[1] < 0)):
-			actions.append(0)
+			actions.append(null)
 
 		lastPos = pos
 		
@@ -49,7 +50,8 @@ func findPath(start, end):
 
 func _ready():
 	graph = AStar2D.new()
-	tileMap = find_parent("Node2D").find_node("Blocks")
+	tileMap = find_parent("Main").find_node("Blocks")
+	tileMap2 = find_parent("Main").find_node("Floor")
 	createMap()
 	createConections()
 
@@ -158,7 +160,7 @@ func _draw():
 			
 func createMap():
 	var space_state = get_world_2d().direct_space_state
-	var cells = tileMap.get_used_cells()
+	var cells = tileMap.get_used_cells() + tileMap2.get_used_cells()
 	
 	for cell in cells:
 		var stat = cellType(cell)
@@ -190,7 +192,7 @@ func getVerticalPoints():
 		var verticalPoint = space_state.intersect_ray(Vector2(pointPos[0], pointPos[1] + 128), Vector2(pointPos[0], pointPos[1] + 1000))
 		if verticalPoint:
 			pointPosition = verticalPoint["position"]
-		var cells = tileMap.get_used_cells()
+		var cells = tileMap.get_used_cells() + tileMap2.get_used_cells()
 		if pointPosition:
 			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells):
 				createPoint(tileMap.world_to_map(pointPosition))
@@ -200,7 +202,7 @@ func cellType(pos, global = false, isAbove = false):
 		pos = tileMap.world_to_map(pos)
 	if isAbove:
 		pos = Vector2(pos[0], pos[1] + 1)
-	var cells = tileMap.get_used_cells()
+	var cells = tileMap.get_used_cells() + tileMap2.get_used_cells()
 
 
 	if (Vector2(pos[0], pos[1] - 1) in cells):
