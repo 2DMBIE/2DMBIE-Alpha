@@ -27,6 +27,7 @@ func _ready():
 func _physics_process(_delta):
 	motion.y += GRAVITY
 	var friction = false
+	$Score.text = str("Score:") + str(Global.Score)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -236,6 +237,7 @@ func setHealth(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			queue_free()
+			Global.Score = 0
 
 var takingDamage = false
 
@@ -249,7 +251,6 @@ func takenDamage(enemyDamage):
 func _zombie_dam_timout():
 	if takingDamage == true:
 		takenDamage(EnemyDamage)
-		#print('commence the damage!')
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
@@ -286,6 +287,8 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_Area2D_area_exited(_area):
+	get_tree().reload_current_scene()
+	Global.Score = 0
 	var _x = get_tree().reload_current_scene()
 
 func _on_gun_is_shooting(value):

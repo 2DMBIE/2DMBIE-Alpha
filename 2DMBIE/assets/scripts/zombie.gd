@@ -109,6 +109,7 @@ func Hurt(damage):
 	emit_signal("play_sound", "hurt")
 
 func kill():
+	Global.Score += Global.ScoreIncrement
 	queue_free()
 
 func _set_health(value):
