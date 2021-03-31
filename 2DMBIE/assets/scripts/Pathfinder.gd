@@ -55,16 +55,6 @@ func _ready():
 	createMap()
 	createConections()
 	
-func _process(_delta):
-	if Input.is_action_just_pressed("debug"):
-		if showLines:
-			showLines = false
-			visible = false
-			get_node("/root/Main/DebugOverlay/Label").visible = false
-		elif !showLines:
-			showLines = true
-			visible = true
-			get_node("/root/Main/DebugOverlay/Label").visible = true
 
 func createConections():
 	var points = graph.get_points()
@@ -244,9 +234,19 @@ func createPoint(cell):
 	var pos = tileMap.map_to_world(above) + Vector2(cell_size/2, cell_size/2)
 	if graph.get_points() and graph.get_point_position(graph.get_closest_point(pos)) == pos:
 		return
-	if (showLines):
-		var test = TEST.instance()
-		test.set_position(pos)
-		call_deferred("add_child", test)
+	var test = TEST.instance()
+	test.set_position(pos)
+	call_deferred("add_child", test)
 	
 	graph.add_point(graph.get_available_point_id(), pos)
+	
+func _process(_delta):
+	if Input.is_action_just_pressed("debug"):
+		if showLines:
+			showLines = false
+			visible = false
+			get_node("/root/Main/DebugOverlay/Label").visible = false
+		elif !showLines:
+			showLines = true
+			visible = true
+			get_node("/root/Main/DebugOverlay/Label").visible = true
