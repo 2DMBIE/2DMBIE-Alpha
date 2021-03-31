@@ -108,7 +108,7 @@ func _process(delta):
 #	elif movement[1] > 0:
 #		movement[1] = 0
 	
-	self.move_and_slide(movement, Vector2(0, -1))
+	var _moveSlide = move_and_slide(movement, Vector2(0, -1))
 	if self.movement.x < 0:
 		direction("left")
 	else:

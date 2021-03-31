@@ -6,8 +6,8 @@
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
-[ext_resource path="res://assets/scenes/debugoverlay.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/scripts/pathfinder.gd" type="Script" id=9]
+[ext_resource path="res://assets/scenes/debugOverlay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scripts/Pathfinder.gd" type="Script" id=8]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
@@ -529,17 +529,14 @@ position = Vector2( 4701.75, -1124.49 )
 position = Vector2( 157.755, -1892.49 )
 
 [node name="Pathfinder" type="Node2D" parent="."]
-script = ExtResource( 9 )
+script = ExtResource( 8 )
 
 [node name="OoBbox" type="Area2D" parent="."]
 position = Vector2( 372.658, 231.227 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
-position = Vector2( 1939.34, -1063.23 )
+position = Vector2( 1944.59, -1150.39 )
 shape = SubResource( 15 )
 
 [node name="DebugOverlay" parent="." instance=ExtResource( 7 )]
-
-[node name="enemyspawnpoint" parent="." instance=ExtResource( 10 )]
-position = Vector2( -637.205, -143.455 )
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]

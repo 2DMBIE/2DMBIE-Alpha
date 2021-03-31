@@ -9,7 +9,7 @@ var tileMap
 var tileMap2
 var graph 
 
-var showLines = true
+var showLines = false
 
 const TEST = preload("res://assets/scenes/face.tscn")
 
@@ -54,6 +54,17 @@ func _ready():
 	tileMap2 = find_parent("Main").find_node("Floor")
 	createMap()
 	createConections()
+	
+func _process(_delta):
+	if Input.is_action_just_pressed("debug"):
+		if showLines:
+			showLines = false
+			visible = false
+			get_node("/root/Main/DebugOverlay/Label").visible = false
+		elif !showLines:
+			showLines = true
+			visible = true
+			get_node("/root/Main/DebugOverlay/Label").visible = true
 
 func createConections():
 	var points = graph.get_points()

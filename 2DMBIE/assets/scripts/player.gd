@@ -29,6 +29,7 @@ func _ready():
 	add_child(zombie_dam_timer)
 
 func _physics_process(_delta):
+	update()
 	motion.y += GRAVITY
 	var friction = false
 	tileMap = get_node("../Blocks")
@@ -298,3 +299,11 @@ func _on_gun_is_shooting(value):
 
 func _on_no_aim_shoot(value):
 	$AnimationTree.set("parameters/fixed_aim/current", value)
+
+func _draw():
+	if get_node("/root/Main/Pathfinder").showLines:
+		var postA = $ShootVector.position
+		var postB = get_local_mouse_position()
+		draw_line(postA, postB, Color(255,0,0),1)
+	else:
+		pass
