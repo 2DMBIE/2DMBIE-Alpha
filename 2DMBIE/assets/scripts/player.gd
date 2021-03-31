@@ -27,14 +27,15 @@ func _ready():
 	zombie_dam_timer = Timer.new()
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
+	tileMap = get_node("../Blocks")
 
 func _physics_process(_delta):
 	update()
 	motion.y += GRAVITY
 	var friction = false
-	tileMap = get_node("../Blocks")
-	mousePos = get_global_mouse_position()
-	tilePos = tileMap.world_to_map(mousePos)
+	if tileMap:
+		mousePos = get_global_mouse_position()
+		tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -301,9 +302,10 @@ func _on_no_aim_shoot(value):
 	$AnimationTree.set("parameters/fixed_aim/current", value)
 
 func _draw():
-	if get_node("/root/Main/Pathfinder").showLines:
-		var postA = $ShootVector.position
-		var postB = get_local_mouse_position()
-		draw_line(postA, postB, Color(255,0,0),1)
-	else:
-		pass
+	if tileMap:
+		if get_node("/root/Main/Pathfinder").showLines:
+			var postA = $ShootVector.position
+			var postB = get_local_mouse_position()
+			draw_line(postA, postB, Color(255,0,0),1)
+		else:
+			pass
