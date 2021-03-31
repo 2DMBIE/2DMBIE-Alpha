@@ -48,6 +48,7 @@ func _process(_delta):
 			if facing == "right":
 				facingDir = 10
 			elif facing == "left":
+				bullet.scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
 				facingDir = -10
 			bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
 		

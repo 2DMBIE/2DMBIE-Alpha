@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://assets/sprites/zombie/torso.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/zombie/bottom.png" type="Texture" id=2]
@@ -15,8 +15,6 @@
 [ext_resource path="res://assets/sprites/zombie/head_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/zombie/lowerleg_left.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/zombie/lowerleg_right.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/groundsprites.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/zombie/Walk1-sheet.png" type="Texture" id=17]
 [ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=18]
 [ext_resource path="res://assets/animations/zombie-jump.tres" type="Animation" id=19]
 [ext_resource path="res://assets/scripts/zombiesfx.gd" type="Script" id=20]
@@ -47,8 +45,8 @@
 [ext_resource path="res://assets/animations/zombie_walk/walk8.tres" type="Animation" id=46]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 14.8705
-height = 129.206
+radius = 23.7557
+height = 95.3275
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "jump"
@@ -142,7 +140,7 @@ nodes/walk8/node = SubResource( 13 )
 nodes/walk8/position = Vector2( -580, 480 )
 nodes/walk9/node = SubResource( 14 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
+node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
 
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
@@ -150,12 +148,11 @@ node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air"
 light_mask = -2147483647
 z_index = 10
 collision_layer = 8
-collision_mask = 10
+collision_mask = 46
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0.5, 13.006 )
+position = Vector2( 0, 20 )
 z_index = 10
 z_as_relative = false
 shape = SubResource( 1 )
@@ -414,9 +411,6 @@ stream = ExtResource( 33 )
 [node name="footstep6" type="AudioStreamPlayer2D" parent="sfx/footstep"]
 stream = ExtResource( 36 )
 
-[node name="footstep7" type="AudioStreamPlayer2D" parent="sfx/footstep"]
-stream = ExtResource( 31 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/jump = ExtResource( 19 )
 anims/walk1 = ExtResource( 39 )
@@ -435,24 +429,4 @@ tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/in_air/current = 1
 parameters/walk/current = 6
-
-[node name="ground" type="Sprite" parent="."]
-visible = false
-position = Vector2( 15.9096, 100.167 )
-scale = Vector2( 2.84, 0.24 )
-z_index = -30
-texture = ExtResource( 16 )
-hframes = 2
-frame = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Walk1-sheet" type="Sprite" parent="."]
-visible = false
-position = Vector2( 126.119, 9.94439 )
-scale = Vector2( 0.44, 0.44 )
-texture = ExtResource( 17 )
-hframes = 6
-frame = 5
 [connection signal="play_sound" from="." to="sfx" method="play_sound"]

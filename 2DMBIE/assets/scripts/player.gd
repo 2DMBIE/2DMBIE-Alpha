@@ -8,7 +8,7 @@ const WALK_ACCELERATION = 25 #old 20
 const RUN_ACCELERATION = 20
 const MAX_WALK_SPEED = 130 #old 110 
 const MAX_RUN_SPEED = 330
-const JUMP_HEIGHT = -550
+const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 
 var motion = Vector2()
@@ -17,6 +17,10 @@ var crouch_idle = false
 var facing = "right"
 var collision
 var zombie_dam_timer
+var tileMap
+var mousePos
+var tilePos
+
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
@@ -25,8 +29,12 @@ func _ready():
 	add_child(zombie_dam_timer)
 
 func _physics_process(_delta):
+	update()
 	motion.y += GRAVITY
 	var friction = false
+	tileMap = get_node("../Blocks")
+	mousePos = get_global_mouse_position()
+	tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -121,12 +129,7 @@ func _physics_process(_delta):
 		scale.y = lerp(scale.y, 1, .1)
 		
 			
-	for i in get_slide_count():
-		collision = get_slide_collision(i).collider.name
-#		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-#			GRAVITY = 0
-#		else:
-#			GRAVITY = 20
+		
 	motion = move_and_slide(motion, UP)
 	pass
 
@@ -225,7 +228,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../Zombie").enemyDamage
+onready var EnemyDamage = 300
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -286,7 +289,7 @@ func _on_GroundChecker_body_exited(_body):
 func crouch_idle_transition(value):
 	crouch_idle = value
 
-func _on_Area2D_area_exited(_area):
+func _on_OoBbox_area_exited(_area):
 	var _x = get_tree().reload_current_scene()
 	Global.Score = 0
 	
@@ -296,3 +299,11 @@ func _on_gun_is_shooting(value):
 
 func _on_no_aim_shoot(value):
 	$AnimationTree.set("parameters/fixed_aim/current", value)
+
+func _draw():
+	if get_node("/root/Main/Pathfinder").showLines:
+		var postA = $ShootVector.position
+		var postB = get_local_mouse_position()
+		draw_line(postA, postB, Color(255,0,0),1)
+	else:
+		pass
