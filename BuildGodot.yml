@@ -5,8 +5,7 @@ on:
     branches: 
     - main
     - alpha
-
-  workflow_dispatch:
+    - TestWorkflow
 
 jobs: 
   Godot:
