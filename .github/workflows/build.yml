@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ifs: true
+          lfs: true
       - name: Build
         id: build
         uses: josephbmanley/build-godot-action@v1.4.1
