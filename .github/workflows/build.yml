@@ -22,7 +22,7 @@ jobs:
         id: build
         uses: josephbmanley/build-godot-action@v1.4.1
         with:
-          name: ${{ matrix.platform }} - build
+          name: 2DMBIE
           preset: ${{ matrix.platform }}
           debugMode: "false"
       - name: Upload Artifact
