@@ -72,7 +72,7 @@ tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -3.3888 ]
+"values": [ 6.71856 ]
 }
 tracks/6/type = "value"
 tracks/6/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:position")
@@ -120,7 +120,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ -83.5755 ]
+"values": [ -73.9208 ]
 }
 tracks/10/type = "value"
 tracks/10/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:position")
@@ -144,7 +144,7 @@ tracks/11/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ 77.6615 ]
+"values": [ 65.4966 ]
 }
 tracks/12/type = "value"
 tracks/12/path = NodePath("body/chest/torso/gun:position")
