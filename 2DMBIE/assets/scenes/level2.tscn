@@ -517,16 +517,7 @@ position = Vector2( 2.245, 4.48984 )
 z_index = -23
 
 [node name="enemyspawnpoint" parent="Spawnpoints" instance=ExtResource( 10 )]
-position = Vector2( 158.429, -355.482 )
-
-[node name="enemyspawnpoint2" parent="Spawnpoints" instance=ExtResource( 10 )]
-position = Vector2( 4765.76, -356.49 )
-
-[node name="enemyspawnpoint3" parent="Spawnpoints" instance=ExtResource( 10 )]
-position = Vector2( 4701.75, -1380.49 )
-
-[node name="enemyspawnpoint4" parent="Spawnpoints" instance=ExtResource( 10 )]
-position = Vector2( 157.755, -1892.49 )
+position = Vector2( 1181.76, -356.49 )
 
 [node name="Pathfinder" type="Node2D" parent="."]
 visible = false
@@ -541,4 +532,10 @@ position = Vector2( 1944.59, -1150.39 )
 shape = SubResource( 15 )
 
 [node name="DebugOverlay" parent="." instance=ExtResource( 7 )]
+
+[node name="enemyspawnpoint" parent="." instance=ExtResource( 10 )]
+position = Vector2( 3224, -352 )
+
+[node name="enemyspawnpoint2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 2592, -992 )
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]

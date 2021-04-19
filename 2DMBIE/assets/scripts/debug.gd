@@ -6,6 +6,7 @@ func _ready():
 	add_stat("mouse_position", "Player", "mousePos", false)
 	add_stat("tile_position", "Player", "tilePos", false)
 	add_stat("player_speed", "Player", "motion", false)
+	add_stat("aids", "Spawnpoints/enemyspawnpoint", "PlayerBody", false)
 #	add_stat("is_running", "Player", "is_running", false)
 #	add_stat("mouse_position", "Player/body/chest/torso/gun", "mouse_position", false)
 #	add_stat("bulletpoint_position", "Player/body/chest/torso/gun", "bulletpoint_position", false)
