@@ -17,14 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ifs: true
+          lfs: true
       - name: Build
         id: build
         uses: josephbmanley/build-godot-action@v1.4.1
         with:
-          name: ${{ matrix.platform }} - build
+          name: 2DMBIE
           preset: ${{ matrix.platform }}
           debugMode: "false"
+          projectDir: 2DMBIE
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
