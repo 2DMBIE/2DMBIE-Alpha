@@ -4,9 +4,14 @@ signal changeScore(newScore)
 
 var Score = 0 setget setScore
 var ScoreIncrement = 100
+var MaxWaveEnemies = 4
+var CurrentWaveEnemies = 0
+var Currentwave = 1
+
 
 func setScore(newScore):
 	newScore = max(0, newScore)
 	Score = newScore
 	emit_signal("changeScore", Score)
+
 
