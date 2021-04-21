@@ -242,6 +242,13 @@ func setHealth(value):
 		if health == 0:
 			queue_free()
 			Global.Score = 0
+			Global.Score = 0
+			Global.MaxWaveEnemies = 4
+			Global.CurrentWaveEnemies = 0
+			Global.Currentwave = 1
+			Global.maxHealth = 500
+			Global.EnemyDamage = 300
+			Global.Speed = 200
 
 var takingDamage = false
 
@@ -293,6 +300,12 @@ func crouch_idle_transition(value):
 func _on_OoBbox_area_exited(_area):
 	var _x = get_tree().reload_current_scene()
 	Global.Score = 0
+	Global.MaxWaveEnemies = 4
+	Global.CurrentWaveEnemies = 0
+	Global.Currentwave = 1
+	Global.maxHealth = 500
+	Global.EnemyDamage = 300
+	Global.Speed = 200
 	
 
 func _on_gun_is_shooting(value):
