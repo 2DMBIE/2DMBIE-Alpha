@@ -229,7 +229,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = 300
+onready var EnemyDamage = Global.EnemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)

@@ -3,7 +3,6 @@ extends Node2D
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
 	$Label.text = str(int(Global.Currentwave))
@@ -11,5 +10,13 @@ func _process(_delta):
 		var _error = get_tree().reload_current_scene()
 		Global.Score = 0
 
-		
-
+func _on_WaveTimer_timeout():
+	if Global.CurrentWaveEnemies != 0:
+		Global.CurrentWaveEnemies = 0
+		Global.MaxWaveEnemies += 4
+		Global.Currentwave += 1
+		print("next wave")
+		print("new enemies")
+		print(Global.MaxWaveEnemies)
+	else:
+		pass

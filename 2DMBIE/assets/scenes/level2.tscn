@@ -517,6 +517,15 @@ position = Vector2( 1135.39, -157.524 )
 position = Vector2( 2.245, 4.48984 )
 z_index = -23
 
+[node name="enemyspawnpoint2" parent="Spawnpoints" instance=ExtResource( 10 )]
+position = Vector2( 1181.76, -356.49 )
+
+[node name="enemyspawnpoint" parent="Spawnpoints" instance=ExtResource( 10 )]
+position = Vector2( 101.755, -356.49 )
+
+[node name="enemyspawnpoint3" parent="Spawnpoints" instance=ExtResource( 10 )]
+position = Vector2( 741.755, -348.49 )
+
 [node name="Pathfinder" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 8 )
@@ -540,9 +549,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="enemyspawnpoint" parent="." instance=ExtResource( 10 )]
-position = Vector2( 96, -352 )
-
-[node name="enemyspawnpoint2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 1184, -352 )
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

@@ -7,6 +7,8 @@ var ScoreIncrement = 100
 var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0
 var Currentwave = 1
+var maxHealth = 500
+var EnemyDamage = 300
 
 
 func setScore(newScore):
