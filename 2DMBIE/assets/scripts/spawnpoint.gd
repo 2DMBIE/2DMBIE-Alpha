@@ -19,7 +19,7 @@ func _on_Timer_timeout():
 		else:
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
 			if enemyAmount == 0:
-				get_node("../../WaveTimer").start(5) 
+				get_node("../../WaveTimer").start(2) # total wait time is this time + the spawn timer
 
 func _on_PlayerDetectionRadius_body_entered(body):
 	if body.is_in_group("player"):
