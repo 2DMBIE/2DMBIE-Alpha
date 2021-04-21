@@ -48,6 +48,7 @@ func _physics_process(_delta):
 				motion.x = 50
 			if (aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false:
 			$AnimationTree.set("parameters/running/current", 1)
@@ -57,6 +58,7 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("left")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "right") && (motion.x < 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
@@ -72,6 +74,7 @@ func _physics_process(_delta):
 			motion.x = min(motion.x, MAX_RUN_SPEED)
 			if(aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false: 
 			$AnimationTree.set("parameters/running/current", 1)
@@ -81,6 +84,7 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("right")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "left") && (motion.x > 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
@@ -89,6 +93,7 @@ func _physics_process(_delta):
 	elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if (aim("walking") == false): 
 			$AnimationTree.set("parameters/aim/blend_position", 0)
+			$AnimationTree.set("parameters/aim2/blend_position", 0)
 			$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		friction = true
 		walk_idle_transition()
@@ -203,7 +208,8 @@ func aim(string):
 		
 		
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
-			$AnimationTree.set("parameters/aim/blend_position", angle_degrees)
+			$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
+			$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
 			$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
 			if (walking) || !is_on_floor(): 
 				direction("left")
@@ -212,6 +218,7 @@ func aim(string):
 			var x = 90-angle_degrees
 			x = 90+x 
 			$AnimationTree.set("parameters/aim/blend_position", x)
+			$AnimationTree.set("parameters/aim2/blend_position", x)
 			$AnimationTree.set("parameters/shoot_angle/blend_position", x)
 			if (walking) || !is_on_floor(): 
 				direction("right")
@@ -219,6 +226,7 @@ func aim(string):
 		elif (angle_degrees > -180) && (angle_degrees < -90):
 			var y = -180-angle_degrees
 			$AnimationTree.set("parameters/aim/blend_position", y)
+			$AnimationTree.set("parameters/aim2/blend_position", y)
 			$AnimationTree.set("parameters/shoot_angle/blend_position", y)
 			if (walking) || !is_on_floor(): 
 				direction("right")
@@ -309,3 +317,6 @@ func _draw():
 			draw_line(postA, postB, Color(255,0,0),1)
 		else:
 			pass
+
+func set_gun_recoil_sensitivity(value):
+	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)

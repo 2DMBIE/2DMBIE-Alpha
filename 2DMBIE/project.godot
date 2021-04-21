@@ -10,9 +10,29 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://assets/scripts/bullet.gd"
+}, {
+"base": "Reference",
 "class": "Gun",
 "language": "GDScript",
 "path": "res://assets/scripts/gun.gd"
+}, {
+"base": "Gun",
+"class": "M4A1",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m4a1.gd"
+}, {
+"base": "Gun",
+"class": "MP5",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/mp5.gd"
+}, {
+"base": "Gun",
+"class": "SPAS12",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/spas12.gd"
 }, {
 "base": "Camera2D",
 "class": "ShakeCamera2D",
@@ -20,7 +40,11 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/shakecamera2d.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "Gun": "",
+"M4A1": "",
+"MP5": "",
+"SPAS12": "",
 "ShakeCamera2D": ""
 }
 
