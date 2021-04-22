@@ -37,6 +37,7 @@ func _physics_process(_delta):
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
+	$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxammo) 
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -252,7 +253,7 @@ func setHealth(value):
 
 var takingDamage = false
 
-func takenDamage(EnemyDamage):
+func takenDamage(_enemyDamage):
 	setHealth(health - EnemyDamage)
 	updatHealtbar()
 	$Timer.start(10)
