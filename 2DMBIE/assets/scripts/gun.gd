@@ -17,7 +17,7 @@ var bulletpoint_position
 var mouse_direction
 var bullet_direction
 var canShoot = true
-var totalAmmo = 60
+var totalAmmo = 300
 var maxclipammo = 30
 var ammo = maxclipammo
 var prevAmmo
@@ -73,7 +73,7 @@ func _process(_delta):
 
 func reload():
 	if totalAmmo > 0:
-		if Input.is_action_just_pressed("reload") and ammo < 30:
+		if Input.is_action_just_pressed("reload") and ammo < 30 or ammo == 0:
 			var reloadTimer = Timer.new()
 			reloadTimer.one_shot = true
 			reloadTimer.wait_time = 2
