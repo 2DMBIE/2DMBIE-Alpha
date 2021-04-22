@@ -252,8 +252,8 @@ func setHealth(value):
 
 var takingDamage = false
 
-func takenDamage(enemyDamage):
-	setHealth(health - enemyDamage)
+func takenDamage(EnemyDamage):
+	setHealth(health - EnemyDamage)
 	updatHealtbar()
 	$Timer.start(10)
 	zombie_dam_timer.start(1.2)
