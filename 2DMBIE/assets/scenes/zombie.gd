@@ -8,7 +8,7 @@ var speed = 200
 var jumpForce = 400
 var gravity = 600
 var padding = 2
-var finishPadding = 4 # 6 or 8 for better padding when state machine
+var finishPadding = 8 # 6 or 8 for better padding when state machine
 
 var movement
 var zombiestep = false
@@ -25,7 +25,7 @@ export (float) var maxHealth = 500
 export (float) var enemyDamage = 300
 
 func _ready():
-	$AnimationTree.active = true
+#	$AnimationTree.active = true
 	$AnimationTree.set("parameters/walk/current", randi()%10)
 	growl_timer.wait_time = _wait_time
 	growl_timer.one_shot = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -290,7 +290,7 @@ nodes/shooting/node = SubResource( 42 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 43 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "TimeScale", 0, "Animation 5", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "TimeScale 2", 0, "Animation 7" ]
+node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "shooting" ]
 
 [sub_resource type="Animation" id=45]
 tracks/0/type = "value"
@@ -658,10 +658,6 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=47]
-radius = 27.3246
-height = 75.8569
-
 [sub_resource type="RectangleShape2D" id=48]
 
 [sub_resource type="CapsuleShape2D" id=49]
@@ -941,14 +937,18 @@ editor_draw_drag_margin = true
 script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -1.4158, -8.88426 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 47 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.416, 6.06 )
+z_index = 1
+shape = SubResource( 2 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -989,6 +989,7 @@ text = "Score:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]
