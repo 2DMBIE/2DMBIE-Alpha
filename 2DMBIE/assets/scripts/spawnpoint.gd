@@ -5,7 +5,6 @@ var PlayerBody = false
 
 func _on_Timer_timeout():
 	$Timer.start(5)
-	print(PlayerBody)
 	if PlayerBody == true:
 		var enemy := plenemy.instance()
 		enemy.position = $spawnpoint.get_global_position()

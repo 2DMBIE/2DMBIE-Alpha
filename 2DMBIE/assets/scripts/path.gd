@@ -9,7 +9,7 @@ var tileMap
 var tileMap2
 var graph 
 
-var showLines = false
+var showLines = true
 
 const TEST = preload("res://assets/scenes/face.tscn")
 
@@ -31,18 +31,20 @@ func findPath(start, end):
 	for point in path:
 		var pos = graph.get_point_position(point)
 		var stat = cellType(pos, true, true)
-		if lastPos and lastPos[1] >= pos[1] - (cell_size * jumpHeight) and ((lastPos[0] < pos[0] and stat[0] < 0) or (lastPos[0] > pos[0] and stat[1] < 0)):
+		if lastPos and lastPos[1] > pos[1] and ((lastPos[0] < pos[0] and stat[0] < 0) or (lastPos[0] > pos[0] and stat[1] < 0)):
 			actions.append(null)
 
 		lastPos = pos
 		
 		if point == path[0] and len(path) > 1:
 			var nextPos = graph.get_point_position(path[1])
-			if start.distance_to(nextPos) > pos.distance_to(nextPos): 
+			if abs(nextPos.x - start.x) > pos.distance_to(nextPos):
 				actions.append(pos)
 		elif point == path[-1] and len(path) > 1:
 			if (graph.get_point_position(path[-2]).distance_to(end) < pos.distance_to(end)):
 				actions.append(pos)
+		elif len(path) == 1:
+			pass
 		else:
 			actions.append(pos)
 	actions.append(end)
@@ -62,7 +64,7 @@ func createConections():
 		var closestRight = -1
 		var closestLeftDrop = -1
 		var closestRightDrop = -1
-		var pos = graph.get_point_position(point)	
+		var pos = graph.get_point_position(point)
 		var stat = cellType(pos, true, true)
 
 		var pointsToJoin = []

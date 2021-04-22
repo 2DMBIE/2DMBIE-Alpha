@@ -9,7 +9,7 @@ func _physics_process(delta):
 		var velocity = direction * speed * delta
 		global_position += velocity
 
-func _on_bullet_body_entered(body):	
+func _on_bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.Hurt(damage)
 		queue_free()

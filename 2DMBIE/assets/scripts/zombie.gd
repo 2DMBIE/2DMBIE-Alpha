@@ -18,7 +18,7 @@ var speed = 200
 var jumpForce = 400
 var gravity = 550
 var padding = 2
-var finishPadding = 90
+var finishPadding = 100
 
 var movement
 signal play_sound(library)
