@@ -416,4 +416,5 @@ shape = SubResource( 7 )
 
 [node name="enemyspawnpoint" parent="." instance=ExtResource( 10 )]
 position = Vector2( 3104, -864 )
+
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
