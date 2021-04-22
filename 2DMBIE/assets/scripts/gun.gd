@@ -19,7 +19,8 @@ var bullet_direction
 var canShoot = true
 var totalAmmo = 60
 var maxclipammo = 30
-var ammo = 30
+var ammo = maxclipammo
+var prevAmmo
 var valid_aim = true
 
 func _process(_delta):
@@ -83,13 +84,15 @@ func reload():
 
 #
 func on_timeout_finished():
-	totalAmmo -= (maxclipammo - ammo)
-	if totalAmmo < maxclipammo:
-		ammo = ammo + totalAmmo 
+	prevAmmo = ammo
+	if totalAmmo <= maxclipammo:
+		ammo = ammo + totalAmmo
 		if ammo > maxclipammo:
 			ammo = maxclipammo
 	else:
 		ammo = maxclipammo
+	totalAmmo -= (maxclipammo - prevAmmo)
+		
 	canShoot = true
 	if totalAmmo < 0:
 		totalAmmo = 0
