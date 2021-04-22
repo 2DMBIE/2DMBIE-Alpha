@@ -17,7 +17,8 @@ var bulletpoint_position
 var mouse_direction
 var bullet_direction
 var canShoot = true
-var maxammo = 30
+var totalAmmo = 60
+var maxclipammo = 30
 var ammo = 30
 var valid_aim = true
 
@@ -70,19 +71,28 @@ func _process(_delta):
 		reload()
 
 func reload():
-	if Input.is_action_just_pressed("reload") and ammo < 30:
-		var reloadTimer = Timer.new()
-		reloadTimer.one_shot = true
-		reloadTimer.wait_time = 2
-		reloadTimer.connect("timeout", self, "on_timeout_finished")
-		add_child(reloadTimer)
-		reloadTimer.start()
-		canShoot = false
+	if totalAmmo > 0:
+		if Input.is_action_just_pressed("reload") and ammo < 30:
+			var reloadTimer = Timer.new()
+			reloadTimer.one_shot = true
+			reloadTimer.wait_time = 2
+			reloadTimer.connect("timeout", self, "on_timeout_finished")
+			add_child(reloadTimer)
+			reloadTimer.start()
+			canShoot = false
 
 #
 func on_timeout_finished():
-	ammo = 30
+	totalAmmo -= (maxclipammo - ammo)
+	if totalAmmo < maxclipammo:
+		ammo = ammo + totalAmmo 
+		if ammo > maxclipammo:
+			ammo = maxclipammo
+	else:
+		ammo = maxclipammo
 	canShoot = true
+	if totalAmmo < 0:
+		totalAmmo = 0
 
 func _on_aimzone_exited():
 	valid_aim = true
