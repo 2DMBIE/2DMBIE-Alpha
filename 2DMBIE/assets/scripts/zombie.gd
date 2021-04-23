@@ -14,7 +14,7 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 200
+var speed = Global.Speed
 var jumpForce = 400
 var gravity = 550
 var padding = 2
