@@ -128,17 +128,17 @@ func _draw():
 			if (stat[1] == 0 and newPos[1] == pos[1] and newPos[0] > pos[0]):
 				if closestRight < 0 or newPos[0] < graph.get_point_position(closestRight)[0]: 
 					closestRight = newPoint
-			if (stat[0] == -1):
-				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
-					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
-						closestLeftDrop = newPoint
+#			if (stat[0] == -1):
+			if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
+				if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+					closestLeftDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
 				newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
 					pointsToJoin.append(newPoint)
-			if (stat[1] == -1):
-				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
-					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
-						closestRightDrop = newPoint
+#			if (stat[1] == -1):
+			if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
+				if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+					closestRightDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
 				newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1 :
 					pointsToJoin.append(newPoint)
@@ -185,6 +185,7 @@ func createMap():
 				if (result):					
 					createPoint(tileMap.world_to_map(result.position))
 		getVerticalPoints()
+		getFloorPoints()
 
 func getVerticalPoints():
 	var space_state = get_world_2d().direct_space_state
@@ -199,6 +200,11 @@ func getVerticalPoints():
 		if pointPosition:
 			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells):
 				createPoint(tileMap.world_to_map(pointPosition))
+
+func getFloorPoints():
+	var floorCells = tileMap2.get_used_cells()
+	for cell in floorCells:
+		createPoint(cell)
 
 func cellType(pos, global = false, isAbove = false):
 	if (global):
