@@ -25,7 +25,7 @@ export (float) var maxHealth = 500
 export (float) var enemyDamage = 300
 
 func _ready():
-#	$AnimationTree.active = true
+	$AnimationTree.active = true
 	$AnimationTree.set("parameters/walk/current", randi()%10)
 	growl_timer.wait_time = _wait_time
 	growl_timer.one_shot = false
@@ -76,8 +76,6 @@ func _process(delta):
 	
 	if !is_on_floor():
 		movement[1] += gravity * delta
-	elif movement[1] > 0:
-		movement[1] = 0
 		
 	if !is_on_floor():
 		$AnimationTree.set("parameters/in_air/current", 0)

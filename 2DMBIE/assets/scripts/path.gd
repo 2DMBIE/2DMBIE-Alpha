@@ -60,11 +60,12 @@ func _ready():
 
 func createConections():
 	var points = graph.get_points()
+	var cells = tileMap2.get_used_cells()
 	for point in points:
 		var closestRight = -1
 		var closestLeftDrop = -1
 		var closestRightDrop = -1
-		var pos = graph.get_point_position(point)
+		var pos = graph.get_point_position(point)	
 		var stat = cellType(pos, true, true)
 
 		var pointsToJoin = []
@@ -79,11 +80,19 @@ func createConections():
 				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
 					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
 						closestLeftDrop = newPoint
+			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
+				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
+					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+						closestLeftDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
 				newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
 					pointsToJoin.append(newPoint)
 			if (stat[1] == -1):
 				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
+					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+						closestRightDrop = newPoint
+			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
+				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
 					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
 						closestRightDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
@@ -113,6 +122,7 @@ func _draw():
 		return
 
 	var points = graph.get_points()
+	var cells = tileMap2.get_used_cells()
 	for point in points:
 		var closestRight = -1
 		var closestLeftDrop = -1
@@ -128,17 +138,25 @@ func _draw():
 			if (stat[1] == 0 and newPos[1] == pos[1] and newPos[0] > pos[0]):
 				if closestRight < 0 or newPos[0] < graph.get_point_position(closestRight)[0]: 
 					closestRight = newPoint
-#			if (stat[0] == -1):
-			if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
-				if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
-					closestLeftDrop = newPoint
+			if (stat[0] == -1):
+				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1]):
+					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+						closestLeftDrop = newPoint
+			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
+				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
+					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
+						closestLeftDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
 				newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
 					pointsToJoin.append(newPoint)
-#			if (stat[1] == -1):
-			if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
-				if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
-					closestRightDrop = newPoint
+			if (stat[1] == -1):
+				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
+					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+						closestRightDrop = newPoint
+			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
+				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
+					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
+						closestRightDrop = newPoint
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
 				newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1 :
 					pointsToJoin.append(newPoint)
