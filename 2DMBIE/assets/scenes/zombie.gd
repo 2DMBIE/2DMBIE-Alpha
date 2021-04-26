@@ -91,6 +91,7 @@ func _process(delta):
 func repeat_me():
 	if is_on_floor():
 		var space_state = get_world_2d().direct_space_state
+#		var playerPos = get_global_mouse_position()
 		var playerPos = get_node("../Player").position
 		var pos = Vector2(playerPos.x, playerPos.y)
 		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_node("../Player/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))

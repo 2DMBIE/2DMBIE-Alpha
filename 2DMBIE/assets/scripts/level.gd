@@ -8,6 +8,3 @@ func _process(_delta):
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
 		Global.Score = 0
-
-		
-
