@@ -464,42 +464,13 @@ tracks/37/keys = {
 "update": 0,
 "values": [ 0.0, 12.5831, 15.3619, 11.6362, 3.54816, 1.47499, 0.0 ]
 }
-tracks/38/type = "value"
-tracks/38/path = NodePath("body/torso/neck/head:frame")
-tracks/38/interp = 2
+tracks/38/type = "audio"
+tracks/38/path = NodePath("sfx/footstep/footstep1")
+tracks/38/interp = 1
 tracks/38/loop_wrap = true
 tracks/38/imported = false
 tracks/38/enabled = true
 tracks/38/keys = {
-"times": PoolRealArray( 0, 0.240085, 0.585153, 0.699257, 0.819088, 1.01145 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5 ]
-}
-tracks/39/type = "method"
-tracks/39/path = NodePath(".")
-tracks/39/interp = 1
-tracks/39/loop_wrap = true
-tracks/39/imported = false
-tracks/39/enabled = true
-tracks/39/keys = {
-"times": PoolRealArray( 0.04, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "togglestep"
-}, {
-"args": [  ],
-"method": "togglestep"
-} ]
-}
-tracks/40/type = "audio"
-tracks/40/path = NodePath("sfx/footstep/footstep1")
-tracks/40/interp = 1
-tracks/40/loop_wrap = true
-tracks/40/imported = false
-tracks/40/enabled = true
-tracks/40/keys = {
 "clips": [ {
 "end_offset": 0.713613,
 "start_offset": 0.0,
@@ -510,4 +481,33 @@ tracks/40/keys = {
 "stream": ExtResource( 2 )
 } ],
 "times": PoolRealArray( 0.190212, 0.8 )
+}
+tracks/39/type = "value"
+tracks/39/path = NodePath("body/torso/neck/head:frame")
+tracks/39/interp = 2
+tracks/39/loop_wrap = true
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/keys = {
+"times": PoolRealArray( 0, 0.240085, 0.585153, 0.699257, 0.819088, 1.01145 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/40/type = "method"
+tracks/40/path = NodePath(".")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/keys = {
+"times": PoolRealArray( 0.04, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "togglestep"
+}, {
+"args": [  ],
+"method": "togglestep"
+} ]
 }

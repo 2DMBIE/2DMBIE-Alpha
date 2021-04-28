@@ -47,6 +47,7 @@
 [ext_resource path="res://assets/animations/shoot/shoot_minus_60_degrees.tres" type="Animation" id=45]
 [ext_resource path="res://assets/animations/shoot/no_aim_shoot.tres" type="Animation" id=46]
 [ext_resource path="res://assets/scripts/shakecamera2d.gd" type="Script" id=47]
+[ext_resource path="res://assets/scenes/groundChecker.tscn" type="PackedScene" id=48]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -659,12 +660,6 @@ tracks/15/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=47]
-radius = 27.3246
-height = 75.8569
-
-[sub_resource type="RectangleShape2D" id=48]
-
-[sub_resource type="CapsuleShape2D" id=49]
 radius = 77.2063
 height = 28.0385
 
@@ -675,7 +670,7 @@ polygon = PoolVector2Array( -1.2634, -73.936, -3.26791, -73.7132, -10.8406, -72.
 "player",
 ]]
 position = Vector2( -160, 0 )
-collision_layer = 12
+collision_layer = 4
 collision_mask = 2147483678
 script = ExtResource( 17 )
 maxHealth = 1000.0
@@ -852,13 +847,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
 shape = SubResource( 1 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1.416, 6.06 )
 z_index = 1
 shape = SubResource( 2 )
@@ -946,24 +939,21 @@ editor_draw_drag_margin = true
 script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -1.4158, -8.88426 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 47 )
+shape = SubResource( 1 )
 
-[node name="GroundChecker" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 32
+[node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.416, 6.06 )
+z_index = 1
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
-position = Vector2( 0, 52 )
-scale = Vector2( 3, 1 )
-shape = SubResource( 48 )
+[node name="groundChecker" parent="." instance=ExtResource( 48 )]
+visible = true
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
@@ -978,7 +968,7 @@ one_shot = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="shootzone" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 49 )
+shape = SubResource( 47 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
@@ -1023,7 +1013,7 @@ __meta__ = {
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
-[connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
+[connection signal="body_exited" from="groundChecker" to="." method="_on_groundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
 [connection signal="mouse_exited" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_exited"]

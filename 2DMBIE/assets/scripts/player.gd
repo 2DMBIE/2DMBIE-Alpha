@@ -28,6 +28,7 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
+	print($CollisionShape2D.shape.height)
 
 func _physics_process(_delta):
 	update()
@@ -293,7 +294,7 @@ func updatHealtbar():
 		emit_signal("health_updated", health)
 	$Timer.start(2)
 
-func _on_GroundChecker_body_exited(_body):
+func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
 func crouch_idle_transition(value):

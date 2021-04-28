@@ -15,7 +15,8 @@
 [ext_resource path="res://assets/sprites/zombie/head_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/zombie/lowerleg_left.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/zombie/lowerleg_right.png" type="Texture" id=15]
-[ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=18]
+[ext_resource path="res://assets/scenes/zombie.gd" type="Script" id=16]
+[ext_resource path="res://assets/scenes/groundChecker.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/animations/zombie-jump.tres" type="Animation" id=19]
 [ext_resource path="res://assets/scripts/zombiesfx.gd" type="Script" id=20]
 [ext_resource path="res://assets/sounds/zombie/z_hurt2.wav" type="AudioStream" id=22]
@@ -27,7 +28,6 @@
 [ext_resource path="res://assets/sounds/zombie/z_growl3.wav" type="AudioStream" id=28]
 [ext_resource path="res://assets/sounds/zombie/z_growl4.wav" type="AudioStream" id=29]
 [ext_resource path="res://assets/sounds/zombie/z_growl5.wav" type="AudioStream" id=30]
-[ext_resource path="res://assets/sounds/zombie/z_footstep7.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/sounds/zombie/z_footstep4.wav" type="AudioStream" id=32]
 [ext_resource path="res://assets/sounds/zombie/z_footstep5.wav" type="AudioStream" id=33]
 [ext_resource path="res://assets/animations/zombie_walk/walk3.tres" type="Animation" id=34]
@@ -45,8 +45,8 @@
 [ext_resource path="res://assets/animations/zombie_walk/walk8.tres" type="Animation" id=46]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 23.7557
-height = 95.3275
+radius = 24.0
+height = 95.0
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "jump"
@@ -112,7 +112,7 @@ animation = "walk8"
 animation = "walk9"
 
 [sub_resource type="AnimationNodeBlendTree" id=15]
-graph_offset = Vector2( -977, 235 )
+graph_offset = Vector2( -1085.2, 380.75 )
 "nodes/Animation 2/node" = SubResource( 2 )
 "nodes/Animation 2/position" = Vector2( -360, 180 )
 nodes/in_air/node = SubResource( 3 )
@@ -140,7 +140,7 @@ nodes/walk8/node = SubResource( 13 )
 nodes/walk8/position = Vector2( -580, 480 )
 nodes/walk9/node = SubResource( 14 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
+node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
 
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
@@ -148,21 +148,19 @@ node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk
 light_mask = -2147483647
 z_index = 10
 collision_layer = 8
-collision_mask = 46
-script = ExtResource( 18 )
+collision_mask = 42
+script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 20 )
-z_index = 10
-z_as_relative = false
 shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 12.3072 )
+position = Vector2( 0, 10.6279 )
 
 [node name="torso" type="Sprite" parent="body"]
 position = Vector2( -0.376, 21.439 )
-rotation = 0.243096
+rotation = 0.0383933
 z_as_relative = false
 texture = ExtResource( 1 )
 offset = Vector2( 0.111326, -30.5612 )
@@ -172,7 +170,7 @@ __meta__ = {
 
 [node name="neck" type="Position2D" parent="body/torso"]
 position = Vector2( -2.9952, -50.1697 )
-rotation = 12.6944
+rotation = 12.9464
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
@@ -180,12 +178,12 @@ __meta__ = {
 
 [node name="head" type="Sprite" parent="body/torso/neck"]
 position = Vector2( 0.840622, -16.5168 )
-rotation = 0.448333
+rotation = -0.149347
 z_index = 6
 z_as_relative = false
 texture = ExtResource( 13 )
 hframes = 6
-frame = 1
+frame = 4
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
@@ -193,7 +191,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/torso"]
 position = Vector2( -11.4567, -37.1691 )
-rotation = -12.2933
+rotation = -12.7635
 z_index = 5
 z_as_relative = false
 texture = ExtResource( 11 )
@@ -205,7 +203,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/torso/upperarm_right"]
 position = Vector2( -9.94557, 20.6394 )
-rotation = -0.258694
+rotation = -0.309356
 z_index = 7
 z_as_relative = false
 texture = ExtResource( 9 )
@@ -216,7 +214,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/torso/upperarm_right/lowerarm_right"]
 position = Vector2( -0.994637, 21.3581 )
-rotation = -0.395194
+rotation = -0.691268
 z_index = 7
 z_as_relative = false
 texture = ExtResource( 8 )
@@ -227,7 +225,7 @@ __meta__ = {
 
 [node name="upperarm_left" type="Sprite" parent="body/torso"]
 position = Vector2( 16.8239, -36.2326 )
-rotation = 0.0781426
+rotation = -0.194335
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( 5.52325, 11.3117 )
@@ -238,7 +236,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/torso/upperarm_left"]
 position = Vector2( 11.7144, 20.0409 )
-rotation = -0.00128936
+rotation = 0.0895092
 z_index = -3
 texture = ExtResource( 6 )
 offset = Vector2( 0.764465, 13.8002 )
@@ -248,7 +246,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 1.30943, 23.1128 )
-rotation = -6.37224
+rotation = -6.3409
 texture = ExtResource( 10 )
 offset = Vector2( 0.209938, 8.42856 )
 __meta__ = {
@@ -257,7 +255,7 @@ __meta__ = {
 
 [node name="bottom" type="Sprite" parent="body"]
 position = Vector2( -0.233067, 18.4983 )
-rotation = 0.204058
+rotation = 0.0502637
 z_index = -1
 z_as_relative = false
 texture = ExtResource( 2 )
@@ -268,7 +266,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/bottom"]
 position = Vector2( -7.36461, 1.56818 )
-rotation = 0.189689
+rotation = -0.468846
 z_as_relative = false
 texture = ExtResource( 3 )
 offset = Vector2( -2.14771, 15.2502 )
@@ -279,7 +277,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/bottom/thigh_right"]
 position = Vector2( -2.54703, 29.6623 )
-rotation = 0.147863
+rotation = 0.165146
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 15 )
@@ -290,7 +288,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/bottom/thigh_right/lowerleg_right"]
 position = Vector2( -1.76029, 22.7582 )
-rotation = -0.0437093
+rotation = 0.0174352
 z_as_relative = false
 texture = ExtResource( 7 )
 offset = Vector2( 6.15741, 1.80693 )
@@ -307,7 +305,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/bottom"]
 position = Vector2( 4.20723, 1.0215 )
-rotation = -0.556782
+rotation = 0.428224
 z_index = -7
 z_as_relative = false
 texture = ExtResource( 5 )
@@ -319,7 +317,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/bottom/thigh_left"]
 position = Vector2( 2.779, 30.1395 )
-rotation = 0.147224
+rotation = 0.566891
 z_index = -9
 z_as_relative = false
 texture = ExtResource( 14 )
@@ -330,7 +328,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/bottom/thigh_left/lowerleg_left"]
 position = Vector2( 1.8254, 22.3106 )
-rotation = 0.19011
+rotation = -0.0904289
 z_index = -8
 z_as_relative = false
 texture = ExtResource( 4 )
@@ -393,7 +391,7 @@ volume_db = 4.0
 [node name="footstep" type="Node2D" parent="sfx"]
 
 [node name="footstep1" type="AudioStreamPlayer2D" parent="sfx/footstep"]
-stream = ExtResource( 31 )
+stream = ExtResource( 37 )
 
 [node name="footstep2" type="AudioStreamPlayer2D" parent="sfx/footstep"]
 position = Vector2( 0, 1 )
@@ -429,4 +427,10 @@ tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/in_air/current = 1
 parameters/walk/current = 6
+
+[node name="GroundChecker" parent="." instance=ExtResource( 17 )]
+visible = true
+position = Vector2( 0, 20 )
+
 [connection signal="play_sound" from="." to="sfx" method="play_sound"]
+[connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
