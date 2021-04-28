@@ -31,7 +31,6 @@ func _ready():
 	print($CollisionShape2D.shape.height)
 
 func _physics_process(_delta):
-	print(get_global_mouse_position().y > self.position.y)
 	update()
 	motion.y += GRAVITY
 	var friction = false

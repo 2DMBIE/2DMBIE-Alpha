@@ -3,17 +3,16 @@
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
-[ext_resource path="res://assets/TileSets/Floor.tres" type="TileSet" id=4]
+[ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=8]
-[ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=9]
-[ext_resource path="res://assets/scenes/light_TL_buis.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=14]
+[ext_resource path="res://assets/scenes/light_TL_buis.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -103,8 +102,6 @@ points = PoolVector2Array( 128, 64, 96, 64, 32, 0, 64, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
-
-[sub_resource type="TileSet" id=25]
 
 [sub_resource type="OccluderPolygon2D" id=5]
 polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -354,8 +351,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 16, 0, 16 )
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="TileSet" id=26]
-
 [sub_resource type="OccluderPolygon2D" id=19]
 polygon = PoolVector2Array( 11, 31, 69, 32, 70, 125, 9, 126 )
 
@@ -485,8 +480,8 @@ polygon = PoolVector2Array( 65, 30, 126, 29, 129, 128, 62, 127 )
 5/shapes = [  ]
 5/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 3582.61, 1565.03 )
+[sub_resource type="RectangleShape2D" id=24]
+extents = Vector2( 4947.74, 1565.03 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -549,10 +544,9 @@ texture = ExtResource( 3 )
 hframes = 21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1224.43, -154.655 )
+position = Vector2( 316.524, -155.924 )
 
 [node name="Spawnpoints" type="YSort" parent="."]
-visible = false
 position = Vector2( 2.245, 4.48984 )
 z_index = -23
 
@@ -602,6 +596,7 @@ position = Vector2( 4445.75, -868.49 )
 position = Vector2( 3357.75, -356.49 )
 
 [node name="Pathfinder" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 8 )
 
 [node name="OoBbox" type="Area2D" parent="."]
