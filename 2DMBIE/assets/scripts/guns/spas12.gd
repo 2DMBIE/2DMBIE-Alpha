@@ -21,4 +21,4 @@ func _init():
 	
 	maxclipAmmo = 8 # How much bullets are in one magazine.
 	totalAmmo = 24 # Total ammo which comes with each gun.
-	
+	ammo = maxclipAmmo

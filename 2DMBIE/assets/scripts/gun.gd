@@ -45,8 +45,7 @@ muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
 	
 	maxclipAmmo = g_maxclipAmmo # How much bullets are in one magazine.
 	totalAmmo = g_totalAmmo # Total ammo which comes with each gun.
-	
-	ammo = g_maxclipAmmo # Current ammo.
+
 func getBullet():
 	return _bullet.getBullet()
 
