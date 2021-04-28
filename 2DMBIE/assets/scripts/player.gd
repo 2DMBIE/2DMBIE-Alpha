@@ -28,6 +28,7 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
+	print($CollisionShape2D.shape.height)
 
 func _physics_process(_delta):
 	update()
@@ -37,6 +38,8 @@ func _physics_process(_delta):
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
+	$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
+	$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -237,7 +240,7 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = 300
+onready var EnemyDamage = Global.EnemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
@@ -250,11 +253,18 @@ func setHealth(value):
 		if health == 0:
 			queue_free()
 			Global.Score = 0
+			Global.Score = 0
+			Global.MaxWaveEnemies = 4
+			Global.CurrentWaveEnemies = 0
+			Global.Currentwave = 1
+			Global.maxHealth = 500
+			Global.EnemyDamage = 300
+			Global.Speed = 200
 
 var takingDamage = false
 
-func takenDamage(enemyDamage):
-	setHealth(health - enemyDamage)
+func takenDamage(_enemyDamage):
+	setHealth(health - EnemyDamage)
 	updatHealtbar()
 	$Timer.start(10)
 	zombie_dam_timer.start(1.2)
@@ -292,7 +302,7 @@ func updatHealtbar():
 		emit_signal("health_updated", health)
 	$Timer.start(2)
 
-func _on_GroundChecker_body_exited(_body):
+func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
 func crouch_idle_transition(value):
@@ -301,6 +311,12 @@ func crouch_idle_transition(value):
 func _on_OoBbox_area_exited(_area):
 	var _x = get_tree().reload_current_scene()
 	Global.Score = 0
+	Global.MaxWaveEnemies = 4
+	Global.CurrentWaveEnemies = 0
+	Global.Currentwave = 1
+	Global.maxHealth = 500
+	Global.EnemyDamage = 300
+	Global.Speed = 200
 	
 
 func _on_gun_is_shooting(value):

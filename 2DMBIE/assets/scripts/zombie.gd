@@ -14,11 +14,11 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 200
+var speed = Global.Speed
 var jumpForce = 400
 var gravity = 550
 var padding = 2
-var finishPadding = 90
+var finishPadding = 100
 
 var movement
 signal play_sound(library)
@@ -35,12 +35,12 @@ func _ready():
 	$AnimationTree.active = true
 	pathFinder = get_node("../Pathfinder")
 	movement = Vector2(0, 0)
-	var timer = Timer.new()
-	timer.set_wait_time(3)
-	timer.set_one_shot(false)
-	timer.connect("timeout", self, "repeat_me")
-	add_child(timer)
-	timer.start()
+#	var timer = Timer.new()
+#	timer.set_wait_time(3)
+#	timer.set_one_shot(false)
+#	timer.connect("timeout", self, "repeat_me")
+#	add_child(timer)
+#	timer.start()
 	
 	$AnimationTree.set("parameters/walk/current", randi()%10)
 	growl_timer.wait_time = _wait_time
@@ -49,15 +49,15 @@ func _ready():
 	growl_timer.autostart = true
 	add_child(growl_timer)
 
-func repeat_me():
-	var space_state = get_world_2d().direct_space_state
-	var playerPos = get_node("../Player").position
-	var pos = Vector2(playerPos.x, playerPos.y)
-	var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
-	if (result):
-		var goTo = result["position"]
-		currentPath = pathFinder.findPath(self.position, goTo)
-		nextPoint()
+#func repeat_me():
+#	var space_state = get_world_2d().direct_space_state
+#	var playerPos = get_global_mouse_position()
+#	var pos = Vector2(playerPos.x, playerPos.y)
+#	var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
+#	if (result):
+#		var goTo = result["position"]
+#		currentPath = pathFinder.findPath(self.position, goTo)
+#		nextPoint()
 		
 func nextPoint():
 	if len(currentPath) == 0:
@@ -76,15 +76,15 @@ func jump():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	if Input.is_action_just_pressed("left_click"):
-#		var space_state = get_world_2d().direct_space_state
-#		var playerPos = get_node("../Player").position
-#		var pos = Vector2(playerPos.x, playerPos.y)
-#		var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
-#		if (result):
-#			var goTo = result["position"]
-#			currentPath = pathFinder.findPath(self.position, goTo)
-#			nextPoint()
+	if Input.is_action_just_pressed("aim"):
+		var space_state = get_world_2d().direct_space_state
+		var playerPos = get_global_mouse_position()
+		var pos = Vector2(playerPos.x, playerPos.y)
+		var result = space_state.intersect_ray(pos, Vector2(pos[0], pos[1] + 1000))
+		if (result):
+			var goTo = result["position"]
+			currentPath = pathFinder.findPath(self.position, goTo)
+			nextPoint()
 	if !is_on_floor():
 		$AnimationTree.set("parameters/in_air/current", 0)
 	else:
@@ -177,15 +177,12 @@ func _reset_module():
 
 signal health_updated(health)
 
-export (float) var maxHealth = 500
-export (float) var enemyDamage = 300
-
-onready var health = maxHealth setget _set_health
+onready var health = Global.maxHealth setget _set_health
 
 func Hurt(damage):
 	emit_signal("play_sound", "hurt")
 	_set_health(health - damage)
-	var percentage = health/maxHealth*100
+	var percentage = health/Global.maxHealth*100
 	show_damage_animation(percentage)
 	
 
@@ -195,7 +192,7 @@ func kill():
 
 func _set_health(value):
 	var prevHealth = health
-	health = clamp(value, 0, maxHealth)
+	health = clamp(value, 0, Global.maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:

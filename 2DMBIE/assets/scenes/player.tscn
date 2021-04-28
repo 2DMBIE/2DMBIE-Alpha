@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -67,6 +67,7 @@
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot2.wav" type="AudioStream" id=65]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot4.wav" type="AudioStream" id=66]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_draw.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/scenes/groundChecker.tscn" type="PackedScene" id=68]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -733,20 +734,18 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=58]
-radius = 27.3246
-height = 75.8569
-
-[sub_resource type="RectangleShape2D" id=59]
-
-[sub_resource type="CapsuleShape2D" id=60]
+[sub_resource type="CapsuleShape2D" id=47]
 radius = 77.2063
 height = 28.0385
+
+[sub_resource type="OccluderPolygon2D" id=50]
+polygon = PoolVector2Array( -1.2634, -73.936, -3.26791, -73.7132, -10.8406, -72.1542, -17.2996, -70.3724, -22.8677, -63.9134, -25.5404, -58.1225, -25.9858, -55.6725, -27.9904, -53.8907, -29.7722, -49.659, -29.5494, -40.9727, -26.4313, -35.4046, -22.4222, -32.2865, -19.7495, -31.6183, -17.5223, -28.7229, -13.5132, -25.8274, -11.5087, -23.8229, -12.3996, -20.9275, -16.8541, -19.1457, -19.5268, -13.8003, -19.9723, -7.11857, -19.9723, 0.231346, -17.0768, 3.34949, -15.0723, 8.69488, -12.6223, 15.1539, -14.4041, 18.4948, -14.1814, 23.3947, -14.6269, 31.2276, -19.7495, 36.573, -23.3131, 44.3683, -25.5404, 54.3909, 25.0181, 55.2818, 25.4636, 48.1546, 19.0045, 45.2592, 13.2137, 43.4774, 11.8773, 32.7866, 13.2137, 27.2185, 12.991, 15.4141, 11.4319, 5.61424, 15.8864, -0.844772, 11.6546, -20.2218, 17, -26.4581, 18.7818, -34.4762, 22.7909, -37.3716, 24.7954, -40.267, 24.7954, -48.7306, 23.6818, -56.5259, 19.0045, -67.3618, 10.0956, -72.4845 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-collision_layer = 12
+position = Vector2( -160, 0 )
+collision_layer = 4
 collision_mask = 2147483678
 script = ExtResource( 17 )
 maxHealth = 1000.0
@@ -1010,13 +1009,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
 shape = SubResource( 1 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -1.416, 6.06 )
 z_index = 1
 shape = SubResource( 2 )
@@ -1106,24 +1103,21 @@ editor_draw_drag_margin = true
 script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -1.4158, -8.88426 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 58 )
+shape = SubResource( 1 )
 
-[node name="GroundChecker" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 32
+[node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.416, 6.06 )
+z_index = 1
+shape = SubResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
-position = Vector2( 0, 52 )
-scale = Vector2( 3, 1 )
-shape = SubResource( 59 )
+[node name="groundChecker" parent="." instance=ExtResource( 48 )]
+visible = true
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
@@ -1139,7 +1133,7 @@ one_shot = true
 visible = false
 
 [node name="shootzone" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 60 )
+shape = SubResource( 47 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
@@ -1155,6 +1149,29 @@ text = "Score:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+z_index = -21
+occluder = SubResource( 50 )
+
+[node name="Ammo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 64.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="maxAmmo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 46.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
@@ -1164,7 +1181,7 @@ __meta__ = {
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
-[connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
+[connection signal="body_exited" from="groundChecker" to="." method="_on_groundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
 [connection signal="mouse_exited" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_exited"]
