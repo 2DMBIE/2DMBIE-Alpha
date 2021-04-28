@@ -17,6 +17,7 @@ position = Vector2( 0, -64 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 autostart = true
 
 [node name="PlayerDetectionRadius" type="Area2D" parent="."]
@@ -24,7 +25,9 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionRadius"]
+visible = false
 shape = SubResource( 1 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="PlayerDetectionRadius" to="." method="_on_PlayerDetectionRadius_body_entered"]
 [connection signal="body_exited" from="PlayerDetectionRadius" to="." method="_on_PlayerDetectionRadius_body_exited"]

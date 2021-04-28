@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -291,7 +291,7 @@ nodes/shooting/node = SubResource( 42 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 43 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "running", 0, "TimeScale", "running", 1, "walk-idle" ]
+node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "TimeScale", 0, "Animation 5", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "fixed_aim", 0, "shoot_angle", "fixed_aim", 1, "Animation 9", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale 2", 0, "Animation 7" ]
 
 [sub_resource type="Animation" id=45]
 tracks/0/type = "value"
@@ -663,6 +663,9 @@ tracks/15/keys = {
 radius = 77.2063
 height = 28.0385
 
+[sub_resource type="OccluderPolygon2D" id=50]
+polygon = PoolVector2Array( -1.2634, -73.936, -3.26791, -73.7132, -10.8406, -72.1542, -17.2996, -70.3724, -22.8677, -63.9134, -25.5404, -58.1225, -25.9858, -55.6725, -27.9904, -53.8907, -29.7722, -49.659, -29.5494, -40.9727, -26.4313, -35.4046, -22.4222, -32.2865, -19.7495, -31.6183, -17.5223, -28.7229, -13.5132, -25.8274, -11.5087, -23.8229, -12.3996, -20.9275, -16.8541, -19.1457, -19.5268, -13.8003, -19.9723, -7.11857, -19.9723, 0.231346, -17.0768, 3.34949, -15.0723, 8.69488, -12.6223, 15.1539, -14.4041, 18.4948, -14.1814, 23.3947, -14.6269, 31.2276, -19.7495, 36.573, -23.3131, 44.3683, -25.5404, 54.3909, 25.0181, 55.2818, 25.4636, 48.1546, 19.0045, 45.2592, 13.2137, 43.4774, 11.8773, 32.7866, 13.2137, 27.2185, 12.991, 15.4141, 11.4319, 5.61424, 15.8864, -0.844772, 11.6546, -20.2218, 17, -26.4581, 18.7818, -34.4762, 22.7909, -37.3716, 24.7954, -40.267, 24.7954, -48.7306, 23.6818, -56.5259, 19.0045, -67.3618, 10.0956, -72.4845 )
+
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
@@ -978,6 +981,28 @@ margin_bottom = -114.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+z_index = -21
+occluder = SubResource( 50 )
+
+[node name="Ammo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 16.0
+margin_right = 64.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="maxAmmo" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 32.0
+margin_right = 64.0
+margin_bottom = 46.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

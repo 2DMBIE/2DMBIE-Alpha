@@ -5,6 +5,27 @@ func _ready():
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
+	$Label.text = str(int(Global.Currentwave))
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
 		Global.Score = 0
+		Global.MaxWaveEnemies = 4
+		Global.CurrentWaveEnemies = 0
+		Global.Currentwave = 1
+		Global.maxHealth = 500
+		Global.EnemyDamage = 300
+		Global.Speed = 200
+
+func _on_WaveTimer_timeout():
+	if Global.CurrentWaveEnemies != 0:
+		Global.CurrentWaveEnemies = 0
+		Global.MaxWaveEnemies += 4
+		Global.Currentwave += 1
+		Global.maxHealth *= 1.05
+		Global.EnemyDamage *= 1.05
+		Global.Speed += 4
+		print("next wave")
+		print("new enemies")
+		print(Global.MaxWaveEnemies)
+	else:
+		pass
