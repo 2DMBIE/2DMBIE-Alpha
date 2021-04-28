@@ -13,6 +13,10 @@ var _muzzleflash: PackedScene
 var camera_shake: float
 var camera_decay: float
 
+var ammo: int
+var maxclipAmmo: int
+var totalAmmo: int
+
 var gun_recoil_sensitivity: float
 #var muzzle_flash:
 #Gunshake Ex. Shotgun: Heavy, m4a1: 
@@ -21,7 +25,7 @@ var gun_recoil_sensitivity: float
 func _init(gun_name = "gun", gun_offset = Vector2(0,0), gun_scale = Vector2(1,1), 
 path = "", bpoint = Vector2(0,0), bdelay = float(2), bullet_i = Bullet.new(float(500), float(750), "res://assets/scenes/bullet.tscn"), 
 muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
- c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1)):
+ c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1), g_maxclipAmmo = int(44), g_totalAmmo = int(300)):
 	
 	name = gun_name # The name of the gun.
 	offset = gun_offset # The position of the gun.
@@ -39,6 +43,10 @@ muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
 	camera_decay = c_decay # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
 	gun_recoil_sensitivity = g_recoil # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
 	
+	maxclipAmmo = g_maxclipAmmo # How much bullets are in one magazine.
+	totalAmmo = g_totalAmmo # Total ammo which comes with each gun.
+	
+	ammo = g_maxclipAmmo # Current ammo.
 func getBullet():
 	return _bullet.getBullet()
 

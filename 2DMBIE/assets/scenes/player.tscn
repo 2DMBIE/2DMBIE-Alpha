@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -67,7 +67,6 @@
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot2.wav" type="AudioStream" id=65]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot4.wav" type="AudioStream" id=66]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_draw.wav" type="AudioStream" id=67]
-[ext_resource path="res://assets/scenes/groundChecker.tscn" type="PackedScene" id=68]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -366,7 +365,7 @@ nodes/shooting/node = SubResource( 53 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "shooting" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "running", 0, "TimeScale", "running", 1, "walk-idle" ]
 
 [sub_resource type="Animation" id=56]
 tracks/0/type = "value"
@@ -734,19 +733,21 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=47]
+[sub_resource type="CapsuleShape2D" id=58]
+radius = 27.3246
+height = 75.8569
+
+[sub_resource type="RectangleShape2D" id=59]
+
+[sub_resource type="CapsuleShape2D" id=60]
 radius = 77.2063
 height = 28.0385
-
-[sub_resource type="OccluderPolygon2D" id=50]
-polygon = PoolVector2Array( -1.2634, -73.936, -3.26791, -73.7132, -10.8406, -72.1542, -17.2996, -70.3724, -22.8677, -63.9134, -25.5404, -58.1225, -25.9858, -55.6725, -27.9904, -53.8907, -29.7722, -49.659, -29.5494, -40.9727, -26.4313, -35.4046, -22.4222, -32.2865, -19.7495, -31.6183, -17.5223, -28.7229, -13.5132, -25.8274, -11.5087, -23.8229, -12.3996, -20.9275, -16.8541, -19.1457, -19.5268, -13.8003, -19.9723, -7.11857, -19.9723, 0.231346, -17.0768, 3.34949, -15.0723, 8.69488, -12.6223, 15.1539, -14.4041, 18.4948, -14.1814, 23.3947, -14.6269, 31.2276, -19.7495, 36.573, -23.3131, 44.3683, -25.5404, 54.3909, 25.0181, 55.2818, 25.4636, 48.1546, 19.0045, 45.2592, 13.2137, 43.4774, 11.8773, 32.7866, 13.2137, 27.2185, 12.991, 15.4141, 11.4319, 5.61424, 15.8864, -0.844772, 11.6546, -20.2218, 17, -26.4581, 18.7818, -34.4762, 22.7909, -37.3716, 24.7954, -40.267, 24.7954, -48.7306, 23.6818, -56.5259, 19.0045, -67.3618, 10.0956, -72.4845 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-position = Vector2( -160, 0 )
 collision_layer = 4
-collision_mask = 2147483678
+collision_mask = 2147483710
 script = ExtResource( 17 )
 maxHealth = 1000.0
 
@@ -1009,11 +1010,13 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
 shape = SubResource( 1 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1.416, 6.06 )
 z_index = 1
 shape = SubResource( 2 )
@@ -1103,21 +1106,24 @@ editor_draw_drag_margin = true
 script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -1.41577, -8.88424 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 1 )
+shape = SubResource( 58 )
 
-[node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( -1.416, 6.06 )
-z_index = 1
-shape = SubResource( 2 )
+[node name="GroundChecker" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
 
-[node name="groundChecker" parent="." instance=ExtResource( 48 )]
-visible = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
+position = Vector2( 0, 52 )
+scale = Vector2( 3, 1 )
+shape = SubResource( 59 )
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
@@ -1133,7 +1139,7 @@ one_shot = true
 visible = false
 
 [node name="shootzone" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 47 )
+shape = SubResource( 60 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
@@ -1150,28 +1156,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-z_index = -21
-occluder = SubResource( 50 )
-
 [node name="Ammo" type="Label" parent="."]
-margin_left = 24.0
-margin_top = 16.0
-margin_right = 64.0
-margin_bottom = 30.0
+margin_left = 119.396
+margin_top = -57.3647
+margin_right = 191.396
+margin_bottom = -43.3647
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="maxAmmo" type="Label" parent="."]
-margin_left = 24.0
-margin_top = 32.0
-margin_right = 64.0
-margin_bottom = 46.0
+[node name="TotalAmmo" type="Label" parent="."]
+margin_left = 118.975
+margin_top = -40.5468
+margin_right = 190.975
+margin_bottom = -26.5468
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
@@ -1181,7 +1188,7 @@ __meta__ = {
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
-[connection signal="body_exited" from="groundChecker" to="." method="_on_groundChecker_body_exited"]
+[connection signal="body_exited" from="GroundChecker" to="." method="_on_groundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
 [connection signal="mouse_exited" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_exited"]

@@ -140,7 +140,7 @@ nodes/walk8/node = SubResource( 13 )
 nodes/walk8/position = Vector2( -580, 480 )
 nodes/walk9/node = SubResource( 14 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
+node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
 
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
