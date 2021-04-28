@@ -14,7 +14,7 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 200
+var speed = Global.Speed
 var jumpForce = 400
 var gravity = 550
 var padding = 2
@@ -177,14 +177,11 @@ func _reset_module():
 
 signal health_updated(health)
 
-export (float) var maxHealth = 500
-export (float) var enemyDamage = 300
-
-onready var health = maxHealth setget _set_health
+onready var health = Global.maxHealth setget _set_health
 
 func Hurt(damage):
 	_set_health(health - damage)
-	var percentage = health/maxHealth*100
+	var percentage = health/Global.maxHealth*100
 	show_damage_animation(percentage)
 	emit_signal("play_sound", "hurt")
 
@@ -194,7 +191,7 @@ func kill():
 
 func _set_health(value):
 	var prevHealth = health
-	health = clamp(value, 0, maxHealth)
+	health = clamp(value, 0, Global.maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:
