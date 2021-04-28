@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Gun",
+"class": "AK12",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/ak12.gd"
+}, {
+"base": "Gun",
+"class": "BARRETT50",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/barrett50.gd"
+}, {
 "base": "Reference",
 "class": "Bullet",
 "language": "GDScript",
@@ -40,6 +50,8 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/shakecamera2d.gd"
 } ]
 _global_script_class_icons={
+"AK12": "",
+"BARRETT50": "",
 "Bullet": "",
 "Gun": "",
 "M4A1": "",
@@ -140,6 +152,16 @@ weapon2={
 weapon3={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon4={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":52,"unicode":0,"echo":false,"script":null)
+ ]
+}
+weapon5={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":53,"unicode":0,"echo":false,"script":null)
  ]
 }
 

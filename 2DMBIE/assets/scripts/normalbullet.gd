@@ -21,3 +21,4 @@ func set_direction(directionx: Vector2):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/barrett50_singleshot2.wav-ca283659764ff4dacbf49f9b88eb0385.sample"
+
+[deps]
+
+source_file="res://assets/sounds/barrett50/barrett50_singleshot2.wav"
+dest_files=[ "res://.import/barrett50_singleshot2.wav-ca283659764ff4dacbf49f9b88eb0385.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

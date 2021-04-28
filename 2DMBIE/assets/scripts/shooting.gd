@@ -9,6 +9,11 @@ signal no_aim_shoot(value)
 signal shake_camera(value)
 signal set_camera_decay(value)
 signal set_gun_recoil_sensitivity(value)
+signal play_sound(value)
+
+# Gun Node2D Position:
+# X 22.073
+# Y -1.744
 
 var mouse_position
 var bulletpoint_position
@@ -17,7 +22,7 @@ var bullet_direction
 var valid_aim = true
 var current_gun_index
 
-var guns = [MP5.new(), SPAS12.new(), M4A1.new()]
+var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 
 func _ready():
 	set_gun(0)
@@ -29,6 +34,10 @@ func _process(_delta):
 		set_gun(1)
 	elif Input.is_action_just_released("weapon3"):
 		set_gun(2)
+	elif Input.is_action_just_released("weapon4"):
+		set_gun(3)
+	elif Input.is_action_just_released("weapon5"):
+		set_gun(4)
 	
 	var _gun: Gun
 	_gun = get_current_gun()
@@ -47,6 +56,8 @@ func _process(_delta):
 			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 			emit_signal("is_shooting", true)
 			emit_signal("shake_camera", _gun.camera_shake)
+			emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+			
 			bullet.set_direction(mouse_direction)
 			var muzzleflashInstance = _gun.getMuzzleFlash()
 			$BulletPoint.add_child(muzzleflashInstance)
@@ -58,6 +69,7 @@ func _process(_delta):
 			var facing = get_node("../../../../").facing
 			emit_signal("is_shooting", true)
 			emit_signal("shake_camera", _gun.camera_shake)
+			emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 			if facing == "right":
 				facingDir = 10
 			elif facing == "left":
@@ -85,6 +97,7 @@ func set_gun(index):
 	get_node("BulletPoint").position = _gun.bulletpoint
 	emit_signal("set_camera_decay", _gun.camera_decay)
 	emit_signal("set_gun_recoil_sensitivity", _gun.gun_recoil_sensitivity)
+	emit_signal("play_sound", _gun.name.to_lower() + str("_draw"))
 	
 func get_current_gun():
 	return guns[current_gun_index]

@@ -183,10 +183,11 @@ export (float) var enemyDamage = 300
 onready var health = maxHealth setget _set_health
 
 func Hurt(damage):
+	emit_signal("play_sound", "hurt")
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
+	
 
 func kill():
 	Global.Score += Global.ScoreIncrement
