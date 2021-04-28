@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=8]
-[ext_resource path="res://assets/scenes/light_TL_buis.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
@@ -621,9 +620,6 @@ __meta__ = {
 [node name="WaveTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-
-[node name="TL_buis" parent="." instance=ExtResource( 9 )]
-position = Vector2( 624, -264 )
 
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

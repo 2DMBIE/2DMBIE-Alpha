@@ -1,32 +1,20 @@
-extends Area2D
+class_name Bullet
 
-export (float) var damage = 300
-var speed = 750
-var direction := Vector2.ZERO
-var bulletpenatration = 2
-var enemyPenetration
+var _scene: PackedScene
+var _damage: float
+var _speed: float
 
-func _physics_process(delta):
-	if direction != Vector2.ZERO:
-		var velocity = direction * speed * delta
-		global_position += velocity
 
-func _on_bullet_body_entered(body):	
-	enemyPenetration = 0
-	if body.is_in_group("enemies"):
-		body.Hurt(damage)
-	else:
-		queue_free()
-
-func set_direction(directionx: Vector2):
-	self.direction = directionx
-
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
-func _on_bullet_body_exited(body):
-	if body.is_in_group("enemies"):
-#		visible = false
-		enemyPenetration += 1
-		if enemyPenetration >= bulletpenatration:
-			queue_free()
+# Class Constructor
+func _init(bdmg = float(500), bspeed = float(750), path = ""):
+	_damage = bdmg
+	_speed = bspeed 
+	#var plBullet := preload (float(500), float(750), "res://assets/scenes/bullet.tscn")
+	if not path.empty():
+		_scene = load(path)
+		
+func getBullet():
+	var instance = _scene.instance()
+	instance.get_node(".").speed = _speed
+	instance.get_node(".").damage = _damage
+	return instance

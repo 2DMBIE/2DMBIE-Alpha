@@ -180,10 +180,11 @@ signal health_updated(health)
 onready var health = Global.maxHealth setget _set_health
 
 func Hurt(damage):
+	emit_signal("play_sound", "hurt")
 	_set_health(health - damage)
 	var percentage = health/Global.maxHealth*100
 	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
+	
 
 func kill():
 	Global.Score += Global.ScoreIncrement

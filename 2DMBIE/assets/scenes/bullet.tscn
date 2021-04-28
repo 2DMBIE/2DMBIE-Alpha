@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sprites/bullet_dot44.png" type="Texture" id=1]
-[ext_resource path="res://assets/scripts/bullet.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/normalbullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.40456, 2.32618 )
@@ -10,7 +10,6 @@ extents = Vector2( 2.40456, 2.32618 )
 collision_layer = 32
 collision_mask = 14
 script = ExtResource( 2 )
-damage = 100.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
