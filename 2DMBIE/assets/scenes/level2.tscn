@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -15,16 +15,14 @@
 [ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/Lightning/light_cone_TL.png" type="Texture" id=14]
 [ext_resource path="res://assets/sprites/Lightning/light_cone_TL_feathered_half.png" type="Texture" id=15]
-[ext_resource path="res://assets/scenes/TL_light_feathered3.gd" type="Script" id=16]
-[ext_resource path="res://assets/scenes/CandleLight.gd" type="Script" id=17]
-[ext_resource path="res://assets/sprites/Lightning/candle_spritesheet.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/Lightning/light.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/Lightning/TL_buis.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/Lightning/emergency_exit.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/Lightning/light bulb with wire.png" type="Texture" id=22]
-[ext_resource path="res://assets/scenes/Lightbulb_broken.gd" type="Script" id=23]
-[ext_resource path="res://assets/sprites/Lightning/UV_light.png" type="Texture" id=24]
-[ext_resource path="res://assets/scenes/UV_light.gd" type="Script" id=25]
+[ext_resource path="res://assets/scenes/light_candle.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scenes/light_TL_buis_broken.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/scenes/light_UV.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/scenes/light_lightbulb_with_wire_broken.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/scenes/light_TL_buis.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/scenes/light_emergency_exit.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/scenes/light_lightbulb_with_wire.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/scenes/light_UV_broken.tscn" type="PackedScene" id=23]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -498,44 +496,6 @@ extents = Vector2( 4947.74, 1565.03 )
 [sub_resource type="OccluderPolygon2D" id=25]
 polygon = PoolVector2Array( 558.309, -5.81335, 595.909, -5.81335, 595.495, -100.587, 560.465, -101.383 )
 
-[sub_resource type="AtlasTexture" id=26]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 0, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=27]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 128, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=28]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 256, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=29]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 384, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=30]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 512, 0, 128, 128 )
-
-[sub_resource type="AtlasTexture" id=31]
-flags = 4
-atlas = ExtResource( 18 )
-region = Rect2( 0, 128, 128, 128 )
-
-[sub_resource type="SpriteFrames" id=32]
-animations = [ {
-"frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -689,126 +649,23 @@ scale = Vector2( 0.233125, 0.229739 )
 texture = ExtResource( 14 )
 shadow_enabled = true
 
-[node name="Candle" type="AnimatedSprite" parent="Light"]
-position = Vector2( -1897.96, -878.478 )
-scale = Vector2( 0.331826, 0.331826 )
-z_index = -20
-frames = SubResource( 32 )
-frame = 5
-speed_scale = 2.0
-playing = true
+[node name="Candle" parent="Light" instance=ExtResource( 16 )]
+frame = 4
 
-[node name="CandleLight" type="Light2D" parent="Light/Candle"]
-position = Vector2( 2.68506, 0 )
-z_index = -20
-texture = ExtResource( 19 )
-shadow_enabled = true
-script = ExtResource( 17 )
+[node name="TL_buis_broken" parent="Light" instance=ExtResource( 17 )]
 
-[node name="TL_buis_broken" type="Sprite" parent="Light"]
-position = Vector2( -2147.35, -1059.49 )
-scale = Vector2( 2.32882, 1.74808 )
-z_index = -20
-texture = ExtResource( 20 )
+[node name="TL_buis" parent="Light" instance=ExtResource( 20 )]
 
-[node name="Timer" type="Timer" parent="Light/TL_buis_broken"]
-wait_time = 0.2
-autostart = true
+[node name="emergency_exit" parent="Light" instance=ExtResource( 21 )]
 
-[node name="TL_light_feathered3" type="Light2D" parent="Light/TL_buis_broken"]
-position = Vector2( -1.19788, -10.7122 )
-scale = Vector2( 0.200051, 0.148258 )
-z_index = -20
-texture = ExtResource( 15 )
-shadow_enabled = true
-script = ExtResource( 16 )
+[node name="UV_light" parent="Light" instance=ExtResource( 18 )]
 
-[node name="TL_buis" type="Sprite" parent="Light"]
-position = Vector2( -2405.53, -1059.59 )
-scale = Vector2( 2.32882, 1.74808 )
-z_index = -20
-texture = ExtResource( 20 )
+[node name="UV_light_broken" parent="Light" instance=ExtResource( 23 )]
 
-[node name="Timer" type="Timer" parent="Light/TL_buis"]
-wait_time = 0.2
-autostart = true
+[node name="Lightbulb_with_wire" parent="Light" instance=ExtResource( 22 )]
+position = Vector2( -1557.99, -1081.06 )
 
-[node name="TL_light_feathered3" type="Light2D" parent="Light/TL_buis"]
-position = Vector2( -1.19788, -10.7122 )
-scale = Vector2( 0.200051, 0.148258 )
-z_index = -20
-texture = ExtResource( 15 )
-shadow_enabled = true
-
-[node name="emergency_exit" type="Sprite" parent="Light"]
-position = Vector2( -1764.57, -1032.4 )
-scale = Vector2( 0.359375, 0.359375 )
-z_index = -20
-texture = ExtResource( 21 )
-
-[node name="Light2D" type="Light2D" parent="Light/emergency_exit"]
-z_index = -20
-texture = ExtResource( 19 )
-texture_scale = 1.52
-color = Color( 0.290196, 1, 0.298039, 1 )
-shadow_enabled = true
-
-[node name="UV_light" type="Sprite" parent="Light"]
-position = Vector2( -1057.34, -1077.13 )
-texture = ExtResource( 24 )
-
-[node name="Light2D" type="Light2D" parent="Light/UV_light"]
-position = Vector2( 3.5636, -3.56348 )
-texture = ExtResource( 19 )
-color = Color( 0.713726, 0.14902, 1, 1 )
-shadow_enabled = true
-
-[node name="UV_light_broken" type="Sprite" parent="Light"]
-position = Vector2( -843.078, -1076.38 )
-texture = ExtResource( 24 )
-
-[node name="Light2D" type="Light2D" parent="Light/UV_light_broken"]
-position = Vector2( 3.5636, -3.56348 )
-texture = ExtResource( 19 )
-color = Color( 0.713726, 0.14902, 1, 1 )
-shadow_enabled = true
-script = ExtResource( 25 )
-
-[node name="Timer" type="Timer" parent="Light/UV_light_broken"]
-wait_time = 0.2
-autostart = true
-
-[node name="Lightbulb_with_wire" type="Sprite" parent="."]
-position = Vector2( -1353.37, -1497.76 )
-scale = Vector2( 0.132213, 0.132213 )
-z_index = -20
-texture = ExtResource( 22 )
-
-[node name="Light2D" type="Light2D" parent="Lightbulb_with_wire"]
-position = Vector2( -4.49731, 166.4 )
-texture = ExtResource( 19 )
-texture_scale = 8.03
-shadow_enabled = true
-
-[node name="Lightbulb_with_wire_broken" type="Sprite" parent="."]
-position = Vector2( -1097.37, -1491.76 )
-scale = Vector2( 0.132213, 0.132213 )
-z_index = -20
-texture = ExtResource( 22 )
-
-[node name="Light2D" type="Light2D" parent="Lightbulb_with_wire_broken"]
-position = Vector2( -4.49731, 166.4 )
-texture = ExtResource( 19 )
-texture_scale = 8.03
-shadow_enabled = true
-script = ExtResource( 23 )
-
-[node name="Timer" type="Timer" parent="Lightbulb_with_wire_broken/Light2D"]
-wait_time = 0.2
-autostart = true
+[node name="Lightbulb_with_wire_broken" parent="Light" instance=ExtResource( 19 )]
+position = Vector2( -1301.99, -1075.06 )
 
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
-[connection signal="timeout" from="Light/TL_buis_broken/Timer" to="Light/TL_buis_broken/TL_light_feathered3" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Light/TL_buis/Timer" to="Light/TL_buis/TL_light_feathered3" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Light/UV_light_broken/Timer" to="Light/UV_light_broken/Light2D" method="_on_Timer_timeout"]
-[connection signal="timeout" from="Lightbulb_with_wire_broken/Light2D/Timer" to="Lightbulb_with_wire_broken/Light2D" method="_on_Timer_timeout"]
