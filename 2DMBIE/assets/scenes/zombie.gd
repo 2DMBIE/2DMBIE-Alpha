@@ -9,6 +9,7 @@ var jumpForce = 400
 var gravity = 600
 var padding = 2
 var finishPadding = 8 # 6 or 8 for better padding when state machine
+const dropthroughBit = 5
 
 var movement
 var zombiestep = false
@@ -52,6 +53,11 @@ func nextPoint():
 	if !currentTarget:
 		jump()
 		nextPoint()
+	
+	if (currentTarget.y - 128 > self.position.y):
+		if is_on_floor():
+			if get_slide_collision(0).collider.name == "Floor":
+				set_collision_mask_bit(dropthroughBit, false)
 
 func jump():
 	if (self.is_on_floor()):
@@ -156,3 +162,6 @@ func _set_health(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			kill()
+
+func _on_GroundChecker_body_exited(_body):
+	set_collision_mask_bit(dropthroughBit, true)

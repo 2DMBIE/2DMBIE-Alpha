@@ -31,6 +31,7 @@ func _ready():
 	print($CollisionShape2D.shape.height)
 
 func _physics_process(_delta):
+	print(get_global_mouse_position().y > self.position.y)
 	update()
 	motion.y += GRAVITY
 	var friction = false
@@ -285,7 +286,7 @@ func updatHealtbar():
 		emit_signal("health_updated", health)
 	$Timer.start(2)
 
-func _on_GroundChecker_body_exited(_body):
+func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
 func crouch_idle_transition(value):

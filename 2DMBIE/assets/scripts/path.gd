@@ -37,6 +37,8 @@ func findPath(start, end):
 	# Gets the position of the last point to check if the final destination is closer to the last point then the next point
 	var lastPos
 	
+	var floors = tileMap2.get_used_cells()
+	
 	# Cycles through all the points in the path
 	for point in path:
 		var pos = graph.get_point_position(point)
@@ -44,6 +46,9 @@ func findPath(start, end):
 		
 		# Implement a jump in the path when identifying one
 		if lastPos and lastPos[1] > pos[1] and ((lastPos[0] < pos[0] and stat[0] < 0) or (lastPos[0] > pos[0] and stat[1] < 0)):
+			actions.append(null)
+		
+		if lastPos and lastPos[1] > pos[1] and tileMap2.world_to_map(pos) + Vector2(0, 1) in floors:
 			actions.append(null)
 		
 		# Set lastPos to the current pos, so it can start looking at a new pos again
@@ -135,7 +140,7 @@ func createConections():
 			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
 				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
 					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
-						closestLeftDrop = newPoint
+						pointsToJoin.append(newPoint)
 			
 			# Will found out soon
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
@@ -153,7 +158,7 @@ func createConections():
 			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
 				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
 					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
-						closestRightDrop = newPoint
+						pointsToJoin.append(newPoint)
 			
 			# Will found out soon
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
@@ -239,15 +244,15 @@ func _draw():
 			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
 				if (newPos[0] == pos[0] - cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
 					if closestLeftDrop < 0 or newPos[1] < graph.get_point_position(closestLeftDrop)[1]:
-						closestLeftDrop = newPoint
+						pointsToJoin.append(newPoint)
 			
 			# Will found out soon
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
-				newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1 :
+				newPos[0] > pos[0] - (cell_size * (jumpDistance + 2)) and newPos[0] < pos[0]) and cellType(newPos, true, true)[1] == -1:
 					pointsToJoin.append(newPoint)
 			
 			
-			# Sets the new point to the new closest drop point on the left until there's no point on the bottom closer to the y level of the ledge to be found
+			# Sets the new point to the new closest drop point on the right until there's no point on the bottom closer to the y level of the ledge to be found
 			if (stat[1] == -1):
 				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1]):
 					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
@@ -257,11 +262,11 @@ func _draw():
 			if (tileMap2.world_to_map(pos) + Vector2(0, 1) in cells):
 				if (newPos[0] == pos[0] + cell_size and newPos[1] > pos[1] and (newPos[1] - pos[1]) <= (cell_size * jumpHeight)):
 					if closestRightDrop < 0 or newPos[1] < graph.get_point_position(closestRightDrop)[1]:
-						closestRightDrop = newPoint
+						pointsToJoin.append(newPoint)
 			
 			# Will found out soon
 			if (newPos[1] >= pos[1] - (cell_size * jumpHeight) and newPos[1] <= pos[1] and 
-				newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1 :
+				newPos[0] < pos[0] + (cell_size * (jumpDistance + 2)) and newPos[0] > pos[0]) and cellType(newPos, true, true)[0] == -1:
 					pointsToJoin.append(newPoint)
 		
 		# When the closest right point is found, place it into the bidirectional points array
@@ -290,7 +295,7 @@ func _draw():
 		for joinPoint in pointsToJoin:
 			draw_line(pos, graph.get_point_position(joinPoint), Color(255, 0, 0), 1)
 		for joinPoint in noBiJoin:
-			draw_line(pos, graph.get_point_position(joinPoint), Color(255, 0, 0), 1)
+			draw_line(pos, graph.get_point_position(joinPoint), Color(0, 150, 150), 1)
 
 ## Creates a point at every wall, ledge, jump and drop
 func createMap():
@@ -414,7 +419,7 @@ func cellType(pos, global = false, isAbove = false):
 ## Makes the actual point
 func createPoint(cell):
 	## Gets the tile right above the current one where to point is being created
-	var above = Vector2(cell[0], cell[1] - 1)\
+	var above = Vector2(cell[0], cell[1] - 1)
 	
 	# Gets the position of the tile above in the middle instead of the top left
 	var pos = tileMap.map_to_world(above) + Vector2(cell_size/2, cell_size/2)
