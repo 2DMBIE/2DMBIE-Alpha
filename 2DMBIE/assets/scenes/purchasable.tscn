@@ -1,16 +1,17 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/scripts/purchasable_m4a1.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/weapon_buying.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/m4a1.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 77.9354, 52.0882 )
 
-[node name="purchasable_m4a1" type="Node2D"]
+[node name="purchasable" type="Node2D"]
 script = ExtResource( 1 )
+Selected_Weapon = 2
 
-[node name="purchasable_m4a1" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -22,6 +23,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="buyarea"]
+visible = false
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="buyarea" to="." method="_on_buyarea_body_entered"]

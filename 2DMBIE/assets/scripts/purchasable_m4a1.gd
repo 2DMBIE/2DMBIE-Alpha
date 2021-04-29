@@ -3,19 +3,20 @@ extends Node2D
 var canBuy = false
 onready var gunscript = get_node("../Player/body/chest/torso/gun")
 
-func _physics_process(delta):
-	if Input.is_action_just_pressed("use") and canBuy == true:
-		if gunscript.weapon_slot_2 == -1:
-			gunscript.current_weapon = 1
-			gunscript.weapon_slot_2 = 2
-		elif gunscript.current_weapon == 0:
-			gunscript.weapon_slot_1 = 2
-		elif gunscript.current_weapon == 1:
-			gunscript.weapon_slot_2 = 2
+export var Selected_Weapon = 0
+
+func _physics_process(_delta):
+	if Input.is_action_just_pressed("use") and canBuy:
+		for i in range(gunscript.weapon_slots.size()):
+			if gunscript.weapon_slots[i] == -1:
+				gunscript.current_weapon = (i)
+				gunscript.weapon_slots[i] = Selected_Weapon
+				return
 			
-		gunscript.set_gun(2)
+			elif gunscript.current_weapon == i:
+				gunscript.weapon_slots[i] = Selected_Weapon
 		
-		pass
+		gunscript.set_gun(Selected_Weapon)
 
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):

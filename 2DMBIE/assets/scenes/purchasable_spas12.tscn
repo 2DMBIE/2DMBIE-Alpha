@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/scripts/purchasable_spas12.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/weapon_buying.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/spas12.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 
@@ -9,6 +9,7 @@ extents = Vector2( 80, 52.088 )
 
 [node name="purchasable_spas12" type="Node2D"]
 script = ExtResource( 1 )
+Selected_Weapon = 1
 
 [node name="purchasable_spas12" type="Sprite" parent="."]
 texture = ExtResource( 2 )

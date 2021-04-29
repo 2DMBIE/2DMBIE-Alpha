@@ -23,8 +23,7 @@ var valid_aim = true
 
 var current_gun_index
 
-var weapon_slot_1 = 0
-var weapon_slot_2 = -1
+var weapon_slots = [0, -1, -1]
 var current_weapon = 0
 
 var canShoot = true # Used for ammo
@@ -32,22 +31,14 @@ var canShoot = true # Used for ammo
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 
 func _ready():
-	set_gun(weapon_slot_1)
+	set_gun(weapon_slots[0])
 
 func _process(_delta):
-	if Input.is_action_just_released("weapon1"):
-		set_gun(weapon_slot_1)
-		current_weapon = 0
-	elif Input.is_action_just_released("weapon2"):
-		if weapon_slot_2 > -1:
-			set_gun(weapon_slot_2)
-			current_weapon = 1
-	elif Input.is_action_just_released("weapon3"):
-		pass
-	elif Input.is_action_just_released("weapon4"):
-		pass
-	elif Input.is_action_just_released("weapon5"):
-		pass
+	for i in range(weapon_slots.size()):
+		if Input.is_action_just_released("weapon" + str(i + 1)) && weapon_slots[i] > -1:
+			set_gun(weapon_slots[i])
+			current_weapon = i
+			break
 	
 	var _gun: Gun
 	_gun = get_current_gun()

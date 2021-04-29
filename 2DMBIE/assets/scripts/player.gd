@@ -21,9 +21,6 @@ var tileMap
 var mousePos
 var tilePos
 
-#weapon_buying
-var weapon_buying_m4a1
-
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
@@ -31,8 +28,6 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
-	
-	weapon_buying_m4a1 = get_node("../weapon_buying_m4a1")
 
 func _physics_process(_delta):
 	update()
