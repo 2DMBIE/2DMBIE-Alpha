@@ -3,8 +3,8 @@ extends Area2D
 var damage = 100
 var speed = 750
 var direction := Vector2.ZERO
-var enemyPenetration = 0
-var bulletPenetration = 2
+var enemy_penetration = 0
+var bullet_penetration = 2
 
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
@@ -25,6 +25,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_bullet_body_exited(body):
 	if body.is_in_group("enemies"):
-		enemyPenetration += 1
-		if enemyPenetration >= bulletPenetration:
+		enemy_penetration += 1
+		if enemy_penetration >= bullet_penetration:
 			queue_free()
