@@ -16,7 +16,7 @@ func _init():
 	_muzzleflash = load("res://assets/scenes/muzzleflash.tscn") # The scene of the muzzleflash
 	
 	camera_shake = float(1) # Camera shake strength [0, 1] Higher = stronger.
-	camera_decay = float(0.3) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
+	camera_decay = float(0.9) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
 	gun_recoil_sensitivity = float(1) # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
 	
 	maxclipAmmo = 5 # How much bullets are in one magazine.
