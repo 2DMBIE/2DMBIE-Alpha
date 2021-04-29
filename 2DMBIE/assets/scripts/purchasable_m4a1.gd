@@ -1,11 +1,19 @@
 extends Node2D
 
 var canBuy = false
+onready var gunscript = get_node("../Player/body/chest/torso/gun")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("use") and canBuy == true:
-		get_node("../Player/body/chest/torso/gun").current_weapon_slot = 2
-		get_node("../Player/body/chest/torso/gun").set_gun(2)
+		if gunscript.weapon_slot_2 == -1:
+			gunscript.current_weapon = 1
+			gunscript.weapon_slot_2 = 2
+		elif gunscript.current_weapon == 0:
+			gunscript.weapon_slot_1 = 2
+		elif gunscript.current_weapon == 1:
+			gunscript.weapon_slot_2 = 2
+			
+		gunscript.set_gun(2)
 		
 		pass
 
