@@ -338,18 +338,6 @@ func _draw():
 		else:
 			pass
 
-
-func _on_Area2D_area_entered(area):
-	print("player entered cum the area")
-	weapon_buying_m4a1.canBuy == true
-	pass # Replace with function body.
-
-
-func _on_Area2D_area_exited(area):
-	print("player exited the area")
-	weapon_buying_m4a1.canBuy == false
-	pass # Replace with function body.
-
 func set_gun_recoil_sensitivity(value):
 	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
 

@@ -12,9 +12,6 @@
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/m4a1.png" type="Texture" id=15]
-[ext_resource path="res://assets/scripts/weapon_buying_m4a1.gd" type="Script" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -485,9 +482,6 @@ polygon = PoolVector2Array( 65, 30, 126, 29, 129, 128, 62, 127 )
 [sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 4947.74, 1565.03 )
 
-[sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 112, 80 )
-
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -627,27 +621,5 @@ __meta__ = {
 wait_time = 5.0
 one_shot = true
 
-[node name="TL_buis" parent="." instance=ExtResource( 9 )]
-position = Vector2( 624, -264 )
-
-[node name="weapon_buying_m4a1" type="Sprite" parent="."]
-position = Vector2( 1120, -160 )
-texture = ExtResource( 15 )
-script = ExtResource( 16 )
-
-[node name="Area2D" type="Area2D" parent="weapon_buying_m4a1"]
-position = Vector2( 8, 0 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="weapon_buying_m4a1/Area2D"]
-position = Vector2( -16, 0 )
-shape = SubResource( 25 )
-
-[node name="Light2D" type="Light2D" parent="weapon_buying_m4a1"]
-position = Vector2( -8, 0 )
-texture = ExtResource( 14 )
-color = Color( 1, 0.819608, 0, 1 )
-
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="area_entered" from="weapon_buying_m4a1/Area2D" to="Player" method="_on_Area2D_area_entered"]
-[connection signal="area_exited" from="weapon_buying_m4a1/Area2D" to="Player" method="_on_Area2D_area_exited"]
