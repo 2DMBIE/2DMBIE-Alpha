@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/Lightning/light bulb with wire.png" type="Texture" id=2]
 
 [node name="Lightbulb_with_wire" type="Sprite"]
-position = Vector2( -1353.37, -1497.76 )
 scale = Vector2( 0.132213, 0.132213 )
 z_index = -20
 texture = ExtResource( 2 )

@@ -2,10 +2,9 @@
 
 [ext_resource path="res://assets/sprites/Lightning/TL_buis.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Lightning/light_cone_TL_feathered_half.png" type="Texture" id=2]
-[ext_resource path="res://assets/scenes/TL_light_feathered3.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/tl_light_feathered.gd" type="Script" id=3]
 
 [node name="TL_buis_broken" type="Sprite"]
-position = Vector2( -2147.35, -1059.49 )
 scale = Vector2( 2.32882, 1.74808 )
 z_index = -20
 texture = ExtResource( 1 )
