@@ -66,7 +66,13 @@ func _process(_delta):
 			$BulletPoint.add_child(muzzleflashInstance)
 			get_tree().current_scene.add_child(bullet)
 			_gun.ammo -= 1
-		elif not Input.is_action_pressed("aim") and canShoot and _gun.ammo > 0: #not aiming
+			#var _facing1 = get_node("../../../../").facing
+			#var _facing2 = get_mouse_facing()
+			#if _facing1 != _facing2: # The player is aiming left while r
+			#	print("true")
+			#print("facing1: " + str(_facing1))
+			#print("facing2: " + str(_facing2))
+		elif not Input.is_action_pressed("aim"): #not aiming
 			emit_signal("no_aim_shoot", true)
 			var facingDir = 10
 			var facing = get_node("../../../../").facing
@@ -144,3 +150,11 @@ func on_reload_timeout_finished():
 	else:
 		canShoot = true	
 	
+func get_mouse_facing():
+	var x1 = get_node("../../../../").position.x
+	var x2 = get_global_mouse_position().x  
+
+	if x1 > x2:
+		return "left"
+	else:
+		return "right"
