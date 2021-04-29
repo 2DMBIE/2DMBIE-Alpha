@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m4a1_singleshot3.wav-617e303d009113d145629f7e0a409ce2.sample"
+
+[deps]
+
+source_file="res://assets/sounds/m4a1/m4a1_singleshot3.wav"
+dest_files=[ "res://.import/m4a1_singleshot3.wav-617e303d009113d145629f7e0a409ce2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=8]
-[ext_resource path="res://assets/scenes/light_TL_buis.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/tiles/furniture_kitchen.png" type="Texture" id=12]
@@ -553,7 +552,6 @@ hframes = 21
 position = Vector2( 316.524, -155.924 )
 
 [node name="Spawnpoints" type="YSort" parent="."]
-visible = false
 position = Vector2( 2.245, 4.48984 )
 z_index = -23
 

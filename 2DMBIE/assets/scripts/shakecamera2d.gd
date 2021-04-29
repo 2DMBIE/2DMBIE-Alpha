@@ -1,9 +1,9 @@
 extends Camera2D
 class_name ShakeCamera2D
 
-export var decay = 1.7  # How quickly the shaking stops [0, 1].
-export var max_offset = Vector2(100, 50)  # Maximum hor/ver shake in pixels.
-export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
+var decay = 1.7  # How quickly the shaking stops [0, 1].
+var max_offset = Vector2(100, 50)  # Maximum hor/ver shake in pixels.
+var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
 export (NodePath) var target  # Assign the node this camera will follow.
 
 var trauma = 0.0  # Current shake strength.
@@ -42,3 +42,6 @@ func add_trauma(amount):
 
 func _on_shoot_event(value):
 	add_trauma(value)
+
+func set_camera_decay(value):
+	decay = value
