@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light_cone_TL.png-2fbabc970f6dd80e4e33bd30a6d6035a.stex"
+path="res://.import/ultraviolet-light-vector-19765265.jpg-a3a21fd44b245c928ac9020fa1cc9c32.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Lightning/light_cone_TL.png"
-dest_files=[ "res://.import/light_cone_TL.png-2fbabc970f6dd80e4e33bd30a6d6035a.stex" ]
+source_file="res://assets/sprites/Lighting/ultraviolet-light-vector-19765265.jpg"
+dest_files=[ "res://.import/ultraviolet-light-vector-19765265.jpg-a3a21fd44b245c928ac9020fa1cc9c32.stex" ]
 
 [params]
 

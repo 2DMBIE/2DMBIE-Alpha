@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light_cone_TL_feathered_half.png-d4474304cfd80c57634f68c1579b3cfd.stex"
+path="res://.import/light_cone_TL.png-4c81ed455f597d5b21019b90311a54ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Lightning/light_cone_TL_feathered_half.png"
-dest_files=[ "res://.import/light_cone_TL_feathered_half.png-d4474304cfd80c57634f68c1579b3cfd.stex" ]
+source_file="res://assets/sprites/Lighting/light_cone_TL.png"
+dest_files=[ "res://.import/light_cone_TL.png-4c81ed455f597d5b21019b90311a54ce.stex" ]
 
 [params]
 

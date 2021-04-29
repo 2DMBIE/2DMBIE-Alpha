@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/UV_light.png-9e8c4d40aa03b8836d5c94645f2ae7b0.stex"
+path="res://.import/light.png-710a5f941453c1b2774b878d24e20798.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Lightning/UV_light.png"
-dest_files=[ "res://.import/UV_light.png-9e8c4d40aa03b8836d5c94645f2ae7b0.stex" ]
+source_file="res://assets/sprites/Lighting/light.png"
+dest_files=[ "res://.import/light.png-710a5f941453c1b2774b878d24e20798.stex" ]
 
 [params]
 
