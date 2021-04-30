@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/furniture_library.png-84b138116f536f09c77fbc3f58d5efdc.stex"
+path="res://.import/furniture_openarea.png-3e6e892f68521ec48329d324b665015d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/furniture_library.png"
-dest_files=[ "res://.import/furniture_library.png-84b138116f536f09c77fbc3f58d5efdc.stex" ]
+source_file="res://assets/sprites/tiles/furniture_openarea.png"
+dest_files=[ "res://.import/furniture_openarea.png-3e6e892f68521ec48329d324b665015d.stex" ]
 
 [params]
 
