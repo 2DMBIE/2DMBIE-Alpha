@@ -11,5 +11,5 @@ func _on_Timer_timeout():
 	if rand_amt < 0.1:
 		self.energy = 0
 	else:
-		self.energy = 0.5
+		self.energy = 0.75
 		

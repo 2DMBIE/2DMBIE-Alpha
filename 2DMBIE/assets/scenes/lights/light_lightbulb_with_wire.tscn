@@ -12,5 +12,5 @@ texture = ExtResource( 2 )
 position = Vector2( -4.49731, 166.4 )
 texture = ExtResource( 1 )
 texture_scale = 8.03
-energy = 0.5
+energy = 0.75
 shadow_enabled = true

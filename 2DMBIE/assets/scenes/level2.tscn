@@ -2175,7 +2175,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.403922, 0.403922, 0.403922, 1 )
+color = Color( 0.870588, 0.870588, 0.870588, 1 )
 
 [node name="lights" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
@@ -2186,7 +2186,7 @@ frame = 1
 
 [node name="Candle2" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1765.76, -132.49 )
-frame = 3
+frame = 4
 
 [node name="Lightbulb_with_wire" parent="lights" instance=ExtResource( 20 )]
 position = Vector2( 1469.76, -292.49 )
@@ -2227,7 +2227,7 @@ frame = 0
 
 [node name="Candle3" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2229.75, -148.49 )
-frame = 3
+frame = 4
 
 [node name="TL_buis3" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 3501.75, -524.49 )
@@ -2305,6 +2305,7 @@ position = Vector2( 1693.75, -1308.49 )
 [node name="Candle5" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 189.755, -884.49 )
 scale = Vector2( 0.271936, 0.334435 )
+frame = 0
 
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

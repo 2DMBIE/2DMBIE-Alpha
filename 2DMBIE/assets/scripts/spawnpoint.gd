@@ -14,7 +14,7 @@ func _on_Timer_timeout():
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
 			Global.CurrentWaveEnemies += 1
 			print(Global.CurrentWaveEnemies)
-			if enemyAmount > 20:
+			if enemyAmount > 15:
 				enemy.queue_free()
 		else:
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
