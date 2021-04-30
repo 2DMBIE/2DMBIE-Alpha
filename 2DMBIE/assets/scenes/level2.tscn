@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,14 @@
 [ext_resource path="res://assets/sprites/tiles/lounge_tileset.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/tiles/furniture.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/tiles/furniture_restaurant.png" type="Texture" id=14]
+[ext_resource path="res://assets/scenes/lights/light_tl_buis.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/scenes/lights/light_tl_buis_broken.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scenes/lights/light_lightbulb_with_wire_broken.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/scenes/lights/light_emergency_exit.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/scenes/lights/light_candle.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/scenes/lights/light_lightbulb_with_wire.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/scenes/lights/light_uv_broken.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/scenes/lights/light_uv.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -1762,6 +1770,139 @@ __meta__ = {
 [node name="WaveTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.403922, 0.403922, 0.403922, 1 )
+
+[node name="lights" type="YSort" parent="."]
+position = Vector2( 2.245, 4.48984 )
+
+[node name="Candle" parent="lights" instance=ExtResource( 19 )]
+position = Vector2( 1437.76, -116.49 )
+frame = 3
+
+[node name="Candle2" parent="lights" instance=ExtResource( 19 )]
+position = Vector2( 1765.76, -132.49 )
+frame = 5
+
+[node name="Lightbulb_with_wire" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 1469.76, -292.49 )
+
+[node name="Lightbulb_with_wire4" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 1429.76, -548.49 )
+
+[node name="TL_buis2" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 3837.75, -268.49 )
+
+[node name="TL_buis_broken" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 4637.76, -260.49 )
+
+[node name="TL_buis" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 4285.76, -268.49 )
+
+[node name="emergency_exit" parent="lights" instance=ExtResource( 18 )]
+position = Vector2( 4781.76, -236.49 )
+
+[node name="Lightbulb_with_wire5" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 3205.75, -292.49 )
+
+[node name="Lightbulb_with_wire_broken2" parent="lights" instance=ExtResource( 17 )]
+position = Vector2( 2973.75, -548.49 )
+
+[node name="Lightbulb_with_wire_broken" parent="lights" instance=ExtResource( 17 )]
+position = Vector2( 2821.75, -292.49 )
+
+[node name="Lightbulb_with_wire3" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 1757.76, -548.49 )
+
+[node name="Lightbulb_with_wire2" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 1965.76, -292.49 )
+
+[node name="Candle4" parent="lights" instance=ExtResource( 19 )]
+position = Vector2( 2781.75, -388.49 )
+frame = 2
+
+[node name="Candle3" parent="lights" instance=ExtResource( 19 )]
+position = Vector2( 2229.75, -148.49 )
+frame = 5
+
+[node name="TL_buis3" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 3501.75, -524.49 )
+
+[node name="TL_buis_broken2" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 3773.75, -524.49 )
+
+[node name="TL_buis_broken3" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 4093.75, -516.49 )
+
+[node name="TL_buis4" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 4509.75, -772.49 )
+
+[node name="TL_buis_broken4" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 4213.75, -780.49 )
+
+[node name="TL_buis_broken5" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 3765.75, -780.49 )
+
+[node name="TL_buis_broken6" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 3237.75, -780.49 )
+
+[node name="TL_buis_broken7" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 3805.75, -1036.49 )
+
+[node name="TL_buis5" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 3261.75, -1036.49 )
+
+[node name="TL_buis6" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 4437.75, -1036.49 )
+
+[node name="Lightbulb_with_wire_broken3" parent="lights" instance=ExtResource( 17 )]
+position = Vector2( 461.755, -1284.49 )
+
+[node name="UV_light" parent="lights" instance=ExtResource( 22 )]
+position = Vector2( 381.755, -2244.49 )
+scale = Vector2( 2.32882, 1.74808 )
+
+[node name="UV_light_broken" parent="lights" instance=ExtResource( 21 )]
+position = Vector2( 1109.76, -2068.49 )
+
+[node name="UV_light_broken2" parent="lights" instance=ExtResource( 21 )]
+position = Vector2( 349.755, -1812.49 )
+
+[node name="UV_light_broken3" parent="lights" instance=ExtResource( 21 )]
+position = Vector2( 1837.76, -2092.49 )
+
+[node name="TL_buis_broken8" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 557.755, -2316.49 )
+
+[node name="TL_buis_broken9" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 181.755, -2316.49 )
+
+[node name="TL_buis7" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 1117.76, -2316.49 )
+
+[node name="TL_buis8" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 309.755, -1548.49 )
+
+[node name="TL_buis9" parent="lights" instance=ExtResource( 15 )]
+position = Vector2( 165.755, -1804.49 )
+
+[node name="TL_buis_broken10" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 1541.76, -2076.49 )
+
+[node name="TL_buis_broken11" parent="lights" instance=ExtResource( 16 )]
+position = Vector2( 1053.76, -1540.49 )
+
+[node name="Lightbulb_with_wire6" parent="lights" instance=ExtResource( 20 )]
+position = Vector2( 1141.76, -1300.49 )
+
+[node name="Lightbulb_with_wire_broken4" parent="lights" instance=ExtResource( 17 )]
+position = Vector2( 1693.75, -1308.49 )
+
+[node name="Candle5" parent="lights" instance=ExtResource( 19 )]
+position = Vector2( 189.755, -884.49 )
+scale = Vector2( 0.271936, 0.334435 )
+frame = 0
 
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

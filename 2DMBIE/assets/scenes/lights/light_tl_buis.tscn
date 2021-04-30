@@ -17,6 +17,7 @@ position = Vector2( -1.19788, -10.7122 )
 scale = Vector2( 0.200051, 0.148258 )
 z_index = -20
 texture = ExtResource( 2 )
+energy = 0.5
 shadow_enabled = true
 
 [connection signal="timeout" from="Timer" to="TL_light_feathered3" method="_on_Timer_timeout"]

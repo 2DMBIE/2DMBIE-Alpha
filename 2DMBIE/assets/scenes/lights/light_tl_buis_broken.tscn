@@ -14,10 +14,11 @@ wait_time = 0.2
 autostart = true
 
 [node name="TL_light_feathered3" type="Light2D" parent="."]
-position = Vector2( -1.19788, -10.7122 )
-scale = Vector2( 0.200051, 0.148258 )
+position = Vector2( -3.83205, -11.315 )
+scale = Vector2( 0.205319, 0.148861 )
 z_index = -20
 texture = ExtResource( 2 )
+energy = 0.5
 shadow_enabled = true
 script = ExtResource( 3 )
 
