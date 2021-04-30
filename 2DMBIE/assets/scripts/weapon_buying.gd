@@ -6,6 +6,7 @@ var spriteM4A1 = preload("res://assets/sprites/guns/m4a1.png")
 var spriteAK12 = preload("res://assets/sprites/guns/ak12.png")
 var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50.png")
 var spriteArray = [spriteMP5, spriteSPAS12, spriteM4A1, spriteAK12, spriteBARRETT50]
+var colorArray = [Color.limegreen, Color.turquoise, Color.gold, Color.orange, Color.pink]
 
 var canBuy = false
 onready var gunscript = get_node("../Player/body/chest/torso/gun")
@@ -43,3 +44,4 @@ func _ready():
 	for i in spriteArray.size():
 		if Selected_Weapon == i:
 			$Sprite.set_texture(spriteArray[i])
+			$Light2D.color = colorArray[i]
