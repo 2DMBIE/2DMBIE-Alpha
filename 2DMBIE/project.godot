@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/guns/barrett50.gd"
 }, {
+"base": "Reference",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://assets/scripts/bullet.gd"
+}, {
+"base": "Reference",
+"class": "Gun",
+"language": "GDScript",
+"path": "res://assets/scripts/gun.gd"
+}, {
 "base": "Gun",
 "class": "M4A1",
 "language": "GDScript",
@@ -42,6 +52,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AK12": "",
 "BARRETT50": "",
+"Bullet": "",
+"Gun": "",
 "M4A1": "",
 "MP5": "",
 "SPAS12": "",
