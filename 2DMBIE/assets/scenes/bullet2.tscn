@@ -105,5 +105,6 @@ lifetime = 20.0
 speed_scale = 6.05
 randomness = 0.28
 process_material = SubResource( 2 )
+
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

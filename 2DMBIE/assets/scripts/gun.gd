@@ -36,7 +36,7 @@ muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
 	bulletpoint = bpoint # Position of the bulletpoint.
 	bulletdelay = bdelay # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = bullet_i # The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
+	_bullet = bullet_i # The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path, bullet_penetration [1,4])
 	_muzzleflash = muzzleflash # The scene of the muzzleflash
 	
 	camera_shake = c_shake # Camera shake strength [0, 1] Higher = stronger.
@@ -45,8 +45,7 @@ muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
 	
 	maxclipAmmo = g_maxclipAmmo # How much bullets are in one magazine.
 	totalAmmo = g_totalAmmo # Total ammo which comes with each gun.
-	
-	ammo = g_maxclipAmmo # Current ammo.
+
 func getBullet():
 	return _bullet.getBullet()
 

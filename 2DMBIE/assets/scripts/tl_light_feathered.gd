@@ -1,6 +1,6 @@
 extends Light2D
 
-onready var timer = $Timer
+#onready var timer = $Timer
 
 func _ready():
 	randomize()

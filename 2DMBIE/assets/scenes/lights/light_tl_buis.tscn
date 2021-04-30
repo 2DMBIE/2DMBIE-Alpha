@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/Lightning/light_cone_TL_feathered_half.png" type="Texture" id=2]
 
 [node name="TL_buis" type="Sprite"]
-position = Vector2( -2405.53, -1059.59 )
 scale = Vector2( 2.32882, 1.74808 )
 z_index = -20
 texture = ExtResource( 1 )

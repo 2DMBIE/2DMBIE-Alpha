@@ -2,10 +2,9 @@
 
 [ext_resource path="res://assets/sprites/Lightning/light.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Lightning/light bulb with wire.png" type="Texture" id=2]
-[ext_resource path="res://assets/scenes/Lightbulb_broken.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/lightbulb_broken.gd" type="Script" id=3]
 
 [node name="Lightbulb_with_wire_broken" type="Sprite"]
-position = Vector2( -1097.37, -1491.76 )
 scale = Vector2( 0.132213, 0.132213 )
 z_index = -20
 texture = ExtResource( 2 )

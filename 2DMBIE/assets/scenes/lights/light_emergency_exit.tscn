@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/Lightning/emergency_exit.png" type="Texture" id=2]
 
 [node name="emergency_exit" type="Sprite"]
-position = Vector2( -1764.57, -1032.4 )
 scale = Vector2( 0.359375, 0.359375 )
 z_index = -20
 texture = ExtResource( 2 )

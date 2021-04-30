@@ -5,7 +5,7 @@ func _ready():
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
-	$Label.text = str(int(Global.Currentwave))
+	#$Label.text = str(int(Global.Currentwave))
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
 		Global.Score = 0
