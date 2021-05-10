@@ -8,6 +8,7 @@ func _process(_delta):
 	#$Label.text = str(int(Global.Currentwave))
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
+		#standaard stats voor de enemies
 		Global.Score = 0
 		Global.MaxWaveEnemies = 4
 		Global.CurrentWaveEnemies = 0
@@ -16,7 +17,7 @@ func _process(_delta):
 		Global.EnemyDamage = 300
 		Global.Speed = 200
 
-func _on_WaveTimer_timeout():
+func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 4
@@ -24,8 +25,8 @@ func _on_WaveTimer_timeout():
 		Global.maxHealth *= 1.05
 		Global.EnemyDamage *= 1.05
 		Global.Speed += 4
-		print("next wave")
-		print("new enemies")
-		print(Global.MaxWaveEnemies)
+#		print("next wave")
+#		print("new enemies")
+#		print(Global.MaxWaveEnemies)
 	else:
 		pass
