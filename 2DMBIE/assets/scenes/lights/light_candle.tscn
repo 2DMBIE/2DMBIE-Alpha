@@ -51,8 +51,10 @@ speed_scale = 2.0
 playing = true
 
 [node name="CandleLight" type="Light2D" parent="."]
-position = Vector2( 2.68506, 0 )
+position = Vector2( -8.69281, 5.68878 )
+scale = Vector2( 1.63334, 1.63334 )
 z_index = -20
 texture = ExtResource( 1 )
+texture_scale = 1.83
 shadow_enabled = true
 script = ExtResource( 3 )
