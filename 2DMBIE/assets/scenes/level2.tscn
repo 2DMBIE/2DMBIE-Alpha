@@ -2182,10 +2182,11 @@ position = Vector2( 2.245, 4.48984 )
 
 [node name="Candle" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1437.76, -116.49 )
-frame = 2
+frame = 3
 
 [node name="Candle2" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1765.76, -132.49 )
+frame = 0
 
 [node name="Lightbulb_with_wire" parent="lights" instance=ExtResource( 20 )]
 position = Vector2( 1469.76, -292.49 )
@@ -2222,10 +2223,11 @@ position = Vector2( 1965.76, -292.49 )
 
 [node name="Candle4" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2781.75, -388.49 )
-frame = 1
+frame = 2
 
 [node name="Candle3" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2229.75, -148.49 )
+frame = 0
 
 [node name="TL_buis3" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 3501.75, -524.49 )
@@ -2303,7 +2305,7 @@ position = Vector2( 1693.75, -1308.49 )
 [node name="Candle5" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 189.755, -884.49 )
 scale = Vector2( 0.271936, 0.334435 )
-frame = 1
+frame = 2
 
 [node name="TL_buis10" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 1421.76, -1796.49 )
@@ -2367,19 +2369,16 @@ position = Vector2( 3117.75, -1740.49 )
 
 [node name="Candle6" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2317.75, -1108.49 )
-frame = 1
+frame = 2
 
 [node name="Candle7" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2077.75, -724.49 )
-frame = 4
 
 [node name="Candle8" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2885.75, -1492.49 )
-frame = 4
 
 [node name="Candle9" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2309.75, -1748.49 )
-frame = 4
 
 [node name="TL_buis_broken18" parent="lights" instance=ExtResource( 16 )]
 position = Vector2( 469.755, -260.49 )
