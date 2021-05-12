@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/TileSets/new_canvasitemmaterial.tres" type="Material" id=1]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,9 @@
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 104.962, 22.6918 )
 
 [node name="MenuButton" type="Button"]
 margin_right = 212.0
@@ -34,3 +37,12 @@ text = "Label"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 105.157, 22.5842 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
