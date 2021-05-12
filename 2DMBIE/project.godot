@@ -74,6 +74,11 @@ Global="*res://assets/scripts/Global.gd"
 
 settings/fps/force_fps=60
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [gdnative]
 
 singletons=[  ]
@@ -182,3 +187,4 @@ reload={
 [rendering]
 
 environment/default_clear_color=Color( 0.509804, 0.529412, 0.537255, 1 )
+quality/dynamic_fonts/use_oversampling=false

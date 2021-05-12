@@ -10,6 +10,7 @@ var Currentwave = 1
 var maxHealth = 500
 var EnemyDamage = 300
 var Speed = 200
+var enemiesKilled = 0
 
 func _process(_delta):
 	maxHealth = clamp(maxHealth, 500, 1500)

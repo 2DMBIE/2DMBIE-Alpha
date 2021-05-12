@@ -255,6 +255,7 @@ func kill():
 	Global.maxHealth = 500
 	Global.EnemyDamage = 300
 	Global.Speed = 200
+	Global.enemiesKilled = 0 
 	
 func setHealth(value):
 	var prevHealth = health

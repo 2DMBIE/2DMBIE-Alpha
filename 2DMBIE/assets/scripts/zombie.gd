@@ -161,6 +161,7 @@ func _set_health(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:
+			Global.enemiesKilled += 1
 			kill()
 
 func _on_GroundChecker_body_exited(_body):
