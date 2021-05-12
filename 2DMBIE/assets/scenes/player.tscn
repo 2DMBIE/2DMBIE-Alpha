@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -34,7 +34,6 @@
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/shooting.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
-[ext_resource path="res://assets/scenes/healthbar.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/animations/crouching-animation.tres" type="Animation" id=36]
 [ext_resource path="res://assets/animations/crouching-idle-animation.tres" type="Animation" id=37]
 [ext_resource path="res://assets/animations/shoot/shoot_minus_30_degrees.tres" type="Animation" id=38]
@@ -370,7 +369,7 @@ nodes/shooting/node = SubResource( 53 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "Add2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "TimeScale", 0, "Animation 5", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim" ]
 
 [sub_resource type="Animation" id=56]
 tracks/0/type = "value"
@@ -754,7 +753,6 @@ height = 28.0385
 collision_layer = 4
 collision_mask = 2147483710
 script = ExtResource( 17 )
-maxHealth = 1000.0
 
 [node name="body" type="Position2D" parent="."]
 position = Vector2( 0, 1.06132 )
@@ -1126,7 +1124,6 @@ z_index = -3
 texture = ExtResource( 21 )
 
 [node name="Pivot" type="Position2D" parent="."]
-visible = false
 position = Vector2( -5.04538, 3.36359 )
 script = ExtResource( 34 )
 
@@ -1160,12 +1157,6 @@ collision_mask = 32
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
 shape = SubResource( 59 )
-
-[node name="healthbar" parent="." instance=ExtResource( 35 )]
-margin_left = -64.0
-margin_top = -112.0
-margin_right = -64.0
-margin_bottom = -112.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

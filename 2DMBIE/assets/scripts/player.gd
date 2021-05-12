@@ -29,6 +29,7 @@ func _ready():
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
 	print($CollisionShape2D.shape.height)
+	emit_signal("health_updated", health, maxHealth)
 
 func _physics_process(_delta):
 	update()
@@ -238,7 +239,7 @@ func aim(string):
 		$AnimationTree.set("parameters/aim_state/current", 1)
 		return false
 #health system
-export (float) var maxHealth = 1200
+var maxHealth = 1200
 
 onready var EnemyDamage = Global.EnemyDamage
 onready var health = maxHealth setget setHealth
@@ -259,7 +260,7 @@ func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
-		emit_signal("health_updated", health)
+		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
 			queue_free()
 			kill()
@@ -268,7 +269,6 @@ var takingDamage = false
 
 func takenDamage(_enemyDamage):
 	setHealth(health - EnemyDamage)
-	updatHealtbar()
 	$Timer.start(10)
 	zombie_dam_timer.start(1.2)
 	$NoDamageTimer.start(1)
@@ -290,20 +290,19 @@ func _on_Hitbox_body_exited(_body):
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
-		updatHealtbar()
 		$Timer.start(0.2)
+		emit_signal("health_updated", health, maxHealth)
 
-func updatHealtbar():
-	var percentageHP = int((float(health) / maxHealth * 100))
-	get_node("healthbar/TextureProgress").value = percentageHP
-	if percentageHP >= 70:
-		get_node("healthbar/TextureProgress").set_tint_progress("14e114")
-	elif percentageHP <= 70 and percentageHP >= 30:
-		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
-	else:
-		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
-		emit_signal("health_updated", health)
-	$Timer.start(2)
+#func updatHealtbar():
+#	var percentageHP = int((float(health) / maxHealth * 100))
+#	get_node("healthbar/TextureProgress").value = percentageHP
+#	if percentageHP >= 70:
+#		get_node("healthbar/TextureProgress").set_tint_progress("14e114")
+#	elif percentageHP <= 70 and percentageHP >= 30:
+#		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
+#	else:
+#		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
+#		emit_signal("health_updated", health)
 
 func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
