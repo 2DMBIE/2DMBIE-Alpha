@@ -4,12 +4,13 @@
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/Greenhouse_tileset.png" type="Texture" id=4]
-[ext_resource path="res://assets/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://assets/sprites/Menus/Button.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/Buttons/OptionsButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/UI/Buttons/ExitButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/Menus/Logo.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/Menus/SmallerButton.png" type="Texture" id=8]
-[ext_resource path="res://assets/TileSets/new_canvasitemmaterial.tres" type="Material" id=9]
+[ext_resource path="res://assets/UI/Buttons/PlayButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/scripts/title_screen.gd" type="Script" id=9]
 [ext_resource path="res://assets/sprites/BloodSplat.png" type="Texture" id=10]
+[ext_resource path="res://assets/UI/Buttons/MenuButton.gd" type="Script" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -388,11 +389,8 @@
 20/shapes = [  ]
 20/z_index = 0
 
-[sub_resource type="DynamicFont" id=2]
-size = 24
-font_data = ExtResource( 5 )
-
-[node name="Node2D" type="Node2D"]
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource( 9 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0.498039, 0.498039, 0.498039, 1 )
@@ -433,83 +431,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button1" type="Button" parent="Buttons"]
-margin_right = 212.0
-margin_bottom = 46.0
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PlayButton" parent="Buttons" instance=ExtResource( 8 )]
 
-[node name="Button1Texture" type="Sprite" parent="Buttons/Button1"]
-position = Vector2( 105, 23 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
+[node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
+anchor_right = 0.3
+margin_top = 63.0
+margin_bottom = 109.0
 
-[node name="Label" type="Label" parent="Buttons/Button1"]
-material = ExtResource( 9 )
-margin_left = 25.0
-margin_top = 4.47731
-margin_right = 74.0
-margin_bottom = 38.4773
-custom_fonts/font = SubResource( 2 )
-text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button2" type="Button" parent="Buttons"]
-margin_top = 64.25
-margin_right = 210.0
-margin_bottom = 110.25
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button2Texture" type="Sprite" parent="Buttons/Button2"]
-position = Vector2( 105, 22.75 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
-
-[node name="Label" type="Label" parent="Buttons/Button2"]
-material = ExtResource( 9 )
-margin_left = 25.0
-margin_top = 6.75002
-margin_right = 117.0
-margin_bottom = 40.75
-custom_fonts/font = SubResource( 2 )
-text = "Settings"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button3" type="Button" parent="Buttons"]
-margin_left = 62.25
-margin_top = 128.5
-margin_right = 210.25
-margin_bottom = 174.5
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button3Texture" type="Sprite" parent="Buttons/Button3"]
-position = Vector2( 74.75, 22.5 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 8 )
-
-[node name="Label" type="Label" parent="Buttons/Button3"]
-material = ExtResource( 9 )
-margin_left = 27.0
-margin_top = 4.47729
-margin_right = 69.0
-margin_bottom = 38.4773
-custom_fonts/font = SubResource( 2 )
-text = "Exit"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ExitButton" parent="." instance=ExtResource( 6 )]
+anchor_left = 0.285
+anchor_right = 0.285
+margin_left = 355.42
+margin_top = 208.0
+margin_right = 505.42
+margin_bottom = 254.0
+script = ExtResource( 11 )
+scene_to_load = "res://assets/scenes/level3.tscn"
 
 [node name="BloodSplat" type="Sprite" parent="."]
 position = Vector2( 231.466, 230.525 )
