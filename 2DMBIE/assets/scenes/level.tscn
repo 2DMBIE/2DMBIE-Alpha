@@ -6,11 +6,12 @@
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/tiles/stairs_tileset_1.png" type="Texture" id=6]
-[ext_resource path="res://assets/scenes/logoblock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=9]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=11]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"

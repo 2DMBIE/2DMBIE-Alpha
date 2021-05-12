@@ -28,7 +28,6 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
-	print($CollisionShape2D.shape.height)
 
 func _physics_process(_delta):
 	update()
@@ -281,11 +280,9 @@ func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
 		takingDamage = true
-		#print(takingDamage)
 
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
-	#print(takingDamage)
 
 func _on_Timer_timeout():
 	if health < maxHealth:

@@ -370,7 +370,7 @@ nodes/shooting/node = SubResource( 53 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=56]
 tracks/0/type = "value"
@@ -751,6 +751,7 @@ height = 28.0385
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
+z_index = 1
 collision_layer = 4
 collision_mask = 2147483710
 script = ExtResource( 17 )
@@ -798,6 +799,12 @@ stream = ExtResource( 48 )
 [node name="mp5_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
 
 [node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]

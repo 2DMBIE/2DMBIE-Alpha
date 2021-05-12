@@ -14,7 +14,7 @@ var tileMap2
 var graph 
 
 # Show debug lines on default
-var showLines = true
+var showLines = false
 
 # Sprite of pathfinding points
 const FACE = preload("res://assets/scenes/face.tscn")
