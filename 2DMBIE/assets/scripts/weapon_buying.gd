@@ -7,8 +7,12 @@ var spriteAK12 = preload("res://assets/sprites/guns/ak12.png")
 var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50.png")
 var spriteArray = [spriteMP5, spriteSPAS12, spriteM4A1, spriteAK12, spriteBARRETT50]
 var colorArray = [Color.limegreen, Color.turquoise, Color.gold, Color.orange, Color.pink]
+var nameArray = ["MP5", "SPAS12", "M4A1", "AK12", "BARRETT50"]
+var priceArray = ["1500", "2500", "3000", "3100", "4000"]
 
 var canBuy = false
+var enoughMoney = false
+onready var score = get_node("../Player/Score")
 onready var gunscript = get_node("../Player/body/chest/torso/gun")
 
 export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 
@@ -33,6 +37,9 @@ func _on_buyarea_body_entered(body):
 		canBuy = true
 		print("player entered the area")
 		print(canBuy)
+#	if Global.score > "1500":
+#		enoughMoney = true
+#		print(enoughMoney)
 
 func _on_buyarea_body_exited(body):
 	if body.is_in_group("player"):
@@ -41,7 +48,9 @@ func _on_buyarea_body_exited(body):
 		print(canBuy)
 
 func _ready():
-	for i in spriteArray.size():
-		if Selected_Weapon == i:
-			$Sprite.set_texture(spriteArray[i])
-			$Light2D.color = colorArray[i]
+	for cum in spriteArray.size():
+		if Selected_Weapon == cum:
+			$Sprite.set_texture(spriteArray[cum])
+			$Light2D.color = colorArray[cum]
+			$WeaponLabelName.text = nameArray[cum]
+			$WeaponLabelPrice.text = priceArray[cum]
