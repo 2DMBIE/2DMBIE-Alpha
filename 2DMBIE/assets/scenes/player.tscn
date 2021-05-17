@@ -34,7 +34,6 @@
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/shooting.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
-[ext_resource path="res://assets/scenes/healthbar.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/animations/crouching-animation.tres" type="Animation" id=36]
 [ext_resource path="res://assets/animations/crouching-idle-animation.tres" type="Animation" id=37]
 [ext_resource path="res://assets/animations/shoot/shoot_minus_30_degrees.tres" type="Animation" id=38]
@@ -774,7 +773,6 @@ z_index = 1
 collision_layer = 4
 collision_mask = 2147483710
 script = ExtResource( 17 )
-maxHealth = 1000.0
 
 [node name="body" type="Position2D" parent="."]
 position = Vector2( 0, 0.563 )
@@ -1178,7 +1176,6 @@ z_index = -3
 texture = ExtResource( 21 )
 
 [node name="Pivot" type="Position2D" parent="."]
-visible = false
 position = Vector2( -5.04538, 3.36359 )
 script = ExtResource( 34 )
 
@@ -1213,12 +1210,6 @@ position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
 shape = SubResource( 62 )
 
-[node name="healthbar" parent="." instance=ExtResource( 35 )]
-margin_left = -64.0
-margin_top = -112.0
-margin_right = -64.0
-margin_bottom = -112.0
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -1231,40 +1222,6 @@ shape = SubResource( 63 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Score" type="Label" parent="."]
-margin_left = -8.0
-margin_top = -128.0
-margin_right = 64.0
-margin_bottom = -114.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "Score:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Ammo" type="Label" parent="."]
-margin_left = 119.396
-margin_top = -57.3647
-margin_right = 191.396
-margin_bottom = -43.3647
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TotalAmmo" type="Label" parent="."]
-margin_left = 119.29
-margin_top = -40.5468
-margin_right = 191.29
-margin_bottom = -26.5468
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]

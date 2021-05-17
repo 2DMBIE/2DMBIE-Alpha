@@ -16,15 +16,19 @@ func _process(_delta):
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
 		Global.Speed = 200
+		Global.enemiesKilled = 0 
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 4
 		Global.Currentwave += 1
-		Global.maxHealth *= 1.05
-		Global.EnemyDamage *= 1.05
+		Global.maxHealth *= 1.25
+		Global.EnemyDamage *= 1.25
 		Global.Speed += 4
+		Global.enemiesKilled = 0 
+		print(Global.maxHealth)
+		print(Global.EnemyDamage)
 #		print("next wave")
 #		print("new enemies")
 #		print(Global.MaxWaveEnemies)

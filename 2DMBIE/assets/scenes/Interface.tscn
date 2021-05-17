@@ -1,0 +1,172 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/healthbar/overlayer.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/healthbar/underlayer.png" type="Texture" id=4]
+[ext_resource path="res://assets/scripts/TextureProgress.gd" type="Script" id=5]
+[ext_resource path="res://assets/scripts/AmmoLabel.gd" type="Script" id=6]
+[ext_resource path="res://assets/scripts/HP bar.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/Interface.gd" type="Script" id=8]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Interface" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -1000, 384 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPbar" type="TextureProgress" parent="Interface"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -192.0
+margin_top = -56.0
+margin_right = -64.0
+margin_bottom = -32.0
+rect_scale = Vector2( 3, 1.5 )
+max_value = 0.0
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 0.145098, 1, 0.188235, 1 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveMeter" type="TextureProgress" parent="Interface"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -256.0
+margin_top = 16.0
+margin_right = -128.0
+margin_bottom = 40.0
+rect_scale = Vector2( 4, 1 )
+texture_under = ExtResource( 4 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 0.380392, 0.0823529, 1, 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WaveLabel" type="Label" parent="Interface"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 40.0
+margin_right = 64.0
+margin_bottom = 64.0
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerScore" type="Label" parent="Interface"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -112.0
+margin_top = 32.0
+margin_right = -24.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0.964706, 0.921569, 0.419608, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scoreboard" type="Label" parent="Interface"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -112.0
+margin_top = 8.0
+margin_right = -24.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Scoreboard"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="scoreboard" type="Panel" parent="Interface/Scoreboard"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -96.0
+margin_top = 16.0
+margin_right = 8.0
+margin_bottom = 48.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLabel" type="Label" parent="Interface"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -72.0
+margin_right = -16.0
+margin_bottom = -40.0
+align = 1
+valign = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalAmmoLabel" type="Label" parent="Interface"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -48.0
+margin_right = -16.0
+margin_bottom = -16.0
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo" type="Label" parent="Interface"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -88.0
+margin_top = -96.0
+margin_right = -16.0
+margin_bottom = -74.0
+text = "AMMO"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ammoLabels" type="Panel" parent="Interface/Ammo"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 2.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
