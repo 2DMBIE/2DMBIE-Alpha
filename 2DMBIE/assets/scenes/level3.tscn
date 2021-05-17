@@ -65,14 +65,14 @@ tile_set = ExtResource( 2 )
 collision_layer = 2
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -524293, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0 )
+tile_data = PoolIntArray( -196594, 0, 0, -131058, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0 )
 
 [node name="Floor" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 collision_layer = 32
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
+tile_data = PoolIntArray( -524293, 0, 0, -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
 
 [node name="cursor" type="Sprite" parent="."]
 z_index = 10
@@ -110,3 +110,5 @@ Selected_Weapon = 4
 [node name="AK12" parent="." instance=ExtResource( 9 )]
 position = Vector2( 663.459, -246.926 )
 Selected_Weapon = 3
+
+[connection signal="play_sound" from="Zombie" to="Zombie/sfx" method="play_sound"]

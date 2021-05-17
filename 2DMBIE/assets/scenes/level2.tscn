@@ -2020,6 +2020,14 @@ tile_set = SubResource( 17 )
 format = 1
 tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -2162663, 47, 0, -2097132, 48, 0, -2097128, 38, 0, -2097127, 38, 2, -2031612, 24, 3, -2031610, 32, 0, -2031609, 31, 0, -2031594, 24, 2, -2031592, 24, 2, -2031590, 24, 2, -2031588, 24, 2, -1769469, 24, 1, -1769467, 24, 1, -1769465, 24, 1, -1769463, 24, 1, -1769457, 20, 0, -1769456, 20, 1, -1769455, 20, 2, -1638353, 45, 0, -1572842, 41, 0, -1507327, 43, 0, -1507325, 23, 3, -1507322, 23, 1, -1507313, 25, 0, -1441777, 10, 0, -1441775, 10, 0, -1441771, 38, 0, -1441770, 38, 2, -1376207, 7, 0, -1376206, 7, 1, -1376205, 7, 1, -1376204, 7, 2, -1245130, 48, 0, -1245116, 47, 0, -1179594, 16, 0, -1179580, 16, 0 )
 
+[node name="OoBbox" type="Area2D" parent="."]
+position = Vector2( 372.658, 231.227 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
+visible = false
+position = Vector2( 1944.59, -1150.39 )
+shape = SubResource( 18 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 316.524, -155.924 )
 
@@ -2071,14 +2079,6 @@ position = Vector2( 4189.75, -868.49 )
 
 [node name="enemyspawnpoint14" parent="Spawnpoints" instance=ExtResource( 10 )]
 position = Vector2( 3357.75, -356.49 )
-
-[node name="OoBbox" type="Area2D" parent="."]
-position = Vector2( 372.658, 231.227 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
-visible = false
-position = Vector2( 1944.59, -1150.39 )
-shape = SubResource( 18 )
 
 [node name="DebugOverlay" parent="." instance=ExtResource( 7 )]
 

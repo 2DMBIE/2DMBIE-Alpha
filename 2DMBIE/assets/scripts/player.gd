@@ -310,7 +310,8 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_OoBbox_area_exited(_area):
-	kill()
+	if !health == 0:
+		kill()
 	
 
 func _on_gun_is_shooting(value):
