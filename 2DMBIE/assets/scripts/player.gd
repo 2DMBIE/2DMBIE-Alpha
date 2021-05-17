@@ -20,6 +20,7 @@ var zombie_dam_timer
 var tileMap
 var mousePos
 var tilePos
+var is_knifing = false
 
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
@@ -28,6 +29,7 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
+	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
 func _physics_process(_delta):
 	update()
@@ -39,6 +41,11 @@ func _physics_process(_delta):
 	$Score.text = str("Score:") + str(Global.Score)
 	#$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
 	#$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
+	if Input.is_action_just_pressed("knife") and not is_knifing:
+		get_node("body/chest/torso/gun").visible = false
+		get_node("body/chest/torso/gun").is_holding_knife = true
+		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+		$AnimationTree.set("parameters/knifing/current", false)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -333,3 +340,10 @@ func set_gun_recoil_sensitivity(value):
 func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
 	$Ammo.text = str(ammo) + '/' + str(maxClipammo) 
 	$TotalAmmo.text = str(totalAmmo)
+
+func on_knife_animation_complete():
+	get_node("body/chest/torso/gun").visible = true
+	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
+	is_knifing = false
+	$AnimationTree.set("parameters/knifing/current", true)
+	get_node("body/chest/torso/gun").is_holding_knife = false

@@ -23,10 +23,12 @@ var valid_aim = true
 
 var current_gun_index
 var canShoot = true # Used for ammo
+var is_holding_knife = false
 
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 
 func _ready():
+	self.visible = true
 	set_gun(3)
 
 func _process(_delta):
@@ -45,7 +47,7 @@ func _process(_delta):
 	_gun = get_current_gun()
 	emit_signal("ammo_ui", _gun.ammo, _gun.maxclipAmmo, _gun.totalAmmo)
 	#als de player wil schieten, en waarnaartoe
-	if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped() and canShoot and _gun.ammo > 0:
+	if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped() and canShoot and _gun.ammo > 0 and not is_holding_knife:
 		bulletDelayTimer.start()
 		var bullet = _gun.getBullet() 
 		
