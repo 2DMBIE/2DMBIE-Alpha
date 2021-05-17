@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/sprites/Lightning/TL_buis.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Lightning/light_cone_TL_feathered_half.png" type="Texture" id=2]
-[ext_resource path="res://assets/scripts/light_broken.gd" type="Script" id=3]
+[ext_resource path="res://assets/scripts/lights/light_broken.gd" type="Script" id=3]
+
 
 [node name="TL_buis_broken" type="Sprite"]
 scale = Vector2( 2.32882, 1.74808 )
