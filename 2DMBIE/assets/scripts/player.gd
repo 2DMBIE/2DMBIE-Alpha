@@ -8,7 +8,7 @@ const WALK_ACCELERATION = 25 #old 20
 const RUN_ACCELERATION = 20
 const MAX_WALK_SPEED = 130 #old 110 
 const MAX_RUN_SPEED = 330
-const JUMP_HEIGHT = -550
+const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 
 var motion = Vector2()
@@ -16,13 +16,29 @@ var is_running = false
 var crouch_idle = false
 var facing = "right"
 var collision
+var zombie_dam_timer
+var tileMap
+var mousePos
+var tilePos
 
+# No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
+	zombie_dam_timer = Timer.new()
+	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
+	add_child(zombie_dam_timer)
+	tileMap = get_node("../Blocks")
 
 func _physics_process(_delta):
+	update()
 	motion.y += GRAVITY
 	var friction = false
+	if tileMap:
+		mousePos = get_global_mouse_position()
+		tilePos = tileMap.world_to_map(mousePos)
+	$Score.text = str("Score:") + str(Global.Score)
+	#$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
+	#$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -34,6 +50,8 @@ func _physics_process(_delta):
 				motion.x = 50
 			if (aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
@@ -42,6 +60,8 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("left")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "right") && (motion.x < 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
@@ -56,6 +76,8 @@ func _physics_process(_delta):
 			motion.x = min(motion.x, MAX_RUN_SPEED)
 			if(aim("running") == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		elif is_running == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
@@ -64,6 +86,8 @@ func _physics_process(_delta):
 			if (aim("walking") == false):
 				direction("right")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
+				$AnimationTree.set("parameters/aim2/blend_position", 0)
+				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 			if (get_direction() == "left") && (motion.x > 0):
 				$AnimationTree.set("parameters/moonwalking/current", 0)
 			else: 
@@ -71,6 +95,8 @@ func _physics_process(_delta):
 	elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if (aim("walking") == false): 
 			$AnimationTree.set("parameters/aim/blend_position", 0)
+			$AnimationTree.set("parameters/aim2/blend_position", 0)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
 		friction = true
 		walk_idle_transition()
 		motion.x = lerp(motion.x, 0, 0.3)
@@ -111,16 +137,11 @@ func _physics_process(_delta):
 		scale.y = lerp(scale.y, 1, .1)
 		
 			
-	for i in get_slide_count():
-		collision = get_slide_collision(i).collider.name
-#		if collision.collider.name == "Stairs" and is_on_floor() and not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-#			GRAVITY = 0
-#		else:
-#			GRAVITY = 20
 		
 	motion = move_and_slide(motion, UP)
 	pass
-	
+
+
 
 func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):
@@ -189,7 +210,9 @@ func aim(string):
 		
 		
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
-			$AnimationTree.set("parameters/aim/blend_position", angle_degrees)
+			$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
+			$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
 			if (walking) || !is_on_floor(): 
 				direction("left")
 			return true
@@ -197,12 +220,16 @@ func aim(string):
 			var x = 90-angle_degrees
 			x = 90+x 
 			$AnimationTree.set("parameters/aim/blend_position", x)
+			$AnimationTree.set("parameters/aim2/blend_position", x)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", x)
 			if (walking) || !is_on_floor(): 
 				direction("right")
 			return true
 		elif (angle_degrees > -180) && (angle_degrees < -90):
 			var y = -180-angle_degrees
 			$AnimationTree.set("parameters/aim/blend_position", y)
+			$AnimationTree.set("parameters/aim2/blend_position", y)
+			$AnimationTree.set("parameters/shoot_angle/blend_position", y)
 			if (walking) || !is_on_floor(): 
 				direction("right")
 			return true
@@ -212,11 +239,21 @@ func aim(string):
 #health system
 export (float) var maxHealth = 1200
 
-onready var EnemyDamage = get_node("../Zombie").enemyDamage
+onready var EnemyDamage = Global.EnemyDamage
 onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
 
+func kill():
+	var _x = get_tree().reload_current_scene()
+	Global.Score = 0
+	Global.MaxWaveEnemies = 4
+	Global.CurrentWaveEnemies = 0
+	Global.Currentwave = 1
+	Global.maxHealth = 500
+	Global.EnemyDamage = 300
+	Global.Speed = 200
+	
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
@@ -224,22 +261,34 @@ func setHealth(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			queue_free()
+			kill()
 
-func takenDamage(enemyDamage):
-	setHealth(health - enemyDamage)
+var takingDamage = false
+
+func takenDamage(_enemyDamage):
+	setHealth(health - EnemyDamage)
 	updatHealtbar()
 	$Timer.start(10)
+	zombie_dam_timer.start(1.2)
+	$NoDamageTimer.start(1)
 
-func _on_Timer_timeout():
-	if health < maxHealth:
-		health += 25
-	updatHealtbar()
-	$Timer.start(0.2)
+func _zombie_dam_timout():
+	if takingDamage == true:
+		takenDamage(EnemyDamage)
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
-		$NoDamageTimer.start(1)
+		takingDamage = true
+
+func _on_Hitbox_body_exited(_body):
+	takingDamage = false
+
+func _on_Timer_timeout():
+	if health < maxHealth:
+		health += 25
+		updatHealtbar()
+		$Timer.start(0.2)
 
 func updatHealtbar():
 	var percentageHP = int((float(health) / maxHealth * 100))
@@ -253,11 +302,34 @@ func updatHealtbar():
 		emit_signal("health_updated", health)
 	$Timer.start(2)
 
-func _on_GroundChecker_body_exited(_body):
+func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
 func crouch_idle_transition(value):
 	crouch_idle = value
-	#print(crouch_idle)
 
+func _on_OoBbox_area_exited(_area):
+	kill()
 	
+
+func _on_gun_is_shooting(value):
+	$AnimationTree.set("parameters/shooting/active", value)
+
+func _on_no_aim_shoot(value):
+	$AnimationTree.set("parameters/fixed_aim/current", value)
+
+func _draw():
+	if tileMap:
+		if get_node("/root/Main/Pathfinder").showLines:
+			var postA = $ShootVector.position
+			var postB = get_local_mouse_position()
+			draw_line(postA, postB, Color(255,0,0),1)
+		else:
+			pass
+
+func set_gun_recoil_sensitivity(value):
+	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
+
+func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
+	$Ammo.text = str(ammo) + '/' + str(maxClipammo) 
+	$TotalAmmo.text = str(totalAmmo)

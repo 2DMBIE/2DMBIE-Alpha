@@ -1,267 +1,427 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=59 format=2]
 
-[ext_resource path="res://assets/sprites/zombie1/torso.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/zombie1/neck.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/zombie1/head0-sheet.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/zombie1/bottom.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/zombie1/thigh_right.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/zombie1/thigh_left.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/zombie1/hand_left.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/zombie1/lowerleg_right.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/zombie1/lowerarm_right.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/zombie1/lowerarm_left.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/zombie1/foot_right.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/zombie1/hand_right.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/zombie1/upperarm_right.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/zombie1/foot_left.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/zombie1/lowerleg_left.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/zombie1/upperarm_left.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/Jump1-sheet.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/groundsprites.png" type="Texture" id=18]
-[ext_resource path="res://assets/animations/zombie-jump-animation.tres" type="Animation" id=19]
-[ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=20]
-[ext_resource path="res://assets/animations/zombie-walk-animation.tres" type="Animation" id=21]
+[ext_resource path="res://assets/sprites/zombie/torso.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/zombie/bottom.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/zombie/thigh_right.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/zombie/foot_left.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/zombie/thigh_left.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/zombie/lowerarm_left.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/zombie/foot_right.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/zombie/hand_right.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/zombie/lowerarm_right.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/zombie/hand_left.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/zombie/upperarm_right.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/zombie/upperarm_left.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/zombie/head_sheet.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/zombie/lowerleg_left.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/zombie/lowerleg_right.png" type="Texture" id=15]
+[ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=16]
+[ext_resource path="res://assets/animations/zombie-jump.tres" type="Animation" id=19]
+[ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=20]
+[ext_resource path="res://assets/sounds/zombie/z_hurt2.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/sounds/zombie/z_hurt4.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sounds/zombie/z_hurt1.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/sounds/zombie/z_hurt3.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sounds/zombie/z_growl1.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/sounds/zombie/z_growl2.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/sounds/zombie/z_growl3.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/sounds/zombie/z_growl4.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/sounds/zombie/z_growl5.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sounds/zombie/z_footstep4.wav" type="AudioStream" id=32]
+[ext_resource path="res://assets/sounds/zombie/z_footstep5.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/animations/zombie_walk/walk3.tres" type="Animation" id=34]
+[ext_resource path="res://assets/sounds/zombie/z_footstep3.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sounds/zombie/z_footstep6.wav" type="AudioStream" id=36]
+[ext_resource path="res://assets/sounds/zombie/z_footstep2.wav" type="AudioStream" id=37]
+[ext_resource path="res://assets/animations/zombie_walk/walk2.tres" type="Animation" id=38]
+[ext_resource path="res://assets/animations/zombie_walk/walk1.tres" type="Animation" id=39]
+[ext_resource path="res://assets/animations/zombie_walk/walk4.tres" type="Animation" id=40]
+[ext_resource path="res://assets/animations/zombie_walk/walk7.tres" type="Animation" id=41]
+[ext_resource path="res://assets/animations/zombie_walk/walk6.tres" type="Animation" id=42]
+[ext_resource path="res://assets/animations/zombie_walk/walk10.tres" type="Animation" id=43]
+[ext_resource path="res://assets/animations/zombie_walk/walk9.tres" type="Animation" id=44]
+[ext_resource path="res://assets/animations/zombie_walk/walk5.tres" type="Animation" id=45]
+[ext_resource path="res://assets/animations/zombie_walk/walk8.tres" type="Animation" id=46]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.75
-height = 130.446
+radius = 24.0
+height = 95.0
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "jump"
+
+[sub_resource type="AnimationNodeTransition" id=3]
+input_count = 2
+input_0/name = "true"
+input_0/auto_advance = false
+input_1/name = "false"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=4]
+input_count = 10
+input_0/name = "walk1"
+input_0/auto_advance = false
+input_1/name = "walk2"
+input_1/auto_advance = false
+input_2/name = "walk3"
+input_2/auto_advance = false
+input_3/name = "walk4"
+input_3/auto_advance = false
+input_4/name = "walk5"
+input_4/auto_advance = false
+input_5/name = "walk6"
+input_5/auto_advance = false
+input_6/name = "walk7"
+input_6/auto_advance = false
+input_7/name = "walk8"
+input_7/auto_advance = false
+input_8/name = "walk9"
+input_8/auto_advance = false
+input_9/name = "walk10"
+input_9/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "walk1"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "walk10"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "walk2"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "walk3"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "walk4"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "walk5"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "walk6"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "walk7"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "walk8"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "walk9"
+
+[sub_resource type="AnimationNodeBlendTree" id=15]
+graph_offset = Vector2( -1085.2, 380.75 )
+"nodes/Animation 2/node" = SubResource( 2 )
+"nodes/Animation 2/position" = Vector2( -360, 180 )
+nodes/in_air/node = SubResource( 3 )
+nodes/in_air/position = Vector2( -140, 220 )
+nodes/output/position = Vector2( 280, 220 )
+nodes/walk/node = SubResource( 4 )
+nodes/walk/position = Vector2( -340, 340 )
+nodes/walk1/node = SubResource( 5 )
+nodes/walk1/position = Vector2( -720, 280 )
+nodes/walk10/node = SubResource( 6 )
+nodes/walk10/position = Vector2( -580, 680 )
+nodes/walk2/node = SubResource( 7 )
+nodes/walk2/position = Vector2( -720, 380 )
+nodes/walk3/node = SubResource( 8 )
+nodes/walk3/position = Vector2( -720, 480 )
+nodes/walk4/node = SubResource( 9 )
+nodes/walk4/position = Vector2( -720, 580 )
+nodes/walk5/node = SubResource( 10 )
+nodes/walk5/position = Vector2( -720, 680 )
+nodes/walk6/node = SubResource( 11 )
+nodes/walk6/position = Vector2( -580, 280 )
+nodes/walk7/node = SubResource( 12 )
+nodes/walk7/position = Vector2( -580, 380 )
+nodes/walk8/node = SubResource( 13 )
+nodes/walk8/position = Vector2( -580, 480 )
+nodes/walk9/node = SubResource( 14 )
+nodes/walk9/position = Vector2( -580, 580 )
+node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
+
+[sub_resource type="RectangleShape2D" id=16]
 
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
 ]]
-scale = Vector2( 0.9, 0.9 )
+light_mask = -2147483647
+z_index = 10
 collision_layer = 8
-collision_mask = 2147483658
-script = ExtResource( 20 )
+collision_mask = 42
+script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 7.517 )
-z_index = 1
+position = Vector2( 0, 20 )
+z_as_relative = false
 shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, -1.44692 )
+position = Vector2( 0, 9.183 )
 
 [node name="torso" type="Sprite" parent="body"]
-position = Vector2( -6.40587, 24.2751 )
-rotation = 0.244426
-z_index = 2
+position = Vector2( -0.376, 21.439 )
 texture = ExtResource( 1 )
-centered = false
-offset = Vector2( -17.3491, -40.9961 )
+offset = Vector2( 0.111326, -30.5612 )
 __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="neck" type="Sprite" parent="body/torso"]
-position = Vector2( -0.108904, -32.3819 )
-rotation = 0.470877
-z_index = 2
-z_as_relative = false
-texture = ExtResource( 2 )
-offset = Vector2( 0, -4.622 )
+[node name="neck" type="Position2D" parent="body/torso"]
+position = Vector2( -2.9952, -50.1697 )
+rotation = 12.592
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
 }
 
 [node name="head" type="Sprite" parent="body/torso/neck"]
-position = Vector2( -5.32017, -27.8868 )
-rotation = 0.174906
-z_index = 2
-z_as_relative = false
-texture = ExtResource( 3 )
+position = Vector2( 0.840622, -16.5168 )
+rotation = 0.458847
+z_index = 6
+texture = ExtResource( 13 )
 hframes = 6
-frame = 3
 __meta__ = {
-"_edit_bone_": true
+"_edit_bone_": true,
+"_edit_ik_": true
 }
 
 [node name="upperarm_right" type="Sprite" parent="body/torso"]
-position = Vector2( -13.2198, -27.8985 )
-rotation = -0.262996
-z_index = 3
-z_as_relative = false
-texture = ExtResource( 13 )
-offset = Vector2( -6.91949, 10.002 )
+position = Vector2( -11.4567, -37.1691 )
+rotation = -12.3054
+z_index = 5
+texture = ExtResource( 11 )
+offset = Vector2( -4.19849, 8.0066 )
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
 }
 
 [node name="lowerarm_right" type="Sprite" parent="body/torso/upperarm_right"]
-position = Vector2( -11.8561, 20.0499 )
-rotation = 0.00394032
-z_index = 2
-z_as_relative = false
+position = Vector2( -9.94557, 20.6394 )
+rotation = -0.0339336
+z_index = 1
 texture = ExtResource( 9 )
-offset = Vector2( -0.269157, 9.44283 )
+offset = Vector2( -0.891537, 11.3118 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="hand_right" type="Sprite" parent="body/torso/upperarm_right/lowerarm_right"]
-position = Vector2( -0.441715, 18.2055 )
-rotation = 0.0621884
-z_index = 4
-z_as_relative = false
-texture = ExtResource( 12 )
-offset = Vector2( 0.205971, 5.63769 )
+position = Vector2( -0.994637, 21.3581 )
+rotation = -0.423017
+z_index = 1
+texture = ExtResource( 8 )
+offset = Vector2( -2.48174, 6.77893 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="upperarm_left" type="Sprite" parent="body/torso"]
-position = Vector2( 13.9209, -30.6332 )
-rotation = -0.00306864
-z_index = 1
-z_as_relative = false
-texture = ExtResource( 16 )
-offset = Vector2( 6.18605, 11.6663 )
+position = Vector2( 16.8239, -36.2326 )
+rotation = -0.0136939
+z_index = -1
+texture = ExtResource( 12 )
+offset = Vector2( 5.52325, 11.3117 )
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
 }
 
 [node name="lowerarm_left" type="Sprite" parent="body/torso/upperarm_left"]
-position = Vector2( 11.7178, 21.0877 )
-rotation = -0.0954634
-z_as_relative = false
-texture = ExtResource( 10 )
-offset = Vector2( 0.266441, 8.39091 )
+position = Vector2( 11.7144, 20.0409 )
+rotation = 0.153028
+z_index = -3
+texture = ExtResource( 6 )
+offset = Vector2( 0.764465, 13.8002 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="hand_left" type="Sprite" parent="body/torso/upperarm_left/lowerarm_left"]
-position = Vector2( 3.40329, 20.045 )
-rotation = 0.0190524
-texture = ExtResource( 7 )
-offset = Vector2( -0.767174, 4.62021 )
+position = Vector2( 1.30943, 23.1128 )
+rotation = -6.53778
+texture = ExtResource( 10 )
+offset = Vector2( 0.209938, 8.42856 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="bottom" type="Sprite" parent="body"]
-position = Vector2( -6.18813, 30.5218 )
-rotation = 0.0627948
-z_index = -8
-z_as_relative = false
-texture = ExtResource( 4 )
-offset = Vector2( 0.404775, -2.44618 )
+position = Vector2( -0.233067, 18.4983 )
+z_index = -1
+texture = ExtResource( 2 )
+offset = Vector2( -0.537167, -0.127419 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_right" type="Sprite" parent="body/bottom"]
-position = Vector2( -5.43374, -5.80467 )
-rotation = -0.417261
+position = Vector2( -7.36461, 1.56818 )
 z_index = 1
-z_as_relative = false
-texture = ExtResource( 5 )
-offset = Vector2( -4.62079, 13.9636 )
+texture = ExtResource( 3 )
+offset = Vector2( -2.14771, 15.2502 )
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
 }
 
 [node name="lowerleg_right" type="Sprite" parent="body/bottom/thigh_right"]
-position = Vector2( -4.70214, 29.769 )
-rotation = 1.35813
-z_as_relative = false
-texture = ExtResource( 8 )
-offset = Vector2( 0.00772858, 8.20511 )
+position = Vector2( -2.54703, 29.6623 )
+z_index = -2
+texture = ExtResource( 15 )
+offset = Vector2( -0.103652, 9.07905 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="foot_right" type="Sprite" parent="body/bottom/thigh_right/lowerleg_right"]
-position = Vector2( -0.622742, 20.0899 )
-rotation = -0.00199764
-z_as_relative = false
-texture = ExtResource( 11 )
-offset = Vector2( 8.76716, 0.0364609 )
+position = Vector2( -1.76029, 22.7582 )
+z_index = 2
+texture = ExtResource( 7 )
+offset = Vector2( 6.15741, 1.80693 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="toes_right" type="Position2D" parent="body/bottom/thigh_right/lowerleg_right/foot_right"]
-position = Vector2( 16.6095, 3.35193 )
+position = Vector2( 16.6647, 7.12737 )
+z_as_relative = false
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_left" type="Sprite" parent="body/bottom"]
-position = Vector2( 6.93864, -1.82587 )
-rotation = 0.128562
-z_index = -1
-z_as_relative = false
-texture = ExtResource( 6 )
-offset = Vector2( 5.12841, 12.6797 )
+position = Vector2( 4.20723, 1.0215 )
+rotation = -0.490242
+z_index = -6
+texture = ExtResource( 5 )
+offset = Vector2( 4.80299, 13.912 )
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
 }
 
 [node name="lowerleg_left" type="Sprite" parent="body/bottom/thigh_left"]
-position = Vector2( 7.16263, 26.6559 )
-rotation = -0.0757099
-z_index = -3
-texture = ExtResource( 15 )
-offset = Vector2( 0.258537, 9.16657 )
+position = Vector2( 2.779, 30.1395 )
+rotation = 0.578753
+z_index = -2
+texture = ExtResource( 14 )
+offset = Vector2( 2.52262, 9.24992 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="foot_left" type="Sprite" parent="body/bottom/thigh_left/lowerleg_left"]
-position = Vector2( 0.90991, 19.8543 )
-rotation = -0.0545184
-texture = ExtResource( 14 )
-offset = Vector2( 6.89845, -0.48394 )
+position = Vector2( 1.8254, 22.3106 )
+rotation = 0.117383
+z_index = 1
+texture = ExtResource( 4 )
+offset = Vector2( 7.17607, 2.32299 )
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="toes_left" type="Position2D" parent="body/bottom/thigh_left/lowerleg_left/foot_left"]
-position = Vector2( 17.5837, 2.74501 )
+position = Vector2( 17.7467, 7.64104 )
+z_index = -8
+z_as_relative = false
 __meta__ = {
 "_edit_bone_": true
 }
 
-[node name="Jump1-sheet" type="Sprite" parent="."]
-visible = false
-position = Vector2( 11.203, 46.073 )
-scale = Vector2( 0.388, 0.388 )
-z_index = -12
-texture = ExtResource( 17 )
-hframes = 7
-frame = 1
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+[node name="sfx" type="Node2D" parent="."]
+script = ExtResource( 20 )
 
-[node name="Jump1-sheet2" type="Sprite" parent="."]
-visible = false
-position = Vector2( 110, 24.449 )
-scale = Vector2( 0.388, 0.388 )
-z_index = -12
-texture = ExtResource( 17 )
-hframes = 7
-frame = 1
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+[node name="hurt" type="Node2D" parent="sfx"]
+
+[node name="hurt1" type="AudioStreamPlayer2D" parent="sfx/hurt"]
+stream = ExtResource( 24 )
+volume_db = 8.0
+
+[node name="hurt3" type="AudioStreamPlayer2D" parent="sfx/hurt"]
+stream = ExtResource( 25 )
+volume_db = 8.0
+
+[node name="hurt2" type="AudioStreamPlayer2D" parent="sfx/hurt"]
+stream = ExtResource( 22 )
+volume_db = 8.0
+
+[node name="hurt4" type="AudioStreamPlayer2D" parent="sfx/hurt"]
+stream = ExtResource( 23 )
+volume_db = 8.0
+
+[node name="growl" type="Node2D" parent="sfx"]
+
+[node name="growl1" type="AudioStreamPlayer2D" parent="sfx/growl"]
+stream = ExtResource( 26 )
+volume_db = 4.0
+
+[node name="growl2" type="AudioStreamPlayer2D" parent="sfx/growl"]
+stream = ExtResource( 27 )
+volume_db = 4.0
+
+[node name="growl3" type="AudioStreamPlayer2D" parent="sfx/growl"]
+stream = ExtResource( 28 )
+volume_db = 4.0
+
+[node name="growl4" type="AudioStreamPlayer2D" parent="sfx/growl"]
+stream = ExtResource( 29 )
+volume_db = 4.0
+
+[node name="growl5" type="AudioStreamPlayer2D" parent="sfx/growl"]
+stream = ExtResource( 30 )
+volume_db = 4.0
+
+[node name="footstep" type="Node2D" parent="sfx"]
+
+[node name="footstep1" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+stream = ExtResource( 35 )
+
+[node name="footstep2" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+position = Vector2( 0, 1 )
+stream = ExtResource( 37 )
+
+[node name="footstep3" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+stream = ExtResource( 35 )
+
+[node name="footstep4" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+stream = ExtResource( 32 )
+
+[node name="footstep5" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+stream = ExtResource( 33 )
+
+[node name="footstep6" type="AudioStreamPlayer2D" parent="sfx/footstep"]
+stream = ExtResource( 36 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/jump = ExtResource( 19 )
-anims/walk = ExtResource( 21 )
+anims/walk1 = ExtResource( 39 )
+anims/walk10 = ExtResource( 43 )
+anims/walk2 = ExtResource( 38 )
+anims/walk3 = ExtResource( 34 )
+anims/walk4 = ExtResource( 40 )
+anims/walk5 = ExtResource( 45 )
+anims/walk6 = ExtResource( 42 )
+anims/walk7 = ExtResource( 41 )
+anims/walk8 = ExtResource( 46 )
+anims/walk9 = ExtResource( 44 )
 
-[node name="groundsprites" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0.329412, 0.298039, 0.298039, 1 )
-position = Vector2( 10.0742, 85.1594 )
-scale = Vector2( 1.52145, 0.15988 )
-texture = ExtResource( 18 )
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 15 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/in_air/current = 1
+parameters/walk/current = 6
+
+[node name="GroundChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
+position = Vector2( 0, 76 )
+scale = Vector2( 3, 1 )
+z_as_relative = false
+shape = SubResource( 16 )
+
+[connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]

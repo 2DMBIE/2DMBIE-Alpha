@@ -1,50 +1,53 @@
-extends Sprite
+class_name Gun
 
-var plBullet := preload("res://assets/scenes/bullet.tscn")
-var muzzleflash := preload("res://assets/scenes/muzzleflash.tscn")
+# Member Variables
+var name: String
+var offset: Vector2
+var scale: Vector2
+var texture: Texture
+var bulletpoint: Vector2
+var bulletdelay: float
 
-#onready variables
-onready var bulletDelayTimer := $BulletDelayTimer
+var _bullet
+var _muzzleflash: PackedScene
+var camera_shake: float
+var camera_decay: float
 
-#bullet variables
-export var bullet_delay: float = .2 
+var ammo: int
+var maxclipAmmo: int
+var totalAmmo: int
 
-var mouse_position
-var bulletpoint_position
-var mouse_direction
-var bullet_direction
-var valid_aim = true
+var gun_recoil_sensitivity: float
+#var muzzle_flash:
+#Gunshake Ex. Shotgun: Heavy, m4a1: 
 
-func _process(_delta):
-	#als de player wil schieten, en waarnaartoe
-	if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped():
-		bulletDelayTimer.start(bullet_delay)
-		var bullet := plBullet.instance()
-		mouse_position = get_global_mouse_position()
-		bulletpoint_position = $BulletPoint.get_global_position()
-		bullet.position = bulletpoint_position
-		if Input.is_action_pressed("aim") and valid_aim:
-			bullet.rotation = (mouse_position - bullet.position).angle()
-			mouse_direction = bullet.position.direction_to(mouse_position).normalized()
-			bullet.set_direction(mouse_direction)
-			var muzzleflashInstance = muzzleflash.instance()
-			$BulletPoint.add_child(muzzleflashInstance)
-			get_tree().current_scene.add_child(bullet)
-		elif not Input.is_action_pressed("aim"):
-			var facingDir = 10
-			var facing = get_node("../../../../").facing
-			if facing == "right":
-				facingDir = 10
-			elif facing == "left":
-				facingDir = -10
-			bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
-		
-			var muzzleflashInstance = muzzleflash.instance()
-			$BulletPoint.add_child(muzzleflashInstance)
-			get_tree().current_scene.add_child(bullet)
+# Class Constructor
+func _init(gun_name = "gun", gun_offset = Vector2(0,0), gun_scale = Vector2(1,1), 
+path = "", bpoint = Vector2(0,0), bdelay = float(2), bullet_i = Bullet.new(float(500), float(750), "res://assets/scenes/bullet.tscn"), 
+muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
+ c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1), g_maxclipAmmo = int(44), g_totalAmmo = int(300)):
+	
+	name = gun_name # The name of the gun.
+	offset = gun_offset # The position of the gun.
+	scale = gun_scale # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
+	if not path.empty():
+		texture = load(path) # The path of the sprite gun.
 
-func _on_aimzone_exited():
-	valid_aim = true
+	bulletpoint = bpoint # Position of the bulletpoint.
+	bulletdelay = bdelay # The delay between each bullet. [0.1, 0.2]
 
-func _on_aimzone_entered():
-	valid_aim = false
+	_bullet = bullet_i # The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path, bullet_penetration [1,4])
+	_muzzleflash = muzzleflash # The scene of the muzzleflash
+	
+	camera_shake = c_shake # Camera shake strength [0, 1] Higher = stronger.
+	camera_decay = c_decay # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
+	gun_recoil_sensitivity = g_recoil # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
+	
+	maxclipAmmo = g_maxclipAmmo # How much bullets are in one magazine.
+	totalAmmo = g_totalAmmo # Total ammo which comes with each gun.
+
+func getBullet():
+	return _bullet.getBullet()
+
+func getMuzzleFlash():
+	return _muzzleflash.instance()

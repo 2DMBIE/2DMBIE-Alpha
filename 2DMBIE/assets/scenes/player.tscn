@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/sprites/agent1/torso.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/agent1/head.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/agent1/lowerarm_left.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/agent1/gun.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/guns/barrett50.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/agent1/foot_right.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/agent1/thigh_right.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/agent1/upperarm_left.png" type="Texture" id=12]
@@ -32,11 +32,46 @@
 [ext_resource path="res://assets/animations/aim/aim_minus_45_degrees.tres" type="Animation" id=30]
 [ext_resource path="res://assets/animations/walk-animation.tres" type="Animation" id=31]
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
-[ext_resource path="res://assets/scripts/gun.gd" type="Script" id=33]
+[ext_resource path="res://assets/scripts/shooting.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
 [ext_resource path="res://assets/scenes/healthbar.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/animations/crouching-animation.tres" type="Animation" id=36]
 [ext_resource path="res://assets/animations/crouching-idle-animation.tres" type="Animation" id=37]
+[ext_resource path="res://assets/animations/shoot/shoot_minus_30_degrees.tres" type="Animation" id=38]
+[ext_resource path="res://assets/animations/shoot/shoot_90_degrees.tres" type="Animation" id=39]
+[ext_resource path="res://assets/animations/shoot/shoot_30_degrees.tres" type="Animation" id=40]
+[ext_resource path="res://assets/animations/shoot/shoot_45_degrees.tres" type="Animation" id=41]
+[ext_resource path="res://assets/animations/shoot/shoot_60_degrees.tres" type="Animation" id=42]
+[ext_resource path="res://assets/animations/shoot/shoot_0_degrees.tres" type="Animation" id=43]
+[ext_resource path="res://assets/animations/shoot/shoot_minus_90_degrees.tres" type="Animation" id=44]
+[ext_resource path="res://assets/animations/shoot/shoot_minus_60_degrees.tres" type="Animation" id=45]
+[ext_resource path="res://assets/animations/shoot/no_aim_shoot.tres" type="Animation" id=46]
+[ext_resource path="res://assets/scripts/shakecamera2d.gd" type="Script" id=47]
+[ext_resource path="res://assets/sounds/mp5/mp5_draw.wav" type="AudioStream" id=48]
+[ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=49]
+[ext_resource path="res://assets/sounds/spas12/spas12_draw.wav" type="AudioStream" id=50]
+[ext_resource path="res://assets/sounds/spas12/spas12_shot2.wav" type="AudioStream" id=51]
+[ext_resource path="res://assets/sounds/spas12/spas12_shot1.wav" type="AudioStream" id=52]
+[ext_resource path="res://assets/sounds/mp5/mp5_single_shot3.wav" type="AudioStream" id=53]
+[ext_resource path="res://assets/sounds/spas12/spas12_shot3.wav" type="AudioStream" id=54]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_singleshot1.wav" type="AudioStream" id=55]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_singleshot2.wav" type="AudioStream" id=56]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_singleshot3.wav" type="AudioStream" id=57]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_draw.wav" type="AudioStream" id=58]
+[ext_resource path="res://assets/sounds/ak12/ak12_singleshot1.wav" type="AudioStream" id=59]
+[ext_resource path="res://assets/sounds/ak12/ak12_draw2.wav" type="AudioStream" id=60]
+[ext_resource path="res://assets/sounds/ak12/ak12_singleshot2.wav" type="AudioStream" id=61]
+[ext_resource path="res://assets/sounds/ak12/ak12_draw1.wav" type="AudioStream" id=62]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot1.wav" type="AudioStream" id=63]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot3.wav" type="AudioStream" id=64]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot2.wav" type="AudioStream" id=65]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot4.wav" type="AudioStream" id=66]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_draw.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_reload.wav" type="AudioStream" id=68]
+[ext_resource path="res://assets/sounds/spas12/spas12_reload.wav" type="AudioStream" id=69]
+[ext_resource path="res://assets/sounds/mp5/mp5_reload.wav" type="AudioStream" id=70]
+[ext_resource path="res://assets/sounds/ak12/ak12_reload.wav" type="AudioStream" id=71]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -70,106 +105,223 @@ animation = "crouching"
 animation = "crouching-idle"
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "idle"
+animation = "no_aim_shoot"
 
-[sub_resource type="AnimationNodeTimeScale" id=12]
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "idle"
 
 [sub_resource type="AnimationNodeTimeScale" id=13]
 
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "aim_minus_90_degrees"
+[sub_resource type="AnimationNodeTimeScale" id=14]
 
 [sub_resource type="AnimationNodeAnimation" id=15]
-animation = "aim_90_degrees"
+animation = "aim_minus_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "aim_45_degrees"
+animation = "aim_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=17]
-animation = "aim_60_degrees"
+animation = "aim_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
-animation = "aim_minus_30_degrees"
+animation = "aim_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=19]
-animation = "aim_minus_45_degrees"
+animation = "aim_minus_30_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "aim_minus_60_degrees"
+animation = "aim_minus_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=21]
-animation = "aim_0_degrees"
+animation = "aim_minus_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=22]
+animation = "aim_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=23]
-blend_point_0/node = SubResource( 14 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=24]
+blend_point_0/node = SubResource( 15 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 15 )
+blend_point_1/node = SubResource( 16 )
 blend_point_1/pos = 90.0
-blend_point_2/node = SubResource( 16 )
+blend_point_2/node = SubResource( 17 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 17 )
+blend_point_3/node = SubResource( 18 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 18 )
+blend_point_4/node = SubResource( 19 )
 blend_point_4/pos = -30.0
-blend_point_5/node = SubResource( 19 )
+blend_point_5/node = SubResource( 20 )
 blend_point_5/pos = -45.0
-blend_point_6/node = SubResource( 20 )
+blend_point_6/node = SubResource( 21 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 21 )
+blend_point_7/node = SubResource( 22 )
 blend_point_7/pos = 0.0
-blend_point_8/node = SubResource( 22 )
+blend_point_8/node = SubResource( 23 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 
-[sub_resource type="AnimationNodeTransition" id=24]
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "aim_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "aim_30_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "aim_45_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "aim_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "aim_90_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "aim_minus_90_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "aim_minus_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "aim_minus_30_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "aim_minus_45_degrees"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=34]
+blend_point_0/node = SubResource( 25 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 26 )
+blend_point_1/pos = 30.0
+blend_point_2/node = SubResource( 27 )
+blend_point_2/pos = 45.0
+blend_point_3/node = SubResource( 28 )
+blend_point_3/pos = 60.0
+blend_point_4/node = SubResource( 29 )
+blend_point_4/pos = 90.0
+blend_point_5/node = SubResource( 30 )
+blend_point_5/pos = -90.0
+blend_point_6/node = SubResource( 31 )
+blend_point_6/pos = -60.0
+blend_point_7/node = SubResource( 32 )
+blend_point_7/pos = -30.0
+blend_point_8/node = SubResource( 33 )
+blend_point_8/pos = -45.0
+min_space = -90.0
+max_space = 90.0
+
+[sub_resource type="AnimationNodeTransition" id=35]
 input_count = 2
 input_0/name = "aiming"
 input_0/auto_advance = false
 input_1/name = "not_aiming"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=25]
+[sub_resource type="AnimationNodeBlend2" id=36]
 
-[sub_resource type="AnimationNodeTransition" id=26]
+[sub_resource type="AnimationNodeTransition" id=37]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=27]
+[sub_resource type="AnimationNodeTransition" id=38]
+input_count = 2
+input_0/name = "true"
+input_0/auto_advance = false
+input_1/name = "false"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAdd2" id=39]
+
+[sub_resource type="AnimationNodeTransition" id=40]
 input_count = 2
 input_0/name = "ground"
 input_0/auto_advance = false
 input_1/name = "air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=28]
+[sub_resource type="AnimationNodeTransition" id=41]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=29]
+[sub_resource type="AnimationNodeTransition" id=42]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=30]
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "shoot_minus_90_degrees"
 
-[sub_resource type="AnimationNodeBlendTree" id=31]
-graph_offset = Vector2( -390, -395 )
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "shoot_minus_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "shoot_minus_45_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "shoot_minus_30_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "shoot_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "shoot_90_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "shoot_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "shoot_45_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "shoot_30_degrees"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=52]
+blend_point_0/node = SubResource( 43 )
+blend_point_0/pos = -90.0
+blend_point_1/node = SubResource( 44 )
+blend_point_1/pos = -60.0
+blend_point_2/node = SubResource( 45 )
+blend_point_2/pos = -45.0
+blend_point_3/node = SubResource( 46 )
+blend_point_3/pos = -30.0
+blend_point_4/node = SubResource( 47 )
+blend_point_4/pos = 0.0
+blend_point_5/node = SubResource( 48 )
+blend_point_5/pos = 90.0
+blend_point_6/node = SubResource( 49 )
+blend_point_6/pos = 60.0
+blend_point_7/node = SubResource( 50 )
+blend_point_7/pos = 45.0
+blend_point_8/node = SubResource( 51 )
+blend_point_8/pos = 30.0
+min_space = -90.0
+max_space = 90.0
+snap = 15.0
+value_label = "0"
+
+[sub_resource type="AnimationNodeOneShot" id=53]
+fadein_time = 0.0
+fadeout_time = 0.0
+autorestart_delay = 0.0
+
+[sub_resource type="AnimationNodeBlend2" id=54]
+
+[sub_resource type="AnimationNodeBlendTree" id=55]
+graph_offset = Vector2( -353, -157 )
 nodes/Add2/node = SubResource( 3 )
 nodes/Add2/position = Vector2( 820, 160 )
-nodes/Animation/node = SubResource( 11 )
+nodes/Animation/node = SubResource( 12 )
 nodes/Animation/position = Vector2( -260, 280 )
 "nodes/Animation 2/node" = SubResource( 4 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
@@ -180,35 +332,47 @@ nodes/Animation/position = Vector2( -260, 280 )
 "nodes/Animation 5/node" = SubResource( 7 )
 "nodes/Animation 5/position" = Vector2( -220, -80 )
 "nodes/Animation 6/node" = SubResource( 8 )
-"nodes/Animation 6/position" = Vector2( 260, 520 )
+"nodes/Animation 6/position" = Vector2( 120, 480 )
 "nodes/Animation 7/node" = SubResource( 9 )
 "nodes/Animation 7/position" = Vector2( -100, -240 )
 "nodes/Animation 8/node" = SubResource( 10 )
 "nodes/Animation 8/position" = Vector2( 60, -400 )
-nodes/TimeScale/node = SubResource( 13 )
+"nodes/Animation 9/node" = SubResource( 11 )
+"nodes/Animation 9/position" = Vector2( 180, 800 )
+nodes/TimeScale/node = SubResource( 14 )
 nodes/TimeScale/position = Vector2( 0, -60 )
-"nodes/TimeScale 2/node" = SubResource( 12 )
+"nodes/TimeScale 2/node" = SubResource( 13 )
 "nodes/TimeScale 2/position" = Vector2( 80, -240 )
-nodes/aim/node = SubResource( 23 )
-nodes/aim/position = Vector2( 240, 360 )
-nodes/aim_state/node = SubResource( 24 )
-nodes/aim_state/position = Vector2( 600, 360 )
-nodes/crouch-idle/node = SubResource( 25 )
+nodes/aim/node = SubResource( 24 )
+nodes/aim/position = Vector2( 100, 360 )
+nodes/aim2/node = SubResource( 34 )
+nodes/aim2/position = Vector2( -100, 700 )
+nodes/aim_state/node = SubResource( 35 )
+nodes/aim_state/position = Vector2( 360, 400 )
+nodes/crouch-idle/node = SubResource( 36 )
 nodes/crouch-idle/position = Vector2( 320, -200 )
-nodes/crouching/node = SubResource( 26 )
+nodes/crouching/node = SubResource( 37 )
 nodes/crouching/position = Vector2( 440, 40 )
-nodes/in_air_state/node = SubResource( 27 )
+nodes/fixed_aim/node = SubResource( 38 )
+nodes/fixed_aim/position = Vector2( 440, 580 )
+nodes/gun_recoil_sensitivity/node = SubResource( 39 )
+nodes/gun_recoil_sensitivity/position = Vector2( 140, 600 )
+nodes/in_air_state/node = SubResource( 40 )
 nodes/in_air_state/position = Vector2( 600, 160 )
-nodes/moonwalking/node = SubResource( 28 )
+nodes/moonwalking/node = SubResource( 41 )
 nodes/moonwalking/position = Vector2( -240, 80 )
-nodes/output/position = Vector2( 1020, 160 )
-nodes/running/node = SubResource( 29 )
+nodes/output/position = Vector2( 1040, 160 )
+nodes/running/node = SubResource( 42 )
 nodes/running/position = Vector2( 180, 20 )
-nodes/walk-idle/node = SubResource( 30 )
+nodes/shoot_angle/node = SubResource( 52 )
+nodes/shoot_angle/position = Vector2( -100, 580 )
+nodes/shooting/node = SubResource( 53 )
+nodes/shooting/position = Vector2( 620, 400 )
+nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "aim_state", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale", 0, "Animation 5", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale 2", 0, "Animation 7", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "running", 0, "TimeScale", "running", 1, "walk-idle" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=56]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -378,29 +542,226 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=33]
+[sub_resource type="Animation" id=57]
+length = 0.15
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -13.4064, -14.1956 ), Vector2( -13.4064, -14.1956 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/chest/torso/upperarm_right:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 23.3243, 13.7901 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1.01368, 20.0398 ), Vector2( -1.01368, 20.0398 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -98.6445, -83.2966 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/chest/torso/upperarm_left:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15.5659, -12.422 ), Vector2( 15.5659, -12.422 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("body/chest/torso/upperarm_left:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 13.0254, 6.71856 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.33635, 15.2045 ), Vector2( 1.33635, 15.2045 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.87866, -2.81434 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.938873, 18.0288 ), Vector2( -0.938873, 18.0288 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -81.8889, -73.9208 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18.566 ), Vector2( 0, 18.566 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 66.6732, 65.4966 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("body/chest/torso/gun:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 7.52653, 7.42542 ), Vector2( 9.95872, 8.93339 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("body/chest/torso/gun:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 17.8373, 21.1885 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("body/chest/torso/head:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.0163317, -24.4058 ), Vector2( -0.0163317, -24.4058 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("body/chest/torso/head:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.73079, 6.62338 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=58]
 radius = 27.3246
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=34]
+[sub_resource type="RectangleShape2D" id=59]
 
-[sub_resource type="CapsuleShape2D" id=35]
-radius = 91.9623
+[sub_resource type="CapsuleShape2D" id=60]
+radius = 77.2063
 height = 28.0385
 
-[node name="Player" type="KinematicBody2D"]
-position = Vector2( -160, 0 )
-collision_layer = 12
-collision_mask = 2147483678
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+z_index = 1
+collision_layer = 4
+collision_mask = 2147483710
 script = ExtResource( 17 )
 maxHealth = 1000.0
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 1.48221 )
+position = Vector2( 0, 1.06132 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
-rotation = -0.000515761
 
 [node name="torso" type="Sprite" parent="body/chest"]
 position = Vector2( 0, -15.094 )
@@ -408,10 +769,13 @@ texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
-position = Vector2( 22.0687, -1.77017 )
-rotation = -0.000929911
+position = Vector2( 22.073, -1.755 )
 texture = ExtResource( 9 )
+offset = Vector2( 17.236, -3.362 )
 script = ExtResource( 33 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="laser" type="Sprite" parent="body/chest/torso/gun"]
 visible = false
@@ -421,14 +785,134 @@ scale = Vector2( 1.43875, 0.0154226 )
 texture = ExtResource( 18 )
 
 [node name="BulletPoint" type="Node2D" parent="body/chest/torso/gun"]
-position = Vector2( 41, -8.312 )
+position = Vector2( 61.589, -7.527 )
+
+[node name="sfx" type="Node2D" parent="body/chest/torso/gun/BulletPoint"]
+position = Vector2( -55.6587, 6.04199 )
+script = ExtResource( 49 )
+
+[node name="mp5_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_draw"]
+stream = ExtResource( 48 )
+
+[node name="mp5_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_reload"]
+stream = ExtResource( 70 )
+attenuation = 0.378929
+
+[node name="spas12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_draw"]
+stream = ExtResource( 50 )
+
+[node name="spas12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
+stream = ExtResource( 52 )
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
+stream = ExtResource( 51 )
+attenuation = 0.25
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
+stream = ExtResource( 54 )
+
+[node name="spas12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_reload"]
+stream = ExtResource( 69 )
+attenuation = 0.378929
+
+[node name="m4a1_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_draw"]
+stream = ExtResource( 58 )
+
+[node name="m4a1_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
+stream = ExtResource( 55 )
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
+stream = ExtResource( 56 )
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
+stream = ExtResource( 57 )
+attenuation = 0.189465
+
+[node name="m4a1_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_reload"]
+stream = ExtResource( 72 )
+attenuation = 0.138696
+
+[node name="ak12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
+stream = ExtResource( 62 )
+
+[node name="draw2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
+stream = ExtResource( 60 )
+
+[node name="ak12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
+stream = ExtResource( 59 )
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
+stream = ExtResource( 61 )
+
+[node name="ak12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_reload"]
+stream = ExtResource( 71 )
+attenuation = 0.138696
+
+[node name="barrett50_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_draw"]
+stream = ExtResource( 67 )
+
+[node name="barrett50_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
+stream = ExtResource( 63 )
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
+stream = ExtResource( 65 )
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
+stream = ExtResource( 64 )
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
+stream = ExtResource( 66 )
+
+[node name="barrett50_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_reload"]
+stream = ExtResource( 68 )
+volume_db = 4.0
+attenuation = 0.138696
 
 [node name="BulletDelayTimer" type="Timer" parent="body/chest/torso/gun"]
 one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = -0.441184
+rotation = -0.440587
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -439,7 +923,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -1.58338
+rotation = -1.58248
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -448,7 +932,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = 1.69985
+rotation = 1.69921
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -457,7 +941,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -13.4064, -14.1956 )
-rotation = -0.325428
+rotation = -0.324783
 z_index = 1
 texture = ExtResource( 13 )
 offset = Vector2( -0.0279083, 8.82368 )
@@ -468,7 +952,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/chest/torso/upperarm_right"]
 position = Vector2( -1.01368, 20.0398 )
-rotation = -1.36196
+rotation = -1.36206
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0.498055, 6.75774 )
@@ -478,7 +962,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right"]
 position = Vector2( 1.33635, 15.2045 )
-rotation = 0.0556031
+rotation = 0.0559495
 texture = ExtResource( 15 )
 __meta__ = {
 "_edit_bone_": true
@@ -486,7 +970,6 @@ __meta__ = {
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
-rotation = -0.000326571
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -502,7 +985,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.148077
+rotation = 0.212528
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -512,7 +995,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.444157
+rotation = 0.310422
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -521,7 +1004,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.588093
+rotation = -0.520218
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -536,7 +1019,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.366747
+rotation = -0.333484
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -547,7 +1030,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.755599
+rotation = 0.696323
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -556,7 +1039,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.37628
+rotation = -0.35025
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -582,18 +1065,23 @@ z_index = 1
 shape = SubResource( 2 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 31 )
+tree_root = SubResource( 55 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
 "parameters/TimeScale 2/scale" = 1.8
-parameters/aim/blend_position = 0.111
+parameters/aim/blend_position = 0.0
+parameters/aim2/blend_position = 0
 parameters/aim_state/current = 0
 parameters/crouch-idle/blend_amount = 1.0
 parameters/crouching/current = 1
+parameters/fixed_aim/current = 0
+parameters/gun_recoil_sensitivity/add_amount = 1.0
 parameters/in_air_state/current = 0
 parameters/moonwalking/current = 1
 parameters/running/current = 1
+parameters/shoot_angle/blend_position = 0.0
+parameters/shooting/active = false
 parameters/walk-idle/blend_amount = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -610,14 +1098,23 @@ anims/crouching = ExtResource( 36 )
 anims/crouching-idle = ExtResource( 37 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
-anims/no_aim = SubResource( 32 )
+anims/no_aim = SubResource( 56 )
+anims/no_aim_shoot = ExtResource( 46 )
 anims/run = ExtResource( 32 )
+anims/shoot_0_degrees = ExtResource( 43 )
+anims/shoot_30_degrees = ExtResource( 40 )
+anims/shoot_45_degrees = ExtResource( 41 )
+anims/shoot_60_degrees = ExtResource( 42 )
+anims/shoot_90_degrees = ExtResource( 39 )
+anims/shoot_minus_30_degrees = ExtResource( 38 )
+anims/shoot_minus_45_degrees = SubResource( 57 )
+anims/shoot_minus_60_degrees = ExtResource( 45 )
+anims/shoot_minus_90_degrees = ExtResource( 44 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
 
 [node name="ShootVector" type="Position2D" parent="."]
-visible = false
-position = Vector2( -0.0265808, 2.35701 )
+position = Vector2( -0.027, -10.536 )
 rotation = -0.00144567
 
 [node name="ground" type="Sprite" parent="."]
@@ -649,6 +1146,7 @@ current = true
 zoom = Vector2( 0.9, 0.9 )
 smoothing_enabled = true
 editor_draw_drag_margin = true
+script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 visible = false
@@ -658,7 +1156,7 @@ collision_mask = 8
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 33 )
+shape = SubResource( 58 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -668,7 +1166,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 34 )
+shape = SubResource( 59 )
 
 [node name="healthbar" parent="." instance=ExtResource( 35 )]
 margin_left = -64.0
@@ -681,15 +1179,59 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="shootzone" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 35 )
+shape = SubResource( 60 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Score" type="Label" parent="."]
+margin_left = -8.0
+margin_top = -128.0
+margin_right = 64.0
+margin_bottom = -114.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo" type="Label" parent="."]
+margin_left = 119.396
+margin_top = -57.3647
+margin_right = 191.396
+margin_bottom = -43.3647
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalAmmo" type="Label" parent="."]
+margin_left = 118.975
+margin_top = -40.5468
+margin_right = 190.975
+margin_bottom = -26.5468
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
+[connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
+[connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
+[connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="set_gun_recoil_sensitivity"]
+[connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
-[connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
+[connection signal="body_exited" from="GroundChecker" to="." method="_on_groundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
 [connection signal="mouse_exited" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_exited"]
