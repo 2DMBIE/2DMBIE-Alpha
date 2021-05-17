@@ -338,7 +338,7 @@ func createMap():
 		
 		# Calls the getVerticalPoints and getFloorPoints functions
 		getVerticalPoints()
-		getFloorPoints()
+	getFloorPoints()
 
 ## Creates a point on the floor under every other point
 func getVerticalPoints():
@@ -437,6 +437,7 @@ func createPoint(cell):
 	
 	# Adds point to actual A* graph
 	graph.add_point(graph.get_available_point_id(), pos)
+	
 
 ## Run every frame of the game
 func _process(_delta):
