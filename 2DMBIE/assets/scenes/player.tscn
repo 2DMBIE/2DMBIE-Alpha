@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -67,6 +67,11 @@
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot2.wav" type="AudioStream" id=65]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_singleshot4.wav" type="AudioStream" id=66]
 [ext_resource path="res://assets/sounds/barrett50/barrett50_draw.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/sounds/barrett50/barrett50_reload.wav" type="AudioStream" id=68]
+[ext_resource path="res://assets/sounds/spas12/spas12_reload.wav" type="AudioStream" id=69]
+[ext_resource path="res://assets/sounds/mp5/mp5_reload.wav" type="AudioStream" id=70]
+[ext_resource path="res://assets/sounds/ak12/ak12_reload.wav" type="AudioStream" id=71]
+[ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 26.5309
@@ -365,7 +370,7 @@ nodes/shooting/node = SubResource( 53 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=56]
 tracks/0/type = "value"
@@ -746,6 +751,7 @@ height = 28.0385
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
+z_index = 1
 collision_layer = 4
 collision_mask = 2147483710
 script = ExtResource( 17 )
@@ -795,6 +801,18 @@ stream = ExtResource( 48 )
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
 
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+
+[node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_reload"]
+stream = ExtResource( 70 )
+attenuation = 0.378929
+
 [node name="spas12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_draw"]
@@ -811,6 +829,12 @@ attenuation = 0.25
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 54 )
+
+[node name="spas12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_reload"]
+stream = ExtResource( 69 )
+attenuation = 0.378929
 
 [node name="m4a1_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
@@ -829,6 +853,12 @@ stream = ExtResource( 56 )
 stream = ExtResource( 57 )
 attenuation = 0.189465
 
+[node name="m4a1_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_reload"]
+stream = ExtResource( 72 )
+attenuation = 0.138696
+
 [node name="ak12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
@@ -844,6 +874,12 @@ stream = ExtResource( 59 )
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
 stream = ExtResource( 61 )
+
+[node name="ak12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_reload"]
+stream = ExtResource( 71 )
+attenuation = 0.138696
 
 [node name="barrett50_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
@@ -863,6 +899,13 @@ stream = ExtResource( 64 )
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 66 )
+
+[node name="barrett50_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_reload"]
+stream = ExtResource( 68 )
+volume_db = 4.0
+attenuation = 0.138696
 
 [node name="BulletDelayTimer" type="Timer" parent="body/chest/torso/gun"]
 one_shot = true

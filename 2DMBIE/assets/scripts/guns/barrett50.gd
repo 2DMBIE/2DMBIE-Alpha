@@ -9,16 +9,16 @@ func _init():
 	texture = load("res://assets/sprites/guns/barrett50.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(79.424, -7.527) # Position of the bulletpoint.
-	bulletdelay = float(1.2) # The delay between each bullet. [0.1, 0.2]
+	bulletdelay = float(2) # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = Bullet.new(float(600), float(2000), "res://assets/scenes/bullet.tscn") 
+	_bullet = Bullet.new(float(600), float(1800), "res://assets/scenes/bullet.tscn", int(5)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
 	_muzzleflash = load("res://assets/scenes/muzzleflash.tscn") # The scene of the muzzleflash
 	
-	camera_shake = float(.8) # Camera shake strength [0, 1] Higher = stronger.
-	camera_decay = float(.3) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
+	camera_shake = float(1) # Camera shake strength [0, 1] Higher = stronger.
+	camera_decay = float(0.9) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
 	gun_recoil_sensitivity = float(1) # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
 	
 	maxclipAmmo = 5 # How much bullets are in one magazine.
 	totalAmmo = 25 # Total ammo which comes with each gun.
-	
+	ammo = maxclipAmmo

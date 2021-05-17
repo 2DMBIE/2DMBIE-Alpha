@@ -65,7 +65,7 @@ tile_set = ExtResource( 2 )
 collision_layer = 2
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -655370, 0, 0, -393224, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0 )
+tile_data = PoolIntArray( -524293, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0 )
 
 [node name="Floor" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
@@ -81,12 +81,13 @@ texture = ExtResource( 4 )
 hframes = 21
 
 [node name="Pathfinder" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 7 )
 
-[node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
-
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( -108.28, -191.75 )
+position = Vector2( 44.5449, -151.453 )
+
+[node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
 position = Vector2( -484.728, -553.583 )

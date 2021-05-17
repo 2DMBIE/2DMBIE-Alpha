@@ -244,6 +244,16 @@ onready var health = maxHealth setget setHealth
 
 signal health_updated(health)
 
+func kill():
+	var _x = get_tree().reload_current_scene()
+	Global.Score = 0
+	Global.MaxWaveEnemies = 4
+	Global.CurrentWaveEnemies = 0
+	Global.Currentwave = 1
+	Global.maxHealth = 500
+	Global.EnemyDamage = 300
+	Global.Speed = 200
+	
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
@@ -251,14 +261,7 @@ func setHealth(value):
 		emit_signal("health_updated", health)
 		if health == 0:
 			queue_free()
-			Global.Score = 0
-			Global.Score = 0
-			Global.MaxWaveEnemies = 4
-			Global.CurrentWaveEnemies = 0
-			Global.Currentwave = 1
-			Global.maxHealth = 500
-			Global.EnemyDamage = 300
-			Global.Speed = 200
+			kill()
 
 var takingDamage = false
 
@@ -277,11 +280,9 @@ func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(EnemyDamage)
 		takingDamage = true
-		#print(takingDamage)
 
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
-	#print(takingDamage)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
@@ -308,14 +309,7 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_OoBbox_area_exited(_area):
-	var _x = get_tree().reload_current_scene()
-	Global.Score = 0
-	Global.MaxWaveEnemies = 4
-	Global.CurrentWaveEnemies = 0
-	Global.Currentwave = 1
-	Global.maxHealth = 500
-	Global.EnemyDamage = 300
-	Global.Speed = 200
+	kill()
 	
 
 func _on_gun_is_shooting(value):
