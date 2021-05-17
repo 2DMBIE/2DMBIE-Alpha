@@ -41,7 +41,7 @@ func _physics_process(_delta):
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
-		print("player entered the area")
+#		print("player entered the area")
 #		print(canBuy)
 
 # checks if the player has enough money/score
@@ -58,7 +58,7 @@ func _on_buyarea_body_entered(body):
 func _on_buyarea_body_exited(body):
 	if body.is_in_group("player"):
 		canBuy = false
-		print("player exited the area")
+#		print("player exited the area")
 #		print(canBuy)
 
 #Dynamically sets the label with the correct values and also sets the sprites to the right one

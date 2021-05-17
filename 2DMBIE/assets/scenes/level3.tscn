@@ -90,7 +90,7 @@ position = Vector2( 44.5449, -151.453 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( -484.728, -553.583 )
+position = Vector2( -296, -680 )
 
 [node name="M4A1" parent="." instance=ExtResource( 9 )]
 position = Vector2( 80.2725, -173.003 )
