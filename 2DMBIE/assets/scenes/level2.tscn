@@ -2095,7 +2095,6 @@ frame = 4
 
 [node name="Candle2" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1765.76, -132.49 )
-frame = 4
 
 [node name="Lightbulb_with_wire" parent="lights" instance=ExtResource( 20 )]
 position = Vector2( 1469.76, -292.49 )
@@ -2136,7 +2135,6 @@ frame = 4
 
 [node name="Candle3" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2229.75, -148.49 )
-frame = 4
 
 [node name="TL_buis3" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 3501.75, -524.49 )

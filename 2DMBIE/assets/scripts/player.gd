@@ -245,6 +245,7 @@ onready var health = maxHealth setget setHealth
 signal health_updated(health)
 
 func kill():
+	print("kill")
 	var _x = get_tree().reload_current_scene()
 	Global.Score = 0
 	Global.MaxWaveEnemies = 4
