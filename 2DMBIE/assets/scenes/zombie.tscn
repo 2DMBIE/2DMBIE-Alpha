@@ -424,4 +424,5 @@ scale = Vector2( 3, 1 )
 z_as_relative = false
 shape = SubResource( 16 )
 
+[connection signal="play_sound" from="." to="sfx" method="play_sound"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
