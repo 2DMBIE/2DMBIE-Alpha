@@ -23,7 +23,7 @@ var valid_aim = true
 
 var current_gun_index
 
-var weapon_slots = [0, -1, -1]
+var weapon_slots = [0, -1]
 var current_weapon = 0
 
 var canShoot = true # Used for ammo
