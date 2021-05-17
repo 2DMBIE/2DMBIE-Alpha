@@ -21,6 +21,7 @@ var tileMap
 var mousePos
 var tilePos
 var is_knifing = false
+var knifing_hitbox_enabled = false
 
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
@@ -39,12 +40,12 @@ func _physics_process(_delta):
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
-	#$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
-	#$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
+
 	if Input.is_action_just_pressed("knife") and not is_knifing:
 		get_node("body/chest/torso/gun").visible = false
 		get_node("body/chest/torso/gun").is_holding_knife = true
 		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+		knifing_hitbox_enabled = true
 		$AnimationTree.set("parameters/knifing/current", false)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
@@ -347,3 +348,8 @@ func on_knife_animation_complete():
 	is_knifing = false
 	$AnimationTree.set("parameters/knifing/current", true)
 	get_node("body/chest/torso/gun").is_holding_knife = false
+
+func on_knife_hit(body):
+	if body.is_in_group("enemies") and knifing_hitbox_enabled:
+		body.Hurt(500)
+		knifing_hitbox_enabled = false
