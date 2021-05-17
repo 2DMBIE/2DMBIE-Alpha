@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/sprites/Lightning/candle_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/scripts/lights/light_candle.gd" type="Script" id=3]
 
-
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 2 )
@@ -47,9 +46,7 @@ animations = [ {
 scale = Vector2( 0.331826, 0.331826 )
 z_index = -20
 frames = SubResource( 7 )
-frame = 5
 speed_scale = 2.0
-playing = true
 
 [node name="CandleLight" type="Light2D" parent="."]
 position = Vector2( -8.69281, 5.68878 )
