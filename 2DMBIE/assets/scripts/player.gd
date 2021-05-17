@@ -21,6 +21,7 @@ var tileMap
 var mousePos
 var tilePos
 
+
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
@@ -31,6 +32,7 @@ func _ready():
 	print($CollisionShape2D.shape.height)
 	emit_signal("health_updated", health, maxHealth)
 
+
 func _physics_process(_delta):
 	update()
 	motion.y += GRAVITY
@@ -38,9 +40,6 @@ func _physics_process(_delta):
 	if tileMap:
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
-	$Score.text = str("Score:") + str(Global.Score)
-	#$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
-	#$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -241,8 +240,7 @@ func aim(string):
 #health system
 var maxHealth = 1200
 
-onready var EnemyDamage = Global.EnemyDamage
-onready var health = maxHealth setget setHealth
+var health = maxHealth setget setHealth
 
 signal health_updated(health)
 
@@ -269,18 +267,18 @@ func setHealth(value):
 var takingDamage = false
 
 func takenDamage(_enemyDamage):
-	setHealth(health - EnemyDamage)
+	setHealth(health - Global.EnemyDamage)
 	$Timer.start(10)
 	zombie_dam_timer.start(1.2)
 	$NoDamageTimer.start(1)
 
 func _zombie_dam_timout():
 	if takingDamage == true:
-		takenDamage(EnemyDamage)
+		takenDamage(Global.EnemyDamage)
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
-		takenDamage(EnemyDamage)
+		takenDamage(Global.EnemyDamage)
 		takingDamage = true
 
 func _on_Hitbox_body_exited(_body):
@@ -331,6 +329,7 @@ func _draw():
 func set_gun_recoil_sensitivity(value):
 	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
 
+signal ammoUpdate(ammo, maxClipammo, totalAmmo)
+
 func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
-	$Ammo.text = str(ammo) + '/' + str(maxClipammo) 
-	$TotalAmmo.text = str(totalAmmo)
+	emit_signal("ammoUpdate", ammo, maxClipammo, totalAmmo)

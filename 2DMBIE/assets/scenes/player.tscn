@@ -369,7 +369,7 @@ nodes/shooting/node = SubResource( 53 )
 nodes/shooting/position = Vector2( 620, 400 )
 nodes/walk-idle/node = SubResource( 54 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouching", 0, "crouch-idle", "crouching", 1, "running", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "Add2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "Add2", 0, "in_air_state", "Add2", 1, "shooting", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "running", 0, "TimeScale", "running", 1, "walk-idle" ]
 
 [sub_resource type="Animation" id=56]
 tracks/0/type = "value"
@@ -1177,40 +1177,6 @@ shape = SubResource( 60 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Score" type="Label" parent="."]
-margin_left = -8.0
-margin_top = -128.0
-margin_right = 64.0
-margin_bottom = -114.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "Score:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Ammo" type="Label" parent="."]
-margin_left = 119.396
-margin_top = -57.3647
-margin_right = 191.396
-margin_bottom = -43.3647
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TotalAmmo" type="Label" parent="."]
-margin_left = 118.975
-margin_top = -40.5468
-margin_right = 190.975
-margin_bottom = -26.5468
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
