@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/sprites/tiles/Greenhouse_tileset.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/tiles/painting.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
+[ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -2029,10 +2030,6 @@ visible = false
 position = Vector2( 1944.59, -1150.39 )
 shape = SubResource( 18 )
 
-[node name="cursor" type="Sprite" parent="."]
-texture = ExtResource( 3 )
-hframes = 21
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 316.524, -155.924 )
 
@@ -2320,10 +2317,31 @@ script = ExtResource( 8 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
 
+[node name="Weapons" type="YSort" parent="."]
+
+[node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 640, -160 )
+Selected_Weapon = 0
+
+[node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 928, -1184 )
+
+[node name="AK12" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 4544, -160 )
+Selected_Weapon = 3
+
+[node name="M4A2" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 4704, -2208 )
+Selected_Weapon = 4
+
+[node name="SPAS12" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 1408, -2208 )
+Selected_Weapon = 1
+
+[connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
-[connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 
 [editable path="CanvasLayer"]

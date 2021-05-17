@@ -31,7 +31,6 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
-	print($CollisionShape2D.shape.height)
 	emit_signal("health_updated", health, maxHealth)
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
@@ -256,7 +255,6 @@ var health = maxHealth setget setHealth
 signal health_updated(health)
 
 func kill():
-	print("kill")
 	var _x = get_tree().reload_current_scene()
 	Global.Score = 0
 	Global.MaxWaveEnemies = 4

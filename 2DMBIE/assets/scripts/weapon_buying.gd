@@ -12,7 +12,7 @@ var priceArray = ["1500", "2500", "3000", "3100", "4000"]
 
 var canBuy = false
 var enoughMoney = false
-onready var gunscript = get_node("../Player/body/chest/torso/gun")
+onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
 export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 
 
@@ -41,25 +41,19 @@ func _physics_process(_delta):
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
-#		print("player entered the area")
-#		print(canBuy)
 
 # checks if the player has enough money/score
 	for joas in spriteArray.size():
 		if Selected_Weapon == joas:
 			if Global.Score >= int(priceArray[joas]):
 				enoughMoney = true
-#				print(enoughMoney)
 			else:
 				enoughMoney = false
-#				print(enoughMoney)
 
 #checks if the player is out of the buy area
 func _on_buyarea_body_exited(body):
 	if body.is_in_group("player"):
 		canBuy = false
-#		print("player exited the area")
-#		print(canBuy)
 
 #Dynamically sets the label with the correct values and also sets the sprites to the right one
 func _ready():
