@@ -314,7 +314,6 @@ func crouch_idle_transition(value):
 
 func _on_OoBbox_area_exited(_area):
 	kill()
-	
 
 func _on_gun_is_shooting(value):
 	$AnimationTree.set("parameters/shooting/active", value)
@@ -350,6 +349,7 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
 
+
 func _on_cancel_sprint(value):
 	running_disabled = true
 	var _sprint_timer = Timer.new()
@@ -361,4 +361,8 @@ func _on_cancel_sprint(value):
 	_sprint_timer.start()
 
 func enable_running():
+	# if the timer is done and the player is still backfiring then restart the timer without disabling running var.
+	# Now signal, but a backfiring var!
+	var backfiring #DECLARE IN SCOPE
+	
 	running_disabled = false
