@@ -12,7 +12,6 @@ const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 
 var motion = Vector2()
-var is_running = false
 var crouch_idle = false
 var facing = "right"
 var collision
@@ -22,6 +21,7 @@ var mousePos
 var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
+var running_disabled = false
 
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
@@ -49,7 +49,7 @@ func _physics_process(_delta):
 		$AnimationTree.set("parameters/knifing/current", false)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		if is_running:
+		if is_running():
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("left")
 			motion.x -= RUN_ACCELERATION
@@ -60,7 +60,7 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running == false:
+		elif is_running() == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
 			motion.x = max(motion.x, -MAX_WALK_SPEED)
@@ -75,7 +75,7 @@ func _physics_process(_delta):
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
 	elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-		if is_running:
+		if is_running():
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("right")
 			if (motion.x < -50):
@@ -86,7 +86,7 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running == false: 
+		elif is_running() == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
 			motion.x = min(motion.x, MAX_WALK_SPEED)
@@ -108,7 +108,6 @@ func _physics_process(_delta):
 		friction = true
 		walk_idle_transition()
 		motion.x = lerp(motion.x, 0, 0.3)
-		is_running = false
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("move_down"):
@@ -121,7 +120,6 @@ func _physics_process(_delta):
 			$AnimationTree.set("parameters/in_air_state/current", 1)
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.3)
-		running()
 	else:
 		#aim("walking")
 		if friction == true:
@@ -167,15 +165,12 @@ func get_direction():
 		return "right"
 	return "null"
 	
-func running():	
-	if Input.is_action_just_pressed("sprint") and is_running == false:
-		is_running = true
-	elif Input.is_action_just_pressed("sprint") and is_running:
-		is_running = false
-		
-	if Input.is_action_pressed("sprint"):
-		is_running = true
-			
+func is_running():	
+	if Input.is_action_pressed("sprint") and not running_disabled:
+		return true
+	else:
+		return false
+
 func walk_idle_transition():
 	var speed = motion.x
 	if speed < 0:
@@ -354,3 +349,16 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
+
+func _on_cancel_sprint(value):
+	running_disabled = true
+	var _sprint_timer = Timer.new()
+	_sprint_timer.one_shot = true
+	_sprint_timer.wait_time = 1
+	
+	_sprint_timer.connect("timeout", self, "enable_running")
+	add_child(_sprint_timer)
+	_sprint_timer.start()
+
+func enable_running():
+	running_disabled = false
