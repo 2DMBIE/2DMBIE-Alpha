@@ -10,7 +10,7 @@ var spriteArray = [spriteMP5, spriteSPAS12, spriteM4A1, spriteAK12, spriteBARRET
 onready var gunscript = get_node("../../../Player/body/chest/torso/gun")
 
 func _physics_process(_delta):
-	$Sprite.texture = gunscript.get_current_gun().texture
+	$Sprite.texture = gunscript.guns[gunscript.weapon_slots[0]].texture
 
 
 	
