@@ -2318,13 +2318,14 @@ script = ExtResource( 8 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer"]
+[node name="Panel" parent="CanvasLayer/Interface/weaponslots/Weapon2" index="1"]
+self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
 
 [node name="Weapons" type="YSort" parent="."]
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 640, -160 )
-Selected_Weapon = 0
+Selected_Weapon = 3
 
 [node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 928, -1184 )
@@ -2362,14 +2363,15 @@ text = "Options"
 align = 1
 valign = 1
 
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
 
+[editable path="Player"]
 [editable path="CanvasLayer"]
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]
