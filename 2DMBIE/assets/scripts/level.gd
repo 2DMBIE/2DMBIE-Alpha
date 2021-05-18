@@ -21,19 +21,14 @@ func _process(_delta):
 		Global.enemiesKilled = 0 
 		
 	if Input.is_action_just_pressed("pause"):
-		print("pause button!")
 		if is_paused == false:
 			get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 			get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 			is_paused = true
 			get_tree().paused = true
-			print('game paused')
+			get_node("PauseMenu/Container").visible = true
 		elif is_paused == true:
-			get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
-			get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
-			is_paused = false
-			get_tree().paused = false
-			print('game unpaused')
+			unpause_game()
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
@@ -46,3 +41,18 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.enemiesKilled = 0 
 	else:
 		pass
+
+func unpause_game():
+	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
+	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
+	is_paused = false
+	get_tree().paused = false
+	get_node("PauseMenu/Container").visible = false
+
+func _on_Continue_button_down():
+	unpause_game()
+
+
+func _on_ExitMenu_button_down():
+	unpause_game()
+	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
