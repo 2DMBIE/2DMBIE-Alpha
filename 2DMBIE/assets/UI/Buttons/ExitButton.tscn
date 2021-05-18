@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/sprites/Menus/SmallerButton.png" type="Texture" id=3]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
 
@@ -29,7 +29,7 @@ margin_left = 26.75
 margin_top = 6.5
 margin_right = 68.75
 margin_bottom = 40.5
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
