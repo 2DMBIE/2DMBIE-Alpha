@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/scripts/weapon_buying.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/purchasable_weapons.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/spas12.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 80, 52.088 )

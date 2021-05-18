@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/gun.gd"
 }, {
+"base": "Reference",
+"class": "HealthPerk",
+"language": "GDScript",
+"path": "res://assets/scripts/perks/HealthPerk.gd"
+}, {
 "base": "Gun",
 "class": "M4A1",
 "language": "GDScript",
@@ -38,6 +43,16 @@ _global_script_classes=[ {
 "class": "MP5",
 "language": "GDScript",
 "path": "res://assets/scripts/guns/mp5.gd"
+}, {
+"base": "Reference",
+"class": "MovementPerk",
+"language": "GDScript",
+"path": "res://assets/scripts/perks/MovementPerk.gd"
+}, {
+"base": "Reference",
+"class": "Perk",
+"language": "GDScript",
+"path": "res://assets/scripts/perks/perk_super_class.gd"
 }, {
 "base": "Gun",
 "class": "SPAS12",
@@ -54,8 +69,11 @@ _global_script_class_icons={
 "BARRETT50": "",
 "Bullet": "",
 "Gun": "",
+"HealthPerk": "",
 "M4A1": "",
 "MP5": "",
+"MovementPerk": "",
+"Perk": "",
 "SPAS12": "",
 "ShakeCamera2D": ""
 }
