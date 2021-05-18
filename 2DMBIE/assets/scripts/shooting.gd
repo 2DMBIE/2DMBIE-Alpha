@@ -29,6 +29,7 @@ var current_weapon = 0
 
 var canShoot = true # Used for ammo
 var is_holding_knife = false
+var backfiring = false
 
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 
@@ -72,7 +73,11 @@ func _process(_delta):
 			var _facing1 = get_node("../../../../").facing
 			var _facing2 = get_mouse_facing()
 			if _facing1 != _facing2: # The player is aiming left while r
-				emit_signal("cancel_sprint", true)
+				#emit_signal("cancel_sprint", true)
+				#print("Heyaaa")
+				backfiring = true
+			else:
+				backfiring = false
 				#print("true")
 			#print("facing1: " + str(_facing1))
 			#print("facing2: " + str(_facing2))

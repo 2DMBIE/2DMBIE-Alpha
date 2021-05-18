@@ -362,7 +362,7 @@ func _on_cancel_sprint(value):
 
 func enable_running():
 	# if the timer is done and the player is still backfiring then restart the timer without disabling running var.
-	# Now signal, but a backfiring var!
-	var backfiring #DECLARE IN SCOPE
-	
+	# No signal, but a backfiring var!
+	var backfiring = get_node("body/chest/torso/gun").backfiring
+	print(backfiring)
 	running_disabled = false
