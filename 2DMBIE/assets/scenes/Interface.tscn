@@ -71,21 +71,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerScore" type="Label" parent="Interface"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -112.0
-margin_top = 32.0
-margin_right = -24.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 0.964706, 0.921569, 0.419608, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Scoreboard" type="Label" parent="Interface"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -112,34 +97,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoLabel" type="Label" parent="Interface"]
+[node name="PlayerScore" type="Label" parent="Interface/Scoreboard"]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = -88.0
-margin_top = -72.0
-margin_right = -16.0
-margin_bottom = -40.0
+margin_top = 24.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0.964706, 0.921569, 0.419608, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 align = 1
 valign = 1
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TotalAmmoLabel" type="Label" parent="Interface"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -88.0
-margin_top = -48.0
-margin_right = -16.0
-margin_bottom = -16.0
-align = 1
-valign = 1
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,6 +124,36 @@ text = "AMMO"
 align = 1
 valign = 1
 autowrap = true
+
+[node name="TotalAmmoLabel" type="Label" parent="Interface/Ammo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 26.0
+margin_bottom = 58.0
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLabel" type="Label" parent="Interface/Ammo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 2.0
+margin_bottom = 34.0
+align = 1
+valign = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ammoLabels" type="Panel" parent="Interface/Ammo"]
 self_modulate = Color( 1, 1, 1, 0.352941 )

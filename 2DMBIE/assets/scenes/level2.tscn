@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/sprites/tiles/painting.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
 [ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/scripts/Weapon1.gd" type="Script" id=27]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -2317,6 +2318,56 @@ script = ExtResource( 8 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
 
+[node name="Weapon1" type="Control" parent="CanvasLayer/Interface" index="5"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = 132.0
+margin_right = -16.0
+margin_bottom = 196.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/Interface/Weapon1"]
+position = Vector2( 64, 32 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Interface/Weapon1"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon2" type="Control" parent="CanvasLayer/Interface" index="6"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = 60.0
+margin_right = -16.0
+margin_bottom = 124.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer/Interface/Weapon2"]
+position = Vector2( 64, 32 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Interface/Weapon2"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Weapons" type="YSort" parent="."]
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
@@ -2339,9 +2390,10 @@ position = Vector2( 1408, -2208 )
 Selected_Weapon = 1
 
 [connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/AmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 
+[editable path="Player"]
 [editable path="CanvasLayer"]
