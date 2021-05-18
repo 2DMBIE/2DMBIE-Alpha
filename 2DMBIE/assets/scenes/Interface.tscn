@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/scripts/HP bar.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/Interface.gd" type="Script" id=8]
 [ext_resource path="res://assets/scripts/Weapon1.gd" type="Script" id=9]
+[ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=10]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -201,6 +202,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon2"]
+position = Vector2( 64, 32 )
+scale = Vector2( 0.484375, 0.34375 )
+texture = ExtResource( 10 )
+color = Color( 0.917647, 0.921569, 0.262745, 1 )
+energy = 0.8
+
 [node name="Weapon1" type="Control" parent="Interface/weaponslots"]
 anchor_left = 1.0
 anchor_top = 0.5
@@ -214,6 +222,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 64, 32 )
+
 [node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
 margin_right = 128.0
@@ -222,5 +233,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
 position = Vector2( 64, 32 )
+scale = Vector2( 0.5, 0.34375 )
+texture = ExtResource( 10 )
+color = Color( 0.196078, 0.694118, 0.890196, 1 )
+energy = 0.8
