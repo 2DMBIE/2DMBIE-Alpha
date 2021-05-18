@@ -35,12 +35,15 @@ func _ready():
 	self.visible = true
 	set_gun(weapon_slots[0])
 
-func _process(_delta):
-	for i in range(weapon_slots.size()):
-		if Input.is_action_just_released("weapon" + str(i + 1)) && weapon_slots[i] > -1:
-			set_gun(weapon_slots[i])
-			current_weapon = i
-			break
+func switch_slot(slot):
+	if weapon_slots[slot] > -1:
+		set_gun(weapon_slots[slot])             
+		current_weapon = slot
+
+func _process(_delta):     
+	for i in range(weapon_slots.size()):         
+		if Input.is_action_just_released("weapon" + str(i + 1)):             
+			switch_slot(i)
 	
 	var _gun: Gun
 	_gun = get_current_gun()
