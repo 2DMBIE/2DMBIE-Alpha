@@ -20,7 +20,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButtonTexture" type="Sprite" parent="."]
+[node name="ButtonTexture" type="Sprite" parent="."]
 position = Vector2( 74.75, 22.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
@@ -38,3 +38,4 @@ __meta__ = {
 }
 
 [connection signal="mouse_entered" from="." to="." method="_on_ExitButton_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_ExitButton_mouse_exited"]

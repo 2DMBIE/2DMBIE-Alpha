@@ -422,10 +422,10 @@ scale = Vector2( 1.04934, 1 )
 texture = ExtResource( 7 )
 
 [node name="Buttons" type="Control" parent="."]
-margin_left = 295.0
-margin_top = 81.0
-margin_right = 507.0
-margin_bottom = 254.0
+margin_left = 280.0
+margin_top = 80.0
+margin_right = 492.0
+margin_bottom = 253.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -434,21 +434,23 @@ __meta__ = {
 
 [node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
 anchor_right = 0.3
-margin_top = 63.0
-margin_bottom = 109.0
+margin_top = 55.0
+margin_right = 146.4
+margin_bottom = 101.0
 
 [node name="ExitButton" parent="." instance=ExtResource( 6 )]
 anchor_left = 0.285
 anchor_right = 0.285
-margin_left = 355.42
-margin_top = 208.0
-margin_right = 505.42
-margin_bottom = 254.0
+margin_left = 310.0
+margin_top = 190.0
+margin_right = 460.0
+margin_bottom = 236.0
 scene_to_load = "res://assets/scenes/level3.tscn"
 
 [node name="BloodSplat" type="Sprite" parent="."]
 position = Vector2( 231.466, 230.525 )
 scale = Vector2( 0.5, 0.5 )
+z_index = -3
 texture = ExtResource( 10 )
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
