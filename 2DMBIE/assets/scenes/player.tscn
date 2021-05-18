@@ -388,7 +388,7 @@ nodes/shooting/node = SubResource( 56 )
 nodes/shooting/position = Vector2( 460, 560 )
 nodes/walk-idle/node = SubResource( 57 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "running", 0, "TimeScale", "running", 1, "walk-idle", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "crouching", 0, "crouch-idle", "crouching", 1, "running" ]
+node_connections = [ "output", 0, "Add2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "knifing", 0, "knife", "knifing", 1, "shooting", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "crouching", 0, "crouch-idle", "crouching", 1, "running", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=59]
 tracks/0/type = "value"
@@ -771,7 +771,7 @@ height = 28.0385
 ]]
 z_index = 1
 collision_layer = 4
-collision_mask = 2147483710
+collision_mask = 2147483774
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
