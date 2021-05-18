@@ -16,6 +16,9 @@ func _process(_delta):
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
 		Global.Speed = 200
+	if Input.is_action_just_pressed("pause"):
+		print("pause!")
+		
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:

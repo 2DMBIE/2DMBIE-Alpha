@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scenes/lights/light_tl_buis_broken.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/UI/Buttons/PlayButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/title_screen.gd" type="Script" id=9]
 [ext_resource path="res://assets/sprites/BloodSplat.png" type="Texture" id=10]
-[ext_resource path="res://assets/UI/Buttons/MenuButton.gd" type="Script" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -445,7 +444,6 @@ margin_left = 355.42
 margin_top = 208.0
 margin_right = 505.42
 margin_bottom = 254.0
-script = ExtResource( 11 )
 scene_to_load = "res://assets/scenes/level3.tscn"
 
 [node name="BloodSplat" type="Sprite" parent="."]

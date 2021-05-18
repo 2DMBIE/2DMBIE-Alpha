@@ -1,24 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/TileSets/new_canvasitemmaterial.tres" type="Material" id=1]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/sprites/Menus/SmallerButton.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/Buttons/MenuButton.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 2 )
 
-[node name="Button3" type="Button"]
+[node name="ExitButton" type="Button"]
 margin_left = 62.25
 margin_top = 128.5
 margin_right = 210.25
 margin_bottom = 174.5
 flat = true
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3Texture" type="Sprite" parent="."]
+[node name="ExitButtonTexture" type="Sprite" parent="."]
 position = Vector2( 74.75, 22.5 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
@@ -34,3 +36,5 @@ text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[connection signal="mouse_entered" from="." to="." method="_on_ExitButton_mouse_entered"]
