@@ -318,7 +318,7 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_OoBbox_area_exited(_area):
-	if !health == 0:
+	if !health == 0 && Global.game_active == true:
 		kill()
 	
 
