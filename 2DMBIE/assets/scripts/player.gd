@@ -20,6 +20,9 @@ var zombie_dam_timer
 var tileMap
 var mousePos
 var tilePos
+var is_knifing = false
+var knifing_hitbox_enabled = false
+
 
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
@@ -28,7 +31,9 @@ func _ready():
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
-	print($CollisionShape2D.shape.height)
+	emit_signal("health_updated", health, maxHealth)
+
+	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
 func _physics_process(_delta):
 	update()
@@ -37,9 +42,14 @@ func _physics_process(_delta):
 	if tileMap:
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
-	$Score.text = str("Score:") + str(Global.Score)
-	#$Ammo.text = str(get_node("body/chest/torso/gun").ammo) + '/' + str(get_node("body/chest/torso/gun").maxclipammo) 
-	#$maxAmmo.text = str(get_node("body/chest/torso/gun").totalAmmo)
+
+
+	if Input.is_action_just_pressed("knife") and not is_knifing:
+		get_node("body/chest/torso/gun").visible = false
+		get_node("body/chest/torso/gun").is_holding_knife = true
+		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+		knifing_hitbox_enabled = true
+		$AnimationTree.set("parameters/knifing/current", false)
 
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running:
@@ -238,10 +248,9 @@ func aim(string):
 		$AnimationTree.set("parameters/aim_state/current", 1)
 		return false
 #health system
-export (float) var maxHealth = 1200
+var maxHealth = 1200
 
-onready var EnemyDamage = Global.EnemyDamage
-onready var health = maxHealth setget setHealth
+var health = maxHealth setget setHealth
 
 signal health_updated(health)
 
@@ -254,12 +263,13 @@ func kill():
 	Global.maxHealth = 500
 	Global.EnemyDamage = 300
 	Global.Speed = 200
+	Global.enemiesKilled = 0 
 	
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
-		emit_signal("health_updated", health)
+		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
 			queue_free()
 			kill()
@@ -267,43 +277,39 @@ func setHealth(value):
 var takingDamage = false
 
 func takenDamage(_enemyDamage):
-	setHealth(health - EnemyDamage)
-	updatHealtbar()
+	setHealth(health - Global.EnemyDamage)
 	$Timer.start(10)
 	zombie_dam_timer.start(1.2)
 	$NoDamageTimer.start(1)
 
 func _zombie_dam_timout():
 	if takingDamage == true:
-		takenDamage(EnemyDamage)
+		takenDamage(Global.EnemyDamage)
 
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
-		takenDamage(EnemyDamage)
+		takenDamage(Global.EnemyDamage)
 		takingDamage = true
-		#print(takingDamage)
 
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
-	#print(takingDamage)
 
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
-		updatHealtbar()
 		$Timer.start(0.2)
+		emit_signal("health_updated", health, maxHealth)
 
-func updatHealtbar():
-	var percentageHP = int((float(health) / maxHealth * 100))
-	get_node("healthbar/TextureProgress").value = percentageHP
-	if percentageHP >= 70:
-		get_node("healthbar/TextureProgress").set_tint_progress("14e114")
-	elif percentageHP <= 70 and percentageHP >= 30:
-		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
-	else:
-		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
-		emit_signal("health_updated", health)
-	$Timer.start(2)
+#func updatHealtbar():
+#	var percentageHP = int((float(health) / maxHealth * 100))
+#	get_node("healthbar/TextureProgress").value = percentageHP
+#	if percentageHP >= 70:
+#		get_node("healthbar/TextureProgress").set_tint_progress("14e114")
+#	elif percentageHP <= 70 and percentageHP >= 30:
+#		get_node("healthbar/TextureProgress").set_tint_progress("e1be32")
+#	else:
+#		get_node("healthbar/TextureProgress").set_tint_progress("e11e1e")
+#		emit_signal("health_updated", health)
 
 func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
@@ -312,7 +318,8 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_OoBbox_area_exited(_area):
-	kill()
+	if !health == 0:
+		kill()
 	
 
 func _on_gun_is_shooting(value):
@@ -333,6 +340,19 @@ func _draw():
 func set_gun_recoil_sensitivity(value):
 	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
 
+signal ammoUpdate(ammo, maxClipammo, totalAmmo)
+
 func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
-	$Ammo.text = str(ammo) + '/' + str(maxClipammo) 
-	$TotalAmmo.text = str(totalAmmo)
+	emit_signal("ammoUpdate", ammo, maxClipammo, totalAmmo)
+
+func on_knife_animation_complete():
+	get_node("body/chest/torso/gun").visible = true
+	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
+	is_knifing = false
+	$AnimationTree.set("parameters/knifing/current", true)
+	get_node("body/chest/torso/gun").is_holding_knife = false
+
+func on_knife_hit(body):
+	if body.is_in_group("enemies") and knifing_hitbox_enabled:
+		body.Hurt(500)
+		knifing_hitbox_enabled = false

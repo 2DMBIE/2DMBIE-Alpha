@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TL_buis.png-ae9574a6956cf77475dddb5fcb93e40a.stex"
+path="res://.import/tv_sprite.png-4873801745e2bc6db5b4d94e9e0cd216.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Lightning/TL_buis.png"
-dest_files=[ "res://.import/TL_buis.png-ae9574a6956cf77475dddb5fcb93e40a.stex" ]
+source_file="res://assets/sprites/Lighting/tv_sprite.png"
+dest_files=[ "res://.import/tv_sprite.png-4873801745e2bc6db5b4d94e9e0cd216.stex" ]
 
 [params]
 

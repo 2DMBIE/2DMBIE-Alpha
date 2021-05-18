@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/light bulb with wire.png-a8acac7e4af2812bf62096824b8f8ab3.stex"
+path="res://.import/light_cone_TL_feathered.png-525f1e1e74fa9d3fc25a9e2d5fc6d5a3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Lightning/light bulb with wire.png"
-dest_files=[ "res://.import/light bulb with wire.png-a8acac7e4af2812bf62096824b8f8ab3.stex" ]
+source_file="res://assets/sprites/Lighting/light_cone_TL_feathered.png"
+dest_files=[ "res://.import/light_cone_TL_feathered.png-525f1e1e74fa9d3fc25a9e2d5fc6d5a3.stex" ]
 
 [params]
 

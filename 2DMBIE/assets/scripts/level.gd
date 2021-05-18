@@ -2,10 +2,10 @@ extends Node2D
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -10)
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
-	#$Label.text = str(int(Global.Currentwave))
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
 		#standaard stats voor de enemies
@@ -16,6 +16,8 @@ func _process(_delta):
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
 		Global.Speed = 200
+		Global.enemiesKilled = 0 
+		
 	if Input.is_action_just_pressed("pause"):
 		print("pause!")
 		
@@ -25,11 +27,9 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 4
 		Global.Currentwave += 1
-		Global.maxHealth *= 1.05
-		Global.EnemyDamage *= 1.05
+		Global.maxHealth *= 1.25
+		Global.EnemyDamage *= 1.25
 		Global.Speed += 4
-#		print("next wave")
-#		print("new enemies")
-#		print(Global.MaxWaveEnemies)
+		Global.enemiesKilled = 0 
 	else:
 		pass

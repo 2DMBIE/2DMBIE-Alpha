@@ -4,11 +4,11 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 200
+var speed = 75
 var jumpForce = 400
 var gravity = 600
 var padding = 2
-var finishPadding = 8 # 6 or 8 for better padding when state machine
+var finishPadding = 6 # 6 or 8 for better padding when state machine
 const dropthroughBit = 5
 
 var movement
@@ -22,8 +22,8 @@ var _wait_time = randi()%_time_diff + growl_time_min
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
-export (float) var maxHealth = 500
-export (float) var enemyDamage = 300
+var maxHealth = Global.maxHealth
+var enemyDamage = Global.EnemyDamage
 
 func _ready():
 	$AnimationTree.active = true
@@ -66,17 +66,24 @@ func jump():
 func _process(delta):
 #	if Input.is_action_just_pressed("aim"):
 #		repeat_me()
-
+	
 	if currentTarget:
 		if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
-			movement[0] = speed
+			if zombiestep:
+				movement[0] = speed * 2
+			else:
+				movement[0] = speed
 		elif (currentTarget[0] + padding < position[0]) and position.distance_to(currentTarget) > padding:
-			movement[0] = -speed
+			if zombiestep:
+				movement[0] = -speed * 2
+			else:
+				movement[0] = -speed
 		else:
 			movement[0] = 0
-
+		
 		if abs(position.x - currentTarget.x) < finishPadding and is_on_floor():
 			nextPoint()
+	
 	else:
 		movement[0] = 0
 	
@@ -117,8 +124,8 @@ func direction(x):
 func growl():
 	emit_signal("play_sound", "growl")
 
-#func togglestep():
-#	zombiestep = !zombiestep
+func togglestep():
+	zombiestep = !zombiestep
 
 func show_damage_animation(_health_percentage):
 	var _index
@@ -161,6 +168,7 @@ func _set_health(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:
+			Global.enemiesKilled += 1
 			kill()
 
 func _on_GroundChecker_body_exited(_body):

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/Lightning/light.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/Lightning/UV_light.png" type="Texture" id=2]
-[ext_resource path="res://assets/scripts/light_uv_broken.gd" type="Script" id=3]
+[ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Lighting/UV_light.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/lights/light_uv_broken.gd" type="Script" id=3]
 
 [node name="UV_light_broken" type="Sprite"]
 texture = ExtResource( 2 )
