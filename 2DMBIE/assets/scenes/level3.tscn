@@ -116,5 +116,5 @@ Selected_Weapon = 3
 position = Vector2( -440, -256 )
 
 [node name="MovementPerk" parent="." instance=ExtResource( 11 )]
-position = Vector2( -952, -256 )
+position = Vector2( -958.016, -257.887 )
 Selected_Perk = 1

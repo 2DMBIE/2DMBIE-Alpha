@@ -1,6 +1,12 @@
-extends "res://assets/scripts/perks/perk_super_class.gd"
+extends Perk
 
 class_name HealthPerk
 
-func _init().("Health"):
+
+func _init():
+	name = "HealthPerk"
+	price = "3500"
+	texture = load("res://assets/sprites/perks/health_perk.png")
+
+func activate():
 	pass

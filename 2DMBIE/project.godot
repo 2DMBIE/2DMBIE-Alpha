@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/gun.gd"
 }, {
-"base": "Reference",
+"base": "Perk",
 "class": "HealthPerk",
 "language": "GDScript",
 "path": "res://assets/scripts/perks/HealthPerk.gd"
@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scripts/guns/mp5.gd"
 }, {
-"base": "Reference",
+"base": "Perk",
 "class": "MovementPerk",
 "language": "GDScript",
 "path": "res://assets/scripts/perks/MovementPerk.gd"
@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Perk",
 "language": "GDScript",
-"path": "res://assets/scripts/perks/perk_super_class.gd"
+"path": "res://assets/scripts/perks/perk.gd"
 }, {
 "base": "Gun",
 "class": "SPAS12",
