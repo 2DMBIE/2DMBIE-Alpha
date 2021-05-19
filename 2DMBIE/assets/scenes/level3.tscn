@@ -110,3 +110,6 @@ Selected_Weapon = 4
 [node name="AK12" parent="." instance=ExtResource( 9 )]
 position = Vector2( 663.459, -246.926 )
 Selected_Weapon = 3
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.498039, 0.498039, 0.498039, 1 )

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var pivotScript = preload("res://assets/scripts/pivot.gd")
+
 var velocity = Vector2(0,0)
 
 const UP = Vector2(0, -1)
@@ -213,44 +215,52 @@ func walk_idle_transition():
 		return
 		
 func aim(string):
+	if Global.aim:
+		if Input.is_action_pressed("aim"):
+			aim_feature(string)
+			return true
+		else:
+			$AnimationTree.set("parameters/aim_state/current", 1)
+			return false
+	else:
+		aim_feature(string)
+		return true
+
+func aim_feature(string):
 	var walking = false
 	if (string == "walking"):
 		walking = true
-	if Input.is_action_pressed("aim"):
-		$AnimationTree.set("parameters/aim_state/current", 0)
-		var positionA = $ShootVector.position
-		var positionB = get_local_mouse_position()
-		var angle_radians = positionA.angle_to_point(positionB)
-		var angle_degrees = angle_radians*180/PI
-		
-		
-		if (angle_degrees >= -90) && (angle_degrees <= 90):
-			$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
-			$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
-			if (walking) || !is_on_floor(): 
-				direction("left")
-			return true
-		elif (angle_degrees > 90) && (angle_degrees < 180):
-			var x = 90-angle_degrees
-			x = 90+x 
-			$AnimationTree.set("parameters/aim/blend_position", x)
-			$AnimationTree.set("parameters/aim2/blend_position", x)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", x)
-			if (walking) || !is_on_floor(): 
-				direction("right")
-			return true
-		elif (angle_degrees > -180) && (angle_degrees < -90):
-			var y = -180-angle_degrees
-			$AnimationTree.set("parameters/aim/blend_position", y)
-			$AnimationTree.set("parameters/aim2/blend_position", y)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", y)
-			if (walking) || !is_on_floor(): 
-				direction("right")
-			return true
-	else:
-		$AnimationTree.set("parameters/aim_state/current", 1)
-		return false
+	
+	$AnimationTree.set("parameters/aim_state/current", 0)
+	var positionA = $ShootVector.position
+	var positionB = get_local_mouse_position()
+	var angle_radians = positionA.angle_to_point(positionB)
+	var angle_degrees = angle_radians*180/PI
+	
+	
+	if (angle_degrees >= -90) && (angle_degrees <= 90):
+		$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
+		$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
+		if (walking) || !is_on_floor(): 
+			direction("left")
+		return true
+	elif (angle_degrees > 90) && (angle_degrees < 180):
+		var x = 90-angle_degrees
+		x = 90+x 
+		$AnimationTree.set("parameters/aim/blend_position", x)
+		$AnimationTree.set("parameters/aim2/blend_position", x)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", x)
+		if (walking) || !is_on_floor(): 
+			direction("right")
+		return true
+	elif (angle_degrees > -180) && (angle_degrees < -90):
+		var y = -180-angle_degrees
+		$AnimationTree.set("parameters/aim/blend_position", y)
+		$AnimationTree.set("parameters/aim2/blend_position", y)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", y)
+		if (walking) || !is_on_floor(): 
+			direction("right")
 
 #health system
 export (float) var maxHealth = 1200
@@ -363,5 +373,4 @@ func on_knife_hit(body):
 		knifing_hitbox_enabled = false
 
 func _on_backfire_event():
-	print("yo")
 	running_disabled = true

@@ -16,6 +16,11 @@ func _process(_delta):
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
 		Global.Speed = 200
+	
+	if Global.brightness:
+		$CanvasModulate.color = Color("#bbbbbb")
+	else:
+		$CanvasModulate.color = Color("#7f7f7f")
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
@@ -30,3 +35,4 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 #		print(Global.MaxWaveEnemies)
 	else:
 		pass
+	

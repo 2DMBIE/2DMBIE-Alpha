@@ -11,6 +11,11 @@ var maxHealth = 500
 var EnemyDamage = 300
 var Speed = 200
 
+# Debug
+var aim = true
+var camera = true
+var brightness = false
+
 func _process(_delta):
 	maxHealth = clamp(maxHealth, 500, 1500)
 	EnemyDamage = clamp(EnemyDamage, 300, 600)
