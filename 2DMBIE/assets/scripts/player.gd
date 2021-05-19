@@ -34,6 +34,7 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
+	
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
@@ -180,24 +181,31 @@ func walk_idle_transition():
 
 	if (speed < 105) && (speed > 12.9): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.15)
+		running_disabled = false
 		return
 	elif (speed < 12.9) && (speed > 0.73): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.32)
+		running_disabled = false
 		return
 	elif (speed < 0.73) && (speed > 0.042): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.4) 
+		running_disabled = false
 		return
 	elif (speed < 0.042) && (speed > 0.0024): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.6)
+		running_disabled = false
 		return
 	elif (speed < 0.0024) && (speed > 0.000141): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.75)
+		running_disabled = false
 		return
 	elif (speed < 0.000141) && (speed > 0.000008): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.9)
+		running_disabled = false
 		return
 	elif (speed < 0.000008) && !($AnimationTree.get("parameters/walk-idle/blend_amount") == 1):  #&& (speed > 0.000001): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 1)
+		running_disabled = false
 		return
 		
 func aim(string):
@@ -349,20 +357,24 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
 
+func _on_backfire_event(backfiring):
+	if backfiring:
+		running_disabled = true
+		var _sprint_timer = Timer.new()
+		_sprint_timer.one_shot = true
+		_sprint_timer.wait_time = 1
+		_sprint_timer.connect("timeout", self, "on_sprint_timer_complete")
+		add_child(_sprint_timer)
+		_sprint_timer.start()
 
-func _on_cancel_sprint(value):
-	running_disabled = true
-	var _sprint_timer = Timer.new()
-	_sprint_timer.one_shot = true
-	_sprint_timer.wait_time = 1
-	
-	_sprint_timer.connect("timeout", self, "enable_running")
-	add_child(_sprint_timer)
-	_sprint_timer.start()
-
-func enable_running():
+func on_sprint_timer_complete():
 	# if the timer is done and the player is still backfiring then restart the timer without disabling running var.
 	# No signal, but a backfiring var!
-	var backfiring = get_node("body/chest/torso/gun").backfiring
-	print(backfiring)
-	running_disabled = false
+	var _backfiring = get_node("body/chest/torso/gun").backfiring
+	if _backfiring:
+		_on_backfire_event(true)
+	else:
+		pass
+		#running_disabled = false
+	#print(backfiring)
+	#running_disabled = false

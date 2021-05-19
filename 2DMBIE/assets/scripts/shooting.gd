@@ -11,7 +11,7 @@ signal set_camera_decay(value)
 signal set_gun_recoil_sensitivity(value)
 signal play_sound(value)
 signal ammo_ui(ammo, maxClipammo, totalAmmo)
-signal cancel_sprint(value)
+signal on_backfire_event(value)
 # Gun Node2D Position:
 # X 22.073
 # Y -1.744
@@ -73,12 +73,10 @@ func _process(_delta):
 			var _facing1 = get_node("../../../../").facing
 			var _facing2 = get_mouse_facing()
 			if _facing1 != _facing2: # The player is aiming left while r
-				#emit_signal("cancel_sprint", true)
-				#print("Heyaaa")
 				backfiring = true
 			else:
 				backfiring = false
-				#print("true")
+			emit_signal("on_backfire_event", backfiring)
 			#print("facing1: " + str(_facing1))
 			#print("facing2: " + str(_facing2))
 		elif not Input.is_action_pressed("aim"): #not aiming
