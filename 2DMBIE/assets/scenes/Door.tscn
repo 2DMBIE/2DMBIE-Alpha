@@ -17,7 +17,6 @@ script = ExtResource( 1 )
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="doorarea"]
-visible = false
 position = Vector2( 32, 80 )
 shape = SubResource( 1 )
 
@@ -30,10 +29,11 @@ visible = false
 margin_left = -64.0
 margin_top = 32.0
 margin_bottom = 63.0
-text = "500 geld
-"
+custom_colors/font_color = Color( 0.141176, 1, 0.607843, 1 )
+text = "500 geld"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="body_entered" from="doorarea" to="." method="_on_doorarea_body_entered"]
+[connection signal="body_exited" from="doorarea" to="." method="_on_doorarea_body_exited"]

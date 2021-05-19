@@ -264,6 +264,7 @@ func kill():
 	Global.EnemyDamage = 300
 	Global.Speed = 200
 	Global.enemiesKilled = 0 
+	Global.unlocked_doors = 0
 	
 func setHealth(value):
 	var prevHealth = health
@@ -315,12 +316,7 @@ func _on_groundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
 func crouch_idle_transition(value):
-	crouch_idle = value
-
-func _on_OoBbox_area_exited(_area):
-	if !health == 0:
-		kill()
-	
+	crouch_idle = value	
 
 func _on_gun_is_shooting(value):
 	$AnimationTree.set("parameters/shooting/active", value)

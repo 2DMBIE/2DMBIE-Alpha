@@ -14,6 +14,7 @@ func _physics_process(delta):
 func _on_bullet_body_entered(body):	
 	if body.is_in_group("enemies"):
 		body.Hurt(damage)
+		Global.Score += 10
 	else:
 		queue_free()
 

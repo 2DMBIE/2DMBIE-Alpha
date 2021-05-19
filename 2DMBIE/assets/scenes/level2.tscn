@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/sprites/tiles/painting.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
 [ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=27]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -1971,9 +1972,6 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 56/shapes = [  ]
 56/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 4947.74, 1565.03 )
-
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -2021,14 +2019,6 @@ z_index = -24
 tile_set = SubResource( 17 )
 format = 1
 tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -2162663, 47, 0, -2097132, 48, 0, -2097128, 38, 0, -2097127, 38, 2, -2031612, 24, 3, -2031610, 32, 0, -2031609, 31, 0, -2031594, 24, 2, -2031592, 24, 2, -2031590, 24, 2, -2031588, 24, 2, -1769469, 24, 1, -1769467, 24, 1, -1769465, 24, 1, -1769463, 24, 1, -1769457, 20, 0, -1769456, 20, 1, -1769455, 20, 2, -1638353, 45, 0, -1572842, 41, 0, -1507327, 43, 0, -1507325, 23, 3, -1507322, 23, 1, -1507313, 25, 0, -1441777, 10, 0, -1441775, 10, 0, -1441771, 38, 0, -1441770, 38, 2, -1376207, 7, 0, -1376206, 7, 1, -1376205, 7, 1, -1376204, 7, 2, -1245130, 48, 0, -1245116, 47, 0, -1179594, 16, 0, -1179580, 16, 0 )
-
-[node name="OoBbox" type="Area2D" parent="."]
-position = Vector2( 372.658, 231.227 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
-visible = false
-position = Vector2( 1944.59, -1150.39 )
-shape = SubResource( 18 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 316.524, -155.924 )
@@ -2324,7 +2314,7 @@ self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 640, -160 )
-Selected_Weapon = 3
+Selected_Weapon = 1
 
 [node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 928, -1184 )
@@ -2341,10 +2331,44 @@ Selected_Weapon = 4
 position = Vector2( 1408, -2208 )
 Selected_Weapon = 1
 
-[connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[node name="Doors" type="YSort" parent="."]
+
+[node name="Door9" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 2816, -2272 )
+
+[node name="Door8" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 1984, -2272 )
+
+[node name="Door6" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 1792, -736 )
+
+[node name="Door" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 1216, -224 )
+
+[node name="Door2" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 3264, -224 )
+
+[node name="Door3" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 3008, -736 )
+
+[node name="Door4" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 3008, -1248 )
+
+[node name="Door5" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 576, -480 )
+
+[node name="Door7" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 1216, -1504 )
+
+[node name="Door10" parent="Doors" instance=ExtResource( 27 )]
+position = Vector2( 3392, -1504 )
+
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 
 [editable path="Player"]
