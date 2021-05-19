@@ -22,7 +22,7 @@ var mousePos
 var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
-
+var is_sliding = false
 
 func _ready():
 	$AnimationTree.active = true
@@ -36,6 +36,10 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
+	if Input.is_action_just_pressed("test"):
+		$AnimationTree.set("parameters/reset_player/current", 0)
+		$AnimationTree.set("parameters/reset_player/current", 1)
+	
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
@@ -146,9 +150,12 @@ func _physics_process(_delta):
 		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 	
-	if Input.is_action_pressed("slide") and not Input.is_action_pressed("crouch"): # Timer slider cooldown!
-		get_node("body/chest/torso/gun").visible = false
+	if Input.is_action_just_pressed("slide") and not Input.is_action_pressed("crouch") and not is_sliding and is_on_floor(): # Timer slider cooldown!
+		is_sliding = true
 		$AnimationTree.set("parameters/sliding/current", 0)
+		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
+		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
+		is_knifing = true # disable knifing 
 		# disable guns (no shooting or knifing)
 		
 	motion = move_and_slide(motion, UP)
@@ -360,5 +367,10 @@ func on_knife_hit(body):
 		knifing_hitbox_enabled = false
 
 func on_slide_animation_complete():
-	$AnimationTree.set("parameters/sliding/current", 1)	
-	get_node("body/chest/torso/gun").visible = true
+	$AnimationTree.set("parameters/sliding/current", 1)
+	$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
+	get_node("body/chest/torso/gun").shooting_disabled = false
+	is_knifing = false
+	is_sliding = false
+
+

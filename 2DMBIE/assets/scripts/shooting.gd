@@ -28,6 +28,7 @@ var current_weapon = 0
 
 var canShoot = true # Used for ammo
 var is_holding_knife = false
+var shooting_disabled = false
 
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 
@@ -41,10 +42,13 @@ func switch_slot(slot):
 		current_weapon = slot
 
 func _process(_delta):     
+	if shooting_disabled:
+		return
+	
 	for i in range(weapon_slots.size()):         
 		if Input.is_action_just_released("weapon" + str(i + 1)):             
 			switch_slot(i)
-	
+
 	var _gun: Gun
 	_gun = get_current_gun()
 	emit_signal("ammo_ui", _gun.ammo, _gun.maxclipAmmo, _gun.totalAmmo)
