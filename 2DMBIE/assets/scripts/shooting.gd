@@ -81,6 +81,8 @@ func _process(_delta):
 				emit_signal("on_backfire_event")
 		
 		elif not Input.is_action_pressed("aim"): #not aiming
+			if not backfiring:
+				emit_signal("on_backfire_event", false)
 			emit_signal("no_aim_shoot", true)
 			var facingDir = 10
 			var facing = get_node("../../../../").facing
