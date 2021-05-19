@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -74,7 +74,7 @@
 [ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 [ext_resource path="res://assets/sprites/knife.png" type="Texture" id=73]
 [ext_resource path="res://assets/animations/knife_attack.tres" type="Animation" id=74]
-[ext_resource path="res://assets/sprites/Slide-spritesheet.png" type="Texture" id=75]
+[ext_resource path="res://assets/animations/slide-animation2.tres" type="Animation" id=76]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -88,6 +88,9 @@ radius = 23.0
 height = 45.0
 
 [sub_resource type="AnimationNodeAdd2" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=70]
+animation = "slide (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "walk"
@@ -349,11 +352,13 @@ input_1/auto_advance = false
 [sub_resource type="AnimationNodeBlend2" id=59]
 
 [sub_resource type="AnimationNodeBlendTree" id=60]
-graph_offset = Vector2( 343, -149.5 )
+graph_offset = Vector2( 50, -305.5 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
 nodes/Animation/node = SubResource( 14 )
 nodes/Animation/position = Vector2( -260, 280 )
+"nodes/Animation 10/node" = SubResource( 70 )
+"nodes/Animation 10/position" = Vector2( 740, -280 )
 "nodes/Animation 2/node" = SubResource( 6 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
 "nodes/Animation 3/node" = SubResource( 7 )
@@ -413,7 +418,7 @@ nodes/torso_reset/node = SubResource( 69 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 59 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "knifing", 0, "knife", "knifing", 1, "shooting", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "TimeScale", 0, "Animation 5", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3" ]
+node_connections = [ "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "knifing", 0, "knife", "knifing", 1, "shooting", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "TimeScale", 0, "Animation 5", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3" ]
 
 [sub_resource type="Animation" id=61]
 tracks/0/type = "value"
@@ -1274,16 +1279,15 @@ collision_mask = 2147483710
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 28.386 )
-rotation = -0.59453
+position = Vector2( 0, 35.664 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
-rotation = -0.432548
+rotation = -0.706693
 
 [node name="torso" type="Sprite" parent="body/chest"]
 position = Vector2( 0, -15.094 )
-rotation = -0.248198
+rotation = -0.0387242
 texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
@@ -1431,7 +1435,7 @@ one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = -0.539884
+rotation = -0.492522
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -1442,7 +1446,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -1.30346
+rotation = -1.4485
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -1451,7 +1455,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = 0.105054
+rotation = 1.74595
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -1512,7 +1516,7 @@ shape = SubResource( 1 )
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
-rotation = 0.615477
+rotation = 0.475474
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -1522,14 +1526,14 @@ __meta__ = {
 
 [node name="legs" type="Position2D" parent="body"]
 position = Vector2( 0, 11.189 )
-rotation = -0.130504
+rotation = -0.78557
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = -1.33391
+rotation = -1.39875
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1539,7 +1543,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 1.41285
+rotation = 1.18073
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1548,7 +1552,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.0820513
+rotation = -0.039136
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1563,7 +1567,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -1.36302
+rotation = -1.4012
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1574,7 +1578,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.899887
+rotation = 0.930426
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1583,7 +1587,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = 0.0921449
+rotation = 0.115387
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1611,7 +1615,6 @@ shape = SubResource( 3 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 60 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
 "parameters/TimeScale 2/scale" = 1.8
@@ -1661,22 +1664,16 @@ anims/shoot_minus_45_degrees = SubResource( 62 )
 anims/shoot_minus_60_degrees = ExtResource( 45 )
 anims/shoot_minus_90_degrees = ExtResource( 44 )
 anims/slide = SubResource( 63 )
+"anims/slide (copy)" = ExtResource( 76 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
-
-[node name="Slide-spritesheet" type="Sprite" parent="."]
-visible = false
-position = Vector2( 122.257, -12.6093 )
-scale = Vector2( 0.564, 0.564 )
-texture = ExtResource( 75 )
-hframes = 4
-frame = 3
 
 [node name="ShootVector" type="Position2D" parent="."]
 position = Vector2( -0.027, -10.536 )
 rotation = -0.00144567
 
 [node name="ground" type="Sprite" parent="."]
+visible = false
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 7.085, 59.466 )
 scale = Vector2( 1, 0.139654 )
