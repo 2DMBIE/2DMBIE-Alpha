@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=28]
+[ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -2330,28 +2331,6 @@ Selected_Weapon = 4
 position = Vector2( 1408, -2208 )
 Selected_Weapon = 1
 
-[node name="Doors" type="YSort" parent="."]
-
-[node name="Door9" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door8" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door6" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door2" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door3" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door4" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door5" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door7" parent="Doors" instance=ExtResource( 27 )]
-
-[node name="Door10" parent="Doors" instance=ExtResource( 27 )]
-
 [node name="PauseMenu" parent="." instance=ExtResource( 27 )]
 layer = 2
 
@@ -2370,8 +2349,40 @@ text = "Options"
 align = 1
 valign = 1
 
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Door6" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1984, -2272 )
+
+[node name="Door2" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 576, -480 )
+
+[node name="Door" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1216, -224 )
+
+[node name="Door3" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1792, -736 )
+
+[node name="Door4" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1216, -1504 )
+
+[node name="Door5" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 2816, -2272 )
+
+[node name="Door7" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3392, -1504 )
+
+[node name="Door8" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3008, -1248 )
+
+[node name="Door9" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3008, -736 )
+
+[node name="Door10" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3264, -224 )
+
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
