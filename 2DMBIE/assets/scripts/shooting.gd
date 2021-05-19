@@ -74,12 +74,12 @@ func _process(_delta):
 			var _facing2 = get_mouse_facing()
 			if _facing1 != _facing2: # The player is aiming left while r
 				backfiring = true
+				emit_signal("on_backfire_event", true)
 			else:
 				backfiring = false
-			emit_signal("on_backfire_event", backfiring)
-			#print("facing1: " + str(_facing1))
-			#print("facing2: " + str(_facing2))
 		elif not Input.is_action_pressed("aim"): #not aiming
+			if not backfiring:
+				emit_signal("on_backfire_event", false)
 			emit_signal("no_aim_shoot", true)
 			var facingDir = 10
 			var facing = get_node("../../../../").facing

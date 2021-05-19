@@ -366,7 +366,11 @@ func _on_backfire_event(backfiring):
 		_sprint_timer.connect("timeout", self, "on_sprint_timer_complete")
 		add_child(_sprint_timer)
 		_sprint_timer.start()
-
+	else:
+		running_disabled = false
+		# Debug Goal: Backfiring started
+		# Still backfiring
+		# Backfiring ended
 func on_sprint_timer_complete():
 	# if the timer is done and the player is still backfiring then restart the timer without disabling running var.
 	# No signal, but a backfiring var!
