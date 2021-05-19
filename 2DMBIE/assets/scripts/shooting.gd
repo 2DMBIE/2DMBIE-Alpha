@@ -76,9 +76,10 @@ func _process(_delta):
 				backfiring = true
 			else:
 				backfiring = false
-			emit_signal("on_backfire_event", backfiring)
-			#print("facing1: " + str(_facing1))
-			#print("facing2: " + str(_facing2))
+			
+			if Input.is_action_pressed("sprint") and backfiring:
+				emit_signal("on_backfire_event")
+		
 		elif not Input.is_action_pressed("aim"): #not aiming
 			emit_signal("no_aim_shoot", true)
 			var facingDir = 10

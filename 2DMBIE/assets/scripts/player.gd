@@ -41,14 +41,18 @@ func _physics_process(_delta):
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
 	$Score.text = str("Score:") + str(Global.Score)
-
+	
 	if Input.is_action_just_pressed("knife") and not is_knifing:
 		get_node("body/chest/torso/gun").visible = false
 		get_node("body/chest/torso/gun").is_holding_knife = true
 		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
 		knifing_hitbox_enabled = true
 		$AnimationTree.set("parameters/knifing/current", false)
-
+	
+	if running_disabled && Input.is_action_just_pressed("sprint"):
+		get_node("body/chest/torso/gun").backfiring = false
+		running_disabled = false
+	
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		if is_running():
 			$AnimationTree.set("parameters/running/current", 0)
@@ -247,6 +251,7 @@ func aim(string):
 	else:
 		$AnimationTree.set("parameters/aim_state/current", 1)
 		return false
+
 #health system
 export (float) var maxHealth = 1200
 
@@ -357,24 +362,6 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
 
-func _on_backfire_event(backfiring):
-	if backfiring:
-		running_disabled = true
-		var _sprint_timer = Timer.new()
-		_sprint_timer.one_shot = true
-		_sprint_timer.wait_time = 1
-		_sprint_timer.connect("timeout", self, "on_sprint_timer_complete")
-		add_child(_sprint_timer)
-		_sprint_timer.start()
-
-func on_sprint_timer_complete():
-	# if the timer is done and the player is still backfiring then restart the timer without disabling running var.
-	# No signal, but a backfiring var!
-	var _backfiring = get_node("body/chest/torso/gun").backfiring
-	if _backfiring:
-		_on_backfire_event(true)
-	else:
-		pass
-		#running_disabled = false
-	#print(backfiring)
-	#running_disabled = false
+func _on_backfire_event():
+	print("yo")
+	running_disabled = true
