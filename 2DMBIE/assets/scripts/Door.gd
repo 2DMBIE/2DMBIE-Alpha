@@ -25,5 +25,7 @@ func _on_doorarea_body_exited(body):
 func buy_door():
 	$doorarea/CollisionShape2D.disabled = true
 	$door.disabled = true
+#	$doorSprite.position.y -= 160
+	$doorSprite.visible = false
 	Global.Score -= price
 

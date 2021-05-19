@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scripts/Door.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/door.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 80 )
@@ -34,6 +35,13 @@ text = "500 geld"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="doorSprite" type="Sprite" parent="."]
+position = Vector2( 32, 80 )
+scale = Vector2( 1, 1.25 )
+z_index = 10
+z_as_relative = false
+texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="doorarea" to="." method="_on_doorarea_body_entered"]
 [connection signal="body_exited" from="doorarea" to="." method="_on_doorarea_body_exited"]
