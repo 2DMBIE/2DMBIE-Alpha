@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
@@ -11,9 +11,6 @@
 [ext_resource path="res://assets/scenes/purchasable_weapons.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=10]
 [ext_resource path="res://assets/scenes/purchasable_perks.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/scripts/perks/HealthPerk.gd" type="Script" id=12]
-[ext_resource path="res://assets/scripts/perks/purchasable_perks.gd" type="Script" id=13]
-[ext_resource path="res://assets/scripts/perks/MovementPerk.gd" type="Script" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -96,35 +93,32 @@ position = Vector2( 44.5449, -151.453 )
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
 position = Vector2( 512, -192 )
 
-[node name="M4A1" parent="." instance=ExtResource( 9 )]
+[node name="Weapons" type="Node" parent="."]
+
+[node name="M4A1" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 80.2725, -173.003 )
 
-[node name="MP5" parent="." instance=ExtResource( 9 )]
+[node name="MP5" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 640, -512 )
 Selected_Weapon = 0
 
-[node name="SPAS12" parent="." instance=ExtResource( 9 )]
+[node name="SPAS12" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 384, -248 )
 Selected_Weapon = 1
 
-[node name="BARRETT50" parent="." instance=ExtResource( 9 )]
-position = Vector2( 297.753, -507.739 )
-Selected_Weapon = 4
-
-[node name="AK12" parent="." instance=ExtResource( 9 )]
+[node name="AK12" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 640, -248 )
 Selected_Weapon = 3
 
-[node name="Perks" type="Node" parent="."]
-script = ExtResource( 13 )
+[node name="BARRETT50" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( 297.753, -507.739 )
+Selected_Weapon = 4
 
-[node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( -440, -256 )
-script = ExtResource( 12 )
+[node name="Perks" type="Node" parent="."]
 
 [node name="MovementPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -958.016, -257.887 )
-script = ExtResource( 14 )
+Selected_Perk = 1
 
-[connection signal="on_healthperk_event" from="Perks/HealthPerk" to="Player" method="on_healthperk_event"]
-[connection signal="on_movementperk_event" from="Perks/MovementPerk" to="Player" method="on_movementperk_event"]
+[node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
+position = Vector2( -440, -256 )
