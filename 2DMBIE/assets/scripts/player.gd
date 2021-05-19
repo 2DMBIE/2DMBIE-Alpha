@@ -24,7 +24,6 @@ var is_knifing = false
 var knifing_hitbox_enabled = false
 
 
-# No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
 	zombie_dam_timer = Timer.new()
@@ -130,7 +129,7 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 			
-	if Input.is_action_pressed("crouch"):
+	if Input.is_action_pressed("crouch") and not Input.is_action_pressed("slide"):
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
@@ -146,8 +145,11 @@ func _physics_process(_delta):
 		$CollisionShape2D.disabled = false
 		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
-		
-			
+	
+	if Input.is_action_pressed("slide") and not Input.is_action_pressed("crouch"): # Timer slider cooldown!
+		get_node("body/chest/torso/gun").visible = false
+		$AnimationTree.set("parameters/sliding/current", 0)
+		# disable guns (no shooting or knifing)
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -356,3 +358,7 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
+
+func on_slide_animation_complete():
+	$AnimationTree.set("parameters/sliding/current", 1)	
+	get_node("body/chest/torso/gun").visible = true
