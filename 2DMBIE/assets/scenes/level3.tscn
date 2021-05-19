@@ -110,5 +110,3 @@ Selected_Weapon = 4
 [node name="AK12" parent="." instance=ExtResource( 9 )]
 position = Vector2( 663.459, -246.926 )
 Selected_Weapon = 3
-
-[connection signal="play_sound" from="Zombie" to="Zombie/sfx" method="play_sound"]
