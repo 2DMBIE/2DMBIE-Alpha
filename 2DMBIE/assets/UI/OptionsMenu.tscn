@@ -1,0 +1,249 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
+[ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="Options" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+rect_pivot_offset = Vector2( 472, -21 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_right = 512.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_top = 125.0
+margin_right = 512.0
+margin_bottom = 205.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Button" parent="HBoxContainer"]
+margin_left = 162.0
+margin_right = 264.0
+margin_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Audio"
+flat = true
+
+[node name="Video" type="Button" parent="HBoxContainer"]
+margin_left = 304.0
+margin_right = 403.0
+margin_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Video"
+flat = true
+
+[node name="Controls" type="Button" parent="HBoxContainer"]
+margin_left = 443.0
+margin_right = 587.0
+margin_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Controls"
+flat = true
+
+[node name="GameOptions" type="Button" parent="HBoxContainer"]
+margin_left = 627.0
+margin_right = 861.0
+margin_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 2 )
+text = "Game Options"
+flat = true
+
+[node name="Container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -512.0
+margin_top = 205.0
+margin_right = 512.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="Container"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 141.0
+custom_fonts/font = ExtResource( 2 )
+text = "
+
+Welcome to the options! Today we serve unchangable values!"
+align = 1
+valign = 1
+
+[node name="Audio" type="HBoxContainer" parent="Container"]
+visible = false
+margin_top = 145.0
+margin_right = 1024.0
+margin_bottom = 348.0
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="Container/Audio"]
+margin_left = 256.0
+margin_right = 768.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 512, 0 )
+alignment = 1
+
+[node name="Master" type="Label" parent="Container/Audio/VBox"]
+margin_right = 512.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="Container/Audio/VBox"]
+margin_top = 49.0
+margin_right = 512.0
+margin_bottom = 65.0
+
+[node name="Music" type="Label" parent="Container/Audio/VBox"]
+margin_right = 512.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="Container/Audio/VBox"]
+margin_top = 49.0
+margin_right = 512.0
+margin_bottom = 65.0
+
+[node name="SoundEffects" type="Label" parent="Container/Audio/VBox"]
+margin_right = 512.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sound Effects"
+
+[node name="SoundEffectsSlider" type="HSlider" parent="Container/Audio/VBox"]
+margin_top = 49.0
+margin_right = 512.0
+margin_bottom = 65.0
+
+[node name="Video" type="Label" parent="Container"]
+visible = false
+margin_top = 145.0
+margin_right = 1024.0
+margin_bottom = 190.0
+custom_fonts/font = ExtResource( 2 )
+text = "Video!"
+align = 1
+valign = 1
+
+[node name="Controls" type="HBoxContainer" parent="Container"]
+margin_right = 1024.0
+margin_bottom = 50.0
+custom_constants/separation = 100
+alignment = 1
+
+[node name="VBoxLeft" type="VBoxContainer" parent="Container/Controls"]
+margin_left = 112.0
+margin_right = 462.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Container/Controls/VBoxLeft"]
+margin_right = 350.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 350, 50 )
+text = "Type here!"
+
+[node name="VBoxRight" type="VBoxContainer" parent="Container/Controls"]
+margin_left = 562.0
+margin_right = 912.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( -889, -51 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Controls/VBoxRight"]
+margin_right = 350.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="CheckButton" type="CheckButton" parent="Container/Controls/VBoxRight/HBoxContainer"]
+margin_right = 350.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 350, 50 )
+mouse_default_cursor_shape = 2
+custom_styles/focus = SubResource( 4 )
+text = "TEXT"
+
+[node name="GameOptions" type="Label" parent="Container"]
+visible = false
+margin_top = 49.0
+margin_right = 1024.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 2 )
+text = "Game Options!"
+align = 1
+valign = 1
+
+[connection signal="button_down" from="HBoxContainer/Audio" to="." method="_on_Audio_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/Audio" to="." method="_on_Audio_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Audio" to="." method="_on_Audio_mouse_exited"]
+[connection signal="button_down" from="HBoxContainer/Video" to="." method="_on_Video_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/Video" to="." method="_on_Video_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Video" to="." method="_on_Video_mouse_exited"]
+[connection signal="button_down" from="HBoxContainer/Controls" to="." method="_on_Controls_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/Controls" to="." method="_on_Controls_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Controls" to="." method="_on_Controls_mouse_exited"]
+[connection signal="button_down" from="HBoxContainer/GameOptions" to="." method="_on_GameOptions_button_down"]
+[connection signal="mouse_entered" from="HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_exited"]
