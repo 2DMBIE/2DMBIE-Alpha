@@ -14,6 +14,11 @@ var enemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 
+# Debug
+var aim = true
+var camera = true
+var brightness = false
+
 func _process(_delta):
 	maxHealth = clamp(maxHealth, 500, 1500)
 	EnemyDamage = clamp(EnemyDamage, 300, 600)

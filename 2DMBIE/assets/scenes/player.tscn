@@ -997,6 +997,7 @@ z_as_relative = false
 texture = ExtResource( 73 )
 
 [node name="KnifeHitbox" type="Area2D" parent="body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife"]
+visible = false
 position = Vector2( -18.0182, -18.0911 )
 rotation = 0.897531
 scale = Vector2( 1.19048, 1.19048 )
@@ -1211,10 +1212,9 @@ shape = SubResource( 62 )
 wait_time = 2.0
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
+[node name="Aimzone" type="Area2D" parent="."]
 
-[node name="shootzone" type="CollisionShape2D" parent="Area2D"]
+[node name="shootzone" type="CollisionShape2D" parent="Aimzone"]
 shape = SubResource( 63 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
@@ -1223,6 +1223,7 @@ one_shot = true
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
+[connection signal="on_backfire_event" from="body/chest/torso/gun" to="." method="_on_backfire_event"]
 [connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
 [connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
 [connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="set_gun_recoil_sensitivity"]
@@ -1233,5 +1234,5 @@ one_shot = true
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_groundChecker_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="mouse_entered" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_entered"]
-[connection signal="mouse_exited" from="Area2D" to="body/chest/torso/gun" method="_on_aimzone_exited"]
+[connection signal="mouse_entered" from="Aimzone" to="body/chest/torso/gun" method="_on_aimzone_entered"]
+[connection signal="mouse_exited" from="Aimzone" to="body/chest/torso/gun" method="_on_aimzone_exited"]

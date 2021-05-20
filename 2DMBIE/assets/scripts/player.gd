@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var pivotScript = preload("res://assets/scripts/pivot.gd")
+
 var velocity = Vector2(0,0)
 
 const UP = Vector2(0, -1)
@@ -12,7 +14,6 @@ const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 
 var motion = Vector2()
-var is_running = false
 var crouch_idle = false
 var facing = "right"
 var collision
@@ -22,6 +23,7 @@ var mousePos
 var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
+var running_disabled = false
 
 
 # No_aim animation -> aim animation recoil met naam: no_aim_shoot
@@ -37,6 +39,7 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
+	
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
@@ -50,9 +53,13 @@ func _physics_process(_delta):
 		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
 		knifing_hitbox_enabled = true
 		$AnimationTree.set("parameters/knifing/current", false)
-
+	
+	if running_disabled && Input.is_action_just_pressed("sprint"):
+		get_node("body/chest/torso/gun").backfiring = false
+		running_disabled = false
+	
 	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		if is_running:
+		if is_running():
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("left")
 			motion.x -= RUN_ACCELERATION
@@ -63,7 +70,7 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running == false:
+		elif is_running() == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
 			motion.x = max(motion.x, -MAX_WALK_SPEED)
@@ -78,7 +85,7 @@ func _physics_process(_delta):
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
 	elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-		if is_running:
+		if is_running():
 			$AnimationTree.set("parameters/running/current", 0)
 			direction("right")
 			if (motion.x < -50):
@@ -89,7 +96,7 @@ func _physics_process(_delta):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running == false: 
+		elif is_running() == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
 			motion.x = min(motion.x, MAX_WALK_SPEED)
@@ -111,7 +118,6 @@ func _physics_process(_delta):
 		friction = true
 		walk_idle_transition()
 		motion.x = lerp(motion.x, 0, 0.3)
-		is_running = false
 		
 	if is_on_floor():
 		if Input.is_action_just_pressed("move_down"):
@@ -124,7 +130,6 @@ func _physics_process(_delta):
 			$AnimationTree.set("parameters/in_air_state/current", 1)
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.3)
-		running()
 	else:
 		#aim("walking")
 		if friction == true:
@@ -170,15 +175,12 @@ func get_direction():
 		return "right"
 	return "null"
 	
-func running():	
-	if Input.is_action_just_pressed("sprint") and is_running == false:
-		is_running = true
-	elif Input.is_action_just_pressed("sprint") and is_running:
-		is_running = false
-		
-	if Input.is_action_pressed("sprint"):
-		is_running = true
-			
+func is_running():	
+	if Input.is_action_pressed("sprint") and not running_disabled:
+		return true
+	else:
+		return false
+
 func walk_idle_transition():
 	var speed = motion.x
 	if speed < 0:
@@ -188,65 +190,81 @@ func walk_idle_transition():
 
 	if (speed < 105) && (speed > 12.9): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.15)
+		running_disabled = false
 		return
 	elif (speed < 12.9) && (speed > 0.73): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.32)
+		running_disabled = false
 		return
 	elif (speed < 0.73) && (speed > 0.042): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.4) 
+		running_disabled = false
 		return
 	elif (speed < 0.042) && (speed > 0.0024): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.6)
+		running_disabled = false
 		return
 	elif (speed < 0.0024) && (speed > 0.000141): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.75)
+		running_disabled = false
 		return
 	elif (speed < 0.000141) && (speed > 0.000008): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.9)
+		running_disabled = false
 		return
 	elif (speed < 0.000008) && !($AnimationTree.get("parameters/walk-idle/blend_amount") == 1):  #&& (speed > 0.000001): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 1)
+		running_disabled = false
 		return
 		
 func aim(string):
+	if Global.aim:
+		if Input.is_action_pressed("aim"):
+			aim_feature(string)
+			return true
+		else:
+			$AnimationTree.set("parameters/aim_state/current", 1)
+			return false
+	else:
+		aim_feature(string)
+		return true
+
+func aim_feature(string):
 	var walking = false
 	if (string == "walking"):
 		walking = true
-	if Input.is_action_pressed("aim"):
-		$AnimationTree.set("parameters/aim_state/current", 0)
-		var positionA = $ShootVector.position
-		var positionB = get_local_mouse_position()
-		var angle_radians = positionA.angle_to_point(positionB)
-		var angle_degrees = angle_radians*180/PI
-		
-		
-		if (angle_degrees >= -90) && (angle_degrees <= 90):
-			$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
-			$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
-			if (walking) || !is_on_floor(): 
-				direction("left")
-			return true
-		elif (angle_degrees > 90) && (angle_degrees < 180):
-			var x = 90-angle_degrees
-			x = 90+x 
-			$AnimationTree.set("parameters/aim/blend_position", x)
-			$AnimationTree.set("parameters/aim2/blend_position", x)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", x)
-			if (walking) || !is_on_floor(): 
-				direction("right")
-			return true
-		elif (angle_degrees > -180) && (angle_degrees < -90):
-			var y = -180-angle_degrees
-			$AnimationTree.set("parameters/aim/blend_position", y)
-			$AnimationTree.set("parameters/aim2/blend_position", y)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", y)
-			if (walking) || !is_on_floor(): 
-				direction("right")
-			return true
-	else:
-		$AnimationTree.set("parameters/aim_state/current", 1)
-		return false
+	
+	$AnimationTree.set("parameters/aim_state/current", 0)
+	var positionA = $ShootVector.position
+	var positionB = get_local_mouse_position()
+	var angle_radians = positionA.angle_to_point(positionB)
+	var angle_degrees = angle_radians*180/PI
+	
+	
+	if (angle_degrees >= -90) && (angle_degrees <= 90):
+		$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
+		$AnimationTree.set("parameters/aim2/blend_position", angle_degrees)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", angle_degrees)
+		if (walking) || !is_on_floor(): 
+			direction("left")
+		return true
+	elif (angle_degrees > 90) && (angle_degrees < 180):
+		var x = 90-angle_degrees
+		x = 90+x 
+		$AnimationTree.set("parameters/aim/blend_position", x)
+		$AnimationTree.set("parameters/aim2/blend_position", x)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", x)
+		if (walking) || !is_on_floor(): 
+			direction("right")
+		return true
+	elif (angle_degrees > -180) && (angle_degrees < -90):
+		var y = -180-angle_degrees
+		$AnimationTree.set("parameters/aim/blend_position", y)
+		$AnimationTree.set("parameters/aim2/blend_position", y)
+		$AnimationTree.set("parameters/shoot_angle/blend_position", y)
+		if (walking) || !is_on_floor(): 
+			direction("right")
+
 #health system
 var maxHealth = 1200
 
@@ -352,3 +370,6 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
+
+func _on_backfire_event():
+	running_disabled = true
