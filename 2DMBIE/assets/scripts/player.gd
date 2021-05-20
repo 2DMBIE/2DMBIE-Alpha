@@ -6,10 +6,10 @@ var velocity = Vector2(0,0)
 
 const UP = Vector2(0, -1)
 var GRAVITY = 20
-const WALK_ACCELERATION = 25 #old 20
-const RUN_ACCELERATION = 20
-const MAX_WALK_SPEED = 130 #old 110 
-const MAX_RUN_SPEED = 330
+var WALK_ACCELERATION = 25 #old 20
+var RUN_ACCELERATION = 20
+var MAX_WALK_SPEED = 130 #old 110 
+var MAX_RUN_SPEED = 330
 const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 
@@ -23,10 +23,10 @@ var mousePos
 var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
+var is_sliding = false
+var _is_already_crouching = false
 var running_disabled = false
 
-
-# No_aim animation -> aim animation recoil met naam: no_aim_shoot
 func _ready():
 	$AnimationTree.active = true
 	zombie_dam_timer = Timer.new()
@@ -134,13 +134,27 @@ func _physics_process(_delta):
 		#aim("walking")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
-			
-	if Input.is_action_pressed("crouch"):
+	var _is_standing_still = motion.x > -21 and motion.x < 21
+	if Input.is_action_just_pressed("crouch-slide") and not _is_standing_still and not is_sliding and is_on_floor(): # Timer slider cooldown!
+		is_sliding = true
+		$AnimationTree.set("parameters/sliding/current", 0)
+		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
+		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
+		is_knifing = true # disable knifing 
+		get_node("Hitbox").set_collision_mask_bit(3, false)
+		self.set_collision_mask_bit(3, false)
+		knifing_hitbox_enabled = false
+		WALK_ACCELERATION = 35 #old 20
+		RUN_ACCELERATION = 40
+		MAX_WALK_SPEED = 230 #old 110 
+		MAX_RUN_SPEED = 430
+	if Input.is_action_pressed("crouch-slide") and (_is_standing_still or _is_already_crouching):
+		_is_already_crouching = true
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
 		else: 
-			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1)
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
 		$CollisionShape2D.disabled = true
 		$CollisionShape2DCrouch.disabled = false
 		if is_on_floor():
@@ -151,8 +165,7 @@ func _physics_process(_delta):
 		$CollisionShape2D.disabled = false
 		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
-		
-			
+		_is_already_crouching = false
 		
 	motion = move_and_slide(motion, UP)
 	pass
@@ -370,6 +383,20 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
+
+func on_slide_animation_complete():
+	$AnimationTree.set("parameters/sliding/current", 1)
+	$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
+	get_node("body/chest/torso/gun").shooting_disabled = false
+	get_node("Hitbox").set_collision_mask_bit(3, true)
+	self.set_collision_mask_bit(3, true)
+	knifing_hitbox_enabled = true
+	is_knifing = false
+	is_sliding = false
+	WALK_ACCELERATION = 25 #old 20
+	RUN_ACCELERATION = 20
+	MAX_WALK_SPEED = 130 #old 110 
+	MAX_RUN_SPEED = 330
 
 func _on_backfire_event():
 	running_disabled = true

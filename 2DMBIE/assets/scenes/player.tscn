@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://assets/animations/run-animation.tres" type="Animation" id=32]
 [ext_resource path="res://assets/scripts/shooting.gd" type="Script" id=33]
 [ext_resource path="res://assets/scripts/pivot.gd" type="Script" id=34]
+[ext_resource path="res://assets/animations/base_position_player.tres" type="Animation" id=35]
 [ext_resource path="res://assets/animations/crouching-animation.tres" type="Animation" id=36]
 [ext_resource path="res://assets/animations/crouching-idle-animation.tres" type="Animation" id=37]
 [ext_resource path="res://assets/animations/shoot/shoot_minus_30_degrees.tres" type="Animation" id=38]
@@ -73,6 +74,7 @@
 [ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 [ext_resource path="res://assets/sprites/knife.png" type="Texture" id=73]
 [ext_resource path="res://assets/animations/knife_attack.tres" type="Animation" id=74]
+[ext_resource path="res://assets/animations/slide-animation2.tres" type="Animation" id=76]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -88,183 +90,175 @@ height = 45.0
 [sub_resource type="AnimationNodeAdd2" id=4]
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "walk"
+animation = "slide (copy)"
 
 [sub_resource type="AnimationNodeAnimation" id=6]
-animation = "jump"
+animation = "walk"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
-animation = "walk (reversed)"
+animation = "jump"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
-animation = "run"
+animation = "walk (reversed)"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "no_aim"
+animation = "run"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
-animation = "crouching"
+animation = "no_aim"
 
 [sub_resource type="AnimationNodeAnimation" id=11]
-animation = "crouching-idle"
+animation = "crouching"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
-animation = "no_aim_shoot"
+animation = "crouching-idle"
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "idle"
+animation = "no_aim_shoot"
 
-[sub_resource type="AnimationNodeTimeScale" id=14]
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "idle"
 
 [sub_resource type="AnimationNodeTimeScale" id=15]
 
-[sub_resource type="AnimationNodeAnimation" id=16]
-animation = "aim_minus_90_degrees"
+[sub_resource type="AnimationNodeTimeScale" id=16]
 
 [sub_resource type="AnimationNodeAnimation" id=17]
-animation = "aim_90_degrees"
+animation = "aim_minus_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=18]
-animation = "aim_45_degrees"
+animation = "aim_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=19]
-animation = "aim_60_degrees"
+animation = "aim_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
-animation = "aim_minus_30_degrees"
+animation = "aim_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=21]
-animation = "aim_minus_45_degrees"
+animation = "aim_minus_30_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=22]
-animation = "aim_minus_60_degrees"
+animation = "aim_minus_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=23]
-animation = "aim_0_degrees"
+animation = "aim_minus_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=24]
+animation = "aim_0_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=25]
-blend_point_0/node = SubResource( 16 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=26]
+blend_point_0/node = SubResource( 17 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 17 )
+blend_point_1/node = SubResource( 18 )
 blend_point_1/pos = 90.0
-blend_point_2/node = SubResource( 18 )
+blend_point_2/node = SubResource( 19 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 19 )
+blend_point_3/node = SubResource( 20 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 20 )
+blend_point_4/node = SubResource( 21 )
 blend_point_4/pos = -30.0
-blend_point_5/node = SubResource( 21 )
+blend_point_5/node = SubResource( 22 )
 blend_point_5/pos = -45.0
-blend_point_6/node = SubResource( 22 )
+blend_point_6/node = SubResource( 23 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 23 )
+blend_point_7/node = SubResource( 24 )
 blend_point_7/pos = 0.0
-blend_point_8/node = SubResource( 24 )
+blend_point_8/node = SubResource( 25 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "aim_0_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "aim_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "aim_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "aim_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "aim_minus_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "aim_minus_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "aim_minus_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "aim_minus_45_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=35]
-blend_point_0/node = SubResource( 26 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=36]
+blend_point_0/node = SubResource( 27 )
 blend_point_0/pos = 0.0
-blend_point_1/node = SubResource( 27 )
+blend_point_1/node = SubResource( 28 )
 blend_point_1/pos = 30.0
-blend_point_2/node = SubResource( 28 )
+blend_point_2/node = SubResource( 29 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 29 )
+blend_point_3/node = SubResource( 30 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 30 )
+blend_point_4/node = SubResource( 31 )
 blend_point_4/pos = 90.0
-blend_point_5/node = SubResource( 31 )
+blend_point_5/node = SubResource( 32 )
 blend_point_5/pos = -90.0
-blend_point_6/node = SubResource( 32 )
+blend_point_6/node = SubResource( 33 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 33 )
+blend_point_7/node = SubResource( 34 )
 blend_point_7/pos = -30.0
-blend_point_8/node = SubResource( 34 )
+blend_point_8/node = SubResource( 35 )
 blend_point_8/pos = -45.0
 min_space = -90.0
 max_space = 90.0
 
-[sub_resource type="AnimationNodeTransition" id=36]
+[sub_resource type="AnimationNodeTransition" id=37]
 input_count = 2
 input_0/name = "aiming"
 input_0/auto_advance = false
 input_1/name = "not_aiming"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlend2" id=37]
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "base_position"
 
-[sub_resource type="AnimationNodeTransition" id=38]
+[sub_resource type="AnimationNodeBlend2" id=39]
+
+[sub_resource type="AnimationNodeTransition" id=40]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=39]
+[sub_resource type="AnimationNodeTransition" id=41]
 input_count = 2
 input_0/name = "true"
 input_0/auto_advance = false
 input_1/name = "false"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAdd2" id=40]
+[sub_resource type="AnimationNodeAdd2" id=42]
 
-[sub_resource type="AnimationNodeTransition" id=41]
+[sub_resource type="AnimationNodeTransition" id=43]
 input_count = 2
 input_0/name = "ground"
 input_0/auto_advance = false
 input_1/name = "air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=42]
+[sub_resource type="AnimationNodeAnimation" id=44]
 animation = "knife_attack"
-
-[sub_resource type="AnimationNodeTransition" id=43]
-input_count = 2
-input_0/name = "yes"
-input_0/auto_advance = false
-input_1/name = "no"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeTransition" id=44]
-input_count = 2
-input_0/name = "yes"
-input_0/auto_advance = false
-input_1/name = "no"
-input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeTransition" id=45]
 input_count = 2
@@ -273,124 +267,160 @@ input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=46]
-animation = "shoot_minus_90_degrees"
+[sub_resource type="AnimationNodeTransition" id=46]
+input_count = 2
+input_0/name = "yes"
+input_0/auto_advance = false
+input_1/name = "no"
+input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=47]
-animation = "shoot_minus_60_degrees"
+[sub_resource type="AnimationNodeTransition" id=47]
+input_count = 2
+input_0/name = "yes"
+input_0/auto_advance = false
+input_1/name = "no"
+input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeAnimation" id=48]
-animation = "shoot_minus_45_degrees"
+animation = "shoot_minus_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=49]
-animation = "shoot_minus_30_degrees"
+animation = "shoot_minus_60_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=50]
-animation = "shoot_0_degrees"
+animation = "shoot_minus_45_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=51]
-animation = "shoot_90_degrees"
+animation = "shoot_minus_30_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=52]
-animation = "shoot_60_degrees"
+animation = "shoot_0_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=53]
-animation = "shoot_45_degrees"
+animation = "shoot_90_degrees"
 
 [sub_resource type="AnimationNodeAnimation" id=54]
+animation = "shoot_60_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "shoot_45_degrees"
+
+[sub_resource type="AnimationNodeAnimation" id=56]
 animation = "shoot_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=55]
-blend_point_0/node = SubResource( 46 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=57]
+blend_point_0/node = SubResource( 48 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 47 )
+blend_point_1/node = SubResource( 49 )
 blend_point_1/pos = -60.0
-blend_point_2/node = SubResource( 48 )
+blend_point_2/node = SubResource( 50 )
 blend_point_2/pos = -45.0
-blend_point_3/node = SubResource( 49 )
+blend_point_3/node = SubResource( 51 )
 blend_point_3/pos = -30.0
-blend_point_4/node = SubResource( 50 )
+blend_point_4/node = SubResource( 52 )
 blend_point_4/pos = 0.0
-blend_point_5/node = SubResource( 51 )
+blend_point_5/node = SubResource( 53 )
 blend_point_5/pos = 90.0
-blend_point_6/node = SubResource( 52 )
+blend_point_6/node = SubResource( 54 )
 blend_point_6/pos = 60.0
-blend_point_7/node = SubResource( 53 )
+blend_point_7/node = SubResource( 55 )
 blend_point_7/pos = 45.0
-blend_point_8/node = SubResource( 54 )
+blend_point_8/node = SubResource( 56 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 value_label = "0"
 
-[sub_resource type="AnimationNodeOneShot" id=56]
+[sub_resource type="AnimationNodeOneShot" id=58]
 fadein_time = 0.0
 fadeout_time = 0.0
 autorestart_delay = 0.0
 
-[sub_resource type="AnimationNodeBlend2" id=57]
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "slide"
 
-[sub_resource type="AnimationNodeBlendTree" id=58]
-graph_offset = Vector2( -185.8, 164.25 )
+[sub_resource type="AnimationNodeTransition" id=60]
+input_count = 2
+input_0/name = "yes"
+input_0/auto_advance = false
+input_1/name = "no"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlend2" id=61]
+
+[sub_resource type="AnimationNodeBlend2" id=62]
+
+[sub_resource type="AnimationNodeBlendTree" id=63]
+graph_offset = Vector2( -321.3, -433.44 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
-nodes/Animation/node = SubResource( 13 )
+nodes/Animation/node = SubResource( 14 )
 nodes/Animation/position = Vector2( -260, 280 )
-"nodes/Animation 2/node" = SubResource( 5 )
+"nodes/Animation 10/node" = SubResource( 5 )
+"nodes/Animation 10/position" = Vector2( 740, -280 )
+"nodes/Animation 2/node" = SubResource( 6 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
-"nodes/Animation 3/node" = SubResource( 6 )
+"nodes/Animation 3/node" = SubResource( 7 )
 "nodes/Animation 3/position" = Vector2( 220, 240 )
-"nodes/Animation 4/node" = SubResource( 7 )
+"nodes/Animation 4/node" = SubResource( 8 )
 "nodes/Animation 4/position" = Vector2( -480, 20 )
-"nodes/Animation 5/node" = SubResource( 8 )
+"nodes/Animation 5/node" = SubResource( 9 )
 "nodes/Animation 5/position" = Vector2( -220, -80 )
-"nodes/Animation 6/node" = SubResource( 9 )
+"nodes/Animation 6/node" = SubResource( 10 )
 "nodes/Animation 6/position" = Vector2( -80, 560 )
-"nodes/Animation 7/node" = SubResource( 10 )
+"nodes/Animation 7/node" = SubResource( 11 )
 "nodes/Animation 7/position" = Vector2( -100, -240 )
-"nodes/Animation 8/node" = SubResource( 11 )
+"nodes/Animation 8/node" = SubResource( 12 )
 "nodes/Animation 8/position" = Vector2( 60, -400 )
-"nodes/Animation 9/node" = SubResource( 12 )
+"nodes/Animation 9/node" = SubResource( 13 )
 "nodes/Animation 9/position" = Vector2( -20, 880 )
-nodes/TimeScale/node = SubResource( 15 )
+nodes/TimeScale/node = SubResource( 16 )
 nodes/TimeScale/position = Vector2( 0, -60 )
-"nodes/TimeScale 2/node" = SubResource( 14 )
+"nodes/TimeScale 2/node" = SubResource( 15 )
 "nodes/TimeScale 2/position" = Vector2( 80, -240 )
-nodes/aim/node = SubResource( 25 )
+nodes/aim/node = SubResource( 26 )
 nodes/aim/position = Vector2( -100, 440 )
-nodes/aim2/node = SubResource( 35 )
+nodes/aim2/node = SubResource( 36 )
 nodes/aim2/position = Vector2( -300, 780 )
-nodes/aim_state/node = SubResource( 36 )
+nodes/aim_state/node = SubResource( 37 )
 nodes/aim_state/position = Vector2( 160, 480 )
-nodes/crouch-idle/node = SubResource( 37 )
+"nodes/base position player/node" = SubResource( 38 )
+"nodes/base position player/position" = Vector2( 700, -40 )
+nodes/crouch-idle/node = SubResource( 39 )
 nodes/crouch-idle/position = Vector2( 320, -200 )
-nodes/crouching/node = SubResource( 38 )
+nodes/crouching/node = SubResource( 40 )
 nodes/crouching/position = Vector2( 440, 40 )
-nodes/fixed_aim/node = SubResource( 39 )
+nodes/fixed_aim/node = SubResource( 41 )
 nodes/fixed_aim/position = Vector2( 240, 660 )
-nodes/gun_recoil_sensitivity/node = SubResource( 40 )
+nodes/gun_recoil_sensitivity/node = SubResource( 42 )
 nodes/gun_recoil_sensitivity/position = Vector2( -60, 680 )
-nodes/in_air_state/node = SubResource( 41 )
+nodes/in_air_state/node = SubResource( 43 )
 nodes/in_air_state/position = Vector2( 600, 160 )
-nodes/knife/node = SubResource( 42 )
+nodes/knife/node = SubResource( 44 )
 nodes/knife/position = Vector2( 440, 360 )
-nodes/knifing/node = SubResource( 43 )
+nodes/knifing/node = SubResource( 45 )
 nodes/knifing/position = Vector2( 720, 340 )
-nodes/moonwalking/node = SubResource( 44 )
+nodes/moonwalking/node = SubResource( 46 )
 nodes/moonwalking/position = Vector2( -240, 80 )
-nodes/output/position = Vector2( 1080, 160 )
-nodes/running/node = SubResource( 45 )
+nodes/output/position = Vector2( 1420, 100 )
+nodes/running/node = SubResource( 47 )
 nodes/running/position = Vector2( 180, 20 )
-nodes/shoot_angle/node = SubResource( 55 )
+nodes/shoot_angle/node = SubResource( 57 )
 nodes/shoot_angle/position = Vector2( -300, 660 )
-nodes/shooting/node = SubResource( 56 )
+nodes/shooting/node = SubResource( 58 )
 nodes/shooting/position = Vector2( 460, 560 )
-nodes/walk-idle/node = SubResource( 57 )
+nodes/slide/node = SubResource( 59 )
+nodes/slide/position = Vector2( 760, -160 )
+nodes/sliding/node = SubResource( 60 )
+nodes/sliding/position = Vector2( 1180, 100 )
+nodes/torso_reset/node = SubResource( 61 )
+nodes/torso_reset/position = Vector2( 960, -120 )
+nodes/walk-idle/node = SubResource( 62 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "Add2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "running", 0, "TimeScale", "running", 1, "walk-idle", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale", 0, "Animation 5", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "crouching", 0, "crouch-idle", "crouching", 1, "running" ]
+node_connections = [ "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=64]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -560,7 +590,7 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=65]
 length = 0.15
 step = 0.15
 tracks/0/type = "value"
@@ -756,13 +786,486 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=61]
+[sub_resource type="Animation" id=66]
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("body/chest:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 11.712 ), Vector2( 0, 11.712 ), Vector2( 0, 11.712 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("body/chest:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.8283, -24.7832 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("body/legs:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("body/legs:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -7.47731 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right/toes_right:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15.1624, 5.05409 ), Vector2( 15.1624, 5.05409 ), Vector2( 15.1624, 5.05409 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right/toes_right:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.506966, 14.393 ), Vector2( 0.506966, 14.393 ), Vector2( 0.506966, 14.393 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -3.86847, -4.70119, -4.70119 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("body/legs/thigh_right/lowerleg_right:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("body/legs/thigh_right/lowerleg_right:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 69.9595, 80.9504, 80.9504 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("body/legs/thigh_right:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("body/legs/thigh_right:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -66.323, -76.4271, -76.4271 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left/toes_left:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 12.9359, 4.65146 ), Vector2( 12.9359, 4.65146 ), Vector2( 12.9359, 4.65146 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left/toes_left:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 4.2704, 25.728, 5.27952 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("body/legs/thigh_left/lowerleg_left:position")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("body/legs/thigh_left/lowerleg_left:rotation_degrees")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 57.9819, 9.07934, 51.5597 ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("body/legs/thigh_left:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("body/legs/thigh_left:rotation_degrees")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -62.6332, -54.4563, -78.0952 ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("body:position")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 8.183 ), Vector2( 0, 13.865 ), Vector2( 0, 28.386 ) ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("body:rotation_degrees")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -15.0492, -34.0641 ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("body/chest/torso:position")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -15.094 ), Vector2( 0, -15.094 ), Vector2( 0, -15.094 ) ]
+}
+tracks/23/type = "value"
+tracks/23/path = NodePath("body/chest/torso:rotation_degrees")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -14.2207 ]
+}
+tracks/24/type = "value"
+tracks/24/path = NodePath("body/chest/torso/upperarm_left:position")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15.5659, -12.422 ), Vector2( 15.5659, -12.422 ), Vector2( 15.5659, -12.422 ) ]
+}
+tracks/25/type = "value"
+tracks/25/path = NodePath("body/chest/torso/upperarm_left:rotation_degrees")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -19.8409, -28.243, -30.9331 ]
+}
+tracks/26/type = "value"
+tracks/26/path = NodePath("body/chest/torso/head:position")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.0163317, -24.4058 ), Vector2( -0.0163317, -24.4058 ), Vector2( -0.0163317, -24.4058 ) ]
+}
+tracks/27/type = "value"
+tracks/27/path = NodePath("body/chest/torso/head:rotation_degrees")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 2.53344, 14.1844, 35.2642 ]
+}
+tracks/28/type = "value"
+tracks/28/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:position")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 18.566 ), Vector2( 0, 18.566 ), Vector2( 0, 18.566 ) ]
+}
+tracks/29/type = "value"
+tracks/29/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:rotation_degrees")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 7.34612, 22.9119, 6.01914 ]
+}
+tracks/30/type = "value"
+tracks/30/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:position")
+tracks/30/interp = 1
+tracks/30/loop_wrap = true
+tracks/30/imported = false
+tracks/30/enabled = true
+tracks/30/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.938873, 18.0288 ), Vector2( -0.938873, 18.0288 ), Vector2( -0.938873, 18.0288 ) ]
+}
+tracks/31/type = "value"
+tracks/31/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:rotation_degrees")
+tracks/31/interp = 1
+tracks/31/loop_wrap = true
+tracks/31/imported = false
+tracks/31/enabled = true
+tracks/31/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -87.4246, -94.9905, -74.6826 ]
+}
+tracks/32/type = "value"
+tracks/32/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:position")
+tracks/32/interp = 1
+tracks/32/loop_wrap = true
+tracks/32/imported = false
+tracks/32/enabled = true
+tracks/32/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1.01368, 20.0398 ), Vector2( -1.01368, 20.0398 ), Vector2( -1.01368, 20.0398 ) ]
+}
+tracks/33/type = "value"
+tracks/33/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:rotation_degrees")
+tracks/33/interp = 1
+tracks/33/loop_wrap = true
+tracks/33/imported = false
+tracks/33/enabled = true
+tracks/33/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -32.6852, 54.3629, 102.126 ]
+}
+tracks/34/type = "value"
+tracks/34/path = NodePath("body/chest/torso/upperarm_right:position")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -13.4064, -14.1956 ), Vector2( -13.4064, -14.1956 ), Vector2( -13.4064, -14.1956 ) ]
+}
+tracks/35/type = "value"
+tracks/35/path = NodePath("body/chest/torso/upperarm_right:rotation_degrees")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 18.3942, 41.3285, 120.373 ]
+}
+tracks/36/type = "value"
+tracks/36/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:position")
+tracks/36/interp = 1
+tracks/36/loop_wrap = true
+tracks/36/imported = false
+tracks/36/enabled = true
+tracks/36/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.33635, 15.2045 ), Vector2( 1.33635, 15.2045 ), Vector2( 1.33635, 15.2045 ) ]
+}
+tracks/37/type = "value"
+tracks/37/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:rotation_degrees")
+tracks/37/interp = 1
+tracks/37/loop_wrap = true
+tracks/37/imported = false
+tracks/37/enabled = true
+tracks/37/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -3.5147, -17.7277, -4.00039 ]
+}
+tracks/38/type = "method"
+tracks/38/path = NodePath(".")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_slide_animation_complete"
+} ]
+}
+
+[sub_resource type="CapsuleShape2D" id=67]
 radius = 25.0
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=62]
+[sub_resource type="RectangleShape2D" id=68]
 
-[sub_resource type="CapsuleShape2D" id=63]
+[sub_resource type="CapsuleShape2D" id=69]
 radius = 77.2063
 height = 28.0385
 
@@ -775,7 +1278,7 @@ collision_mask = 2147483774
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 0.563 )
+position = Vector2( 0, 1.11696 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -786,9 +1289,7 @@ texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
-visible = false
-position = Vector2( -8.12355, 11.4369 )
-rotation = 0.393504
+position = Vector2( 22.0728, -1.75482 )
 texture = ExtResource( 9 )
 offset = Vector2( 17.236, -3.362 )
 script = ExtResource( 33 )
@@ -931,7 +1432,7 @@ one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = 0.073758
+rotation = -0.440587
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -942,7 +1443,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -1.65491
+rotation = -1.58248
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -951,7 +1452,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = -1.07598
+rotation = 1.69921
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -960,7 +1461,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -13.4064, -14.1956 )
-rotation = -0.0984994
+rotation = -0.324783
 z_index = 1
 texture = ExtResource( 13 )
 offset = Vector2( -0.0279083, 8.82368 )
@@ -971,7 +1472,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/chest/torso/upperarm_right"]
 position = Vector2( -1.01368, 20.0398 )
-rotation = -0.599011
+rotation = -1.36206
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0.498055, 6.75774 )
@@ -981,7 +1482,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right"]
 position = Vector2( 1.33635, 15.2045 )
-rotation = 0.0835499
+rotation = 0.0559495
 z_index = 1
 texture = ExtResource( 15 )
 __meta__ = {
@@ -989,6 +1490,7 @@ __meta__ = {
 }
 
 [node name="knife" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right/hand_right"]
+visible = false
 position = Vector2( 10.6882, 2.57911 )
 rotation = 0.0883531
 scale = Vector2( 0.84, 0.84 )
@@ -1005,13 +1507,13 @@ collision_layer = 32
 collision_mask = 14
 
 [node name="KnifeCollisionShape" type="CollisionShape2D" parent="body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox"]
+visible = false
 position = Vector2( 23.4582, -6.62662 )
 rotation = 0.676042
 shape = SubResource( 1 )
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
-rotation = 0.0386878
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -1027,7 +1529,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.288836
+rotation = 0.204008
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1037,7 +1539,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.152083
+rotation = 0.3281
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1046,7 +1548,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.439856
+rotation = -0.52919
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1061,7 +1563,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.294102
+rotation = -0.337881
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1072,7 +1574,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.626142
+rotation = 0.704158
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1081,7 +1583,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.31943
+rotation = -0.353691
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1095,23 +1597,25 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
 shape = SubResource( 2 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -1.416, 6.06 )
 z_index = 1
 shape = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 58 )
+tree_root = SubResource( 63 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
 "parameters/TimeScale 2/scale" = 1.8
 parameters/aim/blend_position = 0.0
-parameters/aim2/blend_position = 0
+parameters/aim2/blend_position = -60.0198
 parameters/aim_state/current = 0
 parameters/crouch-idle/blend_amount = 1.0
 parameters/crouching/current = 1
@@ -1123,6 +1627,8 @@ parameters/moonwalking/current = 1
 parameters/running/current = 1
 parameters/shoot_angle/blend_position = 0.0
 parameters/shooting/active = false
+parameters/sliding/current = 1
+parameters/torso_reset/blend_amount = 0.0
 parameters/walk-idle/blend_amount = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1135,12 +1641,13 @@ anims/aim_minus_30_degrees = ExtResource( 25 )
 anims/aim_minus_45_degrees = ExtResource( 30 )
 anims/aim_minus_60_degrees = ExtResource( 29 )
 anims/aim_minus_90_degrees = ExtResource( 28 )
+anims/base_position = ExtResource( 35 )
 anims/crouching = ExtResource( 36 )
 anims/crouching-idle = ExtResource( 37 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
 anims/knife_attack = ExtResource( 74 )
-anims/no_aim = SubResource( 59 )
+anims/no_aim = SubResource( 64 )
 anims/no_aim_shoot = ExtResource( 46 )
 anims/run = ExtResource( 32 )
 anims/shoot_0_degrees = ExtResource( 43 )
@@ -1149,9 +1656,11 @@ anims/shoot_45_degrees = ExtResource( 41 )
 anims/shoot_60_degrees = ExtResource( 42 )
 anims/shoot_90_degrees = ExtResource( 39 )
 anims/shoot_minus_30_degrees = ExtResource( 38 )
-anims/shoot_minus_45_degrees = SubResource( 60 )
+anims/shoot_minus_45_degrees = SubResource( 65 )
 anims/shoot_minus_60_degrees = ExtResource( 45 )
 anims/shoot_minus_90_degrees = ExtResource( 44 )
+anims/slide = SubResource( 66 )
+"anims/slide (copy)" = ExtResource( 76 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
 
@@ -1161,7 +1670,7 @@ rotation = -0.00144567
 
 [node name="ground" type="Sprite" parent="."]
 visible = false
-modulate = Color( 1, 0.0470588, 0.0470588, 1 )
+modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 7.085, 59.466 )
 scale = Vector2( 1, 0.139654 )
 z_index = -3
@@ -1183,6 +1692,7 @@ script = ExtResource( 34 )
 [node name="CameraOffset" type="Position2D" parent="Pivot"]
 
 [node name="Camera2D" type="Camera2D" parent="Pivot/CameraOffset"]
+visible = false
 current = true
 zoom = Vector2( 0.9, 0.9 )
 smoothing_enabled = true
@@ -1190,13 +1700,14 @@ editor_draw_drag_margin = true
 script = ExtResource( 47 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 61 )
+shape = SubResource( 67 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -1206,7 +1717,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 62 )
+shape = SubResource( 68 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
