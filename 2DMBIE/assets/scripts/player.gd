@@ -132,8 +132,9 @@ func _physics_process(_delta):
 		#aim("walking")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
-			
-	if Input.is_action_pressed("crouch") and not Input.is_action_pressed("slide"):
+		# If player is standing still, do crouching, else do sliding.
+	if Input.is_action_pressed("crouch") and motion.x > -21 and motion.x < 21:
+		
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
@@ -156,6 +157,8 @@ func _physics_process(_delta):
 		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
 		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
 		is_knifing = true # disable knifing 
+		get_node("Hitbox").set_collision_mask_bit(3, false)
+		self.set_collision_mask_bit(3, false)
 		# disable guns (no shooting or knifing)
 		
 	motion = move_and_slide(motion, UP)
@@ -227,7 +230,6 @@ func aim(string):
 		var positionB = get_local_mouse_position()
 		var angle_radians = positionA.angle_to_point(positionB)
 		var angle_degrees = angle_radians*180/PI
-		
 		
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
 			$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
@@ -370,6 +372,8 @@ func on_slide_animation_complete():
 	$AnimationTree.set("parameters/sliding/current", 1)
 	$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
 	get_node("body/chest/torso/gun").shooting_disabled = false
+	get_node("Hitbox").set_collision_mask_bit(3, true)
+	self.set_collision_mask_bit(3, true)
 	is_knifing = false
 	is_sliding = false
 
