@@ -2,15 +2,38 @@ extends Node
 
 var spriteHealthPerk = preload("res://assets/sprites/perks/health_perk.png")
 var spriteMovementPerk = preload("res://assets/sprites/perks/movement_perk.png")
-var spriteArray = [spriteHealthPerk, spriteMovementPerk]
-var colorArray = [Color.limegreen, Color.turquoise]
-var nameArray = ["HealthPerk", "MovementPerk"]
-var priceArray = ["1500", "2500"]
+var spriteReloadPerk = preload ("res://assets/sprites/perks/movement_perk.png")
+var spriteArray = [spriteHealthPerk, spriteMovementPerk, spriteReloadPerk]
+var colorArray = [Color.limegreen, Color.turquoise, Color.beige]
+var nameArray = ["HealthPerk", "MovementPerk", "ReloadPerk"]
+var priceArray = ["1500", "2500", "1000"]
 
 var canBuy = false
 var enoughMoney = false
+var canBuyHealth = true
+var canBuyMovement = true
+var canBuyAmmo = true
 
-export(int, "Health", "Movement speed") var Selected_Perk = 0
+export(int, "Health perk", "Movement speed perk", "Reload perk") var Selected_Perk = 0
+
+func _physics_process(_delta):
+	
+	#Healthperk
+	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 0 and canBuyHealth:
+		healthperk()
+		canBuyHealth = false
+#		print(get_node("../../Player").maxHealth)
+		
+	#Movementperk
+	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 1 and canBuyMovement:
+		movementperk()
+		canBuyMovement = false
+#		print(get_node("../../Player").MAX_WALK_SPEED)
+		
+	#AmmoPerk
+	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 2 and canBuyAmmo:
+		ammoPerk()
+		canBuyAmmo = false
 
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
@@ -34,6 +57,17 @@ func _on_buyarea_body_exited(body):
 		canBuy = false
 #		print("player exited the area")
 #		print(canBuy)
+
+func healthperk():
+	get_node("../../Player").maxHealth = 2500
+	get_node("../../Player").health = 2500
+	
+func movementperk():
+	get_node("../../Player").MAX_WALK_SPEED = 200
+	get_node("../../Player").MAX_RUN_SPEED = 380
+	
+func ammoPerk():
+	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1.25
 
 func _ready():
 	$Sprite.set_texture(spriteArray[Selected_Perk])

@@ -6,8 +6,8 @@ const UP = Vector2(0, -1)
 var GRAVITY = 20
 const WALK_ACCELERATION = 25 #old 20
 const RUN_ACCELERATION = 20
-const MAX_WALK_SPEED = 130 #old 110 
-const MAX_RUN_SPEED = 330
+var MAX_WALK_SPEED = 130 #old 110 
+var MAX_RUN_SPEED = 330
 const JUMP_HEIGHT = -575
 const dropthroughBit = 5
 

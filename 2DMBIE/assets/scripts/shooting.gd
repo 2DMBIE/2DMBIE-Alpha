@@ -10,6 +10,7 @@ signal shake_camera(value)
 signal set_camera_decay(value)
 signal set_gun_recoil_sensitivity(value)
 signal play_sound(value)
+signal play_sound_with_pitch(value, pitch)
 signal ammo_ui(ammo, maxClipammo, totalAmmo)
 # Gun Node2D Position:
 # X 22.073
@@ -30,10 +31,12 @@ var canShoot = true # Used for ammo
 var is_holding_knife = false
 
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
+var reloadTimer = Timer.new()
 
 func _ready():
 	self.visible = true
 	set_gun(weapon_slots[0])
+	reloadTimer.wait_time = 2.5
 
 func _process(_delta):
 	for i in range(weapon_slots.size()):
@@ -116,18 +119,22 @@ func get_current_gun():
 
 var reload_gun_index
 
+
 func reload():
 	var _gun = guns[current_gun_index]
 	if _gun.totalAmmo > 0:
 		if Input.is_action_just_pressed("reload") and _gun.ammo < 30 or _gun.ammo == 0:
 			if canShoot:
 				reload_gun_index = current_gun_index
-				var reloadTimer = Timer.new()
+				
 				reloadTimer.one_shot = true
-				reloadTimer.wait_time = 2.5
+				
 				reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
 				add_child(reloadTimer)
-				emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
+				if reloadTimer.wait_time == 2.5:
+					emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
+				else:
+					emit_signal("play_sound_with_pitch", "mp5_reload", 2)
 				reloadTimer.start()
 				canShoot = false
 

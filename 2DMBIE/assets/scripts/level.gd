@@ -34,7 +34,3 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 #		print(Global.MaxWaveEnemies)
 	else:
 		pass
-
-
-func _on_Node_set_health(value):
-	pass # Replace with function body.
