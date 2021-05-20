@@ -470,7 +470,7 @@ func _process(_delta):
 			# Makes debugMenu invisible
 			get_node("/root/Main/DebugOverlay/Label").visible = false
 		
-		## Turn all debug things on
+		# Turn all debug things on
 		elif !showLines:
 			showLines = true
 			

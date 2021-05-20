@@ -19,7 +19,14 @@ func _process(_delta):
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
 		Global.Speed = 200
+	
+	if Global.brightness:
+		$CanvasModulate.color = Color("#bbbbbb")
+	else:
+		$CanvasModulate.color = Color("#7f7f7f")
+		
 		Global.enemiesKilled = 0 
+		Global.unlocked_doors = 0
 		
 	if Input.is_action_just_pressed("pause"):
 		if is_paused == false:
