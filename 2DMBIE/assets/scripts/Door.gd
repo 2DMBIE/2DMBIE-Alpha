@@ -12,20 +12,29 @@ func _physics_process(_delta):
 	price = priceArray[Global.unlocked_doors]
 	
 			
-func _on_doorarea_body_entered(body):
+func _on_doorareaRight_body_entered(body):
 	if body.is_in_group("player"):
-		$Pricelabel.text = str(int(price))
-		$Pricelabel.visible = true
+		$PricelabelRight.text = str(int(price))
+		$PricelabelRight.visible = true
 		can_buy= true
 
-func _on_doorarea_body_exited(body):
+func _on_doorareaRight_body_exited(body):
 	if body.is_in_group("player"):
-		$Pricelabel.visible = false
+		$PricelabelRight.visible = false
 
 func buy_door():
-	$doorarea/CollisionShape2D.disabled = true
+	$doorareaRight/right.disabled = true
+	$doorareaLeft/left.disabled = true
 	$door.disabled = true
-#	$doorSprite.position.y -= 160
 	$doorSprite.visible = false
 	Global.Score -= price
 
+func _on_doorareaLeft_body_entered(body):
+	if body.is_in_group("player"):
+		$PricelabelLeft.text = str(int(price))
+		$PricelabelLeft.visible = true
+		can_buy= true
+
+func _on_doorareaLeft_body_exited(body):
+	if body.is_in_group("player"):
+		$PricelabelLeft.visible = false
