@@ -352,7 +352,7 @@ input_1/auto_advance = false
 [sub_resource type="AnimationNodeBlend2" id=62]
 
 [sub_resource type="AnimationNodeBlendTree" id=63]
-graph_offset = Vector2( 511.55, -170.603 )
+graph_offset = Vector2( -321.3, -433.44 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
 nodes/Animation/node = SubResource( 14 )
@@ -418,7 +418,7 @@ nodes/torso_reset/node = SubResource( 61 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 62 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "crouching", 0, "crouch-idle", "crouching", 1, "running" ]
+node_connections = [ "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
 
 [sub_resource type="Animation" id=64]
 tracks/0/type = "value"
@@ -1278,7 +1278,7 @@ collision_mask = 2147483710
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 0.946059 )
+position = Vector2( 0, 1.11696 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -1528,7 +1528,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.230178
+rotation = 0.204008
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1538,7 +1538,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.273798
+rotation = 0.3281
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1547,7 +1547,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.50163
+rotation = -0.52919
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1562,7 +1562,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.324375
+rotation = -0.337881
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1573,7 +1573,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.68009
+rotation = 0.704158
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1582,7 +1582,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.343121
+rotation = -0.353691
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1610,7 +1610,6 @@ shape = SubResource( 3 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 63 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
 "parameters/TimeScale 2/scale" = 1.8

@@ -23,6 +23,7 @@ var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
 var is_sliding = false
+var _is_already_crouching = false
 
 func _ready():
 	$AnimationTree.active = true
@@ -132,14 +133,22 @@ func _physics_process(_delta):
 		#aim("walking")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
-		# If player is standing still, do crouching, else do sliding.
-	if Input.is_action_pressed("crouch") and motion.x > -21 and motion.x < 21:
-		
+	var _is_standing_still = motion.x > -21 and motion.x < 21
+	if Input.is_action_just_pressed("crouch-slide") and not _is_standing_still and not is_sliding and is_on_floor(): # Timer slider cooldown!
+		is_sliding = true
+		$AnimationTree.set("parameters/sliding/current", 0)
+		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
+		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
+		is_knifing = true # disable knifing 
+		get_node("Hitbox").set_collision_mask_bit(3, false)
+		self.set_collision_mask_bit(3, false)
+	if Input.is_action_pressed("crouch-slide") and (_is_standing_still or _is_already_crouching):
+		_is_already_crouching = true
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
 		else: 
-			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1)
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
 		$CollisionShape2D.disabled = true
 		$CollisionShape2DCrouch.disabled = false
 		if is_on_floor():
@@ -150,16 +159,7 @@ func _physics_process(_delta):
 		$CollisionShape2D.disabled = false
 		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
-	
-	if Input.is_action_just_pressed("slide") and not Input.is_action_pressed("crouch") and not is_sliding and is_on_floor(): # Timer slider cooldown!
-		is_sliding = true
-		$AnimationTree.set("parameters/sliding/current", 0)
-		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
-		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
-		is_knifing = true # disable knifing 
-		get_node("Hitbox").set_collision_mask_bit(3, false)
-		self.set_collision_mask_bit(3, false)
-		# disable guns (no shooting or knifing)
+		_is_already_crouching = false
 		
 	motion = move_and_slide(motion, UP)
 	pass
