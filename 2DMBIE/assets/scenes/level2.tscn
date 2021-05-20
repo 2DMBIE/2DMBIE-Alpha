@@ -1,10 +1,11 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
+[ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=8]
 [ext_resource path="res://assets/sprites/tiles/office_tileset.png" type="Texture" id=9]
@@ -24,6 +25,10 @@
 [ext_resource path="res://assets/sprites/tiles/Greenhouse_tileset.png" type="Texture" id=23]
 [ext_resource path="res://assets/sprites/tiles/painting.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
+[ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=27]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=28]
+[ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -1969,10 +1974,12 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 56/shapes = [  ]
 56/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 4947.74, 1565.03 )
+[sub_resource type="DynamicFont" id=18]
+size = 48
+font_data = ExtResource( 28 )
 
 [node name="Main" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="Walls" type="TileMap" parent="."]
@@ -2072,14 +2079,6 @@ position = Vector2( 4189.75, -868.49 )
 [node name="enemyspawnpoint14" parent="Spawnpoints" instance=ExtResource( 10 )]
 position = Vector2( 3357.75, -356.49 )
 
-[node name="OoBbox" type="Area2D" parent="."]
-position = Vector2( 372.658, 231.227 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OoBbox"]
-visible = false
-position = Vector2( 1944.59, -1150.39 )
-shape = SubResource( 18 )
-
 [node name="DebugOverlay" parent="." instance=ExtResource( 7 )]
 
 [node name="WaveTimer" type="Timer" parent="."]
@@ -2091,7 +2090,6 @@ position = Vector2( 2.245, 4.48984 )
 
 [node name="Candle" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1437.76, -116.49 )
-frame = 4
 
 [node name="Candle2" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 1765.76, -132.49 )
@@ -2131,7 +2129,6 @@ position = Vector2( 1965.76, -292.49 )
 
 [node name="Candle4" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2781.75, -388.49 )
-frame = 4
 
 [node name="Candle3" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2229.75, -148.49 )
@@ -2212,7 +2209,6 @@ position = Vector2( 1693.75, -1308.49 )
 [node name="Candle5" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 189.755, -884.49 )
 scale = Vector2( 0.271936, 0.334435 )
-frame = 4
 
 [node name="TL_buis10" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 1421.76, -1796.49 )
@@ -2276,19 +2272,15 @@ position = Vector2( 3117.75, -1740.49 )
 
 [node name="Candle6" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2317.75, -1108.49 )
-frame = 4
 
 [node name="Candle7" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2077.75, -724.49 )
-frame = 4
 
 [node name="Candle8" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2885.75, -1492.49 )
-frame = 4
 
 [node name="Candle9" parent="lights" instance=ExtResource( 19 )]
 position = Vector2( 2309.75, -1748.49 )
-frame = 4
 
 [node name="TL_buis_broken18" parent="lights" instance=ExtResource( 16 )]
 position = Vector2( 469.755, -260.49 )
@@ -2313,5 +2305,91 @@ hframes = 21
 visible = false
 script = ExtResource( 8 )
 
-[connection signal="area_exited" from="OoBbox" to="Player" method="_on_OoBbox_area_exited"]
+[node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
+
+[node name="Panel" parent="CanvasLayer/Interface/weaponslots/Weapon2" index="1"]
+self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
+
+[node name="Weapons" type="YSort" parent="."]
+
+[node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 640, -160 )
+Selected_Weapon = 1
+
+[node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 928, -1184 )
+
+[node name="AK12" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 4544, -160 )
+Selected_Weapon = 3
+
+[node name="M4A2" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 4704, -2208 )
+Selected_Weapon = 4
+
+[node name="SPAS12" parent="Weapons" instance=ExtResource( 26 )]
+position = Vector2( 1408, -2208 )
+Selected_Weapon = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource( 27 )]
+layer = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Container/Options" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -91.0
+margin_top = -33.5
+margin_right = 91.0
+margin_bottom = 33.5
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color = Color( 0.823529, 0.823529, 0.823529, 1 )
+text = "Options"
+align = 1
+valign = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Door6" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1984, -2272 )
+
+[node name="Door2" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 576, -480 )
+
+[node name="Door" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1216, -224 )
+
+[node name="Door3" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1792, -736 )
+
+[node name="Door4" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 1216, -1504 )
+
+[node name="Door5" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 2816, -2272 )
+
+[node name="Door7" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3392, -1504 )
+
+[node name="Door8" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3008, -1248 )
+
+[node name="Door9" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3008, -736 )
+
+[node name="Door10" parent="YSort" instance=ExtResource( 29 )]
+position = Vector2( 3264, -224 )
+
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
+[connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
+[connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
+
+[editable path="CanvasLayer"]
+[editable path="PauseMenu"]
+[editable path="PauseMenu/Container/Continue"]
+[editable path="PauseMenu/Container/Options"]
+[editable path="PauseMenu/Container/ExitMenu"]
