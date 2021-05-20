@@ -11,6 +11,7 @@ var maxHealth = 500
 var EnemyDamage = 300
 var Speed = 200
 var enemiesKilled = 0
+var unlocked_doors = 0
 var game_active = false
 
 func _process(_delta):

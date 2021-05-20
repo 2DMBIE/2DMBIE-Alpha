@@ -198,6 +198,7 @@ use={
 2d_physics/layer_4="Enemies"
 2d_physics/layer_5="Collectables"
 2d_physics/layer_6="Floor"
+2d_physics/layer_7="Doors"
 
 [rendering]
 
