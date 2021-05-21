@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/scripts/keybinds.gd" type="Script" id=4]
+[ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -121,7 +123,6 @@ __meta__ = {
 }
 
 [node name="Message" type="Label" parent="Container"]
-visible = false
 margin_right = 1024.0
 margin_bottom = 141.0
 custom_fonts/font = ExtResource( 2 )
@@ -178,52 +179,416 @@ margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
 
-[node name="Video" type="Label" parent="Container"]
-visible = false
+[node name="Controls" type="ScrollContainer" parent="Container"]
 margin_top = 145.0
 margin_right = 1024.0
-margin_bottom = 190.0
-custom_fonts/font = ExtResource( 2 )
-text = "Video!"
-align = 1
-valign = 1
+margin_bottom = 540.0
+rect_min_size = Vector2( 0, 395 )
+size_flags_horizontal = 3
 
-[node name="Controls" type="HBoxContainer" parent="Container"]
-margin_right = 1024.0
-margin_bottom = 50.0
-custom_constants/separation = 100
+[node name="HBox" type="HBoxContainer" parent="Container/Controls"]
+margin_right = 1012.0
+margin_bottom = 536.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
+script = ExtResource( 4 )
 
-[node name="VBoxLeft" type="VBoxContainer" parent="Container/Controls"]
-margin_left = 112.0
-margin_right = 462.0
-margin_bottom = 50.0
+[node name="VBoxLeft" type="VBoxContainer" parent="Container/Controls/HBox"]
+margin_left = 154.0
+margin_right = 504.0
+margin_bottom = 536.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="LineEdit" type="LineEdit" parent="Container/Controls/VBoxLeft"]
+[node name="jump" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 350, 50 )
-text = "Type here!"
 
-[node name="VBoxRight" type="VBoxContainer" parent="Container/Controls"]
-margin_left = 562.0
-margin_right = 912.0
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/jump"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Jump"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/jump"]
+margin_left = 254.0
+margin_right = 304.0
 margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="move_left" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 54.0
+margin_right = 350.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/move_left"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Move Left"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/move_left"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="move_right" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 108.0
+margin_right = 350.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/move_right"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Move Right"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/move_right"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="move_down" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 162.0
+margin_right = 350.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/move_down"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Drop Down"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/move_down"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="sprint" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 216.0
+margin_right = 350.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/sprint"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Sprint"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/sprint"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="crouch" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 270.0
+margin_right = 350.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/crouch"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Crouch"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/crouch"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="use" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 324.0
+margin_right = 350.0
+margin_bottom = 374.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/use"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Use"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/use"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="pause" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 378.0
+margin_right = 350.0
+margin_bottom = 428.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/pause"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Pause"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/pause"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="reload" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 432.0
+margin_right = 350.0
+margin_bottom = 482.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxLeft/reload"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Reload"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxLeft/reload"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="empty" type="HBoxContainer" parent="Container/Controls/HBox/VBoxLeft"]
+margin_top = 486.0
+margin_right = 350.0
+margin_bottom = 536.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="VBoxRight" type="VBoxContainer" parent="Container/Controls/HBox"]
+margin_left = 508.0
+margin_right = 858.0
+margin_bottom = 536.0
 rect_pivot_offset = Vector2( -889, -51 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/Controls/VBoxRight"]
+[node name="game_reset" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="CheckButton" type="CheckButton" parent="Container/Controls/VBoxRight/HBoxContainer"]
-margin_right = 350.0
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/game_reset"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Game Reset"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/game_reset"]
+margin_left = 254.0
+margin_right = 304.0
 margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="debug" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 54.0
+margin_right = 350.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 350, 50 )
-mouse_default_cursor_shape = 2
-custom_styles/focus = SubResource( 4 )
-text = "TEXT"
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/debug"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Debug"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/debug"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="weapon1" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 108.0
+margin_right = 350.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/weapon1"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Weapon 1"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/weapon1"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="weapon2" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 162.0
+margin_right = 350.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/weapon2"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Weapon 2"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/weapon2"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="weapon3" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 216.0
+margin_right = 350.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/weapon3"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Weapon 3"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/weapon3"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="weapon4" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 270.0
+margin_right = 350.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/weapon4"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Weapon 4"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/weapon4"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="weapon5" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 324.0
+margin_right = 350.0
+margin_bottom = 374.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/weapon5"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Weapon 5"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/weapon5"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
+
+[node name="knife" type="HBoxContainer" parent="Container/Controls/HBox/VBoxRight"]
+margin_top = 378.0
+margin_right = 350.0
+margin_bottom = 428.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="Label" type="Label" parent="Container/Controls/HBox/VBoxRight/knife"]
+margin_top = 8.0
+margin_right = 250.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 250, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "Knife"
+
+[node name="Button" type="Button" parent="Container/Controls/HBox/VBoxRight/knife"]
+margin_left = 254.0
+margin_right = 304.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 5 )
+toggle_mode = true
 
 [node name="GameOptions" type="Label" parent="Container"]
 visible = false
@@ -234,6 +599,64 @@ custom_fonts/font = ExtResource( 2 )
 text = "Game Options!"
 align = 1
 valign = 1
+
+[node name="Video" type="ScrollContainer" parent="Container"]
+visible = false
+margin_right = 1024.0
+margin_bottom = 395.0
+rect_min_size = Vector2( 0, 395 )
+
+[node name="HBox" type="HBoxContainer" parent="Container/Video"]
+margin_right = 1024.0
+margin_bottom = 395.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="Container/Video/HBox"]
+margin_left = 337.0
+margin_right = 687.0
+margin_bottom = 395.0
+
+[node name="fullscreen" type="CheckBox" parent="Container/Video/HBox/VBox"]
+margin_right = 350.0
+margin_bottom = 53.0
+custom_styles/focus = SubResource( 4 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Fullscreen"
+
+[node name="resolution" type="HBoxContainer" parent="Container/Video/HBox/VBox"]
+margin_top = 57.0
+margin_right = 350.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 350, 50 )
+
+[node name="less" type="Button" parent="Container/Video/HBox/VBox/resolution"]
+margin_right = 50.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 2 )
+text = "<"
+
+[node name="Label" type="Label" parent="Container/Video/HBox/VBox/resolution"]
+margin_left = 54.0
+margin_top = 3.0
+margin_right = 296.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "???? x ????"
+align = 1
+valign = 1
+
+[node name="more" type="Button" parent="Container/Video/HBox/VBox/resolution"]
+margin_left = 300.0
+margin_right = 350.0
+margin_bottom = 51.0
+rect_min_size = Vector2( 50, 0 )
+custom_fonts/font = ExtResource( 2 )
+text = ">"
 
 [connection signal="button_down" from="HBoxContainer/Audio" to="." method="_on_Audio_button_down"]
 [connection signal="mouse_entered" from="HBoxContainer/Audio" to="." method="_on_Audio_mouse_entered"]
