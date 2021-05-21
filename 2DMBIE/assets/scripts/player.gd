@@ -357,13 +357,3 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		knifing_hitbox_enabled = false
-
-func on_healthperk_event(received):
-	if received:
-		health = 3000 # 
-		print("healthperk received")
-
-func on_movementperk_event(received):
-	if received:
-		health = 3000 # 
-		print("movementperk received")

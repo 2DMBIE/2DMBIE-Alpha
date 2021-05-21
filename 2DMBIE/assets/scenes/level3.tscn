@@ -74,7 +74,7 @@ tile_set = ExtResource( 3 )
 collision_layer = 32
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -131088, 0, 0, -131087, 0, 0, -131080, 0, 0, -131079, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
+tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -131095, 0, 0, -131094, 0, 0, -131088, 0, 0, -131087, 0, 0, -131080, 0, 0, -131079, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
 
 [node name="cursor" type="Sprite" parent="."]
 z_index = 10
@@ -121,6 +121,10 @@ Selected_Weapon = 4
 position = Vector2( -958.016, -257.887 )
 Selected_Perk = 1
 
+[node name="FasterShootingPerk" parent="Perks" instance=ExtResource( 11 )]
+position = Vector2( -687.183, -248.978 )
+Selected_Perk = 3
+
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -438.941, -256 )
 
@@ -130,13 +134,11 @@ Selected_Perk = 2
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 12 )]
 
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
-[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
-[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
-[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
-[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
+[connection signal="send_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="_on_gun_send_decay"]
+[connection signal="perkactive" from="Perks/FasterShootingPerk" to="Player/body/chest/torso/gun" method="_on_FasterShootingPerk_perkactive"]
 
 [editable path="Player"]
 [editable path="CanvasLayer"]

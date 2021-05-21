@@ -12,6 +12,7 @@ signal set_gun_recoil_sensitivity(value)
 signal play_sound(value)
 signal play_sound_with_pitch(value, pitch)
 signal ammo_ui(ammo, maxClipammo, totalAmmo)
+signal send_decay(value)
 # Gun Node2D Position:
 # X 22.073
 # Y -1.744
@@ -30,6 +31,8 @@ var current_weapon = 0
 var canShoot = true # Used for ammo
 var is_holding_knife = false
 
+var canBuyFasterFireRate2 = true
+
 var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 var reloadTimer = Timer.new()
 
@@ -37,12 +40,16 @@ func _ready():
 	self.visible = true
 	set_gun(weapon_slots[0])
 	reloadTimer.wait_time = 2.5
+	reloadTimer.one_shot = true
+	reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
+	add_child(reloadTimer)
 
 func _process(_delta):
 	for i in range(weapon_slots.size()):
 		if Input.is_action_just_released("weapon" + str(i + 1)) && weapon_slots[i] > -1:
 			set_gun(weapon_slots[i])
 			current_weapon = i
+			
 			break
 	
 	var _gun: Gun
@@ -112,7 +119,11 @@ func set_gun(index):
 	get_node("BulletPoint").position = _gun.bulletpoint
 	emit_signal("set_camera_decay", _gun.camera_decay)
 	emit_signal("set_gun_recoil_sensitivity", _gun.gun_recoil_sensitivity)
-	emit_signal("play_sound", _gun.name.to_lower() + str("_draw"))
+	emit_signal("play_sound", _gun.name.to_lower() + str("_draw"))	
+	
+	if canBuyFasterFireRate2 == false:
+		bulletDelayTimer.wait_time *= .75
+		emit_signal("send_decay", 1.22)
 	
 func get_current_gun():
 	return guns[current_gun_index]
@@ -127,10 +138,6 @@ func reload():
 			if canShoot:
 				reload_gun_index = current_gun_index
 				
-				reloadTimer.one_shot = true
-				
-				reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
-				add_child(reloadTimer)
 				if reloadTimer.wait_time == 2.5:
 					emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
 				else:
@@ -166,3 +173,8 @@ func get_mouse_facing():
 		return "left"
 	else:
 		return "right"
+
+
+func _on_FasterShootingPerk_perkactive(canBuyFasterFireRate):
+	if canBuyFasterFireRate == false:
+		canBuyFasterFireRate2 = false
