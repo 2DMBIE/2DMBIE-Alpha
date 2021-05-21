@@ -88,7 +88,6 @@ func findPath(start, end):
 func _ready():	
 	# Creates graph where all the pathfinding points will be saved
 	graph = AStar2D.new()
-	print(graph)
 	
 	# Gets tilesets that the enemies can collide with
 	tileMap = find_parent("Main").find_node("Blocks")
@@ -452,7 +451,6 @@ func createPoint(cell):
 	
 	# Adds point to actual A* graph
 	graph.add_point(graph.get_available_point_id(), pos)
-	print(graph.get_points())
 
 ## Makes array of the amount of cells exist vertically
 func get_unique_ylevels():
