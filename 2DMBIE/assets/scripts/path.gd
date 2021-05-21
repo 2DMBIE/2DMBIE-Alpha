@@ -13,13 +13,18 @@ var tileMap
 var tileMap2
 var ylevel_array = []
 var prevCell
-var graph 
+var graph
+var cachePointArray = []
+var getClosestPoint
 
 # Show debug lines on default
 var showLines = false
 
 # Sprite of pathfinding points
 const FACE = preload("res://assets/scenes/face.tscn")
+
+var output
+var cache_file_path = "user://pathfinding_cache.ivar"
 
 ## Route the AI makes when having an end destination
 func findPath(start, end):
@@ -83,6 +88,7 @@ func findPath(start, end):
 func _ready():	
 	# Creates graph where all the pathfinding points will be saved
 	graph = AStar2D.new()
+	print(graph)
 	
 	# Gets tilesets that the enemies can collide with
 	tileMap = find_parent("Main").find_node("Blocks")
@@ -92,6 +98,7 @@ func _ready():
 	get_unique_ylevels()
 	
 	# Calls function that creates all the points
+#	load_cache()
 	createMap()
 	
 	# Calls function that connects all the points
@@ -365,11 +372,14 @@ func getVerticalPoints():
 		# Gets all tiles from 1 or more tilesets in an array
 		var cells = tileMap.get_used_cells() + tileMap2.get_used_cells()
 		
+		var pos = tileMap.world_to_map(pointPosition)
+		
 		# Creates a point on top of all the tiles that collided with the raycasts,
 		# as long as they aren't created inside another tile
 		if pointPosition:
-			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells):
+			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells) and !tileMap.world_to_map(graph.get_point_position(graph.get_closest_point(pointPosition))) == tileMap.world_to_map(Vector2(pointPosition.x, pointPosition.y - 32)):
 				createPoint(tileMap.world_to_map(pointPosition))
+		
 
 ## Creates a point above every floor tile
 func getFloorPoints():
@@ -442,6 +452,7 @@ func createPoint(cell):
 	
 	# Adds point to actual A* graph
 	graph.add_point(graph.get_available_point_id(), pos)
+	print(graph.get_points())
 
 ## Makes array of the amount of cells exist vertically
 func get_unique_ylevels():
@@ -479,3 +490,31 @@ func _process(_delta):
 			
 			# Makes debugMenu visible
 			get_node("/root/Main/DebugOverlay/Label").visible = true
+	
+	if Input.is_action_just_pressed("save"):
+		save_cache()
+	if Input.is_action_just_pressed("load"):
+		load_cache()
+	
+	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/Main/Player").position))
+
+
+func save_cache():
+	var file = File.new()
+	file.open(cache_file_path, File.WRITE)
+	for point in graph.get_points():
+		cachePointArray.append(tileMap.world_to_map(Vector2(graph.get_point_position(point).x, graph.get_point_position(point).y + 32)))
+	file.store_var(cachePointArray)
+	file.close()
+
+func load_cache():
+	var file = File.new()
+	if file.file_exists(cache_file_path):
+		file.open(cache_file_path, File.READ)
+		output = file.get_var()
+		for p in output.size():
+			createPoint(output[p])
+		file.close()
+	else:
+		createMap()
+		save_cache()
