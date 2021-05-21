@@ -21,22 +21,25 @@ func _process(_delta):
 		Global.Speed = 200
 		Global.enemiesKilled = 0 
 		Global.unlocked_doors = 0
-	
-	if Global.brightness:
-		$CanvasModulate.color = Color("#bbbbbb")
-	else:
-		$CanvasModulate.color = Color("#7f7f7f")
+	if is_paused == false:
+		if Global.brightness:
+			$CanvasModulate.color = Color("#bbbbbb")
+		else:
+			$CanvasModulate.color = Color("#7f7f7f")
 		
 	if Input.is_action_just_pressed("pause"):
-		if is_paused == false:
-			get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-			get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-			is_paused = true
-			get_tree().paused = true
-			get_node("PauseMenu/Container").visible = true
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		elif is_paused == true:
-			unpause_game()
+		if get_node("Optionsmenu/Options").visible == false:
+			if is_paused == false:
+				get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+				get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+				get_tree().paused = true
+				get_node("PauseMenu/Container").visible = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+				is_paused = true
+			elif is_paused == true and get_node("Optionsmenu/Options").visible == false:
+				unpause_game()
+		
+	escape_options()
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
@@ -53,10 +56,10 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 func unpause_game():
 	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
-	is_paused = false
 	get_tree().paused = false
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	is_paused = false
 
 func _on_Continue_button_down():
 	unpause_game()
@@ -67,3 +70,22 @@ func _on_ExitMenu_button_down():
 	Global.game_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+
+
+func _on_ExitOptions_button_down():
+	if get_tree().get_current_scene().get_name() == 'Options':
+		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	else:
+		get_node("Optionsmenu/Options").visible = false
+	get_node("PauseMenu/Container").visible = true
+
+func escape_options():
+	if get_node("Optionsmenu/Options").visible:
+		if Input.is_action_pressed("escape"):
+			get_node("Optionsmenu/Options").visible = false
+			get_node("PauseMenu/Container").visible = true
+
+
+func _on_Options_button_down():
+	get_node("Optionsmenu/Options").visible = true
+	get_node("PauseMenu/Container").visible = false

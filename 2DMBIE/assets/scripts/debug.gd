@@ -46,10 +46,10 @@ func _process(_delta):
 	$Label.text = label_text
 	
 	
-	for t in range(properties.size()):
-		if Input.is_action_just_pressed("toggle" + str(t + 1)):
-			Global[properties[t]] = !Global[properties[t]]
+#	for t in range(properties.size()):
+#		if Input.is_action_just_pressed("toggle" + str(t + 1)):
+#			Global[properties[t]] = !Global[properties[t]]
 			
-		debugAim = Global[properties[0]]
-		debugCamera = Global[properties[1]]
-		debugBrightness = Global[properties[2]]
+	debugAim = Global[properties[0]]
+	debugCamera = Global[properties[1]]
+	debugBrightness = Global[properties[2]]

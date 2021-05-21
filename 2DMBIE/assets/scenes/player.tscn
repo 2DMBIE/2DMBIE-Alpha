@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -418,7 +418,7 @@ nodes/torso_reset/node = SubResource( 61 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 62 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
+node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "running", 0, "TimeScale", "running", 1, "walk-idle", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=64]
 tracks/0/type = "value"
@@ -1265,13 +1265,10 @@ height = 75.8569
 
 [sub_resource type="RectangleShape2D" id=68]
 
-[sub_resource type="CapsuleShape2D" id=69]
-radius = 77.2063
-height = 28.0385
-
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
+pause_mode = 1
 z_index = 1
 collision_layer = 4
 collision_mask = 2147483774
@@ -1726,7 +1723,6 @@ one_shot = true
 [node name="Aimzone" type="Area2D" parent="."]
 
 [node name="shootzone" type="CollisionShape2D" parent="Aimzone"]
-shape = SubResource( 63 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
