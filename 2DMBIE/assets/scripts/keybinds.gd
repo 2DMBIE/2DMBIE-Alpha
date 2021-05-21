@@ -30,15 +30,6 @@ func _input(event):
 			_change_key(event)
 			can_change_key = false
 			
-	if event.is_action_pressed("jump"):
-		print('jump!!!')
-	if event.is_action_pressed("move_left"):
-		print('move_left!!!')
-	if event.is_action_pressed("move_right"):
-		print('move_right!!!')
-	if event.is_action_pressed("move_down"):
-		print('move_down!!!')
-	if event.is_action_pressed("use"):
 		_set_keys()
 
 

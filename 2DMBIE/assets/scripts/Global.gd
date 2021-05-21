@@ -15,7 +15,7 @@ var unlocked_doors = 0
 var game_active = false
 
 # Debug
-var aim = true
+var aim = false
 var camera = true
 var brightness = false
 

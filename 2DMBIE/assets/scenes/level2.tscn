@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -27,7 +27,6 @@
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
 [ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=27]
-[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=28]
 [ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=30]
 
@@ -1975,10 +1974,6 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 56/shapes = [  ]
 56/z_index = 0
 
-[sub_resource type="DynamicFont" id=18]
-size = 48
-font_data = ExtResource( 28 )
-
 [node name="Main" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -2335,21 +2330,6 @@ Selected_Weapon = 1
 [node name="PauseMenu" parent="." instance=ExtResource( 27 )]
 layer = 2
 
-[node name="Label" type="Label" parent="PauseMenu/Container/Options" index="0"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -91.0
-margin_top = -33.5
-margin_right = 91.0
-margin_bottom = 33.5
-custom_fonts/font = SubResource( 18 )
-custom_colors/font_color = Color( 0.823529, 0.823529, 0.823529, 1 )
-text = "Options"
-align = 1
-valign = 1
-
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Door6" parent="YSort" instance=ExtResource( 29 )]
@@ -2387,8 +2367,8 @@ position = Vector2( 3264, -224 )
 [node name="Options" parent="Optionsmenu" instance=ExtResource( 30 )]
 visible = false
 
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

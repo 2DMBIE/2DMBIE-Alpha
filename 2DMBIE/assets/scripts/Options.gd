@@ -4,6 +4,9 @@ extends Control
 func _ready():
 	pass # Replace with function body.
 
+func _process(delta):
+	escape_options()
+
 # Here can maybe go the actual functionality of the options
 
 
@@ -62,5 +65,15 @@ func _on_GameOptions_mouse_exited():
 func _on_Button_button_down():
 	if get_tree().get_current_scene().get_name() == 'Options':
 		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
-	else:
-		get_node('../Options').visible = false
+
+func escape_options():
+	if Input.is_action_pressed("escape"):
+		_on_Button_button_down()
+
+
+func _on_always_aim_toggled(button_pressed):
+	Global.aim = button_pressed
+func _on_stable_camera_toggled(button_pressed):
+	Global.camera = button_pressed
+func _on_brighter_screen_toggled(button_pressed):
+	Global.brightness = button_pressed

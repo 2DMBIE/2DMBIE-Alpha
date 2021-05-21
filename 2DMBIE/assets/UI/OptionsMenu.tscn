@@ -137,7 +137,8 @@ margin_right = 1024.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 1024, 395 )
 custom_fonts/font = ExtResource( 2 )
-text = "Welcome to the options! Today we serve unchangable values!"
+text = "Welcome to the options! 
+Today we serve unchangable values!"
 align = 1
 valign = 1
 
@@ -594,8 +595,9 @@ toggle_mode = true
 
 [node name="GameOptions" type="ScrollContainer" parent="Panel/VBox/Container"]
 visible = false
+margin_top = 399.0
 margin_right = 1024.0
-margin_bottom = 395.0
+margin_bottom = 794.0
 rect_min_size = Vector2( 0, 395 )
 
 [node name="HBox" type="HBoxContainer" parent="Panel/VBox/Container/GameOptions"]
@@ -614,28 +616,32 @@ rect_min_size = Vector2( 512, 0 )
 [node name="always_aim" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_right = 512.0
 margin_bottom = 53.0
+mouse_default_cursor_shape = 2
 custom_styles/focus = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Always Aim"
+text = " Manual Aim Mode"
 
 [node name="stable_camera" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_top = 57.0
 margin_right = 512.0
 margin_bottom = 110.0
+mouse_default_cursor_shape = 2
 custom_styles/focus = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Stable Camera"
+pressed = true
+text = "Centered Camera"
 
 [node name="brighter_screen" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_top = 114.0
 margin_right = 512.0
 margin_bottom = 167.0
+mouse_default_cursor_shape = 2
 custom_styles/focus = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Brighter Screen"
+text = "Light Mode"
 
 [node name="ExitOptions" type="Button" parent="Panel/VBox"]
 margin_top = 546.0
@@ -659,4 +665,7 @@ flat = true
 [connection signal="button_down" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_button_down"]
 [connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_entered"]
 [connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_exited"]
+[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/always_aim" to="." method="_on_always_aim_toggled"]
+[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/stable_camera" to="." method="_on_stable_camera_toggled"]
+[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/brighter_screen" to="." method="_on_brighter_screen_toggled"]
 [connection signal="button_down" from="Panel/VBox/ExitOptions" to="." method="_on_Button_button_down"]
