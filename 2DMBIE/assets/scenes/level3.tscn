@@ -111,4 +111,5 @@ Selected_Weapon = 4
 position = Vector2( 663.459, -246.926 )
 Selected_Weapon = 3
 
-[connection signal="play_sound" from="Zombie" to="Zombie/sfx" method="play_sound"]
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.498039, 0.498039, 0.498039, 1 )
