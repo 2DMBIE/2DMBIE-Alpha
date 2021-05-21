@@ -437,6 +437,7 @@ anchor_right = 0.3
 margin_top = 55.0
 margin_right = 146.4
 margin_bottom = 101.0
+scene_to_load = "res://assets/UI/OptionsMenu.tscn"
 
 [node name="ExitButton" parent="." instance=ExtResource( 6 )]
 anchor_left = 0.285

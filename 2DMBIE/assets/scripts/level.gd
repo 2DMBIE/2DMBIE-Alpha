@@ -21,11 +21,11 @@ func _process(_delta):
 		Global.Speed = 200
 		Global.enemiesKilled = 0 
 		Global.unlocked_doors = 0
-	
-	if Global.brightness:
-		$CanvasModulate.color = Color("#bbbbbb")
-	else:
-		$CanvasModulate.color = Color("#7f7f7f")
+	if is_paused == false:
+		if Global.brightness:
+			$CanvasModulate.color = Color("#bbbbbb")
+		else:
+			$CanvasModulate.color = Color("#7f7f7f")
 		
 	if Input.is_action_just_pressed("pause"):
 		if is_paused == false:
@@ -67,3 +67,16 @@ func _on_ExitMenu_button_down():
 	Global.game_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+
+
+func _on_ExitOptions_button_down():
+	if get_tree().get_current_scene().get_name() == 'Options':
+		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	else:
+		get_node("Optionsmenu/Options").visible = false
+	get_node("PauseMenu/Container").visible = true
+
+
+func _on_Options_button_down():
+	get_node("Optionsmenu/Options").visible = true
+	get_node("PauseMenu/Container").visible = false

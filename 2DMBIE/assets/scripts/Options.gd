@@ -26,11 +26,11 @@ func _on_GameOptions_button_down():
 # Waht teh frick, i did not expect showOption and hideAll to work first try ;-;
 func showOption(option):
 	hideAll()
-	get_node("Container/"+option).visible = true
+	get_node("Panel/VBox/Container/"+option).visible = true
 
 
 func hideAll():
-	for i in $Container.get_children():
+	for i in $Panel/VBox/Container.get_children():
 		i.visible = false
 
 
@@ -57,3 +57,10 @@ func _on_GameOptions_mouse_entered():
 	add_color_override("font_color", ButtonFontHoverColor)
 func _on_GameOptions_mouse_exited():
 	add_color_override("font_color", ButtonFontStandardColor)
+
+
+func _on_Button_button_down():
+	if get_tree().get_current_scene().get_name() == 'Options':
+		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	else:
+		get_node('../Options').visible = false
