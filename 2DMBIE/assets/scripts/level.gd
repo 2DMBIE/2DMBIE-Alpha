@@ -74,7 +74,7 @@ func _on_ExitMenu_button_down():
 
 func _on_ExitOptions_button_down():
 	if get_tree().get_current_scene().get_name() == 'Options':
-		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 	else:
 		get_node("Optionsmenu/Options").visible = false
 	get_node("PauseMenu/Container").visible = true
