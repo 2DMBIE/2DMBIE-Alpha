@@ -1,14 +1,22 @@
 extends Node2D
 
 var is_paused = false
+var random_round
+var music_playing = false
+signal music(action)
+
 
 func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -10)
+	random_round = randi()%7+1 # generate random integer between 10 and 1
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
+	if Global.Currentwave == random_round and not music_playing:
+		emit_signal("music", "play")
+		music_playing = true
 	if Input.is_action_just_released("game_reset"):
 		var _error = get_tree().reload_current_scene()
 		#standaard stats voor de enemies
@@ -36,6 +44,7 @@ func _process(_delta):
 				get_node("PauseMenu/Container").visible = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				is_paused = true
+				emit_signal("music", "pause")
 			elif is_paused == true and get_node("Optionsmenu/Options").visible == false:
 				unpause_game()
 		
@@ -59,6 +68,7 @@ func unpause_game():
 	get_tree().paused = false
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	emit_signal("music", "unpause")
 	is_paused = false
 
 func _on_Continue_button_down():
