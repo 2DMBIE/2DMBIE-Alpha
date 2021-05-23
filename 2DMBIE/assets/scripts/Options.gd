@@ -4,7 +4,7 @@ extends Control
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	escape_options()
 
 # Here can maybe go the actual functionality of the options
@@ -64,7 +64,9 @@ func _on_GameOptions_mouse_exited():
 
 func _on_Button_button_down():
 	if get_tree().get_current_scene().get_name() == 'Options':
-		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		if x != OK:
+			print("Error: ", x)
 
 func escape_options():
 	if Input.is_action_pressed("escape"):

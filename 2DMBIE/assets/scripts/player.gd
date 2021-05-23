@@ -135,7 +135,7 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 	var _is_standing_still = motion.x > -21 and motion.x < 21
-	if Input.is_action_just_pressed("crouch-slide") and not _is_standing_still and not is_sliding and is_on_floor(): # Timer slider cooldown!
+	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor(): # Timer slider cooldown!
 		is_sliding = true
 		$AnimationTree.set("parameters/sliding/current", 0)
 		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
@@ -148,7 +148,7 @@ func _physics_process(_delta):
 		RUN_ACCELERATION = 40
 		MAX_WALK_SPEED = 230 #old 110 
 		MAX_RUN_SPEED = 430
-	if Input.is_action_pressed("crouch-slide") and (_is_standing_still or _is_already_crouching):
+	if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 		_is_already_crouching = true
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):

@@ -371,8 +371,6 @@ func getVerticalPoints():
 		# Gets all tiles from 1 or more tilesets in an array
 		var cells = tileMap.get_used_cells() + tileMap2.get_used_cells()
 		
-		var pos = tileMap.world_to_map(pointPosition)
-		
 		# Creates a point on top of all the tiles that collided with the raycasts,
 		# as long as they aren't created inside another tile
 		if pointPosition:

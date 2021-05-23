@@ -18,7 +18,7 @@ script = ExtResource( 1 )
 collision_layer = 2
 
 [node name="right" type="CollisionShape2D" parent="doorareaRight"]
-position = Vector2( 48, 80 )
+position = Vector2( 64, 80 )
 shape = SubResource( 1 )
 
 [node name="door" type="CollisionShape2D" parent="."]
@@ -53,13 +53,13 @@ __meta__ = {
 collision_layer = 2
 
 [node name="left" type="CollisionShape2D" parent="doorareaLeft"]
-position = Vector2( 16, 80 )
+position = Vector2( 0, 80 )
 shape = SubResource( 1 )
 
 [node name="doorSprite" type="Sprite" parent="."]
 position = Vector2( 32, 80 )
 scale = Vector2( 1, 1.25 )
-z_as_relative = false
+z_index = 32
 texture = ExtResource( 2 )
 
 [connection signal="body_entered" from="doorareaRight" to="." method="_on_doorareaRight_body_entered"]

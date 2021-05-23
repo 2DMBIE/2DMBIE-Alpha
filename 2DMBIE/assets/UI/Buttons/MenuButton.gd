@@ -19,7 +19,7 @@ func _on_ExitButton_mouse_exited():
 	
 
 func buttonOnHover():
-	$ButtonTexture.scale = Vector2(0.55,0.5)
+	$ButtonTexture.scale = Vector2(0.55,0.55)
 
 func buttonOffHover():
 	$ButtonTexture.scale = Vector2(0.5,0.5)

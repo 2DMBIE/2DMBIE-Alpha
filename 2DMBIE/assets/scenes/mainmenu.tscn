@@ -431,12 +431,18 @@ __meta__ = {
 }
 
 [node name="PlayButton" parent="Buttons" instance=ExtResource( 8 )]
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
 
 [node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
 anchor_right = 0.3
 margin_top = 55.0
 margin_right = 146.4
 margin_bottom = 101.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
 scene_to_load = "res://assets/UI/OptionsMenu.tscn"
 
 [node name="ExitButton" parent="." instance=ExtResource( 6 )]
@@ -446,6 +452,9 @@ margin_left = 343.941
 margin_top = 185.05
 margin_right = 493.941
 margin_bottom = 231.05
+focus_mode = 0
+mouse_default_cursor_shape = 2
+enabled_focus_mode = 0
 scene_to_load = "res://assets/scenes/level3.tscn"
 
 [node name="BloodSplat" type="Sprite" parent="."]
