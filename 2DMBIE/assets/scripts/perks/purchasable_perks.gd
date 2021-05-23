@@ -30,24 +30,36 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 0 and canBuyHealth:
 		healthperk()
 		canBuyHealth = false
+		for i in spriteArray.size():
+			if Selected_Perk == i:
+				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").maxHealth)
 		
 	#Movementperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 1 and canBuyMovement:
 		movementperk()
 		canBuyMovement = false
+		for i in spriteArray.size():
+			if Selected_Perk == i:
+				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").MAX_WALK_SPEED)
 		
 	#AmmoPerk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 2 and canBuyAmmo:
 		ammoperk()
 		canBuyAmmo = false
+		for i in spriteArray.size():
+			if Selected_Perk == i:
+				Global.Score -= int(priceArray[i])
 		
 	#Faster shooting
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 3 and canBuyFasterFireRate:
 		canBuyFasterFireRate = false
 		emit_signal("perkactive", canBuyFasterFireRate)
 		fasterfirerateperk()
+		for i in spriteArray.size():
+			if Selected_Perk == i:
+				Global.Score -= int(priceArray[i])
 		
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
