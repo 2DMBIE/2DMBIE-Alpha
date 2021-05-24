@@ -459,5 +459,6 @@ texture = ExtResource( 10 )
 stream = ExtResource( 12 )
 volume_db = -3.0
 autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

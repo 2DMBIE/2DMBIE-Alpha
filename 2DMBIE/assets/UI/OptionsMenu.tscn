@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/scripts/keybinds.gd" type="Script" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/UI/audio_slider.gd" type="Script" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -172,6 +173,10 @@ text = "Master"
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
+max_value = 1.0
+step = 0.05
+script = ExtResource( 6 )
+audio_bus = "Master"
 
 [node name="Music" type="Label" parent="Panel/VBox/Container/Audio/HBox/VBox"]
 margin_right = 512.0
@@ -183,6 +188,10 @@ text = "Music"
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
+max_value = 1.0
+step = 0.05
+script = ExtResource( 6 )
+audio_bus = "Music"
 
 [node name="SoundEffects" type="Label" parent="Panel/VBox/Container/Audio/HBox/VBox"]
 margin_right = 512.0
@@ -194,6 +203,10 @@ text = "Sound Effects"
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
+max_value = 1.0
+step = 0.05
+script = ExtResource( 6 )
+audio_bus = "Soundeffects"
 
 [node name="Video" type="ScrollContainer" parent="Panel/VBox/Container"]
 visible = false
@@ -665,6 +678,9 @@ flat = true
 [connection signal="button_down" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_button_down"]
 [connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_entered"]
 [connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_exited"]
+[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" to="Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" method="on_value_changed"]
+[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" to="Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" method="on_value_changed"]
+[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" to="Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" method="on_value_changed"]
 [connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/always_aim" to="." method="_on_always_aim_toggled"]
 [connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/stable_camera" to="." method="_on_stable_camera_toggled"]
 [connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/brighter_screen" to="." method="_on_brighter_screen_toggled"]

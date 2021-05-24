@@ -1,4 +1,4 @@
-[gd_scene load_steps=153 format=2]
+[gd_scene load_steps=158 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -86,6 +86,11 @@
 [ext_resource path="res://assets/sounds/player/slide3.wav" type="AudioStream" id=84]
 [ext_resource path="res://assets/sounds/player/crouch.wav" type="AudioStream" id=85]
 [ext_resource path="res://assets/sounds/player/falling_ground.wav" type="AudioStream" id=86]
+[ext_resource path="res://assets/sounds/player/footstep4.wav" type="AudioStream" id=87]
+[ext_resource path="res://assets/sounds/player/footstep2.wav" type="AudioStream" id=88]
+[ext_resource path="res://assets/sounds/player/footstep3.wav" type="AudioStream" id=89]
+[ext_resource path="res://assets/sounds/player/footstep5.wav" type="AudioStream" id=90]
+[ext_resource path="res://assets/sounds/player/footstep1.wav" type="AudioStream" id=91]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -345,7 +350,7 @@ fadein_time = 0.0
 fadeout_time = 0.0
 autorestart_delay = 0.0
 
-[sub_resource type="AnimationNodeAnimation" id=67]
+[sub_resource type="AnimationNodeAnimation" id=58]
 animation = "slide"
 
 [sub_resource type="AnimationNodeTransition" id=59]
@@ -360,7 +365,7 @@ input_1/auto_advance = false
 [sub_resource type="AnimationNodeBlend2" id=61]
 
 [sub_resource type="AnimationNodeBlendTree" id=62]
-graph_offset = Vector2( 108.7, -403.94 )
+graph_offset = Vector2( -1187.3, -250.94 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
 nodes/Animation/node = SubResource( 13 )
@@ -416,7 +421,7 @@ nodes/shoot_angle/node = SubResource( 56 )
 nodes/shoot_angle/position = Vector2( -300, 660 )
 nodes/shooting/node = SubResource( 57 )
 nodes/shooting/position = Vector2( 460, 560 )
-nodes/slide/node = SubResource( 67 )
+nodes/slide/node = SubResource( 58 )
 nodes/slide/position = Vector2( 720, -180 )
 nodes/sliding/node = SubResource( 59 )
 nodes/sliding/position = Vector2( 1180, 100 )
@@ -424,7 +429,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "torso_reset", 0, "slide", "torso_reset", 1, "base position player" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "running", 0, "TimeScale", "running", 1, "walk-idle", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale 2", 0, "Animation 7" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -808,7 +813,7 @@ collision_mask = 2147483774
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 1.44754 )
+position = Vector2( 0, 1.04753 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -845,116 +850,142 @@ script = ExtResource( 49 )
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_draw"]
 stream = ExtResource( 48 )
+bus = "Soundeffects"
 
 [node name="mp5_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+bus = "Soundeffects"
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
 pitch_scale = 1.02
+bus = "Soundeffects"
 
 [node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
 pitch_scale = 0.99
+bus = "Soundeffects"
 
 [node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
 pitch_scale = 0.97
+bus = "Soundeffects"
 
 [node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_reload"]
 stream = ExtResource( 70 )
 attenuation = 0.378929
+bus = "Soundeffects"
 
 [node name="spas12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_draw"]
 stream = ExtResource( 50 )
+bus = "Soundeffects"
 
 [node name="spas12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 52 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 51 )
 attenuation = 0.25
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 54 )
+bus = "Soundeffects"
 
 [node name="spas12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_reload"]
 stream = ExtResource( 69 )
 attenuation = 0.378929
+bus = "Soundeffects"
 
 [node name="m4a1_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_draw"]
 stream = ExtResource( 58 )
+bus = "Soundeffects"
 
 [node name="m4a1_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 55 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 56 )
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 57 )
 attenuation = 0.189465
+bus = "Soundeffects"
 
 [node name="m4a1_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_reload"]
 stream = ExtResource( 72 )
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="ak12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
 stream = ExtResource( 62 )
+bus = "Soundeffects"
 
 [node name="draw2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
 stream = ExtResource( 60 )
+bus = "Soundeffects"
 
 [node name="ak12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
 stream = ExtResource( 59 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
 stream = ExtResource( 61 )
+bus = "Soundeffects"
 
 [node name="ak12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_reload"]
 stream = ExtResource( 71 )
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="barrett50_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_draw"]
 stream = ExtResource( 67 )
+bus = "Soundeffects"
 
 [node name="barrett50_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 63 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 65 )
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 64 )
+bus = "Soundeffects"
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 66 )
+bus = "Soundeffects"
 
 [node name="barrett50_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
@@ -962,6 +993,7 @@ stream = ExtResource( 66 )
 stream = ExtResource( 68 )
 volume_db = 4.0
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="BulletDelayTimer" type="Timer" parent="body/chest/torso/gun"]
 one_shot = true
@@ -1065,7 +1097,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.153385
+rotation = 0.214639
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1075,7 +1107,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.433143
+rotation = 0.306041
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1084,7 +1116,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.582503
+rotation = -0.517995
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1099,7 +1131,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.364007
+rotation = -0.332394
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1110,7 +1142,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.750717
+rotation = 0.694381
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1119,7 +1151,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.374137
+rotation = -0.349397
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1272,115 +1304,162 @@ script = ExtResource( 49 )
 
 [node name="jump1" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
 stream = ExtResource( 75 )
+bus = "Soundeffects"
 
 [node name="jump2" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
 stream = ExtResource( 75 )
 pitch_scale = 0.94
+bus = "Soundeffects"
 
 [node name="jump3" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
 stream = ExtResource( 77 )
 pitch_scale = 0.9
+bus = "Soundeffects"
 
 [node name="jump4" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
 stream = ExtResource( 77 )
 pitch_scale = 0.85
+bus = "Soundeffects"
 
 [node name="knife_hit" type="Node2D" parent="player-sfx"]
 
 [node name="knifehit" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
 stream = ExtResource( 78 )
+bus = "Soundeffects"
 
 [node name="knifehit2" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
 stream = ExtResource( 78 )
 pitch_scale = 1.1
+bus = "Soundeffects"
 
 [node name="knifehit3" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
 stream = ExtResource( 78 )
 pitch_scale = 0.96
+bus = "Soundeffects"
 
 [node name="knifehit4" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
 stream = ExtResource( 78 )
 pitch_scale = 0.96
+bus = "Soundeffects"
 
 [node name="knife_swish" type="Node2D" parent="player-sfx"]
 
 [node name="knife_swish" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
 stream = ExtResource( 79 )
 volume_db = 9.172
+bus = "Soundeffects"
 
 [node name="knife_swish2" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
 stream = ExtResource( 79 )
 volume_db = 9.172
 pitch_scale = 1.1
+bus = "Soundeffects"
 
 [node name="knife_swish3" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
 stream = ExtResource( 79 )
 volume_db = 9.172
 pitch_scale = 0.95
+bus = "Soundeffects"
 
 [node name="knife_swish4" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
 stream = ExtResource( 79 )
 volume_db = 9.172
 pitch_scale = 1.05
+bus = "Soundeffects"
 
 [node name="slide" type="Node2D" parent="player-sfx"]
 
 [node name="slide1" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
 stream = ExtResource( 80 )
+bus = "Soundeffects"
 
 [node name="slide2" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
 stream = ExtResource( 82 )
 volume_db = -2.0
+bus = "Soundeffects"
 
 [node name="slide3" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
 stream = ExtResource( 84 )
 volume_db = -2.0
 attenuation = 0.277392
+bus = "Soundeffects"
 
 [node name="slide4" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
 stream = ExtResource( 81 )
 volume_db = 1.0
+bus = "Soundeffects"
 
 [node name="slide5" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
 stream = ExtResource( 83 )
 volume_db = 1.345
+bus = "Soundeffects"
 
 [node name="crouch" type="Node2D" parent="player-sfx"]
 
 [node name="crouch1" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
 stream = ExtResource( 85 )
 volume_db = 2.0
+bus = "Soundeffects"
 
 [node name="crouch2" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
 stream = ExtResource( 85 )
 volume_db = 2.0
 pitch_scale = 0.91
+bus = "Soundeffects"
 
 [node name="crouch3" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
 stream = ExtResource( 85 )
 volume_db = 2.0
 pitch_scale = 1.04
+bus = "Soundeffects"
 
 [node name="fall" type="Node2D" parent="player-sfx"]
 
 [node name="falling_ground" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
 stream = ExtResource( 86 )
+bus = "Soundeffects"
 
 [node name="falling_ground2" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
 stream = ExtResource( 86 )
 pitch_scale = 1.05
+bus = "Soundeffects"
 
 [node name="falling_ground3" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
 stream = ExtResource( 86 )
 pitch_scale = 1.12
+bus = "Soundeffects"
 
 [node name="falling_ground4" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
 stream = ExtResource( 86 )
 pitch_scale = 0.97
+bus = "Soundeffects"
 
 [node name="falling_ground5" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
 stream = ExtResource( 86 )
 pitch_scale = 0.93
+bus = "Soundeffects"
+
+[node name="footstep" type="Node2D" parent="player-sfx"]
+
+[node name="footstep1" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 91 )
+bus = "Soundeffects"
+
+[node name="footstep2" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 88 )
+bus = "Soundeffects"
+
+[node name="footstep3" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 89 )
+bus = "Soundeffects"
+
+[node name="footstep4" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 87 )
+bus = "Soundeffects"
+
+[node name="footstep5" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 90 )
+bus = "Soundeffects"
 
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]

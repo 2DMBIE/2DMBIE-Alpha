@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/Buttons/PauseButton.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=19]
+[sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 1 )
 
@@ -30,7 +30,7 @@ margin_left = -62.5
 margin_top = -33.5
 margin_right = 62.5
 margin_bottom = 33.5
-custom_fonts/font = SubResource( 19 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.823529, 0.823529, 0.823529, 1 )
 text = "Label"
 align = 1

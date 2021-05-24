@@ -9,8 +9,7 @@ signal music(action)
 func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -10)
-	random_round = randi()%7+1 # generate random integer between 10 and 1
+	random_round = randi()%7+1 # generate random integer between 7 and 1
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
