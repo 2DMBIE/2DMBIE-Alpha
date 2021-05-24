@@ -45,6 +45,8 @@ func _process(_delta):
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				is_paused = true
 				emit_signal("music", "pause")
+				AudioServer.set_bus_mute(0, true)
+				
 			elif is_paused == true and get_node("Optionsmenu/Options").visible == false:
 				unpause_game()
 		
@@ -69,6 +71,7 @@ func unpause_game():
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	emit_signal("music", "unpause")
+	AudioServer.set_bus_mute(0, false)
 	is_paused = false
 
 func _on_Continue_button_down():

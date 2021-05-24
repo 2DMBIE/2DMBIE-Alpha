@@ -13,6 +13,7 @@ var priceArray = ["1500", "2500", "3000", "3100", "4000"]
 var canBuy = false
 var enoughMoney = false
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
+signal play_sound(library)
 
 export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 
 
@@ -31,12 +32,14 @@ func _physics_process(_delta):
 				break
 			
 		gunscript.set_gun(Selected_Weapon)
+		emit_signal("play_sound", "buy")
 		
 		# The price of the weapon minus the score of the player
 		for i in spriteArray.size():
 			if Selected_Weapon == i:
 				Global.Score -= int(priceArray[i])
-
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 #checks if the player is in the buy area
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):

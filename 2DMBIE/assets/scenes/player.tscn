@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=155 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -74,7 +74,18 @@
 [ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 [ext_resource path="res://assets/sprites/knife.png" type="Texture" id=73]
 [ext_resource path="res://assets/animations/knife_attack.tres" type="Animation" id=74]
+[ext_resource path="res://assets/sounds/player/jump1.wav" type="AudioStream" id=75]
 [ext_resource path="res://assets/animations/slide-animation2.tres" type="Animation" id=76]
+[ext_resource path="res://assets/sounds/player/jump2.wav" type="AudioStream" id=77]
+[ext_resource path="res://assets/sounds/player/knife_hit.wav" type="AudioStream" id=78]
+[ext_resource path="res://assets/sounds/player/knife_swish.wav" type="AudioStream" id=79]
+[ext_resource path="res://assets/sounds/player/slide1.wav" type="AudioStream" id=80]
+[ext_resource path="res://assets/sounds/player/slide4.wav" type="AudioStream" id=81]
+[ext_resource path="res://assets/sounds/player/slide2.wav" type="AudioStream" id=82]
+[ext_resource path="res://assets/sounds/player/slide5.wav" type="AudioStream" id=83]
+[ext_resource path="res://assets/sounds/player/slide3.wav" type="AudioStream" id=84]
+[ext_resource path="res://assets/sounds/player/crouch.wav" type="AudioStream" id=85]
+[ext_resource path="res://assets/sounds/player/falling_ground.wav" type="AudioStream" id=86]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -352,7 +363,7 @@ input_1/auto_advance = false
 [sub_resource type="AnimationNodeBlend2" id=62]
 
 [sub_resource type="AnimationNodeBlendTree" id=63]
-graph_offset = Vector2( -321.3, -433.44 )
+graph_offset = Vector2( 108.7, -403.94 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
 nodes/Animation/node = SubResource( 14 )
@@ -418,7 +429,7 @@ nodes/torso_reset/node = SubResource( 61 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 62 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "running", 0, "TimeScale", "running", 1, "walk-idle", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player" ]
 
 [sub_resource type="Animation" id=64]
 tracks/0/type = "value"
@@ -1320,9 +1331,15 @@ stream = ExtResource( 53 )
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+pitch_scale = 1.02
 
 [node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+pitch_scale = 0.99
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+pitch_scale = 0.97
 
 [node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
@@ -1726,6 +1743,123 @@ one_shot = true
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="player-sfx" type="Node2D" parent="."]
+script = ExtResource( 49 )
+
+[node name="jump" type="Node2D" parent="player-sfx"]
+
+[node name="jump1" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 75 )
+
+[node name="jump2" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 75 )
+pitch_scale = 0.94
+
+[node name="jump3" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 77 )
+pitch_scale = 0.9
+
+[node name="jump4" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 77 )
+pitch_scale = 0.85
+
+[node name="knife_hit" type="Node2D" parent="player-sfx"]
+
+[node name="knifehit" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+
+[node name="knifehit2" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 1.1
+
+[node name="knifehit3" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 0.96
+
+[node name="knifehit4" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 0.96
+
+[node name="knife_swish" type="Node2D" parent="player-sfx"]
+
+[node name="knife_swish" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+
+[node name="knife_swish2" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 1.1
+
+[node name="knife_swish3" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 0.95
+
+[node name="knife_swish4" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 1.05
+
+[node name="slide" type="Node2D" parent="player-sfx"]
+
+[node name="slide1" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 80 )
+
+[node name="slide2" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 82 )
+volume_db = -2.0
+
+[node name="slide3" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 84 )
+volume_db = -2.0
+attenuation = 0.277392
+
+[node name="slide4" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 81 )
+volume_db = 1.0
+
+[node name="slide5" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 83 )
+volume_db = 1.345
+
+[node name="crouch" type="Node2D" parent="player-sfx"]
+
+[node name="crouch1" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+
+[node name="crouch2" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+pitch_scale = 0.91
+
+[node name="crouch3" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+pitch_scale = 1.04
+
+[node name="fall" type="Node2D" parent="player-sfx"]
+
+[node name="falling_ground" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+
+[node name="falling_ground2" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 1.05
+
+[node name="falling_ground3" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 1.12
+
+[node name="falling_ground4" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 0.97
+
+[node name="falling_ground5" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 0.93
 
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
