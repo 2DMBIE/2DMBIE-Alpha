@@ -244,3 +244,20 @@ tracks/19/keys = {
 "update": 0,
 "values": [ Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ) ]
 }
+tracks/20/type = "method"
+tracks/20/path = NodePath("player-sfx")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0.366543, 1.54463 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "footstep" ],
+"method": "play_sound"
+}, {
+"args": [ "footstep" ],
+"method": "play_sound"
+} ]
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://assets/scripts/AmmoLabel.gd" type="Script" id=6]
 [ext_resource path="res://assets/scripts/HP bar.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/Interface.gd" type="Script" id=8]
+[ext_resource path="res://assets/scripts/Weapon1.gd" type="Script" id=9]
+[ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/redBorder(hor).png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/redBorder(Ver).png" type="Texture" id=12]
+[ext_resource path="res://assets/scripts/redborders.gd" type="Script" id=13]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -71,21 +76,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerScore" type="Label" parent="Interface"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -112.0
-margin_top = 32.0
-margin_right = -24.0
-margin_bottom = 48.0
-custom_colors/font_color = Color( 0.964706, 0.921569, 0.419608, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Scoreboard" type="Label" parent="Interface"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -112,34 +102,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AmmoLabel" type="Label" parent="Interface"]
+[node name="PlayerScore" type="Label" parent="Interface/Scoreboard"]
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = -88.0
-margin_top = -72.0
-margin_right = -16.0
-margin_bottom = -40.0
+margin_top = 24.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0.964706, 0.921569, 0.419608, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 align = 1
 valign = 1
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TotalAmmoLabel" type="Label" parent="Interface"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -88.0
-margin_top = -48.0
-margin_right = -16.0
-margin_bottom = -16.0
-align = 1
-valign = 1
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -158,6 +130,36 @@ align = 1
 valign = 1
 autowrap = true
 
+[node name="TotalAmmoLabel" type="Label" parent="Interface/Ammo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 26.0
+margin_bottom = 58.0
+align = 1
+valign = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLabel" type="Label" parent="Interface/Ammo"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = 2.0
+margin_bottom = 34.0
+align = 1
+valign = 1
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ammoLabels" type="Panel" parent="Interface/Ammo"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
 anchor_left = 1.0
@@ -170,3 +172,144 @@ margin_bottom = 58.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="weaponslots" type="Control" parent="Interface"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -20.0
+margin_bottom = 20.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon2" type="Control" parent="Interface/weaponslots"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = 52.0
+margin_right = -16.0
+margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon2"]
+position = Vector2( 64, 32 )
+
+[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon2"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon2"]
+position = Vector2( 64, 32 )
+scale = Vector2( 0.484375, 0.34375 )
+texture = ExtResource( 10 )
+color = Color( 0.917647, 0.921569, 0.262745, 1 )
+energy = 0.8
+
+[node name="Weapon1" type="Control" parent="Interface/weaponslots"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = 132.0
+margin_right = -16.0
+margin_bottom = 196.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 64, 32 )
+
+[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 64, 32 )
+scale = Vector2( 0.5, 0.34375 )
+texture = ExtResource( 10 )
+color = Color( 0.196078, 0.694118, 0.890196, 1 )
+energy = 0.8
+
+[node name="redborders" type="Control" parent="Interface"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = 8.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="redBorder" type="Control" parent="Interface/redborders"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/redborders/redBorder"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 728, -30 )
+scale = Vector2( 1.02222, 1.125 )
+texture = ExtResource( 11 )
+flip_v = true
+
+[node name="redBorder2" type="Control" parent="Interface/redborders"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/redborders/redBorder2"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( -23, 408 )
+scale = Vector2( 1.46875, 1.19648 )
+texture = ExtResource( 12 )
+flip_h = true
+
+[node name="redBorder3" type="Control" parent="Interface/redborders"]
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/redborders/redBorder3"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 728, 32 )
+scale = Vector2( 1.02222, 1 )
+texture = ExtResource( 11 )
+
+[node name="redBorder4" type="Control" parent="Interface/redborders"]
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/redborders/redBorder4"]
+self_modulate = Color( 1, 1, 1, 0.313726 )
+position = Vector2( 24, 408 )
+scale = Vector2( 1, 1.19648 )
+texture = ExtResource( 12 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
