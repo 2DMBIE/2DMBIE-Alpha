@@ -630,7 +630,6 @@ mouse_default_cursor_shape = 2
 custom_styles/focus = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-pressed = true
 text = "Centered Camera"
 
 [node name="brighter_screen" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]

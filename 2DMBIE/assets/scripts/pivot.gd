@@ -14,7 +14,7 @@ func _ready():
 	
 	
 func _physics_process(_delta):
-	if Global.camera:
+	if !Global.camera:
 		timerTimeout()
 		if mousePos > (parent.position.x - pivotOffset):
 			cameraOffset.position.x = 300
