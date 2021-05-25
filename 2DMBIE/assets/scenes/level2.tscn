@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -27,8 +27,12 @@
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
 [ext_resource path="res://assets/scenes/purchasable.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=27]
+[ext_resource path="res://assets/scripts/music.gd" type="Script" id=28]
 [ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=30]
+[ext_resource path="res://assets/sounds/ingame_music.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=32]
+[ext_resource path="res://assets/sounds/player/heartbeat.wav" type="AudioStream" id=33]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -2367,14 +2371,53 @@ position = Vector2( 3264, -224 )
 [node name="Options" parent="Optionsmenu" instance=ExtResource( 30 )]
 visible = false
 
+[node name="music" type="Node2D" parent="."]
+script = ExtResource( 28 )
+
+[node name="ingame_music" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 31 )
+bus = "Music"
+
+[node name="sfx" type="Node2D" parent="."]
+script = ExtResource( 32 )
+
+[node name="heartbeat" type="Node2D" parent="sfx"]
+
+[node name="hearbeat1" type="AudioStreamPlayer2D" parent="sfx/heartbeat"]
+stream = ExtResource( 33 )
+bus = "Soundeffects"
+
+[node name="hearbeat2" type="AudioStreamPlayer2D" parent="sfx/heartbeat"]
+stream = ExtResource( 33 )
+pitch_scale = 0.95
+bus = "Soundeffects"
+
+[node name="hearbeat3" type="AudioStreamPlayer2D" parent="sfx/heartbeat"]
+stream = ExtResource( 33 )
+pitch_scale = 1.05
+bus = "Soundeffects"
+
+[connection signal="music" from="." to="music" method="do_action"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
+[connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
+[connection signal="play_sound" from="YSort/Door6" to="YSort/Door6/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door2" to="YSort/Door2/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door" to="YSort/Door/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door3" to="YSort/Door3/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door4" to="YSort/Door4/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door5" to="YSort/Door5/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door7" to="YSort/Door7/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door8" to="YSort/Door8/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door9" to="YSort/Door9/sfx" method="play_sound"]
+[connection signal="play_sound" from="YSort/Door10" to="YSort/Door10/sfx" method="play_sound"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 
 [editable path="CanvasLayer"]

@@ -233,3 +233,20 @@ tracks/18/keys = {
 "update": 0,
 "values": [ 0.0 ]
 }
+tracks/19/type = "method"
+tracks/19/path = NodePath("player-sfx")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0.427837, 1.20383 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "footstep" ],
+"method": "play_sound"
+}, {
+"args": [ "footstep" ],
+"method": "play_sound"
+} ]
+}

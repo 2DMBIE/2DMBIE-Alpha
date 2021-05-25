@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=158 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -74,7 +74,23 @@
 [ext_resource path="res://assets/sounds/m4a1/m4a1_reload.wav" type="AudioStream" id=72]
 [ext_resource path="res://assets/sprites/knife.png" type="Texture" id=73]
 [ext_resource path="res://assets/animations/knife_attack.tres" type="Animation" id=74]
-[ext_resource path="res://assets/animations/slide-animation2.tres" type="Animation" id=76]
+[ext_resource path="res://assets/sounds/player/jump1.wav" type="AudioStream" id=75]
+[ext_resource path="res://assets/animations/slide-animation.tres" type="Animation" id=76]
+[ext_resource path="res://assets/sounds/player/jump2.wav" type="AudioStream" id=77]
+[ext_resource path="res://assets/sounds/player/knife_hit.wav" type="AudioStream" id=78]
+[ext_resource path="res://assets/sounds/player/knife_swish.wav" type="AudioStream" id=79]
+[ext_resource path="res://assets/sounds/player/slide1.wav" type="AudioStream" id=80]
+[ext_resource path="res://assets/sounds/player/slide4.wav" type="AudioStream" id=81]
+[ext_resource path="res://assets/sounds/player/slide2.wav" type="AudioStream" id=82]
+[ext_resource path="res://assets/sounds/player/slide5.wav" type="AudioStream" id=83]
+[ext_resource path="res://assets/sounds/player/slide3.wav" type="AudioStream" id=84]
+[ext_resource path="res://assets/sounds/player/crouch.wav" type="AudioStream" id=85]
+[ext_resource path="res://assets/sounds/player/falling_ground.wav" type="AudioStream" id=86]
+[ext_resource path="res://assets/sounds/player/footstep4.wav" type="AudioStream" id=87]
+[ext_resource path="res://assets/sounds/player/footstep2.wav" type="AudioStream" id=88]
+[ext_resource path="res://assets/sounds/player/footstep3.wav" type="AudioStream" id=89]
+[ext_resource path="res://assets/sounds/player/footstep5.wav" type="AudioStream" id=90]
+[ext_resource path="res://assets/sounds/player/footstep1.wav" type="AudioStream" id=91]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -90,175 +106,179 @@ height = 45.0
 [sub_resource type="AnimationNodeAdd2" id=4]
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "slide (copy)"
-
-[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "walk"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "walk (reversed)"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "run"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "no_aim"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "crouching"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "crouching-idle"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "no_aim_shoot"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "idle"
+
+[sub_resource type="AnimationNodeTimeScale" id=14]
 
 [sub_resource type="AnimationNodeTimeScale" id=15]
 
-[sub_resource type="AnimationNodeTimeScale" id=16]
-
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "aim_minus_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "aim_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "aim_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "aim_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "aim_minus_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "aim_minus_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "aim_minus_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "aim_0_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=26]
-blend_point_0/node = SubResource( 17 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=25]
+blend_point_0/node = SubResource( 16 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 18 )
+blend_point_1/node = SubResource( 17 )
 blend_point_1/pos = 90.0
-blend_point_2/node = SubResource( 19 )
+blend_point_2/node = SubResource( 18 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 20 )
+blend_point_3/node = SubResource( 19 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 21 )
+blend_point_4/node = SubResource( 20 )
 blend_point_4/pos = -30.0
-blend_point_5/node = SubResource( 22 )
+blend_point_5/node = SubResource( 21 )
 blend_point_5/pos = -45.0
-blend_point_6/node = SubResource( 23 )
+blend_point_6/node = SubResource( 22 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 24 )
+blend_point_7/node = SubResource( 23 )
 blend_point_7/pos = 0.0
-blend_point_8/node = SubResource( 25 )
+blend_point_8/node = SubResource( 24 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "aim_0_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "aim_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "aim_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "aim_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "aim_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "aim_minus_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "aim_minus_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "aim_minus_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "aim_minus_45_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=36]
-blend_point_0/node = SubResource( 27 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=35]
+blend_point_0/node = SubResource( 26 )
 blend_point_0/pos = 0.0
-blend_point_1/node = SubResource( 28 )
+blend_point_1/node = SubResource( 27 )
 blend_point_1/pos = 30.0
-blend_point_2/node = SubResource( 29 )
+blend_point_2/node = SubResource( 28 )
 blend_point_2/pos = 45.0
-blend_point_3/node = SubResource( 30 )
+blend_point_3/node = SubResource( 29 )
 blend_point_3/pos = 60.0
-blend_point_4/node = SubResource( 31 )
+blend_point_4/node = SubResource( 30 )
 blend_point_4/pos = 90.0
-blend_point_5/node = SubResource( 32 )
+blend_point_5/node = SubResource( 31 )
 blend_point_5/pos = -90.0
-blend_point_6/node = SubResource( 33 )
+blend_point_6/node = SubResource( 32 )
 blend_point_6/pos = -60.0
-blend_point_7/node = SubResource( 34 )
+blend_point_7/node = SubResource( 33 )
 blend_point_7/pos = -30.0
-blend_point_8/node = SubResource( 35 )
+blend_point_8/node = SubResource( 34 )
 blend_point_8/pos = -45.0
 min_space = -90.0
 max_space = 90.0
 
-[sub_resource type="AnimationNodeTransition" id=37]
+[sub_resource type="AnimationNodeTransition" id=36]
 input_count = 2
 input_0/name = "aiming"
 input_0/auto_advance = false
 input_1/name = "not_aiming"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "base_position"
 
-[sub_resource type="AnimationNodeBlend2" id=39]
+[sub_resource type="AnimationNodeBlend2" id=38]
 
-[sub_resource type="AnimationNodeTransition" id=40]
+[sub_resource type="AnimationNodeTransition" id=39]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=41]
+[sub_resource type="AnimationNodeTransition" id=40]
 input_count = 2
 input_0/name = "true"
 input_0/auto_advance = false
 input_1/name = "false"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAdd2" id=42]
+[sub_resource type="AnimationNodeAdd2" id=41]
 
-[sub_resource type="AnimationNodeTransition" id=43]
+[sub_resource type="AnimationNodeTransition" id=42]
 input_count = 2
 input_0/name = "ground"
 input_0/auto_advance = false
 input_1/name = "air"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=44]
+[sub_resource type="AnimationNodeAnimation" id=43]
 animation = "knife_attack"
+
+[sub_resource type="AnimationNodeTransition" id=44]
+input_count = 2
+input_0/name = "yes"
+input_0/auto_advance = false
+input_1/name = "no"
+input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeTransition" id=45]
 input_count = 2
@@ -274,153 +294,144 @@ input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=47]
-input_count = 2
-input_0/name = "yes"
-input_0/auto_advance = false
-input_1/name = "no"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeAnimation" id=48]
+[sub_resource type="AnimationNodeAnimation" id=47]
 animation = "shoot_minus_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=49]
+[sub_resource type="AnimationNodeAnimation" id=48]
 animation = "shoot_minus_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=50]
+[sub_resource type="AnimationNodeAnimation" id=49]
 animation = "shoot_minus_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=51]
+[sub_resource type="AnimationNodeAnimation" id=50]
 animation = "shoot_minus_30_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=52]
+[sub_resource type="AnimationNodeAnimation" id=51]
 animation = "shoot_0_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=53]
+[sub_resource type="AnimationNodeAnimation" id=52]
 animation = "shoot_90_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=54]
+[sub_resource type="AnimationNodeAnimation" id=53]
 animation = "shoot_60_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=55]
+[sub_resource type="AnimationNodeAnimation" id=54]
 animation = "shoot_45_degrees"
 
-[sub_resource type="AnimationNodeAnimation" id=56]
+[sub_resource type="AnimationNodeAnimation" id=55]
 animation = "shoot_30_degrees"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=57]
-blend_point_0/node = SubResource( 48 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=56]
+blend_point_0/node = SubResource( 47 )
 blend_point_0/pos = -90.0
-blend_point_1/node = SubResource( 49 )
+blend_point_1/node = SubResource( 48 )
 blend_point_1/pos = -60.0
-blend_point_2/node = SubResource( 50 )
+blend_point_2/node = SubResource( 49 )
 blend_point_2/pos = -45.0
-blend_point_3/node = SubResource( 51 )
+blend_point_3/node = SubResource( 50 )
 blend_point_3/pos = -30.0
-blend_point_4/node = SubResource( 52 )
+blend_point_4/node = SubResource( 51 )
 blend_point_4/pos = 0.0
-blend_point_5/node = SubResource( 53 )
+blend_point_5/node = SubResource( 52 )
 blend_point_5/pos = 90.0
-blend_point_6/node = SubResource( 54 )
+blend_point_6/node = SubResource( 53 )
 blend_point_6/pos = 60.0
-blend_point_7/node = SubResource( 55 )
+blend_point_7/node = SubResource( 54 )
 blend_point_7/pos = 45.0
-blend_point_8/node = SubResource( 56 )
+blend_point_8/node = SubResource( 55 )
 blend_point_8/pos = 30.0
 min_space = -90.0
 max_space = 90.0
 snap = 15.0
 value_label = "0"
 
-[sub_resource type="AnimationNodeOneShot" id=58]
+[sub_resource type="AnimationNodeOneShot" id=57]
 fadein_time = 0.0
 fadeout_time = 0.0
 autorestart_delay = 0.0
 
-[sub_resource type="AnimationNodeAnimation" id=59]
+[sub_resource type="AnimationNodeAnimation" id=58]
 animation = "slide"
 
-[sub_resource type="AnimationNodeTransition" id=60]
+[sub_resource type="AnimationNodeTransition" id=59]
 input_count = 2
 input_0/name = "yes"
 input_0/auto_advance = false
 input_1/name = "no"
 input_1/auto_advance = false
 
+[sub_resource type="AnimationNodeBlend2" id=60]
+
 [sub_resource type="AnimationNodeBlend2" id=61]
 
-[sub_resource type="AnimationNodeBlend2" id=62]
-
-[sub_resource type="AnimationNodeBlendTree" id=63]
-graph_offset = Vector2( -321.3, -433.44 )
+[sub_resource type="AnimationNodeBlendTree" id=62]
+graph_offset = Vector2( -1187.3, -250.94 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( 880, 160 )
-nodes/Animation/node = SubResource( 14 )
+nodes/Animation/node = SubResource( 13 )
 nodes/Animation/position = Vector2( -260, 280 )
-"nodes/Animation 10/node" = SubResource( 5 )
-"nodes/Animation 10/position" = Vector2( 740, -280 )
-"nodes/Animation 2/node" = SubResource( 6 )
+"nodes/Animation 2/node" = SubResource( 5 )
 "nodes/Animation 2/position" = Vector2( -480, 160 )
-"nodes/Animation 3/node" = SubResource( 7 )
+"nodes/Animation 3/node" = SubResource( 6 )
 "nodes/Animation 3/position" = Vector2( 220, 240 )
-"nodes/Animation 4/node" = SubResource( 8 )
+"nodes/Animation 4/node" = SubResource( 7 )
 "nodes/Animation 4/position" = Vector2( -480, 20 )
-"nodes/Animation 5/node" = SubResource( 9 )
+"nodes/Animation 5/node" = SubResource( 8 )
 "nodes/Animation 5/position" = Vector2( -220, -80 )
-"nodes/Animation 6/node" = SubResource( 10 )
+"nodes/Animation 6/node" = SubResource( 9 )
 "nodes/Animation 6/position" = Vector2( -80, 560 )
-"nodes/Animation 7/node" = SubResource( 11 )
+"nodes/Animation 7/node" = SubResource( 10 )
 "nodes/Animation 7/position" = Vector2( -100, -240 )
-"nodes/Animation 8/node" = SubResource( 12 )
+"nodes/Animation 8/node" = SubResource( 11 )
 "nodes/Animation 8/position" = Vector2( 60, -400 )
-"nodes/Animation 9/node" = SubResource( 13 )
+"nodes/Animation 9/node" = SubResource( 12 )
 "nodes/Animation 9/position" = Vector2( -20, 880 )
-nodes/TimeScale/node = SubResource( 16 )
+nodes/TimeScale/node = SubResource( 15 )
 nodes/TimeScale/position = Vector2( 0, -60 )
-"nodes/TimeScale 2/node" = SubResource( 15 )
+"nodes/TimeScale 2/node" = SubResource( 14 )
 "nodes/TimeScale 2/position" = Vector2( 80, -240 )
-nodes/aim/node = SubResource( 26 )
+nodes/aim/node = SubResource( 25 )
 nodes/aim/position = Vector2( -100, 440 )
-nodes/aim2/node = SubResource( 36 )
+nodes/aim2/node = SubResource( 35 )
 nodes/aim2/position = Vector2( -300, 780 )
-nodes/aim_state/node = SubResource( 37 )
+nodes/aim_state/node = SubResource( 36 )
 nodes/aim_state/position = Vector2( 160, 480 )
-"nodes/base position player/node" = SubResource( 38 )
+"nodes/base position player/node" = SubResource( 37 )
 "nodes/base position player/position" = Vector2( 700, -40 )
-nodes/crouch-idle/node = SubResource( 39 )
+nodes/crouch-idle/node = SubResource( 38 )
 nodes/crouch-idle/position = Vector2( 320, -200 )
-nodes/crouching/node = SubResource( 40 )
+nodes/crouching/node = SubResource( 39 )
 nodes/crouching/position = Vector2( 440, 40 )
-nodes/fixed_aim/node = SubResource( 41 )
+nodes/fixed_aim/node = SubResource( 40 )
 nodes/fixed_aim/position = Vector2( 240, 660 )
-nodes/gun_recoil_sensitivity/node = SubResource( 42 )
+nodes/gun_recoil_sensitivity/node = SubResource( 41 )
 nodes/gun_recoil_sensitivity/position = Vector2( -60, 680 )
-nodes/in_air_state/node = SubResource( 43 )
+nodes/in_air_state/node = SubResource( 42 )
 nodes/in_air_state/position = Vector2( 600, 160 )
-nodes/knife/node = SubResource( 44 )
+nodes/knife/node = SubResource( 43 )
 nodes/knife/position = Vector2( 440, 360 )
-nodes/knifing/node = SubResource( 45 )
+nodes/knifing/node = SubResource( 44 )
 nodes/knifing/position = Vector2( 720, 340 )
-nodes/moonwalking/node = SubResource( 46 )
+nodes/moonwalking/node = SubResource( 45 )
 nodes/moonwalking/position = Vector2( -240, 80 )
 nodes/output/position = Vector2( 1420, 100 )
-nodes/running/node = SubResource( 47 )
+nodes/running/node = SubResource( 46 )
 nodes/running/position = Vector2( 180, 20 )
-nodes/shoot_angle/node = SubResource( 57 )
+nodes/shoot_angle/node = SubResource( 56 )
 nodes/shoot_angle/position = Vector2( -300, 660 )
-nodes/shooting/node = SubResource( 58 )
+nodes/shooting/node = SubResource( 57 )
 nodes/shooting/position = Vector2( 460, 560 )
-nodes/slide/node = SubResource( 59 )
-nodes/slide/position = Vector2( 760, -160 )
-nodes/sliding/node = SubResource( 60 )
+nodes/slide/node = SubResource( 58 )
+nodes/slide/position = Vector2( 720, -180 )
+nodes/sliding/node = SubResource( 59 )
 nodes/sliding/position = Vector2( 1180, 100 )
-nodes/torso_reset/node = SubResource( 61 )
+nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
-nodes/walk-idle/node = SubResource( 62 )
+nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "running", 0, "TimeScale", "running", 1, "walk-idle", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "torso_reset", 0, "Animation 10", "torso_reset", 1, "base position player", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale", 0, "Animation 5", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "running", 0, "TimeScale", "running", 1, "walk-idle", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "TimeScale 2", 0, "Animation 7" ]
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=63]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -590,7 +601,7 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id=64]
 length = 0.15
 step = 0.15
 tracks/0/type = "value"
@@ -786,484 +797,11 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="Animation" id=66]
-length = 2.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("body/chest:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 11.712 ), Vector2( 0, 11.712 ), Vector2( 0, 11.712 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("body/chest:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, -15.8283, -24.7832 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("body/legs:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 11.189 ), Vector2( 0, 11.189 ), Vector2( 0, 11.189 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("body/legs:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, -7.47731 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right/toes_right:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 15.1624, 5.05409 ), Vector2( 15.1624, 5.05409 ), Vector2( 15.1624, 5.05409 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right/toes_right:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 0.0 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.506966, 14.393 ), Vector2( 0.506966, 14.393 ), Vector2( 0.506966, 14.393 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("body/legs/thigh_right/lowerleg_right/foot_right:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -3.86847, -4.70119, -4.70119 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("body/legs/thigh_right/lowerleg_right:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ), Vector2( -1.00315, 16.9141 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("body/legs/thigh_right/lowerleg_right:rotation_degrees")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 69.9595, 80.9504, 80.9504 ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("body/legs/thigh_right:position")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ), Vector2( -6.18385, 3.40305 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("body/legs/thigh_right:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -66.323, -76.4271, -76.4271 ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left/toes_left:position")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 12.9359, 4.65146 ), Vector2( 12.9359, 4.65146 ), Vector2( 12.9359, 4.65146 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left/toes_left:rotation_degrees")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 0.0 ]
-}
-tracks/14/type = "value"
-tracks/14/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left:position")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ), Vector2( 0.074131, 13.4046 ) ]
-}
-tracks/15/type = "value"
-tracks/15/path = NodePath("body/legs/thigh_left/lowerleg_left/foot_left:rotation_degrees")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 4.2704, 25.728, 5.27952 ]
-}
-tracks/16/type = "value"
-tracks/16/path = NodePath("body/legs/thigh_left/lowerleg_left:position")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ), Vector2( 1.05579, 17.9436 ) ]
-}
-tracks/17/type = "value"
-tracks/17/path = NodePath("body/legs/thigh_left/lowerleg_left:rotation_degrees")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 57.9819, 9.07934, 51.5597 ]
-}
-tracks/18/type = "value"
-tracks/18/path = NodePath("body/legs/thigh_left:position")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ), Vector2( 3.28812, 3.49881 ) ]
-}
-tracks/19/type = "value"
-tracks/19/path = NodePath("body/legs/thigh_left:rotation_degrees")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -62.6332, -54.4563, -78.0952 ]
-}
-tracks/20/type = "value"
-tracks/20/path = NodePath("body:position")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 8.183 ), Vector2( 0, 13.865 ), Vector2( 0, 28.386 ) ]
-}
-tracks/21/type = "value"
-tracks/21/path = NodePath("body:rotation_degrees")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, -15.0492, -34.0641 ]
-}
-tracks/22/type = "value"
-tracks/22/path = NodePath("body/chest/torso:position")
-tracks/22/interp = 1
-tracks/22/loop_wrap = true
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -15.094 ), Vector2( 0, -15.094 ), Vector2( 0, -15.094 ) ]
-}
-tracks/23/type = "value"
-tracks/23/path = NodePath("body/chest/torso:rotation_degrees")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, -14.2207 ]
-}
-tracks/24/type = "value"
-tracks/24/path = NodePath("body/chest/torso/upperarm_left:position")
-tracks/24/interp = 1
-tracks/24/loop_wrap = true
-tracks/24/imported = false
-tracks/24/enabled = true
-tracks/24/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 15.5659, -12.422 ), Vector2( 15.5659, -12.422 ), Vector2( 15.5659, -12.422 ) ]
-}
-tracks/25/type = "value"
-tracks/25/path = NodePath("body/chest/torso/upperarm_left:rotation_degrees")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -19.8409, -28.243, -30.9331 ]
-}
-tracks/26/type = "value"
-tracks/26/path = NodePath("body/chest/torso/head:position")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -0.0163317, -24.4058 ), Vector2( -0.0163317, -24.4058 ), Vector2( -0.0163317, -24.4058 ) ]
-}
-tracks/27/type = "value"
-tracks/27/path = NodePath("body/chest/torso/head:rotation_degrees")
-tracks/27/interp = 1
-tracks/27/loop_wrap = true
-tracks/27/imported = false
-tracks/27/enabled = true
-tracks/27/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 2.53344, 14.1844, 35.2642 ]
-}
-tracks/28/type = "value"
-tracks/28/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:position")
-tracks/28/interp = 1
-tracks/28/loop_wrap = true
-tracks/28/imported = false
-tracks/28/enabled = true
-tracks/28/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 18.566 ), Vector2( 0, 18.566 ), Vector2( 0, 18.566 ) ]
-}
-tracks/29/type = "value"
-tracks/29/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left/hand_left:rotation_degrees")
-tracks/29/interp = 1
-tracks/29/loop_wrap = true
-tracks/29/imported = false
-tracks/29/enabled = true
-tracks/29/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 7.34612, 22.9119, 6.01914 ]
-}
-tracks/30/type = "value"
-tracks/30/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:position")
-tracks/30/interp = 1
-tracks/30/loop_wrap = true
-tracks/30/imported = false
-tracks/30/enabled = true
-tracks/30/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -0.938873, 18.0288 ), Vector2( -0.938873, 18.0288 ), Vector2( -0.938873, 18.0288 ) ]
-}
-tracks/31/type = "value"
-tracks/31/path = NodePath("body/chest/torso/upperarm_left/lowerarm_left:rotation_degrees")
-tracks/31/interp = 1
-tracks/31/loop_wrap = true
-tracks/31/imported = false
-tracks/31/enabled = true
-tracks/31/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -87.4246, -94.9905, -74.6826 ]
-}
-tracks/32/type = "value"
-tracks/32/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:position")
-tracks/32/interp = 1
-tracks/32/loop_wrap = true
-tracks/32/imported = false
-tracks/32/enabled = true
-tracks/32/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -1.01368, 20.0398 ), Vector2( -1.01368, 20.0398 ), Vector2( -1.01368, 20.0398 ) ]
-}
-tracks/33/type = "value"
-tracks/33/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right:rotation_degrees")
-tracks/33/interp = 1
-tracks/33/loop_wrap = true
-tracks/33/imported = false
-tracks/33/enabled = true
-tracks/33/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -32.6852, 54.3629, 102.126 ]
-}
-tracks/34/type = "value"
-tracks/34/path = NodePath("body/chest/torso/upperarm_right:position")
-tracks/34/interp = 1
-tracks/34/loop_wrap = true
-tracks/34/imported = false
-tracks/34/enabled = true
-tracks/34/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -13.4064, -14.1956 ), Vector2( -13.4064, -14.1956 ), Vector2( -13.4064, -14.1956 ) ]
-}
-tracks/35/type = "value"
-tracks/35/path = NodePath("body/chest/torso/upperarm_right:rotation_degrees")
-tracks/35/interp = 1
-tracks/35/loop_wrap = true
-tracks/35/imported = false
-tracks/35/enabled = true
-tracks/35/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 18.3942, 41.3285, 120.373 ]
-}
-tracks/36/type = "value"
-tracks/36/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:position")
-tracks/36/interp = 1
-tracks/36/loop_wrap = true
-tracks/36/imported = false
-tracks/36/enabled = true
-tracks/36/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1.33635, 15.2045 ), Vector2( 1.33635, 15.2045 ), Vector2( 1.33635, 15.2045 ) ]
-}
-tracks/37/type = "value"
-tracks/37/path = NodePath("body/chest/torso/upperarm_right/lowerarm_right/hand_right:rotation_degrees")
-tracks/37/interp = 1
-tracks/37/loop_wrap = true
-tracks/37/imported = false
-tracks/37/enabled = true
-tracks/37/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ -3.5147, -17.7277, -4.00039 ]
-}
-tracks/38/type = "method"
-tracks/38/path = NodePath(".")
-tracks/38/interp = 1
-tracks/38/loop_wrap = true
-tracks/38/imported = false
-tracks/38/enabled = true
-tracks/38/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "on_slide_animation_complete"
-} ]
-}
-
-[sub_resource type="CapsuleShape2D" id=67]
+[sub_resource type="CapsuleShape2D" id=65]
 radius = 25.0
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=68]
+[sub_resource type="RectangleShape2D" id=66]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -1275,7 +813,7 @@ collision_mask = 2147483774
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 1.11696 )
+position = Vector2( 0, 1.04753 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -1312,110 +850,142 @@ script = ExtResource( 49 )
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_draw"]
 stream = ExtResource( 48 )
+bus = "Soundeffects"
 
 [node name="mp5_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+bus = "Soundeffects"
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+pitch_scale = 1.02
+bus = "Soundeffects"
 
 [node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
 stream = ExtResource( 53 )
+pitch_scale = 0.99
+bus = "Soundeffects"
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_shot"]
+stream = ExtResource( 53 )
+pitch_scale = 0.97
+bus = "Soundeffects"
 
 [node name="mp5_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_reload"]
 stream = ExtResource( 70 )
 attenuation = 0.378929
+bus = "Soundeffects"
 
 [node name="spas12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_draw"]
 stream = ExtResource( 50 )
+bus = "Soundeffects"
 
 [node name="spas12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 52 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 51 )
 attenuation = 0.25
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_shot"]
 stream = ExtResource( 54 )
+bus = "Soundeffects"
 
 [node name="spas12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_reload"]
 stream = ExtResource( 69 )
 attenuation = 0.378929
+bus = "Soundeffects"
 
 [node name="m4a1_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_draw"]
 stream = ExtResource( 58 )
+bus = "Soundeffects"
 
 [node name="m4a1_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 55 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 56 )
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_shot"]
 stream = ExtResource( 57 )
 attenuation = 0.189465
+bus = "Soundeffects"
 
 [node name="m4a1_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m4a1_reload"]
 stream = ExtResource( 72 )
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="ak12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
 stream = ExtResource( 62 )
+bus = "Soundeffects"
 
 [node name="draw2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_draw"]
 stream = ExtResource( 60 )
+bus = "Soundeffects"
 
 [node name="ak12_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
 stream = ExtResource( 59 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_shot"]
 stream = ExtResource( 61 )
+bus = "Soundeffects"
 
 [node name="ak12_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_reload"]
 stream = ExtResource( 71 )
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="barrett50_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_draw"]
 stream = ExtResource( 67 )
+bus = "Soundeffects"
 
 [node name="barrett50_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 63 )
+bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 65 )
+bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 64 )
+bus = "Soundeffects"
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50_shot"]
 stream = ExtResource( 66 )
+bus = "Soundeffects"
 
 [node name="barrett50_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
@@ -1423,6 +993,7 @@ stream = ExtResource( 66 )
 stream = ExtResource( 68 )
 volume_db = 4.0
 attenuation = 0.138696
+bus = "Soundeffects"
 
 [node name="BulletDelayTimer" type="Timer" parent="body/chest/torso/gun"]
 one_shot = true
@@ -1526,7 +1097,7 @@ __meta__ = {
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
 position = Vector2( -6.18385, 3.40305 )
-rotation = 0.204008
+rotation = 0.214639
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1536,7 +1107,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.3281
+rotation = 0.306041
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1545,7 +1116,7 @@ __meta__ = {
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
 position = Vector2( 0.506966, 14.393 )
-rotation = -0.52919
+rotation = -0.517995
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1560,7 +1131,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -0.337881
+rotation = -0.332394
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1571,7 +1142,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 0.704158
+rotation = 0.694381
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1580,7 +1151,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.353691
+rotation = -0.349397
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1606,7 +1177,7 @@ z_index = 1
 shape = SubResource( 3 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 63 )
+tree_root = SubResource( 62 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/Add2/add_amount = 1.0
 parameters/TimeScale/scale = 2.7
@@ -1644,7 +1215,7 @@ anims/crouching-idle = ExtResource( 37 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
 anims/knife_attack = ExtResource( 74 )
-anims/no_aim = SubResource( 64 )
+anims/no_aim = SubResource( 63 )
 anims/no_aim_shoot = ExtResource( 46 )
 anims/run = ExtResource( 32 )
 anims/shoot_0_degrees = ExtResource( 43 )
@@ -1653,11 +1224,10 @@ anims/shoot_45_degrees = ExtResource( 41 )
 anims/shoot_60_degrees = ExtResource( 42 )
 anims/shoot_90_degrees = ExtResource( 39 )
 anims/shoot_minus_30_degrees = ExtResource( 38 )
-anims/shoot_minus_45_degrees = SubResource( 65 )
+anims/shoot_minus_45_degrees = SubResource( 64 )
 anims/shoot_minus_60_degrees = ExtResource( 45 )
 anims/shoot_minus_90_degrees = ExtResource( 44 )
-anims/slide = SubResource( 66 )
-"anims/slide (copy)" = ExtResource( 76 )
+anims/slide = ExtResource( 76 )
 anims/walk = ExtResource( 31 )
 "anims/walk (reversed)" = ExtResource( 1 )
 
@@ -1704,7 +1274,7 @@ collision_mask = 8
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 67 )
+shape = SubResource( 65 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -1714,7 +1284,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 68 )
+shape = SubResource( 66 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -1726,6 +1296,170 @@ one_shot = true
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="player-sfx" type="Node2D" parent="."]
+script = ExtResource( 49 )
+
+[node name="jump" type="Node2D" parent="player-sfx"]
+
+[node name="jump1" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 75 )
+bus = "Soundeffects"
+
+[node name="jump2" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 75 )
+pitch_scale = 0.94
+bus = "Soundeffects"
+
+[node name="jump3" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 77 )
+pitch_scale = 0.9
+bus = "Soundeffects"
+
+[node name="jump4" type="AudioStreamPlayer2D" parent="player-sfx/jump"]
+stream = ExtResource( 77 )
+pitch_scale = 0.85
+bus = "Soundeffects"
+
+[node name="knife_hit" type="Node2D" parent="player-sfx"]
+
+[node name="knifehit" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+bus = "Soundeffects"
+
+[node name="knifehit2" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 1.1
+bus = "Soundeffects"
+
+[node name="knifehit3" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 0.96
+bus = "Soundeffects"
+
+[node name="knifehit4" type="AudioStreamPlayer2D" parent="player-sfx/knife_hit"]
+stream = ExtResource( 78 )
+pitch_scale = 0.96
+bus = "Soundeffects"
+
+[node name="knife_swish" type="Node2D" parent="player-sfx"]
+
+[node name="knife_swish" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+bus = "Soundeffects"
+
+[node name="knife_swish2" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 1.1
+bus = "Soundeffects"
+
+[node name="knife_swish3" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 0.95
+bus = "Soundeffects"
+
+[node name="knife_swish4" type="AudioStreamPlayer2D" parent="player-sfx/knife_swish"]
+stream = ExtResource( 79 )
+volume_db = 9.172
+pitch_scale = 1.05
+bus = "Soundeffects"
+
+[node name="slide" type="Node2D" parent="player-sfx"]
+
+[node name="slide1" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 80 )
+bus = "Soundeffects"
+
+[node name="slide2" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 82 )
+volume_db = -2.0
+bus = "Soundeffects"
+
+[node name="slide3" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 84 )
+volume_db = -2.0
+attenuation = 0.277392
+bus = "Soundeffects"
+
+[node name="slide4" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 81 )
+volume_db = 1.0
+bus = "Soundeffects"
+
+[node name="slide5" type="AudioStreamPlayer2D" parent="player-sfx/slide"]
+stream = ExtResource( 83 )
+volume_db = 1.345
+bus = "Soundeffects"
+
+[node name="crouch" type="Node2D" parent="player-sfx"]
+
+[node name="crouch1" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+bus = "Soundeffects"
+
+[node name="crouch2" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+pitch_scale = 0.91
+bus = "Soundeffects"
+
+[node name="crouch3" type="AudioStreamPlayer2D" parent="player-sfx/crouch"]
+stream = ExtResource( 85 )
+volume_db = 2.0
+pitch_scale = 1.04
+bus = "Soundeffects"
+
+[node name="fall" type="Node2D" parent="player-sfx"]
+
+[node name="falling_ground" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+bus = "Soundeffects"
+
+[node name="falling_ground2" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 1.05
+bus = "Soundeffects"
+
+[node name="falling_ground3" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 1.12
+bus = "Soundeffects"
+
+[node name="falling_ground4" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 0.97
+bus = "Soundeffects"
+
+[node name="falling_ground5" type="AudioStreamPlayer2D" parent="player-sfx/fall"]
+stream = ExtResource( 86 )
+pitch_scale = 0.93
+bus = "Soundeffects"
+
+[node name="footstep" type="Node2D" parent="player-sfx"]
+
+[node name="footstep1" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 91 )
+bus = "Soundeffects"
+
+[node name="footstep2" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 88 )
+bus = "Soundeffects"
+
+[node name="footstep3" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 89 )
+bus = "Soundeffects"
+
+[node name="footstep4" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 87 )
+bus = "Soundeffects"
+
+[node name="footstep5" type="AudioStreamPlayer2D" parent="player-sfx/footstep"]
+stream = ExtResource( 90 )
+bus = "Soundeffects"
 
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]

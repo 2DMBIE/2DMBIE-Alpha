@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/scripts/Door.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/door.png" type="Texture" id=2]
+[ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=3]
+[ext_resource path="res://assets/sounds/player/buy(cha_ching).wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/player/notenoughmoney.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 80 )
@@ -61,6 +64,47 @@ position = Vector2( 32, 80 )
 scale = Vector2( 1, 1.25 )
 z_as_relative = false
 texture = ExtResource( 2 )
+
+[node name="sfx" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="buy" type="Node2D" parent="sfx"]
+
+[node name="BuySound" type="AudioStreamPlayer2D" parent="sfx/buy"]
+stream = ExtResource( 4 )
+volume_db = 1.0
+bus = "Soundeffects"
+
+[node name="BuySound2" type="AudioStreamPlayer2D" parent="sfx/buy"]
+stream = ExtResource( 4 )
+volume_db = 1.0
+pitch_scale = 0.99
+bus = "Soundeffects"
+
+[node name="BuySound3" type="AudioStreamPlayer2D" parent="sfx/buy"]
+stream = ExtResource( 4 )
+volume_db = 1.0
+pitch_scale = 1.01
+bus = "Soundeffects"
+
+[node name="not_enough_money" type="Node2D" parent="sfx"]
+
+[node name="notenoughmoney" type="AudioStreamPlayer2D" parent="sfx/not_enough_money"]
+stream = ExtResource( 5 )
+volume_db = 2.0
+bus = "Soundeffects"
+
+[node name="notenoughmoney2" type="AudioStreamPlayer2D" parent="sfx/not_enough_money"]
+stream = ExtResource( 5 )
+volume_db = 2.0
+pitch_scale = 0.98
+bus = "Soundeffects"
+
+[node name="notenoughmoney3" type="AudioStreamPlayer2D" parent="sfx/not_enough_money"]
+stream = ExtResource( 5 )
+volume_db = 2.0
+pitch_scale = 1.03
+bus = "Soundeffects"
 
 [connection signal="body_entered" from="doorareaRight" to="." method="_on_doorareaRight_body_entered"]
 [connection signal="body_exited" from="doorareaRight" to="." method="_on_doorareaRight_body_exited"]
