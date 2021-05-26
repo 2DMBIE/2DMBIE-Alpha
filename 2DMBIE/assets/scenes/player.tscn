@@ -809,7 +809,7 @@ height = 75.8569
 pause_mode = 1
 z_index = 1
 collision_layer = 4
-collision_mask = 2147483774
+collision_mask = 2147483902
 script = ExtResource( 17 )
 
 [node name="body" type="Position2D" parent="."]
@@ -1467,6 +1467,7 @@ bus = "Soundeffects"
 stream = ExtResource( 90 )
 bus = "Soundeffects"
 
+[connection signal="ammoPickup" from="." to="body/chest/torso/gun" method="_on_Player_ammoPickup"]
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
@@ -1478,6 +1479,7 @@ bus = "Soundeffects"
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]
 [connection signal="body_entered" from="body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox" to="." method="on_knife_hit"]
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_Hitbox_body_exited"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_groundChecker_body_exited"]

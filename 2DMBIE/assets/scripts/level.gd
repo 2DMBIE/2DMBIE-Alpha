@@ -8,12 +8,6 @@ signal music(action)
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
 func _ready():
-	var spawnTimer = Timer.new()
-	spawnTimer.set_wait_time(2)
-	spawnTimer.set_one_shot(true)
-	spawnTimer.connect("timeout", self, "spawnTimer_timeout")
-	add_child(spawnTimer)
-	spawnTimer.start()
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
@@ -119,5 +113,4 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
 	print(graphRandomPoint)
 
-func spawnTimer_timeout():
-	var _x = $ammoPouch.connect("totalAmmo", $Player, "onAmmoPouchPickup")
+

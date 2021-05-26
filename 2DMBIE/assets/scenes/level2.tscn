@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/sounds/ingame_music.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=32]
 [ext_resource path="res://assets/sounds/player/heartbeat.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/scenes/ammoPouch.tscn" type="PackedScene" id=34]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -2029,7 +2030,6 @@ tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 316.524, -155.924 )
-collision_mask = 2147483902
 
 [node name="Spawnpoints" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
@@ -2398,12 +2398,19 @@ stream = ExtResource( 33 )
 pitch_scale = 1.05
 bus = "Soundeffects"
 
+[node name="ammoPouch" parent="." instance=ExtResource( 34 )]
+position = Vector2( 312, -256 )
+
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
@@ -2422,6 +2429,7 @@ bus = "Soundeffects"
 [connection signal="play_sound" from="YSort/Door10" to="YSort/Door10/sfx" method="play_sound"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 
+[editable path="Player"]
 [editable path="CanvasLayer"]
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]

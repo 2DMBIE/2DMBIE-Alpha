@@ -341,6 +341,7 @@ func _on_Hitbox_body_entered(body):
 		takenDamage(Global.EnemyDamage)
 		takingDamage = true
 
+
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
 
@@ -420,5 +421,10 @@ func on_slide_animation_complete():
 func _on_backfire_event():
 	running_disabled = true
 
-func onAmmoPouchPickup(gainedAmmo):
-	print(gainedAmmo)
+signal ammoPickup(totalAmmo)
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("ammo"):
+		var gainedAmmo = 60
+		emit_signal("ammoPickup", gainedAmmo)
+

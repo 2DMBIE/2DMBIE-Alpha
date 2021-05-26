@@ -216,3 +216,7 @@ func get_mouse_facing():
 func _on_FasterShootingPerk_perkactive(canBuyFasterFireRate):
 	if canBuyFasterFireRate == false:
 		canBuyFasterFireRate2 = false
+
+func _on_Player_ammoPickup(gainedAmmo):
+	var _gun = guns[current_gun_index]
+	_gun.totalAmmo += gainedAmmo
