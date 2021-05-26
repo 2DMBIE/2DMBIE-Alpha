@@ -15,7 +15,11 @@ func _ready():
 	
 	
 func _process(_delta):
-	
+	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
+	if ammobagamount > 1:
+		get_tree().get_nodes_in_group("ammo")[0].queue_free()
+		
+		
 	
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
