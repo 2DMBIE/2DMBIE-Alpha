@@ -2029,6 +2029,7 @@ tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -21
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 316.524, -155.924 )
+collision_mask = 2147483902
 
 [node name="Spawnpoints" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
@@ -2404,6 +2405,7 @@ bus = "Soundeffects"
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]

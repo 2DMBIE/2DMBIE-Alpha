@@ -5,13 +5,24 @@ var random_round
 var music_playing = false
 signal music(action)
 
+var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
 func _ready():
+	var spawnTimer = Timer.new()
+	spawnTimer.set_wait_time(2)
+	spawnTimer.set_one_shot(true)
+	spawnTimer.connect("timeout", self, "spawnTimer_timeout")
+	add_child(spawnTimer)
+	spawnTimer.start()
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
-
+	
+	
+	
 func _process(_delta):
+	
+	
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
@@ -101,3 +112,12 @@ func escape_options():
 func _on_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("PauseMenu/Container").visible = false
+
+func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
+	var ammoPouch = AmmoPouch.instance()
+	ammoPouch.set_position(graphRandomPoint)
+	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
+	print(graphRandomPoint)
+
+func spawnTimer_timeout():
+	var _x = $ammoPouch.connect("totalAmmo", $Player, "onAmmoPouchPickup")
