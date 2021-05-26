@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -4342,11 +4342,6 @@ position = Vector2( 2816, -2272 )
 [node name="Secret" parent="Doors" instance=ExtResource( 29 )]
 position = Vector2( 3008, -1248 )
 
-[node name="Optionsmenu" type="CanvasLayer" parent="."]
-
-[node name="Options" parent="Optionsmenu" instance=ExtResource( 30 )]
-visible = false
-
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
 
@@ -4385,6 +4380,11 @@ stream = ExtResource( 33 )
 pitch_scale = 1.05
 bus = "Soundeffects"
 
+[node name="Optionsmenu" parent="." instance=ExtResource( 30 )]
+
+[node name="Options" parent="Optionsmenu" index="0"]
+visible = false
+
 [connection signal="music" from="." to="music" method="do_action"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
@@ -4393,19 +4393,14 @@ bus = "Soundeffects"
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/M4A2" to="Weapons/M4A2/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
-[connection signal="play_sound" from="YSort/Door6" to="YSort/Door6/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door2" to="YSort/Door2/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door" to="YSort/Door/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door3" to="YSort/Door3/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door4" to="YSort/Door4/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door5" to="YSort/Door5/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door7" to="YSort/Door7/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door8" to="YSort/Door8/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door9" to="YSort/Door9/sfx" method="play_sound"]
-[connection signal="play_sound" from="YSort/Door10" to="YSort/Door10/sfx" method="play_sound"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 
 [editable path="CanvasLayer"]
@@ -4413,4 +4408,4 @@ bus = "Soundeffects"
 [editable path="PauseMenu/Container/Continue"]
 [editable path="PauseMenu/Container/Options"]
 [editable path="PauseMenu/Container/ExitMenu"]
-[editable path="Optionsmenu/Options"]
+[editable path="Optionsmenu"]

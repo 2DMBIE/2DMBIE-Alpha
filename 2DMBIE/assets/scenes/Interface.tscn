@@ -20,6 +20,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -1000, 384 )
+mouse_filter = 2
 script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -253,6 +254,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_right = 8.0
+mouse_filter = 2
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false

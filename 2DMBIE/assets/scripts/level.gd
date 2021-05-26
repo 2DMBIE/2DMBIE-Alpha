@@ -85,7 +85,7 @@ func _on_ExitMenu_button_down():
 
 
 func _on_ExitOptions_button_down():
-	if get_tree().get_current_scene().get_name() == 'Options':
+	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
 			print("ERROR: ", x)
