@@ -880,6 +880,12 @@ stream = ExtResource( 70 )
 attenuation = 0.378929
 bus = "Soundeffects"
 
+[node name="mp5_fasterreload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/mp5_fasterreload"]
+stream = ExtResource( 70 )
+pitch_scale = 2.0
+
 [node name="spas12_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12_draw"]
@@ -1466,6 +1472,7 @@ bus = "Soundeffects"
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="on_backfire_event" from="body/chest/torso/gun" to="." method="_on_backfire_event"]
 [connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
 [connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
 [connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="set_gun_recoil_sensitivity"]
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]

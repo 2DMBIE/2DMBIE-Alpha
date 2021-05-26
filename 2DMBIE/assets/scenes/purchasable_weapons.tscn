@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/scripts/weapon_buying.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/purchasable_weapons.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/m4a1.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 [ext_resource path="res://assets/font/Zombie_Font.tres" type="DynamicFont" id=4]
@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 77.9354, 52.0882 )
 
-[node name="purchasable" type="Node2D"]
+[node name="purchasable_weapons" type="Node2D"]
 script = ExtResource( 1 )
 Selected_Weapon = 2
 
