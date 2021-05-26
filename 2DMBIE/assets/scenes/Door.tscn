@@ -106,6 +106,7 @@ volume_db = 2.0
 pitch_scale = 1.03
 bus = "Soundeffects"
 
+[connection signal="play_sound" from="." to="sfx" method="_on_Door_play_sound"]
 [connection signal="body_entered" from="doorareaRight" to="." method="_on_doorareaRight_body_entered"]
 [connection signal="body_exited" from="doorareaRight" to="." method="_on_doorareaRight_body_exited"]
 [connection signal="body_entered" from="doorareaLeft" to="." method="_on_doorareaLeft_body_entered"]

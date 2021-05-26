@@ -9,3 +9,11 @@ func play_sound_with_pitch(library, _pitch):
 	var node = get_node(library).get_child(c)
 	node.pitch_scale = 2
 	node.play()
+
+
+func _on_purchasable_weapons_play_sound(library):
+	play_sound(library)
+
+
+func _on_Door_play_sound(library):
+	play_sound(library)
