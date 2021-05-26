@@ -26,6 +26,10 @@ var knifing_hitbox_enabled = false
 var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
+var _played_crouch_sfx = false
+signal play_sound(library)
+var debug = false
+var falling = false
 
 func _ready():
 	$AnimationTree.active = true
@@ -45,12 +49,19 @@ func _physics_process(_delta):
 	if tileMap:
 		mousePos = get_global_mouse_position()
 		tilePos = tileMap.world_to_map(mousePos)
-
+		
+	if motion.y > 150 and not falling:
+		falling = true
+	if motion.y == 20 and falling:
+		emit_signal("play_sound", "fall")
+	if motion.y == 20:
+		falling = false
 
 	if Input.is_action_just_pressed("knife") and not is_knifing:
 		get_node("body/chest/torso/gun").visible = false
 		get_node("body/chest/torso/gun").is_holding_knife = true
 		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+		emit_signal("play_sound", "knife_swish")
 		knifing_hitbox_enabled = true
 		$AnimationTree.set("parameters/knifing/current", false)
 	
@@ -128,6 +139,7 @@ func _physics_process(_delta):
 			aim("walking")
 			motion.y = JUMP_HEIGHT
 			$AnimationTree.set("parameters/in_air_state/current", 1)
+			emit_signal("play_sound", "jump")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.3)
 	else:
@@ -135,8 +147,9 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 	var _is_standing_still = motion.x > -21 and motion.x < 21
-	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor(): # Timer slider cooldown!
+	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
 		is_sliding = true
+		emit_signal("play_sound", "slide")
 		$AnimationTree.set("parameters/sliding/current", 0)
 		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
 		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
@@ -150,6 +163,10 @@ func _physics_process(_delta):
 		MAX_RUN_SPEED = 430
 	if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 		_is_already_crouching = true
+		if not _played_crouch_sfx:
+			emit_signal("play_sound", "crouch")
+			_played_crouch_sfx = true
+		
 		$AnimationTree.set("parameters/crouching/current", 0)
 		if(crouch_idle):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
@@ -166,7 +183,7 @@ func _physics_process(_delta):
 		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 		_is_already_crouching = false
-		
+		_played_crouch_sfx = false
 	motion = move_and_slide(motion, UP)
 	pass
 
@@ -382,6 +399,7 @@ func on_knife_animation_complete():
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
+		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
 func on_slide_animation_complete():

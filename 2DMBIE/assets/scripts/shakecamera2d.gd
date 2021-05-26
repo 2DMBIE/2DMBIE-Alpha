@@ -24,6 +24,7 @@ func _process(delta):
 		trauma = max(trauma - decay * delta, 0)
 		shake()
 		
+		
 func shake():
 	var amount = pow(trauma, trauma_power)
 	noise_y += 1
@@ -45,3 +46,7 @@ func _on_shoot_event(value):
 
 func set_camera_decay(value):
 	decay = value
+
+
+func _on_gun_send_decay(value):
+	decay *= value
