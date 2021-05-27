@@ -37,13 +37,22 @@ __meta__ = {
 
 [node name="Continue" parent="Container" instance=ExtResource( 3 )]
 
+[node name="Label" parent="Container/Continue" index="0"]
+custom_colors/font_color = Color( 0.737255, 0.737255, 0.737255, 1 )
+
 [node name="Options" parent="Container" instance=ExtResource( 4 )]
 margin_top = 30.0
 margin_bottom = 80.0
 
+[node name="Label" parent="Container/Options" index="0"]
+custom_colors/font_color = Color( 0.737255, 0.737255, 0.737255, 1 )
+
 [node name="ExitMenu" parent="Container" instance=ExtResource( 2 )]
 margin_top = 110.0
 margin_bottom = 160.0
+
+[node name="Label" parent="Container/ExitMenu" index="0"]
+custom_colors/font_color = Color( 0.737255, 0.737255, 0.737255, 1 )
 
 [editable path="Container/Continue"]
 [editable path="Container/Options"]

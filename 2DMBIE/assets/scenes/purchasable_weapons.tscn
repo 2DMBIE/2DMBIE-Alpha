@@ -96,6 +96,6 @@ volume_db = 2.0
 pitch_scale = 1.03
 bus = "Soundeffects"
 
-[connection signal="play_sound" from="." to="sfx" method="play_sound"]
+[connection signal="play_sound" from="." to="sfx" method="_on_purchasable_weapons_play_sound"]
 [connection signal="body_entered" from="buyarea" to="." method="_on_buyarea_body_entered"]
 [connection signal="body_exited" from="buyarea" to="." method="_on_buyarea_body_exited"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/scripts/keybinds.gd" type="Script" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/UI/audio_slider.gd" type="Script" id=6]
+[ext_resource path="res://assets/UI/gameOptions.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -19,7 +20,9 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-[node name="Options" type="Control"]
+[node name="Optionsmenu" type="CanvasLayer"]
+
+[node name="Options" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -34,7 +37,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="Options"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -512.0
@@ -44,14 +47,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="Panel"]
+[node name="VBox" type="VBoxContainer" parent="Options/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Panel/VBox"]
+[node name="Title" type="Label" parent="Options/Panel/VBox"]
 margin_right = 1024.0
 margin_bottom = 88.0
 custom_fonts/font = SubResource( 1 )
@@ -63,7 +66,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/Panel/VBox"]
 margin_top = 92.0
 margin_right = 1024.0
 margin_bottom = 143.0
@@ -73,7 +76,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Audio" type="Button" parent="Panel/VBox/HBoxContainer"]
+[node name="Audio" type="Button" parent="Options/Panel/VBox/HBoxContainer"]
 margin_left = 162.0
 margin_right = 264.0
 margin_bottom = 51.0
@@ -86,7 +89,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Audio"
 flat = true
 
-[node name="Video" type="Button" parent="Panel/VBox/HBoxContainer"]
+[node name="Video" type="Button" parent="Options/Panel/VBox/HBoxContainer"]
 margin_left = 304.0
 margin_right = 403.0
 margin_bottom = 51.0
@@ -99,7 +102,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Video"
 flat = true
 
-[node name="Controls" type="Button" parent="Panel/VBox/HBoxContainer"]
+[node name="Controls" type="Button" parent="Options/Panel/VBox/HBoxContainer"]
 margin_left = 443.0
 margin_right = 587.0
 margin_bottom = 51.0
@@ -112,7 +115,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Controls"
 flat = true
 
-[node name="GameOptions" type="Button" parent="Panel/VBox/HBoxContainer"]
+[node name="GameOptions" type="Button" parent="Options/Panel/VBox/HBoxContainer"]
 margin_left = 627.0
 margin_right = 861.0
 margin_bottom = 51.0
@@ -125,7 +128,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Game Options"
 flat = true
 
-[node name="Container" type="VBoxContainer" parent="Panel/VBox"]
+[node name="Container" type="VBoxContainer" parent="Options/Panel/VBox"]
 margin_top = 147.0
 margin_right = 1024.0
 margin_bottom = 542.0
@@ -133,7 +136,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Message" type="Label" parent="Panel/VBox/Container"]
+[node name="Message" type="Label" parent="Options/Panel/VBox/Container"]
 margin_right = 1024.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 1024, 395 )
@@ -143,33 +146,33 @@ Today we serve unchangable values!"
 align = 1
 valign = 1
 
-[node name="Audio" type="ScrollContainer" parent="Panel/VBox/Container"]
+[node name="Audio" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
 margin_right = 1024.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 0, 395 )
 size_flags_horizontal = 3
 
-[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Container/Audio"]
+[node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/Audio"]
 margin_right = 1024.0
 margin_bottom = 203.0
 rect_min_size = Vector2( 1024, 0 )
 alignment = 1
 
-[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Container/Audio/HBox"]
+[node name="VBox" type="VBoxContainer" parent="Options/Panel/VBox/Container/Audio/HBox"]
 margin_left = 256.0
 margin_right = 768.0
 margin_bottom = 65.0
 rect_min_size = Vector2( 512, 0 )
 alignment = 1
 
-[node name="Master" type="Label" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="Master" type="Label" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_right = 512.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 2 )
 text = "Master"
 
-[node name="MasterSlider" type="HSlider" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="MasterSlider" type="HSlider" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
@@ -178,13 +181,13 @@ step = 0.05
 script = ExtResource( 6 )
 audio_bus = "Master"
 
-[node name="Music" type="Label" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="Music" type="Label" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_right = 512.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 2 )
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="MusicSlider" type="HSlider" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
@@ -193,13 +196,13 @@ step = 0.05
 script = ExtResource( 6 )
 audio_bus = "Music"
 
-[node name="SoundEffects" type="Label" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="SoundEffects" type="Label" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_right = 512.0
 margin_bottom = 45.0
 custom_fonts/font = ExtResource( 2 )
 text = "Sound Effects"
 
-[node name="SoundEffectsSlider" type="HSlider" parent="Panel/VBox/Container/Audio/HBox/VBox"]
+[node name="SoundEffectsSlider" type="HSlider" parent="Options/Panel/VBox/Container/Audio/HBox/VBox"]
 margin_top = 49.0
 margin_right = 512.0
 margin_bottom = 65.0
@@ -208,26 +211,26 @@ step = 0.05
 script = ExtResource( 6 )
 audio_bus = "Soundeffects"
 
-[node name="Video" type="ScrollContainer" parent="Panel/VBox/Container"]
+[node name="Video" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
 margin_right = 1024.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 0, 395 )
 
-[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Container/Video"]
+[node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/Video"]
 margin_right = 1024.0
 margin_bottom = 395.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Container/Video/HBox"]
+[node name="VBox" type="VBoxContainer" parent="Options/Panel/VBox/Container/Video/HBox"]
 margin_left = 337.0
 margin_right = 687.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 512, 0 )
 
-[node name="fullscreen" type="CheckBox" parent="Panel/VBox/Container/Video/HBox/VBox"]
+[node name="fullscreen" type="CheckBox" parent="Options/Panel/VBox/Container/Video/HBox/VBox"]
 margin_right = 350.0
 margin_bottom = 53.0
 custom_styles/focus = SubResource( 4 )
@@ -235,20 +238,20 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Fullscreen"
 
-[node name="resolution" type="HBoxContainer" parent="Panel/VBox/Container/Video/HBox/VBox"]
+[node name="resolution" type="HBoxContainer" parent="Options/Panel/VBox/Container/Video/HBox/VBox"]
 margin_top = 57.0
 margin_right = 350.0
 margin_bottom = 108.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="less" type="Button" parent="Panel/VBox/Container/Video/HBox/VBox/resolution"]
+[node name="less" type="Button" parent="Options/Panel/VBox/Container/Video/HBox/VBox/resolution"]
 margin_right = 50.0
 margin_bottom = 51.0
 rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 2 )
 text = "<"
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Video/HBox/VBox/resolution"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Video/HBox/VBox/resolution"]
 margin_left = 54.0
 margin_top = 3.0
 margin_right = 296.0
@@ -259,7 +262,7 @@ text = "???? x ????"
 align = 1
 valign = 1
 
-[node name="more" type="Button" parent="Panel/VBox/Container/Video/HBox/VBox/resolution"]
+[node name="more" type="Button" parent="Options/Panel/VBox/Container/Video/HBox/VBox/resolution"]
 margin_left = 300.0
 margin_right = 350.0
 margin_bottom = 51.0
@@ -267,14 +270,14 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 2 )
 text = ">"
 
-[node name="Controls" type="ScrollContainer" parent="Panel/VBox/Container"]
+[node name="Controls" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
 margin_right = 1024.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 0, 395 )
 size_flags_horizontal = 3
 
-[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Container/Controls"]
+[node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls"]
 margin_right = 1024.0
 margin_bottom = 482.0
 size_flags_horizontal = 3
@@ -282,7 +285,7 @@ size_flags_vertical = 3
 alignment = 1
 script = ExtResource( 4 )
 
-[node name="VBoxLeft" type="VBoxContainer" parent="Panel/VBox/Container/Controls/HBox"]
+[node name="VBoxLeft" type="VBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox"]
 margin_left = 154.0
 margin_right = 504.0
 margin_bottom = 536.0
@@ -291,12 +294,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="jump" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="jump" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/jump"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/jump"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -304,7 +307,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Jump"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/jump"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/jump"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -312,13 +315,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="move_left" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="move_left" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 54.0
 margin_right = 350.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_left"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_left"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -326,7 +329,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Move Left"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_left"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_left"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -334,13 +337,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="move_right" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="move_right" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 108.0
 margin_right = 350.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_right"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_right"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -348,7 +351,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Move Right"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_right"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_right"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -356,13 +359,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="move_down" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="move_down" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 162.0
 margin_right = 350.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_down"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_down"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -370,7 +373,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Drop Down"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/move_down"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/move_down"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -378,13 +381,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="sprint" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="sprint" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 216.0
 margin_right = 350.0
 margin_bottom = 266.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/sprint"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/sprint"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -392,7 +395,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Sprint"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/sprint"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/sprint"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -400,13 +403,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="crouch" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="crouch" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 270.0
 margin_right = 350.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/crouch"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/crouch"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -414,7 +417,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Crouch"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/crouch"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/crouch"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -422,13 +425,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="use" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="use" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 324.0
 margin_right = 350.0
 margin_bottom = 374.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/use"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/use"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -436,7 +439,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Use"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/use"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/use"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -444,13 +447,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="pause" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="pause" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 378.0
 margin_right = 350.0
 margin_bottom = 428.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/pause"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/pause"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -458,7 +461,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Pause"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/pause"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/pause"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -466,13 +469,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="reload" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft"]
+[node name="reload" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft"]
 margin_top = 432.0
 margin_right = 350.0
 margin_bottom = 482.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/reload"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/reload"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -480,7 +483,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Reload"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxLeft/reload"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxLeft/reload"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -488,7 +491,7 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="VBoxRight" type="VBoxContainer" parent="Panel/VBox/Container/Controls/HBox"]
+[node name="VBoxRight" type="VBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox"]
 margin_left = 508.0
 margin_right = 858.0
 margin_bottom = 536.0
@@ -497,12 +500,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="game_reset" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxRight"]
+[node name="game_reset" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight"]
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/game_reset"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/game_reset"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -510,7 +513,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Game Reset"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/game_reset"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/game_reset"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -518,13 +521,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="debug" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxRight"]
+[node name="debug" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight"]
 margin_top = 54.0
 margin_right = 350.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/debug"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/debug"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -532,7 +535,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Debug"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/debug"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/debug"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -540,13 +543,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="weapon1" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxRight"]
+[node name="weapon1" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight"]
 margin_top = 108.0
 margin_right = 350.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/weapon1"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/weapon1"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -554,7 +557,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Weapon 1"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/weapon1"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/weapon1"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -562,13 +565,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="weapon2" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxRight"]
+[node name="weapon2" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight"]
 margin_top = 162.0
 margin_right = 350.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/weapon2"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/weapon2"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -576,7 +579,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Weapon 2"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/weapon2"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/weapon2"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -584,13 +587,13 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="knife" type="HBoxContainer" parent="Panel/VBox/Container/Controls/HBox/VBoxRight"]
+[node name="knife" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight"]
 margin_top = 378.0
 margin_right = 350.0
 margin_bottom = 428.0
 rect_min_size = Vector2( 350, 50 )
 
-[node name="Label" type="Label" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/knife"]
+[node name="Label" type="Label" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/knife"]
 margin_top = 8.0
 margin_right = 250.0
 margin_bottom = 42.0
@@ -598,7 +601,7 @@ rect_min_size = Vector2( 250, 0 )
 custom_fonts/font = ExtResource( 5 )
 text = "Knife"
 
-[node name="Button" type="Button" parent="Panel/VBox/Container/Controls/HBox/VBoxRight/knife"]
+[node name="Button" type="Button" parent="Options/Panel/VBox/Container/Controls/HBox/VBoxRight/knife"]
 margin_left = 254.0
 margin_right = 304.0
 margin_bottom = 50.0
@@ -606,27 +609,28 @@ rect_min_size = Vector2( 50, 0 )
 custom_fonts/font = ExtResource( 5 )
 toggle_mode = true
 
-[node name="GameOptions" type="ScrollContainer" parent="Panel/VBox/Container"]
+[node name="GameOptions" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
 margin_top = 399.0
 margin_right = 1024.0
 margin_bottom = 794.0
 rect_min_size = Vector2( 0, 395 )
 
-[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Container/GameOptions"]
+[node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/GameOptions"]
 margin_right = 1024.0
 margin_bottom = 395.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Container/GameOptions/HBox"]
+[node name="VBox" type="VBoxContainer" parent="Options/Panel/VBox/Container/GameOptions/HBox"]
 margin_left = 256.0
 margin_right = 768.0
 margin_bottom = 395.0
 rect_min_size = Vector2( 512, 0 )
+script = ExtResource( 7 )
 
-[node name="always_aim" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
+[node name="always_aim" type="CheckBox" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_right = 512.0
 margin_bottom = 53.0
 mouse_default_cursor_shape = 2
@@ -635,7 +639,7 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = " Manual Aim Mode"
 
-[node name="stable_camera" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
+[node name="stable_camera" type="CheckBox" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_top = 57.0
 margin_right = 512.0
 margin_bottom = 110.0
@@ -643,10 +647,9 @@ mouse_default_cursor_shape = 2
 custom_styles/focus = SubResource( 4 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-pressed = true
 text = "Centered Camera"
 
-[node name="brighter_screen" type="CheckBox" parent="Panel/VBox/Container/GameOptions/HBox/VBox"]
+[node name="brighter_screen" type="CheckBox" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBox"]
 margin_top = 114.0
 margin_right = 512.0
 margin_bottom = 167.0
@@ -656,7 +659,7 @@ custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Light Mode"
 
-[node name="ExitOptions" type="Button" parent="Panel/VBox"]
+[node name="ExitOptions" type="Button" parent="Options/Panel/VBox"]
 margin_top = 546.0
 margin_right = 1024.0
 margin_bottom = 597.0
@@ -666,22 +669,22 @@ custom_fonts/font = ExtResource( 2 )
 text = "Exit Options"
 flat = true
 
-[connection signal="button_down" from="Panel/VBox/HBoxContainer/Audio" to="." method="_on_Audio_button_down"]
-[connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/Audio" to="." method="_on_Audio_mouse_entered"]
-[connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/Audio" to="." method="_on_Audio_mouse_exited"]
-[connection signal="button_down" from="Panel/VBox/HBoxContainer/Video" to="." method="_on_Video_button_down"]
-[connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/Video" to="." method="_on_Video_mouse_entered"]
-[connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/Video" to="." method="_on_Video_mouse_exited"]
-[connection signal="button_down" from="Panel/VBox/HBoxContainer/Controls" to="." method="_on_Controls_button_down"]
-[connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/Controls" to="." method="_on_Controls_mouse_entered"]
-[connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/Controls" to="." method="_on_Controls_mouse_exited"]
-[connection signal="button_down" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_button_down"]
-[connection signal="mouse_entered" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_entered"]
-[connection signal="mouse_exited" from="Panel/VBox/HBoxContainer/GameOptions" to="." method="_on_GameOptions_mouse_exited"]
-[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" to="Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" method="on_value_changed"]
-[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" to="Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" method="on_value_changed"]
-[connection signal="value_changed" from="Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" to="Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" method="on_value_changed"]
-[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/always_aim" to="." method="_on_always_aim_toggled"]
-[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/stable_camera" to="." method="_on_stable_camera_toggled"]
-[connection signal="toggled" from="Panel/VBox/Container/GameOptions/HBox/VBox/brighter_screen" to="." method="_on_brighter_screen_toggled"]
-[connection signal="button_down" from="Panel/VBox/ExitOptions" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="Options/Panel/VBox/HBoxContainer/Audio" to="Options" method="_on_Audio_button_down"]
+[connection signal="mouse_entered" from="Options/Panel/VBox/HBoxContainer/Audio" to="Options" method="_on_Audio_mouse_entered"]
+[connection signal="mouse_exited" from="Options/Panel/VBox/HBoxContainer/Audio" to="Options" method="_on_Audio_mouse_exited"]
+[connection signal="button_down" from="Options/Panel/VBox/HBoxContainer/Video" to="Options" method="_on_Video_button_down"]
+[connection signal="mouse_entered" from="Options/Panel/VBox/HBoxContainer/Video" to="Options" method="_on_Video_mouse_entered"]
+[connection signal="mouse_exited" from="Options/Panel/VBox/HBoxContainer/Video" to="Options" method="_on_Video_mouse_exited"]
+[connection signal="button_down" from="Options/Panel/VBox/HBoxContainer/Controls" to="Options" method="_on_Controls_button_down"]
+[connection signal="mouse_entered" from="Options/Panel/VBox/HBoxContainer/Controls" to="Options" method="_on_Controls_mouse_entered"]
+[connection signal="mouse_exited" from="Options/Panel/VBox/HBoxContainer/Controls" to="Options" method="_on_Controls_mouse_exited"]
+[connection signal="button_down" from="Options/Panel/VBox/HBoxContainer/GameOptions" to="Options" method="_on_GameOptions_button_down"]
+[connection signal="mouse_entered" from="Options/Panel/VBox/HBoxContainer/GameOptions" to="Options" method="_on_GameOptions_mouse_entered"]
+[connection signal="mouse_exited" from="Options/Panel/VBox/HBoxContainer/GameOptions" to="Options" method="_on_GameOptions_mouse_exited"]
+[connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" to="Options/Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" method="on_value_changed"]
+[connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" to="Options/Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" method="on_value_changed"]
+[connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" to="Options/Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" method="on_value_changed"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/always_aim" to="Options" method="_on_always_aim_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/stable_camera" to="Options" method="_on_stable_camera_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]
+[connection signal="button_down" from="Options/Panel/VBox/ExitOptions" to="Options" method="_on_Button_button_down"]

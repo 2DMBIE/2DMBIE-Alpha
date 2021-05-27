@@ -64,25 +64,19 @@ func _physics_process(_delta):
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
-#		print("player entered the area")
-#		print(canBuy)
 
 # checks if the player has enough money/score
 	for joas in range(spriteArray.size()):
 		if Selected_Perk == joas:
 			if Global.Score >= int(priceArray[joas]):
 				enoughMoney = true
-#				print(enoughMoney)
 			else:
 				enoughMoney = false
-#				print(enoughMoney)
 
 #checks if the player is out of the buy area
 func _on_buyarea_body_exited(body):
 	if body.is_in_group("player"):
 		canBuy = false
-#		print("player exited the area")
-#		print(canBuy)
 
 func healthperk():
 	get_node("../../Player").maxHealth = 2500

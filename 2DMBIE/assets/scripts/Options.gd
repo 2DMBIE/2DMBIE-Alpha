@@ -63,8 +63,11 @@ func _on_GameOptions_mouse_exited():
 
 
 func _on_Button_button_down():
-	if get_tree().get_current_scene().get_name() == 'Options':
-		var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
+		print("heolla")
+		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		if x != OK:
+			print("Error: ", x)
 
 func escape_options():
 	if Input.is_action_pressed("escape"):

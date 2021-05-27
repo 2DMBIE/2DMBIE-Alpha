@@ -26,9 +26,9 @@ texture = ExtResource( 3 )
 [node name="Label" type="Label" parent="."]
 material = ExtResource( 1 )
 margin_left = 25.0
-margin_top = 7.0
-margin_right = 74.0
-margin_bottom = 41.0
+margin_top = 5.0
+margin_right = 88.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 1 )
 text = "Label"
 __meta__ = {
