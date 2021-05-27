@@ -4,6 +4,7 @@ var is_paused = false
 var random_round
 var music_playing = false
 signal music(action)
+var GraphRandomPoint
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
@@ -18,6 +19,9 @@ func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
+	var MarkerPos = $Player/MarkerPos.global_position
+	var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
+	$Player/MarkerPos.rotation = (rotationDegree)
 		
 		
 	
@@ -115,6 +119,7 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	var ammoPouch = AmmoPouch.instance()
 	ammoPouch.set_position(graphRandomPoint)
 	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
-	print(graphRandomPoint)
+	GraphRandomPoint = graphRandomPoint
+	
 
 

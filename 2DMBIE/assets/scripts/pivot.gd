@@ -4,12 +4,12 @@ onready var parent = get_parent()
 onready var cameraOffset = $CameraOffset
 onready var timer = $Timer
 onready var mouseAngle = get_global_mouse_position().angle()
-onready var Marker = $MarkerPos
 
 var lookDir = "right"
 var timeout = true
 var pivotOffset = 20
 var mousePos = 0
+
 
 func _ready():
 	updatePivotAngle()

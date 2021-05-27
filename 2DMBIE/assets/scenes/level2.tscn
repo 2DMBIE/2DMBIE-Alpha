@@ -2028,7 +2028,7 @@ format = 1
 tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -2162663, 47, 0, -2097132, 48, 0, -2097128, 38, 0, -2097127, 38, 2, -2031612, 24, 3, -2031610, 32, 0, -2031609, 31, 0, -2031594, 24, 2, -2031592, 24, 2, -2031590, 24, 2, -2031588, 24, 2, -1769469, 24, 1, -1769467, 24, 1, -1769465, 24, 1, -1769463, 24, 1, -1769457, 20, 0, -1769456, 20, 1, -1769455, 20, 2, -1638353, 45, 0, -1572842, 41, 0, -1507327, 43, 0, -1507325, 23, 3, -1507322, 23, 1, -1507313, 25, 0, -1441777, 10, 0, -1441775, 10, 0, -1441771, 38, 0, -1441770, 38, 2, -1376207, 7, 0, -1376206, 7, 1, -1376205, 7, 1, -1376204, 7, 2, -1245130, 48, 0, -1245116, 47, 0, -1179594, 16, 0, -1179580, 16, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 316.524, -155.924 )
+position = Vector2( 128, -128 )
 
 [node name="Spawnpoints" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
@@ -2408,7 +2408,6 @@ bus = "Soundeffects"
 [connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
 [connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="Player/MarkerPos" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
