@@ -22,8 +22,8 @@ var _wait_time = randi()%_time_diff + growl_time_min
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
-export (float) var maxHealth = 500
-export (float) var enemyDamage = 300
+var maxHealth = Global.maxHealth
+var enemyDamage = Global.EnemyDamage
 
 func _ready():
 	$AnimationTree.active = true
@@ -98,7 +98,7 @@ func _process(delta):
 	var _moveSlide = self.move_and_slide(movement, Vector2(0, -1))
 	if self.movement.x < 0:
 		direction("left")
-	else:
+	elif self.movement.x > 0:
 		direction("right")
 
 func repeat_me():
@@ -168,6 +168,7 @@ func _set_health(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:
+			Global.enemiesKilled += 1
 			kill()
 
 func _on_GroundChecker_body_exited(_body):

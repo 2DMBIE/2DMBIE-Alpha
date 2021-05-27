@@ -11,13 +11,20 @@ var jumpDistance = 1
 
 var tileMap
 var tileMap2
-var graph 
+var ylevel_array = []
+var prevCell
+var graph
+var cachePointArray = []
+var getClosestPoint
 
 # Show debug lines on default
 var showLines = false
 
 # Sprite of pathfinding points
 const FACE = preload("res://assets/scenes/face.tscn")
+
+var output
+var cache_file_path = "user://pathfinding_cache.ivar"
 
 ## Route the AI makes when having an end destination
 func findPath(start, end):
@@ -78,8 +85,7 @@ func findPath(start, end):
 	return actions
 
 ## Called when the node enters the scene tree for the first time
-func _ready():
-	
+func _ready():	
 	# Creates graph where all the pathfinding points will be saved
 	graph = AStar2D.new()
 	
@@ -87,7 +93,11 @@ func _ready():
 	tileMap = find_parent("Main").find_node("Blocks")
 	tileMap2 = find_parent("Main").find_node("Floor")
 	
+	# Calls function that creates an array to improve loading times
+	get_unique_ylevels()
+	
 	# Calls function that creates all the points
+#	load_cache()
 	createMap()
 	
 	# Calls function that connects all the points
@@ -335,10 +345,11 @@ func createMap():
 				# Creates a point on top of the tile that collided with the raycast if it did collide in the first place
 				if (result):
 					createPoint(tileMap.world_to_map(result.position))
-		
-		# Calls the getVerticalPoints and getFloorPoints functions
+	
+	# Calls the getVerticalPoints (every other block vertically in the blocks tile set) and getFloorPoints functions
+	for block in ylevel_array.size() / 2:
 		getVerticalPoints()
-		getFloorPoints()
+	getFloorPoints()
 
 ## Creates a point on the floor under every other point
 func getVerticalPoints():
@@ -363,8 +374,9 @@ func getVerticalPoints():
 		# Creates a point on top of all the tiles that collided with the raycasts,
 		# as long as they aren't created inside another tile
 		if pointPosition:
-			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells):
+			if !((tileMap.world_to_map(pointPosition) - Vector2(0, 1)) in cells) and !tileMap.world_to_map(graph.get_point_position(graph.get_closest_point(pointPosition))) == tileMap.world_to_map(Vector2(pointPosition.x, pointPosition.y - 32)):
 				createPoint(tileMap.world_to_map(pointPosition))
+		
 
 ## Creates a point above every floor tile
 func getFloorPoints():
@@ -438,6 +450,20 @@ func createPoint(cell):
 	# Adds point to actual A* graph
 	graph.add_point(graph.get_available_point_id(), pos)
 
+## Makes array of the amount of cells exist vertically
+func get_unique_ylevels():
+	
+	# A for loop that checks every cell in the Blocks tileset
+	for cell in tileMap.get_used_cells().size():
+		
+		# Gets the y value of the current cell in the for loop
+		var currentCell = tileMap.get_used_cells()[cell].y
+		
+		# Appends into a seperate array if unique and sets to prevCell for the next cell to check if its unique or not
+		if !currentCell == prevCell:
+			ylevel_array.append(currentCell)
+			prevCell = currentCell
+
 ## Run every frame of the game
 func _process(_delta):
 	if Input.is_action_just_pressed("debug"):
@@ -451,7 +477,7 @@ func _process(_delta):
 			# Makes debugMenu invisible
 			get_node("/root/Main/DebugOverlay/Label").visible = false
 		
-		## Turn all debug things on
+		# Turn all debug things on
 		elif !showLines:
 			showLines = true
 			
@@ -460,3 +486,31 @@ func _process(_delta):
 			
 			# Makes debugMenu visible
 			get_node("/root/Main/DebugOverlay/Label").visible = true
+	
+	if Input.is_action_just_pressed("save"):
+		save_cache()
+	if Input.is_action_just_pressed("load"):
+		load_cache()
+	
+	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/Main/Player").position))
+
+
+func save_cache():
+	var file = File.new()
+	file.open(cache_file_path, File.WRITE)
+	for point in graph.get_points():
+		cachePointArray.append(tileMap.world_to_map(Vector2(graph.get_point_position(point).x, graph.get_point_position(point).y + 32)))
+	file.store_var(cachePointArray)
+	file.close()
+
+func load_cache():
+	var file = File.new()
+	if file.file_exists(cache_file_path):
+		file.open(cache_file_path, File.READ)
+		output = file.get_var()
+		for p in output.size():
+			createPoint(output[p])
+		file.close()
+	else:
+		createMap()
+		save_cache()

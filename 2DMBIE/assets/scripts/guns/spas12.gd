@@ -11,7 +11,7 @@ func _init():
 	bulletpoint = Vector2(61.589,-7.527) # Position of the bulletpoint.
 	bulletdelay = float(1.5) # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = Bullet.new(float(250), float(850), "res://assets/scenes/bullet2.tscn", int(1)) 
+	_bullet = Bullet.new(float(1500), float(850), "res://assets/scenes/bullet2.tscn", int(1)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
 	_muzzleflash = load("res://assets/scenes/muzzleflash2.tscn") # The scene of the muzzleflash
 	
@@ -20,5 +20,5 @@ func _init():
 	gun_recoil_sensitivity = float(0) # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
 	
 	maxclipAmmo = 8 # How much bullets are in one magazine.
-	totalAmmo = 24 # Total ammo which comes with each gun.
+	totalAmmo = 96 # Total ammo which comes with each gun.
 	ammo = maxclipAmmo

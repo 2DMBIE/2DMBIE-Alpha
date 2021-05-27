@@ -19,6 +19,7 @@ scale_random = 0.14
 color = Color( 0, 0, 0, 1 )
 
 [node name="bullet" type="Area2D"]
+pause_mode = 1
 collision_layer = 32
 collision_mask = 14
 script = ExtResource( 2 )
@@ -107,4 +108,5 @@ randomness = 0.28
 process_material = SubResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_bullet_body_exited"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

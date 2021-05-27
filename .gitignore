@@ -3,3 +3,14 @@
 /2DMBIE/git_api.gdns
 2DMBIE/assets/TileSets/Floor.tres
 2DMBIE/assets/TileSets/Blocks.tres
+
+# Godot-specific ignores
+# 2DMBIE/export.cfg
+# 2DMBIE/export_presets.cfg
+
+2DMBIE/.import/
+
+# Binaries
+2DMBIE/bin/
+2DMBIE/build/
+2DMBIE/lib/

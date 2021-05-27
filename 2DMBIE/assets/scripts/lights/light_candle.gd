@@ -8,6 +8,7 @@ func _ready():
 	randomize()
 	value = randi() % MAX_VALUE
 	noise.period = 16
+	get_node("../").play()
 	
 func _physics_process(_delta):
 	value += 2
