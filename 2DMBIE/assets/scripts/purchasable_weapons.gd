@@ -5,17 +5,18 @@ var spriteSPAS12 = preload("res://assets/sprites/guns/spas12.png")
 var spriteM4A1 = preload("res://assets/sprites/guns/m4a1.png")
 var spriteAK12 = preload("res://assets/sprites/guns/ak12outline.png")
 var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50.png")
-var spriteArray = [spriteMP5, spriteSPAS12, spriteM4A1, spriteAK12, spriteBARRETT50]
-var colorArray = [Color.limegreen, Color.turquoise, Color.gold, Color.red, Color.pink]
-var nameArray = ["MP5", "SPAS12", "M4A1", "AK12", "BARRETT50"]
-var priceArray = [1500, 2500, 3000, 3100, 4000]
+var spriteUMP45 = preload("res://assets/sprites/guns/UMP 45.png")
+var spriteArray = [spriteMP5, spriteSPAS12, spriteM4A1, spriteAK12, spriteBARRETT50, spriteUMP45]
+var colorArray = [Color.limegreen, Color.turquoise, Color.gold, Color.red, Color.pink, Color.limegreen]
+var nameArray = ["MP5", "SPAS12", "M4A1", "AK12", "BARRETT50", "UMP 45"]
+var priceArray = [1500, 2500, 3000, 3100, 4000, 1600]
 
 var canBuy = false
 var enoughMoney = false
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 signal play_sound(library)
 
-export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 
+export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50", "UMP 45") var Selected_Weapon = 0 
 
 #the player can buy a weapon ans sets it to the correct slot
 func _physics_process(_delta):

@@ -117,6 +117,10 @@ Selected_Weapon = 3
 position = Vector2( 297.753, -507.739 )
 Selected_Weapon = 4
 
+[node name="UMP 45" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -136, -234.8 )
+Selected_Weapon = 5
+
 [node name="Perks" type="Node" parent="."]
 
 [node name="MovementPerk" parent="Perks" instance=ExtResource( 11 )]
@@ -137,7 +141,6 @@ Selected_Perk = 2
 [node name="CanvasLayer" parent="." instance=ExtResource( 12 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.498039, 0.498039, 0.498039, 1 )
 
 [node name="Optionsmenu" parent="." instance=ExtResource( 13 )]
 

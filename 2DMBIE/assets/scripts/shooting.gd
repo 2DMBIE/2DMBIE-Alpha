@@ -37,7 +37,7 @@ var backfiring = false
 
 var canBuyFasterFireRate2 = true
 
-var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
+var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new(), UMP45.new()]
 var reloadTimer = Timer.new()
 
 func _ready():
@@ -181,7 +181,7 @@ func reload():
 				if reloadTimer.wait_time == 2.5:
 					emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
 				else:
-					emit_signal("play_sound_with_pitch", "mp5_reload", 2)
+					emit_signal("play_sound_with_pitch", _gun.name.to_lower() + str("_reload"), 2)
 				reloadTimer.start()
 				canShoot = false
 
