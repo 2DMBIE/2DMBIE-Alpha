@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.40456, 2.32618 )
 
-[node name="bullet" type="Area2D"]
+[node name="bullet" type="Area2D" groups=[
+"bullets",
+]]
 pause_mode = 1
 collision_layer = 32
 collision_mask = 14
