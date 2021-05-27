@@ -1,4 +1,4 @@
-[gd_scene load_steps=159 format=2]
+[gd_scene load_steps=160 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -430,7 +430,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "running", 0, "TimeScale", "running", 1, "walk-idle", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "TimeScale", 0, "Animation 5", "knifing", 0, "knife", "knifing", 1, "shooting" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale", 0, "Animation 5", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "TimeScale 2", 0, "Animation 7", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "knifing", 0, "knife", "knifing", 1, "shooting", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"

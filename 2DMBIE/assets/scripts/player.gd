@@ -436,4 +436,7 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("ammo"):
 		var gainedAmmo = 60
 		emit_signal("ammoPickup", gainedAmmo)
+		$MarkerPos/Marker.visible = false
 
+func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
+	$MarkerPos/Marker.visible = true
