@@ -105,14 +105,12 @@ func _ready():
 	
 	ammospawn()
 	ammoTimer = Timer.new()
-	ammoTimer.set_wait_time(20)
+	ammoTimer.set_wait_time(30)
 	ammoTimer.set_one_shot(false)
 	ammoTimer.connect("timeout", self, "ammoTimer_timeout")
 	add_child(ammoTimer)
 	ammoTimer.start()
 	
-	
-	 
 ## Create connections between the points
 func createConections():
 	
