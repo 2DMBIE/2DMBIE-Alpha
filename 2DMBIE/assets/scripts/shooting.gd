@@ -28,6 +28,7 @@ var current_gun_index
 
 var weapon_slots = [0, -1]
 var current_weapon = 0
+var prevWeapon
 
 var canShoot = true # Used for ammo
 var is_holding_knife = false
@@ -48,9 +49,10 @@ func _ready():
 	add_child(reloadTimer)
 
 func switch_slot(slot):
-	if weapon_slots[slot] > -1:
+	if weapon_slots[slot] > -1 and !weapon_slots[slot] == prevWeapon:
 		set_gun(weapon_slots[slot])             
 		current_weapon = slot
+		prevWeapon = weapon_slots[slot]
 
 func _process(_delta):     
 	if shooting_disabled:

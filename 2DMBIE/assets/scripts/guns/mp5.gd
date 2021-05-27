@@ -11,7 +11,7 @@ func _init():
 	bulletpoint = Vector2(41, -8.312) # Position of the bulletpoint.
 	bulletdelay = float(.14) # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = Bullet.new(float(50), float(750), "res://assets/scenes/bullet.tscn", int(1)) 
+	_bullet = Bullet.new(float(100), float(750), "res://assets/scenes/bullet.tscn", int(1)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
 	_muzzleflash = load("res://assets/scenes/muzzleflash.tscn") # The scene of the muzzleflash
 	

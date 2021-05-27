@@ -5,10 +5,9 @@
 2DMBIE/assets/TileSets/Blocks.tres
 
 # Godot-specific ignores
-2DMBIE/export.cfg
-2DMBIE/export_presets.cfg
+# 2DMBIE/export.cfg
+# 2DMBIE/export_presets.cfg
 
-# Import cache
 2DMBIE/.import/
 
 # Binaries

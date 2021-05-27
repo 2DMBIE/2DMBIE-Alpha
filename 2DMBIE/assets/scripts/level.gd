@@ -67,10 +67,10 @@ func _process(_delta):
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
 		Global.CurrentWaveEnemies = 0
-		Global.MaxWaveEnemies += 4
+		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
-		Global.maxHealth *= 1.25
-		Global.EnemyDamage *= 1.25
+		Global.maxHealth += 100
+		Global.EnemyDamage += 50
 		Global.Speed += 4
 		Global.enemiesKilled = 0 
 	else:
@@ -98,8 +98,10 @@ func _on_ExitMenu_button_down():
 
 
 func _on_ExitOptions_button_down():
-	if get_tree().get_current_scene().get_name() == 'Options':
-		var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
+		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		if x != OK:
+			print("ERROR: ", x)
 	else:
 		get_node("Optionsmenu/Options").visible = false
 	get_node("PauseMenu/Container").visible = true

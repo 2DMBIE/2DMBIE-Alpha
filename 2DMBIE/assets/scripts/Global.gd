@@ -2,7 +2,7 @@ extends Node
 
 signal changeScore(newScore)
 
-var Score = 25000 setget setScore
+var Score = 0 setget setScore
 var ScoreIncrement = 100
 var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0
@@ -16,7 +16,7 @@ var game_active = false
 
 # Debug
 var aim = false
-var camera = true
+var camera = false
 var brightness = false
 
 func _process(_delta):

@@ -98,7 +98,7 @@ func _process(delta):
 	var _moveSlide = self.move_and_slide(movement, Vector2(0, -1))
 	if self.movement.x < 0:
 		direction("left")
-	else:
+	elif self.movement.x > 0:
 		direction("right")
 
 func repeat_me():

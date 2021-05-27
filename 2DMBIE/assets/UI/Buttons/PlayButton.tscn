@@ -7,5 +7,4 @@ margin_right = 210.0
 scene_to_load = "res://assets/scenes/level2.tscn"
 
 [node name="Label" parent="." index="1"]
-margin_bottom = 46.0
 text = "Play"

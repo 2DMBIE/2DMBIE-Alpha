@@ -30,6 +30,7 @@ var _played_crouch_sfx = false
 signal play_sound(library)
 var debug = false
 var falling = false
+var slideHold = false
 
 func _ready():
 	$AnimationTree.active = true
@@ -148,7 +149,7 @@ func _physics_process(_delta):
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 	var _is_standing_still = motion.x > -21 and motion.x < 21
-	if Input.is_action_just_pressed("crouch-slide") and not _is_standing_still and not is_sliding and is_on_floor(): 
+	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
 		is_sliding = true
 		emit_signal("play_sound", "slide")
 		$AnimationTree.set("parameters/sliding/current", 0)
@@ -162,7 +163,7 @@ func _physics_process(_delta):
 		RUN_ACCELERATION = 40
 		MAX_WALK_SPEED = 230 #old 110 
 		MAX_RUN_SPEED = 430
-	if Input.is_action_pressed("crouch-slide") and (_is_standing_still or _is_already_crouching):
+	if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 		_is_already_crouching = true
 		if not _played_crouch_sfx:
 			emit_signal("play_sound", "crouch")
@@ -405,18 +406,26 @@ func on_knife_hit(body):
 		knifing_hitbox_enabled = false
 
 func on_slide_animation_complete():
-	$AnimationTree.set("parameters/sliding/current", 1)
-	$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
-	get_node("body/chest/torso/gun").shooting_disabled = false
-	get_node("Hitbox").set_collision_mask_bit(3, true)
-	self.set_collision_mask_bit(3, true)
-	knifing_hitbox_enabled = true
-	is_knifing = false
-	is_sliding = false
-	WALK_ACCELERATION = 25 #old 20
-	RUN_ACCELERATION = 20
-	MAX_WALK_SPEED = 130 #old 110 
-	MAX_RUN_SPEED = 330
+	if Input.is_action_pressed("crouch") and !slideHold:
+		$AnimationPlayer.get_animation("slide").length = 1
+		$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, 1)
+		slideHold = true
+	else:
+		$AnimationTree.set("parameters/sliding/current", 1)
+		$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
+		get_node("body/chest/torso/gun").shooting_disabled = false
+		get_node("Hitbox").set_collision_mask_bit(3, true)
+		self.set_collision_mask_bit(3, true)
+		knifing_hitbox_enabled = true
+		is_knifing = false
+		is_sliding = false
+		WALK_ACCELERATION = 25 #old 20
+		RUN_ACCELERATION = 20
+		MAX_WALK_SPEED = 130 #old 110 
+		MAX_RUN_SPEED = 330
+		$AnimationPlayer.get_animation("slide").length = .6
+		$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, .6)
+		slideHold = false
 
 func _on_backfire_event():
 	running_disabled = true
