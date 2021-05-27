@@ -187,13 +187,15 @@ func _set_health(value):
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
+#signal headroll()
+
 func _on_HeadshotArea_area_entered(area):
 	if area.is_in_group("bullets"):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= 0.1:
-			$body/torso/neck/head.visible = false
+		if rand <= 1:
 			$body/torso/neck/bloodParticles.visible = true
-		
-
+			if $body/torso/neck/head.visible == true:
+				$body/torso/neck/head.visible = false
+#				emit_signal("headroll")

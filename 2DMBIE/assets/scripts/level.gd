@@ -4,14 +4,19 @@ var is_paused = false
 var random_round
 var music_playing = false
 signal music(action)
-
+var headgonesignal = false
 
 func _ready():
+
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
 
 func _process(_delta):
+#	if headgonesignal == false:
+#		if get_node_or_null("Zombie/body/torso/neck/head") != null:
+#			var _x = $Zombie.connect("headroll", self, "rollinghead")
+#			headgonesignal = true
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
@@ -103,3 +108,10 @@ func escape_options():
 func _on_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("PauseMenu/Container").visible = false
+
+#var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
+#
+#func rollinghead():
+#	var enemyHead = enemyhead.instance()
+#	enemyHead.position = $Zombie/body/torso/neck/head.position
+#	call_deferred("add_child", enemyHead)
