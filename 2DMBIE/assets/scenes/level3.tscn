@@ -98,28 +98,17 @@ position = Vector2( 512, -192 )
 
 [node name="Weapons" type="Node" parent="."]
 
-[node name="M4A1" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 80.2725, -173.003 )
+[node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( 0.00158691, -192 )
+Selected_Weapon = 9
 
-[node name="MP5" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 640, -512 )
-Selected_Weapon = 0
+[node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( 248, -192 )
+Selected_Weapon = 10
 
-[node name="SPAS12" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 384, -248 )
-Selected_Weapon = 1
-
-[node name="AK12" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 640, -248 )
-Selected_Weapon = 3
-
-[node name="BARRETT50" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 297.753, -507.739 )
-Selected_Weapon = 4
-
-[node name="UMP 45" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( -136, -234.8 )
-Selected_Weapon = 5
+[node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -296, -184 )
+Selected_Weapon = 11
 
 [node name="Perks" type="Node" parent="."]
 
@@ -153,11 +142,6 @@ position = Vector2( -178.074, -151.993 )
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
-[connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/BARRETT50" to="Weapons/BARRETT50/sfx" method="play_sound"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 
 [editable path="PauseMenu"]
