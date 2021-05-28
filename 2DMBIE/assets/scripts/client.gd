@@ -20,7 +20,7 @@ func _ready():
 	
 func _connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
-	network.create_client(selected_IP, selected_port)
+	network.create_client(DEFAULT_IP, DEFAULT_PORT)
 	get_tree().set_network_peer(network)
 	
 func _player_connected(id):
