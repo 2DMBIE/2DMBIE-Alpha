@@ -303,6 +303,7 @@ var maxHealth = 1200
 var health = maxHealth setget setHealth
 
 signal health_updated(health)
+signal on_death
 
 func kill():
 	var _x = get_tree().reload_current_scene()
@@ -322,8 +323,8 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			queue_free()
-			kill()
+#			queue_free()
+			emit_signal("on_death")
 
 var takingDamage = false
 
