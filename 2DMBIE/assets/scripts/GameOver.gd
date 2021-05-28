@@ -12,6 +12,7 @@ onready var fontBlue = 1
 func _ready():
 	randomize()
 	$VBOX/Label.text = messages[randi() % messages.size()]
+	$VBOX/Title.get_font("font").size = 200
 	fontOutline.outline_color = Color.white
 	rng.randomize()
 	fontRed = rng.randf()
@@ -29,8 +30,6 @@ func _process(_delta):
 		fontOutline = $VBOX/Title.get_font("font")
 		if $VBOX/Title.get_font("font").size >= 96:
 			$VBOX/Title.get_font("font").size -= 0.5
-#			rng.randomize()
-			print(fontRed, " | ", fontGreen, " | ", fontBlue)
 			fontOutline.outline_color = Color(fontRed, fontGreen, fontBlue)
 			fontRed -= colorSpeed
 			fontGreen -= colorSpeed

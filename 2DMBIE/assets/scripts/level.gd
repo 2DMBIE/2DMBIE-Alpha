@@ -11,7 +11,7 @@ var GraphRandomPoint
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
 func _ready():
-
+	get_tree().paused = false
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
