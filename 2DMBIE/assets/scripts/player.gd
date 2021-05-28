@@ -375,14 +375,14 @@ func _on_gun_is_shooting(value):
 func _on_no_aim_shoot(value):
 	$AnimationTree.set("parameters/fixed_aim/current", value)
 
-func _draw():
-	if tileMap:
-		if get_node("/root/Main/Pathfinder").showLines:
-			var postA = $ShootVector.position
-			var postB = get_local_mouse_position()
-			draw_line(postA, postB, Color(255,0,0),1)
-		else:
-			pass
+#func _draw():
+#	if tileMap:
+#		if get_node("/root/Main/Pathfinder").showLines:
+#			var postA = $ShootVector.position
+#			var postB = get_local_mouse_position()
+#			draw_line(postA, postB, Color(255,0,0),1)
+#		else:
+#			pass
 
 func set_gun_recoil_sensitivity(value):
 	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
@@ -440,3 +440,7 @@ func _on_Hitbox_area_entered(area):
 
 func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 	$MarkerPos/Marker.visible = true
+
+
+func _on_gun_set_gun_recoil_sensitivity(value):
+	set_gun_recoil_sensitivity(value)

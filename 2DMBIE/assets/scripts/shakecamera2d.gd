@@ -50,3 +50,7 @@ func set_camera_decay(value):
 
 func _on_gun_send_decay(value):
 	decay *= value
+
+
+func _on_gun_set_camera_decay(value):
+	set_camera_decay(value)

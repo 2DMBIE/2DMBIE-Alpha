@@ -17,3 +17,15 @@ func _on_purchasable_weapons_play_sound(library):
 
 func _on_Door_play_sound(library):
 	play_sound(library)
+
+
+func _on_Player_play_sound(library):
+	play_sound(library)
+
+
+func _on_gun_play_sound(value):
+	play_sound(value)
+
+
+func _on_gun_play_sound_with_pitch(value, pitch):
+	play_sound_with_pitch(value, pitch)

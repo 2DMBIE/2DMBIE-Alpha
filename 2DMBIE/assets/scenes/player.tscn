@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=2]
+[gd_scene load_steps=162 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -92,6 +92,8 @@
 [ext_resource path="res://assets/sounds/player/footstep5.wav" type="AudioStream" id=90]
 [ext_resource path="res://assets/sounds/player/footstep1.wav" type="AudioStream" id=91]
 [ext_resource path="res://assets/sprites/marker.png" type="Texture" id=92]
+[ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=93]
+[ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=94]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -430,7 +432,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale", 0, "Animation 5", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "TimeScale 2", 0, "Animation 7", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "knifing", 0, "knife", "knifing", 1, "shooting", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2" ]
+node_connections = [ "output", 0, "sliding", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -840,9 +842,6 @@ position = Vector2( 22.0728, -1.75482 )
 texture = ExtResource( 9 )
 offset = Vector2( 17.236, -3.362 )
 script = ExtResource( 33 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="laser" type="Sprite" parent="body/chest/torso/gun"]
 visible = false
@@ -1481,15 +1480,25 @@ bus = "Soundeffects"
 stream = ExtResource( 90 )
 bus = "Soundeffects"
 
+[node name="PauseMenu" parent="." instance=ExtResource( 93 )]
+pause_mode = 2
+
+[node name="Optionsmenu" parent="." instance=ExtResource( 94 )]
+pause_mode = 2
+
+[node name="Options" parent="Optionsmenu" index="0"]
+visible = false
+
 [connection signal="ammoPickup" from="." to="body/chest/torso/gun" method="_on_Player_ammoPickup"]
+[connection signal="play_sound" from="." to="player-sfx" method="_on_Player_play_sound"]
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]
 [connection signal="on_backfire_event" from="body/chest/torso/gun" to="." method="_on_backfire_event"]
-[connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
-[connection signal="play_sound_with_pitch" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
-[connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
-[connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="set_gun_recoil_sensitivity"]
+[connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="_on_gun_play_sound"]
+[connection signal="play_sound_with_pitch" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="_on_gun_play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_gun_set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="_on_gun_set_gun_recoil_sensitivity"]
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]
 [connection signal="body_entered" from="body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox" to="." method="on_knife_hit"]
 [connection signal="timeout" from="Pivot/Timer" to="Pivot" method="_on_Timer_timeout"]
@@ -1500,3 +1509,5 @@ bus = "Soundeffects"
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="mouse_entered" from="Aimzone" to="body/chest/torso/gun" method="_on_aimzone_entered"]
 [connection signal="mouse_exited" from="Aimzone" to="body/chest/torso/gun" method="_on_aimzone_exited"]
+
+[editable path="Optionsmenu"]

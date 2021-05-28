@@ -12,7 +12,7 @@ func _ready():
 	add_stat("mouse_position", "Player", "mousePos", false)
 	add_stat("tile_position", "Player", "tilePos", false)
 	add_stat("player_speed", "Player", "motion", false)
-	add_stat("get_closest_point", "Pathfinder", "getClosestPoint", false)
+#	add_stat("get_closest_point", "Pathfinder", "getClosestPoint", false)
 	add_stat("manual_aim", "DebugOverlay", "debugAim", false)
 	add_stat("moving_camera", "DebugOverlay", "debugCamera", false)
 	add_stat("bright_scene", "DebugOverlay", "debugBrightness", false)

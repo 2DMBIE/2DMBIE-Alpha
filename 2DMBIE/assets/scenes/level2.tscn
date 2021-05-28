@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -26,10 +26,8 @@
 [ext_resource path="res://assets/sprites/tiles/painting.png" type="Texture" id=24]
 [ext_resource path="res://assets/sprites/tiles/furniture_openarea.png" type="Texture" id=25]
 [ext_resource path="res://assets/scenes/purchasable_weapons.tscn" type="PackedScene" id=26]
-[ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/scripts/music.gd" type="Script" id=28]
 [ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
-[ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/sounds/ingame_music.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=32]
 [ext_resource path="res://assets/sounds/player/heartbeat.wav" type="AudioStream" id=33]
@@ -4307,9 +4305,6 @@ Selected_Weapon = 4
 position = Vector2( 1408, -2208 )
 Selected_Weapon = 1
 
-[node name="PauseMenu" parent="." instance=ExtResource( 27 )]
-layer = 2
-
 [node name="Doors" type="YSort" parent="."]
 
 [node name="Lounge" parent="Doors" instance=ExtResource( 29 )]
@@ -4380,35 +4375,22 @@ stream = ExtResource( 33 )
 pitch_scale = 1.05
 bus = "Soundeffects"
 
-[node name="Optionsmenu" parent="." instance=ExtResource( 30 )]
-
-[node name="Options" parent="Optionsmenu" index="0"]
-visible = false
-
 [connection signal="music" from="." to="music" method="do_action"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A2" to="Weapons/M4A2/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
-[connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
-[connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
-[connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
-[connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 
 [editable path="Player"]
+[editable path="Player/Optionsmenu"]
 [editable path="CanvasLayer"]
-[editable path="PauseMenu"]
-[editable path="PauseMenu/Container/Continue"]
-[editable path="PauseMenu/Container/Options"]
-[editable path="PauseMenu/Container/ExitMenu"]
-[editable path="Optionsmenu"]
