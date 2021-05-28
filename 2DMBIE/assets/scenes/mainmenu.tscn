@@ -467,4 +467,15 @@ volume_db = -3.0
 autoplay = true
 bus = "Music"
 
+[node name="HighscoreLabel" type="Label" parent="."]
+margin_top = 256.0
+margin_right = 64.0
+margin_bottom = 280.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

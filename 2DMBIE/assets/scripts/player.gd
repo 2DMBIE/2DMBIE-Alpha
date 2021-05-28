@@ -322,8 +322,11 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
+			Global.setHighscore()
+			Global.saveScore()
 			queue_free()
 			kill()
+
 
 var takingDamage = false
 
