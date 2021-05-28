@@ -40,7 +40,7 @@ func _process(_delta):
 			$CanvasModulate.color = Color("#7f7f7f")
 
 	if Input.is_action_just_pressed("pause"):
-		if get_node("Optionsmenu/Options").visible == false:
+		if get_node("Optionsmenu/Options").visible == false and !is_gameOver:
 			if !is_paused:
 				pause_game()
 				is_paused = true
