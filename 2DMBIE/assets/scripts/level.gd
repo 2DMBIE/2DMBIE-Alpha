@@ -44,7 +44,7 @@ func _process(_delta):
 		Global.Currentwave = 1
 		Global.maxHealth = 500
 		Global.EnemyDamage = 300
-		Global.Speed = 200
+		Global.Speed = 75
 		Global.enemiesKilled = 0 
 		Global.unlocked_doors = 0
 	if is_paused == false:

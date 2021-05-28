@@ -4,7 +4,7 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 75
+var speed = Global.Speed
 var jumpForce = 400
 var gravity = 600
 var padding = 2
@@ -194,8 +194,9 @@ func _on_HeadshotArea_area_entered(area):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= 1:
+		if rand <= 0.2:
 			$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
+				$HeadshotArea/CollisionShape2D.disabled = true
 #				emit_signal("headroll")
