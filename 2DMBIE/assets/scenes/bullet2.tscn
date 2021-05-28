@@ -18,7 +18,9 @@ scale = 10.0
 scale_random = 0.14
 color = Color( 0, 0, 0, 1 )
 
-[node name="bullet" type="Area2D"]
+[node name="bullet" type="Area2D" groups=[
+"bullets",
+]]
 pause_mode = 1
 collision_layer = 32
 collision_mask = 14
