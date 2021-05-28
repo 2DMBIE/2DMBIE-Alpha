@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/TileSets/Floor.tres" type="TileSet" id=3]
-[ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=4]
+[ext_resource path="res://assets/scenes/cursor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=7]
@@ -81,12 +81,6 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -131095, 0, 0, -131094, 0, 0, -131088, 0, 0, -131087, 0, 0, -131080, 0, 0, -131079, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
 
-[node name="cursor" type="Sprite" parent="."]
-z_index = 10
-z_as_relative = false
-texture = ExtResource( 4 )
-hframes = 21
-
 [node name="Pathfinder" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 7 )
@@ -146,6 +140,8 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( -178.074, -151.993 )
+
+[node name="cursor" parent="." instance=ExtResource( 4 )]
 
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]

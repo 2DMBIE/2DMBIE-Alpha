@@ -70,14 +70,16 @@ func pause_game():
 	get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 	get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$cursor.visible = false
 	emit_signal("music", "pause")
-	AudioServer.set_bus_mute(0, true)
+#	AudioServer.set_bus_mute(0, true)
 
 func unpause_game():
 	get_tree().paused = false
 	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	$cursor.visible = true
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_mute(0, false)
 
