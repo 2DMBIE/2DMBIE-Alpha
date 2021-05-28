@@ -198,5 +198,4 @@ func _on_HeadshotArea_area_entered(area):
 			$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
-				$HeadshotArea/CollisionShape2D.disabled = true
 #				emit_signal("headroll")
