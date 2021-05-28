@@ -9,3 +9,4 @@ func _ready():
 
 func _process(_delta):
 	$HBox/VBox/Score/Score.text = str(Global.Score)
+	$HBox/VBox/Wave/Wave.text = str(Global.Currentwave)
