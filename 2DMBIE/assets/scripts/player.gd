@@ -303,20 +303,8 @@ var maxHealth = 1200
 var health = maxHealth setget setHealth
 
 signal health_updated(health)
-signal on_death
+signal on_death()
 
-func kill():
-	var _x = get_tree().reload_current_scene()
-	Global.Score = 0
-	Global.MaxWaveEnemies = 4
-	Global.CurrentWaveEnemies = 0
-	Global.Currentwave = 1
-	Global.maxHealth = 500
-	Global.EnemyDamage = 300
-	Global.Speed = 200
-	Global.enemiesKilled = 0 
-	Global.unlocked_doors = 0
-	
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
@@ -325,9 +313,6 @@ func setHealth(value):
 		if health == 0:
 			Global.setHighscore()
 			Global.saveScore()
-			queue_free()
-			kill()
-#			queue_free()
 			emit_signal("on_death")
 
 
