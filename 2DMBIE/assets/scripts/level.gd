@@ -93,7 +93,6 @@ func unpause_game():
 	is_paused = false
 
 func _on_Continue_button_down():
-	print("oi")
 	unpause_game()
 
 

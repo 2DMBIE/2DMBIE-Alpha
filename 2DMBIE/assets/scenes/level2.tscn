@@ -4376,11 +4376,15 @@ pitch_scale = 1.05
 bus = "Soundeffects"
 
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
+[connection signal="button_down" from="Player/PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
+[connection signal="button_down" from="Player/PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
+[connection signal="button_down" from="Player/PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
+[connection signal="button_down" from="Player/Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
@@ -4392,5 +4396,9 @@ bus = "Soundeffects"
 [connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
 
 [editable path="Player"]
+[editable path="Player/PauseMenu"]
+[editable path="Player/PauseMenu/Container/Continue"]
+[editable path="Player/PauseMenu/Container/Options"]
+[editable path="Player/PauseMenu/Container/ExitMenu"]
 [editable path="Player/Optionsmenu"]
 [editable path="CanvasLayer"]
