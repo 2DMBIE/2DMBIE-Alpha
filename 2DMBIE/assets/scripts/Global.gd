@@ -15,6 +15,7 @@ var unlocked_doors = 0
 var game_active = false
 var prevScore = 0
 var highScore = 0
+var debugMode = false
 
 # Debug
 var aim = false

@@ -311,6 +311,8 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
+			if Global.debugMode:
+				Global.Score = 0
 			Global.setHighscore()
 			Global.saveScore()
 			emit_signal("on_death")

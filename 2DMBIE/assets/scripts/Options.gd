@@ -64,7 +64,6 @@ func _on_GameOptions_mouse_exited():
 
 func _on_Button_button_down():
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
-		print("heolla")
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
 			print("Error: ", x)
@@ -80,3 +79,9 @@ func _on_stable_camera_toggled(button_pressed):
 	Global.camera = button_pressed
 func _on_brighter_screen_toggled(button_pressed):
 	Global.brightness = button_pressed
+func _on_CheckButton_toggled(button_pressed):
+	Global.debugMode = button_pressed
+	if button_pressed:
+		Global.Score += 25000
+	elif !button_pressed:
+		Global.Score -= 25000

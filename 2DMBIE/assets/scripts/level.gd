@@ -38,7 +38,7 @@ func _process(_delta):
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
-	if Input.is_action_just_released("game_reset"):
+	if Input.is_action_just_released("game_reset") and Global.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
 		if Global.brightness:

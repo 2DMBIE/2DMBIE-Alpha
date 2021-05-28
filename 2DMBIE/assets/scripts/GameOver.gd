@@ -18,6 +18,7 @@ func _ready():
 	fontRed = rng.randf()
 	fontGreen = rng.randf()
 	fontBlue = rng.randf()
+	
 
 
 func _process(_delta):
