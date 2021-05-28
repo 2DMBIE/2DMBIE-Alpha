@@ -39,6 +39,7 @@ func _ready():
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
 	emit_signal("health_updated", health, maxHealth)
+	
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
@@ -341,6 +342,7 @@ func _on_Hitbox_body_entered(body):
 		takenDamage(Global.EnemyDamage)
 		takingDamage = true
 
+
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
 
@@ -427,3 +429,14 @@ func on_slide_animation_complete():
 
 func _on_backfire_event():
 	running_disabled = true
+
+signal ammoPickup(totalAmmo)
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("ammo"):
+		var gainedAmmo = 60
+		emit_signal("ammoPickup", gainedAmmo)
+		$MarkerPos/Marker.visible = false
+
+func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
+	$MarkerPos/Marker.visible = true

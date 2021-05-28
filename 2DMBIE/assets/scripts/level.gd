@@ -5,18 +5,32 @@ var random_round
 var music_playing = false
 signal music(action)
 var headgonesignal = false
+var GraphRandomPoint
+
+var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
 func _ready():
 
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
-
+	
+	
+	
 func _process(_delta):
 #	if headgonesignal == false:
 #		if get_node_or_null("Zombie/body/torso/neck/head") != null:
 #			var _x = $Zombie.connect("headroll", self, "rollinghead")
 #			headgonesignal = true
+	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
+	if ammobagamount > 1:
+		get_tree().get_nodes_in_group("ammo")[0].queue_free()
+	var MarkerPos = $Player/MarkerPos.global_position
+	var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
+	$Player/MarkerPos.rotation = (rotationDegree)
+		
+		
+	
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
@@ -115,3 +129,12 @@ func _on_Options_button_down():
 #	var enemyHead = enemyhead.instance()
 #	enemyHead.position = $Zombie/body/torso/neck/head.position
 #	call_deferred("add_child", enemyHead)
+
+func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
+	var ammoPouch = AmmoPouch.instance()
+	ammoPouch.set_position(graphRandomPoint)
+	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
+	GraphRandomPoint = graphRandomPoint
+	
+
+

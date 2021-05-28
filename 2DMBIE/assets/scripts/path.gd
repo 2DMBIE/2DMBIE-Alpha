@@ -13,7 +13,11 @@ var tileMap
 var tileMap2
 var ylevel_array = []
 var prevCell
-var graph
+var graph 
+var randomPoint
+var graphRandomPoint
+var rng = RandomNumberGenerator.new()
+var ammoTimer
 var cachePointArray = []
 var getClosestPoint
 
@@ -23,6 +27,7 @@ var showLines = false
 # Sprite of pathfinding points
 const FACE = preload("res://assets/scenes/face.tscn")
 
+const ammoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 var output
 var cache_file_path = "user://pathfinding_cache.ivar"
 
@@ -103,7 +108,14 @@ func _ready():
 	# Calls function that connects all the points
 	createConections()
 	
-
+	ammospawn()
+	ammoTimer = Timer.new()
+	ammoTimer.set_wait_time(30)
+	ammoTimer.set_one_shot(false)
+	ammoTimer.connect("timeout", self, "ammoTimer_timeout")
+	add_child(ammoTimer)
+	ammoTimer.start()
+	
 ## Create connections between the points
 func createConections():
 	
@@ -486,6 +498,22 @@ func _process(_delta):
 			
 			# Makes debugMenu visible
 			get_node("/root/Main/DebugOverlay/Label").visible = true
+
+signal ammopouchSpawn()
+
+func ammospawn():
+	rng.randomize()
+	randomPoint = Vector2(rng.randi_range(100, 4900), rng.randi_range(100, -2300))
+	graphRandomPoint = graph.get_point_position(graph.get_closest_point(randomPoint)) 
+	emit_signal("ammopouchSpawn", graphRandomPoint)
+	
+func ammoTimer_timeout():
+	ammospawn()
+
+
+
+
+
 	
 	if Input.is_action_just_pressed("save"):
 		save_cache()
