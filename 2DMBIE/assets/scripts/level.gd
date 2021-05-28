@@ -15,6 +15,7 @@ func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
+	Global.loadScore()
 	var _x = $Player.connect("on_death", self, "on_death")
 
 
