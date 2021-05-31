@@ -92,7 +92,8 @@ func refresh_lobby():
 
 
 func _on_start_pressed():
-	gamestate.begin_game()
+	gamestate.start_lobby()
+	#gamestate.begin_game()
 
 
 func _on_find_public_ip_pressed():
