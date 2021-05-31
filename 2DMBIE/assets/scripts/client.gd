@@ -1,6 +1,6 @@
 extends Node
 
-const DEFAULT_IP = "77.165.12.177"
+const DEFAULT_IP = "81.204.234.89"
 const DEFAULT_PORT = 25565
 
 var network = NetworkedMultiplayerENet.new()
@@ -34,7 +34,6 @@ func _player_disconnected(id):
 func _connected_ok():
 	print("Successfully connected to server")
 	register_player()
-	rpc_id(1, "send_player_info", local_player_id, player_data)
 	
 func _connected_fail():
 	print("Failed to connect")
@@ -43,9 +42,10 @@ func _server_disconnected():
 	print("Server Disconnected")
 	
 func register_player():
-	local_player_id = get_tree().get_network_unique_id()
+	pass
+	#local_player_id = get_tree().get_network_unique_id()
 #	player_data = Save.save_data
-	players[local_player_id] = player_data
+	#players[local_player_id] = player_data
 
 sync func start_game():
 	pass
@@ -56,14 +56,15 @@ sync func start_game():
 #	get_tree().get_root().get_node("Lobby").queue_free()
 	
 func end_game():
-	rpc_id(1, "game_ended")
-	var world = get_node("/root/World")
-	
-	if has_node("/root/World"):
-		world.queue_free()
-		get_tree().get_root().get_node("Chat").queue_free()
-		
-	get_tree().change_scene("res://lobby/lobby.tscn")
-	network.close_connection()
-	get_tree().disconnect("connected_to_server", self, "_connected_ok")
-	get_tree().set_network_peer(null)
+	pass
+#	rpc_id(1, "game_ended")
+#	var world = get_node("/root/World")
+#
+#	if has_node("/root/World"):
+#		world.queue_free()
+#		get_tree().get_root().get_node("Chat").queue_free()
+#
+#	get_tree().change_scene("res://lobby/lobby.tscn")
+#	network.close_connection()
+#	get_tree().disconnect("connected_to_server", self, "_connected_ok")
+#	get_tree().set_network_peer(null)
