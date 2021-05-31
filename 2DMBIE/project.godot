@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="2DMBIE"
-run/main_scene="res://assets/scenes/level2.tscn"
+run/main_scene="res://assets/scenes/mainmenu.tscn"
 config/icon="res://assets/sprites/icon.png"
 
 [audio]
@@ -72,7 +72,8 @@ default_bus_layout="res://assets/sounds/default_bus_layout.tres"
 
 [autoload]
 
-Global="*res://assets/scripts/Global.gd"
+Global="*res://assets/Singletons/Global.gd"
+Settings="*res://assets/Singletons/Settings.gd"
 
 [debug]
 

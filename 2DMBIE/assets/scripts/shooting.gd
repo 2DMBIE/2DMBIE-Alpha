@@ -74,7 +74,7 @@ func _process(_delta):
 		bulletpoint_position = $BulletPoint.get_global_position()
 		
 		bullet.position = bulletpoint_position
-		if Global.aim:
+		if Settings.aim:
 			if Input.is_action_pressed("aim") and valid_aim: #aiming
 				emit_signal("no_aim_shoot", false)
 				bullet.rotation = (mouse_position - bullet.position).angle()

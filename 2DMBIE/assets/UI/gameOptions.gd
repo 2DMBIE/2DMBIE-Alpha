@@ -1,9 +1,9 @@
 extends VBoxContainer
 
 func _ready():
-	if Global.aim:
+	if Settings.aim:
 		$always_aim.pressed = true
-	if Global.camera:
+	if Settings.camera:
 		$stable_camera.pressed = true
-	if Global.brightness:
+	if Settings.brightness:
 		$brighter_screen.pressed = true
