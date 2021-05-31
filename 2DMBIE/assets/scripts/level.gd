@@ -29,6 +29,8 @@ func _process(_delta):
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
+	# OH NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	Global.Score = 10000
 
 
 	$cursor.position = get_global_mouse_position()
@@ -38,7 +40,7 @@ func _process(_delta):
 	if Input.is_action_just_released("game_reset") and Global.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
-		if Global.brightness:
+		if Settings.brightness:
 			$CanvasModulate.color = Color("#bbbbbb")
 		else:
 			$CanvasModulate.color = Color("#7f7f7f")

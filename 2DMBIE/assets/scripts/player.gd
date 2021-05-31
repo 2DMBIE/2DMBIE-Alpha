@@ -273,7 +273,7 @@ func walk_idle_transition():
 		return
 		
 func aim(string):
-	if Global.aim:
+	if Settings.aim:
 		if Input.is_action_pressed("aim"):
 			aim_feature(string)
 			return true
