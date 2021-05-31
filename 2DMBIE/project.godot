@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="2DMBIE"
-run/main_scene="res://assets/scenes/lobby.tscn"
+run/main_scene="res://assets/scenes/level2.tscn"
 config/icon="res://assets/sprites/icon.png"
 
 [audio]

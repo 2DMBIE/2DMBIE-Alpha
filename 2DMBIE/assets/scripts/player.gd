@@ -444,3 +444,6 @@ func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 
 func _on_gun_set_gun_recoil_sensitivity(value):
 	set_gun_recoil_sensitivity(value)
+	
+func set_player_name(s):
+	get_node("HBoxContainer/NameTag").text = s

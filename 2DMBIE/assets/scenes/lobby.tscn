@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
@@ -223,9 +222,6 @@ tile_data = PoolIntArray( 2, 0, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 
 
 [node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 233.055, -108.536 )
-
 [node name="cursor" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 hframes = 21
@@ -253,17 +249,3 @@ position = Vector2( 355.853, -118.234 )
 position = Vector2( 640.904, -109.739 )
 
 [node name="Players" type="Node2D" parent="."]
-
-[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
-[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
-[connection signal="button_down" from="Player/PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
-[connection signal="button_down" from="Player/PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
-[connection signal="button_down" from="Player/PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
-[connection signal="button_down" from="Player/Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
-
-[editable path="Player"]
-[editable path="Player/PauseMenu"]
-[editable path="Player/PauseMenu/Container/Continue"]
-[editable path="Player/PauseMenu/Container/Options"]
-[editable path="Player/PauseMenu/Container/ExitMenu"]
-[editable path="Player/Optionsmenu"]
