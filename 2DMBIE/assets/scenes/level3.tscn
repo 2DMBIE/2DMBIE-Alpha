@@ -146,6 +146,7 @@ position = Vector2( -178.074, -151.993 )
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
