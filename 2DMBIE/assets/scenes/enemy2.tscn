@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/sprites/zombie/lowerleg_right.png" type="Texture" id=15]
 [ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=16]
 [ext_resource path="res://assets/scenes/cpu_instances/bloodParticles.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/sprites/GetAttachmentThumbnail.jpg" type="Texture" id=18]
+[ext_resource path="res://assets/sprites/icon.png" type="Texture" id=18]
 [ext_resource path="res://assets/animations/zombie-jump.tres" type="Animation" id=19]
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=20]
 [ext_resource path="res://assets/sounds/zombie/z_hurt2.wav" type="AudioStream" id=22]
@@ -457,8 +457,8 @@ position = Vector2( 0, -40 )
 shape = SubResource( 17 )
 
 [node name="bodysprite" type="Sprite" parent="."]
-position = Vector2( -0.37503, 16 )
-scale = Vector2( 0.117448, 0.140625 )
+position = Vector2( 8, 0 )
+scale = Vector2( 2.06458, 2.57031 )
 z_index = 10
 texture = ExtResource( 18 )
 

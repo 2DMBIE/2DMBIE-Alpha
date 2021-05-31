@@ -9,7 +9,7 @@ var CurrentWaveEnemies = 0
 var Currentwave = 1
 var maxHealth = 500
 var EnemyDamage = 300
-var Speed = 200
+var Speed = 75
 var enemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
@@ -41,3 +41,14 @@ func saveScore():
 	saveScoreFile.store_line(str(highScore))
 	saveScoreFile.close()
 	
+var SpecialWaveNumber 
+var rng = RandomNumberGenerator.new()
+
+func setSpecialWaveNumber():
+	if Currentwave >= SpecialWaveNumber:
+		rng.randomize()
+		SpecialWaveNumber = (rng.randi_range(4, 7) + SpecialWaveNumber)
+
+func _ready():
+	rng.randomize()
+	SpecialWaveNumber = rng.randi_range(4, 7)
