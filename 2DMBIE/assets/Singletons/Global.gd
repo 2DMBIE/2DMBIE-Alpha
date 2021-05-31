@@ -15,11 +15,6 @@ var unlocked_doors = 0
 var game_active = false
 var highScore = 0
 
-# Debug
-var aim = false
-var camera = false
-var brightness = false
-
 func _process(_delta):
 	pass
 

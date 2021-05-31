@@ -1,9 +1,16 @@
 extends Control
 
+var master_bus = AudioServer.get_bus_index("Master")
+var music_bus = AudioServer.get_bus_index("Music")
+var soundeffects_bus = AudioServer.get_bus_index("Soundeffects")
+
 
 func _ready():
-	pass # Replace with function body.
-
+#	Settings.loadSettings()
+	$Panel/VBox/Container/Audio/HBox/VBox/MasterSlider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))
+	$Panel/VBox/Container/Audio/HBox/VBox/MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))
+	$Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider.value = db2linear(AudioServer.get_bus_volume_db(soundeffects_bus))
+	
 func _process(_delta):
 	escape_options()
 
@@ -64,7 +71,7 @@ func _on_GameOptions_mouse_exited():
 
 func _on_Button_button_down():
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
-		print("heolla")
+		saveSettings()
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
 			print("Error: ", x)
@@ -72,11 +79,42 @@ func _on_Button_button_down():
 func escape_options():
 	if Input.is_action_pressed("escape"):
 		_on_Button_button_down()
+	
 
 
 func _on_always_aim_toggled(button_pressed):
-	Global.aim = button_pressed
+	Settings.aim = button_pressed
+
+
 func _on_stable_camera_toggled(button_pressed):
-	Global.camera = button_pressed
+	Settings.camera = button_pressed
+
+
 func _on_brighter_screen_toggled(button_pressed):
-	Global.brightness = button_pressed
+	Settings.brightness = button_pressed
+
+func _on_MasterSlider_value_changed(value):
+	Settings.master_volume = value
+	AudioServer.set_bus_volume_db(master_bus, linear2db(Settings.master_volume))
+
+
+func _on_MusicSlider_value_changed(value):
+	Settings.music_volume = value
+	AudioServer.set_bus_volume_db(music_bus, linear2db(Settings.music_volume))
+
+
+func _on_SoundEffectsSlider_value_changed(value):
+	Settings.soundeffects_volume = value
+	AudioServer.set_bus_volume_db(soundeffects_bus, linear2db(Settings.soundeffects_volume))
+
+func saveSettings():
+	var Config = File.new()
+	Config.open("user://Config", File.WRITE)
+	Config.store_float(Settings.master_volume)
+	Config.store_float(Settings.music_volume)
+	Config.store_float(Settings.soundeffects_volume)
+	Config.store_var(Settings.aim)
+	Config.store_var(Settings.camera)
+	Config.store_var(Settings.brightness)
+	print(Settings.brightness)
+	Config.close()
