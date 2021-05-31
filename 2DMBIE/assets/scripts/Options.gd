@@ -72,6 +72,7 @@ func escape_options():
 	if Input.is_action_pressed("escape"):
 		_on_Button_button_down()
 
+signal sendHealth()
 
 func _on_always_aim_toggled(button_pressed):
 	Global.aim = button_pressed
@@ -85,3 +86,10 @@ func _on_CheckButton_toggled(button_pressed):
 		Global.Score += 25000
 	elif !button_pressed:
 		Global.Score -= 25000
+	
+	emit_signal("sendHealth")
+	
+func _on_MaiaMode_toggled(button_pressed):
+	Global.maia = button_pressed
+	if !Global.debugMode:
+		emit_signal("sendHealth")

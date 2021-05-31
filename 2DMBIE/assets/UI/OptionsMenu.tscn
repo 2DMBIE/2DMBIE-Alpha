@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/UI/audio_slider.gd" type="Script" id=6]
 [ext_resource path="res://assets/UI/gameOptions.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/MaiaToggleOff.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/MaiaToggleOn.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -622,8 +624,9 @@ toggle_mode = true
 
 [node name="GameOptions" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
+margin_top = 374.0
 margin_right = 1024.0
-margin_bottom = 370.0
+margin_bottom = 744.0
 rect_min_size = Vector2( 0, 370 )
 
 [node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/GameOptions"]
@@ -691,6 +694,28 @@ margin_bottom = 370.0
 rect_min_size = Vector2( 280, 0 )
 alignment = 2
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2"]
+margin_top = 278.0
+margin_right = 280.0
+margin_bottom = 326.0
+alignment = 2
+
+[node name="CheckButton" type="CheckButton" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer2"]
+margin_left = 88.0
+margin_right = 280.0
+margin_bottom = 48.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+custom_icons/off = ExtResource( 8 )
+custom_icons/on = ExtResource( 9 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_disabled = Color( 0.615686, 0.180392, 0.180392, 1 )
+custom_colors/font_color_hover_pressed = Color( 0.364706, 0.615686, 0.227451, 1 )
+custom_colors/font_color = Color( 0.113725, 0.498039, 0.776471, 1 )
+custom_colors/font_color_hover = Color( 0.254902, 0.662745, 0.960784, 1 )
+custom_colors/font_color_pressed = Color( 0.407843, 0.172549, 0.568627, 1 )
+text = "Maia Mode"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2"]
 margin_top = 330.0
 margin_right = 280.0
@@ -698,12 +723,13 @@ margin_bottom = 370.0
 alignment = 2
 
 [node name="CheckButton" type="CheckButton" parent="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer"]
-margin_left = 145.0
+margin_left = 91.0
 margin_right = 280.0
 margin_bottom = 40.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 custom_fonts/font = SubResource( 7 )
-text = "Debug"
+text = "Debug Mode"
 
 [node name="ExitOptions" type="Button" parent="Options/Panel/VBox"]
 margin_top = 528.0
@@ -733,5 +759,6 @@ flat = true
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/always_aim" to="Options" method="_on_always_aim_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/stable_camera" to="Options" method="_on_stable_camera_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer2/CheckButton" to="Options" method="_on_MaiaMode_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer/CheckButton" to="Options" method="_on_CheckButton_toggled"]
 [connection signal="button_down" from="Options/Panel/VBox/ExitOptions" to="Options" method="_on_Button_button_down"]

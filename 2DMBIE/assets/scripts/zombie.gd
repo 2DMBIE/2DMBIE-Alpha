@@ -11,6 +11,7 @@ var padding = 2
 var finishPadding = 6 # 6 or 8 for better padding when state machine
 const dropthroughBit = 5
 var headshot = false
+var shapeHeadless = CapsuleShape2D.new()
 
 var movement
 var zombiestep = false
@@ -45,6 +46,9 @@ func _ready():
 	timer.connect("timeout", self, "repeat_me")
 	add_child(timer)
 	timer.start()
+	
+	shapeHeadless.radius = 24
+	shapeHeadless.height = 50
 
 func nextPoint():
 	if len(currentPath) == 0:
@@ -187,15 +191,18 @@ func _set_health(value):
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
-#signal headroll()
+signal headroll(bulletPosition)
+
 
 func _on_HeadshotArea_area_entered(area):
 	if area.is_in_group("bullets"):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= 1:
+		if rand <= .2:
 			$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
-#				emit_signal("headroll")
+				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
+				$CollisionShape2D.position.y = 41
+				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity)

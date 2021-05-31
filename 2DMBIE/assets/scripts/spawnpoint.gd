@@ -1,8 +1,9 @@
 extends Node2D
 
+signal zombieSpawned()
+
 var plenemy := preload("res://assets/scenes/zombie.tscn")
 var PlayerBody = false
-
 
 func _on_Timer_timeout():
 	$Timer.start(5)
@@ -19,6 +20,8 @@ func _on_Timer_timeout():
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
 			if enemyAmount == 0:
 				get_node("../../WaveTimer").start(2) # total wait time is this time + the spawn timer
+	
+	emit_signal("zombieSpawned")
 
 #collision area to detect the player & spawn enemies
 func _on_PlayerDetectionRadius_body_entered(body):

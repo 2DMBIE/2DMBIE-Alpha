@@ -16,6 +16,7 @@ var game_active = false
 var prevScore = 0
 var highScore = 0
 var debugMode = false
+var maia = false
 
 # Debug
 var aim = false

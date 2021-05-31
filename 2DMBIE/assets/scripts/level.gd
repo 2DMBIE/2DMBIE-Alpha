@@ -5,7 +5,6 @@ var is_gameOver = false
 var random_round
 var music_playing = false
 signal music(action)
-var headgonesignal = false
 var GraphRandomPoint
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
@@ -14,17 +13,15 @@ func _ready():
 	get_tree().paused = false
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	random_round = randi()%7+1 # generate random integer between 7 and 1
+	random_round = randi()%2+3 # generate random integer between 5 and 3
 	Global.loadScore()
 	var _x = $Player.connect("on_death", self, "on_death")
-
+	var _xx = $Optionsmenu/Options.connect("sendHealth", $Player, "_on_maxHealth_toggled")
+	for spawnpoint in get_tree().get_nodes_in_group("spawnpoints"):
+		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
 
 
 func _process(_delta):
-#	if headgonesignal == false:
-#		if get_node_or_null("Zombie/body/torso/neck/head") != null:
-#			var _x = $Zombie.connect("headroll", self, "rollinghead")
-#			headgonesignal = true
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
@@ -149,12 +146,18 @@ func _on_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("PauseMenu/Container").visible = false
 
-#var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
-#
-#func rollinghead():
-#	var enemyHead = enemyhead.instance()
-#	enemyHead.position = $Zombie/body/torso/neck/head.position
-#	call_deferred("add_child", enemyHead)
+var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
+
+func rollinghead(bulletPosition):
+	var enemyHead = enemyhead.instance()
+	enemyHead.position = bulletPosition
+	call_deferred("add_child", enemyHead)
+
+func _on_zombieSpawned():
+	if get_node_or_null("Zombie/body/torso/neck/head") != null:
+		for zombie in get_tree().get_nodes_in_group("enemies"):
+			if !zombie.is_connected("headroll", self, "rollinghead"):
+				var _x = zombie.connect("headroll", self, "rollinghead")
 
 func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	var ammoPouch = AmmoPouch.instance()
