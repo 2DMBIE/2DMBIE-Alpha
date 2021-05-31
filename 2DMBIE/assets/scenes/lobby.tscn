@@ -235,8 +235,24 @@ color = Color( 0.498039, 0.498039, 0.498039, 1 )
 
 [node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
 
-[node name="Spawnpoint" type="Position2D" parent="."]
-position = Vector2( 404.935, 201.74 )
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 844.782, -106.908 )
+
+[node name="1" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 193.507, 393.347 )
+
+[node name="2" type="Position2D" parent="SpawnPoints"]
+position = Vector2( -165.167, 123.398 )
+
+[node name="3" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 355.853, -118.234 )
+
+[node name="4" type="Position2D" parent="SpawnPoints"]
+position = Vector2( 640.904, -109.739 )
+
+[node name="Players" type="Node2D" parent="."]
 
 [connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
 [connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]

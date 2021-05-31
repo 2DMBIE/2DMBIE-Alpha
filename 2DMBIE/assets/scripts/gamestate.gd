@@ -110,6 +110,43 @@ remote func pre_start_game(spawn_points):
 	elif players.size() == 0:
 		post_start_game()
 
+remote func pre_start_lobby(spawn_points):
+	# Change scene.
+	var world = load("res://assets/scenes/lobby.tscn").instance()
+	get_tree().get_root().add_child(world)
+
+	get_tree().get_root().get_node("Lobby").hide()
+
+	var player_scene = load("res://assets/scenes/player.tscn")
+
+	for p_id in spawn_points:
+		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		var player = player_scene.instance()
+
+		player.set_name(str(p_id)) # Use unique ID as node name.
+		player.position=spawn_pos
+		player.set_network_master(p_id) #set unique id as master.
+
+		if p_id == get_tree().get_network_unique_id():
+			# If node for this peer id, set name.
+			player.set_player_name(player_name)
+		else:
+			# Otherwise set name from peer.
+			player.set_player_name(players[p_id])
+
+		world.get_node("Players").add_child(player)
+
+	# Set up score.
+	#world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
+	#for pn in players:
+	#	world.get_node("Score").add_player(pn, players[pn])
+
+	if not get_tree().is_network_server():
+		# Tell server we are ready to start.
+		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
+	elif players.size() == 0:
+		post_start_game()
+
 
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
@@ -148,6 +185,23 @@ func get_player_list():
 func get_player_name():
 	return player_name
 
+func start_lobby():
+	assert(get_tree().is_network_server())
+
+	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
+	var spawn_points = {}
+	spawn_points[1] = 0 # Server in spawn point 0.
+	var spawn_point_idx = 1
+	for p in players:
+		spawn_points[p] = spawn_point_idx
+		spawn_point_idx += 1
+	# Call to pre-start game with the spawn points.
+	
+	for p in players:
+		rpc_id(p, "pre_start_lobby", spawn_points)
+
+	pre_start_lobby(spawn_points)
+	
 
 func begin_game():
 	assert(get_tree().is_network_server())
@@ -160,6 +214,7 @@ func begin_game():
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
 	# Call to pre-start game with the spawn points.
+	
 	for p in players:
 		rpc_id(p, "pre_start_game", spawn_points)
 
