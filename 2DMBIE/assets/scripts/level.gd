@@ -32,6 +32,8 @@ func _process(_delta):
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
+	# OH NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	Global.Score = 10000
 
 
 	$cursor.position = get_global_mouse_position()

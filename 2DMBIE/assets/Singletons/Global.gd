@@ -13,7 +13,6 @@ var Speed = 200
 var enemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
-var prevScore = 0
 var highScore = 0
 
 func _process(_delta):
@@ -29,19 +28,16 @@ func loadScore():
 	if not saveScoreFile.file_exists("user://highscore.save"):
 		return
 	saveScoreFile.open("user://highscore.save", File.READ)
-	prevScore = int(saveScoreFile.get_line())
 	highScore = int(saveScoreFile.get_line())
 	saveScoreFile.close()
 
 func setHighscore():
-	if Score > prevScore:
+	if Score > highScore:
 		highScore = Score
 
 func saveScore():
-	prevScore = Score
 	var saveScoreFile = File.new()
 	saveScoreFile.open("user://highscore.save", File.WRITE)
-	saveScoreFile.store_line(str(prevScore))
 	saveScoreFile.store_line(str(highScore))
 	saveScoreFile.close()
 	
