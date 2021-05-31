@@ -41,7 +41,7 @@ func _process(_delta):
 	if Input.is_action_just_released("game_reset"):
 		restart_game()
 	if !is_paused and !is_gameOver:
-		if Global.brightness:
+		if Settings.brightness:
 			$CanvasModulate.color = Color("#bbbbbb")
 		else:
 			$CanvasModulate.color = Color("#7f7f7f")

@@ -72,7 +72,8 @@ default_bus_layout="res://assets/sounds/default_bus_layout.tres"
 
 [autoload]
 
-Global="*res://assets/scripts/Global.gd"
+Global="*res://assets/Singletons/Global.gd"
+Settings="*res://assets/Singletons/Settings.gd"
 
 [debug]
 

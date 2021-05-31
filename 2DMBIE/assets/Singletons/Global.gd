@@ -16,11 +16,6 @@ var game_active = false
 var prevScore = 0
 var highScore = 0
 
-# Debug
-var aim = false
-var camera = false
-var brightness = false
-
 func _process(_delta):
 	pass
 
