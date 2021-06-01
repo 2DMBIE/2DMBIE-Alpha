@@ -26,6 +26,7 @@ var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014
 var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold]
 var nameArray = ["MP5", "UMP 45", "P90", "SPAS12", "XM1014", "M4A1", "AK 12", "M60", "M249", "BARRETT 50", "AWP", "INTERVENTION"]
 var priceArray = [1500, 1600, 2000, 2500, 3000, 3000, 3100, 5500, 6000, 5000, 5000, 5500]
+var scaleArray = PoolVector2Array([Vector2(1,1), Vector2(.75,.75), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(.75,.75), Vector2(1,1)])
 
 var canBuy = false
 var enoughMoney = false
@@ -78,6 +79,7 @@ func _on_buyarea_body_exited(body):
 #Dynamically sets the label with the correct values and also sets the sprites to the right one
 func _ready():
 	$Sprite.set_texture(spriteArray[Selected_Weapon])
+	$Sprite.scale=scaleArray[Selected_Weapon]
 	$Light2D.color = colorArray[Selected_Weapon]
 	$WeaponLabelName.text = nameArray[Selected_Weapon]
 	$WeaponLabelPrice.text = str(priceArray[Selected_Weapon])

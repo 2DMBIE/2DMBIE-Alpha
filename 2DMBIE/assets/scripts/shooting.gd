@@ -163,7 +163,7 @@ func set_gun(index):
 	
 	if canBuyFasterFireRate2 == false:
 		bulletDelayTimer.wait_time *= .75
-		emit_signal("send_decay", 1.22)
+		emit_signal("send_decay", 1.2)
 	
 func get_current_gun():
 	return guns[current_gun_index]

@@ -449,7 +449,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale 2", 0, "Animation 7", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale", 0, "Animation 5", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "knifing", 0, "knife", "knifing", 1, "shooting", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "running", 0, "TimeScale", "running", 1, "walk-idle", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "sliding", 0, "torso_reset", "sliding", 1, "Add2" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -2062,6 +2062,7 @@ one_shot = true
 [node name="Aimzone" type="Area2D" parent="."]
 
 [node name="shootzone" type="CollisionShape2D" parent="Aimzone"]
+visible = false
 shape = SubResource( 67 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
@@ -2237,6 +2238,7 @@ bus = "Soundeffects"
 [connection signal="on_backfire_event" from="body/chest/torso/gun" to="." method="_on_backfire_event"]
 [connection signal="play_sound" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
 [connection signal="play_sound_with_pitch" from="body/chest/torso/gun" to="body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="send_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_gun_send_decay"]
 [connection signal="set_camera_decay" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
 [connection signal="set_gun_recoil_sensitivity" from="body/chest/torso/gun" to="." method="set_gun_recoil_sensitivity"]
 [connection signal="shake_camera" from="body/chest/torso/gun" to="Pivot/CameraOffset/Camera2D" method="_on_shoot_event"]

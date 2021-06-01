@@ -100,14 +100,15 @@ position = Vector2( 512, -192 )
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 0.00158691, -192 )
+Selected_Weapon = 4
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 248, -192 )
-Selected_Weapon = 6
+Selected_Weapon = 7
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
-Selected_Weapon = 9
+Selected_Weapon = 8
 
 [node name="Perks" type="Node" parent="."]
 
@@ -141,7 +142,15 @@ position = Vector2( -178.074, -151.993 )
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
+[connection signal="perkactive" from="Perks/FasterShootingPerk" to="Player/body/chest/torso/gun" method="_on_FasterShootingPerk_perkactive"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]
@@ -149,3 +158,4 @@ position = Vector2( -178.074, -151.993 )
 [editable path="PauseMenu/Container/ExitMenu"]
 [editable path="CanvasLayer"]
 [editable path="Optionsmenu"]
+[editable path="Player"]
