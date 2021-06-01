@@ -830,6 +830,7 @@ script = ExtResource( 17 )
 [node name="MarkerPos" type="Position2D" parent="."]
 
 [node name="Marker" type="Sprite" parent="MarkerPos"]
+visible = false
 position = Vector2( 128, 0 )
 rotation = 1.5708
 texture = ExtResource( 92 )

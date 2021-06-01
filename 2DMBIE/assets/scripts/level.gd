@@ -7,17 +7,21 @@ var is_paused = false
 var random_round
 var music_playing = false
 signal music(action)
-var GraphRandomPoint
+var GraphRandomPoint = Vector2.ZERO
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
+var MarkerPos
+var rotationDegree
 
 func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	
-	#print(get_node("/root/Lobby/Players/" + str(gamestate.session_id)).name)
+# warning-ignore:return_value_discarded
+	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
 		print(get_tree().get_network_unique_id())
@@ -32,11 +36,10 @@ func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
-#	var MarkerPos = $Player/MarkerPos.global_position
-#	var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
-#	$Player/MarkerPos.rotation = (rotationDegree)
-		
-		
+	
+	if MarkerPos != null:
+		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
+		MarkerPos.rotation = rotationDegree
 	
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
@@ -61,21 +64,21 @@ func _process(_delta):
 			$CanvasModulate.color = Color("#7f7f7f")
 		
 	if Input.is_action_just_pressed("pause"):
-		if get_node("Player/Optionsmenu/Options").visible == false:
+		if get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible == false:
 			if is_paused == false:
 				get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 				get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 				get_tree().paused = true
-				get_node("Player/PauseMenu/Container").visible = true
+				get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				is_paused = true
 #				emit_signal("music", "pause")
 				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 				
-			elif is_paused == true and get_node("Player/Optionsmenu/Options").visible == false:
+			elif is_paused == true and get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible == false:
 				unpause_game()
 		
-#	escape_options()
+	escape_options()
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
@@ -93,7 +96,7 @@ func unpause_game():
 	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
 	get_tree().paused = false
-	get_node("Player/PauseMenu/Container").visible = false
+	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
@@ -116,23 +119,23 @@ func _on_ExitOptions_button_down():
 		if x != OK:
 			print("ERROR: ", x)
 	else:
-		get_node("Player/Optionsmenu/Options").visible = false
-	get_node("Player/PauseMenu/Container").visible = true
+		get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible = false
+	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
-#func escape_options():
-#	if get_node("Player/Optionsmenu/Options").visible:
-#		if Input.is_action_pressed("escape"):
-#			get_node("Player/Optionsmenu/Options").visible = false
-#			get_node("Player/PauseMenu/Container").visible = true
-#			emit_signal("music", "unpause")
-#			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+func escape_options():
+	if get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible:
+		if Input.is_action_pressed("escape"):
+			get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible = false
+			get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
+			emit_signal("music", "unpause")
+			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 
 func _on_Options_button_down():
-	get_node("Player/Optionsmenu/Options").visible = true
-	get_node("Player/PauseMenu/Container").visible = false
+	get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible = true
+	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = false
 	emit_signal("music", "pause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
 
@@ -141,6 +144,11 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	ammoPouch.set_position(graphRandomPoint)
 	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
 	GraphRandomPoint = graphRandomPoint
-	
+
+func _on_playersLoaded():
+	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
+	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
+	if get_node("Players/"+str(gamestate.player_id)).is_network_master():
+		MarkerPos.get_node("Marker").visible = true
 
 

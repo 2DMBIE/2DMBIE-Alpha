@@ -1,5 +1,7 @@
 extends Node
 
+signal playersLoaded()
+
 # Default game server port. Can be any number between 1024 and 49151.
 # Not on the list of registered or common ports as of November 2020:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
@@ -17,6 +19,7 @@ var player_name = "Player 1"
 var players = {}
 var players_ready = []
 
+var player_id = 1
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -132,7 +135,9 @@ remote func pre_start_lobby(spawn_points):
 	get_tree().get_root().get_node("LobbyUI").hide()
 
 	var player_scene = load("res://assets/scenes/player.tscn")
-
+	
+	print(spawn_points)
+	
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player = player_scene.instance()
@@ -145,12 +150,16 @@ remote func pre_start_lobby(spawn_points):
 			# If node for this peer id, set name.
 			player.set_player_name(player_name)
 			
+			player_id = p_id
+			
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
-
+	
 		world.get_node("Players").add_child(player)
-
+	
+	emit_signal("playersLoaded")
+	
 	# Set up score.
 	#world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
 	#for pn in players:

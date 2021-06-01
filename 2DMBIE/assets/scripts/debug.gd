@@ -8,14 +8,15 @@ var debugBrightness = debugVariables
 var stats = []
 var properties = ['aim', 'camera', 'brightness']
 
-func _ready():	
-	add_stat("mouse_position", "Player", "mousePos", false)
-	add_stat("tile_position", "Player", "tilePos", false)
-	add_stat("player_speed", "Player", "motion", false)
+func _ready():
+	pass
+#	add_stat("mouse_position", "Player", "mousePos", false)
+#	add_stat("tile_position", "Player", "tilePos", false)
+#	add_stat("player_speed", "Player", "motion", false)
 #	add_stat("get_closest_point", "Pathfinder", "getClosestPoint", false)
-	add_stat("manual_aim", "DebugOverlay", "debugAim", false)
-	add_stat("moving_camera", "DebugOverlay", "debugCamera", false)
-	add_stat("bright_scene", "DebugOverlay", "debugBrightness", false)
+#	add_stat("manual_aim", "DebugOverlay", "debugAim", false)
+#	add_stat("moving_camera", "DebugOverlay", "debugCamera", false)
+#	add_stat("bright_scene", "DebugOverlay", "debugBrightness", false)
 #	add_stat("is_running", "Player", "is_running", false)
 #	add_stat("mouse_position", "Player/body/chest/torso/gun", "mouse_position", false)
 #	add_stat("bulletpoint_position", "Player/body/chest/torso/gun", "bulletpoint_position", false)
@@ -51,6 +52,6 @@ func _process(_delta):
 #		if Input.is_action_just_pressed("toggle" + str(t + 1)):
 #			Global[properties[t]] = !Global[properties[t]]
 			
-	debugAim = Global[properties[0]]
-	debugCamera = Global[properties[1]]
-	debugBrightness = Global[properties[2]]
+#	debugAim = Global[properties[0]]
+#	debugCamera = Global[properties[1]]
+#	debugBrightness = Global[properties[2]]

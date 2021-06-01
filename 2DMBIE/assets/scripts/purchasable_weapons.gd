@@ -12,41 +12,42 @@ var priceArray = [1500, 2500, 3000, 3100, 4000]
 
 var canBuy = false
 var enoughMoney = false
-onready var gunscript = get_node("../../Players/"+ session.id + "Player/body/chest/torso/gun")
+var gunscript
 signal play_sound(library)
 
 export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 
 
 #the player can buy a weapon ans sets it to the correct slot
 func _physics_process(_delta):
-	if Input.is_action_just_pressed("use") and canBuy and enoughMoney:
-		for w in range(gunscript.weapon_slots.size()):
-			if gunscript.weapon_slots[w] == -1:
-				gunscript.current_weapon = w
-				gunscript.weapon_slots[w] = Selected_Weapon
-				break
-		
-		for c in range(gunscript.weapon_slots.size()):
-			if gunscript.current_weapon == c:
-				gunscript.weapon_slots[c] = Selected_Weapon
-				break
+	if gunscript != null:
+		if Input.is_action_just_pressed("use") and canBuy and enoughMoney:
+			for w in range(gunscript.weapon_slots.size()):
+				if gunscript.weapon_slots[w] == -1:
+					gunscript.current_weapon = w
+					gunscript.weapon_slots[w] = Selected_Weapon
+					break
 			
-		gunscript.set_gun(Selected_Weapon)
-		emit_signal("play_sound", "buy")
+			for c in range(gunscript.weapon_slots.size()):
+				if gunscript.current_weapon == c:
+					gunscript.weapon_slots[c] = Selected_Weapon
+					break
+				
+			gunscript.set_gun(Selected_Weapon)
+			emit_signal("play_sound", "buy")
+			
+			# The price of the weapon minus the score of the player
+			for i in spriteArray.size():
+				if Selected_Weapon == i:
+					Global.Score -= priceArray[i]
 		
-		# The price of the weapon minus the score of the player
-		for i in spriteArray.size():
-			if Selected_Weapon == i:
-				Global.Score -= priceArray[i]
-	
-	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
-		emit_signal("play_sound", "not_enough_money")
-	
-	# checks if the player has enough money/score
-	if Global.Score >= priceArray[Selected_Weapon]:
-		enoughMoney = true
-	else:
-		enoughMoney = false
+		elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+			emit_signal("play_sound", "not_enough_money")
+		
+		# checks if the player has enough money/score
+		if Global.Score >= priceArray[Selected_Weapon]:
+			enoughMoney = true
+		else:
+			enoughMoney = false
 
 #checks if the player is in the buy area
 func _on_buyarea_body_entered(body):
@@ -64,3 +65,8 @@ func _ready():
 	$Light2D.color = colorArray[Selected_Weapon]
 	$WeaponLabelName.text = nameArray[Selected_Weapon]
 	$WeaponLabelPrice.text = str(priceArray[Selected_Weapon])
+	
+	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+
+func _on_playersLoaded():
+	gunscript = get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/body/chest/torso/gun")
