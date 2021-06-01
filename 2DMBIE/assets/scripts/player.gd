@@ -32,6 +32,9 @@ var debug = false
 var falling = false
 var slideHold = false
 
+puppet var puppet_pos = Vector2()
+puppet var puppet_motion = Vector2()
+
 func _ready():
 	$AnimationTree.active = true
 	zombie_dam_timer = Timer.new()
@@ -45,149 +48,157 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
-	
-	motion.y += GRAVITY
-	var friction = false
-	if tileMap:
-		mousePos = get_global_mouse_position()
-		tilePos = tileMap.world_to_map(mousePos)
-		
-	if motion.y > 150 and not falling:
-		falling = true
-	if motion.y == 20 and falling:
-		emit_signal("play_sound", "fall")
-	if motion.y == 20:
-		falling = false
+	if is_network_master():
+		motion.y += GRAVITY
+		var friction = false
+		if tileMap:
+			mousePos = get_global_mouse_position()
+			tilePos = tileMap.world_to_map(mousePos)
+			
+		if motion.y > 150 and not falling:
+			falling = true
+		if motion.y == 20 and falling:
+			emit_signal("play_sound", "fall")
+		if motion.y == 20:
+			falling = false
 
-	if Input.is_action_just_pressed("knife") and not is_knifing:
-		get_node("body/chest/torso/gun").visible = false
-		get_node("body/chest/torso/gun").is_holding_knife = true
-		get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
-		emit_signal("play_sound", "knife_swish")
-		knifing_hitbox_enabled = true
-		$AnimationTree.set("parameters/knifing/current", false)
-	
-	if running_disabled && Input.is_action_just_pressed("sprint"):
-		get_node("body/chest/torso/gun").backfiring = false
-		running_disabled = false
-	
-	if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		if is_running():
-			$AnimationTree.set("parameters/running/current", 0)
-			direction("left")
-			motion.x -= RUN_ACCELERATION
-			motion.x = max(motion.x, -MAX_RUN_SPEED)
-			if (motion.x > 50):
-				motion.x = 50
-			if (aim("running") == false):
-				$AnimationTree.set("parameters/aim/blend_position", 0)
-				$AnimationTree.set("parameters/aim2/blend_position", 0)
-				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running() == false:
-			$AnimationTree.set("parameters/running/current", 1)
-			motion.x -= WALK_ACCELERATION
-			motion.x = max(motion.x, -MAX_WALK_SPEED)
-			$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-			if (aim("walking") == false):
+		if Input.is_action_just_pressed("knife") and not is_knifing:
+			get_node("body/chest/torso/gun").visible = false
+			get_node("body/chest/torso/gun").is_holding_knife = true
+			get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+			emit_signal("play_sound", "knife_swish")
+			knifing_hitbox_enabled = true
+			$AnimationTree.set("parameters/knifing/current", false)
+		
+		if running_disabled && Input.is_action_just_pressed("sprint"):
+			get_node("body/chest/torso/gun").backfiring = false
+			running_disabled = false
+		
+		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+			if is_running():
+				$AnimationTree.set("parameters/running/current", 0)
 				direction("left")
-				$AnimationTree.set("parameters/aim/blend_position", 0)
-				$AnimationTree.set("parameters/aim2/blend_position", 0)
-				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-			if (get_direction() == "right") && (motion.x < 0):
-				$AnimationTree.set("parameters/moonwalking/current", 0)
-			else: 
-				$AnimationTree.set("parameters/moonwalking/current", 1)
-	elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-		if is_running():
-			$AnimationTree.set("parameters/running/current", 0)
-			direction("right")
-			if (motion.x < -50):
-				motion.x = -50
-			motion.x += RUN_ACCELERATION
-			motion.x = min(motion.x, MAX_RUN_SPEED)
-			if(aim("running") == false):
-				$AnimationTree.set("parameters/aim/blend_position", 0)
-				$AnimationTree.set("parameters/aim2/blend_position", 0)
-				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running() == false: 
-			$AnimationTree.set("parameters/running/current", 1)
-			motion.x += WALK_ACCELERATION
-			motion.x = min(motion.x, MAX_WALK_SPEED)
-			$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-			if (aim("walking") == false):
+				motion.x -= RUN_ACCELERATION
+				motion.x = max(motion.x, -MAX_RUN_SPEED)
+				if (motion.x > 50):
+					motion.x = 50
+				if (aim("running") == false):
+					$AnimationTree.set("parameters/aim/blend_position", 0)
+					$AnimationTree.set("parameters/aim2/blend_position", 0)
+					$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
+			elif is_running() == false:
+				$AnimationTree.set("parameters/running/current", 1)
+				motion.x -= WALK_ACCELERATION
+				motion.x = max(motion.x, -MAX_WALK_SPEED)
+				$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
+				if (aim("walking") == false):
+					direction("left")
+					$AnimationTree.set("parameters/aim/blend_position", 0)
+					$AnimationTree.set("parameters/aim2/blend_position", 0)
+					$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
+				if (get_direction() == "right") && (motion.x < 0):
+					$AnimationTree.set("parameters/moonwalking/current", 0)
+				else: 
+					$AnimationTree.set("parameters/moonwalking/current", 1)
+		elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+			if is_running():
+				$AnimationTree.set("parameters/running/current", 0)
 				direction("right")
+				if (motion.x < -50):
+					motion.x = -50
+				motion.x += RUN_ACCELERATION
+				motion.x = min(motion.x, MAX_RUN_SPEED)
+				if(aim("running") == false):
+					$AnimationTree.set("parameters/aim/blend_position", 0)
+					$AnimationTree.set("parameters/aim2/blend_position", 0)
+					$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
+			elif is_running() == false: 
+				$AnimationTree.set("parameters/running/current", 1)
+				motion.x += WALK_ACCELERATION
+				motion.x = min(motion.x, MAX_WALK_SPEED)
+				$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
+				if (aim("walking") == false):
+					direction("right")
+					$AnimationTree.set("parameters/aim/blend_position", 0)
+					$AnimationTree.set("parameters/aim2/blend_position", 0)
+					$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
+				if (get_direction() == "left") && (motion.x > 0):
+					$AnimationTree.set("parameters/moonwalking/current", 0)
+				else: 
+					$AnimationTree.set("parameters/moonwalking/current", 1)
+		elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+			if (aim("walking") == false): 
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-			if (get_direction() == "left") && (motion.x > 0):
-				$AnimationTree.set("parameters/moonwalking/current", 0)
-			else: 
-				$AnimationTree.set("parameters/moonwalking/current", 1)
-	elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-		if (aim("walking") == false): 
-			$AnimationTree.set("parameters/aim/blend_position", 0)
-			$AnimationTree.set("parameters/aim2/blend_position", 0)
-			$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		friction = true
-		walk_idle_transition()
-		motion.x = lerp(motion.x, 0, 0.3)
-		
-	if is_on_floor():
-		if Input.is_action_just_pressed("move_down"):
-			if get_slide_collision(0).collider.name == "Floor":
-				set_collision_mask_bit(dropthroughBit, false)
-		$AnimationTree.set("parameters/in_air_state/current", 0)
-		if Input.is_action_just_pressed("jump"):
-			aim("walking")
-			motion.y = JUMP_HEIGHT
-			$AnimationTree.set("parameters/in_air_state/current", 1)
-			emit_signal("play_sound", "jump")
-		if friction == true:
+			friction = true
+			walk_idle_transition()
 			motion.x = lerp(motion.x, 0, 0.3)
-	else:
-		#aim("walking")
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.05)
-	var _is_standing_still = motion.x > -21 and motion.x < 21
-	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
-		is_sliding = true
-		emit_signal("play_sound", "slide")
-		$AnimationTree.set("parameters/sliding/current", 0)
-		$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
-		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
-		is_knifing = true # disable knifing 
-		get_node("Hitbox").set_collision_mask_bit(3, false)
-		self.set_collision_mask_bit(3, false)
-		knifing_hitbox_enabled = false
-		WALK_ACCELERATION = 35 #old 20
-		RUN_ACCELERATION = 40
-		MAX_WALK_SPEED = 230 #old 110 
-		MAX_RUN_SPEED = 430
-	if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
-		_is_already_crouching = true
-		if not _played_crouch_sfx:
-			emit_signal("play_sound", "crouch")
-			_played_crouch_sfx = true
-		
-		$AnimationTree.set("parameters/crouching/current", 0)
-		if(crouch_idle):
-			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
-		else: 
-			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
-		$CollisionShape2D.disabled = true
-		$CollisionShape2DCrouch.disabled = false
+			
 		if is_on_floor():
-			motion.x = 0 
+			if Input.is_action_just_pressed("move_down"):
+				if get_slide_collision(0).collider.name == "Floor":
+					set_collision_mask_bit(dropthroughBit, false)
+			$AnimationTree.set("parameters/in_air_state/current", 0)
+			if Input.is_action_just_pressed("jump"):
+				aim("walking")
+				motion.y = JUMP_HEIGHT
+				$AnimationTree.set("parameters/in_air_state/current", 1)
+				emit_signal("play_sound", "jump")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+		else:
+			#aim("walking")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.05)
+		var _is_standing_still = motion.x > -21 and motion.x < 21
+		if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
+			is_sliding = true
+			emit_signal("play_sound", "slide")
+			$AnimationTree.set("parameters/sliding/current", 0)
+			$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
+			get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
+			is_knifing = true # disable knifing 
+			get_node("Hitbox").set_collision_mask_bit(3, false)
+			self.set_collision_mask_bit(3, false)
+			knifing_hitbox_enabled = false
+			WALK_ACCELERATION = 35 #old 20
+			RUN_ACCELERATION = 40
+			MAX_WALK_SPEED = 230 #old 110 
+			MAX_RUN_SPEED = 430
+		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
+			_is_already_crouching = true
+			if not _played_crouch_sfx:
+				emit_signal("play_sound", "crouch")
+				_played_crouch_sfx = true
+			
+			$AnimationTree.set("parameters/crouching/current", 0)
+			if(crouch_idle):
+				$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
+			else: 
+				$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
+			$CollisionShape2D.disabled = true
+			$CollisionShape2DCrouch.disabled = false
+			if is_on_floor():
+				motion.x = 0 
+		else:
+			crouch_idle_transition(false)
+			$AnimationTree.set("parameters/crouching/current", 1)
+			$CollisionShape2D.disabled = false
+			$CollisionShape2DCrouch.disabled = true
+			scale.y = lerp(scale.y, 1, .1)
+			_is_already_crouching = false
+			_played_crouch_sfx = false
+		rset("puppet_motion", motion)
+		rset("puppet_pos", position)
 	else:
-		crouch_idle_transition(false)
-		$AnimationTree.set("parameters/crouching/current", 1)
-		$CollisionShape2D.disabled = false
-		$CollisionShape2DCrouch.disabled = true
-		scale.y = lerp(scale.y, 1, .1)
-		_is_already_crouching = false
-		_played_crouch_sfx = false
+		position = puppet_pos
+		motion = puppet_motion
+	
 	motion = move_and_slide(motion, UP)
-	pass
+	if not is_network_master():
+		puppet_pos = position
+	
 
 
 
