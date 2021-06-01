@@ -100,15 +100,14 @@ position = Vector2( 512, -192 )
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 0.00158691, -192 )
-Selected_Weapon = 9
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 248, -192 )
-Selected_Weapon = 10
+Selected_Weapon = 6
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
-Selected_Weapon = 11
+Selected_Weapon = 9
 
 [node name="Perks" type="Node" parent="."]
 

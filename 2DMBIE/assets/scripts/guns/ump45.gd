@@ -6,7 +6,7 @@ func _init():
 	name = "UMP 45" # The name of the gun.
 	offset = Vector2(1.575,2.282) # The position of the gun.
 	scale = Vector2(.75,.75) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
-	texture = load("res://assets/sprites/guns/UMP45.PNG") # The path of the sprite gun.
+	texture = load("res://assets/sprites/guns/UMP45.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(75.868, -10.467) # Position of the bulletpoint.
 	bulletdelay = float(.12) # The delay between each bullet. [0.1, 0.2]
