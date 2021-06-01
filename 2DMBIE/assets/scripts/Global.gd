@@ -13,7 +13,6 @@ var Speed = 200
 var enemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
-
 # Debug
 var aim = false
 var camera = false

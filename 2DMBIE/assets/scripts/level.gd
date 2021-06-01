@@ -20,8 +20,13 @@ func _ready():
 	#print(get_node("/root/Lobby/Players/" + str(gamestate.session_id)).name)
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
-		print(gamestate.session_id)
+		print(get_tree().get_network_unique_id())
+	elif Input.is_action_just_pressed("knife"):
+		print("Printing Children:")
+		for x in get_node("Players").get_children():
+			print(x.name)
 	
+	return
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()

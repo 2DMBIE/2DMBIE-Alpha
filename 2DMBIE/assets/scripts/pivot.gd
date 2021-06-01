@@ -12,13 +12,11 @@ var mousePos = 0
 
 
 func _ready():
-	if is_network_master():
-		updatePivotAngle()
+	updatePivotAngle()
 	
 	
 func _process(_delta):
-	if is_network_master():
-		timerTimeout()
+	timerTimeout()
 #	if !Global.camera:
 #		timerTimeout()
 #		if mousePos > (parent.position.x - pivotOffset):
