@@ -4320,7 +4320,7 @@ position = Vector2( 3117.75, -1740.49 )
 position = Vector2( 460.277, -266.521 )
 
 [node name="TL_buis_broken19" parent="lights" instance=ExtResource( 16 )]
-position = Vector2( 1076.28, -522.521 )
+position = Vector2( 1077.76, -524.49 )
 
 [node name="TL_buis17" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 128.277, -522.521 )
