@@ -77,10 +77,14 @@ remote func register_player(new_player_name):
 
 func unregister_player(id):
 	players.erase(id)
+	if has_node("/root/Main"):
+		get_node("Players/" + id).queue_free()
 	emit_signal("player_list_changed")
 
 
 remote func pre_start_game(spawn_points):
+	# Refuse new connections
+	#peer.refuse_new_connections = true
 	# Change scene.
 	var world = load("res://world.tscn").instance()
 	get_tree().get_root().add_child(world)
