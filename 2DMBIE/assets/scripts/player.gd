@@ -37,12 +37,14 @@ puppet var puppet_motion = Vector2()
 
 func _ready():
 	$AnimationTree.active = true
-	zombie_dam_timer = Timer.new()
-	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
-	add_child(zombie_dam_timer)
-	tileMap = get_node("../../Blocks")
-	emit_signal("health_updated", health, maxHealth)
 	
+	if is_network_master():
+		zombie_dam_timer = Timer.new()
+		zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
+		add_child(zombie_dam_timer)
+		tileMap = get_node("../../Blocks")
+		emit_signal("health_updated", health, maxHealth)
+		$Pivot/CameraOffset/Camera2D.current = true
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
