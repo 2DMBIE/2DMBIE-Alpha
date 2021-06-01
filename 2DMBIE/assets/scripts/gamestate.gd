@@ -49,7 +49,11 @@ func _connected_ok():
 
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
-	print("Server disconnected 1")
+	# Remove world
+	if has_node("/root/Main"): # Game is in progress.
+		get_node("/root/Main").queue_free()
+		get_tree().get_root().get_node("Lobby").hide()
+	
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 
