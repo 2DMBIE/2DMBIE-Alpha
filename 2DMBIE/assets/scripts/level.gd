@@ -33,7 +33,6 @@ func _process(_delta):
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
 	# OH NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-	Global.Score = 10000
 
 
 	$cursor.position = get_global_mouse_position()
@@ -101,7 +100,7 @@ func restart_game():
 	Global.Currentwave = 1
 	Global.maxHealth = 500
 	Global.EnemyDamage = 300
-	Global.Speed = 200
+	Global.Speed = 75
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
 
