@@ -67,6 +67,7 @@ func jump():
 		movement[1] = -jumpForce
 
 func _process(delta):
+	checkhealth()
 #	if Input.is_action_just_pressed("aim"):
 #		repeat_me()
 	if currentTarget:
@@ -199,3 +200,18 @@ func _on_HeadshotArea_area_entered(area):
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
 #				emit_signal("headroll")
+
+func checkhealth():
+	$Control/TextureProgress.max_value = Global.maxHealth
+	$Control/TextureProgress.value = health
+	var percentageHP = int((float(health) / maxHealth * 100))
+	if percentageHP == 100:
+		$Control/TextureProgress.visible = false
+	else:
+		$Control/TextureProgress.visible = true
+	if percentageHP >= 70:
+		$Control/TextureProgress.set_tint_progress("14e114")
+	elif percentageHP <= 70 and percentageHP >= 30:
+		$Control/TextureProgress.set_tint_progress("e1be32")
+	else:
+		$Control/TextureProgress.set_tint_progress("e11e1e")
