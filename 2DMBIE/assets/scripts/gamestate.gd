@@ -17,7 +17,7 @@ var player_name = "Player 1"
 var players = {}
 var players_ready = []
 
-var session_id
+var session_id = 1
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()

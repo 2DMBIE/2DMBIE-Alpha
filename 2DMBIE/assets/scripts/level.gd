@@ -20,7 +20,7 @@ func _ready():
 	#print(get_node("/root/Lobby/Players/" + str(gamestate.session_id)).name)
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
-		print_tree_pretty()
+		print(gamestate.session_id)
 	
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
