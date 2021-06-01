@@ -19,6 +19,7 @@ func _ready():
 	var _xx = $Optionsmenu/Options.connect("sendHealth", $Player, "_on_maxHealth_toggled")
 	for spawnpoint in get_tree().get_nodes_in_group("spawnpoints"):
 		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
+	_on_zombieSpawned()
 
 
 func _process(_delta):
@@ -29,15 +30,13 @@ func _process(_delta):
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
-	# OH NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-	Global.Score = 10000
 
 
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
-	if Input.is_action_just_released("game_reset") and Global.debugMode:
+	if Input.is_action_just_released("game_reset") and Settings.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
 		if Settings.brightness:
@@ -121,6 +120,7 @@ func _on_ExitMenu_button_down():
 
 
 func _on_ExitOptions_button_down():
+	$Optionsmenu/Options.saveSettings()
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
@@ -135,6 +135,7 @@ func _on_ExitOptions_button_down():
 		
 
 func escape_options():
+	$Optionsmenu/Options.saveSettings()
 	if get_node("Optionsmenu/Options").visible:
 		if Input.is_action_pressed("escape"):
 			if is_paused:

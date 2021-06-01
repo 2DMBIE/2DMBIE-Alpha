@@ -184,9 +184,6 @@ func _set_health(value):
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
-		if health == 0:
-			Global.enemiesKilled += 1
-			kill()
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
@@ -199,7 +196,7 @@ func _on_HeadshotArea_area_entered(area):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= .2:
+		if rand <= .05:
 			$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false

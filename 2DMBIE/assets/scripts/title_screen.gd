@@ -10,9 +10,15 @@ func _ready():
 	for button in $Buttons.get_children():
 		button.connect("pressed", self, "_on_Button_pressed", [button.scene_to_load])
 	$HighscoreLabel.text = "Highscore: " + str(Global.highScore)
-	AudioServer.set_bus_volume_db(master_bus, linear2db(Settings.master_volume))
-	AudioServer.set_bus_volume_db(music_bus, linear2db(Settings.music_volume))
-	AudioServer.set_bus_volume_db(soundeffects_bus, linear2db(Settings.soundeffects_volume))
+	var Config = File.new()
+	if Config.file_exists("user://Config"):
+		AudioServer.set_bus_volume_db(master_bus, linear2db(Settings.master_volume))
+		AudioServer.set_bus_volume_db(music_bus, linear2db(Settings.music_volume))
+		AudioServer.set_bus_volume_db(soundeffects_bus, linear2db(Settings.soundeffects_volume))
+	else:
+		AudioServer.set_bus_volume_db(master_bus, linear2db(.6))
+		AudioServer.set_bus_volume_db(music_bus, linear2db(.4))
+		AudioServer.set_bus_volume_db(soundeffects_bus, linear2db(.8))
 	
 func _on_Button_pressed(scene_to_load):
 	if scene_to_load == "res://assets/scenes/level2.tscn":

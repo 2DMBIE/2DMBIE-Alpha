@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
@@ -19,7 +19,7 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 size = 18
 font_data = ExtResource( 3 )
 
@@ -157,8 +157,9 @@ valign = 1
 
 [node name="Audio" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
 visible = false
+margin_top = 374.0
 margin_right = 1024.0
-margin_bottom = 325.0
+margin_bottom = 744.0
 rect_min_size = Vector2( 0, 370 )
 size_flags_horizontal = 3
 
@@ -701,7 +702,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 custom_icons/off = ExtResource( 8 )
 custom_icons/on = ExtResource( 9 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_disabled = Color( 0.615686, 0.180392, 0.180392, 1 )
 custom_colors/font_color_hover_pressed = Color( 0.364706, 0.615686, 0.227451, 1 )
 custom_colors/font_color = Color( 0.113725, 0.498039, 0.776471, 1 )
@@ -721,7 +722,7 @@ margin_right = 280.0
 margin_bottom = 40.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Debug Mode"
 
 [node name="ExitOptions" type="Button" parent="Options/Panel/VBox"]
@@ -749,7 +750,9 @@ flat = true
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" to="Options" method="_on_MasterSlider_value_changed"]
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" to="Options" method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" to="Options" method="_on_SoundEffectsSlider_value_changed"]
-[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/always_aim" to="Options" method="_on_always_aim_toggled"]
-[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/stable_camera" to="Options" method="_on_stable_camera_toggled"]
-[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/always_aim" to="Options" method="_on_always_aim_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/stable_camera" to="Options" method="_on_stable_camera_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer2/CheckButton" to="Options" method="_on_MaiaMode_toggled"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer/CheckButton" to="Options" method="_on_CheckButton_toggled"]
 [connection signal="button_down" from="Options/Panel/VBox/ExitOptions" to="Options" method="_on_Button_button_down"]

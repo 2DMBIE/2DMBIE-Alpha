@@ -331,6 +331,7 @@ __meta__ = {
 }
 
 [node name="MovementPerk" type="Control" parent="Interface/Perks"]
+visible = false
 margin_left = 90.0
 margin_right = 90.0
 margin_bottom = 40.0
@@ -340,6 +341,7 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 14 )
 
 [node name="FireRatePerk" type="Control" parent="Interface/Perks"]
+visible = false
 margin_left = 160.0
 margin_right = 160.0
 margin_bottom = 40.0
@@ -349,6 +351,7 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 16 )
 
 [node name="ReloadPerk" type="Control" parent="Interface/Perks"]
+visible = false
 margin_left = 230.0
 margin_right = 230.0
 margin_bottom = 40.0
@@ -358,6 +361,7 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 15 )
 
 [node name="HealthPerk" type="Control" parent="Interface/Perks"]
+visible = false
 margin_left = 300.0
 margin_right = 300.0
 margin_bottom = 40.0

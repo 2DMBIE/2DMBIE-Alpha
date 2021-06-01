@@ -96,6 +96,7 @@ func _on_brighter_screen_toggled(button_pressed):
 
 func _on_MasterSlider_value_changed(value):
 	Settings.master_volume = value
+	print(value)
 	AudioServer.set_bus_volume_db(master_bus, linear2db(Settings.master_volume))
 
 
@@ -117,11 +118,11 @@ func saveSettings():
 	Config.store_var(Settings.aim)
 	Config.store_var(Settings.camera)
 	Config.store_var(Settings.brightness)
-	print(Settings.brightness)
+	Config.store_var(Settings.debugMode)
 	Config.close()
 
 func _on_CheckButton_toggled(button_pressed):
-	Global.debugMode = button_pressed
+	Settings.debugMode = button_pressed
 	if button_pressed:
 		Global.Score += 25000
 	elif !button_pressed:
@@ -131,5 +132,5 @@ func _on_CheckButton_toggled(button_pressed):
 	
 func _on_MaiaMode_toggled(button_pressed):
 	Global.maia = button_pressed
-	if !Global.debugMode:
+	if !Settings.debugMode:
 		emit_signal("sendHealth")

@@ -33,7 +33,7 @@ var falling = false
 var slideHold = false
 
 func _ready():
-	if Global.debugMode:
+	if Settings.debugMode:
 		maxHealth = 5000
 	elif Global.maia:
 		maxHealth = 2400
@@ -334,18 +334,18 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			if Global.debugMode:
+			if Settings.debugMode:
 				Global.Score = 0
 			Global.setHighscore()
 			Global.saveScore()
 			emit_signal("on_death")
 
 func _on_maxHealth_toggled():
-	if Global.debugMode:
+	if Settings.debugMode:
 		maxHealth = 5000
 	elif Global.maia:
 		maxHealth = 2400
-	elif !Global.debugMode and !Global.maia:
+	elif !Settings.debugMode and !Global.maia:
 		maxHealth = 1200
 	
 	health = maxHealth
@@ -429,6 +429,8 @@ func on_knife_animation_complete():
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
+		if body.health == 0:
+			body.kill()
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
