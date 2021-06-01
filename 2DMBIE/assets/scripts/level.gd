@@ -17,7 +17,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	
-#	print(get_node("Players/" + str(gamestate.id)).name)
+	print(get_node("Players/" + str(gamestate.session_id)).name)
 	
 func _process(_delta):
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))

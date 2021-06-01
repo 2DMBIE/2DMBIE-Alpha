@@ -17,7 +17,7 @@ var player_name = "Player 1"
 var players = {}
 var players_ready = []
 
-var id
+var session_id
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -70,7 +70,9 @@ func _connected_fail():
 # Lobby management functions.
 
 remote func register_player(new_player_name):
-	id = get_tree().get_rpc_sender_id()
+	if is_network_master():
+		session_id = get_tree().get_rpc_sender_id()
+	var id = get_tree().get_rpc_sender_id()
 	print(id)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
