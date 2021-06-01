@@ -34,7 +34,7 @@ func _ready():
 	growl_timer.autostart = true
 	add_child(growl_timer)
 	
-	pathFinder = find_parent("Main").find_node("Pathfinder")
+	pathFinder = find_parent("World").find_node("Pathfinder")
 	movement = Vector2(0, 0)
 	var timer = Timer.new()
 	timer.set_wait_time(.1)
@@ -105,9 +105,9 @@ func repeat_me():
 	if is_on_floor():
 		var space_state = get_world_2d().direct_space_state
 #		var playerPos = get_global_mouse_position()
-		var playerPos = get_node("../Player").position
+		var playerPos = get_node("../Players/"+str(gamestate.player_id)).position
 		var pos = Vector2(playerPos.x, playerPos.y)
-		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_node("../Player/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))
+		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_node("../Players/"+str(gamestate.player_id)+"/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))
 		if (result):
 			var goTo = result["position"]
 			currentPath = pathFinder.findPath(self.position, goTo)

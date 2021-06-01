@@ -520,7 +520,7 @@ func ammoTimer_timeout():
 	if Input.is_action_just_pressed("load"):
 		load_cache()
 	
-	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/World/Player").position))
+	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/World/Players/"+str(gamestate.player_id)).position))
 
 
 func save_cache():
