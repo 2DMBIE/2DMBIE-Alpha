@@ -4,7 +4,7 @@ class_name UMP45
 
 func _init():
 	name = "UMP 45" # The name of the gun.
-	offset = Vector2(1.575,2.282) # The position of the gun.
+	offset = Vector2(-0.938,6.664) # The position of the gun.
 	scale = Vector2(.75,.75) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
 	texture = load("res://assets/sprites/guns/UMP45.png") # The path of the sprite gun.
 

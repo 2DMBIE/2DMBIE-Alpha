@@ -1,4 +1,4 @@
-[gd_scene load_steps=160 format=2]
+[gd_scene load_steps=179 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/sprites/agent1/torso.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/agent1/head.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/agent1/lowerarm_left.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/guns/UMP45.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/guns/XM1014.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/agent1/foot_right.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/agent1/thigh_right.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/agent1/upperarm_left.png" type="Texture" id=12]
@@ -111,7 +111,6 @@
 [ext_resource path="res://assets/sounds/m60/AR Single Shot 3.wav" type="AudioStream" id=109]
 [ext_resource path="res://assets/sounds/m249/m249 reload.wav" type="AudioStream" id=110]
 [ext_resource path="res://assets/sounds/m249/Pistol Single Shot (Suppressed).wav" type="AudioStream" id=111]
-[ext_resource path="res://assets/sprites/marker.png" type="Texture" id=112]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -450,7 +449,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "TimeScale 2", 0, "Animation 7", "running", 0, "TimeScale", "running", 1, "walk-idle", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "knifing", 0, "knife", "knifing", 1, "shooting", "TimeScale", 0, "Animation 5", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "running", 0, "TimeScale", "running", 1, "walk-idle", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "knifing", 0, "knife", "knifing", 1, "shooting", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale 2", 0, "Animation 7", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -843,10 +842,9 @@ script = ExtResource( 17 )
 position = Vector2( 128, 0 )
 rotation = 1.5708
 scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 92 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 5.50931 )
+position = Vector2( 0, 1.51066 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -857,10 +855,10 @@ texture = ExtResource( 6 )
 offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
-position = Vector2( 22.0728, -1.75482 )
+position = Vector2( 22.073, -1.744 )
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 9 )
-offset = Vector2( 17.236, -3.362 )
+offset = Vector2( 2.286, -0.071 )
 script = ExtResource( 33 )
 
 [node name="laser" type="Sprite" parent="body/chest/torso/gun"]
@@ -871,7 +869,7 @@ scale = Vector2( 1.43875, 0.0154226 )
 texture = ExtResource( 18 )
 
 [node name="BulletPoint" type="Node2D" parent="body/chest/torso/gun"]
-position = Vector2( 75.8682, -10.4668 )
+position = Vector2( 60.6985, -4.93388 )
 
 [node name="sfx" type="Node2D" parent="body/chest/torso/gun/BulletPoint"]
 position = Vector2( -55.6587, 6.04199 )
@@ -1768,7 +1766,7 @@ bus = "Soundeffects"
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/intervention_reload"]
 stream = ExtResource( 100 )
 volume_db = 4.0
-pitch_scale = 1.5
+pitch_scale = 2.0
 attenuation = 0.138696
 bus = "Soundeffects"
 
@@ -1777,7 +1775,7 @@ one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = -0.440587
+rotation = -0.411482
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -1868,14 +1866,13 @@ __meta__ = {
 
 [node name="legs" type="Position2D" parent="body"]
 position = Vector2( 0, 11.189 )
-rotation = -0.154389
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
-position = Vector2( -6.06485, 3.40305 )
-rotation = -0.854741
+position = Vector2( -6.18385, 3.40305 )
+rotation = 0.143719
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1885,7 +1882,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.89866
+rotation = 0.453197
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1893,8 +1890,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.50671, 14.2428 )
-rotation = -0.0641758
+position = Vector2( 0.506966, 14.393 )
+rotation = -0.592681
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1909,7 +1906,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = 0.628839
+rotation = -0.368996
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1920,7 +1917,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 1.35978
+rotation = 0.759606
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1929,7 +1926,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = 0.130362
+rotation = -0.37804
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {

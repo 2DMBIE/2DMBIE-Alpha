@@ -36,6 +36,7 @@ var shooting_disabled = false
 var backfiring = false
 
 var canBuyFasterFireRate2 = true
+var canBuyAmmo2 = true
 
 var guns = [MP5.new(), UMP45.new(), P90.new(), SPAS12.new(), XM1014.new(), M4A1.new(), AK12.new(), M60.new(), M249.new(), BARRETT50.new(), AWP.new(), INTERVENTION.new()]
 var reloadTimer = Timer.new()
@@ -43,7 +44,6 @@ var reloadTimer = Timer.new()
 func _ready():
 	self.visible = true
 	set_gun(weapon_slots[0])
-	reloadTimer.wait_time = 2.5
 	reloadTimer.one_shot = true
 	reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
 	add_child(reloadTimer)
@@ -162,14 +162,22 @@ func set_gun(index):
 	self.scale = _gun.scale
 	self.offset = _gun.offset
 	bulletDelayTimer.wait_time = _gun.bulletdelay
+	reloadTimer.wait_time = _gun.reload_time
 	get_node("BulletPoint").position = _gun.bulletpoint
 	emit_signal("set_camera_decay", _gun.camera_decay)
 	emit_signal("set_gun_recoil_sensitivity", _gun.gun_recoil_sensitivity)
-	emit_signal("play_sound", _gun.name.to_lower() + str("_draw"))	
+	emit_signal("play_sound", _gun.name.to_lower() + str("_draw"))
 	
 	if canBuyFasterFireRate2 == false:
 		bulletDelayTimer.wait_time *= .75
 		emit_signal("send_decay", 1.2)
+		
+	if canBuyAmmo2 == false:
+		reloadTimer.wait_time = _gun.reload_time / 2
+		print(reloadTimer)
+		print("hello")
+		
+		
 	
 func get_current_gun():
 	return guns[current_gun_index]
@@ -180,13 +188,14 @@ var reload_gun_index
 func reload():
 	var _gun = guns[current_gun_index]
 	if _gun.totalAmmo > 0:
-		if Input.is_action_just_pressed("reload") and _gun.ammo < 30 or _gun.ammo == 0:
+		if Input.is_action_just_pressed("reload") and _gun.ammo < _gun.maxclipAmmo or _gun.ammo == 0:
 			if canShoot:
 				reload_gun_index = current_gun_index
 				
-				if reloadTimer.wait_time == 2.5:
+				if reloadTimer.wait_time == _gun.reload_time:
 					emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
 				else:
+					
 					emit_signal("play_sound_with_pitch", _gun.name.to_lower() + str("_reload"), 2)
 				reloadTimer.start()
 				canShoot = false
@@ -228,3 +237,9 @@ func _on_FasterShootingPerk_perkactive(canBuyFasterFireRate):
 func _on_Player_ammoPickup(gainedAmmo):
 	var _gun = guns[current_gun_index]
 	_gun.totalAmmo += gainedAmmo
+
+
+func _on_AmmoPerk_perkactiveAmmo(canBuyAmmo):
+	if canBuyAmmo == false:
+		canBuyAmmo2 = false
+		print(canBuyAmmo2)

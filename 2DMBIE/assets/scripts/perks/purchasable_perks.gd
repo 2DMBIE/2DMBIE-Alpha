@@ -23,6 +23,7 @@ var canBuyAmmo = true
 var canBuyFasterFireRate = true
 
 signal perkactive(canBuyFasterFireRate)
+signal perkactiveAmmo(canBuyAmmo)
 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
@@ -52,9 +53,10 @@ func _physics_process(_delta):
 		
 	#AmmoPerk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 2 and canBuyAmmo:
-		ammoperk()
-		perkInterface("ReloadPerk")
 		canBuyAmmo = false
+		perkInterface("ReloadPerk")
+		emit_signal("perkactiveAmmo", canBuyAmmo)
+		ammoperk()
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
@@ -95,7 +97,7 @@ func movementperk():
 	get_node("../../Player").MAX_RUN_SPEED = 380
 	
 func ammoperk():
-	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1.25
+	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1
 	
 func fasterfirerateperk():
 	gunscript.set_gun(0)
