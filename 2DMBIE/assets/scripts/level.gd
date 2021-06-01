@@ -5,7 +5,6 @@ var is_gameOver = false
 var random_round
 var music_playing = false
 signal music(action)
-var headgonesignal = false
 var GraphRandomPoint
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
@@ -14,17 +13,16 @@ func _ready():
 	get_tree().paused = false
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	random_round = randi()%7+1 # generate random integer between 7 and 1
+	random_round = randi()%2+3 # generate random integer between 5 and 3
 	Global.loadScore()
 	var _x = $Player.connect("on_death", self, "on_death")
-
+	var _xx = $Optionsmenu/Options.connect("sendHealth", $Player, "_on_maxHealth_toggled")
+	for spawnpoint in get_tree().get_nodes_in_group("spawnpoints"):
+		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
+	_on_zombieSpawned()
 
 
 func _process(_delta):
-#	if headgonesignal == false:
-#		if get_node_or_null("Zombie/body/torso/neck/head") != null:
-#			var _x = $Zombie.connect("headroll", self, "rollinghead")
-#			headgonesignal = true
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
@@ -32,14 +30,13 @@ func _process(_delta):
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
-	# OH NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
 
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
-	if Input.is_action_just_released("game_reset"):
+	if Input.is_action_just_released("game_reset") and Settings.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
 		if Settings.brightness:
@@ -123,6 +120,7 @@ func _on_ExitMenu_button_down():
 
 
 func _on_ExitOptions_button_down():
+	$Optionsmenu/Options.saveSettings()
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
@@ -137,6 +135,7 @@ func _on_ExitOptions_button_down():
 		
 
 func escape_options():
+	$Optionsmenu/Options.saveSettings()
 	if get_node("Optionsmenu/Options").visible:
 		if Input.is_action_pressed("escape"):
 			if is_paused:
@@ -150,12 +149,18 @@ func _on_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("PauseMenu/Container").visible = false
 
-#var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
-#
-#func rollinghead():
-#	var enemyHead = enemyhead.instance()
-#	enemyHead.position = $Zombie/body/torso/neck/head.position
-#	call_deferred("add_child", enemyHead)
+var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
+
+func rollinghead(bulletPosition):
+	var enemyHead = enemyhead.instance()
+	enemyHead.position = bulletPosition
+	call_deferred("add_child", enemyHead)
+
+func _on_zombieSpawned():
+	if get_node_or_null("Zombie/body/torso/neck/head") != null:
+		for zombie in get_tree().get_nodes_in_group("enemies"):
+			if !zombie.is_connected("headroll", self, "rollinghead"):
+				var _x = zombie.connect("headroll", self, "rollinghead")
 
 func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	var ammoPouch = AmmoPouch.instance()

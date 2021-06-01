@@ -14,6 +14,7 @@ var enemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
+var maia = false
 
 func _process(_delta):
 	pass
