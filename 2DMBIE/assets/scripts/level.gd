@@ -11,6 +11,8 @@ var GraphRandomPoint = Vector2.ZERO
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
+var MarkerPos
+var rotationDegree
 
 func _ready():
 	Global.game_active = true
@@ -26,11 +28,10 @@ func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
-	var MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
-	var rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
-	MarkerPos.rotation = rotationDegree
-		
-		
+	
+	if MarkerPos != null:
+		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
+		MarkerPos.rotation = rotationDegree
 	
 	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
@@ -138,5 +139,8 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 
 func _on_playersLoaded():
 	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
+	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
+	if get_node("Players/"+str(gamestate.player_id)).is_network_master():
+		MarkerPos.get_node("Marker").visible = true
 
 
