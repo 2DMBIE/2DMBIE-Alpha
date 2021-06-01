@@ -93,7 +93,6 @@ func healthperk():
 func movementperk():
 	get_node("../../Player").MAX_WALK_SPEED = 200
 	get_node("../../Player").MAX_RUN_SPEED = 380
-	print("oi")
 	
 func ammoperk():
 	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1.25

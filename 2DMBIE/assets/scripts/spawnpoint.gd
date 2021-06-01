@@ -38,7 +38,7 @@ func _on_Timer_timeout():
 				Global.setSpecialWaveNumber()
 				specialWave = false
 		
-			emit_signal("zombieSpawned")
+		emit_signal("zombieSpawned")
 
 #collision area to detect the player & spawn enemies
 func _on_PlayerDetectionRadius_body_entered(body):

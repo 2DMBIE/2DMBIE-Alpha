@@ -96,7 +96,6 @@ func _on_brighter_screen_toggled(button_pressed):
 
 func _on_MasterSlider_value_changed(value):
 	Settings.master_volume = value
-	print(value)
 	AudioServer.set_bus_volume_db(master_bus, linear2db(Settings.master_volume))
 
 
