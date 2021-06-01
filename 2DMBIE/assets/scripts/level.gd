@@ -68,7 +68,7 @@ func _process(_delta):
 			elif is_paused == true and get_node("Player/Optionsmenu/Options").visible == false:
 				unpause_game()
 		
-	escape_options()
+#	escape_options()
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
@@ -114,13 +114,13 @@ func _on_ExitOptions_button_down():
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
-func escape_options():
-	if get_node("Player/Optionsmenu/Options").visible:
-		if Input.is_action_pressed("escape"):
-			get_node("Player/Optionsmenu/Options").visible = false
-			get_node("Player/PauseMenu/Container").visible = true
-			emit_signal("music", "unpause")
-			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+#func escape_options():
+#	if get_node("Player/Optionsmenu/Options").visible:
+#		if Input.is_action_pressed("escape"):
+#			get_node("Player/Optionsmenu/Options").visible = false
+#			get_node("Player/PauseMenu/Container").visible = true
+#			emit_signal("music", "unpause")
+#			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 
 func _on_Options_button_down():

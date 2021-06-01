@@ -40,7 +40,7 @@ func _ready():
 	zombie_dam_timer = Timer.new()
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
-	tileMap = get_node("../Blocks")
+	tileMap = get_node("../../Blocks")
 	emit_signal("health_updated", health, maxHealth)
 	
 

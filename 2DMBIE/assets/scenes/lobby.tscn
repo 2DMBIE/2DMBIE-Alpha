@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
 [ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -219,8 +218,6 @@ collision_layer = 32
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 2, 0, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 0, 0, 65538, 1610612737, 0, 65552, 2, 0, 131080, 0, 0, 131081, 0, 0, 131088, 2, 0, 196624, 2, 0, 327670, 0, 0, 327671, 0, 0, 327676, 0, 0, 327677, 0, 0, 327678, 0, 0, 327679, 0, 0, 262144, 1, 0, 262145, 1, 0, 262146, 1, 0, 262147, 1, 0, 262148, 1, 0, 262149, 1, 0, 262150, 1, 0, 262151, 1, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 1, 0, 262158, 1, 0, 262159, 1, 0, 262160, 2, 0, 393215, 1610612737, 0, 327696, 2, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393232, 2, 0, 524280, 0, 0, 458753, 5, 0, 458768, 2, 0, 589819, 0, 0, 589820, 0, 0, 589823, 4, 0, 524288, 4, 0, 524289, 4, 0, 524290, 4, 0, 524291, 4, 0, 524292, 4, 0, 524293, 4, 0, 524294, 4, 0, 524295, 4, 0, 524296, 4, 0, 524297, 4, 0, 524298, 4, 0, 524299, 4, 0, 524300, 4, 0, 524301, 4, 0, 524302, 4, 0, 524303, 4, 0, 524304, 3, 0 )
-
-[node name="DebugOverlay" parent="." instance=ExtResource( 10 )]
 
 [node name="cursor" type="Sprite" parent="."]
 texture = ExtResource( 3 )
