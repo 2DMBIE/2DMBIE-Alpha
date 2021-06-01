@@ -49,12 +49,14 @@ func _connected_ok():
 
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
+	print("Server disconnected 1")
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail():
+	print("Server disconnected 2")
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
 
@@ -129,7 +131,7 @@ remote func pre_start_lobby(spawn_points):
 
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
-			print(player_name + " hi from here")
+			#print(player_name + " hi from here")
 			player.set_player_name(player_name)
 			
 		else:
@@ -231,7 +233,7 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 
-
+		
 func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_player_connected")
