@@ -17,6 +17,7 @@ var player_name = "Player 1"
 var players = {}
 var players_ready = []
 
+var id
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -50,9 +51,9 @@ func _connected_ok():
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
 	# Remove world if connected
-	if has_node("/root/Main"): # Game is in progress.
-		get_node("/root/Main").queue_free()
-		get_tree().get_root().get_node("Lobby").hide()
+	if has_node("/root/Lobby"): # Game is in progress.
+		get_node("/root/Lobby").queue_free()
+		get_tree().get_root().get_node("LobbyUI").hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	emit_signal("game_error", "Server disconnected")
@@ -69,7 +70,7 @@ func _connected_fail():
 # Lobby management functions.
 
 remote func register_player(new_player_name):
-	var id = get_tree().get_rpc_sender_id()
+	id = get_tree().get_rpc_sender_id()
 	print(id)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
@@ -77,24 +78,25 @@ remote func register_player(new_player_name):
 
 func unregister_player(id):
 	players.erase(id)
-	if has_node("/root/Main"):
-#		print("Player ID: " + str(id))
-#		for x in get_node("/root/Main/Players").get_children():
-#			print(x)
-		get_node("/root/Main/Players/" + str(id)).queue_free()
+	if has_node("/root/Lobby"):
+		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
+	if has_node("/root/World"): ## game started
+		pass
+	elif has_node("/root/Lobby"):
+		pass
 
 
 remote func pre_start_game(spawn_points):
 	# Refuse new connections
 	#peer.refuse_new_connections = true
 	# Change scene.
-	var world = load("res://world.tscn").instance()
+	var world = load("res://assets/scenes/World.tscn").instance()
 	get_tree().get_root().add_child(world)
 
-	get_tree().get_root().get_node("Lobby").hide()
+	get_tree().get_root().get_node("LobbyUI").hide()
 
-	var player_scene = load("res://player.tscn")
+	var player_scene = load("res://assets/scenes/player.tscn")
 
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
@@ -126,10 +128,10 @@ remote func pre_start_game(spawn_points):
 
 remote func pre_start_lobby(spawn_points):
 	# Change scene.
-	var world = load("res://assets/scenes/lobby.tscn").instance()
+	var world = load("res://assets/scenes/Lobby.tscn").instance()
 	get_tree().get_root().add_child(world)
 
-	get_tree().get_root().get_node("Lobby").hide()
+	get_tree().get_root().get_node("LobbyUI").hide()
 
 	var player_scene = load("res://assets/scenes/player.tscn")
 

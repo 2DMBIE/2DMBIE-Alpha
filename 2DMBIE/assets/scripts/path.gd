@@ -95,8 +95,8 @@ func _ready():
 	graph = AStar2D.new()
 	
 	# Gets tilesets that the enemies can collide with
-	tileMap = find_parent("Main").find_node("Blocks")
-	tileMap2 = find_parent("Main").find_node("Floor")
+	tileMap = find_parent("World").find_node("Blocks")
+	tileMap2 = find_parent("World").find_node("Floor")
 	
 	# Calls function that creates an array to improve loading times
 	get_unique_ylevels()
@@ -487,7 +487,7 @@ func _process(_delta):
 			visible = false
 			
 			# Makes debugMenu invisible
-			get_node("/root/Main/DebugOverlay/Label").visible = false
+			get_node("/root/World/DebugOverlay/Label").visible = false
 		
 		# Turn all debug things on
 		elif !showLines:
@@ -497,7 +497,7 @@ func _process(_delta):
 			visible = true
 			
 			# Makes debugMenu visible
-			get_node("/root/Main/DebugOverlay/Label").visible = true
+			get_node("/root/World/DebugOverlay/Label").visible = true
 
 signal ammopouchSpawn()
 
@@ -520,7 +520,7 @@ func ammoTimer_timeout():
 	if Input.is_action_just_pressed("load"):
 		load_cache()
 	
-	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/Main/Player").position))
+	getClosestPoint = graph.get_point_position(graph.get_closest_point(get_node("/root/World/Player").position))
 
 
 func save_cache():

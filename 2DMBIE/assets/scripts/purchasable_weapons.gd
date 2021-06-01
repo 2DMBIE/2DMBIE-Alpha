@@ -12,7 +12,7 @@ var priceArray = [1500, 2500, 3000, 3100, 4000]
 
 var canBuy = false
 var enoughMoney = false
-onready var gunscript = get_node("../../Player/body/chest/torso/gun")
+onready var gunscript = get_node("../../Players/"+ session.id + "Player/body/chest/torso/gun")
 signal play_sound(library)
 
 export(int, "MP5", "SPAS12", "M4A1", "AK12", "BARRETT50") var Selected_Weapon = 0 

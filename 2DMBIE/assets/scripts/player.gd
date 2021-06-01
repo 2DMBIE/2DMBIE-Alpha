@@ -390,7 +390,7 @@ func _on_no_aim_shoot(value):
 
 #func _draw():
 #	if tileMap:
-#		if get_node("/root/Main/Pathfinder").showLines:
+#		if get_node("/root/World/Pathfinder").showLines:
 #			var postA = $ShootVector.position
 #			var postB = get_local_mouse_position()
 #			draw_line(postA, postB, Color(255,0,0),1)

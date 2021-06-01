@@ -4309,7 +4309,6 @@ self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 640, -160 )
-Selected_Weapon = 0
 
 [node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 928, -1184 )
@@ -4407,8 +4406,8 @@ bus = "Soundeffects"
 [connection signal="button_down" from="Player/PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
 [connection signal="button_down" from="Player/Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
