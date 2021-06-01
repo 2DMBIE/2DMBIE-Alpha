@@ -78,7 +78,10 @@ remote func register_player(new_player_name):
 func unregister_player(id):
 	players.erase(id)
 	if has_node("/root/Main"):
-		get_node("Players/" + id).queue_free()
+#		print("Player ID: " + str(id))
+#		for x in get_node("/root/Main/Players").get_children():
+#			print(x)
+		get_node("/root/Main/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
 
 
