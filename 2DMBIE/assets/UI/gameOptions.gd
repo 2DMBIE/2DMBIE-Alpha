@@ -1,9 +1,11 @@
-extends VBoxContainer
+extends HBoxContainer
 
 func _ready():
-	if Global.aim:
-		$always_aim.pressed = true
-	if Global.camera:
-		$stable_camera.pressed = true
-	if Global.brightness:
-		$brighter_screen.pressed = true
+	if Settings.aim:
+		$VBox/HBoxContainer/VBoxContainer/always_aim.pressed = true
+	if Settings.camera:
+		$VBox/HBoxContainer/VBoxContainer/stable_camera.pressed = true
+	if Settings.brightness:
+		$VBox/HBoxContainer/VBoxContainer/brighter_screen.pressed = true
+	if Settings.debugMode:
+		$VBoxSide2/HBoxContainer/CheckButton.pressed = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://assets/sprites/redBorder(hor).png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/redBorder(Ver).png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/redborders.gd" type="Script" id=13]
+[ext_resource path="res://assets/UI/Perks/Speed.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/Perks/Reload.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI/Perks/FireRate.png" type="Texture" id=16]
+[ext_resource path="res://assets/UI/Perks/Health.png" type="Texture" id=17]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -313,5 +317,57 @@ self_modulate = Color( 1, 1, 1, 0.313726 )
 position = Vector2( 24, 408 )
 scale = Vector2( 1, 1.19648 )
 texture = ExtResource( 12 )
+
+[node name="Perks" type="HBoxContainer" parent="Interface"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 180.0
+margin_top = -40.0
+margin_right = 480.0
+custom_constants/separation = 70
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 90.0
+margin_right = 90.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/MovementPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 14 )
+
+[node name="FireRatePerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 160.0
+margin_right = 160.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/FireRatePerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 16 )
+
+[node name="ReloadPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 230.0
+margin_right = 230.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/ReloadPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 15 )
+
+[node name="HealthPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 300.0
+margin_right = 300.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/HealthPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 17 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]

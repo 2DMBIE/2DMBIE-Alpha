@@ -4,12 +4,14 @@ var currentPath
 var currentTarget
 var pathFinder
 
-var speed = 75
+var speed = Global.Speed
 var jumpForce = 400
 var gravity = 600
 var padding = 2
 var finishPadding = 6 # 6 or 8 for better padding when state machine
 const dropthroughBit = 5
+var headshot = false
+var shapeHeadless = CapsuleShape2D.new()
 
 var movement
 var zombiestep = false
@@ -25,6 +27,7 @@ signal health_updated(health)
 var maxHealth = Global.maxHealth
 var enemyDamage = Global.EnemyDamage
 
+
 func _ready():
 	$AnimationTree.active = true
 	$AnimationTree.set("parameters/walk/current", randi()%10)
@@ -33,6 +36,7 @@ func _ready():
 	growl_timer.connect("timeout", self, "growl")
 	growl_timer.autostart = true
 	add_child(growl_timer)
+	$body/torso/neck/bloodParticles.visible = false
 	
 	pathFinder = find_parent("Main").find_node("Pathfinder")
 	movement = Vector2(0, 0)
@@ -42,6 +46,9 @@ func _ready():
 	timer.connect("timeout", self, "repeat_me")
 	add_child(timer)
 	timer.start()
+	
+	shapeHeadless.radius = 24
+	shapeHeadless.height = 50
 
 func nextPoint():
 	if len(currentPath) == 0:
@@ -66,7 +73,6 @@ func jump():
 func _process(delta):
 #	if Input.is_action_just_pressed("aim"):
 #		repeat_me()
-	
 	if currentTarget:
 		if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
 			if zombiestep:
@@ -152,24 +158,48 @@ func show_damage_animation(_health_percentage):
 func _reset_module():
 	modulate = Color("ffffff")
 
+var bullet_damage = 0
+
 func Hurt(damage):
-	_set_health(health - damage)
-	var percentage = health/maxHealth*100
-	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
+	bullet_damage = damage
+	if headshot == false:
+		_set_health(health - damage)
+		var percentage = health/maxHealth*100
+		show_damage_animation(percentage)
+		emit_signal("play_sound", "hurt")
+	else:
+		_set_health(health - (damage * 2))
+		var percentage = health/maxHealth*100
+		show_damage_animation(percentage)
+		emit_signal("play_sound", "hurt")
+		Global.Score += 10
+		headshot = false
 
 func kill():
-	Global.Score += Global.ScoreIncrement
-	queue_free()
+		Global.Score += Global.ScoreIncrement
+		queue_free()
 
 func _set_health(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
-		if health == 0:
-			Global.enemiesKilled += 1
-			kill()
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
+
+signal headroll(bulletPosition)
+
+
+func _on_HeadshotArea_area_entered(area):
+	if area.is_in_group("bullets"):
+		headshot = true
+		randomize()
+		var rand = (randf())
+		if rand <= .05:
+			$body/torso/neck/bloodParticles.visible = true
+			if $body/torso/neck/head.visible == true:
+				$body/torso/neck/head.visible = false
+				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
+				$CollisionShape2D.position.y = 41
+				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity)
