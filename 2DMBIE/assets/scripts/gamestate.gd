@@ -129,7 +129,9 @@ remote func pre_start_lobby(spawn_points):
 
 		if p_id == get_tree().get_network_unique_id():
 			# If node for this peer id, set name.
+			print(player_name + " hi from here")
 			player.set_player_name(player_name)
+			
 		else:
 			# Otherwise set name from peer.
 			player.set_player_name(players[p_id])
