@@ -21,6 +21,9 @@ func _on_Timer_timeout():
 					enemy.queue_free()
 			else: 
 				specialWave = true
+				Global.EnemyDamage += 50
+				Global.maxHealth += 300
+				Global.Speed += 25
 				var specialenemy := specialEnemy.instance()
 				specialenemy.position = $spawnpoint.get_global_position()
 				get_tree().current_scene.add_child(specialenemy)
@@ -36,6 +39,9 @@ func _on_Timer_timeout():
 	
 			if specialWave == true:
 				Global.setSpecialWaveNumber()
+				Global.EnemyDamage -= 50
+				Global.maxHealth -= 300
+				Global.Speed -= 25
 				specialWave = false
 		
 		emit_signal("zombieSpawned")
