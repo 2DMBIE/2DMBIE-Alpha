@@ -45,5 +45,4 @@ func _on_bullet_body_exited(body):
 		if enemy_penetration >= bullet_penetration:
 			queue_free()
 		if body.health == 0:
-			Global.enemiesKilled += 1
 			body.kill()

@@ -178,6 +178,7 @@ func Hurt(damage):
 
 func kill():
 		Global.Score += Global.ScoreIncrement
+		Global.enemiesKilled += 1
 		queue_free()
 
 func _set_health(value):
