@@ -73,7 +73,6 @@ func _connected_fail():
 
 remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
-	print(id)
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
 
@@ -136,7 +135,6 @@ remote func pre_start_lobby(spawn_points):
 
 	var player_scene = load("res://assets/scenes/player.tscn")
 	
-	print(spawn_points)
 	
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
