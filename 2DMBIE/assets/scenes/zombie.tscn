@@ -143,7 +143,7 @@ nodes/walk8/node = SubResource( 13 )
 nodes/walk8/position = Vector2( -580, 480 )
 nodes/walk9/node = SubResource( 14 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
+node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
 
 [sub_resource type="RectangleShape2D" id=16]
 
@@ -161,7 +161,7 @@ collision_mask = 42
 script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 9 )
+position = Vector2( 0, 16 )
 shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]
@@ -308,7 +308,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/bottom"]
 position = Vector2( 4.20723, 1.0215 )
-rotation = -0.276312
+rotation = -0.122086
 z_index = -6
 texture = ExtResource( 5 )
 offset = Vector2( 4.80299, 13.912 )
@@ -319,7 +319,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/bottom/thigh_left"]
 position = Vector2( 2.779, 30.1395 )
-rotation = 0.431793
+rotation = -0.119894
 z_index = -2
 texture = ExtResource( 14 )
 offset = Vector2( 2.52262, 9.24992 )
@@ -329,7 +329,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/bottom/thigh_left/lowerleg_left"]
 position = Vector2( 1.8254, 22.3106 )
-rotation = -0.180071
+rotation = -0.0342416
 z_index = 1
 texture = ExtResource( 4 )
 offset = Vector2( 7.17607, 2.32299 )
@@ -448,7 +448,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
-position = Vector2( 0, 76 )
+position = Vector2( 0, 80 )
 scale = Vector2( 3, 1 )
 z_as_relative = false
 shape = SubResource( 16 )
@@ -458,7 +458,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2( 0, -40 )
+position = Vector2( 8, -40 )
 shape = SubResource( 17 )
 
 [node name="Control" type="Control" parent="."]
