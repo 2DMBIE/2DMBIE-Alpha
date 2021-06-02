@@ -1,5 +1,6 @@
 extends Button
 
+export (int, "Continue", "Options", "ExitGame") var buttonType = 0
 
 func _on_PauseButton_mouse_entered():
 	$Label.add_color_override("font_color", Color(1,1,1,1))

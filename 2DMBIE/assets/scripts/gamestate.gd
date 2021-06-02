@@ -226,7 +226,7 @@ func start_lobby():
 	pre_start_lobby(spawn_points)
 	
 func load_lobby():
-	var world = load("res://assets/scenes/Lobby.tscn").instance()
+	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("LobbyUI").hide()

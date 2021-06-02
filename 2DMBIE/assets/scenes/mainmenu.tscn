@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/scenes/lights/light_tl_buis_broken.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=2]
@@ -10,7 +10,11 @@
 [ext_resource path="res://assets/UI/Buttons/PlayButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/scripts/title_screen.gd" type="Script" id=9]
 [ext_resource path="res://assets/sprites/BloodSplat.png" type="Texture" id=10]
+[ext_resource path="res://assets/UI/Buttons/SinglePlayer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/sounds/menu_music.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/UI/Buttons/Multiplayer.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/UI/Buttons/BackButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -389,6 +393,14 @@
 20/shapes = [  ]
 20/z_index = 0
 
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 15 )
+
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 9 )
 
@@ -407,7 +419,6 @@ position = Vector2( 51.4939, -22.2915 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 152 )
-current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Logo" type="Sprite" parent="."]
@@ -431,32 +442,94 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" parent="Buttons" instance=ExtResource( 8 )]
+[node name="Main" type="VBoxContainer" parent="Buttons"]
+margin_right = 210.0
+margin_bottom = 140.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" parent="Buttons/Main" instance=ExtResource( 8 )]
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
-anchor_right = 0.3
-margin_top = 55.0
-margin_right = 146.4
-margin_bottom = 101.0
+[node name="OptionsButton" parent="Buttons/Main" instance=ExtResource( 5 )]
+margin_top = 65.0
+margin_right = 210.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 45 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
-scene_to_load = "res://assets/UI/OptionsMenu.tscn"
 
-[node name="ExitButton" parent="." instance=ExtResource( 6 )]
-anchor_left = 0.285
-anchor_right = 0.285
-margin_left = 343.941
-margin_top = 185.05
-margin_right = 493.941
-margin_bottom = 231.05
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/Main"]
+margin_top = 130.0
+margin_right = 210.0
+margin_bottom = 175.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" parent="Buttons/Main/HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 31.0
+margin_top = 0.0
+margin_right = 179.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 148, 45 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
-scene_to_load = "res://assets/scenes/level3.tscn"
+
+[node name="Play" type="VBoxContainer" parent="Buttons"]
+visible = false
+margin_right = 210.0
+margin_bottom = 140.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SinglePlayer" parent="Buttons/Play" instance=ExtResource( 11 )]
+margin_right = 210.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
+mouse_default_cursor_shape = 2
+
+[node name="Label" parent="Buttons/Play/SinglePlayer" index="1"]
+custom_fonts/font = SubResource( 2 )
+valign = 1
+
+[node name="Multiplayer" parent="Buttons/Play" instance=ExtResource( 13 )]
+margin_top = 65.0
+margin_right = 210.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 45 )
+mouse_default_cursor_shape = 2
+
+[node name="Label" parent="Buttons/Play/Multiplayer" index="1"]
+custom_fonts/font = SubResource( 3 )
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/Play"]
+margin_top = 130.0
+margin_right = 210.0
+margin_bottom = 175.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" parent="Buttons/Play/HBoxContainer" instance=ExtResource( 14 )]
+margin_left = 31.0
+margin_right = 179.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 148, 45 )
+mouse_default_cursor_shape = 2
 
 [node name="BloodSplat" type="Sprite" parent="."]
-position = Vector2( 174.897, 151.329 )
+position = Vector2( 196.254, 219.406 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -3
 texture = ExtResource( 10 )
@@ -466,4 +539,13 @@ stream = ExtResource( 12 )
 volume_db = -3.0
 autoplay = true
 bus = "Music"
-[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+
+[connection signal="button_down" from="Buttons/Main/PlayButton" to="." method="_on_PlayButton_button_down"]
+[connection signal="button_down" from="Buttons/Main/OptionsButton" to="." method="_on_OptionsButton_button_down"]
+[connection signal="pressed" from="Buttons/Main/HBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="button_down" from="Buttons/Play/SinglePlayer" to="." method="_on_SinglePlayer_button_down"]
+[connection signal="button_down" from="Buttons/Play/Multiplayer" to="." method="_on_Multiplayer_button_down"]
+[connection signal="button_down" from="Buttons/Play/HBoxContainer/BackButton" to="." method="_on_BackButton_button_down"]
+
+[editable path="Buttons/Play/SinglePlayer"]
+[editable path="Buttons/Play/Multiplayer"]
