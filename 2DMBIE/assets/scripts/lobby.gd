@@ -100,7 +100,7 @@ func _on_start_pressed():
 	gamestate.start_lobby()
 	#gamestate.begin_game()
 	# Spawn the world. And then the join events.
-	# Print when connection is success!
+	# Print when connection is success! Done
 
 # Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
 # ID will be: 1 and name: APPLE
