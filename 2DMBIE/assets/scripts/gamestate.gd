@@ -190,7 +190,7 @@ func host_game(new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
-	start_lobby()
+	#start_lobby()
 
 
 func join_game(ip, new_player_name):
@@ -199,7 +199,6 @@ func join_game(ip, new_player_name):
 	peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
 	#load_lobby()
-	print(get_player_list())
 
 func get_player_list():
 	return players.values()
@@ -226,7 +225,7 @@ func start_lobby():
 
 	pre_start_lobby(spawn_points)
 	
-remote func load_lobby():
+func load_lobby():
 	var world = load("res://assets/scenes/Lobby.tscn").instance()
 	get_tree().get_root().add_child(world)
 
@@ -234,7 +233,8 @@ remote func load_lobby():
 
 	var player_scene = load("res://assets/scenes/player.tscn")
 	# get other players location?
-
+	print(get_player_list())
+	return
 	var spawn_points = {1:0}
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
