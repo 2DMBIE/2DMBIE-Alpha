@@ -1,20 +1,8 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
-[ext_resource path="res://assets/sprites/zombie/torso.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/zombie/bottom.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/zombie/thigh_right.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/zombie/foot_left.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/zombie/thigh_left.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/zombie/lowerarm_left.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/zombie/foot_right.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/zombie/hand_right.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/zombie/lowerarm_right.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/zombie/hand_left.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/zombie/upperarm_right.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/zombie/upperarm_left.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/zombie/head_sheet.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/zombie/lowerleg_left.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/zombie/lowerleg_right.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/healthbar/overlayer.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/healthbar/underlayer.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=3]
 [ext_resource path="res://assets/scripts/zombie.gd" type="Script" id=16]
 [ext_resource path="res://assets/scenes/cpu_instances/bloodParticles.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/animations/zombie-jump.tres" type="Animation" id=19]
@@ -48,17 +36,77 @@
 radius = 24.0
 height = 95.0
 
-[sub_resource type="AnimationNodeAnimation" id=2]
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/sk_torso.png-565cc1157fba0ab047ea3294723a1bdb.stex"
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/head_sheet.png-f22fb3a61fbe735ad03c95a43133c4ba.stex"
+
+[sub_resource type="StreamTexture" id=4]
+flags = 4
+load_path = "res://.import/sk_upper_arm_right.png-44edbe4e233c787f54c0af8a3ff2590e.stex"
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/sk_bottom_arm_right.png-13a0ac8078b87d6731c29e4a5196d338.stex"
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+load_path = "res://.import/sk_hand_right.png-60c7c35ff626bc5630ac2428bdc6d287.stex"
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/sk_upper_arm_left.png-76cbe253340801370dfcefc215a62ffc.stex"
+
+[sub_resource type="StreamTexture" id=8]
+flags = 4
+load_path = "res://.import/sk_bottom_arm_left.png-f4051d20e69011f2d1a62e90716c4430.stex"
+
+[sub_resource type="StreamTexture" id=9]
+flags = 4
+load_path = "res://.import/sk_hand_left.png-b6bd01955d168dedbcfab1db22f72ff9.stex"
+
+[sub_resource type="StreamTexture" id=10]
+flags = 4
+load_path = "res://.import/sk_ass.png-acf2bc6193aa1ebdfe3850a9730c6755.stex"
+
+[sub_resource type="StreamTexture" id=11]
+flags = 4
+load_path = "res://.import/sk_upper_leg_right.png-504a2c6b0bb8e1e006befb366340fc21.stex"
+
+[sub_resource type="StreamTexture" id=12]
+flags = 4
+load_path = "res://.import/sk_bottom_leg_right.png-c9c95c6786945458795ffa28035758d9.stex"
+
+[sub_resource type="StreamTexture" id=13]
+flags = 4
+load_path = "res://.import/sk_foot_right.png-5939e4e08f6373275ddc9f8797a7aed6.stex"
+
+[sub_resource type="StreamTexture" id=14]
+flags = 4
+load_path = "res://.import/sk_upper_leg_left.png-601ad723307812f716260c7741751227.stex"
+
+[sub_resource type="StreamTexture" id=15]
+flags = 4
+load_path = "res://.import/sk_bottom_leg_left.png-57eba1b84a4307c7e3655cbec1fbb4cb.stex"
+
+[sub_resource type="StreamTexture" id=16]
+flags = 4
+load_path = "res://.import/sk_foot_left.png-fc2a8c8afd666c83ae7c18e71ddf11c8.stex"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "jump"
 
-[sub_resource type="AnimationNodeTransition" id=3]
+[sub_resource type="AnimationNodeTransition" id=18]
 input_count = 2
 input_0/name = "true"
 input_0/auto_advance = false
 input_1/name = "false"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=4]
+[sub_resource type="AnimationNodeTransition" id=19]
 input_count = 10
 input_0/name = "walk1"
 input_0/auto_advance = false
@@ -81,70 +129,70 @@ input_8/auto_advance = false
 input_9/name = "walk10"
 input_9/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "walk1"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "walk10"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "walk2"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "walk3"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "walk4"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "walk5"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "walk6"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "walk7"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "walk8"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "walk9"
 
-[sub_resource type="AnimationNodeBlendTree" id=15]
+[sub_resource type="AnimationNodeBlendTree" id=30]
 graph_offset = Vector2( -1052, 33 )
-"nodes/Animation 2/node" = SubResource( 2 )
+"nodes/Animation 2/node" = SubResource( 17 )
 "nodes/Animation 2/position" = Vector2( -360, 180 )
-nodes/in_air/node = SubResource( 3 )
+nodes/in_air/node = SubResource( 18 )
 nodes/in_air/position = Vector2( -140, 220 )
 nodes/output/position = Vector2( 280, 220 )
-nodes/walk/node = SubResource( 4 )
+nodes/walk/node = SubResource( 19 )
 nodes/walk/position = Vector2( -340, 340 )
-nodes/walk1/node = SubResource( 5 )
+nodes/walk1/node = SubResource( 20 )
 nodes/walk1/position = Vector2( -720, 280 )
-nodes/walk10/node = SubResource( 6 )
+nodes/walk10/node = SubResource( 21 )
 nodes/walk10/position = Vector2( -580, 680 )
-nodes/walk2/node = SubResource( 7 )
+nodes/walk2/node = SubResource( 22 )
 nodes/walk2/position = Vector2( -720, 380 )
-nodes/walk3/node = SubResource( 8 )
+nodes/walk3/node = SubResource( 23 )
 nodes/walk3/position = Vector2( -720, 480 )
-nodes/walk4/node = SubResource( 9 )
+nodes/walk4/node = SubResource( 24 )
 nodes/walk4/position = Vector2( -720, 580 )
-nodes/walk5/node = SubResource( 10 )
+nodes/walk5/node = SubResource( 25 )
 nodes/walk5/position = Vector2( -720, 680 )
-nodes/walk6/node = SubResource( 11 )
+nodes/walk6/node = SubResource( 26 )
 nodes/walk6/position = Vector2( -580, 280 )
-nodes/walk7/node = SubResource( 12 )
+nodes/walk7/node = SubResource( 27 )
 nodes/walk7/position = Vector2( -580, 380 )
-nodes/walk8/node = SubResource( 13 )
+nodes/walk8/node = SubResource( 28 )
 nodes/walk8/position = Vector2( -580, 480 )
-nodes/walk9/node = SubResource( 14 )
+nodes/walk9/node = SubResource( 29 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
+node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=31]
 
-[sub_resource type="CircleShape2D" id=17]
+[sub_resource type="CircleShape2D" id=32]
 radius = 32.0
 
 [node name="Zombie" type="KinematicBody2D" groups=[
@@ -166,8 +214,8 @@ shape = SubResource( 1 )
 position = Vector2( 0, 9.183 )
 
 [node name="torso" type="Sprite" parent="body"]
-position = Vector2( -0.376, 21.439 )
-texture = ExtResource( 1 )
+position = Vector2( 0, 14.817 )
+texture = SubResource( 2 )
 offset = Vector2( 0.111326, -30.5612 )
 __meta__ = {
 "_edit_bone_": true
@@ -175,7 +223,7 @@ __meta__ = {
 
 [node name="neck" type="Position2D" parent="body/torso"]
 position = Vector2( -2.9952, -50.1697 )
-rotation = 12.592
+rotation = 12.8834
 __meta__ = {
 "_edit_bone_": true,
 "_edit_ik_": true
@@ -183,9 +231,9 @@ __meta__ = {
 
 [node name="head" type="Sprite" parent="body/torso/neck"]
 position = Vector2( 0.840622, -16.5168 )
-rotation = 0.458847
+rotation = 0.208141
 z_index = 6
-texture = ExtResource( 13 )
+texture = SubResource( 3 )
 hframes = 6
 __meta__ = {
 "_edit_bone_": true,
@@ -197,9 +245,9 @@ position = Vector2( 3.46101, 3.46015 )
 
 [node name="upperarm_right" type="Sprite" parent="body/torso"]
 position = Vector2( -11.4567, -37.1691 )
-rotation = -12.3054
+rotation = -12.3203
 z_index = 5
-texture = ExtResource( 11 )
+texture = SubResource( 4 )
 offset = Vector2( -4.19849, 8.0066 )
 __meta__ = {
 "_edit_bone_": true,
@@ -208,9 +256,9 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/torso/upperarm_right"]
 position = Vector2( -9.94557, 20.6394 )
-rotation = -0.0339336
+rotation = -0.0325441
 z_index = 1
-texture = ExtResource( 9 )
+texture = SubResource( 5 )
 offset = Vector2( -0.891537, 11.3118 )
 __meta__ = {
 "_edit_bone_": true
@@ -220,7 +268,7 @@ __meta__ = {
 position = Vector2( -0.994637, 21.3581 )
 rotation = -0.423017
 z_index = 1
-texture = ExtResource( 8 )
+texture = SubResource( 6 )
 offset = Vector2( -2.48174, 6.77893 )
 __meta__ = {
 "_edit_bone_": true
@@ -230,7 +278,7 @@ __meta__ = {
 position = Vector2( 16.8239, -36.2326 )
 rotation = -0.0136939
 z_index = -1
-texture = ExtResource( 12 )
+texture = SubResource( 7 )
 offset = Vector2( 5.52325, 11.3117 )
 __meta__ = {
 "_edit_bone_": true,
@@ -241,7 +289,7 @@ __meta__ = {
 position = Vector2( 11.7144, 20.0409 )
 rotation = 0.153028
 z_index = -3
-texture = ExtResource( 6 )
+texture = SubResource( 8 )
 offset = Vector2( 0.764465, 13.8002 )
 __meta__ = {
 "_edit_bone_": true
@@ -250,7 +298,7 @@ __meta__ = {
 [node name="hand_left" type="Sprite" parent="body/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 1.30943, 23.1128 )
 rotation = -6.53778
-texture = ExtResource( 10 )
+texture = SubResource( 9 )
 offset = Vector2( 0.209938, 8.42856 )
 __meta__ = {
 "_edit_bone_": true
@@ -259,7 +307,7 @@ __meta__ = {
 [node name="bottom" type="Sprite" parent="body"]
 position = Vector2( -0.233067, 18.4983 )
 z_index = -1
-texture = ExtResource( 2 )
+texture = SubResource( 10 )
 offset = Vector2( -0.537167, -0.127419 )
 __meta__ = {
 "_edit_bone_": true
@@ -268,7 +316,7 @@ __meta__ = {
 [node name="thigh_right" type="Sprite" parent="body/bottom"]
 position = Vector2( -7.36461, 1.56818 )
 z_index = 1
-texture = ExtResource( 3 )
+texture = SubResource( 11 )
 offset = Vector2( -2.14771, 15.2502 )
 __meta__ = {
 "_edit_bone_": true,
@@ -278,7 +326,7 @@ __meta__ = {
 [node name="lowerleg_right" type="Sprite" parent="body/bottom/thigh_right"]
 position = Vector2( -2.54703, 29.6623 )
 z_index = -2
-texture = ExtResource( 15 )
+texture = SubResource( 12 )
 offset = Vector2( -0.103652, 9.07905 )
 __meta__ = {
 "_edit_bone_": true
@@ -287,7 +335,7 @@ __meta__ = {
 [node name="foot_right" type="Sprite" parent="body/bottom/thigh_right/lowerleg_right"]
 position = Vector2( -1.76029, 22.7582 )
 z_index = 2
-texture = ExtResource( 7 )
+texture = SubResource( 13 )
 offset = Vector2( 6.15741, 1.80693 )
 __meta__ = {
 "_edit_bone_": true
@@ -304,7 +352,7 @@ __meta__ = {
 position = Vector2( 4.20723, 1.0215 )
 rotation = -0.490242
 z_index = -6
-texture = ExtResource( 5 )
+texture = SubResource( 14 )
 offset = Vector2( 4.80299, 13.912 )
 __meta__ = {
 "_edit_bone_": true,
@@ -315,7 +363,7 @@ __meta__ = {
 position = Vector2( 2.779, 30.1395 )
 rotation = 0.578753
 z_index = -2
-texture = ExtResource( 14 )
+texture = SubResource( 15 )
 offset = Vector2( 2.52262, 9.24992 )
 __meta__ = {
 "_edit_bone_": true
@@ -325,7 +373,7 @@ __meta__ = {
 position = Vector2( 1.8254, 22.3106 )
 rotation = 0.117383
 z_index = 1
-texture = ExtResource( 4 )
+texture = SubResource( 16 )
 offset = Vector2( 7.17607, 2.32299 )
 __meta__ = {
 "_edit_bone_": true
@@ -432,7 +480,7 @@ anims/walk8 = ExtResource( 46 )
 anims/walk9 = ExtResource( 44 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 15 )
+tree_root = SubResource( 30 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/in_air/current = 1
 parameters/walk/current = 6
@@ -445,15 +493,37 @@ collision_mask = 32
 position = Vector2( 0, 76 )
 scale = Vector2( 3, 1 )
 z_as_relative = false
-shape = SubResource( 16 )
+shape = SubResource( 31 )
 
 [node name="HeadshotArea" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2( 0, -40 )
-shape = SubResource( 17 )
+position = Vector2( 0, -48 )
+shape = SubResource( 32 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="Control"]
+margin_left = -24.0
+margin_top = -88.0
+margin_right = 104.0
+margin_bottom = -64.0
+rect_scale = Vector2( 0.4, 0.2 )
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 3 )
+tint_progress = Color( 0.592157, 0.968627, 0.0431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="play_sound" from="." to="sfx" method="play_sound"]
 [connection signal="body_exited" from="GroundChecker" to="." method="_on_GroundChecker_body_exited"]
