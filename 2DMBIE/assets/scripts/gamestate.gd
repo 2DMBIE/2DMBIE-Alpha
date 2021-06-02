@@ -21,6 +21,8 @@ var players_ready = []
 
 var player_id = 1
 # Signals to let lobby GUI know what's going on.
+signal on_player_join(id, name)
+signal on_player_leave(id, name)
 signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
@@ -74,12 +76,15 @@ remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
+	emit_signal("on_player_join", id, name)
 
 func unregister_player(id):
+	var _name = players[id]
 	players.erase(id)
 	if has_node("/root/Lobby"):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
+	emit_signal("on_player_leave", id, name)
 	if has_node("/root/World"): ## game started
 		pass
 	elif has_node("/root/Lobby"):
@@ -282,7 +287,6 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 
-		
 func _ready():
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_player_connected")
