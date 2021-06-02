@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/scripts/normalBullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/bulletNormal.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/bullet.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]

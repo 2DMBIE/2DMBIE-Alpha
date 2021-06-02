@@ -36,7 +36,8 @@ func _ready():
 	growl_timer.connect("timeout", self, "growl")
 	growl_timer.autostart = true
 	add_child(growl_timer)
-	$body/torso/neck/bloodParticles.visible = false
+	if str($body/torso/neck/head.texture) == "res://assets/sprites/zombie/head_sheet.png":
+		$body/torso/neck/bloodParticles.visible = false
 	
 	pathFinder = find_parent("Main").find_node("Pathfinder")
 	movement = Vector2(0, 0)
@@ -190,7 +191,7 @@ func _set_health(value):
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
 
-signal headroll(bulletPosition)
+signal headroll(bulletPosition, zombie)
 
 
 func _on_HeadshotArea_area_entered(area):
@@ -198,13 +199,14 @@ func _on_HeadshotArea_area_entered(area):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= .05:
-			$body/torso/neck/bloodParticles.visible = true
+		if rand <= .5:
+			if str($body/torso/neck/head.texture) == "res://assets/sprites/zombie/head_sheet.png":
+				$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
 				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
 				$CollisionShape2D.position.y = 41
-				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity)
+				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity, self)
 
 func checkhealth():
 	$Control/TextureProgress.max_value = Global.maxHealth

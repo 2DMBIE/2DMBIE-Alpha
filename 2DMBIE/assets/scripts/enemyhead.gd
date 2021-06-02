@@ -1,8 +1,12 @@
 extends RigidBody2D
 
+signal spawnHead()
+
 var timer = Timer.new()
 
 func _ready():
+	emit_signal("spawnHead")
+	
 	if Global.maia:
 		timer.set_wait_time(10)
 	else:
@@ -16,6 +20,9 @@ func _ready():
 func _physics_process(_delta):
 	if $Sprite.modulate.a == 0:
 		queue_free()
+	
+	
+	emit_signal("spawnHead")
 
 func _on_timer_timeout():
 	timer.set_wait_time(.1)
@@ -24,3 +31,4 @@ func _on_timer_timeout():
 	
 	if $Sprite.modulate.a <= 0:
 		queue_free()
+	
