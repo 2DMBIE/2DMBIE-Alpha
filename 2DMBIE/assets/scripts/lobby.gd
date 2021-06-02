@@ -88,9 +88,8 @@ func _on_game_error(errtxt):
 func refresh_lobby():
 	var players = gamestate.get_player_list()
 	print("printing players: ")
-	
 	print(gamestate.players)
-	
+	print("----------")
 	players.sort()
 	$Players/List.clear()
 	$Players/List.add_item(gamestate.get_player_name() + " (You)")
@@ -110,10 +109,10 @@ func _on_player_join_event(id, name):
 	print(id)
 	if is_it_me:
 		print("I'm the one who joined!")
-	print(name + " joined (ID: " + str(id) + ")")
+	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):
-	print(name + " joined (ID: " + str(id) + ")")
+	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_find_public_ip_pressed():
 # warning-ignore:return_value_discarded
