@@ -83,7 +83,7 @@ func unregister_player(id):
 	if has_node("/root/Lobby"):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
-	emit_signal("on_player_leave", id, name)
+	emit_signal("on_player_leave", id, _name)
 	players.erase(id)
 	if has_node("/root/World"): ## game started
 		pass
