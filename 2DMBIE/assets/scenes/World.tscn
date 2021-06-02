@@ -3941,7 +3941,7 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 [sub_resource type="RectangleShape2D" id=20]
 extents = Vector2( 896, 384 )
 
-[node name="Main" type="Node2D"]
+[node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
 
@@ -4403,11 +4403,10 @@ bus = "Soundeffects"
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="button_down" from="Player/PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="Player/PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
-[connection signal="button_down" from="Player/PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
 [connection signal="button_down" from="Player/Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
@@ -4419,6 +4418,6 @@ bus = "Soundeffects"
 [editable path="Player/PauseMenu"]
 [editable path="Player/PauseMenu/Container/Continue"]
 [editable path="Player/PauseMenu/Container/Options"]
-[editable path="Player/PauseMenu/Container/ExitMenu"]
+[editable path="Player/PauseMenu/Container/ExitGame"]
 [editable path="Player/Optionsmenu"]
 [editable path="CanvasLayer"]

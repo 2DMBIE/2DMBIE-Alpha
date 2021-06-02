@@ -99,7 +99,7 @@ func _on_start_pressed():
 
 func _on_find_public_ip_pressed():
 # warning-ignore:return_value_discarded
-	OS.shell_open("https://icanhazip.com/")
+	OS.shell_open("https://www.whatismyip.com/")
 
 
 func _on_cancel_pressed():

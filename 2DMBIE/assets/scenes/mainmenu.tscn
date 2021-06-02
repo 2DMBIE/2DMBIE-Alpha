@@ -410,7 +410,6 @@ position = Vector2( 51.4939, -22.2915 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 152 )
-current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Logo" type="Sprite" parent="."]
@@ -447,6 +446,7 @@ margin_bottom = 45.0
 rect_min_size = Vector2( 0, 45 )
 focus_mode = 0
 mouse_default_cursor_shape = 2
+scene_to_load = "res://assets/scenes/World.tscn"
 
 [node name="OptionsButton" parent="Buttons/Main" instance=ExtResource( 5 )]
 margin_top = 65.0

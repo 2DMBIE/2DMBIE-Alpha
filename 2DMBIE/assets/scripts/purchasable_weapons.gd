@@ -66,6 +66,7 @@ func _ready():
 	$WeaponLabelName.text = nameArray[Selected_Weapon]
 	$WeaponLabelPrice.text = str(priceArray[Selected_Weapon])
 	
+# warning-ignore:return_value_discarded
 	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
 func _on_playersLoaded():

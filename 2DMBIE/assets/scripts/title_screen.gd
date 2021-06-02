@@ -1,8 +1,12 @@
 extends Node2D
 
 
-func _ready():
-	pass
+func _ready():	
+	if has_node("/root/Lobby"): # Game is in progress.
+		gamestate._connected_fail()
+		get_node("/root/Lobby").queue_free()
+	
+	$Camera2D.current = true
 
 
 func _on_ExitButton_pressed():
