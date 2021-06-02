@@ -64,7 +64,6 @@ func _server_disconnected():
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail():
-	print("Server disconnected 2")
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
 
@@ -126,7 +125,7 @@ remote func pre_start_game(spawn_points):
 	elif players.size() == 0:
 		post_start_game()
 
-remote func pre_start_lobby(spawn_points):
+remote func pre_start_lobby(spawn_points): 
 	# Change scene.
 	var world = load("res://assets/scenes/Lobby.tscn").instance()
 	get_tree().get_root().add_child(world)
@@ -191,6 +190,7 @@ func host_game(new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
+	#start_lobby()
 
 
 func join_game(ip, new_player_name):
@@ -198,7 +198,7 @@ func join_game(ip, new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
-
+	#load_lobby()
 
 func get_player_list():
 	return players.values()
@@ -212,18 +212,49 @@ func start_lobby():
 
 	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
 	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0.
+	spawn_points[1] = 0 # Server in spawn point 0. {1:0} ID: 1, Spawnpoint 
 	var spawn_point_idx = 1
 	for p in players:
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
 	# Call to pre-start game with the spawn points.
-	
+
+	# its all empty so this loop wont run except for line 227.
 	for p in players:
 		rpc_id(p, "pre_start_lobby", spawn_points)
 
 	pre_start_lobby(spawn_points)
 	
+func load_lobby():
+	var world = load("res://assets/scenes/Lobby.tscn").instance()
+	get_tree().get_root().add_child(world)
+
+	get_tree().get_root().get_node("LobbyUI").hide()
+
+	var player_scene = load("res://assets/scenes/player.tscn")
+	# get other players location?
+	print(get_player_list())
+	return
+	var spawn_points = {1:0}
+	for p_id in spawn_points:
+		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		var player = player_scene.instance()
+
+		player.set_name(str(p_id)) # Use unique ID as node name.
+		player.position=spawn_pos
+		player.set_network_master(p_id) #set unique id as master.
+
+		if p_id == get_tree().get_network_unique_id():
+			# If node for this peer id, set name.
+			player.set_player_name(player_name)
+			
+			player_id = p_id
+			
+		else:
+			# Otherwise set name from peer.
+			player.set_player_name(players[p_id])
+	
+		world.get_node("Players").add_child(player)
 
 func begin_game():
 	assert(get_tree().is_network_server())
