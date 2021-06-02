@@ -367,6 +367,7 @@ func _zombie_dam_timout():
 func _on_Hitbox_body_entered(body):
 	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
 		takenDamage(Global.EnemyDamage)
+		takenDamage(Global.EnemyDamage)
 		takingDamage = true
 
 

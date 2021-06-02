@@ -18,6 +18,7 @@ var maxclipAmmo: int
 var totalAmmo: int
 
 var gun_recoil_sensitivity: float
+var reload_time: float
 #var muzzle_flash:
 #Gunshake Ex. Shotgun: Heavy, m4a1: 
 
@@ -25,7 +26,7 @@ var gun_recoil_sensitivity: float
 func _init(gun_name = "gun", gun_offset = Vector2(0,0), gun_scale = Vector2(1,1), 
 path = "", bpoint = Vector2(0,0), bdelay = float(2), bullet_i = Bullet.new(float(500), float(750), "res://assets/scenes/bullet.tscn"), 
 muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
- c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1), g_maxclipAmmo = int(44), g_totalAmmo = int(300)):
+ c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1), g_maxclipAmmo = int(44), g_totalAmmo = int(300), g_reload_time = float(2.5)):
 	
 	name = gun_name # The name of the gun.
 	offset = gun_offset # The position of the gun.
@@ -45,6 +46,7 @@ muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
 	
 	maxclipAmmo = g_maxclipAmmo # How much bullets are in one magazine.
 	totalAmmo = g_totalAmmo # Total ammo which comes with each gun.
+	reload_time = g_reload_time # How long it takes to reload.
 
 func getBullet():
 	return _bullet.getBullet()

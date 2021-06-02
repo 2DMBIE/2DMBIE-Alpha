@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/awp reload.wav-6cf2240d7d433756588c5fde1ff900f0.sample"
+
+[deps]
+
+source_file="res://assets/sounds/awp/awp reload.wav"
+dest_files=[ "res://.import/awp reload.wav-6cf2240d7d433756588c5fde1ff900f0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
