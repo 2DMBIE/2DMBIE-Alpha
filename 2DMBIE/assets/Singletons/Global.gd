@@ -47,10 +47,11 @@ var rng = RandomNumberGenerator.new()
 
 func setSpecialWaveNumber():
 	if Currentwave >= SpecialWaveNumber:
-		rng.randomize()
-		SpecialWaveNumber = (rng.randi_range(4, 7) + SpecialWaveNumber)
+		SpecialWaveNumber = randomizeSpecialwave() + SpecialWaveNumber
 
 func _ready():
+	randomizeSpecialwave()
+
+func randomizeSpecialwave():
 	rng.randomize()
 	SpecialWaveNumber = rng.randi_range(4, 7)
-	pass

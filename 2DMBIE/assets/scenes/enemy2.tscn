@@ -32,45 +32,59 @@ height = 95.0
 load_path = "res://.import/sk_torso.png-565cc1157fba0ab047ea3294723a1bdb.stex"
 
 [sub_resource type="StreamTexture" id=3]
+flags = 4
 load_path = "res://.import/head_sheet.png-f22fb3a61fbe735ad03c95a43133c4ba.stex"
 
 [sub_resource type="StreamTexture" id=4]
+flags = 4
 load_path = "res://.import/sk_upper_arm_right.png-44edbe4e233c787f54c0af8a3ff2590e.stex"
 
 [sub_resource type="StreamTexture" id=5]
+flags = 4
 load_path = "res://.import/sk_bottom_arm_right.png-13a0ac8078b87d6731c29e4a5196d338.stex"
 
 [sub_resource type="StreamTexture" id=6]
+flags = 4
 load_path = "res://.import/sk_hand_right.png-60c7c35ff626bc5630ac2428bdc6d287.stex"
 
 [sub_resource type="StreamTexture" id=7]
+flags = 4
 load_path = "res://.import/sk_upper_arm_left.png-76cbe253340801370dfcefc215a62ffc.stex"
 
 [sub_resource type="StreamTexture" id=8]
+flags = 4
 load_path = "res://.import/sk_bottom_arm_left.png-f4051d20e69011f2d1a62e90716c4430.stex"
 
 [sub_resource type="StreamTexture" id=9]
+flags = 4
 load_path = "res://.import/sk_hand_left.png-b6bd01955d168dedbcfab1db22f72ff9.stex"
 
 [sub_resource type="StreamTexture" id=10]
+flags = 4
 load_path = "res://.import/sk_ass.png-acf2bc6193aa1ebdfe3850a9730c6755.stex"
 
 [sub_resource type="StreamTexture" id=11]
+flags = 4
 load_path = "res://.import/sk_upper_leg_right.png-504a2c6b0bb8e1e006befb366340fc21.stex"
 
 [sub_resource type="StreamTexture" id=12]
+flags = 4
 load_path = "res://.import/sk_bottom_leg_right.png-c9c95c6786945458795ffa28035758d9.stex"
 
 [sub_resource type="StreamTexture" id=13]
+flags = 4
 load_path = "res://.import/sk_foot_right.png-5939e4e08f6373275ddc9f8797a7aed6.stex"
 
 [sub_resource type="StreamTexture" id=14]
+flags = 4
 load_path = "res://.import/sk_upper_leg_left.png-601ad723307812f716260c7741751227.stex"
 
 [sub_resource type="StreamTexture" id=15]
+flags = 4
 load_path = "res://.import/sk_bottom_leg_left.png-57eba1b84a4307c7e3655cbec1fbb4cb.stex"
 
 [sub_resource type="StreamTexture" id=16]
+flags = 4
 load_path = "res://.import/sk_foot_left.png-fc2a8c8afd666c83ae7c18e71ddf11c8.stex"
 
 [sub_resource type="Animation" id=17]
@@ -533,7 +547,7 @@ tracks/37/keys = {
 "values": [ -14.6396, -13.0513, -6.8489, -43.8165 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=18]
 resource_name = "skelly-walk1"
 length = 1.22
 loop = true
@@ -1042,7 +1056,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=19]
 resource_name = "skelly-walk10"
 length = 1.22
 loop = true
@@ -1551,7 +1565,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=20]
 resource_name = "skelly-walk2"
 length = 1.22
 loop = true
@@ -2060,7 +2074,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=21]
 resource_name = "skelly-walk3"
 length = 1.22
 loop = true
@@ -2569,7 +2583,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=22]
 resource_name = "skelly-walk5"
 length = 1.22
 loop = true
@@ -3078,7 +3092,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=23]
 resource_name = "skelly-walk6"
 length = 1.22
 loop = true
@@ -3587,7 +3601,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=24]
 resource_name = "skelly-walk7"
 length = 1.22
 loop = true
@@ -4096,7 +4110,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=25]
 resource_name = "skelly-walk8"
 length = 1.22
 loop = true
@@ -4605,7 +4619,7 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=26]
 resource_name = "skelly-walk9"
 length = 1.22
 loop = true
@@ -5114,17 +5128,17 @@ tracks/40/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "skelly-jump"
 
-[sub_resource type="AnimationNodeTransition" id=19]
+[sub_resource type="AnimationNodeTransition" id=28]
 input_count = 2
 input_0/name = "true"
 input_0/auto_advance = false
 input_1/name = "false"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=20]
+[sub_resource type="AnimationNodeTransition" id=29]
 input_count = 10
 input_0/name = "walk1"
 input_0/auto_advance = false
@@ -5147,70 +5161,70 @@ input_8/auto_advance = false
 input_9/name = "walk10"
 input_9/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "skelly-walk1"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "skelly-walk10"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "skelly-walk2"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "skelly-walk3"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "skelly-walk4"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "skelly-walk5"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "skelly-walk6"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "skelly-walk7"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "skelly-walk8"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "skelly-walk9"
 
-[sub_resource type="AnimationNodeBlendTree" id=31]
+[sub_resource type="AnimationNodeBlendTree" id=40]
 graph_offset = Vector2( -982, 125.25 )
-"nodes/Animation 2/node" = SubResource( 18 )
+"nodes/Animation 2/node" = SubResource( 27 )
 "nodes/Animation 2/position" = Vector2( -360, 180 )
-nodes/in_air/node = SubResource( 19 )
+nodes/in_air/node = SubResource( 28 )
 nodes/in_air/position = Vector2( -140, 220 )
 nodes/output/position = Vector2( 280, 220 )
-nodes/walk/node = SubResource( 20 )
+nodes/walk/node = SubResource( 29 )
 nodes/walk/position = Vector2( -340, 340 )
-nodes/walk1/node = SubResource( 21 )
+nodes/walk1/node = SubResource( 30 )
 nodes/walk1/position = Vector2( -760, 280 )
-nodes/walk10/node = SubResource( 22 )
+nodes/walk10/node = SubResource( 31 )
 nodes/walk10/position = Vector2( -580, 680 )
-nodes/walk2/node = SubResource( 23 )
+nodes/walk2/node = SubResource( 32 )
 nodes/walk2/position = Vector2( -760, 380 )
-nodes/walk3/node = SubResource( 24 )
+nodes/walk3/node = SubResource( 33 )
 nodes/walk3/position = Vector2( -760, 480 )
-nodes/walk4/node = SubResource( 25 )
+nodes/walk4/node = SubResource( 34 )
 nodes/walk4/position = Vector2( -760, 580 )
-nodes/walk5/node = SubResource( 26 )
+nodes/walk5/node = SubResource( 35 )
 nodes/walk5/position = Vector2( -760, 680 )
-nodes/walk6/node = SubResource( 27 )
+nodes/walk6/node = SubResource( 36 )
 nodes/walk6/position = Vector2( -580, 280 )
-nodes/walk7/node = SubResource( 28 )
+nodes/walk7/node = SubResource( 37 )
 nodes/walk7/position = Vector2( -580, 380 )
-nodes/walk8/node = SubResource( 29 )
+nodes/walk8/node = SubResource( 38 )
 nodes/walk8/position = Vector2( -580, 480 )
-nodes/walk9/node = SubResource( 30 )
+nodes/walk9/node = SubResource( 39 )
 nodes/walk9/position = Vector2( -580, 580 )
 node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "walk1", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10" ]
 
-[sub_resource type="RectangleShape2D" id=32]
+[sub_resource type="RectangleShape2D" id=41]
 
-[sub_resource type="CircleShape2D" id=33]
+[sub_resource type="CircleShape2D" id=42]
 radius = 32.0
 
 [node name="Zombie" type="KinematicBody2D" groups=[
@@ -5224,7 +5238,7 @@ collision_mask = 42
 script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 20 )
+position = Vector2( 0, 16 )
 z_as_relative = false
 shape = SubResource( 1 )
 
@@ -5491,19 +5505,19 @@ bus = "Soundeffects"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/skelly-jump = SubResource( 17 )
-anims/skelly-walk1 = SubResource( 34 )
-anims/skelly-walk10 = SubResource( 35 )
-anims/skelly-walk2 = SubResource( 36 )
-anims/skelly-walk3 = SubResource( 37 )
+anims/skelly-walk1 = SubResource( 18 )
+anims/skelly-walk10 = SubResource( 19 )
+anims/skelly-walk2 = SubResource( 20 )
+anims/skelly-walk3 = SubResource( 21 )
 anims/skelly-walk4 = ExtResource( 40 )
-anims/skelly-walk5 = SubResource( 38 )
-anims/skelly-walk6 = SubResource( 39 )
-anims/skelly-walk7 = SubResource( 40 )
-anims/skelly-walk8 = SubResource( 41 )
-anims/skelly-walk9 = SubResource( 42 )
+anims/skelly-walk5 = SubResource( 22 )
+anims/skelly-walk6 = SubResource( 23 )
+anims/skelly-walk7 = SubResource( 24 )
+anims/skelly-walk8 = SubResource( 25 )
+anims/skelly-walk9 = SubResource( 26 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 31 )
+tree_root = SubResource( 40 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/in_air/current = 1
 parameters/walk/current = 6
@@ -5516,15 +5530,15 @@ collision_mask = 32
 position = Vector2( 0, 76 )
 scale = Vector2( 3, 1 )
 z_as_relative = false
-shape = SubResource( 32 )
+shape = SubResource( 41 )
 
 [node name="HeadshotArea" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2( 0, -48 )
-shape = SubResource( 33 )
+position = Vector2( 0, -64 )
+shape = SubResource( 42 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
