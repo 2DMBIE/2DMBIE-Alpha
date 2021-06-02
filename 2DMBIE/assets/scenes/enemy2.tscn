@@ -36,8 +36,7 @@
 radius = 24.0
 height = 95.0
 
-[sub_resource type="StreamTexture" id=2]
-flags = 4
+[sub_resource type="StreamTexture" id=33]
 load_path = "res://.import/sk_torso.png-565cc1157fba0ab047ea3294723a1bdb.stex"
 
 [sub_resource type="StreamTexture" id=3]
@@ -215,7 +214,7 @@ position = Vector2( 0, 9.183 )
 
 [node name="torso" type="Sprite" parent="body"]
 position = Vector2( 0, 14.817 )
-texture = SubResource( 2 )
+texture = SubResource( 33 )
 offset = Vector2( 0.111326, -30.5612 )
 __meta__ = {
 "_edit_bone_": true

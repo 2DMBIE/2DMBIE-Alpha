@@ -49,7 +49,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
-height = 114.0
+height = 95.0
 
 [sub_resource type="AnimationNodeAnimation" id=2]
 animation = "jump"
@@ -148,9 +148,9 @@ node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air"
 [sub_resource type="RectangleShape2D" id=16]
 
 [sub_resource type="CircleShape2D" id=17]
-radius = 31.1763
+radius = 32.0
 
-[node name="Zombie" type="KinematicBody2D" groups=[
+[node name="Zombie2" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 pause_mode = 1

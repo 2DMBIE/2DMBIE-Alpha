@@ -201,7 +201,9 @@ func _on_HeadshotArea_area_entered(area):
 			$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
-#				emit_signal("headroll")
+				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
+				$CollisionShape2D.position.y = 41
+				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity)
 
 func checkhealth():
 	$Control/TextureProgress.max_value = Global.maxHealth
@@ -217,6 +219,4 @@ func checkhealth():
 		$Control/TextureProgress.set_tint_progress("e1be32")
 	else:
 		$Control/TextureProgress.set_tint_progress("e11e1e")
-				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
-				$CollisionShape2D.position.y = 41
-				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity)
+	
