@@ -658,7 +658,7 @@ node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air"
 [sub_resource type="CircleShape2D" id=18]
 radius = 32.0
 
-[node name="Zombie2" type="KinematicBody2D" groups=[
+[node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 pause_mode = 1
