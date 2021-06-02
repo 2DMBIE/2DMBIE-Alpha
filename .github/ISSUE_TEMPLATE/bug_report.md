@@ -23,7 +23,7 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Game version:**=
+**Game version:**
  - Version [e.g. 2DMBIE 6.0]
 
 **Additional context**
