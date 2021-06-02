@@ -62,7 +62,7 @@ func _on_join_pressed():
 func _on_connection_success():
 	$Connect.hide()
 	$Players.show()
-
+	gamestate.load_lobby()
 
 func _on_connection_failed():
 	$Connect/Host.disabled = false
@@ -87,9 +87,6 @@ func _on_game_error(errtxt):
 
 func refresh_lobby():
 	var players = gamestate.get_player_list()
-	print("printing players: ")
-	print(gamestate.players)
-	print("----------")
 	players.sort()
 	$Players/List.clear()
 	$Players/List.add_item(gamestate.get_player_name() + " (You)")
@@ -102,13 +99,12 @@ func refresh_lobby():
 func _on_start_pressed():
 	gamestate.start_lobby()
 	#gamestate.begin_game()
+	# Spawn the world. And then the join events.
+	# Print when connection is success!
 
+# Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
+# ID will be: 1 and name: APPLE
 func _on_player_join_event(id, name):
-	var is_it_me = get_tree().get_network_unique_id() == id
-	print(get_tree().get_network_unique_id())
-	print(id)
-	if is_it_me:
-		print("I'm the one who joined!")
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):

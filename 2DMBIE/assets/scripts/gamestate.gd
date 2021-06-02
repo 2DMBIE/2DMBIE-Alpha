@@ -82,9 +82,9 @@ func unregister_player(id):
 	var _name = players[id]
 	if has_node("/root/Lobby"):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
-	emit_signal("player_list_changed")
 	emit_signal("on_player_leave", id, _name)
 	players.erase(id)
+	emit_signal("player_list_changed")
 	if has_node("/root/World"): ## game started
 		pass
 	elif has_node("/root/Lobby"):
@@ -237,7 +237,6 @@ func load_lobby():
 
 	var player_scene = load("res://assets/scenes/player.tscn")
 	# get other players location?
-	print(get_player_list())
 	return
 	var spawn_points = {1:0}
 	for p_id in spawn_points:
