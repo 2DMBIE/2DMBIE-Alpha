@@ -191,8 +191,6 @@ func host_game(new_player_name):
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(peer)
 	start_lobby()
-	print(":___________: p ready list")
-	print(players_ready)
 
 
 func join_game(ip, new_player_name):
@@ -200,7 +198,8 @@ func join_game(ip, new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
-	load_lobby()
+	#load_lobby()
+	print(get_player_list())
 
 func get_player_list():
 	return players.values()
@@ -235,8 +234,6 @@ remote func load_lobby():
 
 	var player_scene = load("res://assets/scenes/player.tscn")
 	# get other players location?
-	print("Player list:")
-	print(players)
 
 	var spawn_points = {1:0}
 	for p_id in spawn_points:
