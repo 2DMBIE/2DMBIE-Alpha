@@ -407,7 +407,6 @@ position = Vector2( 51.4939, -22.2915 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 256, 152 )
-current = true
 zoom = Vector2( 0.5, 0.5 )
 
 [node name="Logo" type="Sprite" parent="."]
@@ -434,6 +433,7 @@ __meta__ = {
 [node name="PlayButton" parent="Buttons" instance=ExtResource( 8 )]
 focus_mode = 0
 mouse_default_cursor_shape = 2
+scene_to_load = "res://assets/scenes/World.tscn"
 
 [node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
 anchor_right = 0.3
@@ -466,4 +466,5 @@ stream = ExtResource( 12 )
 volume_db = -3.0
 autoplay = true
 bus = "Music"
+
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -22,7 +22,12 @@ func _ready():
 # warning-ignore:return_value_discarded
 	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
+
 func _process(_delta):
+	if MarkerPos != null:
+		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
+		MarkerPos.rotation = rotationDegree
+	
 	if Input.is_action_just_pressed("jump"):
 		print(get_tree().get_network_unique_id())
 	elif Input.is_action_just_pressed("knife"):
@@ -30,18 +35,14 @@ func _process(_delta):
 		for x in get_node("Players").get_children():
 			print(x.name)
 	
-	return
+	$cursor.position = get_global_mouse_position()
+	
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
 	
-	if MarkerPos != null:
-		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
-		MarkerPos.rotation = rotationDegree
-	
-	$cursor.position = get_global_mouse_position()
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
@@ -106,7 +107,7 @@ func _on_Continue_button_down():
 	unpause_game()
 
 
-func _on_ExitMenu_button_down():
+func _on_ExitGame_button_down():
 	unpause_game()
 	Global.game_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -125,12 +126,15 @@ func _on_ExitOptions_button_down():
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 func escape_options():
-	if get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible:
-		if Input.is_action_pressed("escape"):
-			get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible = false
-			get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
-			emit_signal("music", "unpause")
-			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+	var playerNode = "Players/"+str(gamestate.player_id)
+	
+	if playerNode != null:
+		if get_node(playerNode+"/Optionsmenu/Options").visible:
+			if Input.is_action_pressed("escape"):
+				get_node(playerNode+"/Optionsmenu/Options").visible = false
+				get_node(playerNode+"/PauseMenu/Container").visible = true
+				emit_signal("music", "unpause")
+				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 
 func _on_Options_button_down():
@@ -150,5 +154,11 @@ func _on_playersLoaded():
 	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
 	if get_node("Players/"+str(gamestate.player_id)).is_network_master():
 		MarkerPos.get_node("Marker").visible = true
-
+	
+# warning-ignore:return_value_discarded
+	get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/PauseMenu/Container/Continue").connect("button_down", self, "_on_Continue_button_down")
+# warning-ignore:return_value_discarded
+	get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/PauseMenu/Container/Options").connect("button_down", self, "_on_Options_button_down")
+# warning-ignore:return_value_discarded
+	get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/PauseMenu/Container/ExitGame").connect("button_down", self, "_on_ExitGame_button_down")
 

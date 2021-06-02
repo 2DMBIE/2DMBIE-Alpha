@@ -58,7 +58,7 @@ margin_right = 128.0
 margin_bottom = 429.0
 custom_constants/line_spacing = 6
 text = "If you want non-LAN clients to connect,
-make sure the port 10567 in UDP
+make sure the port 25565 in UDP
 is forwarded on your router."
 align = 1
 
@@ -67,7 +67,7 @@ margin_left = 168.0
 margin_top = 393.5
 margin_right = 341.0
 margin_bottom = 407.5
-text = "Find your public IP address"
+text = "Find your public IPv4 address"
 
 [node name="Connect" type="Panel" parent="."]
 anchor_left = 0.5
