@@ -49,6 +49,7 @@ func _on_join_pressed():
 	$Connect/ErrorLabel.text = ""
 	$Connect/Host.disabled = true
 	$Connect/Join.disabled = true
+	$Connect/Cancel.visible = true
 	$Connect/Cancel.disabled = false
 	var player_name = $Connect/Name.text
 	gamestate.join_game(ip, player_name)
@@ -104,3 +105,4 @@ func _on_find_public_ip_pressed():
 func _on_cancel_pressed():
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
+	$Connect/Cancel.visible = false

@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=4]
 [ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
-0/texture = ExtResource( 3 )
+0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 256, 0, 64, 64 )
@@ -22,7 +22,7 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "walls_tileset_1.png 1"
-1/texture = ExtResource( 3 )
+1/texture = ExtResource( 2 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 256, 256 )
@@ -62,7 +62,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 
 [sub_resource type="TileSet" id=7]
 0/name = "blocks_tileset_1.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 128, 0, 64, 64 )
@@ -83,7 +83,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 1/name = "blocks_tileset_1.png 1"
-1/texture = ExtResource( 2 )
+1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 64, 0, 64, 32 )
@@ -104,7 +104,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 1/z_index = 0
 2/name = "blocks_tileset_1.png 2"
-2/texture = ExtResource( 2 )
+2/texture = ExtResource( 3 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 128, 64, 64, 64 )
@@ -125,7 +125,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 2/z_index = 0
 3/name = "blocks_tileset_1.png 3"
-3/texture = ExtResource( 2 )
+3/texture = ExtResource( 3 )
 3/tex_offset = Vector2( 0, 0 )
 3/modulate = Color( 1, 1, 1, 1 )
 3/region = Rect2( 128, 128, 64, 64 )
@@ -146,7 +146,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 3/z_index = 0
 4/name = "blocks_tileset_1.png 4"
-4/texture = ExtResource( 2 )
+4/texture = ExtResource( 3 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
 4/region = Rect2( 64, 128, 64, 64 )
@@ -172,7 +172,7 @@ points = PoolVector2Array( 64, 16, 0, 16, 0, 0, 64, 0 )
 
 [sub_resource type="TileSet" id=9]
 0/name = "blocks_tileset_1.png 0"
-0/texture = ExtResource( 2 )
+0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 16 )
