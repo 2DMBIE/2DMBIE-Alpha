@@ -83,6 +83,7 @@ func _on_game_error(errtxt):
 
 func refresh_lobby():
 	var players = gamestate.get_player_list()
+	print("reloading lobby!")
 	print(gamestate.players) 
 	players.sort()
 	$Players/List.clear()
