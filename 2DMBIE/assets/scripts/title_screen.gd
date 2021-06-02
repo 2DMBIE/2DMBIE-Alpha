@@ -8,7 +8,6 @@ func _ready():
 	
 	$Camera2D.current = true
 
-
 func _on_ExitButton_pressed():
 	get_tree().quit()
 
@@ -24,12 +23,15 @@ func _on_BackButton_button_down():
 
 
 func _on_SinglePlayer_button_down():
-	var _x = get_tree().change_scene("res://assets/scenes/level3.tscn")
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://assets/scenes/World.tscn")
 
 
 func _on_Multiplayer_button_down():
-	var _x = get_tree().change_scene("res://assets/scenes/lobby.tscn")
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://assets/scenes/LobbyUI.tscn")
 
 
 func _on_OptionsButton_button_down():
-	var _x = get_tree().change_scene("res://assets/UI/OptionsMenu.tscn")
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://assets/UI/OptionsMenu.tscn")
