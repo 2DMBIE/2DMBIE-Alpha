@@ -80,11 +80,11 @@ remote func register_player(new_player_name):
 
 func unregister_player(id):
 	var _name = players[id]
-	players.erase(id)
 	if has_node("/root/Lobby"):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
 	emit_signal("on_player_leave", id, name)
+	players.erase(id)
 	if has_node("/root/World"): ## game started
 		pass
 	elif has_node("/root/Lobby"):
@@ -203,7 +203,6 @@ func join_game(ip, new_player_name):
 	peer = NetworkedMultiplayerENet.new()
 	peer.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(peer)
-	#load_lobby()
 
 func get_player_list():
 	return players.values()
@@ -220,7 +219,7 @@ func start_lobby():
 	spawn_points[1] = 0 # Server in spawn point 0. {1:0} ID: 1, Spawnpoint 
 	var spawn_point_idx = 1
 	for p in players:
-		spawn_points[p] = spawn_point_idx
+		spawn_points[p] = spawn_point_idx # first iteration would be {2131244:1} then {321321:2} etc.
 		spawn_point_idx += 1
 	# Call to pre-start game with the spawn points.
 

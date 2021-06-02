@@ -87,7 +87,7 @@ func _on_game_error(errtxt):
 
 func refresh_lobby():
 	var players = gamestate.get_player_list()
-	print("reloading lobby!")
+	print("printing players: ")
 	
 	print(gamestate.players)
 	
@@ -105,10 +105,15 @@ func _on_start_pressed():
 	#gamestate.begin_game()
 
 func _on_player_join_event(id, name):
-	print("Someone joined")
+	var is_it_me = get_tree().get_network_unique_id() == id
+	print(get_tree().get_network_unique_id())
+	print(id)
+	if is_it_me:
+		print("I'm the one who joined!")
+	print(name + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):
-	print("Someone left!")
+	print(name + " joined (ID: " + str(id) + ")")
 
 func _on_find_public_ip_pressed():
 # warning-ignore:return_value_discarded
