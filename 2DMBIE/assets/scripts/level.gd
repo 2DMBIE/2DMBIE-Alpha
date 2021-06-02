@@ -30,7 +30,7 @@ func _process(_delta):
 		for x in get_node("Players").get_children():
 			print(x.name)
 	
-	return
+	$cursor.position = get_global_mouse_position()
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
@@ -41,7 +41,7 @@ func _process(_delta):
 		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
 		MarkerPos.rotation = rotationDegree
 	
-	$cursor.position = get_global_mouse_position()
+	
 	if Global.Currentwave == random_round and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
