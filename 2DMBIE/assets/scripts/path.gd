@@ -478,7 +478,7 @@ func get_unique_ylevels():
 
 ## Run every frame of the game
 func _process(_delta):
-	if Input.is_action_just_pressed("debug"):
+	if Input.is_action_just_pressed("debug") and Settings.debugMode:
 		# Turn all debug things off
 		if showLines:
 			showLines = false

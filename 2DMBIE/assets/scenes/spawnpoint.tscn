@@ -6,7 +6,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 877.98
 
-[node name="enemyspawnpoint" type="Node2D"]
+[node name="enemyspawnpoint" type="Node2D" groups=[
+"spawnpoints",
+]]
 pause_mode = 1
 script = ExtResource( 2 )
 

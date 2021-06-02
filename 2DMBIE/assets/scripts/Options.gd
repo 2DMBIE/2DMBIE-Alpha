@@ -81,6 +81,7 @@ func escape_options():
 		_on_Button_button_down()
 	
 
+signal sendHealth()
 
 func _on_always_aim_toggled(button_pressed):
 	Settings.aim = button_pressed
@@ -116,5 +117,19 @@ func saveSettings():
 	Config.store_var(Settings.aim)
 	Config.store_var(Settings.camera)
 	Config.store_var(Settings.brightness)
-	print(Settings.brightness)
+	Config.store_var(Settings.debugMode)
 	Config.close()
+
+func _on_CheckButton_toggled(button_pressed):
+	Settings.debugMode = button_pressed
+	if button_pressed:
+		Global.Score += 25000
+	elif !button_pressed:
+		Global.Score -= 25000
+	
+	emit_signal("sendHealth")
+	
+func _on_MaiaMode_toggled(button_pressed):
+	Global.maia = button_pressed
+	if !Settings.debugMode:
+		emit_signal("sendHealth")
