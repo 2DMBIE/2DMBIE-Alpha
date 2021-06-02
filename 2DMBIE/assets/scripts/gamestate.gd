@@ -76,7 +76,7 @@ remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
-	emit_signal("on_player_join", id, name)
+	emit_signal("on_player_join", id, new_player_name)
 
 func unregister_player(id):
 	var _name = players[id]

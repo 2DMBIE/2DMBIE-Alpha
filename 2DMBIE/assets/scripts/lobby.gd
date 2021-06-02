@@ -112,7 +112,7 @@ func _on_player_join_event(id, name):
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):
-	print(str(name) + " joined (ID: " + str(id) + ")")
+	print(str(name) + " leaved (ID: " + str(id) + ")")
 
 func _on_find_public_ip_pressed():
 # warning-ignore:return_value_discarded
