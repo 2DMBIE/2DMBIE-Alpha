@@ -463,10 +463,12 @@ func _on_backfire_event():
 	running_disabled = true
 
 signal ammoPickup(totalAmmo)
+onready var gunscript = get_node("body/chest/torso/gun")
+
 
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("ammo"):
-		var gainedAmmo = 60
+		var gainedAmmo = gunscript.get_current_gun().maxclipAmmo
 		emit_signal("ammoPickup", gainedAmmo)
 		$MarkerPos/Marker.visible = false
 
