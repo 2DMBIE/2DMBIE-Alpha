@@ -32,6 +32,7 @@ var debug = false
 var falling = false
 var slideHold = false
 var groundlessjump = true
+var jumpwaspressed = false
 
 func _ready():
 	if Settings.debugMode:
@@ -142,12 +143,21 @@ func _physics_process(_delta):
 		
 	if is_on_floor():
 		groundlessjump = true
+		if jumpwaspressed == true:
+			aim("walking")
+			motion.y = JUMP_HEIGHT
+			$AnimationTree.set("parameters/in_air_state/current", 1)
+			emit_signal("play_sound", "jump")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
 		if Input.is_action_just_pressed("move_down"):
 			if get_slide_collision(0).collider.name == "Floor":
 				set_collision_mask_bit(dropthroughBit, false)
 		$AnimationTree.set("parameters/in_air_state/current", 0)
 		
 	if Input.is_action_just_pressed("jump"):
+		jumpwaspressed = true
+		rememberjumptime()
 		if groundlessjump == true:
 			aim("walking")
 			motion.y = JUMP_HEIGHT
@@ -486,5 +496,9 @@ func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 func coyotejump():
 	yield(get_tree().create_timer(0.1),"timeout")
 	groundlessjump = false
-	print(groundlessjump)
+	pass
+
+func rememberjumptime():
+	yield(get_tree().create_timer(0.1),"timeout")
+	jumpwaspressed = false
 	pass
