@@ -3,8 +3,9 @@ extends Control
 var gunscript
 
 func _ready():
+	pass
 # warning-ignore:return_value_discarded
-	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+	#gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
 func _process(_delta):
 	if gunscript != null:
