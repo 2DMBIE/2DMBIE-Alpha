@@ -63,7 +63,7 @@ func _on_join_pressed():
 func _on_connection_success():
 	$Connect.hide()
 	$Players.show()
-	gamestate.load_lobby()
+	#gamestate.load_lobby()
 
 func _on_connection_failed():
 	$Connect/Host.disabled = false

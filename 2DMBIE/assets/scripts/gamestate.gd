@@ -96,7 +96,7 @@ remote func pre_start_game(spawn_points):
 	# Refuse new connections
 	#peer.refuse_new_connections = true
 	# Change scene.
-	var world = load("res://assets/scenes/World.tscn").instance()
+	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("LobbyUI").hide()
@@ -121,9 +121,9 @@ remote func pre_start_game(spawn_points):
 		world.get_node("Players").add_child(player)
 
 	# Set up score.
-	world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
-	for pn in players:
-		world.get_node("Score").add_player(pn, players[pn])
+#	world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
+#	for pn in players:
+#		world.get_node("Score").add_player(pn, players[pn])
 
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start.
