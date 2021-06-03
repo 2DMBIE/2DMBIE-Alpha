@@ -107,7 +107,6 @@ func _on_start_pressed():
 # ID will be: 1 and name: APPLE
 func _on_player_join_event(id, name):
 	#gamestate.add_player(id, name)
-	rpc_id(id, "add_player", id)
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):

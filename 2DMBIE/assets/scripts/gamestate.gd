@@ -33,7 +33,7 @@ signal game_error(what)
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
-
+	rpc_id(id, "add_player", player_name)
 
 # Callback from SceneTree.
 func _player_disconnected(id):
@@ -50,6 +50,7 @@ func _player_disconnected(id):
 func _connected_ok():
 	# We just connected to a server
 	emit_signal("connection_succeeded")
+	
 
 
 # Callback from SceneTree, only for clients (not server).
@@ -76,7 +77,6 @@ remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
-	rpc_id(id, "add", player_name)
 	emit_signal("on_player_join", id, new_player_name)
 
 func unregister_player(id):
@@ -246,8 +246,8 @@ func load_lobby():
 	
 	world.get_node("Players").add_child(player)
 
-remote func add_player(id):
-	var name = "MakesNoSense"
+remote func add_player(name):
+	var id = get_tree().get_rpc_sender_id()
 	if has_node("/root/Lobby"):
 		print("Has node Lobby")
 		var world = get_node("/root/Lobby")
