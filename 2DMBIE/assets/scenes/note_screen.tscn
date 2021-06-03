@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/scripts/note_screen.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/note Sprite.png" type="Texture" id=2]
+
+[node name="Node2D" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="popupNode" type="Popup" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="popupNode"]
+position = Vector2( 738.562, 388.653 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 2 )
+
+[node name="StoryLabel" type="Label" parent="popupNode"]
+margin_left = 670.0
+margin_top = 166.0
+margin_right = 923.0
+margin_bottom = 538.0
+rect_rotation = 16.7403
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
