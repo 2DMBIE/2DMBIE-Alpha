@@ -49,7 +49,7 @@ func _ready():
 	timer.start()
 	
 	shapeHeadless.radius = 24
-	shapeHeadless.height = 50
+	shapeHeadless.height = 60
 
 func nextPoint():
 	if len(currentPath) == 0:
@@ -199,13 +199,13 @@ func _on_HeadshotArea_area_entered(area):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand <= .5:
+		if rand <1:
 			if str($body/torso/neck/head.texture) == "res://assets/sprites/zombie/head_sheet.png":
 				$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
 				$body/torso/neck/head.visible = false
 				$CollisionShape2D.call_deferred("set_shape", shapeHeadless)
-				$CollisionShape2D.position.y = 41
+				$CollisionShape2D.position.y = 34
 				emit_signal("headroll", area.get_parent().position + area.get_parent().velocity, self)
 
 func checkhealth():
