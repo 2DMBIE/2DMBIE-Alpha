@@ -30,6 +30,7 @@ var scaleArray = PoolVector2Array([Vector2(1,1), Vector2(.75,.75), Vector2(1,1),
 
 var canBuy = false
 var enoughMoney = false
+var Selected_Weapon2 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 signal play_sound(library)
 

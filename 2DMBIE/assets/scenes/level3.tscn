@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/sprites/football_goal_PNG21.png" type="Texture" id=15]
+[ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -94,7 +95,7 @@ position = Vector2( 255.61, -179.286 )
 [node name="Weapons" type="Node" parent="."]
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 0.00158691, -192 )
+position = Vector2( 11.3409, -188.22 )
 Selected_Weapon = 7
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
@@ -103,7 +104,12 @@ Selected_Weapon = 8
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
-Selected_Weapon = 4
+Selected_Weapon = 6
+
+[node name="puck a panch" type="Node" parent="."]
+
+[node name="puck_a_panch" parent="puck a panch" instance=ExtResource( 16 )]
+position = Vector2( 507.748, -180.169 )
 
 [node name="Perks" type="Node" parent="."]
 
