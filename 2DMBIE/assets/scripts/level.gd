@@ -68,6 +68,12 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.EnemyDamage += 50
 		Global.Speed += 4
 		Global.enemiesKilled = 0 
+		
+		var noteAmount = get_tree().get_nodes_in_group("notes").size()
+		if noteAmount == 1:
+			pass
+		else:
+			SpawnNote()
 	else:
 		pass
 
