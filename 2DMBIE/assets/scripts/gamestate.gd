@@ -23,7 +23,6 @@ var player_id = 1
 # Signals to let lobby GUI know what's going on.
 signal on_player_join(id, name)
 signal on_player_leave(id, name)
-signal player_list_changed()
 signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
