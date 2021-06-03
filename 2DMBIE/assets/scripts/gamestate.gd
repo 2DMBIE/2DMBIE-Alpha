@@ -132,7 +132,7 @@ remote func pre_start_game(spawn_points):
 
 remote func pre_start_lobby(spawn_points): 
 	# Change scene.
-	var world = load("res://assets/scenes/Lobby.tscn").instance()
+	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("LobbyUI").hide()
