@@ -1,5 +1,7 @@
 extends Node2D
 
+var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+
 var is_paused = false
 var is_gameOver = false
 var random_round
@@ -7,7 +9,7 @@ var music_playing = false
 signal music(action)
 var GraphRandomPoint
 
-var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+var specialWaveIncrease = 1.15
 
 func _ready():
 	get_tree().paused = false
@@ -57,12 +59,6 @@ func _process(_delta):
 				get_node("PauseMenu/Container").visible = false
 		
 	escape_options()
-	
-	for enemyHeadReady in get_tree().get_nodes_in_group("enemyHead"):
-		if !enemyHeadReady.is_connected("spawnHead", self, "_on_headSpawned"):
-			enemyHeadReady.connect("spawnHead", self, "_on_headSpawned", [enemyHeadReady])
-			print(enemyHeadReady)
-
 
 var waveType = 0
 var prevWaveType = 0
@@ -71,16 +67,16 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
 		if Global.Currentwave == Global.SpecialWaveNumber:
 			Global.specialWave = true
-			Global.maxHealth *= 1.15
-			Global.EnemyDamage *= 1.15
-			Global.Speed *= 3
+			Global.maxHealth *= specialWaveIncrease
+			Global.EnemyDamage *= specialWaveIncrease
+			Global.Speed *= specialWaveIncrease
 			waveType = 1
 		else:
 			if prevWaveType != waveType:
 				Global.specialWave = false
-				Global.maxHealth /= 1.15
-				Global.EnemyDamage /= 1.15
-				Global.Speed /= 3
+				Global.maxHealth /= specialWaveIncrease
+				Global.EnemyDamage /= specialWaveIncrease
+				Global.Speed /= specialWaveIncrease
 				Global.randomizeSpecialwave()
 				waveType = 0
 				prevWaveType = waveType
@@ -172,13 +168,12 @@ func _on_Options_button_down():
 	get_node("PauseMenu/Container").visible = false
 
 var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
-var zombieDecapitated
 
 func rollinghead(bulletPosition, zombie):
 	var enemyHead = enemyhead.instance()
 	enemyHead.position = bulletPosition
+	enemyHead.get_node("Sprite").texture = zombie.get_node("body/torso/neck/head").texture
 	call_deferred("add_child", enemyHead)
-	zombieDecapitated = zombie
 
 func _on_zombieSpawned():
 	if get_node_or_null("Zombie/body/torso/neck/head") != null:
@@ -210,9 +205,3 @@ func _on_PlayAgainButton_button_down():
 func _on_GameOver_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("GameOver/Container").visible = false
-
-func _on_headSpawned(enemyHead):
-	if zombieDecapitated != null:
-		print(get_node(str(zombieDecapitated.name) + "/body/torso/neck/head").texture)
-#	if str(get_node(str(zombieDecapitated) + "body/neck/head").texture) == "res://assets/sprites/zombie/head_sheet.png":
-#		print("oi")

@@ -55,4 +55,4 @@ func _ready():
 
 func randomizeSpecialwave():
 	rng.randomize()
-	SpecialWaveNumber = rng.randi_range(1, 2)
+	SpecialWaveNumber = rng.randi_range(3, 6)
