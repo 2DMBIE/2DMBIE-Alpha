@@ -6,7 +6,7 @@ func _init():
 	name = "XM1014" # The name of the gun.
 	offset = Vector2(2.286, -0.071) # The position of the gun.
 	scale = Vector2(1,1) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
-	texture = load("res://assets/sprites/guns/XM1014.png") # The path of the sprite gun.
+	texture = load("res://assets/sprites/guns/XM1014_puck_a_panch.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(60.699,-4.934) # Position of the bulletpoint.
 	bulletdelay = float(0.4) # The delay between each bullet. [0.1, 0.2]

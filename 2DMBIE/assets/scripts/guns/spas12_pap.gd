@@ -6,7 +6,7 @@ func _init():
 	name = "SPAS12" # The name of the gun.
 	offset = Vector2(10.734,-5.491) # The position of the gun.
 	scale = Vector2(1,1) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
-	texture = load("res://assets/sprites/guns/spas12.png") # The path of the sprite gun.
+	texture = load("res://assets/sprites/guns/spas12_puck_a_panch.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(61.589,-7.527) # Position of the bulletpoint.
 	bulletdelay = float(1.5) # The delay between each bullet. [0.1, 0.2]

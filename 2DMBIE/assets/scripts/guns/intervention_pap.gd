@@ -6,7 +6,7 @@ func _init():
 	name = "Intervention" # The name of the gun.
 	offset = Vector2(23.544,-5.8) # The position of the gun.
 	scale = Vector2(.75,.75) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
-	texture = load("res://assets/sprites/guns/Intervention.png") # The path of the sprite gun.
+	texture = load("res://assets/sprites/guns/Intervention_puck_a_panch.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(112.888, -10.474) # Position of the bulletpoint.
 	bulletdelay = float(2) # The delay between each bullet. [0.1, 0.2]
