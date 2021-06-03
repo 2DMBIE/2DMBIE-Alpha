@@ -80,7 +80,7 @@ remote func register_player(new_player_name):
 
 func unregister_player(id):
 	var _name = players[id]
-	if has_node("/root/Lobby"):
+	if has_node("/root/Lobby/Players/" + str(id)):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("on_player_leave", id, _name)
 	players.erase(id)
@@ -256,6 +256,7 @@ func add_player(id, name):
 		var spawn_pos = world.get_node("SpawnPoints/0").position
 		player.position=spawn_pos
 		player.set_network_master(id)
+		world.add_child(player)
 
 func begin_game():
 	assert(get_tree().is_network_server())

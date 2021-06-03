@@ -36,7 +36,7 @@ func _process(_delta):
 			print(x.name)
 	
 	$cursor.position = get_global_mouse_position()
-	
+	return
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
