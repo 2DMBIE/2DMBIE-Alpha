@@ -37,9 +37,9 @@ func _on_host_pressed():
 
 	var player_name = $Connect/Name.text
 	gamestate.host_game(player_name)
-	refresh_lobby()
+	#refresh_lobby()
 	#gamestate.pre_start_lobby({1:0})
-	#gamestate.load_lobby()
+	gamestate.load_lobby()
 
 func _on_join_pressed():
 	if $Connect/Name.text == "":
@@ -63,7 +63,7 @@ func _on_join_pressed():
 func _on_connection_success():
 	$Connect.hide()
 	$Players.show()
-	#gamestate.load_lobby()
+	gamestate.load_lobby()
 
 func _on_connection_failed():
 	$Connect/Host.disabled = false
@@ -98,15 +98,15 @@ func refresh_lobby():
 
 
 func _on_start_pressed():
-	#gamestate.start_lobby()
-	gamestate.begin_game()
+	gamestate.start_lobby()
+	#gamestate.begin_game()
 	# Spawn the world. And then the join events.
 	# Print when connection is success! Done
 
 # Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
 # ID will be: 1 and name: APPLE
 func _on_player_join_event(id, name):
-	#gamestate.add_player(id, name)
+	gamestate.add_player(id, name)
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):
