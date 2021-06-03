@@ -194,8 +194,8 @@ func _physics_process(_delta):
 			scale.y = lerp(scale.y, 1, .1)
 			_is_already_crouching = false
 			_played_crouch_sfx = false
-		rset("puppet_motion", motion)
-		rset("puppet_pos", position)
+		#rset("puppet_motion", motion)
+		#rset("puppet_pos", position)
 	else:
 		position = puppet_pos
 		motion = puppet_motion

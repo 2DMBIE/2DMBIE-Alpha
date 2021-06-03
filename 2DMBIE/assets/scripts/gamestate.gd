@@ -41,8 +41,8 @@ func _player_disconnected(id):
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
 	# Registration of a client beings here, tell everyone that we are here
-	rpc("add_player", get_tree().get_network_unique_id(), player_name)
 	rpc("register_player", get_tree().get_network_unique_id(), player_name)
+	rpc("add_player", get_tree().get_network_unique_id(), player_name)
 
 	print(player_name + " joined!")
 	emit_signal("connection_succeeded")
@@ -96,7 +96,7 @@ remote func add_player(id, name):
 		player.set_player_name(name)
 		var spawn_pos = world.get_node("SpawnPoints/0").position
 		player.position=spawn_pos
-		#player.set_network_master(id)
+		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
 		
 remote func pre_start_game(spawn_points):
@@ -196,7 +196,6 @@ func load_lobby():
 	var spawn_pos = world.get_node("SpawnPoints/0").position
 	player.position=spawn_pos
 	player.set_network_master(get_tree().get_network_unique_id())
-	
 	world.get_node("Players").add_child(player)
 
 func _ready():
