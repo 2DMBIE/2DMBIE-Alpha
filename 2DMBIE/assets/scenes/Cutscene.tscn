@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/tiles/Greenhouse_tileset.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/BrightLight.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/background/StarryBackground.png" type="Texture" id=6]
-[ext_resource path="res://assets/scenes/Cutscene.gd" type="Script" id=7]
+[ext_resource path="res://assets/scripts/Cutscene.gd" type="Script" id=7]
 [ext_resource path="res://assets/sprites/BrightLight2.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/BrightLight3.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/MushroomExplosion-Cloud.png" type="Texture" id=10]
@@ -827,6 +827,7 @@ z_index = -25
 tile_set = SubResource( 14 )
 collision_mask = 0
 format = 1
+tile_data = PoolIntArray( 131099, 0, 0, 131119, 0, 0, 196635, 0, 0, 196655, 0, 0, 262171, 0, 0, 262191, 0, 0, 327707, 0, 0, 327727, 0, 0, 393243, 0, 0, 393263, 0, 0, 458779, 0, 0, 458799, 0, 0, 524315, 0, 0, 524335, 0, 0, 589851, 0, 0, 589871, 0, 0 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_ignore_camera_zoom = true
@@ -855,6 +856,7 @@ current = true
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -0.192627, -21.0228 )
 scale = Vector2( 11.2221, 6.29502 )
+z_index = 100
 texture = ExtResource( 9 )
 
 [node name="BrightLight2" type="Sprite" parent="."]
@@ -894,7 +896,7 @@ z_index = -1
 texture = ExtResource( 12 )
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2( 3112.53, 569.728 )
+position = Vector2( 2145.06, 545.807 )
 
 [node name="body" type="Position2D" parent="Player"]
 position = Vector2( 0, 9.728 )
@@ -1081,7 +1083,7 @@ __meta__ = {
 }
 
 [node name="Zombie" type="Node2D" parent="."]
-position = Vector2( 3112.53, 569.728 )
+position = Vector2( 2145.06, 545.807 )
 
 [node name="body" type="Position2D" parent="Zombie"]
 position = Vector2( 181.213, -19.8453 )
