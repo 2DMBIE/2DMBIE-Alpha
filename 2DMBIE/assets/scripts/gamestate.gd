@@ -230,7 +230,7 @@ func start_lobby():
 
 	pre_start_lobby(spawn_points)
 
-# Only load the client and the map.
+# Load the client and the map.
 func load_lobby():
 	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
@@ -246,10 +246,10 @@ func load_lobby():
 	
 	world.get_node("Players").add_child(player)
 
+# Add all the other playrs to the map!
 remote func add_player(name):
 	var id = get_tree().get_rpc_sender_id()
 	if has_node("/root/Lobby"):
-		print("Has node Lobby")
 		var world = get_node("/root/Lobby")
 		var player_scene = load("res://assets/scenes/player.tscn")
 		var player = player_scene.instance()
