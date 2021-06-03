@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/sounds/zombie/z_footstep3.wav" type="AudioStream" id=2]
 
 [resource]
-resource_name = "walk4"
+resource_name = "skelly-walk4"
 length = 1.22
 loop = true
 step = 0.2
@@ -234,7 +234,7 @@ tracks/18/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ), Vector2( 16.8239, -36.2326 ) ]
+"values": [ Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ), Vector2( 23.34, -36.233 ) ]
 }
 tracks/19/type = "value"
 tracks/19/path = NodePath("body/torso/upperarm_left:rotation_degrees")
@@ -258,7 +258,7 @@ tracks/20/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ), Vector2( 0.840622, -16.5168 ) ]
+"values": [ Vector2( -2, -30 ), Vector2( 0, -30 ), Vector2( -5, -30 ), Vector2( -10, -30 ), Vector2( -5, -30 ), Vector2( -14, -30 ), Vector2( -2, -30 ) ]
 }
 tracks/21/type = "value"
 tracks/21/path = NodePath("body/torso/neck/head:rotation_degrees")
@@ -354,7 +354,7 @@ tracks/28/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ), Vector2( -11.4567, -37.1691 ) ]
+"values": [ Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ), Vector2( -23.551, -43.62 ) ]
 }
 tracks/29/type = "value"
 tracks/29/path = NodePath("body/torso/upperarm_right:rotation_degrees")
@@ -450,7 +450,7 @@ tracks/36/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ), Vector2( -0.376, 21.439 ) ]
+"values": [ Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ), Vector2( -0.376, 12.446 ) ]
 }
 tracks/37/type = "value"
 tracks/37/path = NodePath("body/torso:rotation_degrees")
