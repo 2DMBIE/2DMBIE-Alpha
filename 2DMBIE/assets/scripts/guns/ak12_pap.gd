@@ -3,7 +3,7 @@ extends Gun
 class_name AK12_pap
 
 func _init():
-	name = "AK12_pap" # The name of the gun.
+	name = "AK12pap" # The name of the gun.
 	offset = Vector2(5.273,2.714) # The position of the gun.
 	scale = Vector2(1,1) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
 	texture = load("res://assets/sprites/guns/ak12_puck_a_panch.png") # The path of the sprite gun.

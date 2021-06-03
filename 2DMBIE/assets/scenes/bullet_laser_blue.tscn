@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/guns/bullets/pink_laser.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/guns/bullets/blue_laser.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/normalBullet.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -39,7 +39,7 @@ speed_scale = 8.0
 fixed_fps = 60
 gravity = Vector2( 0, 90 )
 scale_amount = 2.0
-color = Color( 1, 0, 0.890196, 1 )
+color = Color( 0, 0.576471, 1, 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

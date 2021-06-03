@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/p90 laser.mp3-9ef26e6785e2b5d2755608f03ad0ac9a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/p90pap/p90 laser.mp3"
+dest_files=[ "res://.import/p90 laser.mp3-9ef26e6785e2b5d2755608f03ad0ac9a.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

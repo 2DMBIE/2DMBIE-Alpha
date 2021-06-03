@@ -96,7 +96,6 @@ position = Vector2( 255.61, -179.286 )
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 11.3409, -188.22 )
-Selected_Weapon = 7
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 248, -192 )

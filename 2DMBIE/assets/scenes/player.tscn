@@ -1,4 +1,4 @@
-[gd_scene load_steps=189 format=2]
+[gd_scene load_steps=198 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -121,6 +121,15 @@
 [ext_resource path="res://assets/sounds/m249pap/m249 reload.wav" type="AudioStream" id=119]
 [ext_resource path="res://assets/sounds/m249pap/m249pap shot.wav" type="AudioStream" id=120]
 [ext_resource path="res://assets/sounds/mp5pap/mp5_reload.wav" type="AudioStream" id=121]
+[ext_resource path="res://assets/sounds/spas12pap/spas12_reload.wav" type="AudioStream" id=122]
+[ext_resource path="res://assets/sounds/spas12pap/spas12_laser.wav" type="AudioStream" id=123]
+[ext_resource path="res://assets/sounds/spas12pap/spas12_draw.wav" type="AudioStream" id=124]
+[ext_resource path="res://assets/sounds/ak12pap/ak47 csgo old.wav" type="AudioStream" id=125]
+[ext_resource path="res://assets/sounds/ak12pap/ak12_reload.wav" type="AudioStream" id=126]
+[ext_resource path="res://assets/sounds/ak12pap/ak12_draw1.wav" type="AudioStream" id=127]
+[ext_resource path="res://assets/sounds/p90pap/p90 draw.wav" type="AudioStream" id=128]
+[ext_resource path="res://assets/sounds/p90pap/p90 reload.wav" type="AudioStream" id=129]
+[ext_resource path="res://assets/sounds/p90pap/p90 laser.wav" type="AudioStream" id=130]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -459,7 +468,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "running", 0, "TimeScale", "running", 1, "walk-idle", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "knifing", 0, "knife", "knifing", 1, "shooting", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "knifing", 0, "knife", "knifing", 1, "shooting", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "running", 0, "TimeScale", "running", 1, "walk-idle", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -1298,6 +1307,25 @@ stream = ExtResource( 69 )
 attenuation = 0.378929
 bus = "Soundeffects"
 
+[node name="spas12pap_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12pap_draw"]
+stream = ExtResource( 124 )
+bus = "Soundeffects"
+
+[node name="spas12pap_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12pap_shot"]
+stream = ExtResource( 123 )
+bus = "Soundeffects"
+
+[node name="spas12pap_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/spas12pap_reload"]
+stream = ExtResource( 122 )
+attenuation = 0.378929
+bus = "Soundeffects"
+
 [node name="xm1014_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/xm1014_draw"]
@@ -1759,6 +1787,46 @@ bus = "Soundeffects"
 stream = ExtResource( 111 )
 bus = "Soundeffects"
 
+[node name="shot31" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot32" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot33" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot34" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot35" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot36" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot37" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot38" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot39" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
+[node name="shot40" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_shot"]
+stream = ExtResource( 111 )
+bus = "Soundeffects"
+
 [node name="m249_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/m249_reload"]
@@ -1867,6 +1935,176 @@ bus = "Soundeffects"
 
 [node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12_reload"]
 stream = ExtResource( 71 )
+attenuation = 0.138696
+bus = "Soundeffects"
+
+[node name="ak12pap_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_draw"]
+stream = ExtResource( 127 )
+bus = "Soundeffects"
+
+[node name="ak12pap_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot7" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot8" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot9" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot10" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot11" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot12" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot13" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot14" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot15" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot16" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot17" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot18" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot19" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot20" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot21" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot22" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot23" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot24" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot25" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot26" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot27" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot28" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot29" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot30" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="shot31" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_shot"]
+stream = ExtResource( 125 )
+volume_db = 10.0
+bus = "Soundeffects"
+
+[node name="ak12pap_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/ak12pap_reload"]
+stream = ExtResource( 126 )
 attenuation = 0.138696
 bus = "Soundeffects"
 
@@ -2096,6 +2334,162 @@ bus = "Soundeffects"
 position = Vector2( 3.99689, -3.10617 )
 stream = ExtResource( 119 )
 attenuation = 0.138696
+bus = "Soundeffects"
+
+[node name="p90pap_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_draw"]
+stream = ExtResource( 128 )
+bus = "Soundeffects"
+
+[node name="p90pap_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot7" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot8" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot9" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot10" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot11" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot12" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot13" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot14" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot15" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot16" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot17" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot18" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot19" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot20" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot21" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot22" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot23" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot24" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot25" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot26" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot27" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot28" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot29" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="shot30" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_shot"]
+stream = ExtResource( 130 )
+volume_db = 5.0
+bus = "Soundeffects"
+
+[node name="p90pap_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+position = Vector2( 3.99689, -3.10617 )
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/p90pap_reload"]
+stream = ExtResource( 129 )
+attenuation = 0.378929
 bus = "Soundeffects"
 
 [node name="BulletDelayTimer" type="Timer" parent="body/chest/torso/gun"]
