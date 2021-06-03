@@ -10,7 +10,9 @@ bounce = 0.5
 [sub_resource type="CircleShape2D" id=2]
 radius = 24.0
 
-[node name="Node2D" type="RigidBody2D"]
+[node name="Node2D" type="RigidBody2D" groups=[
+"enemyHead",
+]]
 collision_layer = 8192
 collision_mask = 102
 physics_material_override = SubResource( 1 )

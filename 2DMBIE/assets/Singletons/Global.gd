@@ -15,6 +15,7 @@ var unlocked_doors = 0
 var game_active = false
 var highScore = 0
 var maia = false
+var specialWave = false
 
 func _process(_delta):
 	pass
@@ -42,14 +43,16 @@ func saveScore():
 	saveScoreFile.store_line(str(highScore))
 	saveScoreFile.close()
 	
-var SpecialWaveNumber 
+var SpecialWaveNumber
 var rng = RandomNumberGenerator.new()
 
 func setSpecialWaveNumber():
 	if Currentwave >= SpecialWaveNumber:
-		rng.randomize()
-		SpecialWaveNumber = (rng.randi_range(4, 7) + SpecialWaveNumber)
+		SpecialWaveNumber = randomizeSpecialwave() + SpecialWaveNumber
 
 func _ready():
+	randomizeSpecialwave()
+
+func randomizeSpecialwave():
 	rng.randomize()
-	SpecialWaveNumber = rng.randi_range(4, 7)
+	SpecialWaveNumber = rng.randi_range(3, 6)

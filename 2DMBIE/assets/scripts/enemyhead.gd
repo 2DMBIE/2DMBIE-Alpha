@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var timer = Timer.new()
 
-func _ready():
+func _ready():	
 	if Global.maia:
 		timer.set_wait_time(10)
 	else:
@@ -24,3 +24,4 @@ func _on_timer_timeout():
 	
 	if $Sprite.modulate.a <= 0:
 		queue_free()
+	
