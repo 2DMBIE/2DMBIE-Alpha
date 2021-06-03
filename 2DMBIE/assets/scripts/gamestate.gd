@@ -132,7 +132,7 @@ remote func pre_start_game(spawn_points):
 
 remote func pre_start_lobby(spawn_points): 
 	# Change scene.
-	var world = load("res://assets/scenes/Lobby.tscn").instance()
+	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 
 	get_tree().get_root().get_node("LobbyUI").hide()
@@ -228,36 +228,22 @@ func start_lobby():
 		rpc_id(p, "pre_start_lobby", spawn_points)
 
 	pre_start_lobby(spawn_points)
-	
+
+# Only load the client and the map.
 func load_lobby():
 	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
-
 	get_tree().get_root().get_node("LobbyUI").hide()
 
 	var player_scene = load("res://assets/scenes/player.tscn")
-	# get other players location?
-	return
-	var spawn_points = {1:0}
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		var player = player_scene.instance()
-
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.position=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
-
-		if p_id == get_tree().get_network_unique_id():
-			# If node for this peer id, set name.
-			player.set_player_name(player_name)
-			
-			player_id = p_id
-			
-		else:
-			# Otherwise set name from peer.
-			player.set_player_name(players[p_id])
+	var player = player_scene.instance()
+	player.set_name(str(get_tree().get_network_unique_id()))
+	player.set_player_name(player_name)
+	var spawn_pos = world.get_node("SpawnPoints/0").position
+	player.position=spawn_pos
+	player.set_network_master(get_tree().get_network_unique_id())
 	
-		world.get_node("Players").add_child(player)
+	world.get_node("Players").add_child(player)
 
 func begin_game():
 	assert(get_tree().is_network_server())

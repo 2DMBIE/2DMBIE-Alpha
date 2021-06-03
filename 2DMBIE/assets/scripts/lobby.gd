@@ -38,7 +38,8 @@ func _on_host_pressed():
 	var player_name = $Connect/Name.text
 	gamestate.host_game(player_name)
 	refresh_lobby()
-
+	#gamestate.pre_start_lobby({1:0})
+	gamestate.load_lobby()
 
 func _on_join_pressed():
 	if $Connect/Name.text == "":
