@@ -76,6 +76,7 @@ remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	players[id] = new_player_name
 	emit_signal("player_list_changed")
+	rpc_id(id, "add", player_name)
 	emit_signal("on_player_join", id, new_player_name)
 
 func unregister_player(id):
@@ -245,7 +246,8 @@ func load_lobby():
 	
 	world.get_node("Players").add_child(player)
 
-func add_player(id, name):
+remote func add_player(id):
+	var name = "MakesNoSense"
 	if has_node("/root/Lobby"):
 		print("Has node Lobby")
 		var world = get_node("/root/Lobby")

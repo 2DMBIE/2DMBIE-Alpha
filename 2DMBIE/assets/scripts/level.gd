@@ -20,7 +20,7 @@ func _ready():
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	
 # warning-ignore:return_value_discarded
-	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+	#gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
 
 func _process(_delta):
