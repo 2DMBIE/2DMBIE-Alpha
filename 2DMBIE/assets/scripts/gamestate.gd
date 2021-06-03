@@ -74,11 +74,13 @@ remote func register_player(id, new_player_name):
 
 remote func unregister_player(id):
 	players.erase(id)
+	if has_node("/root/Lobby/Players/" + str(id)):
+		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("player_list_changed")
 
 remote func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
-	if has_node("/root/Lobby"):
+	if has_node("/root/Lobby") and not has_node("/root/Lobby/Players/" + str(id)):
 		var world = get_node("/root/Lobby")
 		var player_scene = load("res://assets/scenes/player.tscn")
 		var player = player_scene.instance()
