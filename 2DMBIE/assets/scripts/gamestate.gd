@@ -42,11 +42,17 @@ func _player_disconnected(id):
 func _connected_ok():
 	# Registration of a client beings here, tell everyone that we are here
 	rpc("register_player", get_tree().get_network_unique_id(), player_name)
+	rpc("add_player", get_tree().get_network_unique_id(), player_name)
 	print(player_name + " joined!")
 	emit_signal("connection_succeeded")
 
 # Callback from SceneTree, only for clients (not server)
 func _server_disconnected():
+	if has_node("/root/Lobby"): # Game is in progress.
+		get_node("/root/Lobby").queue_free()
+		get_tree().get_root().get_node("LobbyUI").hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 
