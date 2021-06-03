@@ -245,6 +245,18 @@ func load_lobby():
 	
 	world.get_node("Players").add_child(player)
 
+func add_player(id, name):
+	if has_node("/root/Lobby"):
+		print("Has node Lobby")
+		var world = get_node("/root/Lobby")
+		var player_scene = load("res://assets/scenes/player.tscn")
+		var player = player_scene.instance()
+		player.set_name(str(id))
+		player.set_player_name(name)
+		var spawn_pos = world.get_node("SpawnPoints/0").position
+		player.position=spawn_pos
+		player.set_network_master(id)
+
 func begin_game():
 	assert(get_tree().is_network_server())
 
