@@ -258,7 +258,7 @@ remote func add_player(name):
 		var spawn_pos = world.get_node("SpawnPoints/0").position
 		player.position=spawn_pos
 		player.set_network_master(id)
-		world.add_child(player)
+		world.get_node("Players").add_child(player)
 
 func begin_game():
 	assert(get_tree().is_network_server())
