@@ -33,7 +33,6 @@ signal game_error(what)
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
-	add_player(id)
 	#add_player(id)
 	#rpc_id(id, "add_player", player_name)
 
@@ -78,7 +77,7 @@ func _connected_fail():
 remote func register_player(new_player_name):
 	var id = get_tree().get_rpc_sender_id()
 	players[id] = new_player_name
-	emit_signal("player_list_changed")
+	#emit_signal("player_list_changed")
 	emit_signal("on_player_join", id, new_player_name)
 
 func unregister_player(id):
@@ -87,7 +86,7 @@ func unregister_player(id):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	emit_signal("on_player_leave", id, _name)
 	players.erase(id)
-	emit_signal("player_list_changed")
+	#emit_signal("player_list_changed")
 	if has_node("/root/World"): ## game started
 		pass
 	elif has_node("/root/Lobby"):
@@ -249,9 +248,8 @@ func load_lobby():
 	world.get_node("Players").add_child(player)
 
 # Add all the other playrs to the map!
-func add_player(id):
+func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
-	var name = "No name for now"
 	if has_node("/root/Lobby"):
 		var world = get_node("/root/Lobby")
 		var player_scene = load("res://assets/scenes/player.tscn")

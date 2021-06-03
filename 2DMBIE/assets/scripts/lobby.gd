@@ -9,7 +9,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	gamestate.connect("connection_succeeded", self, "_on_connection_success")
 	# warning-ignore:return_value_discarded
-	gamestate.connect("player_list_changed", self, "refresh_lobby")
+	#gamestate.connect("player_list_changed", self, "refresh_lobby")
 	# warning-ignore:return_value_discarded
 	gamestate.connect("game_ended", self, "_on_game_ended")
 	# warning-ignore:return_value_discarded
@@ -106,7 +106,7 @@ func _on_start_pressed():
 # Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
 # ID will be: 1 and name: APPLE
 func _on_player_join_event(id, name):
-	#gamestate.add_player(id, name)
+	gamestate.add_player(id, name)
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):
