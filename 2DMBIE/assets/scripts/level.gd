@@ -193,7 +193,6 @@ func _on_GameOver_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("GameOver/Container").visible = false
 
-signal Readnote()
 
 func SpawnNote():
 	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
@@ -205,5 +204,7 @@ func SpawnNote():
 	var notePosition = spawnpoints[randomspawn].get_global_position()
 	Notescene.set_position(notePosition)
 	add_child(Notescene)
+	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead")
+	
 	
 	
