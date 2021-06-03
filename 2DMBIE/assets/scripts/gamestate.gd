@@ -33,6 +33,8 @@ signal game_error(what)
 func _player_connected(id):
 	# Registration of a client beings here, tell the connected player that we are here.
 	rpc_id(id, "register_player", player_name)
+	add_player(id)
+	#add_player(id)
 	#rpc_id(id, "add_player", player_name)
 
 # Callback from SceneTree.
@@ -247,8 +249,9 @@ func load_lobby():
 	world.get_node("Players").add_child(player)
 
 # Add all the other playrs to the map!
-func add_player(id, name):
+func add_player(id):
 	#var id = get_tree().get_rpc_sender_id()
+	var name = "No name for now"
 	if has_node("/root/Lobby"):
 		var world = get_node("/root/Lobby")
 		var player_scene = load("res://assets/scenes/player.tscn")
