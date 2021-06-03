@@ -20,6 +20,7 @@ func _ready():
 	for spawnpoint in get_tree().get_nodes_in_group("spawnpoints"):
 		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
 	_on_zombieSpawned()
+	SpawnNote()
 
 
 func _process(_delta):
@@ -185,3 +186,18 @@ func _on_PlayAgainButton_button_down():
 func _on_GameOver_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("GameOver/Container").visible = false
+
+signal Readnote()
+
+func SpawnNote():
+	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
+	var Notescene = noteScene.instance()
+	var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
+	var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
+	randomize()
+	var randomspawn = randi() % spawnpointAmount
+	var notePosition = spawnpoints[randomspawn].get_global_position()
+	Notescene.set_position(notePosition)
+	add_child(Notescene)
+	
+	
