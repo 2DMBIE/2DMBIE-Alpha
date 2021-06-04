@@ -28,9 +28,7 @@ func _process(_delta):
 		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
 		MarkerPos.rotation = rotationDegree
 	
-	if Input.is_action_just_pressed("jump"):
-		print(get_tree().get_network_unique_id())
-	elif Input.is_action_just_pressed("knife"):
+	if Input.is_action_just_pressed("attack"):
 		print("Printing Children:")
 		for x in get_node("Players").get_children():
 			print(x.name)
