@@ -9,12 +9,13 @@ const MAX_PEERS = 12
 # Name for my player
 var player_name = "Unnamed"
 var host_name
+var last_player_name = ""
 
 # Names for remote players in id:name format
 var players = {}
 
 # Signals to let lobby GUI know what's going ona
-signal on_player_join(id, name)
+signal on_player_join(name)
 signal on_player_leave(id, name)
 signal lobby_created(id, name)
 signal connection_failed()
@@ -79,7 +80,7 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	emit_signal("on_player_join", id, player_name)
+	
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", id, players[id])
@@ -99,7 +100,7 @@ remote func add_player(id, name):
 		player.position=spawn_pos
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
-		
+
 remote func pre_start_game(spawn_points):
 	# Change scene
 	var main = load("res://scenes/main.tscn").instance()
@@ -150,6 +151,7 @@ func host_game(new_player_name):
 
 func join_game(ip, new_player_name):
 	player_name = new_player_name
+	last_player_name = player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
@@ -190,7 +192,6 @@ func load_lobby():
 	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("LobbyUI").hide()
-	emit_signal("lobby_created", host_name)
 	
 	var player_scene = load("res://assets/scenes/player.tscn")
 	var player = player_scene.instance()
@@ -201,6 +202,10 @@ func load_lobby():
 	player.set_network_master(get_tree().get_network_unique_id())
 	world.get_node("Players").add_child(player)
 	
+	if get_tree().get_network_unique_id() == 1:
+		emit_signal("lobby_created", host_name)
+	if !last_player_name == "":
+		emit_signal("on_player_join", last_player_name)
 
 func _ready():
 	# warning-ignore:return_value_discarded

@@ -28,10 +28,10 @@ func _process(_delta):
 		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
 		MarkerPos.rotation = rotationDegree
 	
-	if Input.is_action_just_pressed("attack"):
-		print("Printing Children:")
-		for x in get_node("Players").get_children():
-			print(x.name)
+#	if Input.is_action_just_pressed("attack"):
+#		print("Printing Children:")
+#		for x in get_node("Players").get_children():
+#			print(x.name)
 	
 	$cursor.position = get_global_mouse_position()
 	return
@@ -147,7 +147,7 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	GraphRandomPoint = graphRandomPoint
 
 func _on_playersLoaded():
-	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
+#	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
 	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
 	if get_node("Players/"+str(gamestate.player_id)).is_network_master():
 		MarkerPos.get_node("Marker").visible = true

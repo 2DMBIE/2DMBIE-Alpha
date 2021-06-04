@@ -10,7 +10,8 @@ var labelNumber = 0
 var labels = {}
 
 func _ready():
-	gamestate.connect("on_player_join", self, "_on_player_join_event")
+	print("ready")
+	gamestate.connect("on_player_join", self, "send_remote_player_name")
 	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
 	gamestate.connect("lobby_created", self, "_on_lobby_created_event")
 	showLabel = Timer.new()
@@ -22,6 +23,7 @@ func _ready():
 
 func _process(delta):
 #	if Input.is_action_just_pressed("jump"):
+#		send_remote_player_name()
 #		var status_label
 #		status_label = lobby_label.instance()
 #		status_label.text = " " + labelName + " joined the room"
@@ -90,7 +92,7 @@ func _on_chatPopup_timeout():
 		$Control/StatusIcon/Panel.visible = true
 		$Control/StatusIcon/ChatIcon.visible = true
 
-func _on_player_join_event(id, name):
+func _on_player_join_event(name):
 	var status_label
 	status_label = lobby_label.instance()
 	status_label.text = " " + (str(name) + " joined the lobby")
@@ -101,7 +103,7 @@ func _on_player_join_event(id, name):
 func _on_player_leave_event(id, name):
 	var status_label
 	status_label = lobby_label.instance()
-	status_label.text = " " + (str(name) + " leaved the lobby")
+	status_label.text = " " + (str(name) + " left the lobby")
 	$Control/Panel/VBoxContainer.add_child(status_label)
 	
 	labels[status_label] = [status_label.modulate.a, false]
@@ -145,3 +147,24 @@ func labelShow():
 	labelNumber += 1
 	if labelNumber < $Control/Panel/VBoxContainer.get_children().size():
 		showLabel.start()
+
+var player_name
+puppet var puppet_name
+
+func send_remote_player_name(playerName):
+	if is_network_master():
+		player_name = playerName
+		rset("player_name", puppet_name)
+	else:
+		player_name = puppet_name
+	
+	player_name = playerName
+	if not is_network_master():
+		puppet_name = player_name
+	
+	_on_player_join_event(player_name)
+#	player_name = playerName
+#	rpc("receive_remote_player_name", player_name)
+
+sync func receive_remote_player_name(test):
+	_on_player_join_event(test)

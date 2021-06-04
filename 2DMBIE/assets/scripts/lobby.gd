@@ -14,10 +14,10 @@ func _ready():
 	gamestate.connect("game_ended", self, "_on_game_ended")
 	# warning-ignore:return_value_discarded
 	gamestate.connect("game_error", self, "_on_game_error")
-	# warning-ignore:return_value_discarded
-	gamestate.connect("on_player_join", self, "_on_player_join_event")
-	# warning-ignore:return_value_discarded
-	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
+#	# warning-ignore:return_value_discarded
+#	gamestate.connect("on_player_join", self, "_on_player_join_event")
+#	# warning-ignore:return_value_discarded
+#	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
@@ -114,11 +114,11 @@ func _on_start_pressed():
 
 # Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
 # ID will be: 1 and name: APPLE
-func _on_player_join_event(id, name):
-	print(str(name) + " joined (ID: " + str(id) + ")")
-
-func _on_player_leave_event(id, name):
-	print(str(name) + " leaved (ID: " + str(id) + ")")
+#func _on_player_join_event(id, name):
+#	print(str(name) + " joined (ID: " + str(id) + ")")
+#
+#func _on_player_leave_event(id, name):
+#	print(str(name) + " leaved (ID: " + str(id) + ")")
 
 func _on_find_public_ip_pressed():
 	# warning-ignore:return_value_discarded
