@@ -153,28 +153,12 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
 			rpc("slide")
 		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
-			_is_already_crouching = true
-			if not _played_crouch_sfx:
-				emit_signal("play_sound", "crouch")
-				_played_crouch_sfx = true
-			
-			$AnimationTree.set("parameters/crouching/current", 0)
-			if(crouch_idle):
-				$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
-			else: 
-				$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
-			$CollisionShape2D.disabled = true
-			$CollisionShape2DCrouch.disabled = false
-			if is_on_floor():
-				motion.x = 0 
+			rpc_unreliable("crouch", true)
+			#rpc("crouch", true)
+			#crouch(true)
 		else:
-			crouch_idle_transition(false)
-			$AnimationTree.set("parameters/crouching/current", 1)
-			$CollisionShape2D.disabled = false
-			$CollisionShape2DCrouch.disabled = true
-			scale.y = lerp(scale.y, 1, .1)
-			_is_already_crouching = false
-			_played_crouch_sfx = false
+			rpc_unreliable("crouch", false)
+			#rpc("crouch", false)
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 		rset("puppet_direction", get_node("body").scale)
@@ -466,10 +450,34 @@ remotesync func slide():
 	is_knifing = true # disable knifing 
 	get_node("Hitbox").set_collision_mask_bit(3, false)
 	self.set_collision_mask_bit(3, false)
-	#for player in get_node("/root/Lobby/Players").get_children():
-	self.set_collision_mask_bit(2, false)
+	for player in get_node("/root/Lobby/Players").get_children():
+		player.set_collision_mask_bit(2, false)
 	knifing_hitbox_enabled = false
 	WALK_ACCELERATION = 35 #old 20
 	RUN_ACCELERATION = 40
 	MAX_WALK_SPEED = 230 #old 110 
 	MAX_RUN_SPEED = 430
+
+remotesync func crouch(state):
+	if state:
+		_is_already_crouching = true
+		if not _played_crouch_sfx:
+			emit_signal("play_sound", "crouch")
+			_played_crouch_sfx = true
+		$AnimationTree.set("parameters/crouching/current", 0)
+		if(crouch_idle):
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
+		else: 
+			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
+		$CollisionShape2D.disabled = true
+		$CollisionShape2DCrouch.disabled = false
+		if is_on_floor():
+			motion.x = 0 
+	else:
+		crouch_idle_transition(false)
+		$AnimationTree.set("parameters/crouching/current", 1)
+		$CollisionShape2D.disabled = false
+		$CollisionShape2DCrouch.disabled = true
+		scale.y = lerp(scale.y, 1, .1)
+		_is_already_crouching = false
+		_played_crouch_sfx = false
