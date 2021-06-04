@@ -1,7 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/scripts/normalBullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/scripts/bulletNormal.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/bullets/bullet shotgun pellet red.png" type="Texture" id=2]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )

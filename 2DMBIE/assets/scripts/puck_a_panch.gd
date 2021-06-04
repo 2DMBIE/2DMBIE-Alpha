@@ -6,7 +6,12 @@ var canBuy = false
 var enoughMoney = false
 var Selected_Weapon = 0
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
+
+onready var Ambientsound = $sfx/Ambientsound/ElectricalHumming
+
 signal play_sound(library)
+signal play_sound_ambient_sound(sound)
+signal stop_sound_ambient_sound(sound)
 
 #export(int, "MP5", "UMP45", "P90", "SPAS12", "XM1014", "M4A1", "AK12", "M60", "M249", "BARRETT50", "AWP", "INTERVENTION") var Selected_Weapon = 0 
 
@@ -27,7 +32,7 @@ func _physics_process(_delta):
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
-			
+	
 	if Global.Score >= int(5000):
 		enoughMoney = true
 	else:

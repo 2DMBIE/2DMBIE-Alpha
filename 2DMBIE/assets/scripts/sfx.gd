@@ -25,3 +25,9 @@ func _on_puck_a_panch_play_sound(library):
 
 func _on_purchasable_perks_play_sound(library):
 	play_sound(library)
+	
+func play_sound_ambient_sound(library):
+	get_node("Ambient sound/Electrical Humming").play()
+	
+func stop_sound_ambient_sound(library):
+	get_node("Ambient sound/Electrical Humming").stop()

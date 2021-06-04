@@ -231,7 +231,7 @@ func SpawnNote():
 	Notescene.set_position(notePosition)
 	add_child(Notescene)
 	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
-	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")	
+	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
 	
 func _on_NotePopup_pauseGame():
 	get_tree().paused = true
