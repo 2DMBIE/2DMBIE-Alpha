@@ -31,6 +31,8 @@ signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
+var groundlessjump = true
+var jumpwaspressed = false
 
 func _ready():
 	if Settings.debugMode:
@@ -140,17 +142,33 @@ func _physics_process(_delta):
 		motion.x = lerp(motion.x, 0, 0.3)
 		
 	if is_on_floor():
-		if Input.is_action_just_pressed("move_down"):
-			if get_slide_collision(0).collider.name == "Floor":
-				set_collision_mask_bit(dropthroughBit, false)
-		$AnimationTree.set("parameters/in_air_state/current", 0)
-		if Input.is_action_just_pressed("jump"):
+		groundlessjump = true
+		if jumpwaspressed == true:
 			aim("walking")
 			motion.y = JUMP_HEIGHT
 			$AnimationTree.set("parameters/in_air_state/current", 1)
 			emit_signal("play_sound", "jump")
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.3)
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+		if Input.is_action_just_pressed("move_down"):
+			if get_slide_collision(0).collider.name == "Floor":
+				set_collision_mask_bit(dropthroughBit, false)
+		$AnimationTree.set("parameters/in_air_state/current", 0)
+		
+	if Input.is_action_just_pressed("jump"):
+		jumpwaspressed = true
+		rememberjumptime()
+		if groundlessjump == true:
+			aim("walking")
+			motion.y = JUMP_HEIGHT
+			$AnimationTree.set("parameters/in_air_state/current", 1)
+			emit_signal("play_sound", "jump")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+	
+	if !is_on_floor():
+		coyotejump()
+
 	else:
 		#aim("walking")
 		if friction == true:
@@ -463,12 +481,24 @@ func _on_backfire_event():
 	running_disabled = true
 
 signal ammoPickup(totalAmmo)
+onready var gunscript = get_node("body/chest/torso/gun")
+
 
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("ammo"):
-		var gainedAmmo = 60
+		var gainedAmmo = gunscript.get_current_gun().maxclipAmmo
 		emit_signal("ammoPickup", gainedAmmo)
 		$MarkerPos/Marker.visible = false
 
 func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 	$MarkerPos/Marker.visible = true
+
+func coyotejump():
+	yield(get_tree().create_timer(0.1),"timeout")
+	groundlessjump = false
+	pass
+
+func rememberjumptime():
+	yield(get_tree().create_timer(0.1),"timeout")
+	jumpwaspressed = false
+	pass
