@@ -8,6 +8,7 @@ const MAX_PEERS = 12
 
 # Name for my player
 var player_name = "Unnamed"
+var host_name
 
 # Names for remote players in id:name format
 var players = {}
@@ -15,6 +16,7 @@ var players = {}
 # Signals to let lobby GUI know what's going ona
 signal on_player_join(id, name)
 signal on_player_leave(id, name)
+signal lobby_created(id, name)
 signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
@@ -141,6 +143,7 @@ remote func ready_to_start(id):
 
 func host_game(new_player_name):
 	player_name = new_player_name
+	host_name = player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
@@ -187,7 +190,8 @@ func load_lobby():
 	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("LobbyUI").hide()
-
+	emit_signal("lobby_created", host_name)
+	
 	var player_scene = load("res://assets/scenes/player.tscn")
 	var player = player_scene.instance()
 	player.set_name(str(get_tree().get_network_unique_id()))
@@ -196,6 +200,7 @@ func load_lobby():
 	player.position=spawn_pos
 	player.set_network_master(get_tree().get_network_unique_id())
 	world.get_node("Players").add_child(player)
+	
 
 func _ready():
 	# warning-ignore:return_value_discarded

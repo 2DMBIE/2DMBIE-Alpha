@@ -4016,6 +4016,9 @@ rotation = 0.873525
 [node name="foot_left" parent="Player/body/legs/thigh_left/lowerleg_left" index="0"]
 rotation = -0.428067
 
+[node name="HBox" parent="Player/Optionsmenu/Options/Panel/VBox/Container/Audio" index="0"]
+margin_bottom = 137.0
+
 [node name="Spawnpoints" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
 z_index = -23
@@ -4396,8 +4399,8 @@ pitch_scale = 1.05
 bus = "Soundeffects"
 
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]

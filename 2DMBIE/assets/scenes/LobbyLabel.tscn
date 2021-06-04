@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+border_width_left = 2
+border_width_top = 1
+border_width_right = 1
+border_color = Color( 0.72549, 0.72549, 0.72549, 1 )
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+
+[node name="Label" type="Label"]
+margin_right = 250.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 250, 25 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
+text = " JoJ3o joined the room"
+__meta__ = {
+"_edit_use_anchors_": false
+}

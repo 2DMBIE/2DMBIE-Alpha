@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/sprites/redBorder(Ver).png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/redborders.gd" type="Script" id=13]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer"]
 
 [node name="Interface" type="Control" parent="."]
 anchor_right = 1.0
