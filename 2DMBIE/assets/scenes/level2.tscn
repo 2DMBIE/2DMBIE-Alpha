@@ -4474,6 +4474,7 @@ Selected_Perk = 2
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
+[connection signal="pauseGame" from="CanvasLayer/NotePopup" to="." method="_on_NotePopup_pauseGame"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]

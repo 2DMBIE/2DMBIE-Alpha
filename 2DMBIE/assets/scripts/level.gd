@@ -6,6 +6,7 @@ var random_round
 var music_playing = false
 signal music(action)
 var GraphRandomPoint
+var notePause = false
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
@@ -46,19 +47,22 @@ func _process(_delta):
 			$CanvasModulate.color = Color("#7f7f7f")
 
 	if Input.is_action_just_pressed("pause"):
-		if get_node("Optionsmenu/Options").visible == false and !is_gameOver:
-			if !is_paused:
-				pause_game()
-				is_paused = true
-				get_node("PauseMenu/Container").visible = true
-				
-			elif is_paused and get_node("Optionsmenu/Options").visible == false:
-				unpause_game()
-				is_paused = false
-				get_node("PauseMenu/Container").visible = false
-		
+		if notePause == false:
+			if get_node("Optionsmenu/Options").visible == false and !is_gameOver:
+				if !is_paused:
+					pause_game()
+					is_paused = true
+					get_node("PauseMenu/Container").visible = true
+					
+				elif is_paused and get_node("Optionsmenu/Options").visible == false:
+					unpause_game()
+					is_paused = false
+					get_node("PauseMenu/Container").visible = false
+		else:
+			get_tree().paused = false
 	escape_options()
-
+	
+	
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
 		Global.CurrentWaveEnemies = 0
@@ -78,13 +82,13 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		pass
 
 func pause_game():
-	get_tree().paused = true
-	get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-	get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$cursor.visible = false
-	emit_signal("music", "pause")
-#	AudioServer.set_bus_mute(0, true)
+		get_tree().paused = true
+		get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+		get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		$cursor.visible = false
+		emit_signal("music", "pause")
+	#	AudioServer.set_bus_mute(0, true)
 
 func unpause_game():
 	get_tree().paused = false
@@ -204,7 +208,10 @@ func SpawnNote():
 	var notePosition = spawnpoints[randomspawn].get_global_position()
 	Notescene.set_position(notePosition)
 	add_child(Notescene)
-	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead")
+	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
+	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")	
 	
-	
-	
+func _on_NotePopup_pauseGame():
+	get_tree().paused = true
+	notePause = true
+
