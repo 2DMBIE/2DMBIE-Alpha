@@ -5,7 +5,7 @@ var weaponPap = [MP5_pap.new(), UMP45_pap.new(), P90_pap.new(), SPAS12_pap.new()
 var canBuy = false
 var enoughMoney = false
 var Selected_Weapon = 0
-onready var gunscript = get_node("../../Player/body/chest/torso/gun")
+onready var gunscript = get_node("../Player/body/chest/torso/gun")
 
 onready var Ambientsound = $sfx/Ambientsound/ElectricalHumming
 
