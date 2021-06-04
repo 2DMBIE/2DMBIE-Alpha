@@ -113,14 +113,14 @@
 [ext_resource path="res://assets/sounds/m249/Pistol Single Shot (Suppressed).wav" type="AudioStream" id=111]
 [ext_resource path="res://assets/sprites/marker.png" type="Texture" id=112]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=63]
 extents = Vector2( 6, 25 )
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=64]
 radius = 23.0
 height = 75.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=65]
 radius = 23.0
 height = 45.0
 
@@ -450,9 +450,9 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale 2", 0, "Animation 7", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "running", 0, "TimeScale", "running", 1, "walk-idle", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "knifing", 0, "knife", "knifing", 1, "shooting", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale", 0, "Animation 5", "TimeScale 2", 0, "Animation 7", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "running", 0, "TimeScale", "running", 1, "walk-idle", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
 
-[sub_resource type="Animation" id=63]
+[sub_resource type="Animation" id=66]
 tracks/0/type = "value"
 tracks/0/path = NodePath("body/chest/torso/upperarm_right:position")
 tracks/0/interp = 1
@@ -622,7 +622,7 @@ tracks/13/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=67]
 length = 0.15
 step = 0.15
 tracks/0/type = "value"
@@ -818,13 +818,13 @@ tracks/15/keys = {
 "values": [ 2.73079, 6.62338 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=65]
+[sub_resource type="CapsuleShape2D" id=68]
 radius = 25.0
 height = 75.8569
 
-[sub_resource type="RectangleShape2D" id=66]
+[sub_resource type="RectangleShape2D" id=69]
 
-[sub_resource type="CapsuleShape2D" id=67]
+[sub_resource type="CapsuleShape2D" id=70]
 radius = 103.144
 height = 6.48692
 
@@ -846,7 +846,7 @@ scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 112 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 9.728 )
+position = Vector2( 0, 2.415 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -1855,7 +1855,7 @@ collision_mask = 14
 visible = false
 position = Vector2( 23.4582, -6.62662 )
 rotation = 0.676042
-shape = SubResource( 1 )
+shape = SubResource( 63 )
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
@@ -1869,13 +1869,14 @@ __meta__ = {
 
 [node name="legs" type="Position2D" parent="body"]
 position = Vector2( 0, 11.189 )
+rotation = 0.479625
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
-position = Vector2( -6.18385, 3.40305 )
-rotation = -1.15755
+position = Vector2( -6.06485, 3.40305 )
+rotation = 0.320622
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -1885,7 +1886,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 1.22102
+rotation = 0.482976
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -1893,8 +1894,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.506966, 14.393 )
-rotation = -0.0675175
+position = Vector2( 0.50671, 14.2428 )
+rotation = 0.252992
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -1909,7 +1910,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -1.09316
+rotation = -1.84364
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -1920,7 +1921,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 1.01198
+rotation = 1.38807
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -1929,7 +1930,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = 0.0745325
+rotation = -0.0883837
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
@@ -1946,13 +1947,13 @@ __meta__ = {
 visible = false
 position = Vector2( -1.41577, -8.88424 )
 z_index = 1
-shape = SubResource( 2 )
+shape = SubResource( 64 )
 
 [node name="CollisionShape2DCrouch" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -1.416, 6.06 )
 z_index = 1
-shape = SubResource( 3 )
+shape = SubResource( 65 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 62 )
@@ -1993,7 +1994,7 @@ anims/crouching-idle = ExtResource( 37 )
 anims/idle = ExtResource( 19 )
 anims/jump = ExtResource( 20 )
 anims/knife_attack = ExtResource( 74 )
-anims/no_aim = SubResource( 63 )
+anims/no_aim = SubResource( 66 )
 anims/no_aim_shoot = ExtResource( 46 )
 anims/run = ExtResource( 32 )
 anims/shoot_0_degrees = ExtResource( 43 )
@@ -2002,7 +2003,7 @@ anims/shoot_45_degrees = ExtResource( 41 )
 anims/shoot_60_degrees = ExtResource( 42 )
 anims/shoot_90_degrees = ExtResource( 39 )
 anims/shoot_minus_30_degrees = ExtResource( 38 )
-anims/shoot_minus_45_degrees = SubResource( 64 )
+anims/shoot_minus_45_degrees = SubResource( 67 )
 anims/shoot_minus_60_degrees = ExtResource( 45 )
 anims/shoot_minus_90_degrees = ExtResource( 44 )
 anims/slide = ExtResource( 76 )
@@ -2052,7 +2053,7 @@ collision_mask = 8
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -1.4158, -8.88426 )
 z_index = 1
-shape = SubResource( 65 )
+shape = SubResource( 68 )
 
 [node name="GroundChecker" type="Area2D" parent="."]
 visible = false
@@ -2062,7 +2063,7 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GroundChecker"]
 position = Vector2( 0, 52 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 66 )
+shape = SubResource( 69 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -2072,7 +2073,7 @@ one_shot = true
 
 [node name="shootzone" type="CollisionShape2D" parent="Aimzone"]
 visible = false
-shape = SubResource( 67 )
+shape = SubResource( 70 )
 
 [node name="NoDamageTimer" type="Timer" parent="."]
 one_shot = true
