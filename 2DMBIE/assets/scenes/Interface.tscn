@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/UI/Perks/Reload.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/Perks/FireRate.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/Perks/Health.png" type="Texture" id=17]
+[ext_resource path="res://assets/scenes/note_screen.tscn" type="PackedScene" id=18]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -371,3 +372,5 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 17 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="NotePopup" parent="." instance=ExtResource( 18 )]
