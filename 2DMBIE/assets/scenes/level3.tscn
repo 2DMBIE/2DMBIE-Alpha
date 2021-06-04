@@ -96,19 +96,55 @@ position = Vector2( 255.61, -179.286 )
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 11.3409, -188.22 )
+Selected_Weapon = 0
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( 248, -192 )
-Selected_Weapon = 8
+Selected_Weapon = 1
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
+
+[node name="purchasable_weapons4" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -712, -142.191 )
+Selected_Weapon = 3
+
+[node name="purchasable_weapons5" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -888, -144 )
+Selected_Weapon = 4
+
+[node name="purchasable_weapons6" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -496, -142.191 )
 Selected_Weapon = 5
+
+[node name="purchasable_weapons7" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1104, -144 )
+Selected_Weapon = 6
+
+[node name="purchasable_weapons8" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1288, -150.191 )
+Selected_Weapon = 7
+
+[node name="purchasable_weapons9" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1464, -145.933 )
+Selected_Weapon = 8
+
+[node name="purchasable_weapons10" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -952, -376 )
+Selected_Weapon = 9
+
+[node name="purchasable_weapons11" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1392, -352 )
+Selected_Weapon = 10
+
+[node name="purchasable_weapons12" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -440, -360 )
+Selected_Weapon = 11
 
 [node name="puck a panch" type="Node" parent="."]
 
 [node name="puck_a_panch" parent="puck a panch" instance=ExtResource( 16 )]
-position = Vector2( 507.748, -180.169 )
+position = Vector2( 512, -157.297 )
 
 [node name="Perks" type="Node" parent="."]
 
@@ -121,7 +157,7 @@ position = Vector2( -687.183, -248.978 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( -438.941, -256 )
+position = Vector2( 280, -513.442 )
 
 [node name="AmmoPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -1403.34, -250.8 )
@@ -161,10 +197,6 @@ flip_h = true
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
-[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
-[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
-[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
-[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]

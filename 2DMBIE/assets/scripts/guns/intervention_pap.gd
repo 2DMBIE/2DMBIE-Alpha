@@ -9,9 +9,9 @@ func _init():
 	texture = load("res://assets/sprites/guns/Intervention_puck_a_panch.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(112.888, -10.474) # Position of the bulletpoint.
-	bulletdelay = float(2) # The delay between each bullet. [0.1, 0.2]
+	bulletdelay = float(1.8) # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = Bullet.new(float(1400), float(1700), "res://assets/scenes/bullet.tscn", int(5)) 
+	_bullet = Bullet.new(float(2500), float(1700), "res://assets/scenes/bullet_intervention.tscn", int(5)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
 	_muzzleflash = load("res://assets/scenes/muzzleflash.tscn") # The scene of the muzzleflash
 	

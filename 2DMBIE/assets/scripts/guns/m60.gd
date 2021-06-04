@@ -9,7 +9,7 @@ func _init():
 	texture = load("res://assets/sprites/guns/M60.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(107.246, -12.552) # Position of the bulletpoint.
-	bulletdelay = float(.18) # The delay between each bullet. [0.1, 0.2]
+	bulletdelay = float(.2) # The delay between each bullet. [0.1, 0.2]
 
 	_bullet = Bullet.new(float(100), float(1000), "res://assets/scenes/bullet.tscn", int(3)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
