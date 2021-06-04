@@ -137,12 +137,9 @@ func _physics_process(_delta):
 			if Input.is_action_just_pressed("move_down"):
 				if get_slide_collision(0).collider.name == "Floor":
 					set_collision_mask_bit(dropthroughBit, false)
-			$AnimationTree.set("parameters/in_air_state/current", 0)
+			rpc("jump", false)
 			if Input.is_action_just_pressed("jump"):
-				aim("walking")
-				motion.y = JUMP_HEIGHT
-				$AnimationTree.set("parameters/in_air_state/current", 1)
-				emit_signal("play_sound", "jump")
+				rpc("jump", true)
 			if friction == true:
 				motion.x = lerp(motion.x, 0, 0.3)
 		else:
@@ -154,11 +151,8 @@ func _physics_process(_delta):
 			rpc("slide")
 		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 			rpc_unreliable("crouch", true)
-			#rpc("crouch", true)
-			#crouch(true)
 		else:
 			rpc_unreliable("crouch", false)
-			#rpc("crouch", false)
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 		rset("puppet_direction", get_node("body").scale)
@@ -481,3 +475,12 @@ remotesync func crouch(state):
 		scale.y = lerp(scale.y, 1, .1)
 		_is_already_crouching = false
 		_played_crouch_sfx = false
+		
+remotesync func jump(pressed_jump):
+	if pressed_jump:
+		aim("walking")
+		motion.y = JUMP_HEIGHT
+		$AnimationTree.set("parameters/in_air_state/current", 1)
+		emit_signal("play_sound", "jump")
+	else:
+		$AnimationTree.set("parameters/in_air_state/current", 0)
