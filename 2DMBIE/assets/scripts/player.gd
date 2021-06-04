@@ -34,6 +34,7 @@ var slideHold = false
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
+puppet var puppet_direction = Vector2()
 
 func _ready():
 	$AnimationTree.active = true
@@ -196,16 +197,17 @@ func _physics_process(_delta):
 			_played_crouch_sfx = false
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
+		rset("puppet_direction", get_node("body").scale)
 	else:
 		position = puppet_pos
 		motion = puppet_motion
+		get_node("body").scale = puppet_direction
 	
 	motion = move_and_slide(motion, UP)
 	if not is_network_master():
 		puppet_pos = position
-	
-
-
+		puppet_motion = motion
+		puppet_direction = get_node("body").scale
 
 func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):

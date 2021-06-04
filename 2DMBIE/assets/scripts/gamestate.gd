@@ -182,7 +182,7 @@ func end_game():
 	players.clear()
 	get_tree().set_network_peer(null) # End networking
 
-# Load the client and the map.
+# Loads the player (you) and the map.
 func load_lobby():
 	var world = load("res://assets/scenes/LobbyWorld.tscn").instance()
 	get_tree().get_root().add_child(world)
