@@ -62,6 +62,7 @@ func _process(_delta):
 					get_node("PauseMenu/Container").visible = false
 		else:
 			get_tree().paused = false
+			notePause = false
 	escape_options()
 
 var waveType = 0
@@ -101,13 +102,13 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		pass
 
 func pause_game():
-		get_tree().paused = true
-		get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-		get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		$cursor.visible = false
-		emit_signal("music", "pause")
-	#	AudioServer.set_bus_mute(0, true)
+	get_tree().paused = true
+	get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+	get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$cursor.visible = false
+	emit_signal("music", "pause")
+#	AudioServer.set_bus_mute(0, true)
 
 func unpause_game():
 	get_tree().paused = false
