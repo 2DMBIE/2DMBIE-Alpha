@@ -392,9 +392,8 @@ func on_slide_animation_complete():
 		get_node("body/chest/torso/gun").shooting_disabled = false
 		get_node("Hitbox").set_collision_mask_bit(3, true)
 		self.set_collision_mask_bit(3, true)
-		if is_network_master():
-			for player in get_node("/root/Lobby/Players").get_children():
-				player.set_collision_mask_bit(2, true)
+		for player in get_node("/root/Lobby/Players").get_children():
+			player.set_collision_mask_bit(2, true)
 		knifing_hitbox_enabled = true
 		is_knifing = false
 		is_sliding = false
