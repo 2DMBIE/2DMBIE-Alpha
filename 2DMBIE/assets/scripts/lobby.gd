@@ -15,16 +15,27 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	gamestate.connect("game_error", self, "_on_game_error")
 	# warning-ignore:return_value_discarded
-	#gamestate.connect("on_player_join", self, "_on_player_join_event")
+	gamestate.connect("on_player_join", self, "_on_player_join_event")
 	# warning-ignore:return_value_discarded
-	#gamestate.connect("on_player_leave", self, "_on_player_leave_event")
+	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
-
+	var _ip_address
+	if OS.get_name() == "Windows":
+		_ip_address = IP.get_local_addresses()[3]
+	elif OS.get_name() == "Android":
+		_ip_address = IP.get_local_addresses()[0]
+	else:
+		_ip_address = IP.get_local_addresses()[3]
+	
+	for ip in IP.get_local_addresses():
+		if ip.begins_with("192.168.") and not ip.ends_with(".1"):
+			_ip_address = ip
+	$Connect/DeviceIP.text = _ip_address
 
 func _on_host_pressed():
 	if $Connect/Name.text == "":
@@ -104,7 +115,6 @@ func _on_start_pressed():
 # Tends to registers others before itself. Meaning if I join a server (with ID:1 and Username:APPLE.)
 # ID will be: 1 and name: APPLE
 func _on_player_join_event(id, name):
-	gamestate.add_player(id, name)
 	print(str(name) + " joined (ID: " + str(id) + ")")
 
 func _on_player_leave_event(id, name):

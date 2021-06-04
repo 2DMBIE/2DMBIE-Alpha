@@ -12,8 +12,9 @@ var player_name = "Unnamed"
 # Names for remote players in id:name format
 var players = {}
 
-# Signals to let lobby GUI know what's going on
-signal player_list_changed()
+# Signals to let lobby GUI know what's going ona
+signal on_player_join(id, name)
+signal on_player_leave(id, name)
 signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
@@ -43,8 +44,6 @@ func _connected_ok():
 	# Registration of a client beings here, tell everyone that we are here
 	rpc("register_player", get_tree().get_network_unique_id(), player_name)
 	rpc("add_player", get_tree().get_network_unique_id(), player_name)
-
-	print(player_name + " joined!")
 	emit_signal("connection_succeeded")
 
 # Callback from SceneTree, only for clients (not server)
@@ -78,13 +77,13 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	emit_signal("player_list_changed")
+	emit_signal("on_player_join", id, player_name)
 
 remote func unregister_player(id):
+	emit_signal("on_player_leave", id, players[id])
 	players.erase(id)
 	if has_node("/root/Lobby/Players/" + str(id)):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
-	emit_signal("player_list_changed")
 
 remote func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
