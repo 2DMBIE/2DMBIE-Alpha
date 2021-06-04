@@ -66,12 +66,7 @@ func _physics_process(_delta):
 			falling = false
 
 		if Input.is_action_just_pressed("knife") and not is_knifing:
-			get_node("body/chest/torso/gun").visible = false
-			get_node("body/chest/torso/gun").is_holding_knife = true
-			get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
-			emit_signal("play_sound", "knife_swish")
-			knifing_hitbox_enabled = true
-			$AnimationTree.set("parameters/knifing/current", false)
+			rpc("knife")
 		
 		if running_disabled && Input.is_action_just_pressed("sprint"):
 			get_node("body/chest/torso/gun").backfiring = false
@@ -156,22 +151,7 @@ func _physics_process(_delta):
 				motion.x = lerp(motion.x, 0, 0.05)
 		var _is_standing_still = motion.x > -21 and motion.x < 21
 		if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
-			is_sliding = true
-			emit_signal("play_sound", "slide")
-			$AnimationTree.set("parameters/sliding/current", 0)
-			$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
-			get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
-			is_knifing = true # disable knifing 
-			get_node("Hitbox").set_collision_mask_bit(3, false)
-			self.set_collision_mask_bit(3, false)
-			if is_network_master():
-				for player in get_node("/root/Lobby/Players").get_children():
-					player.set_collision_mask_bit(2, false)
-			knifing_hitbox_enabled = false
-			WALK_ACCELERATION = 35 #old 20
-			RUN_ACCELERATION = 40
-			MAX_WALK_SPEED = 230 #old 110 
-			MAX_RUN_SPEED = 430
+			rpc("slide")
 		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 			_is_already_crouching = true
 			if not _played_crouch_sfx:
@@ -468,3 +448,29 @@ func _on_gun_set_gun_recoil_sensitivity(value):
 	
 func set_player_name(s):
 	get_node("HBoxContainer/NameTag").text = s
+
+remotesync func knife():
+	get_node("body/chest/torso/gun").visible = false
+	get_node("body/chest/torso/gun").is_holding_knife = true
+	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
+	emit_signal("play_sound", "knife_swish")
+	knifing_hitbox_enabled = true
+	$AnimationTree.set("parameters/knifing/current", false)
+
+remotesync func slide():
+	is_sliding = true
+	emit_signal("play_sound", "slide")
+	$AnimationTree.set("parameters/sliding/current", 0)
+	$AnimationTree.set("parameters/torso_reset/blend_amount", 0)
+	get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
+	is_knifing = true # disable knifing 
+	get_node("Hitbox").set_collision_mask_bit(3, false)
+	self.set_collision_mask_bit(3, false)
+	if is_network_master():
+		for player in get_node("/root/Lobby/Players").get_children():
+			player.set_collision_mask_bit(2, false)
+	knifing_hitbox_enabled = false
+	WALK_ACCELERATION = 35 #old 20
+	RUN_ACCELERATION = 40
+	MAX_WALK_SPEED = 230 #old 110 
+	MAX_RUN_SPEED = 430
