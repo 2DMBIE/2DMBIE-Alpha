@@ -37,6 +37,10 @@ puppet var puppet_motion = Vector2()
 #puppet var puppet_direction = Vector2()
 
 func _ready():
+	var dict = {"walking": true, 
+				"running": false }
+	#print(dict["walking"])
+	#print(dict["running"])
 	$AnimationTree.active = true
 	if is_network_master():
 		zombie_dam_timer = Timer.new()
@@ -69,13 +73,15 @@ func _physics_process(_delta):
 		if running_disabled && Input.is_action_just_pressed("sprint"):
 			get_node("body/chest/torso/gun").backfiring = false
 			running_disabled = false
-		
+		var is_running = Input.is_action_pressed("sprint") and not running_disabled
+		var aim_dict = {"walking": true, 
+				"running": false }
 		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			rpc_unreliable("move", "left")
+			rpc_unreliable("move", "left", is_running, aim_dict)
 		elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-			rpc_unreliable("move", "right")
+			rpc_unreliable("move", "right", is_running, aim_dict)
 		elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			rpc_unreliable("move", "standstill")
+			rpc_unreliable("move", "standstill", is_running, aim_dict)
 			friction = true
 			
 			motion.x = lerp(motion.x, 0, 0.3)
@@ -130,12 +136,6 @@ func get_direction():
 		return "right"
 	return "null"
 	
-func is_running():	
-	if Input.is_action_pressed("sprint") and not running_disabled:
-		return true
-	else:
-		return false
-
 func walk_idle_transition():
 	var speed = motion.x
 	if speed < 0:
@@ -171,11 +171,11 @@ func walk_idle_transition():
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 1)
 		running_disabled = false
 		return
-		
+	
 func aim(string):
 	if Global.aim:
 		if Input.is_action_pressed("aim"):
-			aim_feature(string)
+			aim_feature(string) # wallking
 			return true
 		else:
 			$AnimationTree.set("parameters/aim_state/current", 1)
@@ -184,17 +184,12 @@ func aim(string):
 		aim_feature(string)
 		return true
 
-func aim_feature(string):
-	var walking = false
-	if (string == "walking"):
-		walking = true
-	
+func aim_feature(walking): 
 	$AnimationTree.set("parameters/aim_state/current", 0)
 	var positionA = $ShootVector.position
 	var positionB = get_local_mouse_position()
 	var angle_radians = positionA.angle_to_point(positionB)
 	var angle_degrees = angle_radians*180/PI
-	
 	
 	if (angle_degrees >= -90) && (angle_degrees <= 90):
 		$AnimationTree.set("parameters/aim/blend_position", angle_degrees) 
@@ -379,7 +374,6 @@ remotesync func knife():
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = true
 	emit_signal("play_sound", "knife_swish")
 	knifing_hitbox_enabled = true
-	print(get_direction())
 	$AnimationTree.set("parameters/knifing/current", false)
 
 remotesync func slide():
@@ -432,25 +426,25 @@ remotesync func jump(pressed_jump):
 	else:
 		$AnimationTree.set("parameters/in_air_state/current", 0)
 
-remotesync func move(m_direction):
+remotesync func move(m_direction, is_running, aim_dic):
 	if m_direction == "left":
-		if is_running():
+		if is_running:
 			$AnimationTree.set("parameters/running/current", 0)
 			rpc_unreliable("direction", "left")
 			motion.x -= RUN_ACCELERATION
 			motion.x = max(motion.x, -MAX_RUN_SPEED)
 			if (motion.x > 50):
 				motion.x = 50
-			if (aim("running") == false):
+			if (aim_dic["running"] == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running() == false:
+		elif is_running == false:
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x -= WALK_ACCELERATION
 			motion.x = max(motion.x, -MAX_WALK_SPEED)
 			$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-			if (aim("walking") == false):
+			if (aim_dic["walking"] == false):
 				rpc_unreliable("direction", "left")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
@@ -460,23 +454,23 @@ remotesync func move(m_direction):
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
 	elif m_direction == "right":
-		if is_running():
+		if is_running:
 			$AnimationTree.set("parameters/running/current", 0)
 			rpc_unreliable("direction", "right")
 			if (motion.x < -50):
 				motion.x = -50
 			motion.x += RUN_ACCELERATION
 			motion.x = min(motion.x, MAX_RUN_SPEED)
-			if(aim("running") == false):
+			if(aim_dic["running"] == false):
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
-		elif is_running() == false: 
+		elif is_running == false: 
 			$AnimationTree.set("parameters/running/current", 1)
 			motion.x += WALK_ACCELERATION
 			motion.x = min(motion.x, MAX_WALK_SPEED)
 			$AnimationTree.set("parameters/walk-idle/blend_amount", 0)
-			if (aim("walking") == false):
+			if (aim_dic["walking"] == false):
 				rpc_unreliable("direction", "right")
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
@@ -486,7 +480,7 @@ remotesync func move(m_direction):
 			else: 
 				$AnimationTree.set("parameters/moonwalking/current", 1)
 	elif m_direction == "standstill":
-		if (aim("walking") == false): 
+		if (aim_dic["walking"] == false): 
 				$AnimationTree.set("parameters/aim/blend_position", 0)
 				$AnimationTree.set("parameters/aim2/blend_position", 0)
 				$AnimationTree.set("parameters/shoot_angle/blend_position", 0)
