@@ -466,9 +466,8 @@ remotesync func slide():
 	is_knifing = true # disable knifing 
 	get_node("Hitbox").set_collision_mask_bit(3, false)
 	self.set_collision_mask_bit(3, false)
-	if is_network_master():
-		for player in get_node("/root/Lobby/Players").get_children():
-			player.set_collision_mask_bit(2, false)
+	#for player in get_node("/root/Lobby/Players").get_children():
+	self.set_collision_mask_bit(2, false)
 	knifing_hitbox_enabled = false
 	WALK_ACCELERATION = 35 #old 20
 	RUN_ACCELERATION = 40
