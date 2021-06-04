@@ -1,5 +1,7 @@
 extends Node2D
 
+var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+
 var is_paused = false
 var is_gameOver = false
 var random_round
@@ -8,7 +10,7 @@ signal music(action)
 var GraphRandomPoint
 var notePause = false
 
-var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+var specialWaveIncrease = 1.15
 
 func _ready():
 	get_tree().paused = false
@@ -61,10 +63,27 @@ func _process(_delta):
 		else:
 			get_tree().paused = false
 	escape_options()
-	
-	
+
+var waveType = 0
+var prevWaveType = 0
+
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
+		if Global.Currentwave == Global.SpecialWaveNumber:
+			Global.specialWave = true
+			Global.maxHealth *= specialWaveIncrease
+			Global.EnemyDamage *= specialWaveIncrease
+			Global.Speed *= specialWaveIncrease
+			waveType = 1
+		else:
+			if prevWaveType != waveType:
+				Global.specialWave = false
+				Global.maxHealth /= specialWaveIncrease
+				Global.EnemyDamage /= specialWaveIncrease
+				Global.Speed /= specialWaveIncrease
+				Global.randomizeSpecialwave()
+				waveType = 0
+				prevWaveType = waveType
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
@@ -162,16 +181,17 @@ func _on_Options_button_down():
 
 var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
 
-func rollinghead(bulletPosition):
+func rollinghead(bulletPosition, zombie):
 	var enemyHead = enemyhead.instance()
 	enemyHead.position = bulletPosition
+	enemyHead.get_node("Sprite").texture = zombie.get_node("body/torso/neck/head").texture
 	call_deferred("add_child", enemyHead)
 
 func _on_zombieSpawned():
 	if get_node_or_null("Zombie/body/torso/neck/head") != null:
 		for zombie in get_tree().get_nodes_in_group("enemies"):
 			if !zombie.is_connected("headroll", self, "rollinghead"):
-				var _x = zombie.connect("headroll", self, "rollinghead")
+				zombie.connect("headroll", self, "rollinghead")
 
 func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	var ammoPouch = AmmoPouch.instance()
@@ -190,6 +210,7 @@ func _on_PlayAgainButton_button_down():
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_mute(0, false)
 	get_tree().paused = false
+	Global.randomizeSpecialwave()
 	restart_game()
 
 

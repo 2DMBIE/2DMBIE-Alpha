@@ -1701,7 +1701,7 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 "shape": SubResource( 18 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-37/z_index = 11
+37/z_index = 20
 38/name = "Greenhouse_tileset.png 38"
 38/texture = ExtResource( 23 )
 38/tex_offset = Vector2( 0, 0 )
@@ -4465,8 +4465,8 @@ position = Vector2( 4608, -1184 )
 Selected_Perk = 2
 
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
