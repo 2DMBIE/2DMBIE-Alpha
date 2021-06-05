@@ -10,8 +10,10 @@ const MAX_PEERS = 12
 var player_name = "Unnamed"
 var host_name
 var last_player_name = ""
-var just_joined = true
 
+var send_join_msg = true
+var just_joined = true
+var player_join_cache = []
 # Names for remote players in id:name format
 var players = {}
 
@@ -66,7 +68,7 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 # Lobby management functions
-var player_join_cache = []
+
 
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
@@ -83,12 +85,13 @@ remote func register_player(id, new_player_name):
 	players[id] = new_player_name
 	add_player(id, new_player_name)
 	print(players)
-	if just_joined or player_join_cache.size() != players.size():
-		for p_id in players: 
-			if not player_join_cache.has(p_id):
-				rpc_id(p_id, "show_join_msg", player_name)
-				player_join_cache.append(p_id)
-		just_joined = false
+	if send_join_msg:
+		if just_joined or player_join_cache.size() != players.size():
+			for p_id in players: 
+				if not player_join_cache.has(p_id):
+					rpc_id(p_id, "show_join_msg", player_name)
+					player_join_cache.append(p_id)
+			just_joined = false
 		
 
 remote func unregister_player(id):
@@ -160,6 +163,7 @@ func host_game(new_player_name):
 	host_name = player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
+	send_join_msg = false
 	get_tree().set_network_peer(host)
 
 func join_game(ip, new_player_name):
