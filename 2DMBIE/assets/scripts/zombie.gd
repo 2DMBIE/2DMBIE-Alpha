@@ -34,7 +34,7 @@ func _ready():
 	growl_timer.autostart = true
 	add_child(growl_timer)
 	
-	pathFinder = find_parent("World").find_node("Pathfinder")
+	pathFinder = get_tree().get_root().get_node("World").find_node("Pathfinder")
 	movement = Vector2(0, 0)
 	var timer = Timer.new()
 	timer.set_wait_time(.1)
