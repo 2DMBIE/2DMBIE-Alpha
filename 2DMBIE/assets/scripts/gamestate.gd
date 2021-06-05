@@ -81,6 +81,7 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
+	print(players)
 	if just_joined:
 		for p_id in players:
 			rpc_id(p_id, "show_join_msg", player_name)
