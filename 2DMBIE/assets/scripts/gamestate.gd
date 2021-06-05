@@ -66,6 +66,7 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 # Lobby management functions
+var player_join_cache = []
 
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
@@ -82,10 +83,13 @@ remote func register_player(id, new_player_name):
 	players[id] = new_player_name
 	add_player(id, new_player_name)
 	print(players)
-	if just_joined:
-		for p_id in players:
-			rpc_id(p_id, "show_join_msg", player_name)
+	if just_joined or player_join_cache.size() != players.size():
+		for p_id in players: 
+			if not player_join_cache.has(p_id):
+				rpc_id(p_id, "show_join_msg", player_name)
+				player_join_cache.append(p_id)
 		just_joined = false
+		
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", id, players[id])
