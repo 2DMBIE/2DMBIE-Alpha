@@ -10,6 +10,7 @@ const MAX_PEERS = 12
 var player_name = "Unnamed"
 var host_name
 var last_player_name = ""
+var just_joined = true
 
 # Names for remote players in id:name format
 var players = {}
@@ -68,9 +69,6 @@ func _connected_fail():
 
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
-		for p_id in players:
-			rpc_id(id, "show_join_msg", new_player_name)
-		
 		# If we are the server, let everyone know about the new player
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		rpc_id(id, "add_player", 1, player_name)
@@ -83,8 +81,10 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	#show_join_msg(new_player_name)
-	print("Player: " + new_player_name + " joined!! ")
+	if just_joined:
+		for p_id in players:
+			rpc_id(p_id, "show_join_msg", player_name)
+		just_joined = false
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", id, players[id])
@@ -107,6 +107,7 @@ remote func add_player(id, name):
 
 remote func show_join_msg(name):
 	emit_signal("on_player_join", name)
+	print("Player: " + name + " has joined the session!!!!")
 	
 remote func pre_start_game(spawn_points):
 	# Change scene
