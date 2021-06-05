@@ -84,7 +84,6 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	print(players)
 	if send_join_msg:
 		if just_joined or player_join_cache.size() != players.size():
 			for p_id in players: 
@@ -115,7 +114,6 @@ remote func add_player(id, name):
 
 remote func show_join_msg(name):
 	emit_signal("on_player_join", name)
-	print("Player: " + name + " has joined the session!!!!")
 	
 remote func pre_start_game(spawn_points):
 	# Change scene
