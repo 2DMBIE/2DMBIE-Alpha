@@ -3,17 +3,19 @@ extends Node
 # Default game port
 const DEFAULT_PORT = 25565
 
-# Max number of players
-const MAX_PEERS = 12
+# Max number of players: 4 including host!
+const MAX_PEERS = 3
 
 # Name for my player
 var player_name = "Unnamed"
 var host_name
 var last_player_name = ""
 
+# To send in-game join message
 var send_join_msg = true
 var just_joined = true
 var player_join_cache = []
+
 # Names for remote players in id:name format
 var players = {}
 
@@ -68,7 +70,6 @@ func _connected_fail():
 	emit_signal("connection_failed")
 
 # Lobby management functions
-
 
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
