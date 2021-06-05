@@ -68,11 +68,13 @@ func _connected_fail():
 
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
+		for p_id in players:
+			rpc_id(id, "show_join_msg", new_player_name)
+		
 		# If we are the server, let everyone know about the new player
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		rpc_id(id, "add_player", 1, player_name)
 		for p_id in players: # Then, for each remote player
-			rpc_id(id, "show_join_msg", new_player_name)
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
 			rpc_id(id, "add_player", p_id, players[p_id])
 			
@@ -81,7 +83,7 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	show_join_msg(new_player_name)
+	#show_join_msg(new_player_name)
 	print("Player: " + new_player_name + " joined!! ")
 
 remote func unregister_player(id):
