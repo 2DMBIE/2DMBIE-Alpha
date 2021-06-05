@@ -39,7 +39,6 @@ func _process(_delta):
 	for label in labels:
 		if label.visible == true: #<-- last step
 			$Control/StatusIcon/Panel.visible = false
-			$Control/StatusIcon/ChatIcon.visible = false
 		if labels[label][0] == 1:
 			if !labels[label][1]: #<-- fucking hell this took long
 				var labelTimer = Timer.new()
@@ -93,7 +92,6 @@ func _on_labelTimer_timeout(label):
 func _on_chatPopup_timeout():
 	if get_node("/root/Lobby/cursor").visible:
 		$Control/StatusIcon/Panel.visible = true
-		$Control/StatusIcon/ChatIcon.visible = true
 
 func _on_player_join_event(name):
 	var status_label
@@ -132,7 +130,6 @@ func _on_StatusIcon_mouse_entered():
 #		showLabel.connect("timeout", self, "labelShow", [child])
 #		showLabel.start()
 	$Control/StatusIcon/Panel.visible = false
-	$Control/StatusIcon/ChatIcon.visible = false
 	get_node("/root/Lobby/cursor").visible = false
 
 
@@ -140,7 +137,6 @@ func _on_StatusIcon_mouse_exited():
 	for child in $Control/Panel/VBoxContainer.get_children():
 		child.hide()
 	$Control/StatusIcon/Panel.visible = true
-	$Control/StatusIcon/ChatIcon.visible = true
 	get_node("/root/Lobby/cursor").visible = true
 	labelNumber = 0
 	showLabel.stop()

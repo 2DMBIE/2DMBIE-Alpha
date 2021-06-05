@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=4]
 [ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scenes/LobbyStatus.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/scenes/StartButton.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -255,6 +256,9 @@ tile_data = PoolIntArray( 2, 0, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 0, 0, 
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 
+[node name="Interface" parent="HUD" index="0"]
+visible = false
+
 [node name="cursor" type="Sprite" parent="."]
 z_index = 100
 texture = ExtResource( 4 )
@@ -283,3 +287,7 @@ position = Vector2( 640.904, -109.739 )
 [node name="Players" type="Node2D" parent="."]
 
 [node name="LobbyStatus" parent="." instance=ExtResource( 6 )]
+
+[node name="StartButton" parent="." instance=ExtResource( 7 )]
+
+[editable path="HUD"]

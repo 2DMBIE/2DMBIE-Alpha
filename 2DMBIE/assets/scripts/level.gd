@@ -20,7 +20,7 @@ func _ready():
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	
 # warning-ignore:return_value_discarded
-	#gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
 
 func _process(_delta):
@@ -34,7 +34,6 @@ func _process(_delta):
 #			print(x.name)
 	
 	$cursor.position = get_global_mouse_position()
-	return
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
@@ -66,7 +65,7 @@ func _process(_delta):
 		if get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible == false:
 			if is_paused == false:
 				get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-				get_node("CanvasLayer/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+				get_node("HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 				get_tree().paused = true
 				get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -92,7 +91,7 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 
 func unpause_game():
 	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
-	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
+	get_node("HUD/CanvasModulate").set_color(Color(1,1,1,1))
 	get_tree().paused = false
 	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

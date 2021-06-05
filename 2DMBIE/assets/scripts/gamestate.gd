@@ -4,11 +4,12 @@ extends Node
 const DEFAULT_PORT = 25565
 
 # Max number of players
-const MAX_PEERS = 12
+const MAX_PEERS = 3
 
 # Name for my player
 var player_name = "Unnamed"
 var host_name
+var player_id
 var last_player_name = ""
 
 # Names for remote players in id:name format
@@ -22,6 +23,7 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
+signal playersLoaded()
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -41,6 +43,7 @@ func _player_disconnected(id):
 			for p_id in players:
 				# Erase in the server
 				rpc_id(p_id, "unregister_player", id)
+	print("disconnect")
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
@@ -48,6 +51,7 @@ func _connected_ok():
 	rpc("register_player", get_tree().get_network_unique_id(), player_name)
 	rpc("add_player", get_tree().get_network_unique_id(), player_name)
 	emit_signal("connection_succeeded")
+	print("connect")
 
 # Callback from SceneTree, only for clients (not server)
 func _server_disconnected():
@@ -58,11 +62,13 @@ func _server_disconnected():
 	
 	emit_signal("game_error", "Server disconnected")
 	end_game()
+	print("server")
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_fail():
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
+	print("fail")
 
 # Lobby management functions
 
@@ -186,6 +192,7 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 	get_tree().set_network_peer(null) # End networking
+	print("poopoo")
 
 # Loads the player (you) and the map.
 func load_lobby():
@@ -202,10 +209,12 @@ func load_lobby():
 	player.set_network_master(get_tree().get_network_unique_id())
 	world.get_node("Players").add_child(player)
 	
+	player_id = get_tree().get_network_unique_id()
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)
 	if !last_player_name == "":
 		emit_signal("on_player_join", last_player_name)
+	emit_signal("playersLoaded")
 
 func _ready():
 	# warning-ignore:return_value_discarded

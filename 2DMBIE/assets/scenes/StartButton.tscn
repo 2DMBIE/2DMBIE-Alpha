@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/sprites/StartButton.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/StartButton2.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/StartButton1.png" type="Texture" id=3]
+[ext_resource path="res://assets/font/Zombie_Font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/scripts/StartButton.gd" type="Script" id=6]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="DynamicFont" id=5]
+size = 26
+outline_size = 1
+outline_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+font_data = ExtResource( 5 )
+
+[node name="StartButton" type="CanvasLayer"]
+script = ExtResource( 6 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+focus_mode = 0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 100, 60 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -24.0
+rect_min_size = Vector2( 100, 36 )
+custom_fonts/font = SubResource( 5 )
+text = "2 / 4"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Control/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -24.0
+rect_min_size = Vector2( 100, 24 )
+custom_fonts/font = ExtResource( 4 )
+text = "Players"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
