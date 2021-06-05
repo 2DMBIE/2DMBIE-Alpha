@@ -3,7 +3,7 @@ extends Node
 # Default game port
 const DEFAULT_PORT = 25565
 
-# Max number of players
+# Max number of players: 4 including host!
 const MAX_PEERS = 3
 
 # Name for my player
@@ -11,6 +11,11 @@ var player_name = "Unnamed"
 var host_name
 var player_id
 var last_player_name = ""
+
+# To send in-game join message
+var send_join_msg_enabled = true
+var just_joined = true
+var player_join_cache = []
 
 # Names for remote players in id:name format
 var players = {}
@@ -27,9 +32,9 @@ signal playersLoaded()
 
 # Callback from SceneTree
 func _player_connected(_id):
+	pass
 	# This is not used in this demo, because _connected_ok is called for clients
 	# on success and will do the job.
-	pass
 
 # Callback from SceneTree
 func _player_disconnected(id):
@@ -86,7 +91,14 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	
+	if send_join_msg_enabled:
+		if just_joined or player_join_cache.size() != players.size():
+			for p_id in players: 
+				if not player_join_cache.has(p_id):
+					rpc_id(p_id, "show_join_msg", player_name)
+					player_join_cache.append(p_id)
+			just_joined = false
+		
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", id, players[id])
@@ -107,6 +119,9 @@ remote func add_player(id, name):
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
 
+remote func show_join_msg(name):
+	emit_signal("on_player_join", name)
+	
 remote func pre_start_game(spawn_points):
 	# Change scene
 	var main = load("res://scenes/main.tscn").instance()
@@ -153,6 +168,7 @@ func host_game(new_player_name):
 	host_name = player_name
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
+	send_join_msg_enabled = false
 	get_tree().set_network_peer(host)
 
 func join_game(ip, new_player_name):
