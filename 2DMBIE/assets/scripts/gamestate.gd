@@ -25,9 +25,9 @@ signal game_error(what)
 
 # Callback from SceneTree
 func _player_connected(_id):
+	pass
 	# This is not used in this demo, because _connected_ok is called for clients
 	# on success and will do the job.
-	pass
 
 # Callback from SceneTree
 func _player_disconnected(id):
@@ -72,6 +72,7 @@ remote func register_player(id, new_player_name):
 		rpc_id(id, "register_player", 1, player_name) # Send myself to new dude
 		rpc_id(id, "add_player", 1, player_name)
 		for p_id in players: # Then, for each remote player
+			rpc_id(id, "show_join_msg", new_player_name)
 			rpc_id(id, "register_player", p_id, players[p_id]) # Send player to new dude
 			rpc_id(id, "add_player", p_id, players[p_id])
 			
@@ -80,7 +81,8 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	
+	show_join_msg(new_player_name)
+	print("Player: " + new_player_name + " joined!! ")
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", id, players[id])
@@ -101,6 +103,9 @@ remote func add_player(id, name):
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
 
+remote func show_join_msg(name):
+	emit_signal("on_player_join", name)
+	
 remote func pre_start_game(spawn_points):
 	# Change scene
 	var main = load("res://scenes/main.tscn").instance()
