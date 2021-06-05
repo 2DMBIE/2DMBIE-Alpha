@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/scripts/bulletNormal.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/guns/bullets/bullet shotgun pellet red.png" type="Texture" id=2]
-
+[ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -131,6 +131,13 @@ lifetime = 20.0
 speed_scale = 6.05
 randomness = 0.28
 process_material = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 0.1
+color = Color( 1, 0, 0, 1 )
+energy = 0.75
+shadow_enabled = true
 
 [connection signal="body_entered" from="bullet" to="." method="_on_bullet_body_entered"]
 [connection signal="body_exited" from="bullet" to="." method="_on_bullet_body_exited"]

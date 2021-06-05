@@ -210,8 +210,8 @@ position = Vector2( 3040, -1312 )
 [connection signal="perkactive" from="Perks/FasterShootingPerk" to="Player/body/chest/torso/gun" method="_on_FasterShootingPerk_perkactive"]
 [connection signal="perkactiveAmmo" from="Perks/AmmoPerk" to="Player/body/chest/torso/gun" method="_on_AmmoPerk_perkactiveAmmo"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 
 [editable path="PauseMenu"]

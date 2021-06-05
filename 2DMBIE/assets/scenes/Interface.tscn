@@ -206,10 +206,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon2"]
-position = Vector2( 64, 32 )
+position = Vector2( 48, 31 )
 
 [node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon2"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_left = -32.0
 margin_right = 128.0
 margin_bottom = 64.0
 __meta__ = {
@@ -217,7 +218,7 @@ __meta__ = {
 }
 
 [node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon2"]
-position = Vector2( 64, 32 )
+position = Vector2( 48, 31 )
 scale = Vector2( 0.484375, 0.34375 )
 texture = ExtResource( 10 )
 color = Color( 0.917647, 0.921569, 0.262745, 1 )
@@ -237,10 +238,11 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 64, 32 )
+position = Vector2( 48, 31 )
 
 [node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_left = -32.0
 margin_right = 128.0
 margin_bottom = 64.0
 __meta__ = {
@@ -248,7 +250,7 @@ __meta__ = {
 }
 
 [node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 64, 32 )
+position = Vector2( 48, 31 )
 scale = Vector2( 0.5, 0.34375 )
 texture = ExtResource( 10 )
 color = Color( 0.196078, 0.694118, 0.890196, 1 )

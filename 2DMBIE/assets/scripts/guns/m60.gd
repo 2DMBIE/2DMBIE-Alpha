@@ -5,7 +5,7 @@ class_name M60
 func _init():
 	name = "M60" # The name of the gun.
 	offset = Vector2(21.257,-5.695) # The position of the gun.
-	scale = Vector2(1,1) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
+	scale = Vector2(.9,.9) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
 	texture = load("res://assets/sprites/guns/M60.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(107.246, -12.552) # Position of the bulletpoint.
