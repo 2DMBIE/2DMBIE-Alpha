@@ -34,13 +34,8 @@ var slideHold = false
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
-#puppet var puppet_direction = Vector2()
 
 func _ready():
-	var dict = {"walking": true, 
-				"running": false }
-	#print(dict["walking"])
-	#print(dict["running"])
 	$AnimationTree.active = true
 	if is_network_master():
 		zombie_dam_timer = Timer.new()
@@ -107,17 +102,14 @@ func _physics_process(_delta):
 			rpc_unreliable("crouch", false)
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
-		#rset("puppet_direction", get_node("body").scale)
 	else:
 		position = puppet_pos
 		motion = puppet_motion
-		#get_node("body").scale = puppet_direction
 	
 	motion = move_and_slide(motion, UP)
 	if not is_network_master():
 		puppet_pos = position
 		puppet_motion = motion
-		#puppet_direction = get_node("body").scale
 
 remotesync func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):

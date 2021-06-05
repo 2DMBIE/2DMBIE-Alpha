@@ -11,8 +11,11 @@ var labels = {}
 
 func _ready():
 	print("ready")
+# warning-ignore:return_value_discarded
 	gamestate.connect("on_player_join", self, "send_remote_player_name")
+# warning-ignore:return_value_discarded
 	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
+# warning-ignore:return_value_discarded
 	gamestate.connect("lobby_created", self, "_on_lobby_created_event")
 	showLabel = Timer.new()
 	showLabel.set_wait_time(.01)
@@ -21,7 +24,7 @@ func _ready():
 	showLabel.connect("timeout", self, "labelShow") #[child]
 #	showLabel.start()
 
-func _process(delta):
+func _process(_delta):
 #	if Input.is_action_just_pressed("jump"):
 #		send_remote_player_name()
 #		var status_label
@@ -100,7 +103,7 @@ func _on_player_join_event(name):
 	
 	labels[status_label] = [status_label.modulate.a, false]
 
-func _on_player_leave_event(id, name):
+func _on_player_leave_event(_id, name):
 	var status_label
 	status_label = lobby_label.instance()
 	status_label.text = " " + (str(name) + " left the lobby")
