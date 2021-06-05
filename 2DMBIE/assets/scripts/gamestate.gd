@@ -124,22 +124,22 @@ remote func show_join_msg(name):
 	
 remote func pre_start_game(spawn_points):
 	# Change scene
-	var main = load("res://scenes/main.tscn").instance()
+	var main = load("res://assets/scenes/World.tscn").instance()
 	get_tree().get_root().add_child(main)
 
-	get_tree().get_root().get_node("lobby").hide()
+	get_tree().get_root().get_node("Lobby").hide()
 
-	var player_scene = load("res://scenes/player/player.tscn")
+	var player_scene = load("res://assets/scenes/player.tscn")
 
 	for p_id in spawn_points:
-		var spawn_pos = main.get_node("spawn_points/" + str(spawn_points[p_id])).global_transform.origin
+		var spawn_pos = main.get_node("p_Spawnpoints/" + str(spawn_points[p_id])).global_transform.origin
 		var player = player_scene.instance()
 
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.set_network_master(p_id) #set unique id as master
 		player.global_transform.origin = spawn_pos
 		
-		main.get_node("players").add_child(player)
+		main.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start
@@ -149,6 +149,7 @@ remote func pre_start_game(spawn_points):
 
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
+	get_tree().get_root().get_node("Lobby").queue_free()
 
 var players_ready = []
 

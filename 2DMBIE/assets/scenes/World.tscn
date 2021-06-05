@@ -1,7 +1,6 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=5]
@@ -3992,29 +3991,21 @@ tile_set = SubResource( 19 )
 format = 1
 tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -2162663, 47, 0, -2097132, 48, 0, -2097128, 38, 0, -2097127, 38, 2, -2031612, 19, 0, -2031611, 19, 0, -2031609, 31, 0, -2031601, 20, 0, -2031600, 20, 1, -2031599, 20, 1, -2031598, 20, 2, -2031594, 23, 2, -2031592, 23, 2, -2031590, 23, 2, -2031589, 43, 0, -2031588, 23, 2, -1769470, 19, 1, -1769469, 24, 1, -1769468, 19, 1, -1769467, 24, 1, -1769466, 19, 1, -1769465, 24, 1, -1769464, 19, 1, -1769463, 24, 1, -1769457, 20, 0, -1769456, 20, 1, -1769455, 20, 2, -1769399, 40, 0, -1638353, 45, 0, -1572842, 41, 0, -1507327, 43, 0, -1507326, 20, 0, -1507325, 19, 0, -1507323, 19, 1, -1507322, 24, 1, -1507313, 25, 0, -1441777, 10, 0, -1441775, 10, 0, -1441771, 38, 0, -1441770, 38, 2, -1376207, 7, 0, -1376206, 7, 1, -1376205, 7, 1, -1376204, 7, 2, -1245130, 48, 0, -1245116, 47, 0, -1179594, 16, 0, -1179580, 16, 0, -524254, 41, 0, -458730, 40, 0, -458705, 47, 0, -393194, 16, 0, -393183, 16, 0, -196603, 48, 0, -196546, 3, 5, -196545, 3, 3, -196541, 3, 5, -196540, 3, 3, -196535, 3, 5, -131067, 16, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 316.524, -155.924 )
+[node name="Players" type="Node2D" parent="."]
 
-[node name="body" parent="Player" index="1"]
-position = Vector2( 0, 2.31954 )
+[node name="p_Spawnpoints" type="Node2D" parent="."]
 
-[node name="thigh_right" parent="Player/body/legs" index="0"]
-rotation = 0.0198545
+[node name="0" type="Position2D" parent="p_Spawnpoints"]
+position = Vector2( 160, -160 )
 
-[node name="lowerleg_right" parent="Player/body/legs/thigh_right" index="0"]
-rotation = 0.710216
+[node name="1" type="Position2D" parent="p_Spawnpoints"]
+position = Vector2( 480, -160 )
 
-[node name="foot_right" parent="Player/body/legs/thigh_right/lowerleg_right" index="0"]
-rotation = -0.723126
+[node name="2" type="Position2D" parent="p_Spawnpoints"]
+position = Vector2( 1056, -160 )
 
-[node name="thigh_left" parent="Player/body/legs" index="1"]
-rotation = -0.432921
-
-[node name="lowerleg_left" parent="Player/body/legs/thigh_left" index="0"]
-rotation = 0.873525
-
-[node name="foot_left" parent="Player/body/legs/thigh_left/lowerleg_left" index="0"]
-rotation = -0.428067
+[node name="3" type="Position2D" parent="p_Spawnpoints"]
+position = Vector2( 768, -416 )
 
 [node name="Spawnpoints" type="YSort" parent="."]
 position = Vector2( 2.245, 4.48984 )
@@ -4300,11 +4291,6 @@ hframes = 21
 visible = false
 script = ExtResource( 8 )
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 6 )]
-
-[node name="Panel" parent="CanvasLayer/Interface/weaponslots/Weapon2" index="1"]
-self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
-
 [node name="Weapons" type="YSort" parent="."]
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
@@ -4395,29 +4381,13 @@ stream = ExtResource( 33 )
 pitch_scale = 1.05
 bus = "Soundeffects"
 
+[node name="HUD" parent="." instance=ExtResource( 6 )]
+
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
-[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
-[connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
-[connection signal="button_down" from="Player/PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
-[connection signal="button_down" from="Player/PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
-[connection signal="button_down" from="Player/Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
-[connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/M4A2" to="Weapons/M4A2/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
-
-[editable path="Player"]
-[editable path="Player/PauseMenu"]
-[editable path="Player/PauseMenu/Container/Continue"]
-[editable path="Player/PauseMenu/Container/Options"]
-[editable path="Player/PauseMenu/Container/ExitGame"]
-[editable path="Player/Optionsmenu"]
-[editable path="CanvasLayer"]
