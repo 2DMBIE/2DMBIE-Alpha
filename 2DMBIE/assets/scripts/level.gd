@@ -148,7 +148,7 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 func _on_playersLoaded():
 #	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
 	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
-	if get_node("Players/"+str(gamestate.player_id)).is_network_master():
+	if get_node("Players/"+str(gamestate.player_id)).is_network_master() and not has_node("/root/Lobby"):
 		MarkerPos.get_node("Marker").visible = true
 	
 # warning-ignore:return_value_discarded
