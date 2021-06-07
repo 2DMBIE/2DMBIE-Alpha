@@ -8,8 +8,6 @@ var Selected_Weapon = 0
 onready var gunscript = get_node("../Player/body/chest/torso/gun")
 
 signal play_sound(library)
-signal play_sound_ambient_sound(sound)
-signal stop_sound_ambient_sound(sound)
 
 #export(int, "MP5", "UMP45", "P90", "SPAS12", "XM1014", "M4A1", "AK12", "M60", "M249", "BARRETT50", "AWP", "INTERVENTION") var Selected_Weapon = 0 
 

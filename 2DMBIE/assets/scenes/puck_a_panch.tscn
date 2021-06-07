@@ -196,7 +196,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=46]
-extents = Vector2( 312, 176 )
+extents = Vector2( 100, 120 )
 
 [node name="puck_a_panch" type="Node2D"]
 z_index = -5
@@ -204,7 +204,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 11
+frame = 32
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -272,8 +272,6 @@ max_distance = 500.0
 bus = "Soundeffects"
 
 [connection signal="play_sound" from="." to="sfx" method="_on_puck_a_panch_play_sound"]
-[connection signal="play_sound_ambient_sound" from="." to="sfx" method="_on_puck_a_panch_play_sound_ambient_sound"]
-[connection signal="stop_sound_ambient_sound" from="." to="sfx" method="_on_puck_a_panch_stop_sound_ambient_sound"]
 [connection signal="timeout" from="Timer" to="Light2D" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="buyarea" to="." method="_on_buyarea_body_entered"]
 [connection signal="body_exited" from="buyarea" to="." method="_on_buyarea_body_exited"]
