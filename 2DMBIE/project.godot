@@ -90,6 +90,13 @@ window/stretch/aspect="expand"
 
 singletons=[  ]
 
+[importer_defaults]
+
+texture={
+"detect_3d": false,
+"flags/filter": false
+}
+
 [input]
 
 ui_accept={

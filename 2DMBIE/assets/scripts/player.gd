@@ -31,6 +31,7 @@ signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
+var paused = false
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
@@ -49,67 +50,71 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
-	if is_network_master():
-		motion.y += GRAVITY
-		var friction = false
-		if tileMap:
-			mousePos = get_global_mouse_position()
-			tilePos = tileMap.world_to_map(mousePos)
-			
-		if motion.y > 150 and not falling:
-			falling = true
-		if motion.y == 20 and falling:
-			rpc("onfall")
-		if motion.y == 20:
-			falling = false
+	if !paused:
+		$AnimationTree.active = true
+		if is_network_master():
+			motion.y += GRAVITY
+			var friction = false
+			if tileMap:
+				mousePos = get_global_mouse_position()
+				tilePos = tileMap.world_to_map(mousePos)
+				
+			if motion.y > 150 and not falling:
+				falling = true
+			if motion.y == 20 and falling:
+				rpc("onfall")
+			if motion.y == 20:
+				falling = false
 
-		if Input.is_action_just_pressed("knife") and not is_knifing:
-			rpc("knife")
-		if running_disabled && Input.is_action_just_pressed("sprint"):
-			get_node("body/chest/torso/gun").backfiring = false
-			running_disabled = false
-		var is_running = Input.is_action_pressed("sprint") and not running_disabled
+			if Input.is_action_just_pressed("knife") and not is_knifing:
+				rpc("knife")
+			if running_disabled && Input.is_action_just_pressed("sprint"):
+				get_node("body/chest/torso/gun").backfiring = false
+				running_disabled = false
+			var is_running = Input.is_action_pressed("sprint") and not running_disabled
 
-		if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			move("left", is_running)
-		elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
-			move("right", is_running)
-		elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
-			move("standstill", is_running)
-			friction = true
-			
-			motion.x = lerp(motion.x, 0, 0.3)
-			
-		if is_on_floor():
-			if Input.is_action_just_pressed("move_down"):
-				if get_slide_collision(0).collider.name == "Floor":
-					set_collision_mask_bit(dropthroughBit, false)
-			rpc("jump", false)
-			if Input.is_action_just_pressed("jump"):
-				rpc("jump", true)
-			if friction == true:
+			if Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+				move("left", is_running)
+			elif Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
+				move("right", is_running)
+			elif not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+				move("standstill", is_running)
+				friction = true
+				
 				motion.x = lerp(motion.x, 0, 0.3)
+				
+			if is_on_floor():
+				if Input.is_action_just_pressed("move_down"):
+					if get_slide_collision(0).collider.name == "Floor":
+						set_collision_mask_bit(dropthroughBit, false)
+				rpc("jump", false)
+				if Input.is_action_just_pressed("jump"):
+					rpc("jump", true)
+				if friction == true:
+					motion.x = lerp(motion.x, 0, 0.3)
+			else:
+				#aim("walking")
+				if friction == true:
+					motion.x = lerp(motion.x, 0, 0.05)
+			var _is_standing_still = motion.x > -21 and motion.x < 21
+			if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
+				rpc("slide")
+			if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
+				rpc_unreliable("crouch", true)
+			else:
+				rpc_unreliable("crouch", false)
+			rset("puppet_motion", motion)
+			rset("puppet_pos", position)
 		else:
-			#aim("walking")
-			if friction == true:
-				motion.x = lerp(motion.x, 0, 0.05)
-		var _is_standing_still = motion.x > -21 and motion.x < 21
-		if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
-			rpc("slide")
-		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
-			rpc_unreliable("crouch", true)
-		else:
-			rpc_unreliable("crouch", false)
-		rset("puppet_motion", motion)
-		rset("puppet_pos", position)
+			position = puppet_pos
+			motion = puppet_motion
+		
+		motion = move_and_slide(motion, UP)
+		if not is_network_master():
+			puppet_pos = position
+			puppet_motion = motion
 	else:
-		position = puppet_pos
-		motion = puppet_motion
-	
-	motion = move_and_slide(motion, UP)
-	if not is_network_master():
-		puppet_pos = position
-		puppet_motion = motion
+		$AnimationTree.active = false
 
 remotesync func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):

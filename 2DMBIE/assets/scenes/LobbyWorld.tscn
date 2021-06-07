@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scenes/LobbyStatus.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scenes/StartButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprites/CloudsBG.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/Moon.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/Sun.png" type="Texture" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -221,6 +224,60 @@ points = PoolVector2Array( 64, 16, 0, 16, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
+[sub_resource type="Animation" id=12]
+resource_name = "DayNightCycle"
+length = 24.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.113725, 0.113725, 0.113725, 1 ), Color( 0.137255, 0.137255, 0.137255, 1 ), Color( 0.168627, 0.168627, 0.168627, 1 ), Color( 0.152941, 0.152941, 0.152941, 1 ), Color( 0.239216, 0.239216, 0.239216, 1 ), Color( 0.337255, 0.337255, 0.337255, 1 ), Color( 0.423529, 0.423529, 0.423529, 1 ), Color( 0.52549, 0.52549, 0.52549, 1 ), Color( 0.564706, 0.564706, 0.564706, 1 ), Color( 0.576471, 0.576471, 0.576471, 1 ), Color( 0.643137, 0.643137, 0.643137, 1 ), Color( 0.647059, 0.647059, 0.647059, 1 ), Color( 0.662745, 0.662745, 0.662745, 1 ), Color( 0.67451, 0.67451, 0.67451, 1 ), Color( 0.74902, 0.74902, 0.74902, 1 ), Color( 0.760784, 0.760784, 0.760784, 1 ), Color( 0.687146, 0.687146, 0.687146, 1 ), Color( 0.584314, 0.584314, 0.584314, 1 ), Color( 0.514846, 0.514846, 0.514846, 1 ), Color( 0.445378, 0.445378, 0.445378, 1 ), Color( 0.37591, 0.37591, 0.37591, 1 ), Color( 0.306443, 0.306443, 0.306443, 1 ), Color( 0.236975, 0.236975, 0.236975, 1 ), Color( 0.167507, 0.167507, 0.167507, 1 ), Color( 0.141176, 0.141176, 0.141176, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/SunMoonPivot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -90.0, -75.0, -60.0, -45.0, -30.0, -15.0, 0.0, 15.0, 30.0, 45.0, 60.0, 75.0, 90.0, 105.0, 120.0, 135.0, 150.0, 165.0, 180.0, 195.0, 210.0, 225.0, 240.0, 255.0, 270.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/Clouds1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1000, -100 ), Vector2( 1042, -100 ), Vector2( 1084, -100 ), Vector2( 1126, -100 ), Vector2( 1168, -100 ), Vector2( 1210, -100 ), Vector2( 1252, -100 ), Vector2( 1294, -100 ), Vector2( 1336, -100 ), Vector2( 1378, -100 ), Vector2( 1420, -100 ), Vector2( 1462, -100 ), Vector2( 1504, -100 ), Vector2( 1546, -100 ), Vector2( 1588, -100 ), Vector2( 1630, -100 ), Vector2( 1672, -100 ), Vector2( 1714, -100 ), Vector2( 1756, -100 ), Vector2( 1798, -100 ), Vector2( 1840, -100 ), Vector2( 1882, -100 ), Vector2( 1924, -100 ), Vector2( 1966, -100 ), Vector2( 2008, -100 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimationPlayer/Clouds2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1000, -100 ), Vector2( -958, -100 ), Vector2( -916, -100 ), Vector2( -874, -100 ), Vector2( -832, -100 ), Vector2( -790, -100 ), Vector2( -748, -100 ), Vector2( -706, -100 ), Vector2( -664, -100 ), Vector2( -622, -100 ), Vector2( -580, -100 ), Vector2( -538, -100 ), Vector2( -496, -100 ), Vector2( -454, -100 ), Vector2( -412, -100 ), Vector2( -370, -100 ), Vector2( -328, -100 ), Vector2( -286, -100 ), Vector2( -244, -100 ), Vector2( -202, -100 ), Vector2( -160, -100 ), Vector2( -118, -100 ), Vector2( -76, -100 ), Vector2( -34, -100 ), Vector2( 0, -100 ) ]
+}
+
 [node name="Lobby" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -264,9 +321,6 @@ z_index = 100
 texture = ExtResource( 4 )
 hframes = 21
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.498039, 0.498039, 0.498039, 1 )
-
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="SpawnPoints"]
@@ -286,5 +340,41 @@ position = Vector2( 355.853, -118.234 )
 [node name="LobbyStatus" parent="." instance=ExtResource( 6 )]
 
 [node name="StartButton" parent="." instance=ExtResource( 7 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DayNightCycle = SubResource( 12 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="AnimationPlayer"]
+position = Vector2( 1, 0 )
+z_index = -40
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
+
+[node name="Clouds1" type="Sprite" parent="AnimationPlayer"]
+position = Vector2( 2008, -100 )
+scale = Vector2( 2, 2 )
+z_index = -40
+texture = ExtResource( 8 )
+
+[node name="Clouds2" type="Sprite" parent="AnimationPlayer"]
+position = Vector2( 0, -100 )
+scale = Vector2( 2, 2 )
+z_index = -40
+texture = ExtResource( 8 )
+
+[node name="SunMoonPivot" type="Position2D" parent="AnimationPlayer"]
+position = Vector2( 128, 384 )
+rotation = 4.71239
+z_index = -40
+
+[node name="Sun" type="Sprite" parent="AnimationPlayer/SunMoonPivot"]
+position = Vector2( -768, 0 )
+scale = Vector2( 4, 4 )
+z_index = 1
+texture = ExtResource( 10 )
+
+[node name="Moon" type="Sprite" parent="AnimationPlayer/SunMoonPivot"]
+position = Vector2( 768, 0 )
+z_index = 1
+texture = ExtResource( 9 )
 
 [editable path="HUD"]

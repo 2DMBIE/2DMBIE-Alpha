@@ -18,6 +18,9 @@ func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
+	if get_node("/root/Lobby"):
+		print("orrr")
+		$AnimationPlayer.play("DayNightCycle")
 	
 # warning-ignore:return_value_discarded
 	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
@@ -55,7 +58,7 @@ func _process(_delta):
 		Global.Speed = 200
 		Global.enemiesKilled = 0 
 		Global.unlocked_doors = 0
-	if is_paused == false:
+	if is_paused == false and get_node_or_null("/root/World") != null:
 		if Global.brightness:
 			$CanvasModulate.color = Color("#bbbbbb")
 		else:
@@ -66,7 +69,8 @@ func _process(_delta):
 			if is_paused == false:
 				get_node("CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 				get_node("HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-				get_tree().paused = true
+#				get_tree().paused = true
+				get_node("Players/"+str(gamestate.player_id)).paused = true
 				get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				is_paused = true
@@ -92,7 +96,8 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 func unpause_game():
 	get_node("CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node("HUD/CanvasModulate").set_color(Color(1,1,1,1))
-	get_tree().paused = false
+#	get_tree().paused = false
+	get_node("Players/"+str(gamestate.player_id)).paused = false
 	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")

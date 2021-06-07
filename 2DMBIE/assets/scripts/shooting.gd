@@ -55,94 +55,95 @@ func switch_slot(slot):
 		prevWeapon = weapon_slots[slot]
 
 func _process(_delta):
-	if is_network_master():
-		if shooting_disabled:
-			return
-		
-		for i in range(weapon_slots.size()):         
-			if Input.is_action_just_released("weapon" + str(i + 1)):             
-				switch_slot(i)
+	if !get_node("../../../../").paused:
+		if is_network_master():
+			if shooting_disabled:
+				return
+			
+			for i in range(weapon_slots.size()):         
+				if Input.is_action_just_released("weapon" + str(i + 1)):             
+					switch_slot(i)
 
-		var _gun: Gun
-		_gun = get_current_gun()
-		emit_signal("ammo_ui", _gun.ammo, _gun.maxclipAmmo, _gun.totalAmmo)
-		#als de player wil schieten, en waarnaartoe
-		if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped() and canShoot and _gun.ammo > 0 and not is_holding_knife:
-			bulletDelayTimer.start()
-			var bullet = _gun.getBullet() 
-			
-			mouse_position = get_global_mouse_position()
-			bulletpoint_position = $BulletPoint.get_global_position()
-			
-			bullet.position = bulletpoint_position
-			if Global.aim:
-				if Input.is_action_pressed("aim") and valid_aim: #aiming
-					emit_signal("no_aim_shoot", false)
-					bullet.rotation = (mouse_position - bullet.position).angle()
-					mouse_direction = bullet.position.direction_to(mouse_position).normalized()
-					emit_signal("is_shooting", true)
-					emit_signal("shake_camera", _gun.camera_shake)
-					emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
-					
-					bullet.set_direction(mouse_direction)
-					var muzzleflashInstance = _gun.getMuzzleFlash()
-					$BulletPoint.add_child(muzzleflashInstance)
-					get_tree().current_scene.add_child(bullet)
-					_gun.ammo -= 1
-					
-					var _facing1 = get_node("../../../../").facing
-					var _facing2 = get_mouse_facing()
-					if _facing1 != _facing2: # The player is aiming left while r
-						backfiring = true
-					else:
-						backfiring = false
-					
-					if Input.is_action_pressed("sprint") and backfiring:
-						emit_signal("on_backfire_event")
+			var _gun: Gun
+			_gun = get_current_gun()
+			emit_signal("ammo_ui", _gun.ammo, _gun.maxclipAmmo, _gun.totalAmmo)
+			#als de player wil schieten, en waarnaartoe
+			if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped() and canShoot and _gun.ammo > 0 and not is_holding_knife:
+				bulletDelayTimer.start()
+				var bullet = _gun.getBullet() 
 				
-				elif not Input.is_action_pressed("aim"): #not aiming
-					emit_signal("no_aim_shoot", true)
-					var facingDir = 10
-					var facing = get_node("../../../../").facing
-					emit_signal("is_shooting", true)
-					emit_signal("shake_camera", _gun.camera_shake)
-					emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
-					if facing == "right":
-						facingDir = 10
-					elif facing == "left":
-						bullet.scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
-						facingDir = -10
-					bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
+				mouse_position = get_global_mouse_position()
+				bulletpoint_position = $BulletPoint.get_global_position()
 				
-					var muzzleflashInstance = _gun.getMuzzleFlash()
-					$BulletPoint.add_child(muzzleflashInstance)
-					get_tree().current_scene.add_child(bullet)
-					_gun.ammo -= 1
-			else:
-				if valid_aim:
-					emit_signal("no_aim_shoot", false)
-					bullet.rotation = (mouse_position - bullet.position).angle()
-					mouse_direction = bullet.position.direction_to(mouse_position).normalized()
-					emit_signal("is_shooting", true)
-					emit_signal("shake_camera", _gun.camera_shake)
-					emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+				bullet.position = bulletpoint_position
+				if Global.aim:
+					if Input.is_action_pressed("aim") and valid_aim: #aiming
+						emit_signal("no_aim_shoot", false)
+						bullet.rotation = (mouse_position - bullet.position).angle()
+						mouse_direction = bullet.position.direction_to(mouse_position).normalized()
+						emit_signal("is_shooting", true)
+						emit_signal("shake_camera", _gun.camera_shake)
+						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+						
+						bullet.set_direction(mouse_direction)
+						var muzzleflashInstance = _gun.getMuzzleFlash()
+						$BulletPoint.add_child(muzzleflashInstance)
+						get_tree().current_scene.add_child(bullet)
+						_gun.ammo -= 1
+						
+						var _facing1 = get_node("../../../../").facing
+						var _facing2 = get_mouse_facing()
+						if _facing1 != _facing2: # The player is aiming left while r
+							backfiring = true
+						else:
+							backfiring = false
+						
+						if Input.is_action_pressed("sprint") and backfiring:
+							emit_signal("on_backfire_event")
 					
-					bullet.set_direction(mouse_direction)
-					var muzzleflashInstance = _gun.getMuzzleFlash()
-					$BulletPoint.add_child(muzzleflashInstance)
-					get_tree().current_scene.add_child(bullet)
-					_gun.ammo -= 1
+					elif not Input.is_action_pressed("aim"): #not aiming
+						emit_signal("no_aim_shoot", true)
+						var facingDir = 10
+						var facing = get_node("../../../../").facing
+						emit_signal("is_shooting", true)
+						emit_signal("shake_camera", _gun.camera_shake)
+						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+						if facing == "right":
+							facingDir = 10
+						elif facing == "left":
+							bullet.scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
+							facingDir = -10
+						bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
 					
-					var _facing1 = get_node("../../../../").facing
-					var _facing2 = get_mouse_facing()
-					if _facing1 != _facing2: # The player is aiming left while r
-						backfiring = true
-					else:
-						backfiring = false
-					
-					if Input.is_action_pressed("sprint") and backfiring:
-						emit_signal("on_backfire_event")
-		reload()
+						var muzzleflashInstance = _gun.getMuzzleFlash()
+						$BulletPoint.add_child(muzzleflashInstance)
+						get_tree().current_scene.add_child(bullet)
+						_gun.ammo -= 1
+				else:
+					if valid_aim:
+						emit_signal("no_aim_shoot", false)
+						bullet.rotation = (mouse_position - bullet.position).angle()
+						mouse_direction = bullet.position.direction_to(mouse_position).normalized()
+						emit_signal("is_shooting", true)
+						emit_signal("shake_camera", _gun.camera_shake)
+						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+						
+						bullet.set_direction(mouse_direction)
+						var muzzleflashInstance = _gun.getMuzzleFlash()
+						$BulletPoint.add_child(muzzleflashInstance)
+						get_tree().current_scene.add_child(bullet)
+						_gun.ammo -= 1
+						
+						var _facing1 = get_node("../../../../").facing
+						var _facing2 = get_mouse_facing()
+						if _facing1 != _facing2: # The player is aiming left while r
+							backfiring = true
+						else:
+							backfiring = false
+						
+						if Input.is_action_pressed("sprint") and backfiring:
+							emit_signal("on_backfire_event")
+			reload()
 	
 func _on_aimzone_exited():
 	valid_aim = true
