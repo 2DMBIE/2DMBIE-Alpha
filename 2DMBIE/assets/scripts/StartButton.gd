@@ -9,7 +9,7 @@ func _ready():
 	if !get_tree().get_network_unique_id() == 1:
 		$Control/Button.visible = false
 
-func _process(delta):
+func _process(_delta):
 	user_amount = gamestate.players.size() + 1
 	$Control/Panel/Label.text = str(user_amount) + " / " + str(total_user_amount)
 

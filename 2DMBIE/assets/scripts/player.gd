@@ -269,22 +269,14 @@ func crouch_idle_transition(value):
 	crouch_idle = value
 
 func _on_gun_is_shooting(value):
-	$AnimationTree.set("parameters/shooting/active", value)
+	rpc_unreliable("set_animation", "parameters/shooting/active", value)
+	
 
 func _on_no_aim_shoot(value):
-	$AnimationTree.set("parameters/fixed_aim/current", value)
-
-#func _draw():
-#	if tileMap:
-#		if get_node("/root/World/Pathfinder").showLines:
-#			var postA = $ShootVector.position
-#			var postB = get_local_mouse_position()
-#			draw_line(postA, postB, Color(255,0,0),1)
-#		else:
-#			pass
+	rpc_unreliable("set_animation","parameters/fixed_aim/current", value)
 
 func set_gun_recoil_sensitivity(value):
-	$AnimationTree.set("parameters/gun_recoil_sensitivity/add_amount", value)
+	rpc_unreliable("set_animation", "parameters/gun_recoil_sensitivity/add_amount", value)
 
 signal ammoUpdate(ammo, maxClipammo, totalAmmo)
 
