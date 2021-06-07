@@ -88,7 +88,7 @@ func _on_game_ended():
 	$Players.hide()
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
-	$Connect/Cancel.visible = true
+	$Connect/Cancel.visible = false
 	$Connect/Cancel.disabled = false
 
 

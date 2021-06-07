@@ -41,12 +41,13 @@ var guns = [MP5.new(), SPAS12.new(), M4A1.new(), AK12.new(), BARRETT50.new()]
 var reloadTimer = Timer.new()
 
 func _ready():
-	self.visible = true
 	set_gun(weapon_slots[0])
-	reloadTimer.wait_time = 2.5
-	reloadTimer.one_shot = true
-	reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
-	add_child(reloadTimer)
+	if is_network_master():
+		self.visible = true
+		reloadTimer.wait_time = 2.5
+		reloadTimer.one_shot = true
+		reloadTimer.connect("timeout", self, "on_reload_timeout_finished")
+		add_child(reloadTimer)
 
 func switch_slot(slot):
 	if weapon_slots[slot] > -1 and !weapon_slots[slot] == prevWeapon:
@@ -74,7 +75,6 @@ func _process(_delta):
 				
 				mouse_position = get_global_mouse_position()
 				bulletpoint_position = $BulletPoint.get_global_position()
-				
 				bullet.position = bulletpoint_position
 				if Global.aim:
 					if Input.is_action_pressed("aim") and valid_aim: #aiming
@@ -87,8 +87,11 @@ func _process(_delta):
 						
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
-						$BulletPoint.add_child(muzzleflashInstance)
-						get_tree().current_scene.add_child(bullet)
+						#$BulletPoint.add_child(muzzleflashInstance)
+						#get_tree().current_scene.add_child(bullet)
+						#get_node("../..").add_child(bullet)
+						#get_tree().root.add_child(bullet)
+						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position())
 						_gun.ammo -= 1
 						
 						var _facing1 = get_node("../../../../").facing
@@ -117,7 +120,7 @@ func _process(_delta):
 					
 						var muzzleflashInstance = _gun.getMuzzleFlash()
 						$BulletPoint.add_child(muzzleflashInstance)
-						get_tree().current_scene.add_child(bullet)
+						$BulletPoint.add_child(bullet)
 						_gun.ammo -= 1
 				else:
 					if valid_aim:
@@ -131,7 +134,7 @@ func _process(_delta):
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
 						$BulletPoint.add_child(muzzleflashInstance)
-						get_tree().current_scene.add_child(bullet)
+						$BulletPoint.add_child(bullet)
 						_gun.ammo -= 1
 						
 						var _facing1 = get_node("../../../../").facing
@@ -166,18 +169,33 @@ func set_gun(index):
 	if canBuyFasterFireRate2 == false:
 		bulletDelayTimer.wait_time *= .75
 		emit_signal("send_decay", 1.22)
-	#rpc("remote_set_gun", index)
+	rpc("remote_set_gun", _gun.name)
 
-remotesync func remote_set_gun(index):
-	var gun: Gun
-	gun = guns[index]
-	self.texture = gun.texture
+remote func remote_set_gun(gun_name):
+	for gun in guns:
+		if gun.name == gun_name:
+			self.texture = gun.texture
+			self.scale = gun.scale
+			self.offset = gun.offset
+			break
+			# do i need to play the gun sound?
 
-	#emit_signal("play_sound", gun.name.to_lower() + str("_draw"))
-
-
-remotesync func add_bullet_to_scene(bullet, muzzleflash):
-	pass
+remotesync func fire_bullet(gun_name, _mouse_position, _bullet_position):
+	var gun
+	for x in guns:
+		if x.name == gun_name:
+			gun = x
+			break
+	var bullet = gun.getBullet() 
+	bullet.rotation = (_mouse_position - bullet.position).angle()
+	var _mouse_direction = bullet.position.direction_to(mouse_position).normalized()
+	bullet.position = _bullet_position
+	bullet.set_direction(_mouse_direction)
+	var muzzleflashInstance = gun.getMuzzleFlash()
+	$BulletPoint.add_child(muzzleflashInstance)
+	get_tree().current_scene.add_child(bullet)
+	#get_tree().get_root().add_child(bullet) hetzelfde scheef
+	#get_tree().root.add_child(bullet) # heel scheef maar op de goede plek
 
 func get_current_gun():
 	return guns[current_gun_index]
