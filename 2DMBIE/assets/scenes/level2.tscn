@@ -4350,7 +4350,7 @@ self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
 
 [node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 640, -160 )
-Selected_Weapon = 0
+Selected_Weapon = 1
 
 [node name="M4A1" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 928, -1184 )
