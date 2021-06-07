@@ -8,6 +8,7 @@ var random_round
 var music_playing = false
 signal music(action)
 var GraphRandomPoint
+var notePause = false
 
 var specialWaveIncrease = 1.15
 
@@ -22,6 +23,7 @@ func _ready():
 	for spawnpoint in get_tree().get_nodes_in_group("spawnpoints"):
 		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
 	_on_zombieSpawned()
+	SpawnNote()
 
 
 func _process(_delta):
@@ -47,17 +49,20 @@ func _process(_delta):
 			$CanvasModulate.color = Color("#7f7f7f")
 
 	if Input.is_action_just_pressed("pause"):
-		if get_node("Optionsmenu/Options").visible == false and !is_gameOver:
-			if !is_paused:
-				pause_game()
-				is_paused = true
-				get_node("PauseMenu/Container").visible = true
-				
-			elif is_paused and get_node("Optionsmenu/Options").visible == false:
-				unpause_game()
-				is_paused = false
-				get_node("PauseMenu/Container").visible = false
-		
+		if notePause == false:
+			if get_node("Optionsmenu/Options").visible == false and !is_gameOver:
+				if !is_paused:
+					pause_game()
+					is_paused = true
+					get_node("PauseMenu/Container").visible = true
+					
+				elif is_paused and get_node("Optionsmenu/Options").visible == false:
+					unpause_game()
+					is_paused = false
+					get_node("PauseMenu/Container").visible = false
+		else:
+			get_tree().paused = false
+			notePause = false
 	escape_options()
 
 var waveType = 0
@@ -86,7 +91,15 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.maxHealth += 100
 		Global.EnemyDamage += 50
 		Global.Speed += 4
-		Global.enemiesKilled = 0
+		Global.enemiesKilled = 0 
+		
+		var noteAmount = get_tree().get_nodes_in_group("notes").size()
+		if noteAmount == 1:
+			pass
+		else:
+			SpawnNote()
+	else:
+		pass
 
 func pause_game():
 	get_tree().paused = true
