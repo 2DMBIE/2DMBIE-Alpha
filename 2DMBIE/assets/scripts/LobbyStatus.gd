@@ -12,7 +12,7 @@ var labels = {}
 func _ready():
 	print("ready")
 # warning-ignore:return_value_discarded
-	gamestate.connect("on_player_join", self, "send_remote_player_name")
+	gamestate.connect("on_player_join", self, "_on_player_join_event")
 # warning-ignore:return_value_discarded
 	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
 # warning-ignore:return_value_discarded
@@ -146,24 +146,3 @@ func labelShow():
 	labelNumber += 1
 	if labelNumber < $Control/Panel/VBoxContainer.get_children().size():
 		showLabel.start()
-
-var player_name
-puppet var puppet_name
-
-func send_remote_player_name(playerName):
-	if is_network_master():
-		player_name = playerName
-		rset("player_name", puppet_name)
-	else:
-		player_name = puppet_name
-	
-	player_name = playerName
-	if not is_network_master():
-		puppet_name = player_name
-	
-	_on_player_join_event(player_name)
-#	player_name = playerName
-#	rpc("receive_remote_player_name", player_name)
-
-sync func receive_remote_player_name(test):
-	_on_player_join_event(test)
