@@ -263,7 +263,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1000, -100 ), Vector2( 1042, -100 ), Vector2( 1084, -100 ), Vector2( 1126, -100 ), Vector2( 1168, -100 ), Vector2( 1210, -100 ), Vector2( 1252, -100 ), Vector2( 1294, -100 ), Vector2( 1336, -100 ), Vector2( 1378, -100 ), Vector2( 1420, -100 ), Vector2( 1462, -100 ), Vector2( 1504, -100 ), Vector2( 1546, -100 ), Vector2( 1588, -100 ), Vector2( 1630, -100 ), Vector2( 1672, -100 ), Vector2( 1714, -100 ), Vector2( 1756, -100 ), Vector2( 1798, -100 ), Vector2( 1840, -100 ), Vector2( 1882, -100 ), Vector2( 1924, -100 ), Vector2( 1966, -100 ), Vector2( 2008, -100 ) ]
+"values": [ Vector2( 1000, -100 ), Vector2( 1084, -100 ), Vector2( 1168, -100 ), Vector2( 1252, -100 ), Vector2( 1336, -100 ), Vector2( 1420, -100 ), Vector2( 1504, -100 ), Vector2( 1588, -100 ), Vector2( 1672, -100 ), Vector2( 1756, -100 ), Vector2( 1840, -100 ), Vector2( 1924, -100 ), Vector2( 2008, -100 ), Vector2( 2092, -100 ), Vector2( 2176, -100 ), Vector2( 2260, -100 ), Vector2( 2344, -100 ), Vector2( 2428, -100 ), Vector2( 2512, -100 ), Vector2( 2596, -100 ), Vector2( 2680, -100 ), Vector2( 2764, -100 ), Vector2( 2848, -100 ), Vector2( 2932, -100 ), Vector2( 3000, -100 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AnimationPlayer/Clouds2:position")
@@ -275,7 +275,19 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1000, -100 ), Vector2( -958, -100 ), Vector2( -916, -100 ), Vector2( -874, -100 ), Vector2( -832, -100 ), Vector2( -790, -100 ), Vector2( -748, -100 ), Vector2( -706, -100 ), Vector2( -664, -100 ), Vector2( -622, -100 ), Vector2( -580, -100 ), Vector2( -538, -100 ), Vector2( -496, -100 ), Vector2( -454, -100 ), Vector2( -412, -100 ), Vector2( -370, -100 ), Vector2( -328, -100 ), Vector2( -286, -100 ), Vector2( -244, -100 ), Vector2( -202, -100 ), Vector2( -160, -100 ), Vector2( -118, -100 ), Vector2( -76, -100 ), Vector2( -34, -100 ), Vector2( 0, -100 ) ]
+"values": [ Vector2( -1000, -100 ), Vector2( -916, -100 ), Vector2( -832, -100 ), Vector2( -748, -100 ), Vector2( -664, -100 ), Vector2( -580, -100 ), Vector2( -496, -100 ), Vector2( -412, -100 ), Vector2( -328, -100 ), Vector2( -244, -100 ), Vector2( -160, -100 ), Vector2( -76, -100 ), Vector2( 8, -100 ), Vector2( 92, -100 ), Vector2( 176, -100 ), Vector2( 260, -100 ), Vector2( 344, -100 ), Vector2( 428, -100 ), Vector2( 512, -100 ), Vector2( 596, -100 ), Vector2( 680, -100 ), Vector2( 764, -100 ), Vector2( 848, -100 ), Vector2( 932, -100 ), Vector2( 1000, -100 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AnimationPlayer/Clouds3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.001, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3000, -100 ), Vector2( -3000, -100 ), Vector2( -2916, -100 ), Vector2( -2832, -100 ), Vector2( -2748, -100 ), Vector2( -2664, -100 ), Vector2( -2580, -100 ), Vector2( -2496, -100 ), Vector2( -2412, -100 ), Vector2( -2328, -100 ), Vector2( -2244, -100 ), Vector2( -2160, -100 ), Vector2( -2076, -100 ), Vector2( -1992, -100 ), Vector2( -1908, -100 ), Vector2( -1824, -100 ), Vector2( -1740, -100 ), Vector2( -1656, -100 ), Vector2( -1572, -100 ), Vector2( -1488, -100 ), Vector2( -1404, -100 ), Vector2( -1320, -100 ), Vector2( -1236, -100 ), Vector2( -1152, -100 ), Vector2( -1068, -100 ), Vector2( -1000, -100 ) ]
 }
 
 [node name="Lobby" type="Node2D"]
@@ -347,23 +359,29 @@ anims/DayNightCycle = SubResource( 12 )
 [node name="CanvasModulate" type="CanvasModulate" parent="AnimationPlayer"]
 position = Vector2( 1, 0 )
 z_index = -40
-color = Color( 0.141176, 0.141176, 0.141176, 1 )
+color = Color( 0.167507, 0.167507, 0.167507, 1 )
 
 [node name="Clouds1" type="Sprite" parent="AnimationPlayer"]
-position = Vector2( 2008, -100 )
+position = Vector2( 2932, -100 )
 scale = Vector2( 2, 2 )
 z_index = -40
 texture = ExtResource( 8 )
 
 [node name="Clouds2" type="Sprite" parent="AnimationPlayer"]
-position = Vector2( 0, -100 )
+position = Vector2( 932, -100 )
+scale = Vector2( 2, 2 )
+z_index = -40
+texture = ExtResource( 8 )
+
+[node name="Clouds3" type="Sprite" parent="AnimationPlayer"]
+position = Vector2( -1068, -100 )
 scale = Vector2( 2, 2 )
 z_index = -40
 texture = ExtResource( 8 )
 
 [node name="SunMoonPivot" type="Position2D" parent="AnimationPlayer"]
 position = Vector2( 128, 384 )
-rotation = 4.71239
+rotation = 4.45059
 z_index = -40
 
 [node name="Sun" type="Sprite" parent="AnimationPlayer/SunMoonPivot"]
