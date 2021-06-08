@@ -23,6 +23,7 @@ func _ready():
 func _process(_delta):
 	$VBOX/HBox/VBox/Score/Score.text = str(Global.Score)
 	$VBOX/HBox/VBox/Wave/Wave.text = str(Global.Currentwave)
+	$VBOX/HBox/VBox/Kills/Kills.text = str(Global.totalEnemiesKilled)
 	
 	if visible:
 		if !$AudioStreamPlayer.playing:

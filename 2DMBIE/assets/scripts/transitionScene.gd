@@ -1,9 +1,9 @@
 extends Node2D
 
 var tips = [
-	"You can view you controls in the options menu!",
-	"You can view you controls in the options menu!",
-	"You can view you controls in the options menu!",
+	"You can view your controls in the options menu!",
+	"You can view your controls in the options menu!",
+	"You can view your controls in the options menu!",
 	"Dying is not good for you!",
 	"You can use score to buy everything! (if you have enough :D)"
 ]

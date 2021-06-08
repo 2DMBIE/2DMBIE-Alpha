@@ -384,13 +384,13 @@
 20/shapes = [  ]
 20/z_index = 0
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 56
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 4 )
 
@@ -429,7 +429,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="HBox/VBox"]
-material = SubResource( 4 )
+material = SubResource( 2 )
 margin_top = 205.0
 margin_right = 640.0
 margin_bottom = 605.0
@@ -463,7 +463,7 @@ material = ExtResource( 6 )
 margin_top = 75.0
 margin_right = 550.0
 margin_bottom = 152.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Tip!"
 align = 1
 autowrap = true
@@ -473,7 +473,7 @@ material = ExtResource( 6 )
 margin_top = 232.0
 margin_right = 550.0
 margin_bottom = 325.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Text Text Text Text Text Text Text Text Text Text Text Text"
 align = 1
 valign = 1

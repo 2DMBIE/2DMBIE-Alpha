@@ -11,6 +11,7 @@ var maxHealth = 500
 var EnemyDamage = 300
 var Speed = 75
 var enemiesKilled = 0
+var totalEnemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
