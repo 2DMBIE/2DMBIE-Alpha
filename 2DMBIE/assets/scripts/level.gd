@@ -19,12 +19,19 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	if get_node("/root/Lobby"):
-		print("orrr")
-		$AnimationPlayer.play("DayNightCycle")
-	
+		if get_tree().get_network_unique_id() == 1:
+			$AnimationPlayer.play("DayNightCycle")
+		else:
+			rpc_id(1, "get_daynightcycle", get_tree().get_network_unique_id())
 # warning-ignore:return_value_discarded
 	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
+remote func get_daynightcycle(id):
+	rpc_id(id, "set_daynightcycle", $AnimationPlayer.current_animation_position)
+	#$AnimationPlayer.current_animation_position
+remote func set_daynightcycle(time):
+	$AnimationPlayer.play("DayNightCycle")
+	$AnimationPlayer.seek(time)
 
 func _process(_delta):
 	if MarkerPos != null:
