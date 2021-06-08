@@ -439,6 +439,7 @@ __meta__ = {
 [node name="PlayButton" parent="Buttons" instance=ExtResource( 8 )]
 focus_mode = 0
 mouse_default_cursor_shape = 2
+scene_to_load = "res://assets/scenes/transitionScene.tscn"
 
 [node name="OptionsButton" parent="Buttons" instance=ExtResource( 5 )]
 anchor_right = 0.3

@@ -19,17 +19,17 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 size = 36
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 18
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [node name="Optionsmenu" type="CanvasLayer"]
 
@@ -312,7 +312,7 @@ margin_bottom = 374.0
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Movement"
 valign = 1
 
@@ -499,7 +499,7 @@ margin_bottom = 374.0
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Interact"
 valign = 1
 
@@ -657,7 +657,7 @@ margin_bottom = 590.0
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Attack"
 valign = 1
 
@@ -758,7 +758,7 @@ margin_bottom = 590.0
 margin_right = 350.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Debug"
 valign = 1
 
@@ -906,7 +906,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 custom_icons/off = ExtResource( 8 )
 custom_icons/on = ExtResource( 9 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_disabled = Color( 0.615686, 0.180392, 0.180392, 1 )
 custom_colors/font_color_hover_pressed = Color( 0.364706, 0.615686, 0.227451, 1 )
 custom_colors/font_color = Color( 0.113725, 0.498039, 0.776471, 1 )
@@ -926,7 +926,7 @@ margin_right = 280.0
 margin_bottom = 40.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Debug Mode"
 
 [node name="ExitOptions" type="Button" parent="Options/Panel/VBox"]
@@ -934,7 +934,7 @@ margin_top = 528.0
 margin_right = 1024.0
 margin_bottom = 579.0
 mouse_default_cursor_shape = 2
-custom_styles/focus = SubResource( 6 )
+custom_styles/focus = SubResource( 7 )
 custom_fonts/font = ExtResource( 2 )
 text = "Exit Options"
 flat = true
