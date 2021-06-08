@@ -121,14 +121,13 @@ func _on_ExitGame_button_down():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 
-
 func _on_ExitOptions_button_down():
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
 		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 		if x != OK:
 			print("ERROR: ", x)
 	else:
-		get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible = false
+		get_node("Players/"+str(gamestate.player_id)+"Optionsmenu/Options").visible = false
 	get_node("Players/"+str(gamestate.player_id)+"/PauseMenu/Container").visible = true
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
