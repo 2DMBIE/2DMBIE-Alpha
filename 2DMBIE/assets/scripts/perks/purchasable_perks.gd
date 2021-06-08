@@ -33,8 +33,6 @@ export(int, "Health perk", "Movement speed perk", "Reload perk", "Fire Rate") va
 
 func _physics_process(_delta):
 	
-	print(get_node("../../Player").MAX_RUN_SPEED)
-	
 	#Healthperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 0 and canBuyHealth:
 		healthperk()

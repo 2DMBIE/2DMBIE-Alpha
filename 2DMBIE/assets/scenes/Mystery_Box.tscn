@@ -1,7 +1,7 @@
 [gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=1]
-[ext_resource path="res://assets/scripts/puck_a_panch.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/MysteryBox.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/guns/Juke a Box spritesheet.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/Jukebox/mr sandman jukebox music.wav" type="AudioStream" id=5]
@@ -204,7 +204,7 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 14
+frame = 39
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
