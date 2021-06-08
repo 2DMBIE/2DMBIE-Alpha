@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/scripts/perks/purchasable_perks.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/perks/health_perk.png" type="Texture" id=2]
@@ -7,9 +7,15 @@
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=5]
 [ext_resource path="res://assets/sounds/player/notenoughmoney.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/sounds/player/buy(cha_ching).wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 77.9354, 52.0882 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
 
 [node name="purchasable_perks" type="Node2D"]
 script = ExtResource( 1 )
@@ -48,6 +54,7 @@ margin_left = -50.5546
 margin_top = 41.8089
 margin_right = 46.4454
 margin_bottom = 60.8089
+custom_fonts/font = SubResource( 2 )
 text = "Hello world"
 align = 1
 __meta__ = {
