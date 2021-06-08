@@ -33,6 +33,7 @@ var falling = false
 var slideHold = false
 var groundlessjump = true
 var jumpwaspressed = false
+var canBuyMovement2 = true
 
 func _ready():
 	if Settings.debugMode:
@@ -187,11 +188,13 @@ func _physics_process(_delta):
 		if !Global.maia:
 			WALK_ACCELERATION = 35 #old 20
 			MAX_WALK_SPEED = 230 #old 110 
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 430
 		else:
 			WALK_ACCELERATION = 40 #old 20
 			MAX_WALK_SPEED = 430 #old 110 
-		RUN_ACCELERATION = 40
-		MAX_RUN_SPEED = 430
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 430
 	if Global.maia and _is_standing_still and is_sliding:
 		$AnimationTree.set("parameters/sliding/current", 1)
 		$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
@@ -468,10 +471,16 @@ func on_slide_animation_complete():
 			is_knifing = false
 			if !Global.maia:
 				is_sliding = false
-			WALK_ACCELERATION = 25 #old 20
-			RUN_ACCELERATION = 20
-			MAX_WALK_SPEED = 130 #old 110 
-			MAX_RUN_SPEED = 330
+			if canBuyMovement2 == false:
+				WALK_ACCELERATION = 40 #old 20
+				MAX_WALK_SPEED = 200 #old 110 
+				RUN_ACCELERATION = 40
+				MAX_RUN_SPEED = 380
+			else:
+				WALK_ACCELERATION = 25 #old 20
+				RUN_ACCELERATION = 20
+				MAX_WALK_SPEED = 130 #old 110 
+				MAX_RUN_SPEED = 330
 			$AnimationPlayer.get_animation("slide").length = .6
 			$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, .6)
 			slideHold = false
@@ -501,3 +510,8 @@ func rememberjumptime():
 	yield(get_tree().create_timer(0.1),"timeout")
 	jumpwaspressed = false
 	pass
+
+
+func _on_MovementPerk_perkactiveMovement(canBuyMovement):
+	if canBuyMovement == false:
+		canBuyMovement2 = false

@@ -24,6 +24,7 @@ var canBuyFasterFireRate = true
 
 signal perkactive(canBuyFasterFireRate)
 signal perkactiveAmmo(canBuyAmmo)
+signal perkactiveMovement(canBuyMovement)
 signal play_sound(library)
 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
@@ -31,6 +32,8 @@ onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 export(int, "Health perk", "Movement speed perk", "Reload perk", "Fire Rate") var Selected_Perk = 0
 
 func _physics_process(_delta):
+	
+	print(get_node("../../Player").MAX_RUN_SPEED)
 	
 	#Healthperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 0 and canBuyHealth:
@@ -51,6 +54,7 @@ func _physics_process(_delta):
 		perkInterface("MovementPerk")
 		canBuyMovement = false
 		emit_signal("play_sound", "buy")
+		emit_signal("perkactiveMovement", canBuyMovement)
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
