@@ -72,7 +72,6 @@ func _process(_delta):
 			if Input.is_action_pressed("attack") and bulletDelayTimer.is_stopped() and canShoot and _gun.ammo > 0 and not is_holding_knife:
 				bulletDelayTimer.start()
 				var bullet = _gun.getBullet() 
-				
 				mouse_position = get_global_mouse_position()
 				bulletpoint_position = $BulletPoint.get_global_position()
 				bullet.position = bulletpoint_position
@@ -87,10 +86,6 @@ func _process(_delta):
 						
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
-						#$BulletPoint.add_child(muzzleflashInstance)
-						#get_tree().current_scene.add_child(bullet)
-						#get_node("../..").add_child(bullet)
-						#get_tree().root.add_child(bullet)
 						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position())
 						_gun.ammo -= 1
 						
@@ -111,20 +106,23 @@ func _process(_delta):
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
 						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+						var _scale = Vector2(1,1)
 						if facing == "right":
 							facingDir = 10
 						elif facing == "left":
-							bullet.scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
+							_scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
 							facingDir = -10
 						bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(facingDir, 0)).normalized())
-					
+						
+						rpc("fire_bullet_no_aim", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position(), facingDir, _scale)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
-						$BulletPoint.add_child(muzzleflashInstance)
-						$BulletPoint.add_child(bullet)
+						#$BulletPoint.add_child(muzzleflashInstance)
+						#$BulletPoint.add_child(bullet)
 						_gun.ammo -= 1
 				else:
 					if valid_aim:
 						emit_signal("no_aim_shoot", false)
+						
 						bullet.rotation = (mouse_position - bullet.position).angle()
 						mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 						emit_signal("is_shooting", true)
@@ -180,22 +178,45 @@ remote func remote_set_gun(gun_name):
 			break
 			# do i need to play the gun sound?
 
-remotesync func fire_bullet(gun_name, _mouse_position, _bullet_position):
-	var gun
+remotesync func fire_bullet(gun_name, _global_mouse_position, _global_bullet_position):
+	var _gun
 	for x in guns:
 		if x.name == gun_name:
-			gun = x
+			_gun = x
 			break
-	var bullet = gun.getBullet() 
-	bullet.rotation = (_mouse_position - bullet.position).angle()
-	var _mouse_direction = bullet.position.direction_to(mouse_position).normalized()
-	bullet.position = _bullet_position
+	var bullet = _gun.getBullet() 
+	#mouse_position = get_global_mouse_position()
+	#bulletpoint_position = $BulletPoint.get_global_position()
+	bullet.position = _global_bullet_position
+	bullet.rotation = (_global_mouse_position - bullet.position).angle()
+	var _mouse_direction = bullet.position.direction_to(_global_mouse_position).normalized()
+	
 	bullet.set_direction(_mouse_direction)
-	var muzzleflashInstance = gun.getMuzzleFlash()
+	var muzzleflashInstance = _gun.getMuzzleFlash()
 	$BulletPoint.add_child(muzzleflashInstance)
-	get_tree().current_scene.add_child(bullet)
-	#get_tree().get_root().add_child(bullet) hetzelfde scheef
+	#get_tree().current_scene.add_child(bullet)
+	#get_node("../..").add_child(bullet)
+	get_tree().root.add_child(bullet)
+		#get_tree().get_root().add_child(bullet) hetzelfde scheef
 	#get_tree().root.add_child(bullet) # heel scheef maar op de goede plek
+
+remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bullet_position, _facing_direction, _bullet_scale):
+	var _gun
+	for x in guns:
+		if x.name == gun_name:
+			_gun = x
+			break
+	#mouse_position = get_global_mouse_position()
+	#bulletpoint_position = $BulletPoint.get_global_position()
+	#bullet.position = bulletpoint_position
+			
+	var bullet = _gun.getBullet()
+	bullet.position = _global_bullet_position
+	bullet.scale = _bullet_scale
+	bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(_facing_direction, 0)).normalized())
+	var muzzleflashInstance = _gun.getMuzzleFlash()
+	$BulletPoint.add_child(muzzleflashInstance)
+	get_tree().root.add_child(bullet)
 
 func get_current_gun():
 	return guns[current_gun_index]
