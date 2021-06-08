@@ -17,3 +17,11 @@ func _on_purchasable_weapons_play_sound(library):
 
 func _on_Door_play_sound(library):
 	play_sound(library)
+
+
+func _on_puck_a_panch_play_sound(library):
+	play_sound(library)
+
+
+func _on_purchasable_perks_play_sound(library):
+	play_sound(library)

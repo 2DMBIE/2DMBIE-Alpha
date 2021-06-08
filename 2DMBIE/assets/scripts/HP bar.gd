@@ -13,3 +13,5 @@ func _on_Player_health_updated(health, maxHealth):
 		set_tint_progress("e1be32")
 	else:
 		set_tint_progress("e11e1e")
+	
+	$Label.text = str(int(health))

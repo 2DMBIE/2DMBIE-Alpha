@@ -199,7 +199,7 @@ func _on_HeadshotArea_area_entered(area):
 		headshot = true
 		randomize()
 		var rand = (randf())
-		if rand < 0.15:
+		if rand < 0.05:
 			if str($body/torso/neck/head.texture) == "res://assets/sprites/zombie/head_sheet.png":
 				$body/torso/neck/bloodParticles.visible = true
 			if $body/torso/neck/head.visible == true:
