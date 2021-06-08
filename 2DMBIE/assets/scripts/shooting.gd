@@ -234,11 +234,19 @@ func reload():
 				reload_gun_index = current_gun_index
 				
 				if reloadTimer.wait_time == 2.5:
-					emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
+					#emit_signal("play_sound", _gun.name.to_lower() + str("_reload"))
+					rpc("play_sound_remote", _gun.name.to_lower() + str("_reload"))
 				else:
-					emit_signal("play_sound_with_pitch", "mp5_reload", 2)
+					rpc("play_sound_remote_pitch", "mp5_reload", 2)
+					#emit_signal("play_sound_with_pitch", "mp5_reload", 2)
 				reloadTimer.start()
 				canShoot = false
+
+remotesync func play_sound_remote(library):
+	emit_signal("play_sound", library)
+	
+remotesync func play_sound_remote_pitch(library, pitch):
+	emit_signal("play_sound_with_pitch", library, pitch)
 
 func on_reload_timeout_finished():
 	if reload_gun_index == current_gun_index:
