@@ -209,7 +209,6 @@ func end_game():
 	emit_signal("game_ended")
 	players.clear()
 	get_tree().set_network_peer(null) # End networking
-	print("poopoo")
 
 # Loads the player (you) and the map.
 func load_lobby():
@@ -221,8 +220,7 @@ func load_lobby():
 	var player = player_scene.instance()
 	player.set_name(str(get_tree().get_network_unique_id()))
 	player.set_player_name(player_name)
-	var spawnpoint_number = randi()%7 # generate random integer between 7 and 1
-	#print("Randomnumber is " + str(spawnpoint_number))
+	var spawnpoint_number = randi()%7 # generate random integer between 6 and 0
 	var spawn_pos = world.get_node("SpawnPoints/" + str(spawnpoint_number)).position
 	player.position=spawn_pos
 	player.set_network_master(get_tree().get_network_unique_id())
@@ -234,7 +232,7 @@ func load_lobby():
 	emit_signal("on_local_player_loaded")
 
 func _ready():
-	randomize()
+	randomize() # enabled for spawning at random locations
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	# warning-ignore:return_value_discarded
