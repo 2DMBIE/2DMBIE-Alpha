@@ -4461,11 +4461,101 @@ Selected_Perk = 2
 [node name="puck_a_panch" parent="." instance=ExtResource( 37 )]
 position = Vector2( 4608, -1184 )
 
+[node name="darkenedAreas" type="YSort" parent="."]
+
+[node name="Library" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Library"]
+z_index = 20
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1312, 64, -1312 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Library"]
+visible = false
+polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1312, 64, -1312 )
+
+[node name="Office" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Office"]
+z_index = 20
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 64, -2336, 1976, -2336, 1984, -1856, 1216, -1856, 1216, -1344, 64, -1344 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Office"]
+visible = false
+polygon = PoolVector2Array( 64, -1352, 1216, -1344, 1216, -1856, 1984, -1856, 1984, -2336, 64, -2336 )
+
+[node name="Lounge" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Lounge"]
+visible = false
+polygon = PoolVector2Array( 1280, -64, 3264, -64, 3264, -544, 1280, -544 )
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Lounge"]
+z_index = 20
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 1280, -64, 1280, -544, 3264, -544, 3264, -64 )
+
+[node name="Restaurant" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Restaurant"]
+visible = false
+polygon = PoolVector2Array( 3328, -64, 3328, -576, 3072, -576, 3072, -1056, 4864, -1056, 4864, -64 )
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Restaurant"]
+z_index = 20
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 3328, -64, 3328, -576, 3072, -576, 3072, -1056, 4864, -1056, 4864, -64 )
+
+[node name="Greenhouse" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Greenhouse"]
+visible = false
+polygon = PoolVector2Array( 4864, -2336, 2880, -2336, 2880, -1856, 3456, -1856, 3456, -1344, 4864, -1344 )
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Greenhouse"]
+z_index = 20
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 2880, -2336, 4864, -2336, 4864, -1344, 3456, -1344, 3456, -1856, 2880, -1864, 3440, -1856, 2880, -1856 )
+
+[node name="Special" type="Area2D" parent="darkenedAreas" groups=[
+"Areas",
+]]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Special"]
+polygon = PoolVector2Array( 3072, -1312, 4864, -1312, 4864, -1088, 3072, -1088 )
+
+[node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Special"]
+color = Color( 0, 0, 0, 0.941176 )
+polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
+
 [connection signal="music" from="." to="music" method="do_action"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
-[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
