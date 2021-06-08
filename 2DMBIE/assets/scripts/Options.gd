@@ -3,10 +3,12 @@ extends Control
 var master_bus = AudioServer.get_bus_index("Master")
 var music_bus = AudioServer.get_bus_index("Music")
 var soundeffects_bus = AudioServer.get_bus_index("Soundeffects")
+var inputName
 
 
 func _ready():
 #	Settings.loadSettings()
+	updateControls()
 	$Panel/VBox/Container/Audio/HBox/VBox/MasterSlider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))
 	$Panel/VBox/Container/Audio/HBox/VBox/MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))
 	$Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider.value = db2linear(AudioServer.get_bus_volume_db(soundeffects_bus))
@@ -15,6 +17,13 @@ func _process(_delta):
 	escape_options()
 
 # Here can maybe go the actual functionality of the options
+func updateControls():
+	for Categories in $Panel/VBox/Container/Controls/HBox/Grid.get_children():
+		for Item in Categories.get_children():
+			if (Item.name != 'Label'):
+				Item.get_children()[1].get_children()[0].text = InputMap.get_action_list(Item.name)[0].as_text()
+				if ('InputEventMouseButton' in InputMap.get_action_list(Item.name)[0].as_text()):
+					Item.get_children()[1].get_children()[0].text = 'Mouse '+str(InputMap.get_action_list(Item.name)[0].button_index)
 
 
 # Beneath is the functions of the buttons for the options menu
@@ -33,7 +42,6 @@ func _on_Controls_button_down():
 func _on_GameOptions_button_down():
 	showOption('GameOptions')
 
-# Waht teh frick, i did not expect showOption and hideAll to work first try ;-;
 func showOption(option):
 	hideAll()
 	get_node("Panel/VBox/Container/"+option).visible = true
