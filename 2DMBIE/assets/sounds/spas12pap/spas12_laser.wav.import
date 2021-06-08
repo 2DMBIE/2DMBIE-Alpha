@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spas12_laser.wav-3a0ae4487271af9bbb53bb22672c9d2d.sample"
+
+[deps]
+
+source_file="res://assets/sounds/spas12pap/spas12_laser.wav"
+dest_files=[ "res://.import/spas12_laser.wav-3a0ae4487271af9bbb53bb22672c9d2d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

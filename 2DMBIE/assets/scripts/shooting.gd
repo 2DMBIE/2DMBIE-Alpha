@@ -38,7 +38,7 @@ var backfiring = false
 var canBuyFasterFireRate2 = true
 var canBuyAmmo2 = true
 
-var guns = [MP5.new(), UMP45.new(), P90.new(), SPAS12.new(), XM1014.new(), M4A1.new(), AK12.new(), M60.new(), M249.new(), BARRETT50.new(), AWP.new(), INTERVENTION.new()]
+var guns = [MP5.new(), UMP45.new(), P90.new(), SPAS12.new(),XM1014.new(), M4A1.new(), AK12.new(), M60.new(), M249.new(), BARRETT50.new(), AWP.new(), INTERVENTION.new()]
 var reloadTimer = Timer.new()
 
 func _ready():
@@ -54,7 +54,7 @@ func switch_slot(slot):
 		current_weapon = slot
 		prevWeapon = weapon_slots[slot]
 
-func _process(_delta):     
+func _process(_delta):    
 	if shooting_disabled:
 		return
 	

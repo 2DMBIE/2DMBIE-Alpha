@@ -22,4 +22,4 @@ func _init():
 	maxclipAmmo = 30 # How much bullets are in one magazine.
 	totalAmmo = 330 # Total ammo which comes with each gun.
 	ammo = maxclipAmmo
-	reload_time = float(0.5)
+	reload_time = float(2)
