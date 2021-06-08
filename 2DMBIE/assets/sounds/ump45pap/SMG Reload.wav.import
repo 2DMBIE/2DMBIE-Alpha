@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/SMG Reload.wav-f8263fbd989c7e51a5a34c086b27bec2.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ump45pap/SMG Reload.wav"
+dest_files=[ "res://.import/SMG Reload.wav-f8263fbd989c7e51a5a34c086b27bec2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

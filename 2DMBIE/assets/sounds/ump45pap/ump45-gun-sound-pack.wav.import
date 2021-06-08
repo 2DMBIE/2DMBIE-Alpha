@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ump45-gun-sound-pack.wav-26c554c662077549a35c963d87852b8c.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ump45pap/ump45-gun-sound-pack.wav"
+dest_files=[ "res://.import/ump45-gun-sound-pack.wav-26c554c662077549a35c963d87852b8c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

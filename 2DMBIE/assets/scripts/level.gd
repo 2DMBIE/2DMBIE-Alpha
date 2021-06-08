@@ -230,8 +230,10 @@ func SpawnNote():
 	var notePosition = spawnpoints[randomspawn].get_global_position()
 	Notescene.set_position(notePosition)
 	add_child(Notescene)
+# warning-ignore:return_value_discarded
 	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
-	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")	
+# warning-ignore:return_value_discarded
+	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
 	
 func _on_NotePopup_pauseGame():
 	get_tree().paused = true

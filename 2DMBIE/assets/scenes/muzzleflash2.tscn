@@ -18,6 +18,7 @@ animations = [ {
 [node name="fuzzleflash" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 2.589 )
 frames = SubResource( 1 )
+frame = 1
 speed_scale = 5.0
 playing = true
 script = ExtResource( 4 )
@@ -25,9 +26,9 @@ script = ExtResource( 4 )
 [node name="fuzzleflash2" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -3.399 )
 frames = SubResource( 1 )
-frame = 2
 speed_scale = 5.0
 playing = true
 script = ExtResource( 4 )
+
 [connection signal="animation_finished" from="fuzzleflash" to="fuzzleflash" method="_on_fuzzleflash_animation_finished"]
 [connection signal="animation_finished" from="fuzzleflash2" to="fuzzleflash2" method="_on_fuzzleflash_animation_finished"]

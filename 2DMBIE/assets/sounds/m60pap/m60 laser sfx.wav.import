@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m60 laser sfx.wav-b13194aa712f3573a873135a97fe9c67.sample"
+
+[deps]
+
+source_file="res://assets/sounds/m60pap/m60 laser sfx.wav"
+dest_files=[ "res://.import/m60 laser sfx.wav-b13194aa712f3573a873135a97fe9c67.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

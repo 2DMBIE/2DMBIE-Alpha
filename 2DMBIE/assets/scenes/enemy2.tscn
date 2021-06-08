@@ -23,7 +23,7 @@
 [ext_resource path="res://assets/sounds/zombie/z_footstep2.wav" type="AudioStream" id=37]
 [ext_resource path="res://assets/animations/zombie_walk/walk4.tres" type="Animation" id=40]
 
-[sub_resource type="CapsuleShape2D" id=43]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
 height = 136.316
 
@@ -5239,7 +5239,7 @@ script = ExtResource( 16 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
 z_as_relative = false
-shape = SubResource( 43 )
+shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]
 position = Vector2( 0, 9.183 )

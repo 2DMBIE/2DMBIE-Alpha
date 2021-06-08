@@ -24,6 +24,7 @@ var canBuyFasterFireRate = true
 
 signal perkactive(canBuyFasterFireRate)
 signal perkactiveAmmo(canBuyAmmo)
+signal play_sound(library)
 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
@@ -36,40 +37,52 @@ func _physics_process(_delta):
 		healthperk()
 		perkInterface("HealthPerk")
 		canBuyHealth = false
+		emit_signal("play_sound", "buy")
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").maxHealth)
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#Movementperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 1 and canBuyMovement:
 		movementperk()
 		perkInterface("MovementPerk")
 		canBuyMovement = false
+		emit_signal("play_sound", "buy")
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").MAX_WALK_SPEED)
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#AmmoPerk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 2 and canBuyAmmo:
 		canBuyAmmo = false
+		emit_signal("play_sound", "buy")
 		perkInterface("ReloadPerk")
 		emit_signal("perkactiveAmmo", canBuyAmmo)
 		ammoperk()
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#Faster shooting
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 3 and canBuyFasterFireRate:
 		canBuyFasterFireRate = false
+		emit_signal("play_sound", "buy")
 		perkInterface("FireRatePerk")
 		emit_signal("perkactive", canBuyFasterFireRate)
 		fasterfirerateperk()
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
@@ -89,8 +102,8 @@ func _on_buyarea_body_exited(body):
 		canBuy = false
 
 func healthperk():
-	get_node("../../Player").maxHealth = 2500
-	get_node("../../Player").health = 2500
+	get_node("../../Player").maxHealth *= 2
+	get_node("../../Player").health = get_node("../../Player").maxHealth
 	
 func movementperk():
 	get_node("../../Player").MAX_WALK_SPEED = 200
