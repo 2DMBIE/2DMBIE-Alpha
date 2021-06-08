@@ -131,8 +131,10 @@ func _process(_delta):
 						
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
-						$BulletPoint.add_child(muzzleflashInstance)
-						$BulletPoint.add_child(bullet)
+						#$BulletPoint.add_child(muzzleflashInstance)
+						#$BulletPoint.add_child(bullet)
+						
+						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position())
 						_gun.ammo -= 1
 						
 						var _facing1 = get_node("../../../../").facing
