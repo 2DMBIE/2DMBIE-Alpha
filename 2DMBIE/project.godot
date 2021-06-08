@@ -15,9 +15,29 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/guns/ak12.gd"
 }, {
 "base": "Gun",
+"class": "AK12_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/ak12_pap.gd"
+}, {
+"base": "Gun",
+"class": "AWP",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/awp.gd"
+}, {
+"base": "Gun",
+"class": "AWP_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/awp_pap.gd"
+}, {
+"base": "Gun",
 "class": "BARRETT50",
 "language": "GDScript",
 "path": "res://assets/scripts/guns/barrett50.gd"
+}, {
+"base": "Gun",
+"class": "BARRETT50_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/barrett50_pap.gd"
 }, {
 "base": "Reference",
 "class": "Bullet",
@@ -30,9 +50,44 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/gun.gd"
 }, {
 "base": "Gun",
+"class": "INTERVENTION",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/intervention.gd"
+}, {
+"base": "Gun",
+"class": "INTERVENTION_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/intervention_pap.gd"
+}, {
+"base": "Gun",
+"class": "M249",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m249.gd"
+}, {
+"base": "Gun",
+"class": "M249_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m249_pap.gd"
+}, {
+"base": "Gun",
 "class": "M4A1",
 "language": "GDScript",
 "path": "res://assets/scripts/guns/m4a1.gd"
+}, {
+"base": "Gun",
+"class": "M4A1_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m4a1_pap.gd"
+}, {
+"base": "Gun",
+"class": "M60",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m60.gd"
+}, {
+"base": "Gun",
+"class": "M60_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/m60_pap.gd"
 }, {
 "base": "Gun",
 "class": "MP5",
@@ -40,24 +95,83 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/guns/mp5.gd"
 }, {
 "base": "Gun",
+"class": "MP5_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/mp5_pap.gd"
+}, {
+"base": "Gun",
+"class": "P90",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/p90.gd"
+}, {
+"base": "Gun",
+"class": "P90_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/p90_pap.gd"
+}, {
+"base": "Gun",
 "class": "SPAS12",
 "language": "GDScript",
 "path": "res://assets/scripts/guns/spas12.gd"
+}, {
+"base": "Gun",
+"class": "SPAS12_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/spas12_pap.gd"
 }, {
 "base": "Camera2D",
 "class": "ShakeCamera2D",
 "language": "GDScript",
 "path": "res://assets/scripts/shakecamera2d.gd"
+}, {
+"base": "Gun",
+"class": "UMP45",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/ump45.gd"
+}, {
+"base": "Gun",
+"class": "UMP45_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/ump45_pap.gd"
+}, {
+"base": "Gun",
+"class": "XM1014",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/xm1014.gd"
+}, {
+"base": "Gun",
+"class": "XM1014_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/xm1014_pap.gd"
 } ]
 _global_script_class_icons={
 "AK12": "",
+"AK12_pap": "",
+"AWP": "",
+"AWP_pap": "",
 "BARRETT50": "",
+"BARRETT50_pap": "",
 "Bullet": "",
 "Gun": "",
+"INTERVENTION": "",
+"INTERVENTION_pap": "",
+"M249": "",
+"M249_pap": "",
 "M4A1": "",
+"M4A1_pap": "",
+"M60": "",
+"M60_pap": "",
 "MP5": "",
+"MP5_pap": "",
+"P90": "",
+"P90_pap": "",
 "SPAS12": "",
-"ShakeCamera2D": ""
+"SPAS12_pap": "",
+"ShakeCamera2D": "",
+"UMP45": "",
+"UMP45_pap": "",
+"XM1014": "",
+"XM1014_pap": ""
 }
 
 [application]
@@ -72,7 +186,8 @@ default_bus_layout="res://assets/sounds/default_bus_layout.tres"
 
 [autoload]
 
-Global="*res://assets/scripts/Global.gd"
+Global="*res://assets/Singletons/Global.gd"
+Settings="*res://assets/Singletons/Settings.gd"
 
 [debug]
 
@@ -88,6 +203,29 @@ window/stretch/aspect="expand"
 [gdnative]
 
 singletons=[  ]
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 

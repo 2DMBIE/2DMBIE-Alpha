@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/TileSets/Floor.tres" type="TileSet" id=3]
-[ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=4]
+[ext_resource path="res://assets/scenes/cursor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/scenes/debug.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/scenes/zombie.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scripts/path.gd" type="Script" id=7]
@@ -14,6 +14,9 @@
 [ext_resource path="res://assets/scenes/Interface.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/UI/PauseMenu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/sprites/football_goal_PNG21.png" type="Texture" id=15]
+[ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -72,7 +75,7 @@ tile_set = ExtResource( 2 )
 collision_layer = 2
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -720925, 0, 0, -26, 0, 0, -25, 0, 0, -24, 0, 0, -23, 0, 0, -22, 0, 0, -21, 0, 0, -20, 0, 0, -19, 0, 0, -18, 0, 0, -17, 0, 0, -16, 0, 0, -15, 0, 0, -14, 0, 0, -13, 0, 0, -12, 0, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0 )
+tile_data = PoolIntArray( -720925, 0, 0, -589808, 0, 0, -524272, 0, 0, -458736, 0, 0, -393200, 0, 0, -196583, 0, 0, -131047, 0, 0, -26, 0, 0, -25, 0, 0, -24, 0, 0, -23, 0, 0, -22, 0, 0, -21, 0, 0, -20, 0, 0, -19, 0, 0, -18, 0, 0, -17, 0, 0, -16, 0, 0, -15, 0, 0, -14, 0, 0, -13, 0, 0, -12, 0, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -65528, 0, 0, -65527, 0, 0, -65526, 0, 0, -65525, 0, 0, -65524, 0, 0, -65523, 0, 0, -65522, 0, 0, -65521, 0, 0, -65520, 0, 0, -65519, 0, 0, -65518, 0, 0, -65517, 0, 0, -65516, 0, 0, -65515, 0, 0, -65514, 0, 0, -65513, 0, 0, -65512, 0, 0, -65511, 0, 0 )
 
 [node name="Floor" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
@@ -81,12 +84,6 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -589817, 0, 0, -589816, 0, 0, -458748, 0, 0, -458743, 0, 0, -458742, 0, 0, -327673, 0, 0, -327672, 0, 0, -131095, 0, 0, -131094, 0, 0, -131088, 0, 0, -131087, 0, 0, -131080, 0, 0, -131079, 0, 0, -196603, 0, 0, -196602, 0, 0, -196599, 0, 0, -196598, 0, 0, -65529, 0, 0, -65528, 0, 0 )
 
-[node name="cursor" type="Sprite" parent="."]
-z_index = 10
-z_as_relative = false
-texture = ExtResource( 4 )
-hframes = 21
-
 [node name="Pathfinder" type="Node2D" parent="."]
 visible = false
 script = ExtResource( 7 )
@@ -94,28 +91,61 @@ script = ExtResource( 7 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( 512, -192 )
+position = Vector2( 255.61, -179.286 )
 
 [node name="Weapons" type="Node" parent="."]
 
-[node name="M4A1" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 80.2725, -173.003 )
-
-[node name="MP5" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 640, -512 )
+[node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( 11.3409, -188.22 )
 Selected_Weapon = 0
 
-[node name="SPAS12" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 384, -248 )
+[node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( 248, -192 )
 Selected_Weapon = 1
 
-[node name="AK12" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 640, -248 )
+[node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -296, -184 )
+
+[node name="purchasable_weapons4" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -712, -142.191 )
 Selected_Weapon = 3
 
-[node name="BARRETT50" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 297.753, -507.739 )
+[node name="purchasable_weapons5" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -888, -144 )
 Selected_Weapon = 4
+
+[node name="purchasable_weapons6" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -496, -142.191 )
+Selected_Weapon = 5
+
+[node name="purchasable_weapons7" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1104, -144 )
+Selected_Weapon = 6
+
+[node name="purchasable_weapons8" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1288, -150.191 )
+Selected_Weapon = 7
+
+[node name="purchasable_weapons9" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1464, -145.933 )
+Selected_Weapon = 8
+
+[node name="purchasable_weapons10" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -952, -376 )
+Selected_Weapon = 9
+
+[node name="purchasable_weapons11" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -1392, -352 )
+Selected_Weapon = 10
+
+[node name="purchasable_weapons12" parent="Weapons" instance=ExtResource( 9 )]
+position = Vector2( -440, -360 )
+Selected_Weapon = 11
+
+[node name="puck a panch" type="Node" parent="."]
+
+[node name="puck_a_panch" parent="puck a panch" instance=ExtResource( 16 )]
+position = Vector2( 776, -170.686 )
 
 [node name="Perks" type="Node" parent="."]
 
@@ -128,7 +158,7 @@ position = Vector2( -687.183, -248.978 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( -438.941, -256 )
+position = Vector2( 280, -513.442 )
 
 [node name="AmmoPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -1403.34, -250.8 )
@@ -137,7 +167,6 @@ Selected_Perk = 2
 [node name="CanvasLayer" parent="." instance=ExtResource( 12 )]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.498039, 0.498039, 0.498039, 1 )
 
 [node name="Optionsmenu" parent="." instance=ExtResource( 13 )]
 
@@ -147,15 +176,43 @@ visible = false
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( -178.074, -151.993 )
 
+[node name="cursor" parent="." instance=ExtResource( 4 )]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 947.312, -410.967 )
+texture = ExtResource( 15 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( -1201.43, -125.017 )
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Spawnpoints" type="Node" parent="."]
+
+[node name="enemyspawnpoint15" parent="Spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 3869.75, -1892.49 )
+
+[node name="enemyspawnpoint11" parent="Spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 3293.75, -1380.49 )
+
+[node name="enemyspawnpoint7" parent="Spawnpoints" instance=ExtResource( 17 )]
+position = Vector2( 3040, -1312 )
+
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
-[connection signal="play_sound" from="Weapons/M4A1" to="Weapons/M4A1/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/BARRETT50" to="Weapons/BARRETT50/sfx" method="play_sound"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="perkactive" from="Perks/FasterShootingPerk" to="Player/body/chest/torso/gun" method="_on_FasterShootingPerk_perkactive"]
+[connection signal="perkactiveAmmo" from="Perks/AmmoPerk" to="Player/body/chest/torso/gun" method="_on_AmmoPerk_perkactiveAmmo"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]
@@ -163,3 +220,4 @@ position = Vector2( -178.074, -151.993 )
 [editable path="PauseMenu/Container/ExitMenu"]
 [editable path="CanvasLayer"]
 [editable path="Optionsmenu"]
+[editable path="Player"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -13,6 +13,11 @@
 [ext_resource path="res://assets/sprites/redBorder(hor).png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/redBorder(Ver).png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/redborders.gd" type="Script" id=13]
+[ext_resource path="res://assets/UI/Perks/Speed.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/Perks/Reload.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI/Perks/FireRate.png" type="Texture" id=16]
+[ext_resource path="res://assets/UI/Perks/Health.png" type="Texture" id=17]
+[ext_resource path="res://assets/scenes/note_screen.tscn" type="PackedScene" id=18]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -45,6 +50,19 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="Interface/HPbar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+text = "1000"
+align = 1
+valign = 1
 
 [node name="WaveMeter" type="TextureProgress" parent="Interface"]
 anchor_left = 0.5
@@ -187,7 +205,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon2" type="Control" parent="Interface/weaponslots"]
+[node name="Weapon1" type="Control" parent="Interface/weaponslots"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -200,25 +218,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon2"]
-position = Vector2( 64, 32 )
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 48, 31 )
 
-[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon2"]
+[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_left = -32.0
 margin_right = 128.0
 margin_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon2"]
-position = Vector2( 64, 32 )
-scale = Vector2( 0.484375, 0.34375 )
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 48, 31 )
+scale = Vector2( 0.5, 0.34375 )
 texture = ExtResource( 10 )
-color = Color( 0.917647, 0.921569, 0.262745, 1 )
+color = Color( 0.196078, 0.694118, 0.890196, 1 )
 energy = 0.8
 
-[node name="Weapon1" type="Control" parent="Interface/weaponslots"]
+[node name="Label" type="Label" parent="Interface/weaponslots/Weapon1"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -19.0
+margin_bottom = -5.0
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon2" type="Control" parent="Interface/weaponslots"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -231,23 +265,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 64, 32 )
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon2"]
+position = Vector2( 48, 31 )
 
-[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
+[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon2"]
 self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_left = -32.0
 margin_right = 128.0
 margin_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 64, 32 )
-scale = Vector2( 0.5, 0.34375 )
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon2"]
+position = Vector2( 48, 31 )
+scale = Vector2( 0.484375, 0.34375 )
 texture = ExtResource( 10 )
-color = Color( 0.196078, 0.694118, 0.890196, 1 )
+color = Color( 0.917647, 0.921569, 0.262745, 1 )
 energy = 0.8
+
+[node name="Label" type="Label" parent="Interface/weaponslots/Weapon2"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -19.0
+margin_bottom = -5.0
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="redborders" type="Control" parent="Interface"]
 anchor_right = 1.0
@@ -314,4 +364,58 @@ position = Vector2( 24, 408 )
 scale = Vector2( 1, 1.19648 )
 texture = ExtResource( 12 )
 
+[node name="Perks" type="HBoxContainer" parent="Interface"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 180.0
+margin_top = -40.0
+margin_right = 480.0
+custom_constants/separation = 70
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 90.0
+margin_right = 90.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/MovementPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 14 )
+
+[node name="FireRatePerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 160.0
+margin_right = 160.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/FireRatePerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 16 )
+
+[node name="ReloadPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 230.0
+margin_right = 230.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/ReloadPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 15 )
+
+[node name="HealthPerk" type="Control" parent="Interface/Perks"]
+visible = false
+margin_left = 300.0
+margin_right = 300.0
+margin_bottom = 40.0
+
+[node name="Sprite" type="Sprite" parent="Interface/Perks/HealthPerk"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 17 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="NotePopup" parent="." instance=ExtResource( 18 )]

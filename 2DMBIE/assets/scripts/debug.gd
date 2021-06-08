@@ -51,6 +51,4 @@ func _process(_delta):
 #		if Input.is_action_just_pressed("toggle" + str(t + 1)):
 #			Global[properties[t]] = !Global[properties[t]]
 			
-	debugAim = Global[properties[0]]
-	debugCamera = Global[properties[1]]
-	debugBrightness = Global[properties[2]]
+
