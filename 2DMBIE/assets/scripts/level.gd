@@ -78,7 +78,7 @@ func _process(_delta):
 				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 				
 			elif is_paused == true and get_node("Players/"+str(gamestate.player_id)+"/Optionsmenu/Options").visible == false:
-				unpause_game()	
+				unpause_game()
 	escape_options()
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
