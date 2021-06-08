@@ -69,13 +69,14 @@ func _physics_process(_delta):
 			elif paused == true and get_node("Optionsmenu/Options").visible == false:
 				unpause_game()
 	escape_options()
-	
-	print(paused)
 	update()
 	if paused:
-		$AnimationTree.active = false
 		motion.y += GRAVITY
 		motion = move_and_slide(motion, UP)
+		rset("puppet_motion", motion)
+		rset("puppet_pos", position)
+		if is_on_floor():
+			$AnimationTree.active = false
 		return
 	else:
 		$AnimationTree.active = true
@@ -526,12 +527,13 @@ func escape_options():
 		if Input.is_action_pressed("escape"):
 			get_node("Optionsmenu/Options").visible = false
 			get_node("PauseMenu/Container").visible = true
-			emit_signal("music", "unpause")
+		#	emit_signal("music", "unpause")
 			AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 
 func _on_Options_button_down():
 	get_node("PauseMenu/Container").visible = false
 	get_node("Optionsmenu/Options").visible = true
-	emit_signal("music", "pause")
+	#emit_signal("music", "pause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
+	
