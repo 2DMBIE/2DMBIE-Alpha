@@ -152,13 +152,11 @@ __meta__ = {
 }
 
 [node name="Message" type="Label" parent="Options/Panel/VBox/Container"]
-visible = false
 margin_right = 1024.0
 margin_bottom = 370.0
 rect_min_size = Vector2( 1024, 370 )
 custom_fonts/font = ExtResource( 2 )
-text = "Welcome to the options! 
-Today we serve unchangable values!"
+text = "Welcome to the options! "
 align = 1
 valign = 1
 
@@ -285,13 +283,15 @@ custom_fonts/font = ExtResource( 2 )
 text = ">"
 
 [node name="Controls" type="ScrollContainer" parent="Options/Panel/VBox/Container"]
+visible = false
+margin_top = 374.0
 margin_right = 1024.0
-margin_bottom = 370.0
+margin_bottom = 744.0
 rect_min_size = Vector2( 0, 370 )
 size_flags_horizontal = 3
 
 [node name="HBox" type="HBoxContainer" parent="Options/Panel/VBox/Container/Controls"]
-margin_right = 1012.0
+margin_right = 1024.0
 margin_bottom = 590.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
