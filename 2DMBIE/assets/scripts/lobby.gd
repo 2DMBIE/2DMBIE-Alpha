@@ -9,15 +9,10 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	gamestate.connect("connection_succeeded", self, "_on_connection_success")
 	# warning-ignore:return_value_discarded
-	#gamestate.connect("player_list_changed", self, "refresh_lobby")
-	# warning-ignore:return_value_discarded
 	gamestate.connect("game_ended", self, "_on_game_ended")
 	# warning-ignore:return_value_discarded
 	gamestate.connect("game_error", self, "_on_game_error")
-#	# warning-ignore:return_value_discarded
-#	gamestate.connect("on_player_join", self, "_on_player_join_event")
-#	# warning-ignore:return_value_discarded
-#	gamestate.connect("on_player_leave", self, "_on_player_leave_event")
+
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
@@ -34,7 +29,7 @@ func _ready():
 	for ip in ip_addresses:
 		i = 1
 		for character in ip:
-			if character == ".":
+			if character == ".": # get address with 4 dots cause ipv4: ...x...x...x...
 				i = i+1
 			if i >= 4:
 				$Connect/DeviceIP.text = ip
@@ -50,8 +45,6 @@ func _on_host_pressed():
 
 	var player_name = $Connect/Name.text
 	gamestate.host_game(player_name)
-	#refresh_lobby()
-	#gamestate.pre_start_lobby({1:0})
 	gamestate.load_lobby()
 
 func _on_join_pressed():
@@ -114,7 +107,6 @@ func refresh_lobby():
 
 func _on_start_pressed():
 	gamestate.start_lobby()
-	#gamestate.begin_game()
 
 func _on_find_public_ip_pressed():
 	# warning-ignore:return_value_discarded
