@@ -396,6 +396,8 @@ func _on_Timer_timeout():
 		health += 25
 		$Timer.start(0.2)
 		emit_signal("health_updated", health, maxHealth)
+	if health > maxHealth:
+		health = maxHealth 
 
 #func updatHealtbar():
 #	var percentageHP = int((float(health) / maxHealth * 100))
