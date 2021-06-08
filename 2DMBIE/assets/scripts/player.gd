@@ -53,22 +53,6 @@ func _ready():
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
 func _physics_process(_delta):
-	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
-	if Input.is_action_just_pressed("pause"):
-		if get_node("Optionsmenu/Options").visible == false:
-			if paused == false:
-				get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-				get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-#				get_tree().paused = true
-				paused = true
-				get_node("PauseMenu/Container").visible = true
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#				emit_signal("music", "pause")
-				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
-				
-			elif paused == true and get_node("Optionsmenu/Options").visible == false:
-				unpause_game()
-	escape_options()
 	update()
 	if paused:
 		motion.y += GRAVITY
@@ -76,11 +60,27 @@ func _physics_process(_delta):
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 		if is_on_floor():
-			$AnimationTree.active = false
+			rpc_unreliable("jump", false)
+			rpc_unreliable("set_animation", "parameters/walk-idle/blend_amount", 1)
 		return
 	else:
 		$AnimationTree.active = true
 	if is_network_master():
+		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
+		if Input.is_action_just_pressed("pause"):
+			if get_node("Optionsmenu/Options").visible == false:
+				if paused == false:
+					get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+					get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+	#				get_tree().paused = true
+					paused = true
+					get_node("PauseMenu/Container").visible = true
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#				emit_signal("music", "pause")
+					AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+				elif paused == true and get_node("Optionsmenu/Options").visible == false:
+					unpause_game()
+		escape_options()
 		motion.y += GRAVITY
 		var friction = false
 		if tileMap:
