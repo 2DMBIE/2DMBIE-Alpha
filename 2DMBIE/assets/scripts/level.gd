@@ -82,7 +82,7 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 				Global.maxHealth /= specialWaveIncrease
 				Global.EnemyDamage /= specialWaveIncrease
 				Global.Speed /= specialWaveIncrease
-				Global.randomizeSpecialwave()
+				Global.setSpecialWaveNumber()
 				waveType = 0
 				prevWaveType = waveType
 		Global.CurrentWaveEnemies = 0
@@ -205,6 +205,7 @@ func on_death():
 	pause_game()
 	is_gameOver = true
 	get_node("GameOver/Container").visible = true
+	_on_WaveTimer_timeout()
 
 
 func _on_PlayAgainButton_button_down():
