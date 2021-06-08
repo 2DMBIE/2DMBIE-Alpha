@@ -102,8 +102,8 @@ func _on_buyarea_body_exited(body):
 		canBuy = false
 
 func healthperk():
-	get_node("../../Player").maxHealth = 2500
-	get_node("../../Player").health = 2500
+	get_node("../../Player").maxHealth *= 2
+	get_node("../../Player").health = get_node("../../Player").maxHealth
 	
 func movementperk():
 	get_node("../../Player").MAX_WALK_SPEED = 200

@@ -51,6 +51,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="Interface/HPbar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -7.0
+margin_right = 20.0
+margin_bottom = 7.0
+text = "1000"
+align = 1
+valign = 1
+
 [node name="WaveMeter" type="TextureProgress" parent="Interface"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -192,7 +205,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Weapon2" type="Control" parent="Interface/weaponslots"]
+[node name="Weapon1" type="Control" parent="Interface/weaponslots"]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -201,6 +214,53 @@ margin_left = -144.0
 margin_top = 52.0
 margin_right = -16.0
 margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 48, 31 )
+
+[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
+margin_left = -32.0
+margin_right = 128.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
+position = Vector2( 48, 31 )
+scale = Vector2( 0.5, 0.34375 )
+texture = ExtResource( 10 )
+color = Color( 0.196078, 0.694118, 0.890196, 1 )
+energy = 0.8
+
+[node name="Label" type="Label" parent="Interface/weaponslots/Weapon1"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -19.0
+margin_bottom = -5.0
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Weapon2" type="Control" parent="Interface/weaponslots"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -144.0
+margin_top = 132.0
+margin_right = -16.0
+margin_bottom = 196.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,37 +284,20 @@ texture = ExtResource( 10 )
 color = Color( 0.917647, 0.921569, 0.262745, 1 )
 energy = 0.8
 
-[node name="Weapon1" type="Control" parent="Interface/weaponslots"]
+[node name="Label" type="Label" parent="Interface/weaponslots/Weapon2"]
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -144.0
-margin_top = 132.0
-margin_right = -16.0
-margin_bottom = 196.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -19.0
+margin_bottom = -5.0
+text = "2"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite" type="Sprite" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 48, 31 )
-
-[node name="Panel" type="Panel" parent="Interface/weaponslots/Weapon1"]
-self_modulate = Color( 1, 1, 1, 0.352941 )
-margin_left = -32.0
-margin_right = 128.0
-margin_bottom = 64.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Light2D" type="Light2D" parent="Interface/weaponslots/Weapon1"]
-position = Vector2( 48, 31 )
-scale = Vector2( 0.5, 0.34375 )
-texture = ExtResource( 10 )
-color = Color( 0.196078, 0.694118, 0.890196, 1 )
-energy = 0.8
 
 [node name="redborders" type="Control" parent="Interface"]
 anchor_right = 1.0
