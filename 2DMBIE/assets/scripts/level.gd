@@ -221,19 +221,20 @@ func _on_GameOver_Options_button_down():
 
 
 func SpawnNote():
-	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
-	var Notescene = noteScene.instance()
-	var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
-	var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
-	randomize()
-	var randomspawn = randi() % spawnpointAmount
-	var notePosition = spawnpoints[randomspawn].get_global_position()
-	Notescene.set_position(notePosition)
-	add_child(Notescene)
-# warning-ignore:return_value_discarded
-	$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
-# warning-ignore:return_value_discarded
-	$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
+	if get_tree().get_nodes_in_group("spawnpoints").size() != 0:
+		var noteScene = preload("res://assets/scenes/stickyNote.tscn")
+		var Notescene = noteScene.instance()
+		var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
+		var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
+		randomize()
+		var randomspawn = randi() % spawnpointAmount
+		var notePosition = spawnpoints[randomspawn].get_global_position()
+		Notescene.set_position(notePosition)
+		add_child(Notescene)
+	# warning-ignore:return_value_discarded
+		$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
+	# warning-ignore:return_value_discarded
+		$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
 	
 func _on_NotePopup_pauseGame():
 	get_tree().paused = true
