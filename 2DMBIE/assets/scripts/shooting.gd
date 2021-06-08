@@ -82,7 +82,6 @@ func _process(_delta):
 						mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
-						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 						
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
@@ -105,7 +104,6 @@ func _process(_delta):
 						var facing = get_node("../../../../").facing
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
-						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 						var _scale = Vector2(1,1)
 						if facing == "right":
 							facingDir = 10
@@ -127,7 +125,7 @@ func _process(_delta):
 						mouse_direction = bullet.position.direction_to(mouse_position).normalized()
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
-						emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+						
 						
 						bullet.set_direction(mouse_direction)
 						var muzzleflashInstance = _gun.getMuzzleFlash()
@@ -198,6 +196,7 @@ remotesync func fire_bullet(gun_name, _global_mouse_position, _global_bullet_pos
 	$BulletPoint.add_child(muzzleflashInstance)
 	#get_tree().current_scene.add_child(bullet)
 	#get_node("../..").add_child(bullet)
+	emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 	get_tree().root.add_child(bullet)
 		#get_tree().get_root().add_child(bullet) hetzelfde scheef
 	#get_tree().root.add_child(bullet) # heel scheef maar op de goede plek
@@ -218,6 +217,7 @@ remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bul
 	bullet.set_direction(bullet.position.direction_to(bullet.position + Vector2(_facing_direction, 0)).normalized())
 	var muzzleflashInstance = _gun.getMuzzleFlash()
 	$BulletPoint.add_child(muzzleflashInstance)
+	emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 	get_tree().root.add_child(bullet)
 
 func get_current_gun():
