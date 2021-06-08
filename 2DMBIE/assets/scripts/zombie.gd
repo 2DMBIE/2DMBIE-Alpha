@@ -25,35 +25,37 @@ signal health_updated(health)
 var maxHealth = Global.maxHealth
 var enemyDamage = Global.EnemyDamage
 
+puppet var puppet_pos = Vector2()
+puppet var puppet_movement = Vector2()
+
 func _ready():
-	$AnimationTree.active = true
-	$AnimationTree.set("parameters/walk/current", randi()%10)
-	growl_timer.wait_time = _wait_time
-	growl_timer.one_shot = false
-	growl_timer.connect("timeout", self, "growl")
-	growl_timer.autostart = true
-	add_child(growl_timer)
-	
-	pathFinder = get_tree().get_root().get_node("World").find_node("Pathfinder")
-	movement = Vector2(0, 0)
-	var timer = Timer.new()
-	timer.set_wait_time(.1)
-	timer.set_one_shot(false)
-	timer.connect("timeout", self, "repeat_me")
-	add_child(timer)
-	timer.start()
+	if is_network_master():
+		randomize()
+		$AnimationTree.active = true
+		rpc("set_animation", "parameters/walk/current", randi()%10)
+		growl_timer.wait_time = _wait_time
+		growl_timer.one_shot = false
+		growl_timer.connect("timeout", self, "growl")
+		growl_timer.autostart = true
+		add_child(growl_timer)
+		
+		pathFinder = get_tree().get_root().get_node("World").find_node("Pathfinder")
+		movement = Vector2(0, 0)
+		var timer = Timer.new()
+		timer.set_wait_time(.1)
+		timer.set_one_shot(false)
+		timer.connect("timeout", self, "repeat_me")
+		add_child(timer)
+		timer.start()
 
 func nextPoint():
 	if len(currentPath) == 0:
 		currentTarget = null
 		return
-	
 	currentTarget = currentPath.pop_front()
-	
 	if !currentTarget:
 		jump()
 		nextPoint()
-	
 	if (currentTarget.y - 128 > self.position.y):
 		if is_on_floor():
 			if get_slide_collision(0).collider.name == "Floor":
@@ -64,42 +66,45 @@ func jump():
 		movement[1] = -jumpForce
 
 func _process(delta):
-#	if Input.is_action_just_pressed("aim"):
-#		repeat_me()
-	
-	if currentTarget:
-		if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
-			if zombiestep:
-				movement[0] = speed * 2
+	if is_network_master():
+		if currentTarget:
+			if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
+				if zombiestep:
+					movement[0] = speed * 2
+				else:
+					movement[0] = speed
+			elif (currentTarget[0] + padding < position[0]) and position.distance_to(currentTarget) > padding:
+				if zombiestep:
+					movement[0] = -speed * 2
+				else:
+					movement[0] = -speed
 			else:
-				movement[0] = speed
-		elif (currentTarget[0] + padding < position[0]) and position.distance_to(currentTarget) > padding:
-			if zombiestep:
-				movement[0] = -speed * 2
-			else:
-				movement[0] = -speed
+				movement[0] = 0
+			if abs(position.x - currentTarget.x) < finishPadding and is_on_floor():
+				nextPoint()
 		else:
 			movement[0] = 0
+		if !is_on_floor():
+			movement[1] += gravity * delta
+			
+		if !is_on_floor():
+			rpc_unreliable("set_animation", "parameters/in_air/current", 0)
+		else:
+			rpc_unreliable("set_animation", "parameters/in_air/current", 1)
 		
-		if abs(position.x - currentTarget.x) < finishPadding and is_on_floor():
-			nextPoint()
-	
+		var _moveSlide = move_and_slide(movement, Vector2(0, -1))
+		if self.movement.x < 0:
+			direction("left")
+		elif self.movement.x > 0:
+			direction("right")
+		rset("puppet_movement", movement)
+		rset("puppet_pos", position)
 	else:
-		movement[0] = 0
-	
-	if !is_on_floor():
-		movement[1] += gravity * delta
-		
-	if !is_on_floor():
-		$AnimationTree.set("parameters/in_air/current", 0)
-	else:
-		$AnimationTree.set("parameters/in_air/current", 1)
-	
-	var _moveSlide = self.move_and_slide(movement, Vector2(0, -1))
-	if self.movement.x < 0:
-		direction("left")
-	elif self.movement.x > 0:
-		direction("right")
+		puppet_pos = position
+		puppet_movement = movement
+	if not is_network_master():
+		puppet_pos = position
+		puppet_movement = movement
 
 func repeat_me():
 	if is_on_floor():
@@ -116,13 +121,15 @@ func repeat_me():
 func direction(x):
 	var body = get_node("body")
 	if (x == "left") && !(body.scale == Vector2(-1,1)):
-		body.scale = Vector2(-1,1)
+		rpc_unreliable("set_direction", Vector2(-1,1))
+		#body.scale = Vector2(-1,1)
 	elif (x == "right") && !(body.scale == Vector2(1,1)):
-		body.scale = Vector2(1,1)
+		#body.scale = Vector2(1,1)
+		rpc_unreliable("set_direction", Vector2(1,1))
 	else: pass
 
 func growl():
-	emit_signal("play_sound", "growl")
+	rpc("play_sound_remote", "growl")
 
 func togglestep():
 	zombiestep = !zombiestep
@@ -156,8 +163,7 @@ func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
-
+	rpc("play_sound_remote", "hurt")
 func kill():
 	Global.Score += Global.ScoreIncrement
 	queue_free()
@@ -173,3 +179,12 @@ func _set_health(value):
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
+
+remotesync func play_sound_remote(sound):
+	emit_signal("play_sound", sound)
+
+remotesync func set_animation(path, value):
+	$AnimationTree.set(path, value)
+	
+remotesync func set_direction(scale):
+	get_node("body").scale = scale
