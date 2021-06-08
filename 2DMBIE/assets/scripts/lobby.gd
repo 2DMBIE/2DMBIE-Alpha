@@ -24,19 +24,21 @@ func _ready():
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
-	var _ip_address
-	if OS.get_name() == "Windows":
-		_ip_address = IP.get_local_addresses()[3]
-	elif OS.get_name() == "Android":
-		_ip_address = IP.get_local_addresses()[0]
-	else:
-		_ip_address = IP.get_local_addresses()[3]
-	
-	for ip in IP.get_local_addresses():
-		if ip.begins_with("192.168.") and not ip.ends_with(".1"):
-			_ip_address = ip
-	$Connect/DeviceIP.text = _ip_address
-
+	var ip_addresses = IP.get_local_addresses()
+	var i = 0
+	for ip in ip_addresses:
+		if ip == "127.0.0.1":
+			break
+		i = i+1
+	ip_addresses.remove(i) # remove 127.0.0.1 from list
+	for ip in ip_addresses:
+		i = 1
+		for character in ip:
+			if character == ".":
+				i = i+1
+			if i >= 4:
+				$Connect/DeviceIP.text = ip
+		
 func _on_host_pressed():
 	if $Connect/Name.text == "":
 		$Connect/ErrorLabel.text = "Invalid name!"
