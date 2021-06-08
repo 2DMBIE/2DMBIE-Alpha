@@ -23,12 +23,12 @@ var players = {}
 # Signals to let lobby GUI know what's going ona
 signal on_player_join(name)
 signal on_player_leave(id, name)
-signal lobby_created(id, name)
+signal lobby_created(name)
 signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
-signal playersLoaded()
+signal on_local_player_loaded() #playersLoaded
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -229,9 +229,7 @@ func load_lobby():
 	player_id = get_tree().get_network_unique_id()
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)
-	if !last_player_name == "":
-		emit_signal("on_player_join", last_player_name)
-	emit_signal("playersLoaded")
+	emit_signal("on_local_player_loaded")
 
 func _ready():
 	# warning-ignore:return_value_discarded
