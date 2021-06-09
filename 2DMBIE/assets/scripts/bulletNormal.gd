@@ -27,8 +27,6 @@ func _on_bullet_body_entered(body):
 		bulletEnterPos = position.x
 		if enemy_penetration >= bullet_penetration:
 			self.visible = false
-		if body.health == 0:
-			body.kill()
 #			halfRadius = body.get_node("CollisionShape2D").shape.radius * 10
 #			bulletCalc = true
 #	if body.is_in_group("enemyHeads"):

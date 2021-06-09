@@ -48,7 +48,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 24.0
-height = 95.0
+height = 112.71
 
 [sub_resource type="Animation" id=2]
 resource_name = "walk4"
@@ -669,7 +669,7 @@ collision_mask = 42
 script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 16 )
+position = Vector2( 0, 8.59986 )
 shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]

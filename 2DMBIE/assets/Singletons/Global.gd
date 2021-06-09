@@ -8,9 +8,10 @@ var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0
 var Currentwave = 1
 var maxHealth = 500
-var EnemyDamage = 300
+var EnemyDamage = 200
 var Speed = 75
 var enemiesKilled = 0
+var totalEnemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
@@ -43,7 +44,7 @@ func saveScore():
 	saveScoreFile.store_line(str(highScore))
 	saveScoreFile.close()
 	
-var SpecialWaveNumber
+var SpecialWaveNumber = 0 
 var rng = RandomNumberGenerator.new()
 
 func setSpecialWaveNumber():
@@ -56,3 +57,7 @@ func _ready():
 func randomizeSpecialwave():
 	rng.randomize()
 	SpecialWaveNumber = rng.randi_range(3, 6)
+	return SpecialWaveNumber
+	
+	
+

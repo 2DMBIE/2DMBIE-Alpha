@@ -10,11 +10,10 @@ onready var fontGreen = 1
 onready var fontBlue = 1
 
 func _ready():
-	randomize()
-	$VBOX/Label.text = messages[randi() % messages.size()]
+	rng.randomize()
+	$VBOX/Label.text = messages[rng.randi() % messages.size()]
 	$VBOX/Title.get_font("font").size = 200
 	fontOutline.outline_color = Color.white
-	rng.randomize()
 	fontRed = rng.randf()
 	fontGreen = rng.randf()
 	fontBlue = rng.randf()
@@ -24,6 +23,7 @@ func _ready():
 func _process(_delta):
 	$VBOX/HBox/VBox/Score/Score.text = str(Global.Score)
 	$VBOX/HBox/VBox/Wave/Wave.text = str(Global.Currentwave)
+	$VBOX/HBox/VBox/Kills/Kills.text = str(Global.totalEnemiesKilled)
 	
 	if visible:
 		if !$AudioStreamPlayer.playing:

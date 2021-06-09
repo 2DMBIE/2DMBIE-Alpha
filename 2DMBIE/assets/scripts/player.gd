@@ -404,6 +404,7 @@ func _on_Hitbox_body_exited(_body):
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
+		health = clamp(health, 0, maxHealth)
 		$Timer.start(0.2)
 		emit_signal("health_updated", health, maxHealth)
 
@@ -458,7 +459,6 @@ func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
 		if body.health == 0:
-			body.kill()
 			Global.Score += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
@@ -505,6 +505,8 @@ func _on_Hitbox_area_entered(area):
 		var gainedAmmo = gunscript.get_current_gun().maxclipAmmo
 		emit_signal("ammoPickup", gainedAmmo)
 		$MarkerPos/Marker.visible = false
+	if area.is_in_group("Areas"):
+		area.visible = false
 
 func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 	$MarkerPos/Marker.visible = true
