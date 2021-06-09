@@ -4253,10 +4253,10 @@ position = Vector2( 1544.28, -2078.52 )
 position = Vector2( 1056.28, -1546.52 )
 
 [node name="Lightbulb_with_wire6" parent="lights" instance=ExtResource( 20 )]
-position = Vector2( 1141.76, -1300.49 )
+position = Vector2( 1142.35, -1316.25 )
 
 [node name="Lightbulb_with_wire_broken4" parent="lights" instance=ExtResource( 17 )]
-position = Vector2( 1744, -1308.49 )
+position = Vector2( 1743.25, -1316.74 )
 
 [node name="TL_buis10" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 1420.28, -1802.52 )
@@ -4453,7 +4453,7 @@ position = Vector2( 4768, -1440 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 36 )]
-position = Vector2( 928, -1184 )
+position = Vector2( 925.013, -1190.14 )
 
 [node name="ReloadPerk" parent="Perks" instance=ExtResource( 36 )]
 position = Vector2( 1376, -2208 )
@@ -4475,9 +4475,13 @@ position = Vector2( 2335.64, -693.032 )
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="pauseGame" from="CanvasLayer/NotePopup" to="." method="_on_NotePopup_pauseGame"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
