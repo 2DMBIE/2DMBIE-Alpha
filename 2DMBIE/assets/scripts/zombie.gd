@@ -63,7 +63,7 @@ func nextPoint():
 		nextPoint()
 	
 	if (currentTarget.y - 128 > self.position.y):
-		if is_on_floor():
+		if is_on_floor() && get_slide_collision(0).collider.name != null:
 			if get_slide_collision(0).collider.name == "Floor":
 				set_collision_mask_bit(dropthroughBit, false)
 
@@ -188,6 +188,8 @@ func _set_health(value):
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
+		if health == 0:
+			kill()
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)

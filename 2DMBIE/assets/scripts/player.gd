@@ -394,10 +394,9 @@ func _on_Hitbox_body_exited(_body):
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
+		health = clamp(health, 0, maxHealth)
 		$Timer.start(0.2)
 		emit_signal("health_updated", health, maxHealth)
-	if health > maxHealth:
-		health = maxHealth 
 
 #func updatHealtbar():
 #	var percentageHP = int((float(health) / maxHealth * 100))
@@ -449,8 +448,6 @@ func on_knife_animation_complete():
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
-		if body.health == 0:
-			body.kill()
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
