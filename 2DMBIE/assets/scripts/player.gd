@@ -79,8 +79,6 @@ func _physics_process(_delta):
 			rpc_unreliable("jump", false)
 			rpc_unreliable("set_animation", "parameters/walk-idle/blend_amount", 1)
 		return
-	else:
-		$AnimationTree.active = true
 	if is_network_master():
 		motion.y += GRAVITY
 		var friction = false
