@@ -523,3 +523,7 @@ func rememberjumptime():
 func _on_MovementPerk_perkactiveMovement(canBuyMovement):
 	if canBuyMovement == false:
 		canBuyMovement2 = false
+
+
+func _on_FireRatePerk_perkactive(canBuyFasterFireRate):
+	pass # Replace with function body.
