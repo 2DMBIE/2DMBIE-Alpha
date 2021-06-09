@@ -2,7 +2,7 @@ extends Node
 
 signal changeScore(newScore)
 
-var Score = 2000000 setget setScore
+var Score = 20000 setget setScore
 var ScoreIncrement = 100
 var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0

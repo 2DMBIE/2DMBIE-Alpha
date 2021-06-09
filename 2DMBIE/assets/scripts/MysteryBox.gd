@@ -4,7 +4,6 @@ var weapons = [MP5.new(), UMP45.new(), P90.new(), SPAS12.new(),XM1014.new(), M4A
 
 var canBuy = false
 var enoughMoney = false
-var Selected_Weapon = 0
 var rng = RandomNumberGenerator.new()
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
@@ -15,6 +14,17 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("use") and canBuy and enoughMoney:
 		rng.randomize()
 		var randomweapon = rng.randi_range(0,11)
+		
+		for w in range(gunscript.weapon_slots.size()):
+			if gunscript.weapon_slots[w] == -1:
+				gunscript.current_weapon = w
+				gunscript.weapon_slots[w] = randomweapon
+				break
+		
+		for c in range(gunscript.weapon_slots.size()):
+			if gunscript.current_weapon == c:
+				gunscript.weapon_slots[c] = randomweapon
+				break
 		gunscript.set_gun(randomweapon)
 		
 		emit_signal("play_sound", "buy")

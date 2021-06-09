@@ -198,13 +198,13 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=46]
 extents = Vector2( 100, 120 )
 
-[node name="puck_a_panch" type="Node2D"]
+[node name="Mystery_Box" type="Node2D"]
 z_index = -5
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 39
+frame = 9
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
