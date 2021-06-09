@@ -175,10 +175,12 @@ func Hurt(damage):
 		show_damage_animation(percentage)
 		emit_signal("play_sound", "hurt")
 		Global.Score += 10
+		Global.TotalScore += 10
 		headshot = false
 
 func kill():
 		Global.Score += Global.ScoreIncrement
+		Global.TotalScore += Global.ScoreIncrement
 		Global.enemiesKilled += 1
 		queue_free()
 

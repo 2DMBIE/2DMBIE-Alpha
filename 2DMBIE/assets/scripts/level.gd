@@ -131,6 +131,7 @@ func restart_game():
 	Global.Speed = 75
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
+	Global.TotalScore = 0
 
 func _on_Continue_button_down():
 	unpause_game()
