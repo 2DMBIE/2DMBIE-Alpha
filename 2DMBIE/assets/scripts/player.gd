@@ -56,8 +56,7 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
-	print(MAX_WALK_SPEED, "|", MAX_RUN_SPEED)
-	
+
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
