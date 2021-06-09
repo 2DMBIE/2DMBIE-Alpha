@@ -490,6 +490,8 @@ func _on_Hitbox_area_entered(area):
 		var gainedAmmo = gunscript.get_current_gun().maxclipAmmo
 		emit_signal("ammoPickup", gainedAmmo)
 		$MarkerPos/Marker.visible = false
+	if area.is_in_group("Areas"):
+		area.visible = false
 
 func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 	$MarkerPos/Marker.visible = true

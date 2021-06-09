@@ -44,7 +44,7 @@ func saveScore():
 	saveScoreFile.store_line(str(highScore))
 	saveScoreFile.close()
 	
-var SpecialWaveNumber
+var SpecialWaveNumber = 0 
 var rng = RandomNumberGenerator.new()
 
 func setSpecialWaveNumber():
@@ -57,3 +57,7 @@ func _ready():
 func randomizeSpecialwave():
 	rng.randomize()
 	SpecialWaveNumber = rng.randi_range(3, 6)
+	return SpecialWaveNumber
+	
+	
+

@@ -15,7 +15,8 @@ func _ready():
 
 func _on_Timer_timeout():
 	setTooltip()
-	var _x = get_tree().change_scene("res://assets/scenes/level2.tscn")
+# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://assets/scenes/level2.tscn")
 
 func setTooltip():
 	rng.randomize()
