@@ -1,8 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/newCrosshaird.png" type="Texture" id=1]
+[ext_resource path="res://assets/scripts/cursor.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 17.8885
 
 [node name="cursor" type="Sprite"]
+self_modulate = Color( 0.188235, 0.52549, 0.682353, 1 )
 z_index = 100
 texture = ExtResource( 1 )
-hframes = 21
+script = ExtResource( 2 )
+
+[node name="cursor_box" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cursor_box"]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="cursor_box" to="." method="_on_cursor_box_body_entered"]
+[connection signal="body_exited" from="cursor_box" to="." method="_on_cursor_box_body_exited"]
