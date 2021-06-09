@@ -1,6 +1,6 @@
 extends Node2D
 
-var priceArray = [500, 750, 1000, 1250, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7500]
+var priceArray = [500, 750, 1000, 1250, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7500] # sync this
 var price 
 var can_buy = false
 signal play_sound(library)
@@ -30,12 +30,15 @@ func _on_doorareaRight_body_exited(body):
 		can_buy = false
 
 func buy_door():
+	rpc("remove_door")
+	emit_signal("play_sound", "buy")
+	Global.Score -= price
+
+remotesync func remove_door():
 	$doorareaRight/right.disabled = true
 	$doorareaLeft/left.disabled = true
 	$door.disabled = true
 	$doorSprite.position.y -= 160
-	emit_signal("play_sound", "buy")
-	Global.Score -= price
 
 func _on_doorareaLeft_body_entered(body):
 	if body.is_in_group("player"):

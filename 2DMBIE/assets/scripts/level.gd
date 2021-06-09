@@ -18,25 +18,13 @@ func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
-	if get_node("/root/Lobby"):
-		if get_tree().get_network_unique_id() == 1:
-			$AnimationPlayer.play("DayNightCycle")
-		else:
-			rpc_id(1, "get_daynightcycle", get_tree().get_network_unique_id())
-# warning-ignore:return_value_discarded
-	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
-
-remote func get_daynightcycle(id):
-	rpc_id(id, "set_daynightcycle", $AnimationPlayer.current_animation_position)
-	#$AnimationPlayer.current_animation_position
-remote func set_daynightcycle(time):
-	$AnimationPlayer.play("DayNightCycle")
-	$AnimationPlayer.seek(time)
+	# warning-ignore:return_value_discarded
+	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 
 func _process(_delta):
-	if MarkerPos != null:
-		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
-		MarkerPos.rotation = rotationDegree
+#	if MarkerPos != null:
+#		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
+#		MarkerPos.rotation = rotationDegree
 	
 #	if Input.is_action_just_pressed("attack"):
 #		print("Printing Children:")
@@ -44,6 +32,7 @@ func _process(_delta):
 #			print(x.name)
 	
 	$cursor.position = get_global_mouse_position()
+	return
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
@@ -156,7 +145,7 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
 	GraphRandomPoint = graphRandomPoint
 
-func _on_playersLoaded():
+func on_player_loaded():
 #	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
 	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
 	if get_node("Players/"+str(gamestate.player_id)).is_network_master() and not has_node("/root/Lobby"):

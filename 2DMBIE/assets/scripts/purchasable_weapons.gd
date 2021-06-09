@@ -66,8 +66,8 @@ func _ready():
 	$WeaponLabelName.text = nameArray[Selected_Weapon]
 	$WeaponLabelPrice.text = str(priceArray[Selected_Weapon])
 	
-# warning-ignore:return_value_discarded
-	gamestate.connect("playersLoaded", self, "_on_playersLoaded")
+	# warning-ignore:return_value_discarded
+	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 
-func _on_playersLoaded():
+func on_player_loaded():
 	gunscript = get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/body/chest/torso/gun")
