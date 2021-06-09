@@ -37,7 +37,7 @@ func _process(_delta):
 
 
 	$cursor.position = get_global_mouse_position()
-	if Global.Currentwave == random_round and not music_playing:
+	if Global.Currentwave == 1 and not music_playing: #random_round
 		emit_signal("music", "play")
 		music_playing = true
 	if Input.is_action_just_released("game_reset") and Settings.debugMode:

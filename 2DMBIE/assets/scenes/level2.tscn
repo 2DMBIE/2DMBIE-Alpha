@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -30,13 +30,16 @@
 [ext_resource path="res://assets/scripts/music.gd" type="Script" id=28]
 [ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=30]
-[ext_resource path="res://assets/sounds/ingame_music.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sounds/music/ingame_music1.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=32]
 [ext_resource path="res://assets/sounds/player/heartbeat.wav" type="AudioStream" id=33]
 [ext_resource path="res://assets/UI/GameOver.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/sprites/background/StarryBackground.png" type="Texture" id=35]
 [ext_resource path="res://assets/scenes/purchasable_perks.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/sounds/music/ingame_music2.mp3" type="AudioStream" id=38]
+[ext_resource path="res://assets/sounds/music/ingame_music4.mp3" type="AudioStream" id=39]
+[ext_resource path="res://assets/sounds/music/ingame_music3.mp3" type="AudioStream" id=40]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -4411,8 +4414,20 @@ polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1344, 64, -1344 )
 [node name="music" type="Node2D" parent="."]
 script = ExtResource( 28 )
 
-[node name="ingame_music" type="AudioStreamPlayer" parent="music"]
+[node name="ingame_music1" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 31 )
+bus = "Music"
+
+[node name="ingame_music2" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 38 )
+bus = "Music"
+
+[node name="ingame_music3" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 40 )
+bus = "Music"
+
+[node name="ingame_music4" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 39 )
 bus = "Music"
 
 [node name="sfx" type="Node2D" parent="."]
