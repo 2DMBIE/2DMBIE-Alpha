@@ -29,6 +29,7 @@ puppet var puppet_pos = Vector2()
 puppet var puppet_movement = Vector2()
 
 func _ready():
+	set_network_master(1) # let the host control the zombie
 	if is_network_master():
 		randomize()
 		$AnimationTree.active = true
@@ -91,8 +92,6 @@ func _process(delta):
 			rpc_unreliable("set_animation", "parameters/in_air/current", 0)
 		else:
 			rpc_unreliable("set_animation", "parameters/in_air/current", 1)
-		
-		var _moveSlide = move_and_slide(movement, Vector2(0, -1))
 		if self.movement.x < 0:
 			direction("left")
 		elif self.movement.x > 0:
@@ -102,6 +101,7 @@ func _process(delta):
 	else:
 		puppet_pos = position
 		puppet_movement = movement
+	var _moveSlide = move_and_slide(movement, Vector2(0, -1))
 	if not is_network_master():
 		puppet_pos = position
 		puppet_movement = movement
@@ -126,7 +126,6 @@ func direction(x):
 	elif (x == "right") && !(body.scale == Vector2(1,1)):
 		#body.scale = Vector2(1,1)
 		rpc_unreliable("set_direction", Vector2(1,1))
-	else: pass
 
 func growl():
 	rpc("play_sound_remote", "growl")
