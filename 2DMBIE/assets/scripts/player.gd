@@ -54,6 +54,22 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
+	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
+	if Input.is_action_just_pressed("pause"):
+		if get_node("Optionsmenu/Options").visible == false:
+			if paused == false:
+				get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+				get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+#				get_tree().paused = true
+				paused = true
+				get_node("PauseMenu/Container").visible = true
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+#				emit_signal("music", "pause")
+				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+				get_node("/root/Lobby/cursor").visible = false
+			elif paused == true and get_node("Optionsmenu/Options").visible == false:
+				unpause_game()
+	escape_options()
 	if paused:
 		motion.y += GRAVITY
 		motion = move_and_slide(motion, UP)
@@ -66,21 +82,6 @@ func _physics_process(_delta):
 	else:
 		$AnimationTree.active = true
 	if is_network_master():
-		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
-		if Input.is_action_just_pressed("pause"):
-			if get_node("Optionsmenu/Options").visible == false:
-				if paused == false:
-					get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-					get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-	#				get_tree().paused = true
-					paused = true
-					get_node("PauseMenu/Container").visible = true
-					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	#				emit_signal("music", "pause")
-					AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
-				elif paused == true and get_node("Optionsmenu/Options").visible == false:
-					unpause_game()
-		escape_options()
 		motion.y += GRAVITY
 		var friction = false
 		if tileMap:
@@ -499,6 +500,7 @@ func unpause_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
+	get_node("/root/Lobby/cursor").visible = false
 
 func _on_Continue_button_down():
 	unpause_game()
