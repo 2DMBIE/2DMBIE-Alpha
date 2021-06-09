@@ -28,7 +28,7 @@ func _physics_process(_delta):
 		gunscript.set_gun(randomweapon)
 		
 		emit_signal("play_sound", "buy")
-		Global.Score -= int(1000)
+		Global.Score -= int(3000)
 	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
 		emit_signal("play_sound", "not_enough_money")
 
@@ -37,7 +37,7 @@ func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
 	
-	if Global.Score >= int(1000):
+	if Global.Score >= int(3000):
 		enoughMoney = true
 	else:
 		enoughMoney = false

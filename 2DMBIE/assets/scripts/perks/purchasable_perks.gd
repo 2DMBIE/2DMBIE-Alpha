@@ -13,7 +13,7 @@ var reloadColor = Color(0.345098, 0.937254, 0.278431, 1)
 var fireRateColor = Color(0.317647, 0.690196, 1, 1)
 var colorArray = [healthColor, fireRateColor, reloadColor, movementColor]
 var nameArray = ["HealthPerk", "MovementPerk", "ReloadPerk", "FireRatePerk"]
-var priceArray = ["1500", "2500", "1000", "3000"]
+var priceArray = ["3500", "3000", "1000", "3000"]
 
 var canBuy = false
 var enoughMoney = false

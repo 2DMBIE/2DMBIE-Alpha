@@ -27,13 +27,14 @@ var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
-signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
 var groundlessjump = true
 var jumpwaspressed = false
 var canBuyMovement2 = true
+
+signal play_sound(library)
 
 func _ready():
 	if Settings.debugMode:
@@ -55,6 +56,7 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
+	print(MAX_WALK_SPEED, "|", MAX_RUN_SPEED)
 	
 	motion.y += GRAVITY
 	var friction = false
@@ -185,11 +187,16 @@ func _physics_process(_delta):
 		get_node("Hitbox").set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(3, false)
 		knifing_hitbox_enabled = false
-		if !Global.maia:
+#		if !Global.maia:
+#			WALK_ACCELERATION = 35 #old 20
+#			MAX_WALK_SPEED = 230 #old 110 
+#			RUN_ACCELERATION = 40
+#			MAX_RUN_SPEED = 430
+		if canBuyMovement2 == false:
 			WALK_ACCELERATION = 35 #old 20
-			MAX_WALK_SPEED = 230 #old 110 
+			MAX_WALK_SPEED = 470 #old 110 
 			RUN_ACCELERATION = 40
-			MAX_RUN_SPEED = 430
+			MAX_RUN_SPEED = 470
 		else:
 			WALK_ACCELERATION = 40 #old 20
 			MAX_WALK_SPEED = 430 #old 110 
@@ -452,6 +459,7 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		if body.health == 0:
 			body.kill()
+			Global.Score += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
