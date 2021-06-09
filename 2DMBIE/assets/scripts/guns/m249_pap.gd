@@ -19,7 +19,7 @@ func _init():
 	camera_decay = float(1.7) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)
 	gun_recoil_sensitivity = float(0.12) # Gun recoil strength [0, 1] 1 = heaviest 0 = lowest (can't be higher then 1 or lower then 0)
 	
-	maxclipAmmo = 200 # How much bullets are in one magazine.
-	totalAmmo = 400 #Total ammo which comes with each gun.
+	maxclipAmmo = 120 # How much bullets are in one magazine.
+	totalAmmo = 200 #Total ammo which comes with each gun.
 	ammo = maxclipAmmo
 	reload_time = float(4)
