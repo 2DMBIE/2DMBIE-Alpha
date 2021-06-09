@@ -2,7 +2,6 @@ extends Node2D
 
 
 onready var anim = $AnimationPlayer
-var numder = 0
 
 func _ready():
 	anim.play("Cutscene")
@@ -15,8 +14,5 @@ func _on_Timer_timeout():
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if event.scancode != KEY_ENTER:
-			numder += 1
-#			print('skip cutscene! '+str(numder))
 # warning-ignore:return_value_discarded
 			get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
