@@ -13,8 +13,6 @@ var player_id
 var last_player_name = ""
 
 # To send in-game join message
-var send_join_msg_enabled = true
-var just_joined = true
 var player_join_cache = []
 
 # Names for remote players in id:name format
@@ -91,14 +89,12 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	if send_join_msg_enabled:
-		if just_joined or player_join_cache.size() != players.size():
-			for p_id in players: 
-				if not player_join_cache.has(p_id):
-					rpc_id(p_id, "show_join_msg", player_name)
-					player_join_cache.append(p_id)
-			just_joined = false
-			show_join_msg(player_name)
+	if get_tree().is_network_server():
+		if not player_join_cache.has(id):
+			for id in players: 
+				rpc_id(id, "show_join_msg", new_player_name)
+			show_join_msg(new_player_name)
+			player_join_cache.append(id)
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", players[id])
@@ -169,7 +165,6 @@ remote func ready_to_start(id):
 func host_game(new_player_name):
 	player_name = new_player_name
 	host_name = player_name
-	send_join_msg_enabled = false
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
