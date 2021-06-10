@@ -20,8 +20,6 @@ var player_join_cache = []
 # Names for remote players in id:name format
 var players = {}
 
-var host
-
 # Signals to let lobby GUI know what's going ona
 signal on_player_join(name)
 signal on_player_leave(id, name)
@@ -108,8 +106,6 @@ remote func unregister_player(id):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	elif has_node("/root/World/Players/" + str(id)):
 		get_node("/root/World/Players/" + str(id)).queue_free()
-	if get_tree().get_network_unique_id() == int(id):
-		host.close_connection()
 
 remote func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
@@ -173,7 +169,7 @@ func host_game(new_player_name):
 	host_name = player_name
 	send_join_msg_enabled = false
 	just_joined = false
-	host = NetworkedMultiplayerENet.new()
+	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
 
@@ -182,7 +178,7 @@ func join_game(ip, new_player_name):
 	last_player_name = player_name
 	just_joined = true
 	send_join_msg_enabled = true
-	host = NetworkedMultiplayerENet.new()
+	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
 
@@ -212,7 +208,8 @@ func end_game():
 	if has_node("/root/World"): # Game is in progress
 		# End it
 		get_node("/root/World").queue_free()
-
+	elif has_node("/root/Lobby"):
+		get_node("/root/Lobby").queue_free()
 	emit_signal("game_ended")
 	players.clear()
 	get_tree().set_network_peer(null) # End networking
@@ -253,7 +250,8 @@ func _ready():
 
 func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		if get_tree().is_network_server():
-			for p_id in players: # Erase in the server
-				if p_id != 1:
-					rpc_id(p_id, "unregister_player", p_id)
+		pass
+#		if get_tree().is_network_server():
+#			for p_id in players: # Erase in the server
+#				if p_id != 1:
+#					rpc_id(p_id, "unregister_player", p_id)
