@@ -4,6 +4,7 @@ extends Node2D
 onready var anim = $AnimationPlayer
 
 func _ready():
+	OS.window_fullscreen = true
 	anim.play("Cutscene")
 	$Timer.start(26)
 	
