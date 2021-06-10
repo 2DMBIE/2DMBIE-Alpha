@@ -1,26 +1,34 @@
 extends Node2D
 
-var weaponPap = [MP5_pap.new(), UMP45_pap.new(), P90_pap.new(), SPAS12_pap.new(),XM1014_pap.new(), M4A1_pap.new(), AK12_pap.new(), M60_pap.new(), M249_pap.new(), BARRETT50_pap.new(), AWP_pap.new(), INTERVENTION_pap.new()]
+var weapons = [MP5.new(), UMP45.new(), P90.new(), SPAS12.new(),XM1014.new(), M4A1.new(), AK12.new(), M60.new(), M249.new(), BARRETT50.new(), AWP.new(), INTERVENTION.new()]
 
 var canBuy = false
 var enoughMoney = false
-var Selected_Weapon = 0
+var rng = RandomNumberGenerator.new()
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
 signal play_sound(library)
 
-#export(int, "MP5", "UMP45", "P90", "SPAS12", "XM1014", "M4A1", "AK12", "M60", "M249", "BARRETT50", "AWP", "INTERVENTION") var Selected_Weapon = 0 
-
 #the player can buy a weapon ans sets it to the correct slot
 func _physics_process(_delta):
 	if Input.is_action_just_pressed("use") and canBuy and enoughMoney:
-#		print(gunscript.guns[gunscript.current_gun_index].name, " | ", weaponPap[gunscript.current_gun_index].name)
-		gunscript.guns[gunscript.current_gun_index] = weaponPap[gunscript.current_gun_index]
-		gunscript.set_gun(gunscript.current_gun_index)
+		rng.randomize()
+		var randomweapon = rng.randi_range(0,11)
+		
+		for w in range(gunscript.weapon_slots.size()):
+			if gunscript.weapon_slots[w] == -1:
+				gunscript.current_weapon = w
+				gunscript.weapon_slots[w] = randomweapon
+				break
+		
+		for c in range(gunscript.weapon_slots.size()):
+			if gunscript.current_weapon == c:
+				gunscript.weapon_slots[c] = randomweapon
+				break
+		gunscript.set_gun(randomweapon)
+		
 		emit_signal("play_sound", "buy")
-		Global.Score -= int(5000)
-#	print(gunscript.guns[gunscript.current_gun_index].name)
-#	print(weaponPap[0].name)
+		Global.Score -= int(3000)
 	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
 		emit_signal("play_sound", "not_enough_money")
 
@@ -29,7 +37,7 @@ func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
 		canBuy = true
 	
-	if Global.Score >= int(5000):
+	if Global.Score >= int(3000):
 		enoughMoney = true
 	else:
 		enoughMoney = false

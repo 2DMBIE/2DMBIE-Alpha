@@ -27,12 +27,14 @@ var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
-signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
 var groundlessjump = true
 var jumpwaspressed = false
+var canBuyMovement2 = true
+
+signal play_sound(library)
 
 func _ready():
 	if Settings.debugMode:
@@ -54,7 +56,7 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
-	
+
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
@@ -184,14 +186,21 @@ func _physics_process(_delta):
 		get_node("Hitbox").set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(3, false)
 		knifing_hitbox_enabled = false
-		if !Global.maia:
+#		if !Global.maia:
+#			WALK_ACCELERATION = 35 #old 20
+#			MAX_WALK_SPEED = 230 #old 110 
+#			RUN_ACCELERATION = 40
+#			MAX_RUN_SPEED = 430
+		if canBuyMovement2 == false:
 			WALK_ACCELERATION = 35 #old 20
-			MAX_WALK_SPEED = 230 #old 110 
+			MAX_WALK_SPEED = 470 #old 110 
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 470
 		else:
 			WALK_ACCELERATION = 40 #old 20
 			MAX_WALK_SPEED = 430 #old 110 
-		RUN_ACCELERATION = 40
-		MAX_RUN_SPEED = 430
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 430
 	if Global.maia and _is_standing_still and is_sliding:
 		$AnimationTree.set("parameters/sliding/current", 1)
 		$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
@@ -448,6 +457,8 @@ func on_knife_animation_complete():
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
+		if body.health == 0:
+			Global.Score += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
@@ -467,10 +478,16 @@ func on_slide_animation_complete():
 			is_knifing = false
 			if !Global.maia:
 				is_sliding = false
-			WALK_ACCELERATION = 25 #old 20
-			RUN_ACCELERATION = 20
-			MAX_WALK_SPEED = 130 #old 110 
-			MAX_RUN_SPEED = 330
+			if canBuyMovement2 == false:
+				WALK_ACCELERATION = 40 #old 20
+				MAX_WALK_SPEED = 200 #old 110 
+				RUN_ACCELERATION = 40
+				MAX_RUN_SPEED = 380
+			else:
+				WALK_ACCELERATION = 25 #old 20
+				RUN_ACCELERATION = 20
+				MAX_WALK_SPEED = 130 #old 110 
+				MAX_RUN_SPEED = 330
 			$AnimationPlayer.get_animation("slide").length = .6
 			$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, .6)
 			slideHold = false
@@ -502,3 +519,12 @@ func rememberjumptime():
 	yield(get_tree().create_timer(0.1),"timeout")
 	jumpwaspressed = false
 	pass
+
+
+func _on_MovementPerk_perkactiveMovement(canBuyMovement):
+	if canBuyMovement == false:
+		canBuyMovement2 = false
+
+
+func _on_FireRatePerk_perkactive(canBuyFasterFireRate):
+	pass # Replace with function body.
