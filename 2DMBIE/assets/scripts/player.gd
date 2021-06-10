@@ -75,6 +75,13 @@ func _physics_process(_delta):
 			elif paused == true and get_node("Optionsmenu/Options").visible == false:
 				unpause_game()
 	escape_options()
+	
+	if !paused and get_node_or_null("/root/World") != null: #"/root/World") != null:
+		if Global.brightness:
+			get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
+		else:
+			get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
+	
 	if paused:
 		motion.y += GRAVITY
 		motion = move_and_slide(motion, UP)
@@ -521,7 +528,7 @@ func unpause_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
-	get_node(_path + "cursor").visible = false
+	get_node(_path + "cursor").visible = true
 
 func _on_Continue_button_down():
 	unpause_game()
