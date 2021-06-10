@@ -61,9 +61,10 @@ func _connected_ok():
 func _server_disconnected():
 	if has_node("/root/Lobby"): # Game is in progress.
 		get_node("/root/Lobby").queue_free()
-		get_tree().get_root().get_node("LobbyUI").hide()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+	elif has_node("/root/World"): # Game is in progress.
+		get_node("/root/World").queue_free()
+	get_tree().get_root().get_node("LobbyUI").hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 	print("server")
