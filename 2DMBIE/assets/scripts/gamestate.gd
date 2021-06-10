@@ -14,7 +14,7 @@ var last_player_name = ""
 
 # To send in-game join message
 var send_join_msg_enabled = true
-var just_joined = true
+var just_joined = false
 var player_join_cache = []
 
 # Names for remote players in id:name format
@@ -100,7 +100,7 @@ remote func register_player(id, new_player_name):
 		
 
 remote func unregister_player(id):
-	emit_signal("on_player_leave", id, players[id])
+	emit_signal("on_player_leave", players[id])
 	players.erase(id)
 	if has_node("/root/Lobby/Players/" + str(id)):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
@@ -175,6 +175,7 @@ func host_game(new_player_name):
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	last_player_name = player_name
+	just_joined = true
 	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
