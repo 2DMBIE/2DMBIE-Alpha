@@ -1,5 +1,6 @@
 extends HBoxContainer
 
-func ready():
+func _ready():
 	if Settings.fullscreen:
 		$VBox/fullscreen.pressed = true
+
