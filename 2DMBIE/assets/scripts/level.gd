@@ -54,7 +54,11 @@ func _process(_delta):
 		Global.Speed = 200
 		Global.enemiesKilled = 0 
 		Global.unlocked_doors = 0
-	if is_paused == false and get_node_or_null("/root/World") != null:
+		var _path = ""
+	
+	#get_tree().get_root().has_node("/root/World/Players"):
+		
+	if is_paused == false and get_tree().root.has_node("/root/World"): #"/root/World") != null:
 		if Global.brightness:
 			$CanvasModulate.color = Color("#bbbbbb")
 		else:
