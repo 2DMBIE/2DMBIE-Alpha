@@ -3,10 +3,9 @@
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/Buttons/ExitMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/UI/Buttons/PlayAgain.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sounds/music/woodwind.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sounds/music/menu_music.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/scripts/GameOver.gd" type="Script" id=6]
-
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -32,7 +31,7 @@ __meta__ = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Container"]
 stream = ExtResource( 4 )
-volume_db = 5.0
+volume_db = -1.0
 bus = "Music"
 
 [node name="VBOX" type="VBoxContainer" parent="Container"]

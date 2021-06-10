@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -37,10 +37,10 @@
 [ext_resource path="res://assets/sprites/background/StarryBackground.png" type="Texture" id=35]
 [ext_resource path="res://assets/scenes/purchasable_perks.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=37]
-[ext_resource path="res://assets/sounds/music/ingame_music2.mp3" type="AudioStream" id=38]
+[ext_resource path="res://assets/scenes/mystery_box.tscn" type="PackedScene" id=38]
 [ext_resource path="res://assets/sounds/music/ingame_music4.mp3" type="AudioStream" id=39]
 [ext_resource path="res://assets/sounds/music/ingame_music3.mp3" type="AudioStream" id=40]
-[ext_resource path="res://assets/scenes/mystery_box.tscn" type="PackedScene" id=41]
+[ext_resource path="res://assets/sounds/music/ingame_music2.mp3" type="AudioStream" id=41]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -4420,7 +4420,7 @@ stream = ExtResource( 31 )
 bus = "Music"
 
 [node name="ingame_music2" type="AudioStreamPlayer" parent="music"]
-stream = ExtResource( 38 )
+stream = ExtResource( 41 )
 bus = "Music"
 
 [node name="ingame_music3" type="AudioStreamPlayer" parent="music"]
@@ -4483,6 +4483,7 @@ position = Vector2( 4608, -1184 )
 
 [node name="Mystery_Box" parent="Mystery_Box" instance=ExtResource( 38 )]
 position = Vector2( 2278.91, -698.371 )
+
 [node name="darkenedAreas" type="YSort" parent="."]
 
 [node name="Library" type="Area2D" parent="darkenedAreas" groups=[
@@ -4574,14 +4575,14 @@ color = Color( 0, 0, 0, 0.941176 )
 polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
 
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="pauseGame" from="CanvasLayer/NotePopup" to="." method="_on_NotePopup_pauseGame"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
