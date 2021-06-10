@@ -98,7 +98,7 @@ remote func register_player(id, new_player_name):
 					rpc_id(p_id, "show_join_msg", player_name)
 					player_join_cache.append(p_id)
 			just_joined = false
-		
+			show_join_msg(player_name)
 
 remote func unregister_player(id):
 	emit_signal("on_player_leave", players[id])
