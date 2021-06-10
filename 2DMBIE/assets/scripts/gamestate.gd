@@ -26,7 +26,7 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
-signal on_local_player_loaded() #playersLoaded
+signal on_local_player_loaded() 
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -37,15 +37,24 @@ func _player_connected(_id):
 # Callback from SceneTree
 func _player_disconnected(id):
 	if get_tree().is_network_server():
-		if has_node("/root/World111"): # Game is in progress
-			emit_signal("game_error", "Player " + players[id] + " disconnected")
+		if get_tree().root.has_node("/root/World"): # Game is in progress
+			var msg = "Player " + players[id] + " disconnected"
+			for p_id in players:
+				rpc_id(p_id, "end_game_error", msg)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			emit_signal("game_error", msg)
 			end_game()
-		else: # Game is not in progress
+		else:
 			# If we are the server, send to the new dude all the already registered players
 			unregister_player(id)
 			for p_id in players:
 				# Erase in the server
 				rpc_id(p_id, "unregister_player", id)
+
+remote func end_game_error(msg):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	emit_signal("game_error", msg)
+	end_game()
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
@@ -71,10 +80,11 @@ func _server_disconnected():
 func _connected_fail():
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
-	print("fail")
+	player_join_cache = []
+	players = {}
+	players_ready = []
 
 # Lobby management functions
-
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
 		# If we are the server, let everyone know about the new player
@@ -146,8 +156,8 @@ remote func pre_start_game(spawn_points):
 		post_start_game()
 
 remote func post_start_game():
-	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_tree().get_root().get_node("Lobby").queue_free()
+	get_tree().set_pause(false) # Unpause and unleash the game!
 	emit_signal("on_local_player_loaded")
 
 var players_ready = []
@@ -201,8 +211,7 @@ func begin_game():
 
 func end_game():
 	if has_node("/root/World"): # Game is in progress
-		# End it
-		get_node("/root/World").queue_free()
+		get_node("/root/World").queue_free() # End it
 	elif has_node("/root/Lobby"):
 		get_node("/root/Lobby").queue_free()
 	emit_signal("game_ended")
