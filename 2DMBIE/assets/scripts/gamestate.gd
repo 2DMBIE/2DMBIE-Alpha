@@ -39,7 +39,7 @@ func _player_connected(_id):
 # Callback from SceneTree
 func _player_disconnected(id):
 	if get_tree().is_network_server():
-		if has_node("/root/world"): # Game is in progress
+		if has_node("/root/World111"): # Game is in progress
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
 			end_game()
 		else: # Game is not in progress
@@ -48,7 +48,6 @@ func _player_disconnected(id):
 			for p_id in players:
 				# Erase in the server
 				rpc_id(p_id, "unregister_player", id)
-	print("disconnect")
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
@@ -105,6 +104,8 @@ remote func unregister_player(id):
 	players.erase(id)
 	if has_node("/root/Lobby/Players/" + str(id)):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
+	elif has_node("/root/World/Players/" + str(id)):
+		get_node("/root/World/Players/" + str(id)).queue_free()
 
 remote func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
@@ -201,9 +202,9 @@ func begin_game():
 	pre_start_game(spawn_points)
 
 func end_game():
-	if has_node("/root/world"): # Game is in progress
+	if has_node("/root/World"): # Game is in progress
 		# End it
-		get_node("/root/world").queue_free()
+		get_node("/root/World").queue_free()
 
 	emit_signal("game_ended")
 	players.clear()
@@ -242,3 +243,9 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	# warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		if get_tree().is_network_server():
+			for p_id in players: # Erase in the server
+				rpc_id(p_id, "unregister_player", p_id)
