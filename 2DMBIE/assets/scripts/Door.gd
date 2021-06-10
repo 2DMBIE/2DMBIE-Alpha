@@ -19,6 +19,8 @@ func _on_doorareaRight_body_entered(body):
 		$PricelabelRight.visible = true
 		can_buy = true
 		id = body.name
+	else:
+		$PricelabelRight.visible = false
 
 func _on_doorareaRight_body_exited(body):
 	if body.is_in_group("player"):
@@ -32,6 +34,8 @@ func _on_doorareaLeft_body_entered(body):
 		$PricelabelLeft.visible = true
 		can_buy = true
 		id = body.name
+	else:
+		$PricelabelLeft.visible = false
 
 func _on_doorareaLeft_body_exited(body):
 	if body.is_in_group("player"):
@@ -77,6 +81,6 @@ func refresh_door_prices():
 		if door.getID() == int(0): 
 			door.get_node("PricelabelRight").visible = false
 			door.get_node("PricelabelLeft").visible = false
-		if door.get_name() != "Secret":
+		if door.get_name() != "Secret": # The Secret door price must be unaffected since the price is always 10000
 			door.get_node("PricelabelRight").text = str(prices[get_total_unlocked_doors()])	
 			door.get_node("PricelabelLeft").text = str(prices[get_total_unlocked_doors()])
