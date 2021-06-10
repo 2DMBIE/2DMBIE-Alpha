@@ -5,7 +5,11 @@ onready var anim = $AnimationPlayer
 
 func _ready():
 	Settings.loadSettings()
-	print(Settings.fullscreen)
+	if Settings.fullscreen == true:
+		OS.window_fullscreen = true
+	else:
+		OS.window_fullscreen = false
+
 	anim.play("Cutscene")
 	$Timer.start(26)
 	
