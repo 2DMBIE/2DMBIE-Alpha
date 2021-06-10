@@ -13,8 +13,8 @@ var player_id
 var last_player_name = ""
 
 # To send in-game join message
-var send_join_msg_enabled
-var just_joined
+var send_join_msg_enabled = true
+var just_joined = true
 var player_join_cache = []
 
 # Names for remote players in id:name format
@@ -103,6 +103,7 @@ remote func register_player(id, new_player_name):
 remote func unregister_player(id):
 	emit_signal("on_player_leave", players[id])
 	players.erase(id)
+	player_join_cache.erase(id)
 	if has_node("/root/Lobby/Players/" + str(id)):
 		get_node("/root/Lobby/Players/" + str(id)).queue_free()
 	elif has_node("/root/World/Players/" + str(id)):
@@ -169,7 +170,6 @@ func host_game(new_player_name):
 	player_name = new_player_name
 	host_name = player_name
 	send_join_msg_enabled = false
-	just_joined = false
 	var host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
 	get_tree().set_network_peer(host)
@@ -177,8 +177,6 @@ func host_game(new_player_name):
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	last_player_name = player_name
-	just_joined = true
-	send_join_msg_enabled = true
 	var host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
@@ -248,11 +246,3 @@ func _ready():
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	# warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-
-func _notification(what):
-	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		pass
-#		if get_tree().is_network_server():
-#			for p_id in players: # Erase in the server
-#				if p_id != 1:
-#					rpc_id(p_id, "unregister_player", p_id)
