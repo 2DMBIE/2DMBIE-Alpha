@@ -244,3 +244,15 @@ func _on_NotePopup_pauseGame():
 	get_tree().paused = true
 	notePause = true
 
+
+
+
+
+
+
+
+
+
+
+
+
