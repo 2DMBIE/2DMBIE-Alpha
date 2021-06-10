@@ -148,6 +148,7 @@ remote func pre_start_game(spawn_points):
 remote func post_start_game():
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_tree().get_root().get_node("Lobby").queue_free()
+	emit_signal("on_local_player_loaded")
 
 var players_ready = []
 

@@ -17,7 +17,8 @@ var rotationDegree
 func _ready():
 	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
+	random_round = randi()%7+1 # generate random integer between 7 and 1
+	randomize()
 	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 

@@ -312,8 +312,8 @@ func _on_no_aim_shoot(value):
 	rpc_unreliable("set_animation","parameters/fixed_aim/current", value)
 
 func set_gun_recoil_sensitivity(value):
-	rpc_unreliable("set_animation", "parameters/gun_recoil_sensitivity/add_amount", value)
-
+	rpc("set_animation", "parameters/gun_recoil_sensitivity/add_amount", value)
+	
 signal ammoUpdate(ammo, maxClipammo, totalAmmo)
 
 func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
