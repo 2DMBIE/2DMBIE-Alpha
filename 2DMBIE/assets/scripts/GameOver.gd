@@ -10,7 +10,7 @@ onready var fontGreen = 1
 onready var fontBlue = 1
 var is_time_formatted = false
 var TimeDummy
-var TimeSeconds = 10000
+var TimeSeconds = 0
 var TimeMinutes = 0
 var TimeHours = 0
 var TimeText
