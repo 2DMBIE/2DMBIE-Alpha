@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/healthbar/overlayer.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/healthbar/underlayer.png" type="Texture" id=4]
 [ext_resource path="res://assets/scripts/TextureProgress.gd" type="Script" id=5]
-[ext_resource path="res://assets/scripts/AmmoLabel.gd" type="Script" id=6]
 [ext_resource path="res://assets/scripts/HP bar.gd" type="Script" id=7]
 [ext_resource path="res://assets/scripts/Interface.gd" type="Script" id=8]
 [ext_resource path="res://assets/scripts/Weapon1.gd" type="Script" id=9]
@@ -13,6 +11,7 @@
 [ext_resource path="res://assets/sprites/redBorder(hor).png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/redBorder(Ver).png" type="Texture" id=12]
 [ext_resource path="res://assets/scripts/redborders.gd" type="Script" id=13]
+[ext_resource path="res://assets/scripts/ammo_ui.gd" type="Script" id=14]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -130,6 +129,7 @@ text = "AMMO"
 align = 1
 valign = 1
 autowrap = true
+script = ExtResource( 14 )
 
 [node name="TotalAmmoLabel" type="Label" parent="Interface/Ammo"]
 anchor_left = 1.0
@@ -141,7 +141,6 @@ margin_top = 26.0
 margin_bottom = 58.0
 align = 1
 valign = 1
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -156,7 +155,6 @@ margin_top = 2.0
 margin_bottom = 34.0
 align = 1
 valign = 1
-script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

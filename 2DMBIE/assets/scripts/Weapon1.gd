@@ -3,7 +3,7 @@ extends Control
 var gunscript
 
 func _ready():
-	pass
+	gamestate.connect("on_local_player_loaded", self, "_on_player_loaded")	
 # warning-ignore:return_value_discarded
 	#gamestate.connect("playersLoaded", self, "_on_playersLoaded")
 
@@ -17,5 +17,6 @@ func _process(_delta):
 		else:
 			$Weapon2.visible = true
 
-func _on_playersLoaded():
-	gunscript = get_node("/root/Lobby/Players/"+str(gamestate.player_id)+"/body/chest/torso/gun")
+func _on_player_loaded():
+	if get_tree().root.has_node("/root/World"):
+		gunscript = get_node("/root/World/Players/" + str(gamestate.player_id)+ "/body/chest/torso/gun")

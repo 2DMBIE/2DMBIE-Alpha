@@ -101,8 +101,8 @@ func _process(delta):
 		rset("puppet_movement", movement)
 		rset("puppet_pos", position)
 	else:
-		puppet_pos = position
-		puppet_movement = movement
+		position = puppet_pos
+		movement = puppet_movement
 	var _moveSlide = move_and_slide(movement, Vector2(0, -1))
 	if not is_network_master():
 		puppet_pos = position

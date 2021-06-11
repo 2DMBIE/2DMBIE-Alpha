@@ -193,7 +193,7 @@ remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bul
 	emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 	get_tree().root.add_child(bullet)
 
-func get_current_gun():
+func get_current_gun() -> Gun:
 	return guns[current_gun_index]
 
 var reload_gun_index

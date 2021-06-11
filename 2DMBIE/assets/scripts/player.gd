@@ -533,7 +533,7 @@ func _on_Continue_button_down():
 
 func _on_ExitGame_button_down():
 	unpause_game()
-	Global.game_active = false
+	Global.paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 
