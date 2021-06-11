@@ -101,8 +101,8 @@ remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
 		if not player_join_cache.has(id):
 			for id in players: 
-				rpc_id(id, "show_join_msg", new_player_name)
-			show_join_msg(new_player_name)
+				rpc_id(id, "show_join_msg", id, new_player_name)
+			show_join_msg(id, new_player_name)
 			player_join_cache.append(id)
 
 remote func unregister_player(id):

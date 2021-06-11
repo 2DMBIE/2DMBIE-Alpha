@@ -57,7 +57,7 @@ func _physics_process(_delta):
 		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 		if Input.is_action_just_pressed("pause"):
 			if get_node("Optionsmenu/Options").visible == false:
-				if paused == false:
+				if Global.paused == false:
 					var _path = ""
 					if get_tree().get_root().has_node("/root/World/Players"):
 						_path = "/root/World/"
@@ -66,21 +66,21 @@ func _physics_process(_delta):
 					get_tree().root.get_node(_path + "CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 					get_tree().root.get_node(_path + "HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 	#				get_tree().paused = true
-					paused = true
+					Global.paused = true
 					get_node("PauseMenu/Container").visible = true
 					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	#				emit_signal("music", "pause")
 					AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 					get_node(_path + "cursor").visible = false
-				elif paused == true and get_node("Optionsmenu/Options").visible == false:
+				elif Global.paused == true and get_node("Optionsmenu/Options").visible == false:
 					unpause_game()
 		escape_options()
-		if !paused and get_tree().root.has_node("/root/World"): #get_tree.root.has_node("/root/World") != null: #"/root/World") != null:
+		if !Global.paused and get_tree().root.has_node("/root/World"): #get_tree.root.has_node("/root/World") != null: #"/root/World") != null:
 			if Global.brightness:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
 			else:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
-		if paused:
+		if Global.paused:
 			motion.y += GRAVITY
 			motion = move_and_slide(motion, UP)
 			rset("puppet_motion", motion)
