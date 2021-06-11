@@ -10,7 +10,7 @@ var player_display
 
 func _ready():
 # warning-ignore:return_value_discarded
-	gamestate.connect("on_player_join", self, "_on_player_joined")
+	gamestate.connect("player_added", self, "_on_player_joined")
 	total_user_amount = gamestate.MAX_PEERS + 1
 	
 	if !get_tree().get_network_unique_id() == 1:
@@ -26,8 +26,8 @@ func _on_Button_button_down():
 
 func _on_player_joined(id, player_name):
 	displayID = id
-	print(displayID)
 	player_display = playerDisplay.instance()
 	player_display.name = str(id)
 	player_display.get_node("NameDisplay/Label").text = " " + str(player_name)
 	$Control/PlayerDisplays.add_child(player_display)
+	player_display.get_node("ColorSelect").on_player_loaded()
