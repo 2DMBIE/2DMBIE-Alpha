@@ -17,6 +17,7 @@ var game_active = false
 var highScore = 0
 var maia = false
 var specialWave = false
+var TotalScore = 0
 
 func _process(_delta):
 	pass
