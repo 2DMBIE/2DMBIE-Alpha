@@ -11,7 +11,7 @@ var selectNumber = 0
 var prevColor
 
 func _ready():
-	colorArray = ['randomColor', 'greyColor', 'blueColor', 'redColor', 'yellowColor']
+	colorArray = [randomColor, greyColor, blueColor, redColor, yellowColor]
 
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
@@ -31,7 +31,7 @@ func _on_LeftArrow_button_down():
 	selectNumber -= 1
 	if selectNumber == -1:
 		selectNumber = 4
-#		$ColorDisplay.texture = colorArray[selectNumber]
+	$ColorDisplay.texture = colorArray[selectNumber]
 	prevColor = colorArray[selectNumber]
 	rpc("set_player_color", prevColor)
 
@@ -41,7 +41,7 @@ func _on_RightArrow_button_down():
 	selectNumber += 1
 	if selectNumber == 5:
 		selectNumber = 0
-#		$ColorDisplay.texture = colorArray[selectNumber]
+	$ColorDisplay.texture = colorArray[selectNumber]
 	prevColor = colorArray[selectNumber]
 	rpc("set_player_color", prevColor)
 
@@ -51,4 +51,4 @@ func on_player_loaded():
 
 remotesync func set_player_color(prevColor):
 	colorArray.erase(prevColor)
-	print(colorArray)
+#	print(colorArray)
