@@ -42,6 +42,7 @@ puppet var puppet_motion = Vector2()
 
 func _ready():
 	$AnimationTree.active = true
+	set_color(Camo.ORANGE)
 	if is_network_master():
 		zombie_dam_timer = Timer.new()
 		zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
@@ -510,6 +511,24 @@ remotesync func moonwalking(x):
 
 remotesync func set_animation(path, value):
 	$AnimationTree.set(path, value)
+
+enum Camo {GREY=0, BLUE=1, RED=2, ORANGE=3}
+func set_color(color):
+	$body/chest/torso.frame = color
+	$body/chest/torso/upperarm_left.frame = color
+	$body/chest/torso/upperarm_right.frame = color
+	$body/chest/torso/upperarm_left/lowerarm_left.frame = color
+	$body/chest/torso/upperarm_right/lowerarm_right.frame = color
+	$body/legs/thigh_left.frame = color
+	$body/legs/thigh_right.frame = color
+	$body/legs/thigh_left/lowerleg_left.frame = color
+	$body/legs/thigh_right/lowerleg_right.frame = color
+	if color == Camo.GREY:
+		$body/legs/thigh_left/lowerleg_left/foot_left.frame = 0
+		$body/legs/thigh_right/lowerleg_right/foot_right.frame = 0
+	else:
+		$body/legs/thigh_left/lowerleg_left/foot_left.frame = 1
+		$body/legs/thigh_right/lowerleg_right/foot_right.frame = 1
 	
 func unpause_game():
 	var _path = ""
