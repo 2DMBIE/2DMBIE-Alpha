@@ -13,7 +13,7 @@ var reloadColor = Color(0.345098, 0.937254, 0.278431, 1)
 var fireRateColor = Color(0.317647, 0.690196, 1, 1)
 var colorArray = [healthColor, fireRateColor, reloadColor, movementColor]
 var nameArray = ["HealthPerk", "MovementPerk", "ReloadPerk", "FireRatePerk"]
-var priceArray = ["1500", "2500", "1000", "3000"]
+var priceArray = ["3500", "3000", "1000", "3000"]
 
 var canBuy = false
 var enoughMoney = false
@@ -24,6 +24,7 @@ var canBuyFasterFireRate = true
 
 signal perkactive(canBuyFasterFireRate)
 signal perkactiveAmmo(canBuyAmmo)
+signal perkactiveMovement(canBuyMovement)
 signal play_sound(library)
 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
@@ -51,6 +52,7 @@ func _physics_process(_delta):
 		perkInterface("MovementPerk")
 		canBuyMovement = false
 		emit_signal("play_sound", "buy")
+		emit_signal("perkactiveMovement", canBuyMovement)
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])

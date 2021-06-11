@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -30,13 +30,17 @@
 [ext_resource path="res://assets/scripts/music.gd" type="Script" id=28]
 [ext_resource path="res://assets/scenes/Door.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=30]
-[ext_resource path="res://assets/sounds/ingame_music.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sounds/music/ingame_music1.wav" type="AudioStream" id=31]
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=32]
 [ext_resource path="res://assets/sounds/player/heartbeat.wav" type="AudioStream" id=33]
 [ext_resource path="res://assets/UI/GameOver.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/sprites/background/StarryBackground.png" type="Texture" id=35]
 [ext_resource path="res://assets/scenes/purchasable_perks.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/scenes/mystery_box.tscn" type="PackedScene" id=38]
+[ext_resource path="res://assets/sounds/music/ingame_music4.mp3" type="AudioStream" id=39]
+[ext_resource path="res://assets/sounds/music/ingame_music3.mp3" type="AudioStream" id=40]
+[ext_resource path="res://assets/sounds/music/ingame_music2.mp3" type="AudioStream" id=41]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -4252,10 +4256,10 @@ position = Vector2( 1544.28, -2078.52 )
 position = Vector2( 1056.28, -1546.52 )
 
 [node name="Lightbulb_with_wire6" parent="lights" instance=ExtResource( 20 )]
-position = Vector2( 1141.76, -1300.49 )
+position = Vector2( 1142.35, -1316.25 )
 
 [node name="Lightbulb_with_wire_broken4" parent="lights" instance=ExtResource( 17 )]
-position = Vector2( 1744, -1308.49 )
+position = Vector2( 1743.25, -1316.74 )
 
 [node name="TL_buis10" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 1420.28, -1802.52 )
@@ -4411,8 +4415,20 @@ polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1344, 64, -1344 )
 [node name="music" type="Node2D" parent="."]
 script = ExtResource( 28 )
 
-[node name="ingame_music" type="AudioStreamPlayer" parent="music"]
+[node name="ingame_music1" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 31 )
+bus = "Music"
+
+[node name="ingame_music2" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 41 )
+bus = "Music"
+
+[node name="ingame_music3" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 40 )
+bus = "Music"
+
+[node name="ingame_music4" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 39 )
 bus = "Music"
 
 [node name="sfx" type="Node2D" parent="."]
@@ -4452,14 +4468,21 @@ position = Vector2( 4768, -1440 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 36 )]
-position = Vector2( 928, -1184 )
+position = Vector2( 925.013, -1190.14 )
 
 [node name="ReloadPerk" parent="Perks" instance=ExtResource( 36 )]
 position = Vector2( 1376, -2208 )
 Selected_Perk = 2
 
-[node name="puck_a_panch" parent="." instance=ExtResource( 37 )]
+[node name="Juke_a_Box" type="Node" parent="."]
+
+[node name="puck_a_panch" parent="Juke_a_Box" instance=ExtResource( 37 )]
 position = Vector2( 4608, -1184 )
+
+[node name="Mystery_Box" type="Node" parent="."]
+
+[node name="Mystery_Box" parent="Mystery_Box" instance=ExtResource( 38 )]
+position = Vector2( 2278.91, -698.371 )
 
 [node name="darkenedAreas" type="YSort" parent="."]
 
@@ -4571,6 +4594,9 @@ polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
 [connection signal="button_down" from="GameOver/Container/VBOX/PlayAgainButton" to="." method="_on_PlayAgainButton_button_down"]
 [connection signal="button_down" from="GameOver/Container/VBOX/ExitToMenu" to="." method="_on_ExitMenu_button_down"]
+[connection signal="perkactiveMovement" from="Perks/MovementPerk" to="Player" method="_on_MovementPerk_perkactiveMovement"]
+[connection signal="perkactive" from="Perks/FireRatePerk" to="Player" method="_on_FireRatePerk_perkactive"]
+[connection signal="perkactiveAmmo" from="Perks/ReloadPerk" to="Player/body/chest/torso/gun" method="_on_AmmoPerk_perkactiveAmmo"]
 
 [editable path="Player"]
 [editable path="CanvasLayer"]
