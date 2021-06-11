@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/puck_a_panch.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/sounds/Jukebox/only you jukebox music.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/Jukebox/Electrical Humming 50hz.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/scripts/lights/lightbulb_broken.gd" type="Script" id=10]
+[ext_resource path="res://assets/sprites/guns/m4a1.png" type="Texture" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -202,9 +203,21 @@ extents = Vector2( 100, 120 )
 z_index = -5
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -40 )
+z_index = 5
+texture = ExtResource( 11 )
+
+[node name="Light2D2" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -40 )
+texture = ExtResource( 3 )
+color = Color( 1, 0.819608, 0, 1 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 25
+frame = 9
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -271,7 +284,10 @@ autoplay = true
 max_distance = 500.0
 bus = "Soundeffects"
 
+[node name="Timer_buy_wait_time" type="Timer" parent="."]
+
 [connection signal="play_sound" from="." to="sfx" method="_on_puck_a_panch_play_sound"]
 [connection signal="timeout" from="Timer" to="Light2D" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="buyarea" to="." method="_on_buyarea_body_entered"]
 [connection signal="body_exited" from="buyarea" to="." method="_on_buyarea_body_exited"]
+[connection signal="timeout" from="Timer_buy_wait_time" to="." method="_on_Timer_buy_wait_time_timeout"]

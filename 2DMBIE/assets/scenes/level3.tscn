@@ -92,22 +92,16 @@ script = ExtResource( 7 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( 255.61, -179.286 )
-
-[node name="Zombie2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 352, -179.286 )
-
-[node name="Zombie3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 464, -178 )
+position = Vector2( -880, -178 )
 
 [node name="Weapons" type="Node" parent="."]
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 11.3409, -188.22 )
+position = Vector2( -665.555, -392 )
 Selected_Weapon = 0
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 248, -192 )
+position = Vector2( -168, -318.191 )
 Selected_Weapon = 1
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
@@ -154,6 +148,24 @@ Selected_Weapon = 11
 [node name="Mystery_Box" parent="Mystery box" instance=ExtResource( 18 )]
 position = Vector2( 486, -178 )
 
+[node name="Mystery_Box5" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 214.5, -441.991 )
+
+[node name="Mystery_Box7" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 8, -180.96 )
+
+[node name="Mystery_Box6" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 224, -185.991 )
+
+[node name="Mystery_Box2" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 704, -490 )
+
+[node name="Mystery_Box3" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 486, -688 )
+
+[node name="Mystery_Box4" parent="Mystery box" instance=ExtResource( 18 )]
+position = Vector2( 482.562, -439.555 )
+
 [node name="puck a panch" type="Node" parent="."]
 
 [node name="puck_a_panch" parent="puck a panch" instance=ExtResource( 16 )]
@@ -170,7 +182,7 @@ position = Vector2( -687.183, -248.978 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( 280, -513.442 )
+position = Vector2( -88, -513.442 )
 
 [node name="AmmoPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -1403.34, -250.8 )
@@ -223,8 +235,8 @@ position = Vector2( 3040, -1312 )
 [connection signal="perkactive" from="Perks/FasterShootingPerk" to="Player/body/chest/torso/gun" method="_on_FasterShootingPerk_perkactive"]
 [connection signal="perkactiveAmmo" from="Perks/AmmoPerk" to="Player/body/chest/torso/gun" method="_on_AmmoPerk_perkactiveAmmo"]
 [connection signal="button_down" from="Optionsmenu/Options/Panel/VBox/ExitOptions" to="." method="_on_ExitOptions_button_down"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 
 [editable path="PauseMenu"]
