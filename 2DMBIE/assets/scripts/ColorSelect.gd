@@ -3,7 +3,7 @@ extends HBoxContainer
 onready var greyColor = preload("res://assets/sprites/ColorSelectGrey.png")
 onready var blueColor = preload("res://assets/sprites/ColorSelectBlue.png")
 onready var redColor = preload("res://assets/sprites/ColorSelectRed.png")
-onready var yellowColor = preload("res://assets/sprites/ColorSelectYellow.png")
+onready var orangeColor = preload("res://assets/sprites/ColorSelectOrange.png")
 onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
 
 var colorArray
@@ -11,7 +11,7 @@ var selectNumber = 0
 var prevColor
 
 func _ready():
-	colorArray = [randomColor, greyColor, blueColor, redColor, yellowColor]
+	colorArray = [randomColor, greyColor, blueColor, redColor, orangeColor]
 
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
