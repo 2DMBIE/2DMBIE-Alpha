@@ -21,7 +21,7 @@ var player_join_cache = []
 var players = {}
 
 # Signals to let lobby GUI know what's going ona
-signal on_player_join(name)
+signal on_player_join(id, name)
 signal on_player_leave(id, name)
 signal lobby_created(name)
 signal connection_failed()
@@ -29,6 +29,7 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
 signal on_local_player_loaded() #playersLoaded
+signal player_added(player, player_name)
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -95,8 +96,9 @@ remote func register_player(id, new_player_name):
 		if just_joined or player_join_cache.size() != players.size():
 			for p_id in players: 
 				if not player_join_cache.has(p_id):
-					rpc_id(p_id, "show_join_msg", player_name)
+					rpc_id(p_id, "show_join_msg", id, player_name)
 					player_join_cache.append(p_id)
+					emit_signal("player_added", id, player_name)
 			just_joined = false
 		
 
@@ -119,8 +121,8 @@ remote func add_player(id, name):
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
 
-remote func show_join_msg(name):
-	emit_signal("on_player_join", name)
+remote func show_join_msg(id, name):
+	emit_signal("on_player_join", id, name)
 	
 remote func pre_start_game(spawn_points):
 	# Change scene
@@ -227,6 +229,7 @@ func load_lobby():
 	world.get_node("Players").add_child(player)
 	
 	player_id = get_tree().get_network_unique_id()
+	
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)
 	emit_signal("on_local_player_loaded")

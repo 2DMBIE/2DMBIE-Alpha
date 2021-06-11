@@ -10,7 +10,6 @@ var labelNumber = 0
 var labels = {}
 
 func _ready():
-	print("ready")
 # warning-ignore:return_value_discarded
 	gamestate.connect("on_player_join", self, "_on_player_join_event")
 # warning-ignore:return_value_discarded
@@ -93,7 +92,7 @@ func _on_chatPopup_timeout():
 	if get_node("/root/Lobby/cursor").visible:
 		$Control/StatusIcon/Panel.visible = true
 
-func _on_player_join_event(name):
+func _on_player_join_event(_id, name):
 	var status_label
 	status_label = lobby_label.instance()
 	status_label.text = " " + (str(name) + " joined the lobby")

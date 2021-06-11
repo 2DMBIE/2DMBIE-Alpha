@@ -15,7 +15,6 @@ var MarkerPos
 var rotationDegree
 
 func _ready():
-	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = 1 #randi()%7+1 # generate random integer between 7 and 1
 	if get_node("/root/Lobby"):
@@ -117,7 +116,6 @@ func _on_Continue_button_down():
 
 func _on_ExitGame_button_down():
 	unpause_game()
-	Global.game_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 

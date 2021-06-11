@@ -56,7 +56,7 @@ func switch_slot(slot):
 		prevWeapon = weapon_slots[slot]
 
 func _process(_delta):
-	if !get_node("../../../../").paused:
+	if !Global.paused:
 		if is_network_master():
 			if shooting_disabled:
 				return

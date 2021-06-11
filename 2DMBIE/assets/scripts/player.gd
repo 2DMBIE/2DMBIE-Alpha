@@ -34,7 +34,6 @@ signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
-var paused = false
 
 
 puppet var puppet_pos = Vector2()
@@ -57,20 +56,20 @@ func _physics_process(_delta):
 	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 	if Input.is_action_just_pressed("pause"):
 		if get_node("Optionsmenu/Options").visible == false:
-			if paused == false:
+			if Global.paused == false:
 				get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 				get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
 #				get_tree().paused = true
-				paused = true
+				Global.paused = true
 				get_node("PauseMenu/Container").visible = true
 				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 #				emit_signal("music", "pause")
 				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 				get_node("/root/Lobby/cursor").visible = false
-			elif paused == true and get_node("Optionsmenu/Options").visible == false:
+			elif Global.paused == true and get_node("Optionsmenu/Options").visible == false:
 				unpause_game()
 	escape_options()
-	if paused:
+	if Global.paused:
 		motion.y += GRAVITY
 		motion = move_and_slide(motion, UP)
 		rset("puppet_motion", motion)
@@ -493,12 +492,12 @@ func unpause_game():
 	get_node("/root/Lobby/CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(1,1,1,1))
 #	get_tree().paused = false
-	paused = false
+	Global.paused = false
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
-	get_node("/root/Lobby/cursor").visible = false
+	get_node("/root/Lobby/cursor").visible = true
 
 func _on_Continue_button_down():
 	unpause_game()

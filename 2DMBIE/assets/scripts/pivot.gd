@@ -17,7 +17,7 @@ func _ready():
 	
 func _process(_delta):
 #	timerTimeout()
-	if !get_node("../").paused:
+	if !Global.paused:
 		if !Global.camera:
 			timerTimeout()
 			if mousePos > (parent.position.x - pivotOffset):
