@@ -8,8 +8,6 @@ func _ready():
 			$AnimationPlayer.seek(6.5)
 		else:
 			rpc_id(1, "get_daynightcycle", get_tree().get_network_unique_id())
-	# warning-ignore:return_value_discarded
-	gamestate.connect("on_local_player_loaded", self, "on_player_loaded_event")
 
 remote func get_daynightcycle(id):
 	rpc_id(id, "set_daynightcycle", $AnimationPlayer.current_animation_position)
@@ -20,6 +18,3 @@ remote func set_daynightcycle(time):
 
 func _process(_delta):
 	$cursor.position = get_global_mouse_position()
-
-func on_player_loaded_event():
-	pass

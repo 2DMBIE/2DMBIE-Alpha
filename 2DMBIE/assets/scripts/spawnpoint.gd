@@ -5,13 +5,13 @@ var PlayerBody = false
 
 
 func _on_Timer_timeout():
-	return
 	$Timer.start(5)
 	if PlayerBody == true: #checks if the player is in the spawnradius
 		if Global.CurrentWaveEnemies < Global.MaxWaveEnemies: #check for the maximum amount of enemies in this round
 			var enemy := plenemy.instance()
 			enemy.position = $spawnpoint.get_global_position()
-			get_tree().current_scene.add_child(enemy)
+			get_tree().root.get_node("/root/World").add_child(enemy)
+			#get_tree().current_scene.add_child(enemy)
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size() #checkin the amount of enemies ont the map
 			Global.CurrentWaveEnemies += 1
 			if enemyAmount > 10: #maximum amount of enemies on the map at the same time
@@ -19,7 +19,7 @@ func _on_Timer_timeout():
 		else: #function for starting timer to the next wave
 			var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
 			if enemyAmount == 0:
-				get_node("../../WaveTimer").start(2) # total wait time is this time + the spawn timer
+				get_tree().root.get_node("/root/World/WaveTimer").start(2) # total wait time is this time + the spawn timer
 
 #collision area to detect the player & spawn enemies
 func _on_PlayerDetectionRadius_body_entered(body):
