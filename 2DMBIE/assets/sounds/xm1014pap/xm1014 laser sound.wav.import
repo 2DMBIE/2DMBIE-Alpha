@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xm1014 laser sound.wav-e8fabfdd473aedbba6d8dff8b7d6eefd.sample"
+
+[deps]
+
+source_file="res://assets/sounds/xm1014pap/xm1014 laser sound.wav"
+dest_files=[ "res://.import/xm1014 laser sound.wav-e8fabfdd473aedbba6d8dff8b7d6eefd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

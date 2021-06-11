@@ -2,14 +2,18 @@ extends Node
 
 
 
-var spriteHealthPerk = preload("res://assets/sprites/perks/health_perk.png")
-var spriteMovementPerk = preload("res://assets/sprites/perks/movement_perk.png")
-var spriteReloadPerk = preload ("res://assets/sprites/perks/movement_perk.png")
-var spriteFasterShootingPerk = preload ("res://assets/sprites/perks/movement_perk.png")
+var spriteHealthPerk = preload("res://assets/UI/Perks/Health.png")
+var spriteMovementPerk = preload("res://assets/UI/Perks/Speed.png")
+var spriteReloadPerk = preload ("res://assets/UI/Perks/Reload.png")
+var spriteFasterShootingPerk = preload ("res://assets/UI/Perks/FireRate.png")
 var spriteArray = [spriteHealthPerk, spriteMovementPerk, spriteReloadPerk, spriteFasterShootingPerk]
-var colorArray = [Color.limegreen, Color.turquoise, Color.beige, Color.antiquewhite]
-var nameArray = ["HealthPerk", "MovementPerk", "ReloadPerk", "FasterShootingPerk"]
-var priceArray = ["1500", "2500", "1000", "3000"]
+var healthColor = Color(0.725490, 0, 0, 1)
+var movementColor = Color(1, 0.415686, 0, 1)
+var reloadColor = Color(0.345098, 0.937254, 0.278431, 1)
+var fireRateColor = Color(0.317647, 0.690196, 1, 1)
+var colorArray = [healthColor, fireRateColor, reloadColor, movementColor]
+var nameArray = ["HealthPerk", "MovementPerk", "ReloadPerk", "FireRatePerk"]
+var priceArray = ["3500", "3000", "1000", "3000"]
 
 var canBuy = false
 var enoughMoney = false
@@ -19,47 +23,68 @@ var canBuyAmmo = true
 var canBuyFasterFireRate = true
 
 signal perkactive(canBuyFasterFireRate)
+signal perkactiveAmmo(canBuyAmmo)
+signal perkactiveMovement(canBuyMovement)
+signal play_sound(library)
 
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 
-export(int, "Health perk", "Movement speed perk", "Reload perk", "Faster Shooting") var Selected_Perk = 0
+export(int, "Health perk", "Movement speed perk", "Reload perk", "Fire Rate") var Selected_Perk = 0
 
 func _physics_process(_delta):
 	
 	#Healthperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 0 and canBuyHealth:
 		healthperk()
+		perkInterface("HealthPerk")
 		canBuyHealth = false
+		emit_signal("play_sound", "buy")
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").maxHealth)
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#Movementperk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 1 and canBuyMovement:
 		movementperk()
+		perkInterface("MovementPerk")
 		canBuyMovement = false
+		emit_signal("play_sound", "buy")
+		emit_signal("perkactiveMovement", canBuyMovement)
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
 #		print(get_node("../../Player").MAX_WALK_SPEED)
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#AmmoPerk
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 2 and canBuyAmmo:
-		ammoperk()
 		canBuyAmmo = false
+		emit_signal("play_sound", "buy")
+		perkInterface("ReloadPerk")
+		emit_signal("perkactiveAmmo", canBuyAmmo)
+		ammoperk()
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 	#Faster shooting
 	if Input.is_action_just_pressed("use") && canBuy and enoughMoney and Selected_Perk == 3 and canBuyFasterFireRate:
 		canBuyFasterFireRate = false
+		emit_signal("play_sound", "buy")
+		perkInterface("FireRatePerk")
 		emit_signal("perkactive", canBuyFasterFireRate)
 		fasterfirerateperk()
 		for i in spriteArray.size():
 			if Selected_Perk == i:
 				Global.Score -= int(priceArray[i])
+	elif Input.is_action_just_pressed("use") and canBuy and not enoughMoney:
+		emit_signal("play_sound", "not_enough_money")
 		
 func _on_buyarea_body_entered(body):
 	if body.is_in_group("player"):
@@ -79,20 +104,23 @@ func _on_buyarea_body_exited(body):
 		canBuy = false
 
 func healthperk():
-	get_node("../../Player").maxHealth = 2500
-	get_node("../../Player").health = 2500
+	get_node("../../Player").maxHealth *= 2
+	get_node("../../Player").health = get_node("../../Player").maxHealth
 	
 func movementperk():
 	get_node("../../Player").MAX_WALK_SPEED = 200
 	get_node("../../Player").MAX_RUN_SPEED = 380
 	
 func ammoperk():
-	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1.25
+	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1
 	
 func fasterfirerateperk():
 	gunscript.set_gun(0)
 	canBuyFasterFireRate = false
-	
+
+func perkInterface(perk):
+	get_node("../../CanvasLayer/Interface/Perks/"+perk).visible = true
+
 func _ready():
 	$Sprite.set_texture(spriteArray[Selected_Perk])
 	$Light2D.color = colorArray[Selected_Perk]

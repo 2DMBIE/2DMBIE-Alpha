@@ -27,24 +27,36 @@ var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
-signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
+var groundlessjump = true
+var jumpwaspressed = false
+var canBuyMovement2 = true
+
+signal play_sound(library)
 
 func _ready():
+	if Settings.debugMode:
+		maxHealth = 5000
+	elif Global.maia:
+		maxHealth = 2400
+	else:
+		maxHealth = 1200
+	_on_maxHealth_toggled()
 	$AnimationTree.active = true
 	zombie_dam_timer = Timer.new()
 	zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 	add_child(zombie_dam_timer)
 	tileMap = get_node("../Blocks")
 	emit_signal("health_updated", health, maxHealth)
-
+	
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
+	
 
 func _physics_process(_delta):
 	update()
-	
+
 	motion.y += GRAVITY
 	var friction = false
 	if tileMap:
@@ -132,23 +144,39 @@ func _physics_process(_delta):
 		motion.x = lerp(motion.x, 0, 0.3)
 		
 	if is_on_floor():
-		if Input.is_action_just_pressed("move_down"):
-			if get_slide_collision(0).collider.name == "Floor":
-				set_collision_mask_bit(dropthroughBit, false)
-		$AnimationTree.set("parameters/in_air_state/current", 0)
-		if Input.is_action_just_pressed("jump"):
+		groundlessjump = true
+		if jumpwaspressed == true:
 			aim("walking")
 			motion.y = JUMP_HEIGHT
 			$AnimationTree.set("parameters/in_air_state/current", 1)
 			emit_signal("play_sound", "jump")
-		if friction == true:
-			motion.x = lerp(motion.x, 0, 0.3)
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+		if Input.is_action_just_pressed("move_down"):
+			if get_slide_collision(0).collider.name == "Floor":
+				set_collision_mask_bit(dropthroughBit, false)
+		$AnimationTree.set("parameters/in_air_state/current", 0)
+		
+	if Input.is_action_just_pressed("jump"):
+		jumpwaspressed = true
+		rememberjumptime()
+		if groundlessjump == true:
+			aim("walking")
+			motion.y = JUMP_HEIGHT
+			$AnimationTree.set("parameters/in_air_state/current", 1)
+			emit_signal("play_sound", "jump")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.3)
+	
+	if !is_on_floor():
+		coyotejump()
+
 	else:
 		#aim("walking")
 		if friction == true:
 			motion.x = lerp(motion.x, 0, 0.05)
 	var _is_standing_still = motion.x > -21 and motion.x < 21
-	if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
+	if (Input.is_action_just_pressed("crouch") or Global.maia) and not _is_standing_still and not is_sliding and is_on_floor():
 		is_sliding = true
 		emit_signal("play_sound", "slide")
 		$AnimationTree.set("parameters/sliding/current", 0)
@@ -158,10 +186,35 @@ func _physics_process(_delta):
 		get_node("Hitbox").set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(3, false)
 		knifing_hitbox_enabled = false
-		WALK_ACCELERATION = 35 #old 20
-		RUN_ACCELERATION = 40
-		MAX_WALK_SPEED = 230 #old 110 
-		MAX_RUN_SPEED = 430
+#		if !Global.maia:
+#			WALK_ACCELERATION = 35 #old 20
+#			MAX_WALK_SPEED = 230 #old 110 
+#			RUN_ACCELERATION = 40
+#			MAX_RUN_SPEED = 430
+		if canBuyMovement2 == false:
+			WALK_ACCELERATION = 35 #old 20
+			MAX_WALK_SPEED = 470 #old 110 
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 470
+		else:
+			WALK_ACCELERATION = 40 #old 20
+			MAX_WALK_SPEED = 430 #old 110 
+			RUN_ACCELERATION = 40
+			MAX_RUN_SPEED = 430
+	if Global.maia and _is_standing_still and is_sliding:
+		$AnimationTree.set("parameters/sliding/current", 1)
+		$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
+		get_node("body/chest/torso/gun").shooting_disabled = false
+		get_node("Hitbox").set_collision_mask_bit(3, true)
+		self.set_collision_mask_bit(3, true)
+		knifing_hitbox_enabled = true
+		is_knifing = false
+		WALK_ACCELERATION = 25 #old 20
+		RUN_ACCELERATION = 20
+		MAX_WALK_SPEED = 130 #old 110 
+		MAX_RUN_SPEED = 330
+		slideHold = false
+		is_sliding = false
 	if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
 		_is_already_crouching = true
 		if not _played_crouch_sfx:
@@ -187,8 +240,6 @@ func _physics_process(_delta):
 		_played_crouch_sfx = false
 	motion = move_and_slide(motion, UP)
 	pass
-
-
 
 func direction(x):
 	if (x == "left") && !($body.scale == Vector2(-1,1)):
@@ -249,7 +300,7 @@ func walk_idle_transition():
 		return
 		
 func aim(string):
-	if Global.aim:
+	if Settings.aim:
 		if Input.is_action_pressed("aim"):
 			aim_feature(string)
 			return true
@@ -302,33 +353,37 @@ var maxHealth = 1200
 var health = maxHealth setget setHealth
 
 signal health_updated(health)
+signal on_death()
 
-func kill():
-	var _x = get_tree().reload_current_scene()
-	Global.Score = 0
-	Global.MaxWaveEnemies = 4
-	Global.CurrentWaveEnemies = 0
-	Global.Currentwave = 1
-	Global.maxHealth = 500
-	Global.EnemyDamage = 300
-	Global.Speed = 200
-	Global.enemiesKilled = 0 
-	Global.unlocked_doors = 0
-	
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			queue_free()
-			kill()
+			if Settings.debugMode:
+				Global.Score = 0
+			Global.setHighscore()
+			Global.saveScore()
+			emit_signal("on_death")
+
+func _on_maxHealth_toggled():
+	if Settings.debugMode:
+		maxHealth = 5000
+	elif Global.maia:
+		maxHealth = 2400
+	elif !Settings.debugMode and !Global.maia:
+		maxHealth = 1200
+	
+	health = maxHealth
+	emit_signal("health_updated", health, maxHealth)
+
 
 var takingDamage = false
 
 func takenDamage(_enemyDamage):
 	setHealth(health - Global.EnemyDamage)
-	$Timer.start(10)
+	$Timer.start(5)
 	zombie_dam_timer.start(1.2)
 	$NoDamageTimer.start(1)
 
@@ -341,12 +396,14 @@ func _on_Hitbox_body_entered(body):
 		takenDamage(Global.EnemyDamage)
 		takingDamage = true
 
+
 func _on_Hitbox_body_exited(_body):
 	takingDamage = false
 
 func _on_Timer_timeout():
 	if health < maxHealth:
 		health += 25
+		health = clamp(health, 0, maxHealth)
 		$Timer.start(0.2)
 		emit_signal("health_updated", health, maxHealth)
 
@@ -400,30 +457,74 @@ func on_knife_animation_complete():
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
 		body.Hurt(500)
+		if body.health == 0:
+			Global.Score += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
 func on_slide_animation_complete():
-	if Input.is_action_pressed("crouch") and !slideHold:
-		$AnimationPlayer.get_animation("slide").length = 1
-		$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, 1)
-		slideHold = true
-	else:
-		$AnimationTree.set("parameters/sliding/current", 1)
-		$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
-		get_node("body/chest/torso/gun").shooting_disabled = false
-		get_node("Hitbox").set_collision_mask_bit(3, true)
-		self.set_collision_mask_bit(3, true)
-		knifing_hitbox_enabled = true
-		is_knifing = false
-		is_sliding = false
-		WALK_ACCELERATION = 25 #old 20
-		RUN_ACCELERATION = 20
-		MAX_WALK_SPEED = 130 #old 110 
-		MAX_RUN_SPEED = 330
-		$AnimationPlayer.get_animation("slide").length = .6
-		$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, .6)
-		slideHold = false
+	if !Global.maia:
+		if Input.is_action_pressed("crouch") and !slideHold:
+			$AnimationPlayer.get_animation("slide").length = 1
+			$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, 1)
+			slideHold = true
+		else:
+			$AnimationTree.set("parameters/sliding/current", 1)
+			$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
+			get_node("body/chest/torso/gun").shooting_disabled = false
+			get_node("Hitbox").set_collision_mask_bit(3, true)
+			self.set_collision_mask_bit(3, true)
+			knifing_hitbox_enabled = true
+			is_knifing = false
+			if !Global.maia:
+				is_sliding = false
+			if canBuyMovement2 == false:
+				WALK_ACCELERATION = 40 #old 20
+				MAX_WALK_SPEED = 200 #old 110 
+				RUN_ACCELERATION = 40
+				MAX_RUN_SPEED = 380
+			else:
+				WALK_ACCELERATION = 25 #old 20
+				RUN_ACCELERATION = 20
+				MAX_WALK_SPEED = 130 #old 110 
+				MAX_RUN_SPEED = 330
+			$AnimationPlayer.get_animation("slide").length = .6
+			$AnimationPlayer.get_animation("slide").track_set_key_time(36, 0, .6)
+			slideHold = false
 
 func _on_backfire_event():
 	running_disabled = true
+
+signal ammoPickup(totalAmmo)
+onready var gunscript = get_node("body/chest/torso/gun")
+
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("ammo"):
+		var gainedAmmo = gunscript.get_current_gun().maxclipAmmo
+		emit_signal("ammoPickup", gainedAmmo)
+		$MarkerPos/Marker.visible = false
+	if area.is_in_group("Areas"):
+		area.visible = false
+
+func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
+	$MarkerPos/Marker.visible = true
+
+func coyotejump():
+	yield(get_tree().create_timer(0.1),"timeout")
+	groundlessjump = false
+	pass
+
+func rememberjumptime():
+	yield(get_tree().create_timer(0.1),"timeout")
+	jumpwaspressed = false
+	pass
+
+
+func _on_MovementPerk_perkactiveMovement(canBuyMovement):
+	if canBuyMovement == false:
+		canBuyMovement2 = false
+
+
+func _on_FireRatePerk_perkactive(canBuyFasterFireRate):
+	pass # Replace with function body.
