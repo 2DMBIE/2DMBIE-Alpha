@@ -15,9 +15,10 @@ func _on_Timer_timeout():
 				enemy.position = $spawnpoint.get_global_position()
 				get_tree().current_scene.add_child(enemy)
 				var enemyAmount = get_tree().get_nodes_in_group("enemies").size() #checkin the amount of enemies ont the map
-				Global.CurrentWaveEnemies += 1
 				if enemyAmount > 10: #maximum amount of enemies on the map at the same time
 					enemy.queue_free()
+				else:
+					Global.CurrentWaveEnemies += 1
 			else:
 				var specialenemy := specialEnemy.instance()
 				specialenemy.position = $spawnpoint.get_global_position()
