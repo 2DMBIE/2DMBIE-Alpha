@@ -87,8 +87,8 @@ func _physics_process(_delta):
 			rset("puppet_motion", motion)
 			rset("puppet_pos", position)
 			if is_on_floor():
-				rpc_unreliable("jump", false)
-				rpc_unreliable("set_animation", "parameters/walk-idle/blend_amount", 1)
+				rpc("jump", false)
+				rpc("set_animation", "parameters/walk-idle/blend_amount", 1)
 			return
 		motion.y += GRAVITY
 		var friction = false
@@ -137,9 +137,9 @@ func _physics_process(_delta):
 		if Input.is_action_just_pressed("crouch") and not _is_standing_still and not is_sliding and is_on_floor():
 			rpc("slide")
 		if Input.is_action_pressed("crouch") and (_is_standing_still or _is_already_crouching):
-			rpc_unreliable("crouch", true)
+			rpc("crouch", true)
 		else:
-			rpc_unreliable("crouch", false)
+			rpc("crouch", false)
 		rset("puppet_motion", motion)
 		rset("puppet_pos", position)
 	else:
@@ -218,18 +218,18 @@ func aim(is_walking):
 		if (angle_degrees >= -90) && (angle_degrees <= 90):
 			rpc_unreliable("set_aim_angle", angle_degrees)
 			if (is_walking) || !is_on_floor(): 
-				rpc_unreliable("direction", "left")
+				rpc("direction", "left")
 		elif (angle_degrees > 90) && (angle_degrees < 180):
 			var x = 90-angle_degrees
 			x = 90+x 
 			rpc_unreliable("set_aim_angle", x)
 			if (is_walking) || !is_on_floor(): 
-				rpc_unreliable("direction", "right")
+				rpc("direction", "right")
 		elif (angle_degrees > -180) && (angle_degrees < -90):
 			var y = -180-angle_degrees
 			rpc_unreliable("set_aim_angle", y)
 			if (is_walking) || !is_on_floor(): 
-				rpc_unreliable("direction", "right")
+				rpc("direction", "right")
 		return true
 
 #health system

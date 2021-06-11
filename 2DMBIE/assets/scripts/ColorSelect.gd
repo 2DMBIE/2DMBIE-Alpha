@@ -7,11 +7,11 @@ onready var yellowColor = preload("res://assets/sprites/ColorSelectYellow.png")
 onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
 
 var colorArray
-var selectNumber = 2
+var selectNumber = 0
 var prevColor
 
 func _ready():
-	colorArray = [randomColor, greyColor, blueColor, redColor, yellowColor]
+	colorArray = ['randomColor', 'greyColor', 'blueColor', 'redColor', 'yellowColor']
 
 func _process(_delta):
 	if Input.is_action_just_pressed("jump"):
@@ -31,18 +31,24 @@ func _on_LeftArrow_button_down():
 	selectNumber -= 1
 	if selectNumber == -1:
 		selectNumber = 4
-	$ColorDisplay.texture = colorArray[selectNumber]
+#		$ColorDisplay.texture = colorArray[selectNumber]
 	prevColor = colorArray[selectNumber]
-	colorArray.erase(prevColor)
-	for value in colorArray:
-		print(value.load_path)
+	rpc("set_player_color", prevColor)
 
 func _on_RightArrow_button_down():
+	if prevColor != null:
+		colorArray.insert(selectNumber, prevColor)
 	selectNumber += 1
-	if selectNumber == 4:
+	if selectNumber == 5:
 		selectNumber = 0
-	$ColorDisplay.texture = colorArray[selectNumber]
+#		$ColorDisplay.texture = colorArray[selectNumber]
+	prevColor = colorArray[selectNumber]
+	rpc("set_player_color", prevColor)
 
 func on_player_loaded():
 	print(get_node("/root/Lobby/Players").get_children())
-	_on_LeftArrow_button_down()
+	_on_RightArrow_button_down()
+
+remotesync func set_player_color(prevColor):
+	colorArray.erase(prevColor)
+	print(colorArray)
