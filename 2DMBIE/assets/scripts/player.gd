@@ -36,6 +36,7 @@ var falling = false
 var slideHold = false
 
 
+
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
 
@@ -248,7 +249,6 @@ func kill():
 	Global.EnemyDamage = 300
 	Global.Speed = 200
 	Global.enemiesKilled = 0 
-	Global.unlocked_doors = 0
 	
 func setHealth(value):
 	var prevHealth = health

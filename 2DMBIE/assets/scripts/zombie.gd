@@ -27,13 +27,15 @@ var enemyDamage = Global.EnemyDamage
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_movement = Vector2()
+puppet var puppet_health = int()
 
 func _ready():
 	set_network_master(1) # let the host control the zombie
+	$AnimationTree.active = true
 	if is_network_master():
 		randomize()
-		$AnimationTree.active = true
-		rpc("set_animation", "parameters/walk/current", randi()%10) # 0 till 9
+		var walk_current = randi()%10 # 0 till 9
+		rpc("set_animation", "parameters/walk/current", walk_current) 
 		growl_timer.wait_time = _wait_time
 		growl_timer.one_shot = false
 		growl_timer.connect("timeout", self, "growl")
@@ -110,9 +112,11 @@ func repeat_me():
 	if is_on_floor():
 		var space_state = get_world_2d().direct_space_state
 #		var playerPos = get_global_mouse_position()
-		var playerPos = get_node("../Players/"+str(gamestate.player_id)).position
+		# replace 1 with gamestate.player_id
+		# use get_parent, its probably faster
+		var playerPos = get_tree().root.get_node("/root/World/Players/1").position
 		var pos = Vector2(playerPos.x, playerPos.y)
-		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_node("../Players/"+str(gamestate.player_id)+"/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))
+		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_tree().root.get_node("/root/World/Players/1/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))
 		if (result):
 			var goTo = result["position"]
 			currentPath = pathFinder.findPath(self.position, goTo)
@@ -133,7 +137,7 @@ func growl():
 func togglestep():
 	zombiestep = !zombiestep
 
-func show_damage_animation(_health_percentage):
+remotesync func show_damage_animation(_health_percentage):
 	var _index
 	var _array = [Color("ffcbcb"), Color("ff9f9f"), Color("ff7e7e"), Color("ff5858"), Color("ffe7e7")] #Color("ffcbcb")
 	if _health_percentage < 100 and _health_percentage >= 80:
@@ -161,11 +165,13 @@ func _reset_module():
 func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
-	show_damage_animation(percentage)
+	#show_damage_animation(percentage)
+	rpc("show_damage_animation", percentage)
 	rpc("play_sound_remote", "hurt")
+
 func kill():
 	Global.Score += Global.ScoreIncrement
-	queue_free()
+	rpc("queue_free_remote")
 
 func _set_health(value):
 	var prevHealth = health
@@ -187,3 +193,6 @@ remotesync func set_animation(path, value):
 	
 remotesync func set_direction(scale):
 	get_node("body").scale = scale
+
+remotesync func queue_free_remote():
+	queue_free()
