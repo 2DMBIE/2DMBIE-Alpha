@@ -11,7 +11,7 @@ var maxHealth = 500
 var EnemyDamage = 300
 var Speed = 200
 var enemiesKilled = 0
-var game_active = false
+var paused = false
 # Debug
 var aim = false
 var camera = false

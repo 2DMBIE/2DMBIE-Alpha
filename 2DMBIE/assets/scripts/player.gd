@@ -34,7 +34,6 @@ signal play_sound(library)
 var debug = false
 var falling = false
 var slideHold = false
-var paused = false
 
 
 
@@ -521,7 +520,7 @@ func unpause_game():
 	get_node(_path + "CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
 	get_node(_path + "HUD/CanvasModulate").set_color(Color(1,1,1,1))
 #	get_tree().paused = false
-	paused = false
+	Global.paused = false
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")

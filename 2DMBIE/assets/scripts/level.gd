@@ -15,7 +15,6 @@ var MarkerPos
 var rotationDegree
 
 func _ready():
-	Global.game_active = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	random_round = randi()%7+1 # generate random integer between 7 and 1
 	randomize()
