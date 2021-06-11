@@ -146,6 +146,8 @@ remote func remote_set_gun(gun_name):
 			self.texture = gun.texture
 			self.scale = gun.scale
 			self.offset = gun.offset
+			self.get_node("BulletPoint").position = gun.bulletpoint
+			emit_signal("play_sound", gun.name.to_lower() + str("_draw"))	
 			break
 			# do i need to play the gun sound?
 

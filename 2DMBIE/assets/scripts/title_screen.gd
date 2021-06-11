@@ -5,7 +5,11 @@ func _ready():
 	if has_node("/root/Lobby"): # Game is in progress.
 		gamestate._connected_fail()
 		get_node("/root/Lobby").queue_free()
-	
+	if has_node("/root/World"): # Game is in progress.
+		gamestate._connected_fail()
+		get_node("/root/World").queue_free()
+	if has_node("/root/LobbyUI"): # Game is in progress.
+		get_node("/root/LobbyUI").queue_free()
 	$Camera2D.current = true
 
 func _on_ExitButton_pressed():

@@ -53,32 +53,42 @@ func _ready():
 
 func _physics_process(_delta):
 	update()
-	musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
-	if Input.is_action_just_pressed("pause"):
-		if get_node("Optionsmenu/Options").visible == false:
-			if Global.paused == false:
-				get_node("/root/Lobby/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-				get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
-#				get_tree().paused = true
-				Global.paused = true
-				get_node("PauseMenu/Container").visible = true
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#				emit_signal("music", "pause")
-				AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
-				get_node("/root/Lobby/cursor").visible = false
-			elif Global.paused == true and get_node("Optionsmenu/Options").visible == false:
-				unpause_game()
-	escape_options()
-	if Global.paused:
-		motion.y += GRAVITY
-		motion = move_and_slide(motion, UP)
-		rset("puppet_motion", motion)
-		rset("puppet_pos", position)
-		if is_on_floor():
-			rpc_unreliable("jump", false)
-			rpc_unreliable("set_animation", "parameters/walk-idle/blend_amount", 1)
-		return
 	if is_network_master():
+		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
+		if Input.is_action_just_pressed("pause"):
+			if get_node("Optionsmenu/Options").visible == false:
+				if paused == false:
+					var _path = ""
+					if get_tree().get_root().has_node("/root/World/Players"):
+						_path = "/root/World/"
+					else:
+						_path = "/root/Lobby/"
+					get_tree().root.get_node(_path + "CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+					get_tree().root.get_node(_path + "HUD/CanvasModulate").set_color(Color(0.1,0.1,0.1,1))
+	#				get_tree().paused = true
+					paused = true
+					get_node("PauseMenu/Container").visible = true
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#				emit_signal("music", "pause")
+					AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
+					get_node(_path + "cursor").visible = false
+				elif paused == true and get_node("Optionsmenu/Options").visible == false:
+					unpause_game()
+		escape_options()
+		if !paused and get_tree().root.has_node("/root/World"): #get_tree.root.has_node("/root/World") != null: #"/root/World") != null:
+			if Global.brightness:
+				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
+			else:
+				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
+		if paused:
+			motion.y += GRAVITY
+			motion = move_and_slide(motion, UP)
+			rset("puppet_motion", motion)
+			rset("puppet_pos", position)
+			if is_on_floor():
+				rpc_unreliable("jump", false)
+				rpc_unreliable("set_animation", "parameters/walk-idle/blend_amount", 1)
+			return
 		motion.y += GRAVITY
 		var friction = false
 		if tileMap:
@@ -301,8 +311,8 @@ func _on_no_aim_shoot(value):
 	rpc_unreliable("set_animation","parameters/fixed_aim/current", value)
 
 func set_gun_recoil_sensitivity(value):
-	rpc_unreliable("set_animation", "parameters/gun_recoil_sensitivity/add_amount", value)
-
+	rpc("set_animation", "parameters/gun_recoil_sensitivity/add_amount", value)
+	
 signal ammoUpdate(ammo, maxClipammo, totalAmmo)
 
 func on_ammo_ui_update(ammo, maxClipammo, totalAmmo):
@@ -332,7 +342,13 @@ func on_slide_animation_complete():
 		get_node("body/chest/torso/gun").shooting_disabled = false
 		get_node("Hitbox").set_collision_mask_bit(3, true)
 		self.set_collision_mask_bit(3, true)
-		for player in get_node("/root/Lobby/Players").get_children():
+		var _path = ""
+		if get_tree().get_root().has_node("/root/World/Players"):
+			_path = "/root/World/Players"
+		else:
+			_path = "/root/Lobby/Players"
+			
+		for player in get_node(_path).get_children():
 			player.set_collision_mask_bit(2, true)
 		knifing_hitbox_enabled = true
 		is_knifing = false
@@ -383,7 +399,14 @@ remotesync func slide():
 	is_knifing = true # disable knifing 
 	get_node("Hitbox").set_collision_mask_bit(3, false)
 	self.set_collision_mask_bit(3, false)
-	for player in get_node("/root/Lobby/Players").get_children():
+	var _path = ""
+	
+	if get_tree().get_root().has_node("/root/World/Players"):
+		_path = "/root/World/Players"
+	else:
+		_path = "/root/Lobby/Players"
+
+	for player in get_tree().root.get_node(_path).get_children():
 		player.set_collision_mask_bit(2, false)
 	knifing_hitbox_enabled = false
 	WALK_ACCELERATION = 35 #old 20
@@ -489,15 +512,20 @@ remotesync func set_animation(path, value):
 	$AnimationTree.set(path, value)
 	
 func unpause_game():
-	get_node("/root/Lobby/CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
-	get_node("/root/Lobby/HUD/CanvasModulate").set_color(Color(1,1,1,1))
+	var _path = ""
+	if get_tree().get_root().has_node("/root/World/Players"):
+		_path = "/root/World/"
+	else:
+		_path = "/root/Lobby/"
+	get_node(_path + "CanvasModulate").set_color(Color(0.498039,0.498039,0.498039,1))
+	get_node(_path + "HUD/CanvasModulate").set_color(Color(1,1,1,1))
 #	get_tree().paused = false
 	Global.paused = false
 	get_node("PauseMenu/Container").visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 #	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
-	get_node("/root/Lobby/cursor").visible = true
+	get_node(_path + "cursor").visible = true
 
 func _on_Continue_button_down():
 	unpause_game()
@@ -517,7 +545,7 @@ func _on_ExitOptions_button_down():
 	else:
 		get_node("Optionsmenu/Options").visible = false
 	get_node("PauseMenu/Container").visible = true
-	emit_signal("music", "unpause")
+#	emit_signal("music", "unpause")
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue/4))
 
 func escape_options():

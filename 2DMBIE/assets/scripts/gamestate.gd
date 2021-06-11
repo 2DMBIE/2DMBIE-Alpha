@@ -13,8 +13,6 @@ var player_id
 var last_player_name = ""
 
 # To send in-game join message
-var send_join_msg_enabled = true
-var just_joined = true
 var player_join_cache = []
 
 # Names for remote players in id:name format
@@ -40,16 +38,22 @@ func _player_connected(_id):
 # Callback from SceneTree
 func _player_disconnected(id):
 	if get_tree().is_network_server():
-		if has_node("/root/world"): # Game is in progress
-			emit_signal("game_error", "Player " + players[id] + " disconnected")
-			end_game()
-		else: # Game is not in progress
+		if get_tree().root.has_node("/root/World"): # Game is in progress
+			var msg = "Player " + players[id] + " disconnected"
+			for p_id in players:
+				rpc_id(p_id, "end_game_error", msg)
+			end_game_error(msg)
+		else:
 			# If we are the server, send to the new dude all the already registered players
 			unregister_player(id)
 			for p_id in players:
 				# Erase in the server
 				rpc_id(p_id, "unregister_player", id)
-	print("disconnect")
+
+remote func end_game_error(msg):
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	emit_signal("game_error", msg)
+	end_game()
 
 # Callback from SceneTree, only for clients (not server)
 func _connected_ok():
@@ -63,9 +67,10 @@ func _connected_ok():
 func _server_disconnected():
 	if has_node("/root/Lobby"): # Game is in progress.
 		get_node("/root/Lobby").queue_free()
-		get_tree().get_root().get_node("LobbyUI").hide()
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+	elif has_node("/root/World"): # Game is in progress.
+		get_node("/root/World").queue_free()
+	get_tree().get_root().get_node("LobbyUI").hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	emit_signal("game_error", "Server disconnected")
 	end_game()
 	print("server")
@@ -74,10 +79,11 @@ func _server_disconnected():
 func _connected_fail():
 	get_tree().set_network_peer(null) # Remove peer
 	emit_signal("connection_failed")
-	print("fail")
+	player_join_cache = []
+	players = {}
+	players_ready = []
 
 # Lobby management functions
-
 remote func register_player(id, new_player_name):
 	if get_tree().is_network_server():
 		# If we are the server, let everyone know about the new player
@@ -92,21 +98,23 @@ remote func register_player(id, new_player_name):
 
 	players[id] = new_player_name
 	add_player(id, new_player_name)
-	if send_join_msg_enabled:
-		if just_joined or player_join_cache.size() != players.size():
-			for p_id in players: 
-				if not player_join_cache.has(p_id):
-					rpc_id(p_id, "show_join_msg", id, player_name)
-					player_join_cache.append(p_id)
-					emit_signal("player_added", id, player_name)
-			just_joined = false
-		
+	if get_tree().is_network_server():
+		if not player_join_cache.has(id):
+			for id in players: 
+				rpc_id(id, "show_join_msg", new_player_name)
+			show_join_msg(new_player_name)
+			player_join_cache.append(id)
 
 remote func unregister_player(id):
-	emit_signal("on_player_leave", id, players[id])
+	if not players.has(id):
+		return
+	emit_signal("on_player_leave", players[id])
 	players.erase(id)
-	if has_node("/root/Lobby/Players/" + str(id)):
-		get_node("/root/Lobby/Players/" + str(id)).queue_free()
+	player_join_cache.erase(id)
+	if get_tree().get_root().has_node("/root/Lobby/Players/" + str(id)):
+		get_tree().get_root().get_node("/root/Lobby/Players/" + str(id)).queue_free()
+	elif get_tree().get_root().has_node("/root/World/Players/" + str(id)):
+		get_tree().get_root().get_node("/root/World/Players/" + str(id)).queue_free()
 
 remote func add_player(id, name):
 	#var id = get_tree().get_rpc_sender_id()
@@ -139,8 +147,7 @@ remote func pre_start_game(spawn_points):
 
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.set_network_master(p_id) #set unique id as master
-		player.global_transform.origin = spawn_pos
-		
+		player.position = spawn_pos
 		main.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
@@ -150,8 +157,9 @@ remote func pre_start_game(spawn_points):
 		post_start_game()
 
 remote func post_start_game():
-	get_tree().set_pause(false) # Unpause and unleash the game!
 	get_tree().get_root().get_node("Lobby").queue_free()
+	get_tree().set_pause(false) # Unpause and unleash the game!
+	emit_signal("on_local_player_loaded")
 
 var players_ready = []
 
@@ -166,18 +174,19 @@ remote func ready_to_start(id):
 			rpc_id(p, "post_start_game")
 		post_start_game()
 
+var host
+
 func host_game(new_player_name):
 	player_name = new_player_name
 	host_name = player_name
-	var host = NetworkedMultiplayerENet.new()
+	host = NetworkedMultiplayerENet.new()
 	host.create_server(DEFAULT_PORT, MAX_PEERS)
-	send_join_msg_enabled = false
 	get_tree().set_network_peer(host)
 
 func join_game(ip, new_player_name):
 	player_name = new_player_name
 	last_player_name = player_name
-	var host = NetworkedMultiplayerENet.new()
+	host = NetworkedMultiplayerENet.new()
 	host.create_client(ip, DEFAULT_PORT)
 	get_tree().set_network_peer(host)
 
@@ -189,7 +198,7 @@ func get_player_name():
 
 func begin_game():
 	assert(get_tree().is_network_server())
-
+	#host.refuse_new_connections = true
 	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing
 	var spawn_points = {}
 	spawn_points[1] = 0 # Server in spawn point 0
@@ -204,13 +213,16 @@ func begin_game():
 	pre_start_game(spawn_points)
 
 func end_game():
-	if has_node("/root/world"): # Game is in progress
-		# End it
-		get_node("/root/world").queue_free()
-
+	if get_tree().get_root().has_node("/root/World"): # Game is in progress
+		get_tree().get_root().get_node("/root/World").queue_free() # End it
+	elif get_tree().get_root().has_node("/root/Lobby"):
+		get_tree().get_root().get_node("/root/Lobby").queue_free()
 	emit_signal("game_ended")
 	players.clear()
-	get_tree().set_network_peer(null) # End networking
+	player_join_cache.clear()
+	players_ready.clear()
+	get_tree().network_peer = null
+	#get_tree().set_network_peer(null) # End networking
 
 # Loads the player (you) and the map.
 func load_lobby():

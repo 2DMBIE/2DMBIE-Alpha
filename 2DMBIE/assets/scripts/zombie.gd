@@ -33,7 +33,7 @@ func _ready():
 	if is_network_master():
 		randomize()
 		$AnimationTree.active = true
-		rpc("set_animation", "parameters/walk/current", randi()%10)
+		rpc("set_animation", "parameters/walk/current", randi()%10) # 0 till 9
 		growl_timer.wait_time = _wait_time
 		growl_timer.one_shot = false
 		growl_timer.connect("timeout", self, "growl")

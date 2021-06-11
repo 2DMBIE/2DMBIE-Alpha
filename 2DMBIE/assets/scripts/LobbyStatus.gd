@@ -100,7 +100,7 @@ func _on_player_join_event(_id, name):
 	
 	labels[status_label] = [status_label.modulate.a, false]
 
-func _on_player_leave_event(_id, name):
+func _on_player_leave_event(name):
 	var status_label
 	status_label = lobby_label.instance()
 	status_label.text = " " + (str(name) + " left the lobby")

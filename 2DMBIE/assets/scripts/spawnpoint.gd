@@ -5,6 +5,7 @@ var PlayerBody = false
 
 
 func _on_Timer_timeout():
+	return
 	$Timer.start(5)
 	if PlayerBody == true: #checks if the player is in the spawnradius
 		if Global.CurrentWaveEnemies < Global.MaxWaveEnemies: #check for the maximum amount of enemies in this round
