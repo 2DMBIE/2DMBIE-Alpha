@@ -214,10 +214,8 @@ func begin_game():
 func end_game():
 	if get_tree().get_root().has_node("/root/World"): # Game is in progress
 		get_tree().get_root().get_node("/root/World").queue_free() # End it
-		print("Removing world!")
 	elif get_tree().get_root().has_node("/root/Lobby"):
 		get_tree().get_root().get_node("/root/Lobby").queue_free()
-		print("Removing lobby!")
 	emit_signal("game_ended")
 	players.clear()
 	player_join_cache.clear()

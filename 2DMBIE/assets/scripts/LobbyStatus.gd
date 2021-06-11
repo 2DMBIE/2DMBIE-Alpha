@@ -10,7 +10,6 @@ var labelNumber = 0
 var labels = {}
 
 func _ready():
-	print("ready")
 # warning-ignore:return_value_discarded
 	gamestate.connect("on_player_join", self, "_on_player_join_event")
 # warning-ignore:return_value_discarded
