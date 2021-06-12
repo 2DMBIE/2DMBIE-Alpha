@@ -198,3 +198,6 @@ remotesync func set_direction(scale):
 
 remotesync func queue_free_remote():
 	queue_free()
+
+sync func hitt(dmg):
+	print("I wonder wheter this works or not: " + str(dmg))

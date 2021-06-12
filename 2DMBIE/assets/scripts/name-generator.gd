@@ -31,7 +31,7 @@ static func clone_array(original):
 		result.append(item)
 	return result
 	
-static func get_letter(state, last_letter, max_length):
+static func get_letter(state, _last_letter, max_length):
 	var transitions = clone_array(TRANSITION[state])
 	if max_length < 3:
 		transitions.erase('COMPOSE')
