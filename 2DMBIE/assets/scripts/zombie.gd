@@ -162,14 +162,14 @@ func show_damage_animation(_health_percentage):
 func _reset_module():
 	modulate = Color("ffffff")
 
-remote func Hurt(damage):
-	_set_health(health - damage)
-	var percentage = health/maxHealth*100
-	#show_damage_animation(percentage)
-	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
-	#rpc("show_damage_animation", percentage)
-	#rpc("play_sound_remote", "hurt")
+#remote func Hurt2(damage):
+#	_set_health(health - damage)
+#	var percentage = health/maxHealth*100
+#	#show_damage_animation(percentage)
+#	show_damage_animation(percentage)
+#	emit_signal("play_sound", "hurt")
+#	#rpc("show_damage_animation", percentage)
+#	#rpc("play_sound_remote", "hurt")
 
 func kill():
 	Global.Score += Global.ScoreIncrement
@@ -199,5 +199,8 @@ remotesync func set_direction(scale):
 remotesync func queue_free_remote():
 	queue_free()
 
-sync func hitt(dmg):
-	print("I wonder wheter this works or not: " + str(dmg))
+remotesync func hurt(damage, id):
+	_set_health(health - damage)
+	var percentage = health/maxHealth*100
+	show_damage_animation(percentage)
+	emit_signal("play_sound", "hurt")
