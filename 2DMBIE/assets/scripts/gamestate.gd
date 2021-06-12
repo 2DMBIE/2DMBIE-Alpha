@@ -26,8 +26,7 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
-signal on_local_player_loaded() #playersLoaded
-signal player_added(id, name)
+signal on_local_player_loaded() 
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -128,7 +127,6 @@ remote func add_player(id, name):
 		player.position=spawn_pos
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
-		emit_signal("player_added", id, name)
 
 remote func show_join_msg(id, name):
 	emit_signal("on_player_join", id, name)
@@ -245,7 +243,6 @@ func load_lobby():
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)
 	emit_signal("on_local_player_loaded")
-	emit_signal("player_added", player_id, player_name)
 
 func _ready():
 	randomize() # enabled for spawning at random locations

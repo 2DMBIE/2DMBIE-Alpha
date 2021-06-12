@@ -14,6 +14,8 @@ func _process(_delta):
 	if gunscript != null:
 		var _gun:= Gun
 		_gun = gunscript.get_current_gun()
+		if _gun == null:
+			return
 		get_node("TotalAmmoLabel").text = str(_gun.totalAmmo)
 		get_node("AmmoLabel").text = "(" + str(_gun.ammo) + '/' + str(_gun.maxclipAmmo) + ")"
 

@@ -66,9 +66,6 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-scale = Vector2( 0.588438, 0.476204 )
-
 [node name="bullettrail" type="CPUParticles2D" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -4.79891, -0.446457 )
@@ -109,4 +106,3 @@ process_material = SubResource( 2 )
 
 [connection signal="body_entered" from="." to="." method="_on_bullet_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_bullet_body_exited"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

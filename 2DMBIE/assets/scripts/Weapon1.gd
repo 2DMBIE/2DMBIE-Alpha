@@ -3,6 +3,7 @@ extends Control
 var gunscript
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "_on_player_loaded")	
 # warning-ignore:return_value_discarded
 	#gamestate.connect("playersLoaded", self, "_on_playersLoaded")

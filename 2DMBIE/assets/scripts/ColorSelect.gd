@@ -6,49 +6,51 @@ onready var redColor = preload("res://assets/sprites/ColorSelectRed.png")
 onready var orangeColor = preload("res://assets/sprites/ColorSelectOrange.png")
 onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
 
-var colorArray
+var colors
 var selectNumber = 0
-var prevColor
 
 func _ready():
-	colorArray = [randomColor, greyColor, blueColor, redColor, orangeColor]
-
-func _process(_delta):
-	if Input.is_action_just_pressed("jump"):
-		print(get_node("/root/Lobby/Players").get_children())
-	
-	if !Global.paused:
-		$LeftArrow.visible = false
-		$RightArrow.visible = false
-	elif Global.paused:
-		if get_parent().name == str(get_tree().get_network_unique_id()):
-			$LeftArrow.visible = true
-			$RightArrow.visible = true
+	colors = [randomColor, greyColor, blueColor, redColor, orangeColor]
 
 func _on_LeftArrow_button_down():
-	if prevColor != null:
-		colorArray.insert(selectNumber, prevColor)
+	print("left")
 	selectNumber -= 1
 	if selectNumber == -1:
 		selectNumber = 4
-	$ColorDisplay.texture = colorArray[selectNumber]
-	prevColor = colorArray[selectNumber]
-	rpc("set_player_color", prevColor)
+	$ColorDisplay.texture = colors[selectNumber]
+	#prevColor = colors[selectNumber]
+	#rpc("set_player_color", prevColor)
 
 func _on_RightArrow_button_down():
-	if prevColor != null:
-		colorArray.insert(selectNumber, prevColor)
+	print("right")
 	selectNumber += 1
 	if selectNumber == 5:
 		selectNumber = 0
-	$ColorDisplay.texture = colorArray[selectNumber]
-	prevColor = colorArray[selectNumber]
-	rpc("set_player_color", prevColor)
+	$ColorDisplay.texture = colors[selectNumber]
+	#prevColor = colors[selectNumber]
+	#rpc("set_player_color", prevColor)
 
 func on_player_loaded():
 	print(get_node("/root/Lobby/Players").get_children())
-	_on_RightArrow_button_down()
+	#_on_RightArrow_button_down()
 
-remotesync func set_player_color(prevColor):
-	colorArray.erase(prevColor)
-#	print(colorArray)
+
+func _on_RightArrow_pressed():
+	print("right11")
+	selectNumber += 1
+	if selectNumber == 5:
+		selectNumber = 0
+	$ColorDisplay.texture = colors[selectNumber]
+
+
+func _on_LeftArrow_pressed():
+	print("left22")
+	selectNumber -= 1
+	if selectNumber == -1:
+		selectNumber = 4
+	$ColorDisplay.texture = colors[selectNumber]
+	#prevColor = colors[selectNumber]
+
+
+func _on_LeftArrow_button_down2():
+	print("Yeey")

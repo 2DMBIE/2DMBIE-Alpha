@@ -137,7 +137,7 @@ func growl():
 func togglestep():
 	zombiestep = !zombiestep
 
-remotesync func show_damage_animation(_health_percentage):
+func show_damage_animation(_health_percentage):
 	var _index
 	var _array = [Color("ffcbcb"), Color("ff9f9f"), Color("ff7e7e"), Color("ff5858"), Color("ffe7e7")] #Color("ffcbcb")
 	if _health_percentage < 100 and _health_percentage >= 80:
@@ -162,12 +162,14 @@ remotesync func show_damage_animation(_health_percentage):
 func _reset_module():
 	modulate = Color("ffffff")
 
-func Hurt(damage):
+remote func Hurt(damage):
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	#show_damage_animation(percentage)
-	rpc("show_damage_animation", percentage)
-	rpc("play_sound_remote", "hurt")
+	show_damage_animation(percentage)
+	emit_signal("play_sound", "hurt")
+	#rpc("show_damage_animation", percentage)
+	#rpc("play_sound_remote", "hurt")
 
 func kill():
 	Global.Score += Global.ScoreIncrement

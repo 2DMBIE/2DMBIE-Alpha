@@ -263,19 +263,22 @@ func setHealth(value):
 var takingDamage = false
 
 func takenDamage(_enemyDamage):
-	setHealth(health - Global.EnemyDamage)
-	$Timer.start(10)
-	zombie_dam_timer.start(1.2)
-	$NoDamageTimer.start(1)
+	if is_network_master():
+		setHealth(health - Global.EnemyDamage)
+		$Timer.start(10)
+		zombie_dam_timer.start(1.2)
+		$NoDamageTimer.start(1)
 
 func _zombie_dam_timout():
-	if takingDamage == true:
-		takenDamage(Global.EnemyDamage)
+	if is_network_master():
+		if takingDamage == true:
+			takenDamage(Global.EnemyDamage)
 
 func _on_Hitbox_body_entered(body):
-	if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
-		takenDamage(Global.EnemyDamage)
-		takingDamage = true
+	if is_network_master():
+		if body.is_in_group("enemies") && $NoDamageTimer.is_stopped():
+			takenDamage(Global.EnemyDamage)
+			takingDamage = true
 
 
 func _on_Hitbox_body_exited(_body):

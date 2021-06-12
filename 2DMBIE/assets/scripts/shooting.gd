@@ -76,7 +76,7 @@ func _process(_delta):
 						emit_signal("no_aim_shoot", false)
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
-						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position())
+						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position(), get_tree().get_network_unique_id())
 						_gun.ammo -= 1
 						var _facing1 = get_node("../../../../").facing
 						var _facing2 = get_mouse_facing()
@@ -98,14 +98,14 @@ func _process(_delta):
 						elif facing == "left":
 							_scale = Vector2(-1,1) # bullet trail fixed when shooting to the left
 							facingDir = -10
-						rpc("fire_bullet_no_aim", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position(), facingDir, _scale)
+						rpc("fire_bullet_no_aim", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position(), facingDir, _scale, get_tree().get_network_unique_id())
 						_gun.ammo -= 1
 				else:
 					if valid_aim:
 						emit_signal("no_aim_shoot", false)
 						emit_signal("is_shooting", true)
 						emit_signal("shake_camera", _gun.camera_shake)
-						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position())
+						rpc("fire_bullet", _gun.name, get_global_mouse_position(), $BulletPoint.get_global_position(), get_tree().get_network_unique_id())
 						_gun.ammo -= 1
 						var _facing1 = get_node("../../../../").facing
 						var _facing2 = get_mouse_facing()
@@ -151,7 +151,7 @@ remote func remote_set_gun(gun_name):
 			break
 			# do i need to play the gun sound?
 
-remotesync func fire_bullet(gun_name, _global_mouse_position, _global_bullet_position):
+remotesync func fire_bullet(gun_name, _global_mouse_position, _global_bullet_position, id):
 	var _gun
 	for x in guns:
 		if x.name == gun_name:
@@ -169,12 +169,13 @@ remotesync func fire_bullet(gun_name, _global_mouse_position, _global_bullet_pos
 	$BulletPoint.add_child(muzzleflashInstance)
 	#get_tree().current_scene.add_child(bullet)
 	#get_node("../..").add_child(bullet)
+	bullet.set_network_master(id)
 	emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
 	get_tree().root.add_child(bullet)
 		#get_tree().get_root().add_child(bullet) hetzelfde scheef
 	#get_tree().root.add_child(bullet) # heel scheef maar op de goede plek
 
-remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bullet_position, _facing_direction, _bullet_scale):
+remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bullet_position, _facing_direction, _bullet_scale, id):
 	var _gun
 	for x in guns:
 		if x.name == gun_name:
@@ -191,6 +192,7 @@ remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bul
 	var muzzleflashInstance = _gun.getMuzzleFlash()
 	$BulletPoint.add_child(muzzleflashInstance)
 	emit_signal("play_sound", _gun.name.to_lower() + str("_shot"))
+	bullet.set_network_master(id)
 	get_tree().root.add_child(bullet)
 
 func get_current_gun() -> Gun:

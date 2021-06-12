@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/scripts/ColorSelect.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/ColorSelectRandom.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/LeftArrow.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/RightArrow.png" type="Texture" id=4]
@@ -39,6 +38,9 @@ margin_right = 250.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 250, 36 )
 custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NameDisplay" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -53,7 +55,7 @@ margin_right = 100.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 100, 36 )
 custom_fonts/font = SubResource( 2 )
-text = " JoJ3o"
+text = " JoJ3oasddsadsa"
 valign = 1
 clip_text = true
 __meta__ = {
@@ -81,7 +83,6 @@ margin_bottom = 18.0
 rect_min_size = Vector2( 75, 36 )
 custom_constants/separation = 0
 alignment = 2
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

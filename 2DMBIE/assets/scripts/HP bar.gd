@@ -1,10 +1,12 @@
 extends TextureProgress
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "_on_player_loaded")	
 
 func _on_player_loaded():
 	if get_tree().root.has_node("/root/World"):
+	# warning-ignore:return_value_discarded
 		get_node("/root/World/Players/" + str(gamestate.player_id)).connect("health_updated", self, "_on_Player_health_updated")
 
 func _on_Player_health_updated(health, maxHealth):

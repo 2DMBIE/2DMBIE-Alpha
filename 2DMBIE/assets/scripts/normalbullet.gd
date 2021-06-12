@@ -10,11 +10,20 @@ var bulletCalc = false
 var velocity
 var halfRadius
 
+var timer = Timer.new()
+
+func _ready():
+	if is_network_master():
+		timer.one_shot = true
+		timer.wait_time = 8
+		timer.connect("timeout", self, "_self_destruct")
+		add_child(timer)
+		timer.start()
+
 func _physics_process(delta):
 	if direction != Vector2.ZERO:
 		velocity = direction * speed * delta
 		global_position += velocity
-	
 #	if bulletCalc:
 #		if (velocity.x > 0 and self.position.x > bulletEnterPos - halfRadius) or (velocity.x < 0 and self.position.x < bulletEnterPos + halfRadius):
 #			self.visible = false
@@ -22,23 +31,27 @@ func _physics_process(delta):
 func _on_bullet_body_entered(body):	
 	if body.is_in_group("enemies"):
 		body.Hurt(damage)
-		Global.Score += 10
+		#Global.Score += 10
 		enemy_penetration += 1
 		bulletEnterPos = position.x
 		if enemy_penetration >= bullet_penetration:
 			self.visible = false
-#			halfRadius = body.get_node("CollisionShape2D").shape.radius * 10
-#			bulletCalc = true
 	else:
-		queue_free()
+		pass
+		#_self_destruct()
 
 func set_direction(directionx: Vector2):
 	self.direction = directionx
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
 func _on_bullet_body_exited(body):
 	if body.is_in_group("enemies"):
 		if enemy_penetration >= bullet_penetration:
-			queue_free()
+			pass
+			#_self_destruct()
+
+func _self_destruct():
+	rpc("self_destruct_remote")
+
+remotesync func self_destruct_remote():
+	print("Annd its goneee")
+	queue_free()

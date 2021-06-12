@@ -3993,6 +3993,8 @@ tile_data = PoolIntArray( -2293745, 22, 0, -2293743, 22, 0, -2293741, 22, 0, -21
 
 [node name="Players" type="Node2D" parent="."]
 
+[node name="Enemies" type="Node2D" parent="."]
+
 [node name="p_Spawnpoints" type="Node2D" parent="."]
 
 [node name="0" type="Position2D" parent="p_Spawnpoints"]
