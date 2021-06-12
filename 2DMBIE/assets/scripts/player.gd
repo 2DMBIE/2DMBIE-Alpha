@@ -42,8 +42,8 @@ puppet var puppet_motion = Vector2()
 
 func _ready():
 	$AnimationTree.active = true
-	set_color(Camo.ORANGE)
 	if is_network_master():
+		set_color(3)
 		zombie_dam_timer = Timer.new()
 		zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 		add_child(zombie_dam_timer)
