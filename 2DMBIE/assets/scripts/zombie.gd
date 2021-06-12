@@ -173,7 +173,7 @@ func _reset_module():
 
 func kill():
 	Global.Score += Global.ScoreIncrement
-	rpc("queue_free_remote")
+	queue_free()
 
 func _set_health(value):
 	var prevHealth = health
@@ -196,11 +196,9 @@ remotesync func set_animation(path, value):
 remotesync func set_direction(scale):
 	get_node("body").scale = scale
 
-remotesync func queue_free_remote():
-	queue_free()
-
-remotesync func hurt(damage, id):
+remotesync func hurt(damage):
+	emit_signal("play_sound", "hurt")
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100
 	show_damage_animation(percentage)
-	emit_signal("play_sound", "hurt")
+

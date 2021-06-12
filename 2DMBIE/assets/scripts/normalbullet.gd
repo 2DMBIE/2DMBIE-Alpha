@@ -27,7 +27,7 @@ func _physics_process(delta):
 func _on_bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		if is_network_master():
-			body.rpc("hurt", damage, get_network_master())
+			body.rpc("hurt", damage)
 			Global.Score += 10
 		enemy_penetration += 1
 		bulletEnterPos = position.x

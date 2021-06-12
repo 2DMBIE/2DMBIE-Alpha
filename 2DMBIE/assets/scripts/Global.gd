@@ -26,3 +26,4 @@ func setScore(newScore):
 	newScore = max(0, newScore)
 	Score = newScore
 	emit_signal("changeScore", Score)
+	
