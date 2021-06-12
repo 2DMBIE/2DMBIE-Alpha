@@ -175,7 +175,6 @@ remotesync func walk_idle_transition():
 		speed = speed*-1
 	if (speed < 110):
 		$AnimationTree.set("parameters/running/current", 1)
-
 	if (speed < 105) && (speed > 12.9): 
 		$AnimationTree.set("parameters/walk-idle/blend_amount", 0.15)
 		running_disabled = false
@@ -331,7 +330,7 @@ func on_knife_animation_complete():
 
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
-		body.Hurt(500)
+		body.rpc("hurt", 300)
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
