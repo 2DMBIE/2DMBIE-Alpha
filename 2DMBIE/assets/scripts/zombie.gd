@@ -171,8 +171,9 @@ func _reset_module():
 #	#rpc("show_damage_animation", percentage)
 #	#rpc("play_sound_remote", "hurt")
 
-master func kill():
+mastersync func kill():
 	#Global.Score += Global.ScoreIncrement
+	print("This is a kill test!")
 	queue_free()
 
 func _set_health(value):
@@ -183,7 +184,6 @@ func _set_health(value):
 		if health == 0:
 			Global.enemiesKilled += 1
 			rpc("kill")
-			queue_free()
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
