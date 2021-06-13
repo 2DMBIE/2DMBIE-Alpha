@@ -54,7 +54,6 @@ func _player_disconnected(id):
 				rpc_id(p_id, "unregister_player", id)
 
 remote func end_game_error(msg):
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	emit_signal("game_error", msg)
 	end_game()
 
@@ -232,6 +231,7 @@ func end_game():
 	player_join_cache.clear()
 	players_ready.clear()
 	get_tree().network_peer = null
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Global.reset_all()
 	#get_tree().set_network_peer(null) # End networking
 

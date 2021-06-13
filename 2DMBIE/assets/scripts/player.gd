@@ -60,6 +60,8 @@ func _physics_process(_delta):
 	if is_network_master():
 		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 		if Input.is_action_just_pressed("pause"):
+			if is_dead:
+				rpc("respawn")
 			if get_node("Optionsmenu/Options").visible == false:
 				if Global.paused == false:
 					var _path = ""
@@ -242,8 +244,12 @@ signal health_updated(health)
 
 remotesync func die():
 	is_dead = true
+	is_knifing = true # disable knifing
+	knifing_hitbox_enabled = false
+	set_player_name("Dead")
 	get_node("body/chest/torso/gun").shooting_disabled = true
 	$body/chest/torso/gun.visible = false
+	get_node("Hitbox").set_collision_mask_bit(3, false)
 	self.set_collision_mask_bit(3, false)
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
@@ -251,14 +257,17 @@ remotesync func die():
 
 remotesync func respawn():
 	is_dead = false
-	Global.Score = 0
+	is_knifing = false
+	knifing_hitbox_enabled = true
+	set_player_name(gamestate.player_name)
 	get_node("body/chest/torso/gun").shooting_disabled = false
-	# ammo and gun reset?
-	self.set_collision_mask_bit(3, true)
 	$body/chest/torso/gun.visible = true
+	get_node("Hitbox").set_collision_mask_bit(3, true)
+	self.set_collision_mask_bit(3, true)
+	Global.Score = 0
+	setHealth(maxHealth) 	# ammo and gun reset?
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
 	$AnimationTree.set("parameters/is_alive/current", true)
-	pass
 
 func setHealth(value):
 	var prevHealth = health
@@ -293,7 +302,7 @@ func _on_Hitbox_body_exited(_body):
 	takingDamage = false
 
 func _on_Timer_timeout():
-	if health < maxHealth:
+	if health < maxHealth and not is_dead:
 		health += 25
 		$Timer.start(0.2)
 		emit_signal("health_updated", health, maxHealth)
