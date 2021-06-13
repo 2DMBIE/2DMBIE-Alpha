@@ -14,10 +14,12 @@ var colors
 var selectNumber = 0
 var path
 var loaded = false
+var new_number = 0
 
 func _ready():
 	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
+	gamestate.connect("on_player_join", self, "on_player_join")
 	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor, "Random" : randomColor }
 	$ColorDisplay.texture = colors["Grey"]
 
@@ -40,29 +42,34 @@ func _on_right_button_down():
 	selectNumber += 1
 	if selectNumber == 5:
 		selectNumber = 0
-	$ColorDisplay.texture = colors.values()[selectNumber]
-	rpc("add_color", gamestate.player_id, selectNumber)
-
+	change_color()
 
 func _on_left_button_down():
 	selectNumber -= 1
 	if selectNumber == -1:
 		selectNumber = 4
-	$ColorDisplay.texture = colors.values()[selectNumber]
-	rpc("add_color", gamestate.player_id, selectNumber)
+	change_color()
 
 func getPlayer():
 	return get_tree().root.get_node_or_null(path)
 
 remotesync func add_color(id, number):
 	if loaded:
-		var new_number = number
-		if number == 4:
-			rng.randomize()
-			new_number = rng.randi() % 4
-		gamestate.players_info[id]["Color"] = translate_number[new_number]
-		get_node("/root/Lobby/Players/" + str(id)).set_color(new_number)
+		gamestate.players_info[id]["Color"] = translate_number[number]
+		get_node("/root/Lobby/Players/" + str(id)).set_color(number)
 
 func on_players_loaded():
 	loaded = true
-	rpc("add_color", gamestate.player_id, selectNumber)
+	rpc("add_color", gamestate.player_id, new_number)
+
+func change_color():
+	if selectNumber == 4:
+		rng.randomize()
+		new_number = rng.randi() % 4
+	else:
+		new_number = selectNumber
+	rpc("add_color", gamestate.player_id, new_number)
+	$ColorDisplay.texture = colors.values()[selectNumber]
+
+func on_player_join(_id, _name):
+	change_color()

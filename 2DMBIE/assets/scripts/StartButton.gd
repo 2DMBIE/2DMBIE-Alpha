@@ -22,6 +22,7 @@ func _process(_delta):
 	
 
 func _on_Button_button_down():
+	$ColorSelect.change_color()
 	gamestate.begin_game()
 
 #	player_display = playerDisplay.instance()

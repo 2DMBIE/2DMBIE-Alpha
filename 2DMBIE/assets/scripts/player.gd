@@ -51,7 +51,7 @@ func _ready():
 		emit_signal("health_updated", health, maxHealth)
 		$Pivot/CameraOffset/Camera2D.current = true
 		# warning-ignore:return_value_discarded
-		#gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
+		gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
