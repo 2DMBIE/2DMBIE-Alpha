@@ -1,12 +1,12 @@
 extends HBoxContainer
 
-var translate_number = {0 : "Grey", 1 : "Blue", 2 : "Red", 3 : "Orange"}
+var translate_number = {0 : "Grey", 1 : "Blue", 2 : "Red", 3 : "Orange", 4 : "Random"}
 
 onready var greyColor = preload("res://assets/sprites/ColorSelectGrey.png")
 onready var blueColor = preload("res://assets/sprites/ColorSelectBlue.png")
 onready var redColor = preload("res://assets/sprites/ColorSelectRed.png")
 onready var orangeColor = preload("res://assets/sprites/ColorSelectOrange.png")
-#onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
+onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
 
 var colors
 var selectNumber = 0
@@ -15,8 +15,8 @@ var loaded = false
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
-	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor }
+	gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
+	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor, "Random" : randomColor }
 	$ColorDisplay.texture = colors["Grey"]
 
 func _process(_delta):
@@ -36,7 +36,7 @@ func on_player_loaded():
 
 func _on_right_button_down():
 	selectNumber += 1
-	if selectNumber == 4:
+	if selectNumber == 5:
 		selectNumber = 0
 	$ColorDisplay.texture = colors.values()[selectNumber]
 	rpc("add_color", gamestate.player_id, selectNumber)
@@ -45,7 +45,7 @@ func _on_right_button_down():
 func _on_left_button_down():
 	selectNumber -= 1
 	if selectNumber == -1:
-		selectNumber = 3
+		selectNumber = 4
 	$ColorDisplay.texture = colors.values()[selectNumber]
 	rpc("add_color", gamestate.player_id, selectNumber)
 

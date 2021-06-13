@@ -74,8 +74,6 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 
 func on_player_loaded():
 #	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
-	var player = get_node("/root/World/Players/" + str(gamestate.player_id))
-	player.rpc("set_color", gamestate.player_color_index)
 
 	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
 	if get_node("Players/"+str(gamestate.player_id)).is_network_master() and not has_node("/root/Lobby"):
