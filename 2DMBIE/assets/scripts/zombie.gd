@@ -140,11 +140,11 @@ func repeat_me():
 func direction(x):
 	var body = get_node("body")
 	if (x == "left") && !(body.scale == Vector2(-1,1)):
-		rpc_unreliable("set_direction", Vector2(-1,1))
+		rpc("set_direction", Vector2(-1,1))
 		#body.scale = Vector2(-1,1)
 	elif (x == "right") && !(body.scale == Vector2(1,1)):
 		#body.scale = Vector2(1,1)
-		rpc_unreliable("set_direction", Vector2(1,1))
+		rpc("set_direction", Vector2(1,1))
 
 func growl():
 	rpc("play_sound_remote", "growl")

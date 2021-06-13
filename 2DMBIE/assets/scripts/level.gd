@@ -81,8 +81,12 @@ remotesync func spawn_ammopouch(location):
 	get_tree().root.add_child(ammoPouch)
 
 func on_player_loaded():
-	#var player = get_node("/root/World/Players/" + str(gamestate.player_id))
+	var player = get_node("/root/World/Players/" + str(gamestate.player_id))
+	player.rpc("set_player_name", gamestate.player_name)
 	#player.rpc("set_color", gamestate.player_color_index)
+	
+	#
+		
 
 	MarkerPos = get_node("/root/World/Players/"+ str(gamestate.player_id)+"/MarkerPos")
 	MarkerPos.get_node("Marker").visible = true

@@ -49,8 +49,8 @@ func _ready():
 		tileMap = get_node("../../Blocks")
 		emit_signal("health_updated", health, maxHealth)
 		$Pivot/CameraOffset/Camera2D.current = true
-# warning-ignore:return_value_discarded
-		gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
+		# warning-ignore:return_value_discarded
+		#gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
@@ -382,7 +382,7 @@ func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
 func _on_gun_set_gun_recoil_sensitivity(value):
 	set_gun_recoil_sensitivity(value)
 	
-func set_player_name(s):
+remotesync func set_player_name(s):
 	get_node("HBoxContainer/NameTag").text = s
 
 remotesync func knife():
