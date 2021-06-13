@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/sprites/ColorSelectRandom.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/LeftArrow.png" type="Texture" id=3]
@@ -33,6 +33,12 @@ region_rect = Rect2( 0, 0, 20, 36 )
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 20, 36 )
 
+[sub_resource type="DynamicFont" id=6]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
 [node name="PlayerDisplay" type="Panel"]
 margin_right = 250.0
 margin_bottom = 36.0
@@ -55,7 +61,7 @@ margin_right = 100.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 100, 36 )
 custom_fonts/font = SubResource( 2 )
-text = " JoJ3oasddsadsa"
+text = " JoJ3o"
 valign = 1
 clip_text = true
 __meta__ = {
@@ -72,6 +78,7 @@ text = "|"
 align = 1
 
 [node name="ColorSelect" type="HBoxContainer" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -117,6 +124,24 @@ custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 5 )
 custom_styles/disabled = SubResource( 5 )
 custom_styles/normal = SubResource( 5 )
+
+[node name="Score" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -18.0
+margin_right = -5.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 115, 36 )
+rect_clip_content = true
+custom_fonts/font = SubResource( 6 )
+text = "3000"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="button_down" from="ColorSelect/LeftArrow" to="ColorSelect" method="_on_LeftArrow_button_down"]
 [connection signal="button_down" from="ColorSelect/RightArrow" to="ColorSelect" method="_on_RightArrow_button_down"]

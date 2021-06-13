@@ -13,7 +13,7 @@ var path
 func _ready():
 	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor }
 
-func _process(delta):
+func _process(_delta):
 	if Global.paused:
 		$ColorDisplay.visible = false
 		$LeftArrow.disabled = true
