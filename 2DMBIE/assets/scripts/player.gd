@@ -246,7 +246,6 @@ remotesync func die():
 	is_dead = true
 	knifing_hitbox_enabled = false
 	is_knifing = true # disable knifing
-
 	set_player_name("Dead")
 	get_node("body/chest/torso/gun").shooting_disabled = true
 	$body/chest/torso/gun.visible = false
@@ -258,6 +257,8 @@ remotesync func die():
 
 
 remotesync func respawn():
+	if is_network_master():
+		Global.Score = 0
 	is_dead = false
 	is_knifing = false
 	knifing_hitbox_enabled = true
@@ -267,7 +268,6 @@ remotesync func respawn():
 	get_node("Hitbox").set_collision_mask_bit(3, true)
 	set_collision_mask_bit(3, true)
 	set_collision_mask_bit(2, true)
-	Global.Score = 0
 	setHealth(maxHealth) 	# ammo and gun reset?
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
 	$AnimationTree.set("parameters/is_alive/current", true)
