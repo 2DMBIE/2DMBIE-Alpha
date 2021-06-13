@@ -329,7 +329,7 @@ func on_knife_animation_complete():
 
 func on_knife_hit(body):
 	if body.is_in_group("enemies") and knifing_hitbox_enabled:
-		body.rpc("hurt", 300)
+		body.rpc("hurt", 300, gamestate.player_id)
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
