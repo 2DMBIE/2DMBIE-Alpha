@@ -120,13 +120,16 @@ func repeat_me():
 			if not player.is_dead:
 				paths[player_id] = distance_x 
 		var shortest_path = paths.values().min() # get key with value x
-		var target = 1 # zero means no target found yet
+		var target = 0 # zero means no target found yet
 		for key in paths.keys():
 			if paths[key] == shortest_path:
 				target = key # new target found
-		if target == 0:
-			pass
-			get_parent() # what to do if everyone is dead?
+		if target == 0: # everyone is dead since the target still has not changed
+			var _msg = "Game over"
+			for p_id in players:
+				rpc_id(p_id, "end_game_error", _msg)
+			gamestate.end_game_error(_msg)
+			return
 		var playerPos = get_tree().root.get_node("/root/World/Players/" + str(target)).position
 		
 		var pos = Vector2(playerPos.x, playerPos.y)
