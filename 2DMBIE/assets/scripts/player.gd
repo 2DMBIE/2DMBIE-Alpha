@@ -429,8 +429,7 @@ remotesync func slide():
 		_path = "/root/Lobby/Players"
 
 	for player in get_tree().root.get_node(_path).get_children():
-		#player.set_collision_mask_bit(2, false)
-		player.rpc("set_collision_mask_bit", 2, false)
+		player.set_collision_mask_bit(2, false)
 	knifing_hitbox_enabled = false
 	WALK_ACCELERATION = 35 #old 20
 	RUN_ACCELERATION = 40
