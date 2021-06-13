@@ -11,6 +11,7 @@ var selectNumber = 0
 var path
 
 func _ready():
+	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor }
 
@@ -39,6 +40,7 @@ func _on_right_button_down():
 		selectNumber = 0
 	$ColorDisplay.texture = colors.values()[selectNumber]
 	getPlayer().rpc("set_color", selectNumber)
+	gamestate.player_color_index = selectNumber
 
 func _on_left_button_down():
 	selectNumber -= 1
@@ -46,6 +48,7 @@ func _on_left_button_down():
 		selectNumber = 3
 	$ColorDisplay.texture = colors.values()[selectNumber]
 	getPlayer().rpc("set_color", selectNumber)
+	gamestate.player_color_index = selectNumber
 
 func getPlayer():
 	return get_tree().root.get_node_or_null(path)
