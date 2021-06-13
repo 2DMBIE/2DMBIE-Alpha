@@ -39,7 +39,7 @@ func _on_host_joined(id, player_name):
 	for p in gamestate.players:
 		var PlayerDisplay = playerDisplay.instance()
 		PlayerDisplay.name = str(p)
-		PlayerDisplay.get_node("NameDisplay/Label").text = " " + str(gamestate.players[p])
-		playerDisplay.get_node("ColorDisplay").texture = translate_color[gamestate.players_info[p]["Color"]]
+		PlayerDisplay.get_node("NameDisplay/Label").text = " " + str(gamestate.players_info[p]["Name"])
+		PlayerDisplay.get_node("ColorDisplay").texture = translate_color[gamestate.players_info[p]["Color"]]
 		$MultiScore/ScoreDisplays.add_child(PlayerDisplay)
 	get_node("MultiScore/ScoreDisplays").on_players_loaded()

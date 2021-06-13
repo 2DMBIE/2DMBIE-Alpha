@@ -101,7 +101,7 @@ remote func register_player(id, new_player_name):
 			rpc_id(p_id, "add_player", id, new_player_name) # Send new dude to player
 
 	players[id] = new_player_name
-	players_info[id] = {"Name " : new_player_name}
+	players_info[id] = {"Name" : new_player_name}
 	add_player(id, new_player_name)
 	if get_tree().is_network_server():
 		if not player_join_cache.has(id):

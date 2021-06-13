@@ -594,7 +594,7 @@ func _on_Options_button_down():
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
 
 func on_players_loaded():
-	if get_tree().get_root().has_node("/root/World/Players"):		
+	if get_tree().get_root().has_node("/root/World/Players"):
 		for p in gamestate.players_info:
 			get_node("/root/World/Players/" + str(p)).set_color(translate_color[gamestate.players_info[p]["Color"]])
 	else:

@@ -61,6 +61,7 @@ remotesync func add_color(id, number):
 			rng.randomize()
 			new_number = rng.randi() % 4
 		gamestate.players_info[id]["Color"] = translate_number[new_number]
+		get_node("/root/Lobby/Players/" + str(id)).set_color(new_number)
 
 func on_players_loaded():
 	loaded = true
