@@ -35,9 +35,7 @@ var debug = false
 var falling = false
 var slideHold = false
 
-var rng = RandomNumberGenerator.new()
-var random_number = 0
-var translate_color = {"Grey" : 0, "Blue" : 1, "Red" : 2, "Orange" : 3, "Random" : random_number}
+var translate_color = {"Grey" : 0, "Blue" : 1, "Red" : 2, "Orange" : 3}
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_motion = Vector2()
@@ -53,9 +51,6 @@ func _ready():
 		$Pivot/CameraOffset/Camera2D.current = true
 # warning-ignore:return_value_discarded
 		gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
-		rng.randomize()
-		random_number = rng.randi() % 4
-		translate_color["Random"] = random_number
 
 	get_node("body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife").visible = false
 
@@ -519,7 +514,7 @@ remotesync func moonwalking(x):
 remotesync func set_animation(path, value):
 	$AnimationTree.set(path, value)
 
-enum Camo {GREY=0, BLUE=1, RED=2, ORANGE=3, RANDOM=4}
+enum Camo {GREY=0, BLUE=1, RED=2, ORANGE=3}
 func set_color(color):
 	$body/chest/torso.frame = color
 	$body/chest/torso/upperarm_left.frame = color
@@ -590,7 +585,7 @@ func _on_Options_button_down():
 	AudioServer.set_bus_volume_db(musicBus, linear2db(musicValue*4))
 
 func on_players_loaded():
-	if get_tree().get_root().has_node("/root/World/Players"):
+	if get_tree().get_root().has_node("/root/World/Players"):		
 		for p in gamestate.players_info:
 			get_node("/root/World/Players/" + str(p)).set_color(translate_color[gamestate.players_info[p]["Color"]])
 	else:

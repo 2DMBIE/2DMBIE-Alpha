@@ -1,12 +1,14 @@
 extends HBoxContainer
 
-var translate_number = {0 : "Grey", 1 : "Blue", 2 : "Red", 3 : "Orange", 4 : "Random"}
+var translate_number = {0 : "Grey", 1 : "Blue", 2 : "Red", 3 : "Orange"}
 
 onready var greyColor = preload("res://assets/sprites/ColorSelectGrey.png")
 onready var blueColor = preload("res://assets/sprites/ColorSelectBlue.png")
 onready var redColor = preload("res://assets/sprites/ColorSelectRed.png")
 onready var orangeColor = preload("res://assets/sprites/ColorSelectOrange.png")
 onready var randomColor = preload("res://assets/sprites/ColorSelectRandom.png")
+
+var rng = RandomNumberGenerator.new()
 
 var colors
 var selectNumber = 0
@@ -54,7 +56,11 @@ func getPlayer():
 
 remotesync func add_color(id, number):
 	if loaded:
-		gamestate.players_info[id]["Color"] = translate_number[number]
+		var new_number = number
+		if number == 4:
+			rng.randomize()
+			new_number = rng.randi() % 4
+		gamestate.players_info[id]["Color"] = translate_number[new_number]
 
 func on_players_loaded():
 	loaded = true
