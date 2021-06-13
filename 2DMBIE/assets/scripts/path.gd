@@ -108,13 +108,14 @@ func _ready():
 	# Calls function that connects all the points
 	createConections()
 	
-	ammospawn()
-	ammoTimer = Timer.new()
-	ammoTimer.set_wait_time(30)
-	ammoTimer.set_one_shot(false)
-	ammoTimer.connect("timeout", self, "ammoTimer_timeout")
-	add_child(ammoTimer)
-	ammoTimer.start()
+	if get_tree().get_network_unique_id() == 1:
+		ammospawn()
+		ammoTimer = Timer.new()
+		ammoTimer.set_wait_time(30)
+		ammoTimer.set_one_shot(false)
+		ammoTimer.connect("timeout", self, "ammoTimer_timeout")
+		add_child(ammoTimer)
+		ammoTimer.start()
 	
 ## Create connections between the points
 func createConections():

@@ -10,7 +10,7 @@ var GraphRandomPoint = Vector2.ZERO
 
 var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
 
-var MarkerPos
+var MarkerPos = null
 var rotationDegree
 
 func _ready():
@@ -19,9 +19,9 @@ func _ready():
 	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 
 func _process(_delta):
-#	if MarkerPos != null:
-#		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
-#		MarkerPos.rotation = rotationDegree
+	if MarkerPos != null:
+		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
+		MarkerPos.rotation = rotationDegree
 	
 	$cursor.position = get_global_mouse_position()
 	
@@ -59,14 +59,32 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		pass
 
 func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
+#	var ammoPouch = AmmoPouch.instance()
+#	ammoPouch.set_position(graphRandomPoint)
+#
+#	#get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
+#	get_tree().root.add_child(ammoPouch)
+	#GraphRandomPoint = graphRandomPoint
+	print("Spawning ammopouch")
+	rpc("set_random_graph_point", graphRandomPoint)
+	rpc("spawn_ammopouch", graphRandomPoint)
+
+
+remotesync func set_random_graph_point(x):
+	GraphRandomPoint = x
+
+remotesync func spawn_ammopouch(location):
+	if get_tree().root.has_node("ammoPouch"):
+		get_tree().root.get_node("ammoPouch").queue_free()
 	var ammoPouch = AmmoPouch.instance()
-	ammoPouch.set_position(graphRandomPoint)
-	get_tree().get_current_scene().call_deferred("add_child", ammoPouch)
-	GraphRandomPoint = graphRandomPoint
+	ammoPouch.set_position(location)
+	get_tree().root.add_child(ammoPouch)
 
 func on_player_loaded():
-#	print(get_node("/root/Lobby/Players/" + str(gamestate.player_id)))
+	#var player = get_node("/root/World/Players/" + str(gamestate.player_id))
+	#player.rpc("set_color", gamestate.player_color_index)
 
-	MarkerPos = get_node("Players/"+str(gamestate.player_id)+"/MarkerPos")
-	if get_node("Players/"+str(gamestate.player_id)).is_network_master() and not has_node("/root/Lobby"):
-		MarkerPos.get_node("Marker").visible = true
+	MarkerPos = get_node("/root/World/Players/"+ str(gamestate.player_id)+"/MarkerPos")
+	MarkerPos.get_node("Marker").visible = true
+#	if get_node("Players/"+str(gamestate.player_id)).is_network_master() and not has_node("/root/Lobby"):
+#		MarkerPos.get_node("Marker").visible = true

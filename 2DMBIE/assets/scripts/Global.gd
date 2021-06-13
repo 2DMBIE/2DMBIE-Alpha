@@ -13,16 +13,15 @@ var Speed = 200
 var enemiesKilled = 0
 var paused = false
 var online = true
-var random_round_music
+var random_round_music = -1
 # Debug
 var aim = false
 var camera = false
 var brightness = false
 
 func _ready():
-	if get_tree().get_network_unique_id() == 1:
-		randomize()
-		rpc("set_random_round", randi()%7+1)  # generate random integer between 7 and 1
+	# warning-ignore:return_value_discarded
+	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 
 func _process(_delta):
 	maxHealth = clamp(maxHealth, 500, 1500)
@@ -52,3 +51,8 @@ remote func wavetimer_update(remote_MaxWaveEnemies, remote_Currentwave, remote_m
 
 remotesync func set_random_round(x):
 	random_round_music = x
+
+func on_player_loaded():
+	if get_tree().get_network_unique_id() == 1 and get_tree().root.has_node("/root/World"):
+		randomize()
+		rpc("set_random_round", randi()%7+1)  # generate random integer between 7 and 1

@@ -1,6 +1,6 @@
 extends Label
 
-var gunscript
+var gunscript = null
 
 var _ammo
 var _maxclip_ammo 

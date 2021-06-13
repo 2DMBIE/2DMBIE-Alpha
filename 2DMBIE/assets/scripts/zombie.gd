@@ -114,7 +114,22 @@ func repeat_me():
 #		var playerPos = get_global_mouse_position()
 		# replace 1 with gamestate.player_id
 		# use get_parent, its probably faster
-		var playerPos = get_tree().root.get_node("/root/World/Players/1").position
+		#self.position A B C D
+		var players = gamestate.players.keys()
+		players.append(1) # include host in player network
+		var paths = {}
+		for player_id in players:
+			var player = get_tree().root.get_node("/root/World/Players/" + str(player_id))
+			var distance_x = self.position.distance_to(player.position)
+			paths[player_id] = distance_x 
+		var shortest_path = paths.values().min() # get key with value x
+		var target = 1 # host is by default the target
+		for key in paths.keys():
+			if paths[key] == shortest_path:
+				target = key # new target found
+		
+		var playerPos = get_tree().root.get_node("/root/World/Players/" + str(target)).position
+		
 		var pos = Vector2(playerPos.x, playerPos.y)
 		var result = space_state.intersect_ray(Vector2(pos[0], pos[1] + get_tree().root.get_node("/root/World/Players/1/CollisionShape2D").shape.height/2 + 10), Vector2(pos[0], pos[1] + 1000))
 		if (result):
