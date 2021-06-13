@@ -12,6 +12,7 @@ var EnemyDamage = 300
 var Speed = 200
 var enemiesKilled = 0
 var paused = false
+var online = true
 # Debug
 var aim = false
 var camera = false

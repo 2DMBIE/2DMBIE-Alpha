@@ -26,7 +26,8 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what)
-signal on_local_player_loaded() 
+signal on_local_player_loaded()
+signal player_added(id, name)
 
 # Callback from SceneTree
 func _player_connected(_id):
@@ -127,6 +128,7 @@ remote func add_player(id, name):
 		player.position=spawn_pos
 		player.set_network_master(id)
 		world.get_node("Players").add_child(player)
+#		emit_signal("player_added", id, name)
 
 remote func show_join_msg(id, name):
 	emit_signal("on_player_join", id, name)
@@ -148,7 +150,8 @@ remote func pre_start_game(spawn_points):
 		player.set_network_master(p_id) #set unique id as master
 		player.position = spawn_pos
 		main.get_node("Players").add_child(player)
-
+	
+	
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
@@ -159,6 +162,7 @@ remote func post_start_game():
 	get_tree().get_root().get_node("Lobby").queue_free()
 	get_tree().set_pause(false) # Unpause and unleash the game!
 	emit_signal("on_local_player_loaded")
+	emit_signal("player_added", get_tree().get_network_unique_id(), player_name)
 
 var players_ready = []
 
@@ -208,7 +212,7 @@ func begin_game():
 	# Call to pre-start game with the spawn points
 	for p in players:
 		rpc_id(p, "pre_start_game", spawn_points)
-
+	
 	pre_start_game(spawn_points)
 
 func end_game():
@@ -243,6 +247,7 @@ func load_lobby():
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)
 	emit_signal("on_local_player_loaded")
+#	emit_signal("player_added", player_id, player_name)
 
 func _ready():
 	randomize() # enabled for spawning at random locations
