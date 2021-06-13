@@ -250,8 +250,8 @@ remotesync func die():
 	set_player_name("Dead")
 	get_node("body/chest/torso/gun").shooting_disabled = true
 	$body/chest/torso/gun.visible = false
-	get_node("Hitbox").set_collision_mask_bit(3, false)
-	self.set_collision_mask_bit(3, false)
+	#get_node("Hitbox").set_collision_mask_bit(3, false)
+	set_collision_mask_bit(3, false)
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
 

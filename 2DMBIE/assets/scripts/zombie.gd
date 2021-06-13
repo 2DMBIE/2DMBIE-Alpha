@@ -111,6 +111,7 @@ func _process(delta):
 func repeat_me():
 	if is_on_floor():
 		var space_state = get_world_2d().direct_space_state
+
 		var players = gamestate.players.keys()
 		players.append(1) # include host in player network
 		var paths = {}
