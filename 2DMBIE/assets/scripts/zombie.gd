@@ -171,9 +171,10 @@ func _reset_module():
 #	#rpc("show_damage_animation", percentage)
 #	#rpc("play_sound_remote", "hurt")
 
+
 mastersync func kill():
-	#Global.Score += Global.ScoreIncrement
-	print("This is a kill test!")
+	if get_tree().get_network_unique_id() == target_id:
+		Global.Score += Global.ScoreIncrement
 	queue_free()
 
 func _set_health(value):
@@ -182,7 +183,11 @@ func _set_health(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health)
 		if health == 0:
-			Global.enemiesKilled += 1
+			if get_tree().get_network_unique_id() == 1:
+				Global.add_to_global("enemiesKilled", 1)
+			else:
+				Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
+			#Global.enemiesKilled += 1
 			rpc("kill")
 
 func _on_GroundChecker_body_exited(_body):
@@ -197,7 +202,10 @@ remotesync func set_animation(path, value):
 remotesync func set_direction(scale):
 	get_node("body").scale = scale
 
-remotesync func hurt(damage):
+var target_id = 0
+
+remotesync func hurt(damage, id):
+	target_id = id
 	emit_signal("play_sound", "hurt")
 	_set_health(health - damage)
 	var percentage = health/maxHealth*100

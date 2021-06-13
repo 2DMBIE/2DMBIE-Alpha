@@ -10,6 +10,7 @@ const MAX_PEERS = 3
 var player_name = "Unnamed"
 var host_name
 var player_id
+var player_color_index
 var last_player_name = ""
 
 # To send in-game join message

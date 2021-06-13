@@ -14,7 +14,8 @@ var path
 var loaded = false
 
 func _ready():
-	gamestate.connect("on_local_player_loaded", self, "on_players_loaded")
+	# warning-ignore:return_value_discarded
+	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor }
 	$ColorDisplay.texture = colors["Grey"]
 
@@ -30,7 +31,6 @@ func _process(_delta):
 
 func on_player_loaded():
 	path = "/root/Lobby/Players/" + str(gamestate.player_id)
-	#getPlayer().
 	#print(get_node("/root/Lobby/Players").get_children())
 	#_on_RightArrow_button_down()
 
