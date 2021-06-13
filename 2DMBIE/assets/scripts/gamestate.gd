@@ -18,6 +18,9 @@ var player_join_cache = []
 # Names for remote players in id:name format
 var players = {}
 
+# Info of all players including host
+var players_info = {}
+
 # Signals to let lobby GUI know what's going ona
 signal on_player_join(id, name)
 signal on_player_leave(id, name)
@@ -81,6 +84,7 @@ func _connected_fail():
 	emit_signal("connection_failed")
 	player_join_cache = []
 	players = {}
+	players_info = {}
 	players_ready = []
 
 # Lobby management functions
@@ -97,6 +101,7 @@ remote func register_player(id, new_player_name):
 			rpc_id(p_id, "add_player", id, new_player_name) # Send new dude to player
 
 	players[id] = new_player_name
+	players_info[id] = {"Name " : new_player_name}
 	add_player(id, new_player_name)
 	if get_tree().is_network_server():
 		if not player_join_cache.has(id):
@@ -110,6 +115,7 @@ remote func unregister_player(id):
 		return
 	emit_signal("on_player_leave", players[id])
 	players.erase(id)
+	players_info.erase(id)
 	player_join_cache.erase(id)
 	if get_tree().get_root().has_node("/root/Lobby/Players/" + str(id)):
 		get_tree().get_root().get_node("/root/Lobby/Players/" + str(id)).queue_free()
@@ -222,6 +228,7 @@ func end_game():
 		get_tree().get_root().get_node("/root/Lobby").queue_free()
 	emit_signal("game_ended")
 	players.clear()
+	players_info.clear()
 	player_join_cache.clear()
 	players_ready.clear()
 	get_tree().network_peer = null
@@ -243,6 +250,8 @@ func load_lobby():
 	player.set_network_master(get_tree().get_network_unique_id())
 	world.get_node("Players").add_child(player)
 	player_id = get_tree().get_network_unique_id()
+	
+	players_info[get_tree().get_network_unique_id()] = {"Name" : player_name}
 	
 	if get_tree().get_network_unique_id() == 1:
 		emit_signal("lobby_created", host_name)

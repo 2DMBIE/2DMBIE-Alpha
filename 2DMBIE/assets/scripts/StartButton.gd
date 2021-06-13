@@ -7,13 +7,18 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	#gamestate.connect("player_added", self, "_on_player_joined")
 	total_user_amount = gamestate.MAX_PEERS + 1
-	
 	if !get_tree().get_network_unique_id() == 1:
 		$Control/Button.visible = false
 
 func _process(_delta):
 	user_amount = gamestate.players.size() + 1
 	$Control/PlayerList/Panel/Label.text = str(user_amount) + " / " + str(total_user_amount)
+	
+	if get_tree().get_network_unique_id() == 1:
+		if Global.paused:
+			$Control/Button.visible = false
+		else:
+			$Control/Button.visible = true
 	
 
 func _on_Button_button_down():

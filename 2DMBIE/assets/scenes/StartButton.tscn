@@ -113,5 +113,7 @@ __meta__ = {
 }
 
 [node name="ColorSelect" parent="." instance=ExtResource( 4 )]
+margin_top = 15.0
+margin_bottom = 51.0
 
 [connection signal="button_down" from="Control/Button" to="." method="_on_Button_button_down"]

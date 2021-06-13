@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/scripts/lobbyworld.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/tiles/walls_tileset_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/crosshair.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/Sign.png" type="Texture" id=5]
 [ext_resource path="res://assets/scenes/LobbyStatus.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/scenes/StartButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprites/CloudsBG.png" type="Texture" id=8]
@@ -450,3 +451,23 @@ z_index = 0
 [node name="emergency_exit" parent="lights" instance=ExtResource( 13 )]
 position = Vector2( -192, 312 )
 z_index = 0
+
+[node name="Sign" type="Sprite" parent="."]
+position = Vector2( -448, 210 )
+scale = Vector2( 1.4, 1.4 )
+z_index = -5
+texture = ExtResource( 5 )
+
+[node name="Label" type="Label" parent="Sign"]
+margin_left = -36.733
+margin_top = -33.556
+margin_right = 69.267
+margin_bottom = 14.444
+rect_scale = Vector2( 0.7, 0.65 )
+text = " Pause the
+game to
+change color"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

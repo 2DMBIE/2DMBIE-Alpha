@@ -1,6 +1,7 @@
 extends Control
 
 onready var playerDisplay = preload("res://assets/scenes/PlayerDisplay.tscn")
+onready var separator = preload("res://assets/scenes/Separator.tscn").instance()
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -18,10 +19,14 @@ func _physics_process(_delta):
 	$SingleScore/PlayerScore.text = str(int(Global.Score))
 
 func _on_host_joined(id, player_name):
+	print(gamestate.players_info)
+	
 	var player_display = playerDisplay.instance()
 	player_display.name = str(id)
 	player_display.get_node("NameDisplay/Label").text = " " + str(player_name)
 	$MultiScore/ScoreDisplays.add_child(player_display)
+	
+	$MultiScore/ScoreDisplays.add_child(separator)
 	
 	for p in gamestate.players:
 		var PlayerDisplay = playerDisplay.instance()
