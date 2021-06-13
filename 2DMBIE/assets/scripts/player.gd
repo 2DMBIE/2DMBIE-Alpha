@@ -252,6 +252,7 @@ remotesync func die():
 	$body/chest/torso/gun.visible = false
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
 	set_collision_mask_bit(3, false)
+	set_collision_mask_bit(2, false)
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
 
@@ -264,7 +265,8 @@ remotesync func respawn():
 	get_node("body/chest/torso/gun").shooting_disabled = false
 	$body/chest/torso/gun.visible = true
 	get_node("Hitbox").set_collision_mask_bit(3, true)
-	self.set_collision_mask_bit(3, true)
+	set_collision_mask_bit(3, true)
+	set_collision_mask_bit(2, true)
 	Global.Score = 0
 	setHealth(maxHealth) 	# ammo and gun reset?
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
