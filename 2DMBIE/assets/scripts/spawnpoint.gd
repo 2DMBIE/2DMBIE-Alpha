@@ -42,6 +42,7 @@ remotesync func spawn_enemy(spawnpoint, name):
 remotesync func kill_enemy(name):
 	var enemy = get_tree().root.get_node_or_null("root/World/Enemies/" + name)
 	if enemy != null:
+		print("killing target")
 		enemy.rpc("kill")
 		#enemy.queue_free()
 	#get_tree().root.get_node("/root/World").get_node(name).queue_free()
