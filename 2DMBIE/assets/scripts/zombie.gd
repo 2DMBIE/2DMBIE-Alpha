@@ -111,23 +111,22 @@ func _process(delta):
 func repeat_me():
 	if is_on_floor():
 		var space_state = get_world_2d().direct_space_state
-#		var playerPos = get_global_mouse_position()
-		# replace 1 with gamestate.player_id
-		# use get_parent, its probably faster
-		#self.position A B C D
 		var players = gamestate.players.keys()
 		players.append(1) # include host in player network
 		var paths = {}
 		for player_id in players:
 			var player = get_tree().root.get_node("/root/World/Players/" + str(player_id))
 			var distance_x = self.position.distance_to(player.position)
-			paths[player_id] = distance_x 
+			if not player.is_dead:
+				paths[player_id] = distance_x 
 		var shortest_path = paths.values().min() # get key with value x
-		var target = 1 # host is by default the target
+		var target = 1 # zero means no target found yet
 		for key in paths.keys():
 			if paths[key] == shortest_path:
 				target = key # new target found
-		
+		if target == 0:
+			pass
+			get_parent() # what to do if everyone is dead?
 		var playerPos = get_tree().root.get_node("/root/World/Players/" + str(target)).position
 		
 		var pos = Vector2(playerPos.x, playerPos.y)

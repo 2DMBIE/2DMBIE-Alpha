@@ -56,3 +56,13 @@ func on_player_loaded():
 	if get_tree().get_network_unique_id() == 1 and get_tree().root.has_node("/root/World"):
 		randomize()
 		rpc("set_random_round", randi()%7+1)  # generate random integer between 7 and 1
+
+func reset_all():
+	Global.Score = 0
+	Global.MaxWaveEnemies = 4
+	Global.CurrentWaveEnemies = 0
+	Global.Currentwave = 1
+	Global.maxHealth = 500
+	Global.EnemyDamage = 300
+	Global.Speed = 200
+	Global.enemiesKilled = 0 

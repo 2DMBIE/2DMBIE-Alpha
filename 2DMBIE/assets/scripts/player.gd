@@ -27,6 +27,7 @@ var tilePos
 var is_knifing = false
 var knifing_hitbox_enabled = false
 var is_sliding = false
+var is_dead = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
@@ -82,7 +83,7 @@ func _physics_process(_delta):
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
 			else:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
-		if Global.paused:
+		if Global.paused or is_dead:
 			motion.y += GRAVITY
 			motion = move_and_slide(motion, UP)
 			rset("puppet_motion", motion)
@@ -239,25 +240,33 @@ var health = maxHealth setget setHealth
 
 signal health_updated(health)
 
-func kill():
-	var _x = get_tree().reload_current_scene()
+remotesync func die():
+	is_dead = true
+	get_node("body/chest/torso/gun").shooting_disabled = true
+	$body/chest/torso/gun.visible = false
+	self.set_collision_mask_bit(3, false)
+	$AnimationTree.set("parameters/is_alive/current", false)
+	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
+
+
+remotesync func respawn():
+	is_dead = false
 	Global.Score = 0
-	Global.MaxWaveEnemies = 4
-	Global.CurrentWaveEnemies = 0
-	Global.Currentwave = 1
-	Global.maxHealth = 500
-	Global.EnemyDamage = 300
-	Global.Speed = 200
-	Global.enemiesKilled = 0 
-	
+	get_node("body/chest/torso/gun").shooting_disabled = false
+	# ammo and gun reset?
+	self.set_collision_mask_bit(3, true)
+	$body/chest/torso/gun.visible = true
+	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
+	$AnimationTree.set("parameters/is_alive/current", true)
+	pass
+
 func setHealth(value):
 	var prevHealth = health
 	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			queue_free()
-			kill()
+			rpc("die")
 
 var takingDamage = false
 

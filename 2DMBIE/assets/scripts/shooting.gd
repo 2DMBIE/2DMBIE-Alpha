@@ -58,7 +58,8 @@ func switch_slot(slot):
 func _process(_delta):
 	if !Global.paused:
 		if is_network_master():
-			if shooting_disabled:
+			var _is_dead = get_parent().get_parent().get_parent().get_parent().is_dead
+			if shooting_disabled or _is_dead:
 				return
 			
 			for i in range(weapon_slots.size()):         

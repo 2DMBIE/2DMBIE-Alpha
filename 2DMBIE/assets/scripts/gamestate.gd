@@ -232,6 +232,7 @@ func end_game():
 	player_join_cache.clear()
 	players_ready.clear()
 	get_tree().network_peer = null
+	Global.reset_all()
 	#get_tree().set_network_peer(null) # End networking
 
 # Loads the player (you) and the map.
