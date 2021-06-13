@@ -47,6 +47,12 @@ func _process(_delta):
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
+		var players = gamestate.players.keys()
+		players.append(1) # include host in player network
+		for player_id in players:
+			var player = get_tree().root.get_node("/root/World/Players/" + str(player_id))
+			if player.is_dead:
+				player.rpc("respawn")
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
