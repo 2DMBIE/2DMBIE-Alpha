@@ -114,19 +114,19 @@ func repeat_me():
 		var players = gamestate.players.keys()
 		players.append(1) # include host in player network
 		var paths = {}
-		for player_id in players:
-			var player = get_tree().root.get_node("/root/World/Players/" + str(player_id))
-			var distance_x = self.position.distance_to(player.position)
+		for player_id in players: # get all players
+			var player = get_tree().root.get_node("/root/World/Players/" + str(player_id)) # for each player
+			var distance_x = self.position.distance_to(player.position) # get the distance between the player and the zombie
 			if not player.is_dead:
-				paths[player_id] = distance_x 
-		var shortest_path = paths.values().min() # get key with value x
+				paths[player_id] = distance_x # add distance to array
+		var shortest_path = paths.values().min() # get shortest distance value in array
 		var target = 0 # zero means no target found yet
 		for key in paths.keys():
-			if paths[key] == shortest_path:
+			if paths[key] == shortest_path: # get the id from the player with the shortest path
 				target = key # new target found
 		if target == 0: # everyone is dead since the target still has not changed
 			var _msg = "Game over"
-			for p_id in players:
+			for p_id in gamestate.players:
 				rpc_id(p_id, "end_game_error", _msg)
 			gamestate.end_game_error(_msg)
 			return

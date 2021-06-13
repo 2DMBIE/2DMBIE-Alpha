@@ -244,8 +244,9 @@ signal health_updated(health)
 
 remotesync func die():
 	is_dead = true
-	is_knifing = true # disable knifing
 	knifing_hitbox_enabled = false
+	is_knifing = true # disable knifing
+
 	set_player_name("Dead")
 	get_node("body/chest/torso/gun").shooting_disabled = true
 	$body/chest/torso/gun.visible = false
