@@ -24,7 +24,7 @@ var mouse_direction
 var bullet_direction
 var valid_aim = true
 
-var current_gun_index
+var current_gun_index = -1
 
 var weapon_slots = [0, -1]
 var current_weapon = 0
@@ -196,6 +196,8 @@ remotesync func fire_bullet_no_aim(gun_name, _global_mouse_position, _global_bul
 	get_tree().root.add_child(bullet)
 
 func get_current_gun() -> Gun:
+	if current_gun_index == -1:
+		return null
 	return guns[current_gun_index]
 
 var reload_gun_index
