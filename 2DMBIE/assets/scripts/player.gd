@@ -60,8 +60,6 @@ func _physics_process(_delta):
 	if is_network_master():
 		musicValue = db2linear(AudioServer.get_bus_volume_db(musicBus))
 		if Input.is_action_just_pressed("pause"):
-			if is_dead:
-				rpc("respawn")
 			if get_node("Optionsmenu/Options").visible == false:
 				if Global.paused == false:
 					var _path = ""
@@ -85,7 +83,7 @@ func _physics_process(_delta):
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
 			else:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
-		if Global.paused or is_dead:
+		if Global.paused:
 			motion.y += GRAVITY
 			motion = move_and_slide(motion, UP)
 			rset("puppet_motion", motion)
@@ -252,8 +250,6 @@ remotesync func die():
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
 	set_collision_mask_bit(3, false)
 	set_collision_mask_bit(2, false)
-	$CollisionShape2D.disabled = true
-	$CollisionShape2DCrouch.disabled = true
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
 
@@ -433,7 +429,8 @@ remotesync func slide():
 		_path = "/root/Lobby/Players"
 
 	for player in get_tree().root.get_node(_path).get_children():
-		player.set_collision_mask_bit(2, false)
+		#player.set_collision_mask_bit(2, false)
+		player.rpc("set_collision_mask_bit", 2, false)
 	knifing_hitbox_enabled = false
 	WALK_ACCELERATION = 35 #old 20
 	RUN_ACCELERATION = 40
