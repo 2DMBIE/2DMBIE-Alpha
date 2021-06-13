@@ -449,15 +449,15 @@ remotesync func crouch(state):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
 		else: 
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
-		$CollisionShape2D.disabled = true
-		$CollisionShape2DCrouch.disabled = false
+#		$CollisionShape2D.disabled = true
+#		$CollisionShape2DCrouch.disabled = false
 		if is_on_floor():
 			motion.x = 0 
 	else:
 		crouch_idle_transition(false)
 		$AnimationTree.set("parameters/crouching/current", 1)
-		$CollisionShape2D.disabled = false
-		$CollisionShape2DCrouch.disabled = true
+#		$CollisionShape2D.disabled = false
+#		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 		_is_already_crouching = false
 		_played_crouch_sfx = false
