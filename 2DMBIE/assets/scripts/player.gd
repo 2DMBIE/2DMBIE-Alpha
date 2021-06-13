@@ -252,6 +252,8 @@ remotesync func die():
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
 	set_collision_mask_bit(3, false)
 	set_collision_mask_bit(2, false)
+	$CollisionShape2D.disabled = true
+	$CollisionShape2DCrouch.disabled = true
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
 
