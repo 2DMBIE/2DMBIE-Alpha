@@ -11,6 +11,7 @@ var selectNumber = 0
 var path
 
 func _ready():
+	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 	colors = { "Grey": greyColor, "Blue": blueColor, "Red": redColor, "Orange": orangeColor }
 
 func _process(delta):
@@ -29,7 +30,6 @@ func _process(delta):
 
 func on_player_loaded():
 	path = "/root/Lobby/Players/" + str(gamestate.player_id)
-	#getPlayer().
 	#print(get_node("/root/Lobby/Players").get_children())
 	#_on_RightArrow_button_down()
 
@@ -38,13 +38,14 @@ func _on_right_button_down():
 	if selectNumber == 4:
 		selectNumber = 0
 	$ColorDisplay.texture = colors.values()[selectNumber]
-
+	getPlayer().rpc("set_color", selectNumber)
 
 func _on_left_button_down():
 	selectNumber -= 1
 	if selectNumber == -1:
 		selectNumber = 3
 	$ColorDisplay.texture = colors.values()[selectNumber]
+	getPlayer().rpc("set_color", selectNumber)
 
 func getPlayer():
 	return get_tree().root.get_node_or_null(path)

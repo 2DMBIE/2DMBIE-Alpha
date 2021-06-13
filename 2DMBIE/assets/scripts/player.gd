@@ -43,7 +43,6 @@ puppet var puppet_motion = Vector2()
 func _ready():
 	$AnimationTree.active = true
 	if is_network_master():
-		set_color(3)
 		zombie_dam_timer = Timer.new()
 		zombie_dam_timer.connect("timeout",self,"_zombie_dam_timout")
 		add_child(zombie_dam_timer)
@@ -515,7 +514,7 @@ remotesync func set_animation(path, value):
 	$AnimationTree.set(path, value)
 
 enum Camo {GREY=0, BLUE=1, RED=2, ORANGE=3}
-func set_color(color):
+remotesync func set_color(color):
 	$body/chest/torso.frame = color
 	$body/chest/torso/upperarm_left.frame = color
 	$body/chest/torso/upperarm_right.frame = color
