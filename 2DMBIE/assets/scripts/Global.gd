@@ -13,10 +13,16 @@ var Speed = 200
 var enemiesKilled = 0
 var paused = false
 var online = true
+var random_round_music
 # Debug
 var aim = false
 var camera = false
 var brightness = false
+
+func _ready():
+	if get_tree().get_network_unique_id() == 1:
+		randomize()
+		rpc("set_random_round", randi()%7+1)  # generate random integer between 7 and 1
 
 func _process(_delta):
 	maxHealth = clamp(maxHealth, 500, 1500)
@@ -43,3 +49,6 @@ remote func wavetimer_update(remote_MaxWaveEnemies, remote_Currentwave, remote_m
 	Global.EnemyDamage = remote_EnemyDamage
 	Global.Speed = remote_Speed
 	Global.enemiesKilled = remote_enemiesKilled
+
+remotesync func set_random_round(x):
+	random_round_music = x

@@ -4,7 +4,6 @@ onready var musicBus := AudioServer.get_bus_index("Music")
 onready var musicValue
 
 var is_paused = false
-var random_round
 var music_playing = false
 signal music(action)
 var GraphRandomPoint = Vector2.ZERO
@@ -16,8 +15,6 @@ var rotationDegree
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	random_round = randi()%7+1 # generate random integer between 7 and 1
-	randomize()
 	# warning-ignore:return_value_discarded
 	gamestate.connect("on_local_player_loaded", self, "on_player_loaded")
 
@@ -26,18 +23,13 @@ func _process(_delta):
 #		rotationDegree = GraphRandomPoint.angle_to_point(MarkerPos.global_position)
 #		MarkerPos.rotation = rotationDegree
 	
-#	if Input.is_action_just_pressed("attack"):
-#		print("Printing Children:")
-#		for x in get_node("Players").get_children():
-#			print(x.name)
-	
 	$cursor.position = get_global_mouse_position()
 	
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
 	
-	if Global.Currentwave == random_round and not music_playing:
+	if Global.Currentwave == Global.random_round_music and not music_playing:
 		emit_signal("music", "play")
 		music_playing = true
 	if Input.is_action_just_released("game_reset"):
