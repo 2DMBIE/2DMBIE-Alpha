@@ -208,9 +208,6 @@ func _reset_module():
 #	#rpc("show_damage_animation", percentage)
 #	#rpc("play_sound_remote", "hurt")
 
-
-
-
 func _set_health(value):
 	var prevHealth = health
 	rpc("change_health", value)

@@ -56,8 +56,8 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
-		Global.maxHealth += 100
-		Global.EnemyDamage += 50
+#		Global.maxHealth += 100
+#		Global.EnemyDamage += 50
 		Global.Speed += 4
 		Global.enemiesKilled = 0
 		Global.rpc("wavetimer_update", Global.MaxWaveEnemies,Global.Currentwave,Global.maxHealth,Global.EnemyDamage,Global.Speed,Global.enemiesKilled)
