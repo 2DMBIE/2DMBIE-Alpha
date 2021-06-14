@@ -193,7 +193,7 @@ func _reset_module():
 mastersync func kill():
 	if get_tree().get_network_unique_id() == target_id:
 		Global.Score += Global.ScoreIncrement
-	queue_free()
+	call_deferred("queue_free")
 
 func _set_health(value):
 	var prevHealth = health
