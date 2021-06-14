@@ -266,10 +266,10 @@ remotesync func die():
 remotesync func respawn():
 	if is_network_master():
 		Global.Score = 0
+		rpc("set_player_name", gamestate.player_name)
 	is_dead = false
 	is_knifing = false
 	knifing_hitbox_enabled = true
-	set_player_name(gamestate.player_name)
 	get_node("body/chest/torso/gun").shooting_disabled = false
 	$body/chest/torso/gun.visible = true
 	get_node("Hitbox").set_collision_mask_bit(3, true)

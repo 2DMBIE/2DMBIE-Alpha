@@ -203,8 +203,8 @@ func _set_health(value):
 		if health == 0:
 			if get_tree().get_network_unique_id() == 1:
 				Global.add_to_global("enemiesKilled", 1)
-			else:
-				Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
+			#else:
+			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
 			rpc("kill")
 
