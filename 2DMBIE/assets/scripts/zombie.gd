@@ -191,7 +191,7 @@ func _reset_module():
 #	#rpc("play_sound_remote", "hurt")
 
 
-mastersync func kill():	
+func kill():
 	if get_tree().get_network_unique_id() == target_id:
 		Global.Score += Global.ScoreIncrement
 	queue_free()
@@ -208,7 +208,7 @@ func _set_health(value):
 			#else:
 			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
-			rpc("kill")
+			kill()
 
 func _on_GroundChecker_body_exited(_body):
 	set_collision_mask_bit(dropthroughBit, true)
