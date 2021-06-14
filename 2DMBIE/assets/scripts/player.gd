@@ -85,9 +85,8 @@ func _physics_process(_delta):
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
 		if is_dead:
 			velocity = Vector2(0,0)
-			#motion = move_and_slide(motion, UP)
-			#rset("puppet_motion", motion)
-			#rset("puppet_pos", position)
+			rset("puppet_motion", motion)
+			rset("puppet_pos", position)
 			return
 		if Global.paused:
 			motion.y += GRAVITY
@@ -255,6 +254,8 @@ remotesync func die():
 	$body/chest/torso/gun.visible = false
 	$CollisionShape2D.disabled = true
 	$CollisionShape2DCrouch.disabled = true
+	$body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox/KnifeCollisionShape.disabled = true
+	$GroundChecker/CollisionShape2D.disabled = true
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
 	set_collision_mask_bit(3, false)
 	set_collision_mask_bit(2, false)
@@ -276,6 +277,8 @@ remotesync func respawn():
 	set_collision_mask_bit(2, true)
 	$CollisionShape2D.disabled = false
 	$CollisionShape2DCrouch.disabled = false
+	$body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox/KnifeCollisionShape.disabled = false
+	$GroundChecker/CollisionShape2D.disabled = false
 	setHealth(maxHealth) 	# ammo and gun reset?
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
 	$AnimationTree.set("parameters/is_alive/current", true)
