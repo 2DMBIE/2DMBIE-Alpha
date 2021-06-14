@@ -70,8 +70,6 @@ func jump():
 		movement[1] = -jumpForce
 
 func _process(delta):
-	if is_dead:
-		return
 	if is_network_master():
 		if currentTarget:
 			if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
@@ -196,7 +194,6 @@ func _reset_module():
 mastersync func kill():	
 	if get_tree().get_network_unique_id() == target_id:
 		Global.Score += Global.ScoreIncrement
-	is_dead = true
 	queue_free()
 
 
