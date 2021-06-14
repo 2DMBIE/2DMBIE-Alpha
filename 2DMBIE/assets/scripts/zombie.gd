@@ -24,6 +24,7 @@ onready var health = maxHealth setget _set_health
 signal health_updated(health)
 var maxHealth = Global.maxHealth
 var enemyDamage = Global.EnemyDamage
+var is_dead = false
 
 puppet var puppet_pos = Vector2()
 puppet var puppet_movement = Vector2()
@@ -69,6 +70,8 @@ func jump():
 		movement[1] = -jumpForce
 
 func _process(delta):
+	if is_dead:
+		return
 	if is_network_master():
 		if currentTarget:
 			if (currentTarget[0] - padding > position[0]) and position.distance_to(currentTarget) > padding:
@@ -190,10 +193,12 @@ func _reset_module():
 #	#rpc("play_sound_remote", "hurt")
 
 
-mastersync func kill():
+mastersync func kill():	
 	if get_tree().get_network_unique_id() == target_id:
 		Global.Score += Global.ScoreIncrement
-	call_deferred("queue_free")
+	is_dead = true
+	queue_free()
+
 
 func _set_health(value):
 	var prevHealth = health
