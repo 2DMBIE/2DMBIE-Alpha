@@ -18,6 +18,8 @@ var highScore = 0
 var maia = false
 var specialWave = false
 var TotalScore = 0
+var noteCount = 0
+var neededNotes = -1
 
 func _process(_delta):
 	pass

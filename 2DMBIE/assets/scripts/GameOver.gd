@@ -16,8 +16,11 @@ var TimeHours = 0
 var TimeText
 
 func _ready():
-	rng.randomize()
-	$VBOX/Label.text = messages[rng.randi() % messages.size()]
+	if Global.noteCount > Global.neededNotes:
+		$VBOX/Label.text = "The zombies are now at peace..."
+	else:
+		rng.randomize()
+		$VBOX/Label.text = messages[rng.randi() % messages.size()]
 	$VBOX/Title.get_font("font").size = 200
 	fontOutline.outline_color = Color.white
 	fontRed = rng.randf()
