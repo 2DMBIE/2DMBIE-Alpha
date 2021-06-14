@@ -40,6 +40,7 @@ var weaponPapIndex
 onready var timer = get_node("Timer_buy_wait_time")
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 onready var animatedsprite = get_node("AnimatedSprite")
+onready var animatedspriteprocessing = get_node("AnimatedSpriteProcessing")
 
 signal play_sound(library)
 
@@ -51,6 +52,9 @@ func _physics_process(_delta):
 #		print(gunscript.guns[gunscript.current_gun_index].name, " | ", weaponPap[gunscript.current_gun_index].name)
 		timer.set_wait_time(13.11)
 		timer.start()
+		animatedsprite.hide()
+		animatedspriteprocessing.set_frame(0)
+		animatedspriteprocessing.show()
 		GotGun = false
 		weaponPapIndex = gunscript.current_gun_index
 		
@@ -93,8 +97,9 @@ func _on_buyarea_body_exited(body):
 
 func _on_Timer_buy_wait_time_timeout():
 	timer.stop()
-#	animatedsprite.set_frame(0)
-#	animatedsprite.stop()
+	animatedspriteprocessing.hide()
+	animatedsprite.set_frame(0)
+	animatedsprite.show()
 	$Sprite.set_texture(spriteArray[weaponPapIndex])
 	$Sprite.scale=scaleArray[weaponPapIndex]
 	$Light2D2.color = colorArray[weaponPapIndex]

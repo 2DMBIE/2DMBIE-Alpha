@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/MysteryBox.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/sounds/Jukebox/Electrical Humming 50hz.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/scripts/lights/lightbulb_broken.gd" type="Script" id=10]
 [ext_resource path="res://assets/sprites/guns/m4a1.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/guns/2DMBIE arcade idle animation.png" type="Texture" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -244,7 +245,103 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=58]
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 12 )
+region = Rect2( 300, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 12 )
+region = Rect2( 600, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 12 )
+region = Rect2( 900, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 12 )
+region = Rect2( 1200, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 12 )
+region = Rect2( 1500, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 12 )
+region = Rect2( 1800, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 12 )
+region = Rect2( 2100, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 12 )
+region = Rect2( 2400, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 12 )
+region = Rect2( 2700, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 12 )
+region = Rect2( 3000, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 12 )
+region = Rect2( 3300, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 12 )
+region = Rect2( 3600, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 12 )
+region = Rect2( 3900, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=72]
+atlas = ExtResource( 12 )
+region = Rect2( 4200, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=73]
+atlas = ExtResource( 12 )
+region = Rect2( 4500, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=74]
+atlas = ExtResource( 12 )
+region = Rect2( 4800, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=75]
+atlas = ExtResource( 12 )
+region = Rect2( 5100, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=76]
+atlas = ExtResource( 12 )
+region = Rect2( 5400, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=77]
+atlas = ExtResource( 12 )
+region = Rect2( 5700, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=78]
+atlas = ExtResource( 12 )
+region = Rect2( 6000, 0, 300, 641 )
+
+[sub_resource type="AtlasTexture" id=79]
+atlas = ExtResource( 12 )
+region = Rect2( 6300, 0, 300, 641 )
+
+[sub_resource type="SpriteFrames" id=80]
+animations = [ {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=81]
 extents = Vector2( 100, 120 )
 
 [node name="Mystery_Box" type="Node2D"]
@@ -270,6 +367,13 @@ position = Vector2( 4.76837e-07, -9.53674e-07 )
 scale = Vector2( 0.431667, 0.431667 )
 frames = SubResource( 57 )
 
+[node name="AnimatedSpriteIdle" type="AnimatedSprite" parent="."]
+position = Vector2( 4.76837e-07, -9.53674e-07 )
+scale = Vector2( 0.431667, 0.431667 )
+frames = SubResource( 80 )
+frame = 5
+playing = true
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
@@ -283,7 +387,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="buyarea"]
-shape = SubResource( 58 )
+shape = SubResource( 81 )
 
 [node name="sfx" type="Node2D" parent="."]
 script = ExtResource( 1 )

@@ -37,6 +37,7 @@ var randomweapon
 onready var timer = get_node("Timer_buy_wait_time")
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 onready var animatedsprite = get_node("AnimatedSpriteCycle")
+onready var animatedspriteidle = get_node("AnimatedSpriteIdle")
 
 signal play_sound(library)
 
@@ -49,6 +50,8 @@ func _physics_process(_delta):
 		emit_signal("play_sound", "buy")
 		timer.set_wait_time(12.09)
 		timer.start()
+		animatedspriteidle.hide()
+		animatedsprite.show()
 		animatedsprite.play()
 		GotGun = false
 		
@@ -70,6 +73,7 @@ func _physics_process(_delta):
 				gunscript.weapon_slots[c] = randomweapon
 				break
 				
+		animatedspriteidle.show()
 		gunscript.set_gun(randomweapon)
 		$Sprite.hide()
 		$Light2D2.hide()
@@ -96,8 +100,8 @@ func _on_Timer_buy_wait_time_timeout():
 	rng.randomize()
 	randomweapon = rng.randi_range(0,11)
 	timer.stop()
-	animatedsprite.set_frame(0)
 	animatedsprite.stop()
+	animatedsprite.set_frame(0)
 	$Sprite.set_texture(spriteArray[randomweapon])
 	$Sprite.scale=scaleArray[randomweapon]
 	$Light2D2.color = colorArray[randomweapon]
