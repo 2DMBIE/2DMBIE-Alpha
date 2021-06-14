@@ -65,6 +65,8 @@ _global_script_class_icons={
 config/name="2DMBIE"
 run/main_scene="res://assets/scenes/LobbyUI.tscn"
 config/icon="res://assets/sprites/icon.png"
+config/macos_native_icon="res://assets/sprites/mac0zombie-icon.icns"
+config/windows_native_icon="res://assets/sprites/game_icon.ico"
 
 [audio]
 
