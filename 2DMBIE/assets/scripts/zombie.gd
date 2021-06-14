@@ -113,19 +113,6 @@ func _process(delta):
 		if get_tree().get_network_unique_id() != gamestate.player_id:
 			puppet_pos = position
 			puppet_movement = movement
-		
-	if health <= 0 and one_shot == true:
-		dead = true
-		if get_tree().get_network_unique_id() == 1:
-			Global.add_to_global("enemiesKilled", 1)
-		var packageTimer = Timer.new()
-		packageTimer.set_wait_time(.1)
-		packageTimer.set_one_shot(false)
-		packageTimer.connect("timeout", self, "kill")
-		add_child(packageTimer)
-		packageTimer.start()
-		one_shot = false
-
 
 func repeat_me():
 	if is_on_floor():
@@ -210,9 +197,17 @@ func _reset_module():
 
 func _set_health(value):
 	var prevHealth = health
-	rpc("change_health", value)
+	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
+		if health == 0:
+			if get_tree().get_network_unique_id() == target_id:
+				Global.Score += Global.ScoreIncrement
+			if get_tree().is_network_server():
+				Global.add_to_global("enemiesKilled", 1)
+				queue_free()
+				for player_id in gamestate.players:
+					rpc_id(player_id, "kill")
 			#else:
 			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
@@ -220,9 +215,7 @@ func _set_health(value):
 remotesync func change_health(value):
 	health = clamp(value, 0, maxHealth)
 
-func kill():
-	if get_tree().get_network_unique_id() == target_id:
-		Global.Score += Global.ScoreIncrement
+remote func kill():
 	queue_free()
 
 func _on_GroundChecker_body_exited(_body):
