@@ -18,7 +18,8 @@ func _on_Timer_timeout():
 				var enemyAmount = get_tree().get_nodes_in_group("enemies").size() #checkin the amount of enemies ont the map
 				Global.CurrentWaveEnemies += 1
 				if enemyAmount > 10: #maximum amount of enemies on the map at the same time
-					rpc("kill_enemy", name)
+					pass
+					#rpc("kill_enemy", name)
 			else: #function for starting timer to the next wave
 				var enemyAmount = get_tree().get_nodes_in_group("enemies").size()
 				if enemyAmount == 0:

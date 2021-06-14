@@ -210,9 +210,11 @@ func _reset_module():
 
 func _set_health(value):
 	var prevHealth = health
-	rpc("change_health", value)
+	health = clamp(value, 0, maxHealth)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
+		if health == 0:
+			kill()
 			#else:
 			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
