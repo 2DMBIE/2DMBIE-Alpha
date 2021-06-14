@@ -19,6 +19,8 @@ export (int) var growl_time_max = 12
 var growl_timer = Timer.new()
 var _time_diff = growl_time_max - growl_time_min 
 var _wait_time = randi()%_time_diff + growl_time_min
+var one_shot = true
+var dead = false
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
@@ -90,24 +92,40 @@ func _process(delta):
 			movement[0] = 0
 		if !is_on_floor():
 			movement[1] += gravity * delta
-			
-		if !is_on_floor():
-			rpc_unreliable("set_animation", "parameters/in_air/current", 0)
-		else:
-			rpc_unreliable("set_animation", "parameters/in_air/current", 1)
-		if self.movement.x < 0:
-			direction("left")
-		elif self.movement.x > 0:
-			direction("right")
-		rset("puppet_movement", movement)
-		rset("puppet_pos", position)
+		
+		if !dead:
+			if !is_on_floor():
+				rpc_unreliable("set_animation", "parameters/in_air/current", 0)
+			else:
+				rpc_unreliable("set_animation", "parameters/in_air/current", 1)
+			if self.movement.x < 0:
+				direction("left")
+			elif self.movement.x > 0:
+				direction("right")
+			rset("puppet_movement", movement)
+			rset("puppet_pos", position)
 	else:
-		position = puppet_pos
-		movement = puppet_movement
-	var _moveSlide = move_and_slide(movement, Vector2(0, -1))
-	if not is_network_master():
-		puppet_pos = position
-		puppet_movement = movement
+		if !dead:
+			position = puppet_pos
+			movement = puppet_movement
+	if !dead:
+		var _moveSlide = move_and_slide(movement, Vector2(0, -1))
+		if get_tree().get_network_unique_id() != gamestate.player_id:
+			puppet_pos = position
+			puppet_movement = movement
+		
+	if health <= 0 and one_shot == true:
+		dead = true
+		if get_tree().get_network_unique_id() == 1:
+			Global.add_to_global("enemiesKilled", 1)
+		var packageTimer = Timer.new()
+		packageTimer.set_wait_time(.1)
+		packageTimer.set_one_shot(false)
+		packageTimer.connect("timeout", self, "kill")
+		add_child(packageTimer)
+		packageTimer.start()
+		one_shot = false
+
 
 func repeat_me():
 	if is_on_floor():
@@ -195,23 +213,17 @@ func _reset_module():
 
 func _set_health(value):
 	var prevHealth = health
-	health = clamp(value, 0, maxHealth)
+	rpc("change_health", value)
 	if health != prevHealth:
 		emit_signal("health_updated", health)
-		if health == 0:
-			if get_tree().get_network_unique_id() == 1:
-				Global.add_to_global("enemiesKilled", 1)
-				rpc("kill")
-				return
 			#else:
 			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
-			rpc_id(1, "killhost")
 
-remote func killhost():
-	rpc("kill")
+remotesync func change_health(value):
+	health = clamp(value, 0, maxHealth)
 
-remotesync func kill():
+func kill():
 	if get_tree().get_network_unique_id() == target_id:
 		Global.Score += Global.ScoreIncrement
 	queue_free()
