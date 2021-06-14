@@ -76,7 +76,6 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 		rpc("spawn_ammopouch", graphRandomPoint)
 		var players = gamestate.players.keys()
 		players.append(1)
-		print(players)
 		for id in players:
 			var player = get_tree().root.get_node_or_null("/root/World/Players/" + str(id))
 			if player != null:
