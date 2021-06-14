@@ -37,9 +37,6 @@ func _process(_delta):
 
 
 	$cursor.position = get_global_mouse_position()
-	if Global.Currentwave == 1 and not music_playing: #random_round
-		emit_signal("music", "play")
-		music_playing = true
 	if Input.is_action_just_released("game_reset") and Settings.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
@@ -75,16 +72,14 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 			Global.maxHealth *= specialWaveIncrease
 			Global.EnemyDamage *= specialWaveIncrease
 			Global.Speed *= specialWaveIncrease
+			Global.setSpecialWaveNumber()
 			waveType = 1
+			if not music_playing: #random_round
+				emit_signal("music", "play")
+				music_playing = true
 		else:
 			if prevWaveType != waveType:
-				Global.specialWave = false
-				Global.maxHealth /= specialWaveIncrease
-				Global.EnemyDamage /= specialWaveIncrease
-				Global.Speed /= specialWaveIncrease
-				Global.setSpecialWaveNumber()
-				waveType = 0
-				prevWaveType = waveType
+				enemyWaveStats()
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
@@ -197,7 +192,15 @@ func on_death():
 	pause_game()
 	is_gameOver = true
 	get_node("GameOver/Container").visible = true
-	_on_WaveTimer_timeout()
+	enemyWaveStats()
+	
+
+func enemyWaveStats():
+	Global.specialWave = false
+	Global.maxHealth /= specialWaveIncrease
+	Global.EnemyDamage /= specialWaveIncrease
+	Global.Speed /= specialWaveIncrease
+	waveType = 0
 
 func resetGameValues():
 	#standaard stats voor de enemies

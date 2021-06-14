@@ -7,10 +7,10 @@
 [ext_resource path="res://assets/sounds/player/notenoughmoney.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 80 )
+extents = Vector2( 24, 80 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 80 )
+extents = Vector2( 32, 80 )
 
 [node name="Door" type="StaticBody2D"]
 collision_layer = 64

@@ -59,25 +59,20 @@ func _on_Seconds_timeout():
 
 func format_time():
 	TimeText = str(TimeSeconds)+" seconds"
-	print('timetext: '+TimeText)
-	print('timeseconds: '+str(TimeSeconds))
 	if TimeSeconds > 59:
 		TimeDummy = TimeSeconds % 60
 		TimeMinutes = (TimeSeconds - TimeDummy) / 60
 		TimeSeconds -= TimeMinutes * 60
+		if TimeSeconds < 10:
+			TimeSeconds = '0'+str(TimeSeconds)
 		TimeText = str(TimeMinutes)+":"+str(TimeSeconds)
-	print('timetext: '+TimeText)
-	print('timeseconds: '+str(TimeSeconds))
-	print('timeminutes: '+str(TimeMinutes))
 	
 	if TimeMinutes > 59:
 		TimeDummy = TimeMinutes % 60
 		TimeHours = (TimeMinutes - TimeDummy) / 60
 		TimeMinutes -= TimeHours * 60
+		if TimeMinutes < 10:
+			TimeMinutes = '0'+str(TimeMinutes)
 		TimeText = str(TimeHours)+":"+str(TimeMinutes)+":"+str(TimeSeconds)
-	print('timetext: '+TimeText)
-	print('timeseconds: '+str(TimeSeconds))
-	print('timeminutes: '+str(TimeMinutes))
-	print('timehours: '+str(TimeHours))
 	is_time_formatted = true
 	return TimeText
