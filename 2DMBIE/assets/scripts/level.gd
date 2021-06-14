@@ -76,9 +76,11 @@ func _on_Pathfinder_ammopouchSpawn(graphRandomPoint):
 		rpc("spawn_ammopouch", graphRandomPoint)
 		var players = gamestate.players.keys()
 		players.append(1)
+		print(players)
 		for id in players:
-			var player = get_node("/root/World/Players/" + str(id))
-			player.rpc("_on_ammopouch_spawn")
+			var player = get_tree().root.get_node_or_null("/root/World/Players/" + str(id))
+			if player != null:
+				player.rpc("_on_ammopouch_spawn")
 
 remotesync func set_random_graph_point(x):
 	GraphRandomPoint = x
