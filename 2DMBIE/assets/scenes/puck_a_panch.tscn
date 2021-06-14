@@ -217,7 +217,7 @@ color = Color( 1, 0.819608, 0, 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 21
+frame = 14
 playing = true
 
 [node name="Timer" type="Timer" parent="."]

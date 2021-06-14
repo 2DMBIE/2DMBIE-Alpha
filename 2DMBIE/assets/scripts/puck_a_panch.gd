@@ -1,5 +1,6 @@
 extends Node2D
 
+#smg
 var spriteMP5 = preload("res://assets/sprites/guns/mp5_puck_a_panch.png")
 var spriteUMP45 = preload("res://assets/sprites/guns/UMP45_puck_a_panch.png")
 var spriteP90 = preload("res://assets/sprites/guns/p90_puck_a_panch.png")
@@ -20,12 +21,15 @@ var spriteM249 = preload("res://assets/sprites/guns/M249_puck_a_panch.png")
 var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50_puck_a_panch.png")
 var spriteAWP = preload("res://assets/sprites/guns/AWP_puck_a_panch.png")
 var spriteIntervention = preload("res://assets/sprites/guns/Intervention_puck_a_panch.png")
+var spriteKar98k = preload("res://assets/sprites/guns/kar98k_puck_a_panch.png")
 
-var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014, spriteM4A1, spriteAK12, spriteM60, spriteM249, spriteBARRETT50, spriteAWP, spriteIntervention]
-var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold]
-var scaleArray = PoolVector2Array([Vector2(.8,.8), Vector2(.6,.6), Vector2(.8,.8), Vector2(.8,.8), Vector2(.8,.8), Vector2(.7,.7), Vector2(.8,.8), Vector2(.45,.45), Vector2(.45,.45), Vector2(.65,.65), Vector2(.45,.45), Vector2(.45,.45)])
+var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014, spriteM4A1, spriteAK12, spriteM60, spriteM249, spriteBARRETT50, spriteAWP, spriteIntervention, spriteKar98k]
+var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold, Color.gold]
+var nameArray = ["MP5", "UMP 45", "P90", "SPAS12", "XM1014", "M4A1", "AK 12", "M60", "M249", "BARRETT 50", "AWP", "INTERVENTION", "KAR98K"]
+var priceArray = [1500, 1600, 2000, 2500, 3000, 3000, 3100, 5500, 6000, 5000, 5000, 5500, 1250]
+var scaleArray = PoolVector2Array([Vector2(1,1), Vector2(.75,.75), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(.9,.9), Vector2(.9,.9), Vector2(1,1), Vector2(.75,.75), Vector2(.75,.75), Vector2(1,1)])
 
-var weaponPap = [MP5_pap.new(), UMP45_pap.new(), P90_pap.new(), SPAS12_pap.new(),XM1014_pap.new(), M4A1_pap.new(), AK12_pap.new(), M60_pap.new(), M249_pap.new(), BARRETT50_pap.new(), AWP_pap.new(), INTERVENTION_pap.new()]
+var weaponPap = [MP5_pap.new(), UMP45_pap.new(), P90_pap.new(), SPAS12_pap.new(),XM1014_pap.new(), M4A1_pap.new(), AK12_pap.new(), M60_pap.new(), M249_pap.new(), BARRETT50_pap.new(), AWP_pap.new(), INTERVENTION_pap.new(), KAR98K_pap.new()]
 
 var canBuy = false
 var enoughMoney = false
