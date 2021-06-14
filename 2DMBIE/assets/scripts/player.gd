@@ -407,8 +407,9 @@ func _on_Hitbox_area_entered(area):
 		emit_signal("ammoPickup", gainedAmmo)
 		$MarkerPos/Marker.visible = false
 
-func _on_Pathfinder_ammopouchSpawn(_graphRandomPoint):
-	$MarkerPos/Marker.visible = true
+remotesync func _on_ammopouch_spawn():
+	if is_network_master(): 
+		$MarkerPos/Marker.visible = true
 
 
 func _on_gun_set_gun_recoil_sensitivity(value):
