@@ -38,8 +38,11 @@ func _process(_delta):
 	if visible:
 		if !is_time_formatted:
 			$VBOX/HBox/VBox/Time/Time.text = format_time()
-		if !$AudioStreamPlayer.playing:
-			$AudioStreamPlayer.play()
+		if !$AudioStreamPlayer.playing && !$AudioStreamPlayer2.playing:
+			if Global.noteCount > Global.neededNotes:
+				$AudioStreamPlayer2.play()
+			else:
+				$AudioStreamPlayer.play()
 		fontOutline = $VBOX/Title.get_font("font")
 		if $VBOX/Title.get_font("font").size >= 96:
 			$VBOX/Title.get_font("font").size -= 0.5

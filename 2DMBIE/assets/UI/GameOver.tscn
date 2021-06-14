@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/Buttons/ExitMenu.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sounds/music/menu_music.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/scripts/GameOver.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/music/game_over_music1.mp3" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -32,6 +33,11 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Container"]
 stream = ExtResource( 4 )
 volume_db = -1.0
+bus = "Music"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Container"]
+stream = ExtResource( 7 )
+volume_db = 3.0
 bus = "Music"
 
 [node name="VBOX" type="VBoxContainer" parent="Container"]
@@ -102,7 +108,7 @@ margin_left = 362.0
 margin_right = 558.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your total score: "
+text = "Total score: "
 
 [node name="Score" type="Label" parent="Container/VBOX/HBox/VBox/TotalScore"]
 margin_left = 562.0
@@ -128,7 +134,7 @@ margin_left = 344.0
 margin_right = 577.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your leftover score: "
+text = "Leftover score: "
 
 [node name="Score" type="Label" parent="Container/VBOX/HBox/VBox/Score"]
 margin_left = 581.0
@@ -154,7 +160,7 @@ margin_left = 394.0
 margin_right = 528.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your wave: "
+text = "Wave: "
 
 [node name="Wave" type="Label" parent="Container/VBOX/HBox/VBox/Wave"]
 margin_left = 532.0
@@ -180,7 +186,7 @@ margin_left = 408.0
 margin_right = 528.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your kills: "
+text = "Kills: "
 
 [node name="Kills" type="Label" parent="Container/VBOX/HBox/VBox/Kills"]
 margin_left = 532.0
