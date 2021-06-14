@@ -84,10 +84,10 @@ func _physics_process(_delta):
 			else:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
 		if is_dead:
-			motion = 0
-			motion = move_and_slide(motion, UP)
-			rset("puppet_motion", motion)
-			rset("puppet_pos", position)
+			velocity = Vector2(0,0)
+			#motion = move_and_slide(motion, UP)
+			#rset("puppet_motion", motion)
+			#rset("puppet_pos", position)
 			return
 		if Global.paused:
 			motion.y += GRAVITY
