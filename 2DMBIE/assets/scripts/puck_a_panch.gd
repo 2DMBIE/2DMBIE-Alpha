@@ -31,6 +31,8 @@ var canBuy = false
 var enoughMoney = false
 var GotGun = true
 var CycleEnded = false
+var weaponPapIndex
+
 onready var timer = get_node("Timer_buy_wait_time")
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 onready var animatedsprite = get_node("AnimatedSprite")
@@ -46,6 +48,11 @@ func _physics_process(_delta):
 		timer.set_wait_time(13.11)
 		timer.start()
 		GotGun = false
+		weaponPapIndex = gunscript.current_gun_index
+		
+		gunscript.weapon_slots[gunscript.current_weapon] = -1
+		print(gunscript.weapon_slots)
+		gunscript.set_gun(gunscript.weapon_slots[gunscript.current_weapon -1])
 
 		emit_signal("play_sound", "buy")
 		Global.Score -= int(5000)
@@ -56,8 +63,9 @@ func _physics_process(_delta):
 		emit_signal("play_sound", "not_enough_money")
 		
 	if Input.is_action_just_pressed("use") and canBuy and CycleEnded:
-		gunscript.guns[gunscript.current_gun_index] = weaponPap[gunscript.current_gun_index]
-		gunscript.set_gun(gunscript.current_gun_index)
+		gunscript.weapon_slots[gunscript.current_weapon] = weaponPapIndex
+		gunscript.guns[weaponPapIndex] = weaponPap[weaponPapIndex]
+		gunscript.set_gun(weaponPapIndex)
 		$Sprite.hide()
 		$Light2D2.hide()
 		GotGun = true
@@ -83,9 +91,9 @@ func _on_Timer_buy_wait_time_timeout():
 	timer.stop()
 #	animatedsprite.set_frame(0)
 #	animatedsprite.stop()
-	$Sprite.set_texture(spriteArray[gunscript.current_gun_index])
-	$Sprite.scale=scaleArray[gunscript.current_gun_index]
-	$Light2D2.color = colorArray[gunscript.current_gun_index]
+	$Sprite.set_texture(spriteArray[weaponPapIndex])
+	$Sprite.scale=scaleArray[weaponPapIndex]
+	$Light2D2.color = colorArray[weaponPapIndex]
 	$Sprite.show()
 	$Light2D2.show()
 	CycleEnded = true

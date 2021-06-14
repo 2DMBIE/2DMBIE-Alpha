@@ -1,4 +1,4 @@
-[gd_scene load_steps=210 format=2]
+[gd_scene load_steps=212 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/sprites/agent1/torso.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/agent1/head.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/agent1/lowerarm_left.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/guns/UMP45.png" type="Texture" id=9]
+[ext_resource path="res://assets/sounds/kar98k/kar98-gun-sound-effects.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/sprites/agent1/foot_right.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/agent1/thigh_right.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/agent1/upperarm_left.png" type="Texture" id=12]
@@ -142,6 +142,8 @@
 [ext_resource path="res://assets/sounds/ump45pap/SMG Cocking 2.wav" type="AudioStream" id=140]
 [ext_resource path="res://assets/sounds/ump45pap/ump 45 laser.wav" type="AudioStream" id=141]
 [ext_resource path="res://assets/sounds/ump45pap/AR15 Reload.wav" type="AudioStream" id=142]
+[ext_resource path="res://assets/sounds/kar98k/sniper reload.wav" type="AudioStream" id=143]
+[ext_resource path="res://assets/sprites/guns/kar98k_puck_a_panch.png" type="Texture" id=144]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -480,7 +482,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "TimeScale 2", 0, "Animation 7", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale", 0, "Animation 5", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "running", 0, "TimeScale", "running", 1, "walk-idle", "knifing", 0, "knife", "knifing", 1, "shooting", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation" ]
+node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale 2", 0, "Animation 7", "TimeScale", 0, "Animation 5", "knifing", 0, "knife", "knifing", 1, "shooting", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -877,7 +879,7 @@ z_index = 50
 texture = ExtResource( 112 )
 
 [node name="body" type="Position2D" parent="."]
-position = Vector2( 0, 2.415 )
+position = Vector2( 0, 1.00733 )
 
 [node name="chest" type="Position2D" parent="body"]
 position = Vector2( 0, 11.712 )
@@ -889,9 +891,8 @@ offset = Vector2( -1.59697, -3.48996 )
 
 [node name="gun" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 22.0728, -1.75482 )
-scale = Vector2( 0.75, 0.75 )
-texture = ExtResource( 9 )
-offset = Vector2( -12.441, 7.292 )
+texture = ExtResource( 144 )
+offset = Vector2( 7.994, -1.09 )
 script = ExtResource( 33 )
 
 [node name="laser" type="Sprite" parent="body/chest/torso/gun"]
@@ -902,7 +903,7 @@ scale = Vector2( 1.43875, 0.0154226 )
 texture = ExtResource( 18 )
 
 [node name="BulletPoint" type="Node2D" parent="body/chest/torso/gun"]
-position = Vector2( 53.9789, -8.29367 )
+position = Vector2( 68.153, -6.71877 )
 
 [node name="sfx" type="Node2D" parent="body/chest/torso/gun/BulletPoint"]
 position = Vector2( -55.6587, 6.04199 )
@@ -2390,6 +2391,96 @@ volume_db = 4.0
 attenuation = 0.138696
 bus = "Soundeffects"
 
+[node name="kar98k_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_draw"]
+stream = ExtResource( 67 )
+bus = "Soundeffects"
+
+[node name="kar98k_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_shot"]
+stream = ExtResource( 9 )
+volume_db = 9.324
+bus = "Soundeffects"
+
+[node name="kar98k_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98k_reload"]
+stream = ExtResource( 143 )
+volume_db = 4.0
+attenuation = 0.138696
+bus = "Soundeffects"
+
+[node name="kar98kpap_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_draw"]
+stream = ExtResource( 67 )
+bus = "Soundeffects"
+
+[node name="kar98kpap_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="shot7" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
+stream = ExtResource( 9 )
+bus = "Soundeffects"
+
+[node name="kar98kpap_reload2" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
+
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_reload2"]
+stream = ExtResource( 143 )
+volume_db = 4.0
+attenuation = 0.138696
+bus = "Soundeffects"
+
 [node name="barrett50pap_draw" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="draw" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/barrett50pap_draw"]
@@ -2985,7 +3076,7 @@ one_shot = true
 
 [node name="upperarm_left" type="Sprite" parent="body/chest/torso"]
 position = Vector2( 15.5659, -12.422 )
-rotation = -0.404974
+rotation = -0.440587
 z_index = -1
 texture = ExtResource( 12 )
 offset = Vector2( -0.0147476, 7.05466 )
@@ -2996,7 +3087,7 @@ __meta__ = {
 
 [node name="lowerarm_left" type="Sprite" parent="body/chest/torso/upperarm_left"]
 position = Vector2( -0.938873, 18.0288 )
-rotation = -1.58287
+rotation = -1.58248
 texture = ExtResource( 8 )
 offset = Vector2( 0.949958, 6.18722 )
 __meta__ = {
@@ -3005,7 +3096,7 @@ __meta__ = {
 
 [node name="hand_left" type="Sprite" parent="body/chest/torso/upperarm_left/lowerarm_left"]
 position = Vector2( 0, 18.566 )
-rotation = 1.92728
+rotation = 1.69921
 z_index = 2
 texture = ExtResource( 4 )
 __meta__ = {
@@ -3014,7 +3105,7 @@ __meta__ = {
 
 [node name="upperarm_right" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -13.4064, -14.1956 )
-rotation = 0.321039
+rotation = -0.324783
 z_index = 1
 texture = ExtResource( 13 )
 offset = Vector2( -0.0279083, 8.82368 )
@@ -3025,7 +3116,7 @@ __meta__ = {
 
 [node name="lowerarm_right" type="Sprite" parent="body/chest/torso/upperarm_right"]
 position = Vector2( -1.01368, 20.0398 )
-rotation = -0.570464
+rotation = -1.36206
 z_index = 1
 texture = ExtResource( 3 )
 offset = Vector2( 0.498055, 6.75774 )
@@ -3035,7 +3126,7 @@ __meta__ = {
 
 [node name="hand_right" type="Sprite" parent="body/chest/torso/upperarm_right/lowerarm_right"]
 position = Vector2( 1.33635, 15.2045 )
-rotation = -0.0613431
+rotation = 0.0559495
 z_index = 1
 texture = ExtResource( 15 )
 __meta__ = {
@@ -3067,7 +3158,6 @@ shape = SubResource( 1 )
 
 [node name="head" type="Sprite" parent="body/chest/torso"]
 position = Vector2( -0.0163317, -24.4058 )
-rotation = 0.0442169
 z_index = 1
 texture = ExtResource( 7 )
 offset = Vector2( 4.72615, -21.8243 )
@@ -3077,14 +3167,13 @@ __meta__ = {
 
 [node name="legs" type="Position2D" parent="body"]
 position = Vector2( 0, 11.189 )
-rotation = 0.479625
 __meta__ = {
 "_edit_bone_": true
 }
 
 [node name="thigh_right" type="Sprite" parent="body/legs"]
-position = Vector2( -6.06485, 3.40305 )
-rotation = 0.320622
+position = Vector2( -6.18385, 3.40305 )
+rotation = 0.220795
 texture = ExtResource( 11 )
 offset = Vector2( -0.569733, 9.51619 )
 __meta__ = {
@@ -3094,7 +3183,7 @@ __meta__ = {
 
 [node name="lowerleg_right" type="Sprite" parent="body/legs/thigh_right"]
 position = Vector2( -1.00315, 16.9141 )
-rotation = 0.482976
+rotation = 0.293268
 texture = ExtResource( 2 )
 offset = Vector2( 1.15935, 6.17796 )
 __meta__ = {
@@ -3102,8 +3191,8 @@ __meta__ = {
 }
 
 [node name="foot_right" type="Sprite" parent="body/legs/thigh_right/lowerleg_right"]
-position = Vector2( 0.50671, 14.2428 )
-rotation = 0.252992
+position = Vector2( 0.506966, 14.393 )
+rotation = -0.511512
 texture = ExtResource( 10 )
 offset = Vector2( 6.97537, 2.76973 )
 __meta__ = {
@@ -3118,7 +3207,7 @@ __meta__ = {
 
 [node name="thigh_left" type="Sprite" parent="body/legs"]
 position = Vector2( 3.28812, 3.49881 )
-rotation = -1.84364
+rotation = -0.329218
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( -0.0710678, 9.22731 )
@@ -3129,7 +3218,7 @@ __meta__ = {
 
 [node name="lowerleg_left" type="Sprite" parent="body/legs/thigh_left"]
 position = Vector2( 1.05579, 17.9436 )
-rotation = 1.38807
+rotation = 0.68872
 texture = ExtResource( 16 )
 offset = Vector2( 0.816467, 5.62079 )
 __meta__ = {
@@ -3138,7 +3227,7 @@ __meta__ = {
 
 [node name="foot_left" type="Sprite" parent="body/legs/thigh_left/lowerleg_left"]
 position = Vector2( 0.074131, 13.4046 )
-rotation = -0.0883837
+rotation = -0.346911
 texture = ExtResource( 14 )
 offset = Vector2( 6.562, 2.194 )
 __meta__ = {
