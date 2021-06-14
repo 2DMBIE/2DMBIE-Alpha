@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=213 format=2]
 
 [ext_resource path="res://assets/animations/walk-animation (reversed).tres" type="Animation" id=1]
 [ext_resource path="res://assets/sprites/agent1/lowerleg_right.png" type="Texture" id=2]
@@ -144,6 +144,7 @@
 [ext_resource path="res://assets/sounds/ump45pap/AR15 Reload.wav" type="AudioStream" id=142]
 [ext_resource path="res://assets/sounds/kar98k/sniper reload.wav" type="AudioStream" id=143]
 [ext_resource path="res://assets/sprites/guns/kar98k_puck_a_panch.png" type="Texture" id=144]
+[ext_resource path="res://assets/sounds/kar98kpap/sniper laser sound 1 25 faster.wav" type="AudioStream" id=145]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 25 )
@@ -482,7 +483,7 @@ nodes/torso_reset/node = SubResource( 60 )
 nodes/torso_reset/position = Vector2( 960, -120 )
 nodes/walk-idle/node = SubResource( 61 )
 nodes/walk-idle/position = Vector2( 0, 140 )
-node_connections = [ "output", 0, "sliding", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2", "crouching", 0, "crouch-idle", "crouching", 1, "running", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "TimeScale 2", 0, "Animation 7", "TimeScale", 0, "Animation 5", "knifing", 0, "knife", "knifing", 1, "shooting", "running", 0, "TimeScale", "running", 1, "walk-idle", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "aim_state", 0, "aim", "aim_state", 1, "Animation 6" ]
+node_connections = [ "output", 0, "sliding", "crouching", 0, "crouch-idle", "crouching", 1, "running", "crouch-idle", 0, "Animation 8", "crouch-idle", 1, "TimeScale 2", "fixed_aim", 0, "gun_recoil_sensitivity", "fixed_aim", 1, "Animation 9", "in_air_state", 0, "crouching", "in_air_state", 1, "Animation 3", "Add2", 0, "in_air_state", "Add2", 1, "knifing", "TimeScale", 0, "Animation 5", "aim_state", 0, "aim", "aim_state", 1, "Animation 6", "TimeScale 2", 0, "Animation 7", "walk-idle", 0, "moonwalking", "walk-idle", 1, "Animation", "moonwalking", 0, "Animation 4", "moonwalking", 1, "Animation 2", "knifing", 0, "knife", "knifing", 1, "shooting", "shooting", 0, "aim_state", "shooting", 1, "fixed_aim", "sliding", 0, "torso_reset", "sliding", 1, "Add2", "torso_reset", 0, "slide", "torso_reset", 1, "base position player", "running", 0, "TimeScale", "running", 1, "walk-idle", "gun_recoil_sensitivity", 0, "shoot_angle", "gun_recoil_sensitivity", 1, "aim2" ]
 
 [sub_resource type="Animation" id=63]
 tracks/0/type = "value"
@@ -2446,36 +2447,38 @@ bus = "Soundeffects"
 [node name="kar98kpap_shot" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
 [node name="shot1" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
 [node name="shot2" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
 [node name="shot3" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
 [node name="shot4" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
 [node name="shot5" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
 [node name="shot6" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
+stream = ExtResource( 145 )
+volume_db = 10.041
 bus = "Soundeffects"
 
-[node name="shot7" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_shot"]
-stream = ExtResource( 9 )
-bus = "Soundeffects"
+[node name="kar98kpap_reload" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
 
-[node name="kar98kpap_reload2" type="Node2D" parent="body/chest/torso/gun/BulletPoint/sfx"]
-
-[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_reload2"]
+[node name="reload" type="AudioStreamPlayer2D" parent="body/chest/torso/gun/BulletPoint/sfx/kar98kpap_reload"]
 stream = ExtResource( 143 )
 volume_db = 4.0
 attenuation = 0.138696
