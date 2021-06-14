@@ -144,19 +144,19 @@ remote func pre_start_game(spawn_points):
 	get_tree().get_root().add_child(main)
 
 	get_tree().get_root().get_node("Lobby").hide()
-
+	get_tree().paused = true
 	var player_scene = load("res://assets/scenes/player.tscn")
 
 	for p_id in spawn_points:
 		var spawn_pos = main.get_node("p_Spawnpoints/" + str(spawn_points[p_id])).global_transform.origin
 		var player = player_scene.instance()
-
 		player.set_name(str(p_id)) # Use unique ID as node name
 		player.set_network_master(p_id) #set unique id as master
 		player.position = spawn_pos
 		main.get_node("Players").add_child(player)
 	
-	
+	emit_signal("on_local_player_loaded")
+	emit_signal("player_added", get_tree().get_network_unique_id(), player_name)
 	if not get_tree().is_network_server():
 		# Tell server we are ready to start
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
@@ -166,8 +166,6 @@ remote func pre_start_game(spawn_points):
 remote func post_start_game():
 	get_tree().get_root().get_node("Lobby").queue_free()
 	get_tree().set_pause(false) # Unpause and unleash the game!
-	emit_signal("on_local_player_loaded")
-	emit_signal("player_added", get_tree().get_network_unique_id(), player_name)
 
 var players_ready = []
 
