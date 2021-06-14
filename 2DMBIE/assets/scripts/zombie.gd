@@ -24,8 +24,8 @@ var dead = false
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
-var maxHealth = Global.maxHealth
-var enemyDamage = Global.EnemyDamage
+var maxHealth = 500 #Global.maxHealth
+var enemyDamage = 300 #Global.EnemyDamage
 var is_dead = false
 
 puppet var puppet_pos = Vector2()
