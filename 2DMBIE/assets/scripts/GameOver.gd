@@ -16,11 +16,8 @@ var TimeHours = 0
 var TimeText
 
 func _ready():
-	if Global.noteCount > Global.neededNotes:
-		$VBOX/Label.text = "The zombies are now at peace..."
-	else:
-		rng.randomize()
-		$VBOX/Label.text = messages[rng.randi() % messages.size()]
+	rng.randomize()
+	$VBOX/Label.text = messages[rng.randi() % messages.size()]
 	$VBOX/Title.get_font("font").size = 200
 	fontOutline.outline_color = Color.white
 	fontRed = rng.randf()
@@ -31,6 +28,8 @@ func _ready():
 
 
 func _process(_delta):
+	if Global.noteCount > Global.neededNotes:
+		$VBOX/Label.text = "The zombies are now at peace..."
 	$VBOX/HBox/VBox/TotalScore/Score.text = str(Global.TotalScore)
 	$VBOX/HBox/VBox/Score/Score.text = str(Global.Score)
 	$VBOX/HBox/VBox/Wave/Wave.text = str(Global.Currentwave)
