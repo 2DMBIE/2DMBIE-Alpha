@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var label = $Label
+
 var currentPath
 var currentTarget
 var pathFinder
@@ -21,6 +23,7 @@ var _time_diff = growl_time_max - growl_time_min
 var _wait_time = randi()%_time_diff + growl_time_min
 var one_shot = true
 var dead = false
+var deaddead = "Alive"
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
@@ -102,8 +105,8 @@ func _process(delta):
 				direction("left")
 			elif self.movement.x > 0:
 				direction("right")
-			rset("puppet_movement", movement)
-			rset("puppet_pos", position)
+			rset_unreliable("puppet_movement", movement)
+			rset_unreliable("puppet_pos", position)
 	else:
 		if !dead:
 			position = puppet_pos
@@ -125,6 +128,10 @@ func _process(delta):
 		add_child(packageTimer)
 		packageTimer.start()
 		one_shot = false
+	
+	if dead:
+		deaddead = "Dead"
+	label.text = str(name) + "\n" + str(health) + ", " + str(deaddead)
 
 
 func repeat_me():
@@ -162,11 +169,11 @@ func repeat_me():
 func direction(x):
 	var body = get_node("body")
 	if (x == "left") && !(body.scale == Vector2(-1,1)):
-		rpc("set_direction", Vector2(-1,1))
+		rpc_unreliable("set_direction", Vector2(-1,1))
 		#body.scale = Vector2(-1,1)
 	elif (x == "right") && !(body.scale == Vector2(1,1)):
 		#body.scale = Vector2(1,1)
-		rpc("set_direction", Vector2(1,1))
+		rpc_unreliable("set_direction", Vector2(1,1))
 
 func growl():
 	rpc("play_sound_remote", "growl")

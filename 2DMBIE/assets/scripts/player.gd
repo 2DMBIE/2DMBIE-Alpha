@@ -85,14 +85,14 @@ func _physics_process(_delta):
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
 		if is_dead:
 			velocity = Vector2(0,0)
-			rset("puppet_motion", motion)
-			rset("puppet_pos", position)
+			rset_unreliable("puppet_motion", motion)
+			rset_unreliable("puppet_pos", position)
 			return
 		if Global.paused:
 			motion.y += GRAVITY
 			motion = move_and_slide(motion, UP)
-			rset("puppet_motion", motion)
-			rset("puppet_pos", position)
+			rset_unreliable("puppet_motion", motion)
+			rset_unreliable("puppet_pos", position)
 			if is_on_floor():
 				rpc("jump", false)
 				rpc("set_animation", "parameters/walk-idle/blend_amount", 1)
