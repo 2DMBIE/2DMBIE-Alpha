@@ -83,6 +83,12 @@ func _physics_process(_delta):
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#bbbbbb")
 			else:
 				get_tree().root.get_node("/root/World/CanvasModulate").color = Color("#7f7f7f")
+		if is_dead:
+			motion = 0
+			motion = move_and_slide(motion, UP)
+			rset("puppet_motion", motion)
+			rset("puppet_pos", position)
+			return
 		if Global.paused:
 			motion.y += GRAVITY
 			motion = move_and_slide(motion, UP)
@@ -247,6 +253,8 @@ remotesync func die():
 	set_player_name("Dead")
 	get_node("body/chest/torso/gun").shooting_disabled = true
 	$body/chest/torso/gun.visible = false
+	$CollisionShape2D.disabled = true
+	$CollisionShape2DCrouch.disabled = true
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
 	set_collision_mask_bit(3, false)
 	set_collision_mask_bit(2, false)
@@ -266,6 +274,8 @@ remotesync func respawn():
 	get_node("Hitbox").set_collision_mask_bit(3, true)
 	set_collision_mask_bit(3, true)
 	set_collision_mask_bit(2, true)
+	$CollisionShape2D.disabled = false
+	$CollisionShape2DCrouch.disabled = false
 	setHealth(maxHealth) 	# ammo and gun reset?
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 1)
 	$AnimationTree.set("parameters/is_alive/current", true)
