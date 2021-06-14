@@ -257,8 +257,8 @@ remotesync func die():
 	$body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox/KnifeCollisionShape.disabled = true
 	$GroundChecker/CollisionShape2D.disabled = true
 	#get_node("Hitbox").set_collision_mask_bit(3, false)
-	set_collision_mask_bit(3, false)
-	set_collision_mask_bit(2, false)
+#	set_collision_mask_bit(3, false)
+#	set_collision_mask_bit(2, false)
 	$AnimationTree.set("parameters/is_alive/current", false)
 	$AnimationTree.set("parameters/torso_reset_2/blend_amount", 0)
 
@@ -272,9 +272,8 @@ remotesync func respawn():
 	knifing_hitbox_enabled = true
 	get_node("body/chest/torso/gun").shooting_disabled = false
 	$body/chest/torso/gun.visible = true
-	get_node("Hitbox").set_collision_mask_bit(3, true)
-	set_collision_mask_bit(3, true)
-	set_collision_mask_bit(2, true)
+#	set_collision_mask_bit(3, true)
+#	set_collision_mask_bit(2, true)
 	$CollisionShape2D.disabled = false
 	$CollisionShape2DCrouch.disabled = false
 	$body/chest/torso/upperarm_right/lowerarm_right/hand_right/knife/KnifeHitbox/KnifeCollisionShape.disabled = false
