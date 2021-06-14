@@ -148,24 +148,6 @@ Selected_Weapon = 12
 [node name="Mystery_Box" parent="Mystery box" instance=ExtResource( 18 )]
 position = Vector2( 486, -178 )
 
-[node name="Mystery_Box5" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 214.5, -441.991 )
-
-[node name="Mystery_Box7" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 8, -180.96 )
-
-[node name="Mystery_Box6" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 224, -185.991 )
-
-[node name="Mystery_Box2" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 704, -490 )
-
-[node name="Mystery_Box3" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 486, -688 )
-
-[node name="Mystery_Box4" parent="Mystery box" instance=ExtResource( 18 )]
-position = Vector2( 482.562, -439.555 )
-
 [node name="puck a panch" type="Node" parent="."]
 
 [node name="puck_a_panch" parent="puck a panch" instance=ExtResource( 16 )]
