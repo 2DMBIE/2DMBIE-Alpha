@@ -205,7 +205,9 @@ func _set_health(value):
 				Global.Score += Global.ScoreIncrement
 			if get_tree().is_network_server():
 				Global.add_to_global("enemiesKilled", 1)
-				rpc("kill")
+				queue_free()
+				for player_id in gamestate.players:
+					rpc_id(player_id, "kill")
 			#else:
 			#	Global.rpc_id(1, "add_to_global", "enemiesKilled", 1)
 			#Global.enemiesKilled += 1
@@ -213,7 +215,7 @@ func _set_health(value):
 remotesync func change_health(value):
 	health = clamp(value, 0, maxHealth)
 
-remotesync func kill():
+remote func kill():
 	queue_free()
 
 func _on_GroundChecker_body_exited(_body):
