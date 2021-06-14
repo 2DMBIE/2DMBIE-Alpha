@@ -63,7 +63,7 @@ func _connected_ok():
 	rpc("register_player", get_tree().get_network_unique_id(), player_name)
 	rpc("add_player", get_tree().get_network_unique_id(), player_name)
 	emit_signal("connection_succeeded")
-	print("connect")
+
 
 # Callback from SceneTree, only for clients (not server)
 func _server_disconnected():
