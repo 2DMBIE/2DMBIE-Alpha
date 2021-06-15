@@ -5595,16 +5595,16 @@ tracks/40/keys = {
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "jumpBaby"
 
-[sub_resource type="AnimationNodeTimeScale" id=29]
+[sub_resource type="AnimationNodeTimeScale" id=14]
 
-[sub_resource type="AnimationNodeTransition" id=14]
+[sub_resource type="AnimationNodeTransition" id=15]
 input_count = 2
 input_0/name = "true"
 input_0/auto_advance = false
 input_1/name = "false"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeTransition" id=15]
+[sub_resource type="AnimationNodeTransition" id=16]
 input_count = 10
 input_0/name = "walk1"
 input_0/auto_advance = false
@@ -5627,73 +5627,73 @@ input_8/auto_advance = false
 input_9/name = "walk10"
 input_9/auto_advance = false
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "walk1Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "walk10Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "walk2Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "walk3Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "walk4Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "walk5Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "walk6Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=24]
 animation = "walk7Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=25]
 animation = "walk8Baby"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "walk9Baby"
 
-[sub_resource type="AnimationNodeBlendTree" id=26]
+[sub_resource type="AnimationNodeBlendTree" id=27]
 graph_offset = Vector2( -1032.27, 194.933 )
 "nodes/Animation 2/node" = SubResource( 13 )
 "nodes/Animation 2/position" = Vector2( -360, 180 )
-nodes/TimeScale/node = SubResource( 29 )
+nodes/TimeScale/node = SubResource( 14 )
 nodes/TimeScale/position = Vector2( -760, 240 )
-nodes/in_air/node = SubResource( 14 )
+nodes/in_air/node = SubResource( 15 )
 nodes/in_air/position = Vector2( -140, 220 )
 nodes/output/position = Vector2( 280, 220 )
-nodes/walk/node = SubResource( 15 )
+nodes/walk/node = SubResource( 16 )
 nodes/walk/position = Vector2( -340, 340 )
-nodes/walk1/node = SubResource( 16 )
+nodes/walk1/node = SubResource( 17 )
 nodes/walk1/position = Vector2( -1040, 220 )
-nodes/walk10/node = SubResource( 17 )
+nodes/walk10/node = SubResource( 18 )
 nodes/walk10/position = Vector2( -580, 680 )
-nodes/walk2/node = SubResource( 18 )
+nodes/walk2/node = SubResource( 19 )
 nodes/walk2/position = Vector2( -720, 380 )
-nodes/walk3/node = SubResource( 19 )
+nodes/walk3/node = SubResource( 20 )
 nodes/walk3/position = Vector2( -720, 480 )
-nodes/walk4/node = SubResource( 20 )
+nodes/walk4/node = SubResource( 21 )
 nodes/walk4/position = Vector2( -720, 580 )
-nodes/walk5/node = SubResource( 21 )
+nodes/walk5/node = SubResource( 22 )
 nodes/walk5/position = Vector2( -720, 680 )
-nodes/walk6/node = SubResource( 22 )
+nodes/walk6/node = SubResource( 23 )
 nodes/walk6/position = Vector2( -580, 280 )
-nodes/walk7/node = SubResource( 23 )
+nodes/walk7/node = SubResource( 24 )
 nodes/walk7/position = Vector2( -580, 380 )
-nodes/walk8/node = SubResource( 24 )
+nodes/walk8/node = SubResource( 25 )
 nodes/walk8/position = Vector2( -580, 480 )
-nodes/walk9/node = SubResource( 25 )
+nodes/walk9/node = SubResource( 26 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "walk", 0, "TimeScale", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "in_air", 0, "Animation 2", "in_air", 1, "walk", "TimeScale", 0, "walk1" ]
+node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "TimeScale", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "TimeScale", 0, "walk1" ]
 
-[sub_resource type="RectangleShape2D" id=27]
+[sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 11.9587, 12.5999 )
 
-[sub_resource type="CircleShape2D" id=28]
+[sub_resource type="CircleShape2D" id=29]
 radius = 37.7757
 
 [node name="ZombieBabyWeh" type="KinematicBody2D" groups=[
@@ -5703,8 +5703,8 @@ pause_mode = 1
 light_mask = -2147483647
 scale = Vector2( 0.6, 0.6 )
 z_index = 5
-collision_layer = 8
-collision_mask = 42
+collision_layer = 256
+collision_mask = 290
 script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -5996,7 +5996,7 @@ anims/walk8Baby = SubResource( 11 )
 anims/walk9Baby = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 26 )
+tree_root = SubResource( 27 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/TimeScale/scale = 2.0
 parameters/in_air/current = 1
@@ -6010,7 +6010,7 @@ collision_mask = 32
 position = Vector2( 3.20209, 80.0111 )
 scale = Vector2( 3, 1 )
 z_as_relative = false
-shape = SubResource( 27 )
+shape = SubResource( 28 )
 
 [node name="HeadshotArea" type="Area2D" parent="."]
 collision_layer = 8
@@ -6018,7 +6018,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
 position = Vector2( 2.64465, -32.3967 )
-shape = SubResource( 28 )
+shape = SubResource( 29 )
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0

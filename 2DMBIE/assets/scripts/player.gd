@@ -185,6 +185,7 @@ func _physics_process(_delta):
 		is_knifing = true # disable knifing 
 		get_node("Hitbox").set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(3, false)
+		self.set_collision_mask_bit(8, false)
 		knifing_hitbox_enabled = false
 #		if !Global.maia:
 #			WALK_ACCELERATION = 35 #old 20
@@ -207,6 +208,7 @@ func _physics_process(_delta):
 		get_node("body/chest/torso/gun").shooting_disabled = false
 		get_node("Hitbox").set_collision_mask_bit(3, true)
 		self.set_collision_mask_bit(3, true)
+		self.set_collision_mask_bit(8, true)
 		knifing_hitbox_enabled = true
 		is_knifing = false
 		WALK_ACCELERATION = 25 #old 20
@@ -474,6 +476,7 @@ func on_slide_animation_complete():
 			get_node("body/chest/torso/gun").shooting_disabled = false
 			get_node("Hitbox").set_collision_mask_bit(3, true)
 			self.set_collision_mask_bit(3, true)
+			self.set_collision_mask_bit(8, true)
 			knifing_hitbox_enabled = true
 			is_knifing = false
 			if !Global.maia:
