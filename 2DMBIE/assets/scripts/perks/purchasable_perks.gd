@@ -115,7 +115,7 @@ func ammoperk():
 	get_node("../../Player/body/chest/torso/gun").reloadTimer.wait_time = 1
 	
 func fasterfirerateperk():
-	gunscript.set_gun(0)
+	gunscript.set_gun(gunscript.current_gun_index)
 	canBuyFasterFireRate = false
 
 func perkInterface(perk):

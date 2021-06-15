@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=1]
 [ext_resource path="res://assets/scripts/puck_a_panch.gd" type="Script" id=2]
@@ -10,6 +10,112 @@
 [ext_resource path="res://assets/sounds/Jukebox/only you jukebox music.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/sounds/Jukebox/Electrical Humming 50hz.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/scripts/lights/lightbulb_broken.gd" type="Script" id=10]
+[ext_resource path="res://assets/sprites/guns/m4a1.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/guns/JukeBox animated processing.png" type="Texture" id=12]
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 12 )
+region = Rect2( 233, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 12 )
+region = Rect2( 466, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 12 )
+region = Rect2( 699, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 12 )
+region = Rect2( 932, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 12 )
+region = Rect2( 1165, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 12 )
+region = Rect2( 1398, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 12 )
+region = Rect2( 1631, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 12 )
+region = Rect2( 1864, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 12 )
+region = Rect2( 2097, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 12 )
+region = Rect2( 2330, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 12 )
+region = Rect2( 2563, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 12 )
+region = Rect2( 2796, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 12 )
+region = Rect2( 3029, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 12 )
+region = Rect2( 3262, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 12 )
+region = Rect2( 3495, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 12 )
+region = Rect2( 3728, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 12 )
+region = Rect2( 3961, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 12 )
+region = Rect2( 4194, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 12 )
+region = Rect2( 4427, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 12 )
+region = Rect2( 4660, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 12 )
+region = Rect2( 4893, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 12 )
+region = Rect2( 5126, 0, 233, 240 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 12 )
+region = Rect2( 5359, 0, 233, 240 )
+
+[sub_resource type="SpriteFrames" id=70]
+animations = [ {
+"frames": [ SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -195,16 +301,33 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=46]
+[sub_resource type="RectangleShape2D" id=71]
 extents = Vector2( 100, 120 )
 
 [node name="puck_a_panch" type="Node2D"]
 z_index = -5
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -40 )
+z_index = 5
+texture = ExtResource( 11 )
+
+[node name="Light2D2" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -40 )
+texture = ExtResource( 3 )
+color = Color( 1, 0.819608, 0, 1 )
+
+[node name="AnimatedSpriteProcessing" type="AnimatedSprite" parent="."]
+frames = SubResource( 70 )
+frame = 20
+playing = true
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 45 )
-frame = 25
+frame = 31
 playing = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -221,7 +344,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="buyarea"]
-shape = SubResource( 46 )
+shape = SubResource( 71 )
 
 [node name="sfx" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -271,7 +394,10 @@ autoplay = true
 max_distance = 500.0
 bus = "Soundeffects"
 
+[node name="Timer_buy_wait_time" type="Timer" parent="."]
+
 [connection signal="play_sound" from="." to="sfx" method="_on_puck_a_panch_play_sound"]
 [connection signal="timeout" from="Timer" to="Light2D" method="_on_Timer_timeout"]
 [connection signal="body_entered" from="buyarea" to="." method="_on_buyarea_body_entered"]
 [connection signal="body_exited" from="buyarea" to="." method="_on_buyarea_body_exited"]
+[connection signal="timeout" from="Timer_buy_wait_time" to="." method="_on_Timer_buy_wait_time_timeout"]

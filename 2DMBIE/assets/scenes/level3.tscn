@@ -92,22 +92,16 @@ script = ExtResource( 7 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( 255.61, -179.286 )
-
-[node name="Zombie2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 352, -179.286 )
-
-[node name="Zombie3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 464, -178 )
+position = Vector2( -880, -178 )
 
 [node name="Weapons" type="Node" parent="."]
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 11.3409, -188.22 )
+position = Vector2( -665.555, -392 )
 Selected_Weapon = 0
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 248, -192 )
+position = Vector2( -168, -318.191 )
 Selected_Weapon = 1
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
@@ -147,7 +141,7 @@ Selected_Weapon = 10
 
 [node name="purchasable_weapons12" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -440, -360 )
-Selected_Weapon = 11
+Selected_Weapon = 12
 
 [node name="Mystery box" type="Node" parent="."]
 
@@ -166,11 +160,11 @@ position = Vector2( -958.016, -257.887 )
 Selected_Perk = 1
 
 [node name="FasterShootingPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( -687.183, -248.978 )
+position = Vector2( 88, -234.8 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( 280, -513.442 )
+position = Vector2( -88, -513.442 )
 
 [node name="AmmoPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -1403.34, -250.8 )
