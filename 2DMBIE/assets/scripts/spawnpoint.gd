@@ -13,7 +13,9 @@ func _on_Timer_timeout():
 		if PlayerBody == true: #checks if the player is in the spawnradius
 			if Global.CurrentWaveEnemies < Global.MaxWaveEnemies: #check for the maximum amount of enemies in this round
 				var name = name_generator.generate()
-				rpc("spawn_enemy", $spawnpoint.get_global_position(), name)
+				var enemy_health = Global.maxHealth
+				var enemy_damage = Global.EnemyDamage
+				rpc("spawn_enemy", $spawnpoint.get_global_position(), name, enemy_health, enemy_damage)
 				
 				var enemyAmount = get_tree().get_nodes_in_group("enemies").size() #checkin the amount of enemies ont the map
 				Global.CurrentWaveEnemies += 1
@@ -33,10 +35,12 @@ func _on_PlayerDetectionRadius_body_exited(body):
 	if body.is_in_group("player"):
 		PlayerBody = false
 
-remotesync func spawn_enemy(spawnpoint, name):
+remotesync func spawn_enemy(spawnpoint, name, health, damage):
 	var enemy := plenemy.instance()
 	enemy.name = name
 	enemy.position = spawnpoint
+	enemy.maxHealth = health
+	enemy.enemyDamage = damage
 	get_tree().root.get_node("/root/World/Enemies").add_child(enemy)
 
 remotesync func kill_enemy(name):
