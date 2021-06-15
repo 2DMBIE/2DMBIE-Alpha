@@ -2,7 +2,7 @@
 extends Control
 
 var storytext = ["We lived in harmony", "We shared our life", "We shared our home", "Why....?", "Does killing us...", "Make you happy...?", "We can't even die", "We would just reappear at our tombstones", "You realize this, don't you...", "Does this have to do with the Explosion", "That must be it...", "But Why...?", "We don't want to kill our friends", "But you leave us no choice", "You are making us suffer", "You confuse us...", "Where do the weapons that you hold come from?", "Why can't you walk through the open doors...", "Because you powers have been amplified..", "It's like they say, Human imagination is the strongest thing there is." ]
-var pickedNotes = 0
+var pickedNotes = 0 #  1                            2                3                  4             5                     6                         7                8                                              9                             10                                            11                       12     13                                     14                          15                                  16           17                                                    18                                              19                                              20                                                                      
 
 signal pauseGame()
 
