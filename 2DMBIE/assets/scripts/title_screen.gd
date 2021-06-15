@@ -29,7 +29,6 @@ func _on_BackButton_button_down():
 func _on_SinglePlayer_button_down():
 # warning-ignore:return_value_discarded
 	Global.online = false
-	get_tree().change_scene("res://assets/scenes/World.tscn")
 
 
 func _on_Multiplayer_button_down():
