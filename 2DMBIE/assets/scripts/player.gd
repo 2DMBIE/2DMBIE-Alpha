@@ -226,15 +226,11 @@ func _physics_process(_delta):
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 0.6)
 		else: 
 			$AnimationTree.set("parameters/crouch-idle/blend_amount", 1.0)
-		$CollisionShape2D.disabled = true
-		$CollisionShape2DCrouch.disabled = false
 		if is_on_floor():
 			motion.x = 0 
 	else:
 		crouch_idle_transition(false)
 		$AnimationTree.set("parameters/crouching/current", 1)
-		$CollisionShape2D.disabled = false
-		$CollisionShape2DCrouch.disabled = true
 		scale.y = lerp(scale.y, 1, .1)
 		_is_already_crouching = false
 		_played_crouch_sfx = false
@@ -384,7 +380,7 @@ var takingDamage = false
 func takenDamage(_enemyDamage):
 	setHealth(health - Global.EnemyDamage)
 	$Timer.start(5)
-	zombie_dam_timer.start(1.2)
+	zombie_dam_timer.start(1)
 	$NoDamageTimer.start(1)
 
 func _zombie_dam_timout():
