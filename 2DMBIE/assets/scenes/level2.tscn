@@ -4574,15 +4574,25 @@ polygon = PoolVector2Array( 3072, -1312, 4864, -1312, 4864, -1088, 3072, -1088 )
 color = Color( 0, 0, 0, 0.941176 )
 polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
 
+[node name="lastNote" type="Label" parent="."]
+visible = false
+margin_left = 1020.0
+margin_top = -1504.0
+margin_right = 1060.0
+margin_bottom = -1490.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
-[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
+[connection signal="ammopouchSpawn" from="Pathfinder" to="." method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="pauseGame" from="CanvasLayer/NotePopup" to="." method="_on_NotePopup_pauseGame"]
 [connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]

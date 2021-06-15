@@ -213,6 +213,7 @@ func resetGameValues():
 	Global.Speed = 75
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
+	Global.noteCount = 0
 
 func _on_PlayAgainButton_button_down():
 	emit_signal("music", "unpause")
@@ -228,14 +229,20 @@ func _on_GameOver_Options_button_down():
 
 
 func SpawnNote():
+	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
+	var Notescene = noteScene.instance()
+	var notePosition
 	if get_tree().get_nodes_in_group("spawnpoints").size() != 0:
-		var noteScene = preload("res://assets/scenes/stickyNote.tscn")
-		var Notescene = noteScene.instance()
-		var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
-		var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
-		randomize()
-		var randomspawn = randi() % spawnpointAmount
-		var notePosition = spawnpoints[randomspawn].get_global_position()
+		if Global.noteCount > Global.neededNotes:
+			notePosition = get_node("lastNote").get_global_position()
+		else: 
+			var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
+			var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
+			randomize()
+			var randomspawn = randi() % spawnpointAmount
+			notePosition = spawnpoints[randomspawn].get_global_position()
+			Global.noteCount +=1
+			
 		Notescene.set_position(notePosition)
 		add_child(Notescene)
 	# warning-ignore:return_value_discarded
