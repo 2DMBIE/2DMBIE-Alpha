@@ -43,7 +43,6 @@ func _process(_delta):
 		Global.EnemyDamage = 300
 		Global.Speed = 200
 		Global.enemiesKilled = 0 
-		Global.unlocked_doors = 0
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
 	if Global.CurrentWaveEnemies != 0:
