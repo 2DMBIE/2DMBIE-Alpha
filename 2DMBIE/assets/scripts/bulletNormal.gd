@@ -23,6 +23,7 @@ func _on_bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		body.Hurt(damage)
 		Global.Score += 10
+		Global.TotalScore += 10
 		enemy_penetration += 1
 		bulletEnterPos = position.x
 		if enemy_penetration >= bullet_penetration:

@@ -37,9 +37,6 @@ func _process(_delta):
 
 
 	$cursor.position = get_global_mouse_position()
-	if Global.Currentwave == random_round and not music_playing:
-		emit_signal("music", "play")
-		music_playing = true
 	if Input.is_action_just_released("game_reset") and Settings.debugMode:
 		restart_game()
 	if !is_paused and !is_gameOver:
@@ -75,16 +72,14 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 			Global.maxHealth *= specialWaveIncrease
 			Global.EnemyDamage *= specialWaveIncrease
 			Global.Speed *= specialWaveIncrease
+			Global.setSpecialWaveNumber()
 			waveType = 1
+			if not music_playing: #random_round
+				emit_signal("music", "play")
+				music_playing = true
 		else:
 			if prevWaveType != waveType:
-				Global.specialWave = false
-				Global.maxHealth /= specialWaveIncrease
-				Global.EnemyDamage /= specialWaveIncrease
-				Global.Speed /= specialWaveIncrease
-				Global.setSpecialWaveNumber()
-				waveType = 0
-				prevWaveType = waveType
+				enemyWaveStats()
 		Global.CurrentWaveEnemies = 0
 		Global.MaxWaveEnemies += 2
 		Global.Currentwave += 1
@@ -197,7 +192,15 @@ func on_death():
 	pause_game()
 	is_gameOver = true
 	get_node("GameOver/Container").visible = true
-	_on_WaveTimer_timeout()
+	enemyWaveStats()
+	
+
+func enemyWaveStats():
+	Global.specialWave = false
+	Global.maxHealth /= specialWaveIncrease
+	Global.EnemyDamage /= specialWaveIncrease
+	Global.Speed /= specialWaveIncrease
+	waveType = 0
 
 func resetGameValues():
 	#standaard stats voor de enemies
@@ -210,6 +213,7 @@ func resetGameValues():
 	Global.Speed = 75
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
+	Global.noteCount = 0
 
 func _on_PlayAgainButton_button_down():
 	emit_signal("music", "unpause")
@@ -225,14 +229,20 @@ func _on_GameOver_Options_button_down():
 
 
 func SpawnNote():
+	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
+	var Notescene = noteScene.instance()
+	var notePosition
 	if get_tree().get_nodes_in_group("spawnpoints").size() != 0:
-		var noteScene = preload("res://assets/scenes/stickyNote.tscn")
-		var Notescene = noteScene.instance()
-		var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
-		var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
-		randomize()
-		var randomspawn = randi() % spawnpointAmount
-		var notePosition = spawnpoints[randomspawn].get_global_position()
+		if Global.noteCount > Global.neededNotes:
+			notePosition = get_node("lastNote").get_global_position()
+		else: 
+			var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
+			var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
+			randomize()
+			var randomspawn = randi() % spawnpointAmount
+			notePosition = spawnpoints[randomspawn].get_global_position()
+			Global.noteCount +=1
+			
 		Notescene.set_position(notePosition)
 		add_child(Notescene)
 	# warning-ignore:return_value_discarded
@@ -243,4 +253,16 @@ func SpawnNote():
 func _on_NotePopup_pauseGame():
 	get_tree().paused = true
 	notePause = true
+
+
+
+
+
+
+
+
+
+
+
+
 

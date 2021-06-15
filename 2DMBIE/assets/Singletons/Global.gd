@@ -17,6 +17,9 @@ var game_active = false
 var highScore = 0
 var maia = false
 var specialWave = false
+var TotalScore = 0
+var noteCount = 0
+var neededNotes = 20 # max 20, anders pijn in geen notes meer
 
 func _process(_delta):
 	pass
