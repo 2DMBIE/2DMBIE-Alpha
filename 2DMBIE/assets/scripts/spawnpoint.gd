@@ -41,7 +41,7 @@ remotesync func spawn_enemy(spawnpoint, name, health, damage):
 	enemy.position = spawnpoint
 	enemy.maxHealth = health
 	enemy.enemyDamage = damage
-	get_tree().root.get_node("/root/World/Enemies").add_child(enemy)
+	get_node("/root/World/Enemies").call_deferred("add_child", enemy)
 
 remotesync func kill_enemy(name):
 	var enemy = get_tree().root.get_node_or_null("root/World/Enemies/" + name)

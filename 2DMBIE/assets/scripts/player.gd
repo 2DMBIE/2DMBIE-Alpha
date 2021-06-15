@@ -404,7 +404,11 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("ammo"):
 		var gainedAmmo = 60
 		emit_signal("ammoPickup", gainedAmmo)
-		$MarkerPos/Marker.visible = false
+		rpc("remove_marker")
+
+remotesync func remove_marker():
+	get_node("/root/World/Players/" + str(gamestate.player_id) + "/MarkerPos/Marker").visible = false
+	
 
 remotesync func _on_ammopouch_spawn():
 	if is_network_master(): 

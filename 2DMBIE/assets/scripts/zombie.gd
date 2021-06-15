@@ -131,7 +131,7 @@ func _process(delta):
 	
 	if dead:
 		deaddead = "Dead"
-	label.text = str(name) + "\n" + str(health) + ", " + str(deaddead)
+	label.text = str(name) + "\n" + str(health) # + ", " + str(deaddead)
 
 
 func repeat_me():
