@@ -5,7 +5,7 @@ signal zombieSpawned()
 var plenemy := preload("res://assets/scenes/zombie.tscn")
 var specialEnemy := preload("res://assets/scenes/enemy2.tscn")
 var PlayerBody = false
-#var plEnemy2 := preload()
+var plEnemy2 := preload("res://assets/scenes/zombieFast.tscn")
 var enemyType
 
 func _on_Timer_timeout():
@@ -24,7 +24,7 @@ func _on_Timer_timeout():
 					else:
 						Global.CurrentWaveEnemies += 1
 				else:
-					var enemy2 := specialEnemy.instance()
+					var enemy2 := plEnemy2.instance()
 					enemy2.position = $spawnpoint.get_global_position()
 					get_tree().current_scene.add_child(enemy2)
 					var enemyAmount = get_tree().get_nodes_in_group("enemies").size() #checkin the amount of enemies ont the map
