@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/scenes/mystery_box.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/scenes/zombieFast.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -92,7 +93,7 @@ script = ExtResource( 7 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( -880, -178 )
+position = Vector2( -1625.31, -176.878 )
 
 [node name="Weapons" type="Node" parent="."]
 
@@ -209,6 +210,21 @@ position = Vector2( 3293.75, -1380.49 )
 [node name="enemyspawnpoint7" parent="Spawnpoints" instance=ExtResource( 17 )]
 position = Vector2( 3040, -1312 )
 
+[node name="Zombie2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 193.164, -122.787 )
+
+[node name="Zombie3" parent="." instance=ExtResource( 19 )]
+position = Vector2( 124.694, -120.542 )
+
+[node name="Zombie4" parent="." instance=ExtResource( 19 )]
+position = Vector2( 285.206, -126.154 )
+
+[node name="Zombie5" parent="." instance=ExtResource( 19 )]
+position = Vector2( 59.5911, -127.277 )
+
+[node name="Zombie6" parent="." instance=ExtResource( 19 )]
+position = Vector2( -5.51166, -127.277 )
+
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
@@ -220,6 +236,11 @@ position = Vector2( 3040, -1312 )
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="play_sound" from="Zombie2" to="Zombie2/sfx" method="play_sound"]
+[connection signal="play_sound" from="Zombie3" to="Zombie3/sfx" method="play_sound"]
+[connection signal="play_sound" from="Zombie4" to="Zombie4/sfx" method="play_sound"]
+[connection signal="play_sound" from="Zombie5" to="Zombie5/sfx" method="play_sound"]
+[connection signal="play_sound" from="Zombie6" to="Zombie6/sfx" method="play_sound"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]
