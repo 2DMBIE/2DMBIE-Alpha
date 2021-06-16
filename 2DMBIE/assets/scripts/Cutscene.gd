@@ -22,3 +22,4 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 # warning-ignore:return_value_discarded
 			get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+
