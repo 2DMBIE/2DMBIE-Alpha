@@ -126,6 +126,7 @@ func saveSettings():
 	Config.store_var(Settings.camera)
 	Config.store_var(Settings.brightness)
 	Config.store_var(Settings.debugMode)
+	Config.store_var(Settings.fullscreen)
 	Config.close()
 
 func _on_CheckButton_toggled(button_pressed):
@@ -141,3 +142,12 @@ func _on_MaiaMode_toggled(button_pressed):
 	Global.maia = button_pressed
 	if !Settings.debugMode:
 		emit_signal("sendHealth")
+
+
+func _on_fullscreen_toggled(button_pressed):
+	Settings.fullscreen = button_pressed
+	if button_pressed:
+		OS.window_fullscreen = true
+	else:
+		OS.window_fullscreen = false
+	

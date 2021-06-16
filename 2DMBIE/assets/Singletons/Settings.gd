@@ -7,6 +7,7 @@ var aim: bool
 var camera: bool
 var brightness: bool
 var debugMode: bool
+var fullscreen: bool
 
 func loadSettings():
 	var Config = File.new()
@@ -20,4 +21,5 @@ func loadSettings():
 	camera = Config.get_var()
 	brightness = Config.get_var()
 	debugMode = Config.get_var()
+	fullscreen = Config.get_var()
 	Config.close()

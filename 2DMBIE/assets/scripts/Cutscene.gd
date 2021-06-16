@@ -4,7 +4,12 @@ extends Node2D
 onready var anim = $AnimationPlayer
 
 func _ready():
-	OS.window_fullscreen = true
+	Settings.loadSettings()
+	if Settings.fullscreen == true:
+		OS.window_fullscreen = true
+	else:
+		OS.window_fullscreen = false
+
 	anim.play("Cutscene")
 	$Timer.start(26)
 	
