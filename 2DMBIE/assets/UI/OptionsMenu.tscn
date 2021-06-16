@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/scripts/Options.gd" type="Script" id=1]
 [ext_resource path="res://assets/font/Open_Sans.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/scripts/keybinds.gd" type="Script" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/UI/HBox.gd" type="Script" id=6]
 [ext_resource path="res://assets/UI/gameOptions.gd" type="Script" id=7]
 [ext_resource path="res://assets/sprites/MaiaToggleOff.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/MaiaToggleOn.png" type="Texture" id=9]
@@ -235,6 +236,7 @@ rect_min_size = Vector2( 0, 325 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+script = ExtResource( 6 )
 
 [node name="VBox" type="VBoxContainer" parent="Options/Panel/VBox/Container/Video/HBox"]
 margin_left = 256.0
@@ -954,6 +956,7 @@ flat = true
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MasterSlider" to="Options" method="_on_MasterSlider_value_changed"]
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/MusicSlider" to="Options" method="_on_MusicSlider_value_changed"]
 [connection signal="value_changed" from="Options/Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider" to="Options" method="_on_SoundEffectsSlider_value_changed"]
+[connection signal="toggled" from="Options/Panel/VBox/Container/Video/HBox/VBox/fullscreen" to="Options" method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/always_aim" to="Options" method="_on_always_aim_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/stable_camera" to="Options" method="_on_stable_camera_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]

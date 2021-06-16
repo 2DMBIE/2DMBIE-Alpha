@@ -3,7 +3,7 @@ extends Gun
 class_name INTERVENTION_pap
 
 func _init():
-	name = "Intervention" # The name of the gun.
+	name = "Interventionpap" # The name of the gun.
 	offset = Vector2(23.544,-5.8) # The position of the gun.
 	scale = Vector2(.75,.75) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
 	texture = load("res://assets/sprites/guns/Intervention_puck_a_panch.png") # The path of the sprite gun.

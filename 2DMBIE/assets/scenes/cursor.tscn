@@ -7,7 +7,6 @@
 radius = 17.8885
 
 [node name="cursor" type="Sprite"]
-self_modulate = Color( 0.188235, 0.52549, 0.682353, 1 )
 z_index = 100
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

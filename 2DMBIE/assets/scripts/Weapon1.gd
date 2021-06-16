@@ -10,3 +10,8 @@ func _process(_delta):
 		$Weapon2.visible = false
 	else:
 		$Weapon2.visible = true
+
+	if gunscript.weapon_slots[0] == -1:
+		$Weapon1.visible = false
+	else:
+		$Weapon1.visible = true
