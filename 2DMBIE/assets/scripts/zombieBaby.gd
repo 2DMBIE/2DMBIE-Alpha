@@ -24,7 +24,7 @@ var _wait_time = randi()%_time_diff + growl_time_min
 
 onready var health = maxHealth setget _set_health
 signal health_updated(health)
-var maxHealth = Global.maxHealth
+var maxHealth = (Global.maxHealth / 1.5)
 var enemyDamage = Global.EnemyDamage
 
 
