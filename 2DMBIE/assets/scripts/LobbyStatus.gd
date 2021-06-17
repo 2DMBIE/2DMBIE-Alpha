@@ -2,7 +2,6 @@ extends CanvasLayer
 
 var lobby_label = preload("res://assets/scenes/LobbyLabel.tscn")
 var labelName = "Joas"
-#var labelTimer = Timer.new()
 var lastLabel
 var showLabel
 var labelNumber = 0
@@ -20,39 +19,27 @@ func _ready():
 	showLabel.set_wait_time(.01)
 	showLabel.set_one_shot(true)
 	add_child(showLabel)
-	showLabel.connect("timeout", self, "labelShow") #[child]
-#	showLabel.start()
+	showLabel.connect("timeout", self, "labelShow")
 
 func _process(_delta):
-#	if Input.is_action_just_pressed("jump"):
-#		send_remote_player_name()
-#		var status_label
-#		status_label = lobby_label.instance()
-#		status_label.text = " " + labelName + " joined the room"
-#		$Control/Panel/VBoxContainer.add_child(status_label)
-#
-#		labels[status_label] = [status_label.modulate.a, false]
-#		lastLabel = status_label
-		
-#	if lastLabel != null:
-	for label in labels:
-		if label.visible == true: #<-- last step
+	for label in labels: #<-- Loops through all labels in dictionary
+		if label.visible == true: #<-- Hide icon if notification is visible
 			$Control/StatusIcon/Panel.visible = false
-		if labels[label][0] == 1:
-			if !labels[label][1]: #<-- fucking hell this took long
+		if labels[label][0] == 1: #<-- Run when opacity of label is 1
+			if !labels[label][1]: #<-- Run timer when timer hasnt been started yet (boolean)
 				var labelTimer = Timer.new()
 				labelTimer.set_wait_time(3)
 				labelTimer.set_one_shot(true)
 				add_child(labelTimer)
 				labelTimer.connect("timeout", self, "_on_labelTimer_timeout", [label])
 				labelTimer.start()
+				labels[label][1] = true #<-- Set boolean to false so timer doesnt run again
 				var chatPopup = Timer.new()
 				chatPopup.set_wait_time(4)
 				chatPopup.set_one_shot(true)
 				add_child(chatPopup)
 				chatPopup.connect("timeout", self, "_on_chatPopup_timeout")
 				chatPopup.start()
-				labels[label][1] = true
 		else:
 			fade_label(label)
 
@@ -64,26 +51,6 @@ func fade_label(label):
 		labels.erase(label)
 	else:
 		labels[label][0] = label.modulate.a
-#	if label != null:
-#		label.modulate.a -= .05
-#		if label.modulate.a <= 0:
-#			label.visible = false
-#		else:
-#			return label
-#		labelTimer.set_wait_time(3)
-#		labelTimer.set_one_shot(true)
-#		add_child(labelTimer)
-#		labelTimer.connect("timeout", self, "_on_labelTimer_timeout", [last_label])
-#		labelTimer.start()
-#
-#func _on_labelTimer_timeout(label):
-#	if label != null:
-#		label.modulate.a -= .05
-#		if label.modulate.a <= 0:
-#			label.visible = false
-#		else:
-#			labelTimer.set_wait_time(float(1)/float(30))
-#			labelTimer.start()
 
 func _on_labelTimer_timeout(label):
 	fade_label(label)
@@ -122,12 +89,7 @@ func _on_StatusIcon_mouse_entered():
 		if $Control/Panel/VBoxContainer/Label.rect_size.x >= 400:
 			$Control/Panel.rect_clip_content = true
 	labelShow()
-#		showLabel = Timer.new()
-#		showLabel.set_wait_time(.2)
-#		showLabel.set_one_shot(true)
-#		add_child(showLabel)
-#		showLabel.connect("timeout", self, "labelShow", [child])
-#		showLabel.start()
+
 	$Control/StatusIcon/Panel.visible = false
 	get_node("/root/Lobby/cursor").visible = false
 
