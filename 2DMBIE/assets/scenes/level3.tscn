@@ -107,6 +107,7 @@ Selected_Weapon = 1
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
+Selected_Weapon = 11
 
 [node name="purchasable_weapons4" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -712, -142.191 )
@@ -236,11 +237,10 @@ position = Vector2( -5.51166, -127.277 )
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
-[connection signal="play_sound" from="Zombie2" to="Zombie2/sfx" method="play_sound"]
-[connection signal="play_sound" from="Zombie3" to="Zombie3/sfx" method="play_sound"]
-[connection signal="play_sound" from="Zombie4" to="Zombie4/sfx" method="play_sound"]
-[connection signal="play_sound" from="Zombie5" to="Zombie5/sfx" method="play_sound"]
-[connection signal="play_sound" from="Zombie6" to="Zombie6/sfx" method="play_sound"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]

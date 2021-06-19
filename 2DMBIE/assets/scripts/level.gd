@@ -9,7 +9,9 @@ var music_playing = false
 signal music(action)
 var GraphRandomPoint
 var notePause = false
-
+var music_box_bus = AudioServer.get_bus_index("MusicBox")
+var music_box_game = AudioServer.get_bus_index("MusicGame")
+var music_box_playing = false
 var specialWaveIncrease = 1.15
 
 func _ready():
@@ -25,7 +27,6 @@ func _ready():
 	_on_zombieSpawned()
 	SpawnNote()
 
-
 func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
@@ -34,6 +35,16 @@ func _process(_delta):
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
+	
+	if Global.boxMusicNode != null:
+		if Global.boxMusicNode.playing == true:
+			emit_signal("music", "pause")
+			music_box_playing = true
+		else:
+			emit_signal("music", "unpause")
+			music_box_playing = false
+			Global.boxMusicNode = null
+	
 
 
 	$cursor.position = get_global_mouse_position()
@@ -66,6 +77,9 @@ var waveType = 0
 var prevWaveType = 0
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
+	if not music_playing: #random_round
+		emit_signal("music", "play")
+		music_playing = true
 	if Global.CurrentWaveEnemies != 0:
 		if Global.Currentwave == Global.SpecialWaveNumber:
 			Global.specialWave = true
@@ -74,9 +88,9 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 			Global.Speed *= specialWaveIncrease
 			Global.setSpecialWaveNumber()
 			waveType = 1
-			if not music_playing: #random_round
-				emit_signal("music", "play")
-				music_playing = true
+#			if not music_playing: #random_round
+#				emit_signal("music", "play")
+#				music_playing = true
 		else:
 			if prevWaveType != waveType:
 				enemyWaveStats()
@@ -111,7 +125,8 @@ func unpause_game():
 	get_node("CanvasLayer/CanvasModulate").set_color(Color(1,1,1,1))
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	$cursor.visible = true
-	emit_signal("music", "unpause")
+	if music_box_playing == false:
+		emit_signal("music", "unpause")
 	AudioServer.set_bus_mute(0, false)
 
 func restart_game():
@@ -227,42 +242,32 @@ func _on_GameOver_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("GameOver/Container").visible = false
 
+var allowNotes = true
 
 func SpawnNote():
 	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
 	var Notescene = noteScene.instance()
 	var notePosition
-	if get_tree().get_nodes_in_group("spawnpoints").size() != 0:
-		if Global.noteCount > Global.neededNotes:
-			notePosition = get_node("lastNote").get_global_position()
-		else: 
-			var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
-			var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
-			randomize()
-			var randomspawn = randi() % spawnpointAmount
-			notePosition = spawnpoints[randomspawn].get_global_position()
-			Global.noteCount +=1
-			
-		Notescene.set_position(notePosition)
-		add_child(Notescene)
-	# warning-ignore:return_value_discarded
-		$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
-	# warning-ignore:return_value_discarded
-		$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
+	if allowNotes:
+		if get_tree().get_nodes_in_group("spawnpoints").size() != 0:
+			if Global.noteCount >= Global.neededNotes:
+				notePosition = get_node("lastNote").get_global_position()
+				allowNotes = false
+			else: 
+				var spawnpointAmount = get_tree().get_nodes_in_group("spawnpoints").size()
+				var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
+				randomize()
+				var randomspawn = randi() % spawnpointAmount
+				notePosition = spawnpoints[randomspawn].get_global_position()
+				
+			Notescene.set_position(notePosition)
+			add_child(Notescene)
+		# warning-ignore:return_value_discarded
+			$StickeyNote.connect("readNote", $CanvasLayer/NotePopup, "onNoteRead") 
+		# warning-ignore:return_value_discarded
+			$StickeyNote.connect("closeNote", $CanvasLayer/NotePopup, "CloseNote")
 	
 func _on_NotePopup_pauseGame():
 	get_tree().paused = true
 	notePause = true
-
-
-
-
-
-
-
-
-
-
-
-
 

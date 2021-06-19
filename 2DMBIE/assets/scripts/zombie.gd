@@ -64,8 +64,9 @@ func nextPoint():
 	
 	if (currentTarget.y - 128 > self.position.y):
 		if is_on_floor() && get_slide_collision(0) != null:
-			if get_slide_collision(0).collider.name == "Floor":
-				set_collision_mask_bit(dropthroughBit, false)
+			if get_slide_collision(0).collider != null:
+				if get_slide_collision(0).collider.name == "Floor":
+					set_collision_mask_bit(dropthroughBit, false)
 
 func jump():
 	if (self.is_on_floor()):
