@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=2]
+[gd_scene load_steps=117 format=2]
 
 [ext_resource path="res://assets/sprites/tiles/blocks_tileset_1.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=2]
@@ -55,6 +55,7 @@
 [ext_resource path="res://assets/sprites/Menus/Logo.png" type="Texture" id=53]
 [ext_resource path="res://assets/scenes/lights/light_tl_buis_broken.tscn" type="PackedScene" id=54]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=55]
+[ext_resource path="res://assets/sounds/Jukebox/2DMBIEintro.wav" type="AudioStream" id=56]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
@@ -14578,5 +14579,10 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 56 )
+autoplay = true
+bus = "Music"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

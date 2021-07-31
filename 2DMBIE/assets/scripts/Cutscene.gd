@@ -19,7 +19,7 @@ func _on_Timer_timeout():
 	$Timer.start(1)
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
-# warning-ignore:return_value_discarded
-			get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	if event is InputEvent and !event is InputEventMouseMotion and !event is InputEventJoypadMotion and !event is InputEventScreenDrag:
+	# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
 
