@@ -220,6 +220,7 @@ func enemyWaveStats():
 func resetGameValues():
 	#standaard stats voor de enemies
 	Global.Score = 0
+	Global.TotalScore = 0
 	Global.MaxWaveEnemies = 4
 	Global.CurrentWaveEnemies = 0
 	Global.Currentwave = 1

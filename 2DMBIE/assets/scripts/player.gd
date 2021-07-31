@@ -34,12 +34,15 @@ var groundlessjump = true
 var jumpwaspressed = false
 var canBuyMovement2 = true
 
+
 signal play_sound(library)
 
 func _ready():
 	if Settings.debugMode:
+		debug = true
 		maxHealth = 5000
 	elif Global.maia:
+		debug = true
 		maxHealth = 2400
 	else:
 		maxHealth = 1200
@@ -359,16 +362,18 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			if Settings.debugMode:
-				Global.Score = 0
+			if debug:
+				Global.TotalScore = 0
 			Global.setHighscore()
 			Global.saveScore()
 			emit_signal("on_death")
 
 func _on_maxHealth_toggled():
 	if Settings.debugMode:
+		debug = true
 		maxHealth = 5000
 	elif Global.maia:
+		debug = true
 		maxHealth = 2400
 	elif !Settings.debugMode and !Global.maia:
 		maxHealth = 1200
@@ -457,6 +462,7 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		if body.health == 0:
 			Global.Score += 100
+			Global.TotalScore += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 

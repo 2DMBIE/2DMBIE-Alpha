@@ -23,6 +23,7 @@ func _ready():
 func _on_Button_pressed(scene_to_load):
 	if scene_to_load == "res://assets/scenes/level2.tscn":
 		Global.Score = 0
+		Global.TotalScore = 0
 		Global.MaxWaveEnemies = 4
 		Global.CurrentWaveEnemies = 0
 		Global.Currentwave = 1
