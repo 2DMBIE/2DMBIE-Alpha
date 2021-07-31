@@ -9,3 +9,5 @@ func _ready():
 		$VBox/HBoxContainer/VBoxContainer/brighter_screen.pressed = true
 	if Settings.debugMode:
 		$VBoxSide2/HBoxContainer/CheckButton.pressed = true
+	if Global.maia:
+		$VBoxSide2/HBoxContainer2/CheckButton.pressed = true

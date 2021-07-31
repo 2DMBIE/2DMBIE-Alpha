@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/scenes/lights/light_tl_buis_broken.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/tiles/furniture_library.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/sprites/BloodSplat.png" type="Texture" id=10]
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://assets/sounds/music/menu_music.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/UI/OptionsMenu.tscn" type="PackedScene" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -486,4 +487,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Optionsmenu" parent="." instance=ExtResource( 13 )]
+
+[connection signal="button_down" from="Buttons/PlayButton" to="." method="_on_PlayButton_button_down"]
+[connection signal="button_down" from="Buttons/OptionsButton" to="." method="_on_OptionsButton_button_down"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -962,4 +962,4 @@ flat = true
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBox/HBoxContainer/VBoxContainer/brighter_screen" to="Options" method="_on_brighter_screen_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer2/CheckButton" to="Options" method="_on_MaiaMode_toggled"]
 [connection signal="toggled" from="Options/Panel/VBox/Container/GameOptions/HBox/VBoxSide2/HBoxContainer/CheckButton" to="Options" method="_on_CheckButton_toggled"]
-[connection signal="button_down" from="Options/Panel/VBox/ExitOptions" to="Options" method="_on_Button_button_down"]
+[connection signal="button_down" from="Options/Panel/VBox/ExitOptions" to="Options" method="escape_options"]

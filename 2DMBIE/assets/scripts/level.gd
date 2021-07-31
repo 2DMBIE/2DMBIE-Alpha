@@ -175,7 +175,6 @@ func escape_options():
 				get_node("PauseMenu/Container").visible = true
 			elif is_gameOver:
 				get_node("GameOver/Container").visible = true
-			get_node("Optionsmenu/Options").visible = false
 
 
 func _on_Options_button_down():
