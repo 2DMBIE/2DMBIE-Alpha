@@ -1,4 +1,7 @@
 extends Node2D
+
+var options_menu = preload("res://assets/UI/OptionsMenu.tscn").instance()
+
 var master_bus = AudioServer.get_bus_index("Master")
 var music_bus = AudioServer.get_bus_index("Music")
 var soundeffects_bus = AudioServer.get_bus_index("Soundeffects")
@@ -20,6 +23,7 @@ func _ready():
 		AudioServer.set_bus_volume_db(music_bus, linear2db(.4))
 		AudioServer.set_bus_volume_db(soundeffects_bus, linear2db(.8))
 	
+	add_child(options_menu)
 	$Optionsmenu/Options.visible = false
 
 
