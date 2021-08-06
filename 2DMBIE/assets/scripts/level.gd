@@ -117,7 +117,7 @@ func pause_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$cursor.visible = false
 	emit_signal("music", "pause")
-#	AudioServer.set_bus_mute(0, true)
+	AudioServer.set_bus_mute(0, true)
 
 func unpause_game():
 	get_tree().paused = false
@@ -231,11 +231,11 @@ func resetGameValues():
 	Global.noteCount = 0
 
 func _on_PlayAgainButton_button_down():
+	get_tree().paused = false
+	restart_game()
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_mute(0, false)
-	get_tree().paused = false
 	Global.randomizeSpecialwave()
-	restart_game()
 
 
 func _on_GameOver_Options_button_down():

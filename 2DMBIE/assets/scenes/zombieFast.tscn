@@ -39,8 +39,8 @@
 [ext_resource path="res://assets/sounds/zombie/z_footstep2.wav" type="AudioStream" id=37]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 38.7908
-height = 50.7265
+radius = 24.0
+height = 106.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "jumpBaby"
@@ -5688,13 +5688,13 @@ nodes/walk8/node = SubResource( 25 )
 nodes/walk8/position = Vector2( -580, 480 )
 nodes/walk9/node = SubResource( 26 )
 nodes/walk9/position = Vector2( -580, 580 )
-node_connections = [ "output", 0, "in_air", "in_air", 0, "Animation 2", "in_air", 1, "walk", "walk", 0, "TimeScale", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "TimeScale", 0, "walk1" ]
+node_connections = [ "output", 0, "in_air", "walk", 0, "TimeScale", "walk", 1, "walk2", "walk", 2, "walk3", "walk", 3, "walk4", "walk", 4, "walk5", "walk", 5, "walk6", "walk", 6, "walk7", "walk", 7, "walk8", "walk", 8, "walk9", "walk", 9, "walk10", "TimeScale", 0, "walk1", "in_air", 0, "Animation 2", "in_air", 1, "walk" ]
 
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 11.9587, 12.5999 )
 
 [sub_resource type="CircleShape2D" id=29]
-radius = 37.7757
+radius = 38.0
 
 [node name="ZombieBabyWeh" type="KinematicBody2D" groups=[
 "enemies",
@@ -5708,7 +5708,7 @@ collision_mask = 290
 script = ExtResource( 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.00226, 33.9618 )
+position = Vector2( 0, 14 )
 shape = SubResource( 1 )
 
 [node name="body" type="Position2D" parent="."]
@@ -6017,7 +6017,7 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeadshotArea"]
-position = Vector2( 2.64465, -32.3967 )
+position = Vector2( 0, -25 )
 shape = SubResource( 29 )
 
 [node name="Control" type="Control" parent="."]

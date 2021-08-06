@@ -121,9 +121,9 @@ __meta__ = {
 }
 
 [node name="Kills" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 105.0
+margin_top = 61.0
 margin_right = 1000.0
-margin_bottom = 139.0
+margin_bottom = 95.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,9 +147,9 @@ __meta__ = {
 }
 
 [node name="Time" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 149.0
+margin_top = 105.0
 margin_right = 1000.0
-margin_bottom = 183.0
+margin_bottom = 139.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -173,9 +173,9 @@ __meta__ = {
 }
 
 [node name="Wave" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 61.0
+margin_top = 149.0
 margin_right = 1000.0
-margin_bottom = 95.0
+margin_bottom = 183.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false

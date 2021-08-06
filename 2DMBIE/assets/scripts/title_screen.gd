@@ -42,7 +42,7 @@ func _on_PlayButton_button_down():
 	Global.Speed = 75
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
-	var _x = get_tree().change_scene("res://assets/scenes/level2.tscn")
+	var _x = get_tree().change_scene("res://assets/scenes/transitionScene.tscn")
 
 
 func _on_OptionsButton_button_down():
