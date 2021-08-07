@@ -16,6 +16,7 @@ var totalEnemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
+var debug = false
 var maia = false
 var specialWave = false
 var TotalScore = 0

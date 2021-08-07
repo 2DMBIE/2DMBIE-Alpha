@@ -100,7 +100,7 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.maxHealth += 100
 		Global.EnemyDamage *= 1.05
 		Global.Speed += 4
-		Global.enemiesKilled = 0 
+		Global.enemiesKilled = 0
 		
 		var noteAmount = get_tree().get_nodes_in_group("notes").size()
 		if noteAmount == 1:
@@ -229,6 +229,7 @@ func resetGameValues():
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
 	Global.noteCount = 0
+	Global.debug = false
 
 func _on_PlayAgainButton_button_down():
 	get_tree().paused = false

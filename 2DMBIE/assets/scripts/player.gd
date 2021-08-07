@@ -27,7 +27,6 @@ var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
-var debug = false
 var falling = false
 var slideHold = false
 var groundlessjump = true
@@ -39,10 +38,10 @@ signal play_sound(library)
 
 func _ready():
 	if Settings.debugMode:
-		debug = true
+		Global.debug = true
 		maxHealth = 5000
 	elif Global.maia:
-		debug = true
+		Global.debug = true
 		maxHealth = 2400
 	else:
 		maxHealth = 1200
@@ -362,7 +361,7 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			if debug:
+			if Global.debug:
 				Global.TotalScore = 0
 			Global.setHighscore()
 			Global.saveScore()
@@ -370,10 +369,10 @@ func setHealth(value):
 
 func _on_maxHealth_toggled():
 	if Settings.debugMode:
-		debug = true
+		Global.debug = true
 		maxHealth = 5000
 	elif Global.maia:
-		debug = true
+		Global.debug = true
 		maxHealth = 2400
 	elif !Settings.debugMode and !Global.maia:
 		maxHealth = 1200
