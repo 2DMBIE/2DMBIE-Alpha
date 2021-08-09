@@ -186,6 +186,7 @@ func _physics_process(_delta):
 		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
 		is_knifing = true # disable knifing 
 		get_node("Hitbox").set_collision_mask_bit(3, false)
+		get_node("Hitbox").set_collision_mask_bit(8, false)
 		self.set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(8, false)
 		knifing_hitbox_enabled = false
@@ -476,6 +477,7 @@ func on_slide_animation_complete():
 			$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
 			get_node("body/chest/torso/gun").shooting_disabled = false
 			get_node("Hitbox").set_collision_mask_bit(3, true)
+			get_node("Hitbox").set_collision_mask_bit(8, true)
 			self.set_collision_mask_bit(3, true)
 			self.set_collision_mask_bit(8, true)
 			knifing_hitbox_enabled = true
@@ -528,7 +530,3 @@ func rememberjumptime():
 func _on_MovementPerk_perkactiveMovement(canBuyMovement):
 	if canBuyMovement == false:
 		canBuyMovement2 = false
-
-
-func _on_FireRatePerk_perkactive(canBuyFasterFireRate):
-	pass # Replace with function body.

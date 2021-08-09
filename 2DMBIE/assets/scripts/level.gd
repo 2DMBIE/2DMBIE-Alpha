@@ -26,6 +26,7 @@ func _ready():
 		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
 	_on_zombieSpawned()
 	SpawnNote()
+	emit_signal("music", "play")
 
 func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
@@ -77,9 +78,6 @@ var waveType = 0
 var prevWaveType = 0
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
-	if not music_playing: #random_round
-		emit_signal("music", "play")
-		music_playing = true
 	if Global.CurrentWaveEnemies != 0:
 		if Global.Currentwave == Global.SpecialWaveNumber:
 			Global.specialWave = true

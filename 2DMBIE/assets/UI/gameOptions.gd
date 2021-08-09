@@ -20,6 +20,6 @@ func _ready():
 	if Global.maia:
 		maia.pressed = true
 
-func _process(delta):
+func _process(_delta):
 	if buttons[0].pressed == true and buttons[1].pressed == true and buttons[2].pressed == true and buttons[3].pressed == true:
 		maia.visible = true
