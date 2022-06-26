@@ -3,20 +3,26 @@ extends Node
 signal changeScore(newScore)
 
 var Score = 0 setget setScore
-var ScoreIncrement = 100
+var ScoreIncrement = 75
 var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0
 var Currentwave = 1
 var maxHealth = 500
 var EnemyDamage = 200
 var Speed = 75
+var SpeedBaby = 150
 var enemiesKilled = 0
 var totalEnemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
+var debug = false
 var maia = false
 var specialWave = false
+var TotalScore = 0
+var noteCount = 0 #
+var neededNotes = 20 # max 20, anders pijn in geen notes meer
+var boxMusicNode
 
 func _process(_delta):
 	pass
@@ -35,8 +41,8 @@ func loadScore():
 	saveScoreFile.close()
 
 func setHighscore():
-	if Score > highScore:
-		highScore = Score
+	if TotalScore > highScore:
+		highScore = TotalScore
 
 func saveScore():
 	var saveScoreFile = File.new()

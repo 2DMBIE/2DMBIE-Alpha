@@ -43,6 +43,7 @@ func _process(_delta):
 #	label_text += "manual_aim : " + str(Global.aim) + "\n"
 #	label_text += "moving camera : " + str(Global.camera) + "\n" 
 #	label_text += "bright_scene : " + str(Global.brightness) + "\n" 
+	label_text += "DebugMode : " + str(Global.debug) + "\n" 
 	
 	$Label.text = label_text
 	

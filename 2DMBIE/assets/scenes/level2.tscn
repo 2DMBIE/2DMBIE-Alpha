@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -3996,9 +3996,6 @@ points = PoolVector2Array( 64, 36.179, 0, 35.9464, 0, 0, 64, 0 )
 56/shapes = [  ]
 56/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 896, 384 )
-
 [node name="Main" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -4219,7 +4216,7 @@ position = Vector2( 3264.28, -1034.52 )
 position = Vector2( 4436.28, -1034.52 )
 
 [node name="Lightbulb_with_wire_broken3" parent="lights" instance=ExtResource( 17 )]
-position = Vector2( 461.755, -1284.49 )
+position = Vector2( 461.755, -1316.49 )
 
 [node name="UV_light" parent="lights" instance=ExtResource( 22 )]
 position = Vector2( 381.755, -2244.49 )
@@ -4325,13 +4322,13 @@ position = Vector2( 3117.75, -1740.49 )
 position = Vector2( 460.277, -266.521 )
 
 [node name="TL_buis_broken19" parent="lights" instance=ExtResource( 16 )]
-position = Vector2( 1077.76, -524.49 )
+position = Vector2( 1077.76, -522.49 )
 
 [node name="TL_buis17" parent="lights" instance=ExtResource( 15 )]
 position = Vector2( 128.277, -522.521 )
 
 [node name="TL_buis18" parent="lights" instance=ExtResource( 15 )]
-position = Vector2( 733.755, -516.49 )
+position = Vector2( 733.755, -522.49 )
 
 [node name="emergency_exit" parent="lights" instance=ExtResource( 18 )]
 position = Vector2( 4781.76, -236.49 )
@@ -4353,17 +4350,17 @@ self_modulate = Color( 0.862745, 0.796078, 0.796078, 0.352941 )
 
 [node name="Weapons" type="YSort" parent="."]
 
-[node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
+[node name="Kar98k" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 640, -160 )
-Selected_Weapon = 1
+Selected_Weapon = 12
 
 [node name="SPAS12" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 4544, -160 )
-Selected_Weapon = 4
+Selected_Weapon = 3
 
-[node name="AK12" parent="Weapons" instance=ExtResource( 26 )]
+[node name="MP5" parent="Weapons" instance=ExtResource( 26 )]
 position = Vector2( 4704, -2208 )
-Selected_Weapon = 6
+Selected_Weapon = 0
 
 [node name="PauseMenu" parent="." instance=ExtResource( 27 )]
 layer = 2
@@ -4399,18 +4396,6 @@ position = Vector2( 2816, -2272 )
 
 [node name="Secret" parent="Doors" instance=ExtResource( 29 )]
 position = Vector2( 3008, -1248 )
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 928, -948 )
-shape = SubResource( 22 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
-z_index = 30
-color = Color( 0, 0, 0, 0.815686 )
-polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1344, 64, -1344 )
 
 [node name="music" type="Node2D" parent="."]
 script = ExtResource( 28 )
@@ -4482,9 +4467,10 @@ position = Vector2( 4608, -1184 )
 [node name="Mystery_Box" type="Node" parent="."]
 
 [node name="Mystery_Box" parent="Mystery_Box" instance=ExtResource( 38 )]
-position = Vector2( 2278.91, -698.371 )
+position = Vector2( 2278.91, -693.371 )
 
 [node name="darkenedAreas" type="YSort" parent="."]
+visible = false
 
 [node name="Library" type="Area2D" parent="darkenedAreas" groups=[
 "Areas",
@@ -4495,7 +4481,7 @@ collision_mask = 4
 [node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Library"]
 z_index = 20
 color = Color( 0, 0, 0, 0.941176 )
-polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1312, 64, -1312 )
+polygon = PoolVector2Array( 64, -576, 1792, -576, 1792, -1344, 64, -1344 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="darkenedAreas/Library"]
 visible = false
@@ -4529,7 +4515,7 @@ polygon = PoolVector2Array( 1280, -64, 3264, -64, 3264, -544, 1280, -544 )
 [node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Lounge"]
 z_index = 20
 color = Color( 0, 0, 0, 0.941176 )
-polygon = PoolVector2Array( 1280, -64, 1280, -544, 3264, -544, 3264, -64 )
+polygon = PoolVector2Array( 1280, -64, 1280, -576, 3264, -576, 3264, -64 )
 
 [node name="Restaurant" type="Area2D" parent="darkenedAreas" groups=[
 "Areas",
@@ -4544,7 +4530,7 @@ polygon = PoolVector2Array( 3328, -64, 3328, -576, 3072, -576, 3072, -1056, 4864
 [node name="Polygon2D" type="Polygon2D" parent="darkenedAreas/Restaurant"]
 z_index = 20
 color = Color( 0, 0, 0, 0.941176 )
-polygon = PoolVector2Array( 3328, -64, 3328, -576, 3072, -576, 3072, -1056, 4864, -1056, 4864, -64 )
+polygon = PoolVector2Array( 3328, -64, 3328, -576, 3072, -576, 3072, -1088, 4864, -1088, 4864, -64 )
 
 [node name="Greenhouse" type="Area2D" parent="darkenedAreas" groups=[
 "Areas",
@@ -4574,9 +4560,19 @@ polygon = PoolVector2Array( 3072, -1312, 4864, -1312, 4864, -1088, 3072, -1088 )
 color = Color( 0, 0, 0, 0.941176 )
 polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
 
+[node name="lastNote" type="Label" parent="."]
+visible = false
+margin_left = 1020.0
+margin_top = -1504.0
+margin_right = 1060.0
+margin_bottom = -1490.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="music" from="." to="music" method="do_action"]
-[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
+[connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/redborders" method="_on_Player_health_updated"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
 [connection signal="play_sound" from="Player" to="Player/player-sfx" method="play_sound"]
@@ -4585,9 +4581,9 @@ polygon = PoolVector2Array( 3072, -1088, 3072, -1312, 4864, -1312, 4864, -1088 )
 [connection signal="ammopouchSpawn" from="Pathfinder" to="Player" method="_on_Pathfinder_ammopouchSpawn"]
 [connection signal="play_sound" from="CanvasLayer/Interface/redborders" to="sfx" method="play_sound"]
 [connection signal="pauseGame" from="CanvasLayer/NotePopup" to="." method="_on_NotePopup_pauseGame"]
-[connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/Kar98k" to="Weapons/Kar98k/sfx" method="play_sound"]
 [connection signal="play_sound" from="Weapons/SPAS12" to="Weapons/SPAS12/sfx" method="play_sound"]
-[connection signal="play_sound" from="Weapons/AK12" to="Weapons/AK12/sfx" method="play_sound"]
+[connection signal="play_sound" from="Weapons/MP5" to="Weapons/MP5/sfx" method="play_sound"]
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]

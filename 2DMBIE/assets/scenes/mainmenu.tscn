@@ -486,4 +486,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_down" from="Buttons/PlayButton" to="." method="_on_PlayButton_button_down"]
+[connection signal="button_down" from="Buttons/OptionsButton" to="." method="_on_OptionsButton_button_down"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

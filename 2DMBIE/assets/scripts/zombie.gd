@@ -63,9 +63,10 @@ func nextPoint():
 		nextPoint()
 	
 	if (currentTarget.y - 128 > self.position.y):
-		if is_on_floor() && get_slide_collision(0).collider.name != null:
-			if get_slide_collision(0).collider.name == "Floor":
-				set_collision_mask_bit(dropthroughBit, false)
+		if is_on_floor() && get_slide_collision(0) != null:
+			if get_slide_collision(0).collider != null:
+				if get_slide_collision(0).collider.name == "Floor":
+					set_collision_mask_bit(dropthroughBit, false)
 
 func jump():
 	if (self.is_on_floor()):
@@ -175,10 +176,12 @@ func Hurt(damage):
 		show_damage_animation(percentage)
 		emit_signal("play_sound", "hurt")
 		Global.Score += 10
+		Global.TotalScore += 10
 		headshot = false
 
 func kill():
 		Global.Score += Global.ScoreIncrement
+		Global.TotalScore += Global.ScoreIncrement
 		Global.enemiesKilled += 1
 		Global.totalEnemiesKilled += 1
 		queue_free()

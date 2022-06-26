@@ -12,9 +12,10 @@ func _ready():
 	$Panel/VBox/Container/Audio/HBox/VBox/MasterSlider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))
 	$Panel/VBox/Container/Audio/HBox/VBox/MusicSlider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))
 	$Panel/VBox/Container/Audio/HBox/VBox/SoundEffectsSlider.value = db2linear(AudioServer.get_bus_volume_db(soundeffects_bus))
-	
+
 func _process(_delta):
-	escape_options()
+	if Input.is_action_pressed("escape"):
+		escape_options()
 
 # Here can maybe go the actual functionality of the options
 func updateControls():
@@ -77,17 +78,9 @@ func _on_GameOptions_mouse_exited():
 	add_color_override("font_color", ButtonFontStandardColor)
 
 
-func _on_Button_button_down():
-	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
-		saveSettings()
-		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
-		if x != OK:
-			print("Error: ", x)
-
 func escape_options():
-	if Input.is_action_pressed("escape"):
-		_on_Button_button_down()
-	
+	saveSettings()
+	self.visible = false
 
 signal sendHealth()
 
@@ -126,18 +119,28 @@ func saveSettings():
 	Config.store_var(Settings.camera)
 	Config.store_var(Settings.brightness)
 	Config.store_var(Settings.debugMode)
+	Config.store_var(Settings.fullscreen)
 	Config.close()
 
 func _on_CheckButton_toggled(button_pressed):
-	Settings.debugMode = button_pressed
 	if button_pressed:
 		Global.Score += 25000
 	elif !button_pressed:
 		Global.Score -= 25000
 	
+	Settings.debugMode = button_pressed
 	emit_signal("sendHealth")
 	
 func _on_MaiaMode_toggled(button_pressed):
 	Global.maia = button_pressed
 	if !Settings.debugMode:
 		emit_signal("sendHealth")
+
+
+func _on_fullscreen_toggled(button_pressed):
+	Settings.fullscreen = button_pressed
+	if button_pressed:
+		OS.window_fullscreen = true
+	else:
+		OS.window_fullscreen = false
+	

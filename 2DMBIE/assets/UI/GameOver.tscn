@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/Buttons/ExitMenu.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/sounds/music/menu_music.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/font/Open_Sans_24.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/scripts/GameOver.gd" type="Script" id=6]
+[ext_resource path="res://assets/sounds/music/game_over_music1.mp3" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 200
@@ -32,6 +33,11 @@ __meta__ = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Container"]
 stream = ExtResource( 4 )
 volume_db = -1.0
+bus = "Music"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Container"]
+stream = ExtResource( 7 )
+volume_db = 3.0
 bus = "Music"
 
 [node name="VBOX" type="VBoxContainer" parent="Container"]
@@ -88,25 +94,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 39.0
+[node name="TotalScore" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
+margin_top = 17.0
 margin_right = 1000.0
-margin_bottom = 73.0
+margin_bottom = 51.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/Score"]
-margin_left = 392.0
-margin_right = 528.0
+[node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/TotalScore"]
+margin_left = 390.0
+margin_right = 531.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your score: "
+text = "Total score: "
 
-[node name="Score" type="Label" parent="Container/VBOX/HBox/VBox/Score"]
-margin_left = 532.0
-margin_right = 607.0
+[node name="Score" type="Label" parent="Container/VBOX/HBox/VBox/TotalScore"]
+margin_left = 535.0
+margin_right = 610.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
 text = "'score'"
@@ -114,51 +120,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Wave" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 83.0
-margin_right = 1000.0
-margin_bottom = 117.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/Wave"]
-margin_left = 394.0
-margin_right = 528.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 5 )
-text = "Your wave: "
-
-[node name="Wave" type="Label" parent="Container/VBOX/HBox/VBox/Wave"]
-margin_left = 532.0
-margin_right = 605.0
-margin_bottom = 34.0
-custom_fonts/font = ExtResource( 5 )
-text = "'wave'"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Kills" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 127.0
+margin_top = 61.0
 margin_right = 1000.0
-margin_bottom = 161.0
+margin_bottom = 95.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/Kills"]
-margin_left = 408.0
-margin_right = 528.0
+margin_left = 438.0
+margin_right = 499.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
-text = "Your kills: "
+text = "Kills: "
 
 [node name="Kills" type="Label" parent="Container/VBOX/HBox/VBox/Kills"]
-margin_left = 532.0
-margin_right = 591.0
+margin_left = 503.0
+margin_right = 562.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
 text = "'kills'"
@@ -167,27 +147,53 @@ __meta__ = {
 }
 
 [node name="Time" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
-margin_top = 127.0
+margin_top = 105.0
 margin_right = 1000.0
-margin_bottom = 161.0
+margin_bottom = 139.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/Time"]
-margin_left = 408.0
-margin_right = 528.0
+margin_left = 388.0
+margin_right = 543.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
 text = "Time played: "
 
 [node name="Time" type="Label" parent="Container/VBOX/HBox/VBox/Time"]
-margin_left = 532.0
-margin_right = 591.0
+margin_left = 547.0
+margin_right = 612.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 5 )
 text = "'time'"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wave" type="HBoxContainer" parent="Container/VBOX/HBox/VBox"]
+margin_top = 149.0
+margin_right = 1000.0
+margin_bottom = 183.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="Container/VBOX/HBox/VBox/Wave"]
+margin_left = 423.0
+margin_right = 500.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 5 )
+text = "Wave: "
+
+[node name="Wave" type="Label" parent="Container/VBOX/HBox/VBox/Wave"]
+margin_left = 504.0
+margin_right = 577.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 5 )
+text = "'wave'"
 __meta__ = {
 "_edit_use_anchors_": false
 }

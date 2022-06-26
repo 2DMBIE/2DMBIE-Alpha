@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://assets/TileSets/Blocks.tres" type="TileSet" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/scenes/puck_a_panch.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/scenes/spawnpoint.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/scenes/mystery_box.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/scenes/zombieFast.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "walls_tileset_1.png 0"
@@ -92,26 +93,21 @@ script = ExtResource( 7 )
 [node name="DebugOverlay" parent="." instance=ExtResource( 5 )]
 
 [node name="Zombie" parent="." instance=ExtResource( 6 )]
-position = Vector2( 255.61, -179.286 )
-
-[node name="Zombie2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 352, -179.286 )
-
-[node name="Zombie3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 464, -178 )
+position = Vector2( -1625.31, -176.878 )
 
 [node name="Weapons" type="Node" parent="."]
 
 [node name="purchasable_weapons" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 11.3409, -188.22 )
+position = Vector2( -665.555, -392 )
 Selected_Weapon = 0
 
 [node name="purchasable_weapons2" parent="Weapons" instance=ExtResource( 9 )]
-position = Vector2( 248, -192 )
+position = Vector2( -168, -318.191 )
 Selected_Weapon = 1
 
 [node name="purchasable_weapons3" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -296, -184 )
+Selected_Weapon = 11
 
 [node name="purchasable_weapons4" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -712, -142.191 )
@@ -147,7 +143,7 @@ Selected_Weapon = 10
 
 [node name="purchasable_weapons12" parent="Weapons" instance=ExtResource( 9 )]
 position = Vector2( -440, -360 )
-Selected_Weapon = 11
+Selected_Weapon = 12
 
 [node name="Mystery box" type="Node" parent="."]
 
@@ -166,11 +162,11 @@ position = Vector2( -958.016, -257.887 )
 Selected_Perk = 1
 
 [node name="FasterShootingPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( -687.183, -248.978 )
+position = Vector2( 88, -234.8 )
 Selected_Perk = 3
 
 [node name="HealthPerk" parent="Perks" instance=ExtResource( 11 )]
-position = Vector2( 280, -513.442 )
+position = Vector2( -88, -513.442 )
 
 [node name="AmmoPerk" parent="Perks" instance=ExtResource( 11 )]
 position = Vector2( -1403.34, -250.8 )
@@ -215,6 +211,21 @@ position = Vector2( 3293.75, -1380.49 )
 [node name="enemyspawnpoint7" parent="Spawnpoints" instance=ExtResource( 17 )]
 position = Vector2( 3040, -1312 )
 
+[node name="Zombie2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 193.164, -122.787 )
+
+[node name="Zombie3" parent="." instance=ExtResource( 19 )]
+position = Vector2( 124.694, -120.542 )
+
+[node name="Zombie4" parent="." instance=ExtResource( 19 )]
+position = Vector2( 285.206, -126.154 )
+
+[node name="Zombie5" parent="." instance=ExtResource( 19 )]
+position = Vector2( 59.5911, -127.277 )
+
+[node name="Zombie6" parent="." instance=ExtResource( 19 )]
+position = Vector2( -5.51166, -127.277 )
+
 [connection signal="button_down" from="PauseMenu/Container/Continue" to="." method="_on_Continue_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="PauseMenu/Container/ExitMenu" to="." method="_on_ExitMenu_button_down"]
@@ -226,6 +237,10 @@ position = Vector2( 3040, -1312 )
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/AmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="ammoUpdate" from="Player" to="CanvasLayer/Interface/Ammo/TotalAmmoLabel" method="_on_Player_ammoUpdate"]
 [connection signal="health_updated" from="Player" to="CanvasLayer/Interface/HPbar" method="_on_Player_health_updated"]
+[connection signal="play_sound" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound"]
+[connection signal="play_sound_with_pitch" from="Player/body/chest/torso/gun" to="Player/body/chest/torso/gun/BulletPoint/sfx" method="play_sound_with_pitch"]
+[connection signal="set_camera_decay" from="Player/body/chest/torso/gun" to="Player/Pivot/CameraOffset/Camera2D" method="set_camera_decay"]
+[connection signal="set_gun_recoil_sensitivity" from="Player/body/chest/torso/gun" to="Player" method="set_gun_recoil_sensitivity"]
 
 [editable path="PauseMenu"]
 [editable path="PauseMenu/Container/Continue"]

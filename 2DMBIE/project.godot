@@ -60,6 +60,16 @@ _global_script_classes=[ {
 "path": "res://assets/scripts/guns/intervention_pap.gd"
 }, {
 "base": "Gun",
+"class": "KAR98K",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/kar98k.gd"
+}, {
+"base": "Gun",
+"class": "KAR98K_pap",
+"language": "GDScript",
+"path": "res://assets/scripts/guns/kar98k_pap.gd"
+}, {
+"base": "Gun",
 "class": "M249",
 "language": "GDScript",
 "path": "res://assets/scripts/guns/m249.gd"
@@ -155,6 +165,8 @@ _global_script_class_icons={
 "Gun": "",
 "INTERVENTION": "",
 "INTERVENTION_pap": "",
+"KAR98K": "",
+"KAR98K_pap": "",
 "M249": "",
 "M249_pap": "",
 "M4A1": "",
@@ -178,7 +190,7 @@ _global_script_class_icons={
 
 config/name="2DMBIE"
 run/main_scene="res://assets/scenes/Cutscene.tscn"
-config/icon="res://assets/sprites/icon.png"
+config/icon="res://assets/sprites/logo.png"
 
 [audio]
 

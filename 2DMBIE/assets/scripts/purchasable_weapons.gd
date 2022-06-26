@@ -21,19 +21,20 @@ var spriteM249 = preload("res://assets/sprites/guns/M249.png")
 var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50.png")
 var spriteAWP = preload("res://assets/sprites/guns/AWP.png")
 var spriteIntervention = preload("res://assets/sprites/guns/Intervention.png")
+var spriteKar98k = preload("res://assets/sprites/guns/kar98k.png")
 
-var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014, spriteM4A1, spriteAK12, spriteM60, spriteM249, spriteBARRETT50, spriteAWP, spriteIntervention]
-var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold]
-var nameArray = ["MP5", "UMP 45", "P90", "SPAS12", "XM1014", "M4A1", "AK 12", "M60", "M249", "BARRETT 50", "AWP", "INTERVENTION"]
-var priceArray = [1500, 1600, 2000, 2500, 3000, 3000, 3100, 5500, 6000, 5000, 5000, 5500]
-var scaleArray = PoolVector2Array([Vector2(1,1), Vector2(.75,.75), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(.9,.9), Vector2(.9,.9), Vector2(1,1), Vector2(.75,.75), Vector2(.75,.75)])
+var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014, spriteM4A1, spriteAK12, spriteM60, spriteM249, spriteBARRETT50, spriteAWP, spriteIntervention, spriteKar98k]
+var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold, Color.gold]
+var nameArray = ["MP5", "UMP 45", "P90", "SPAS12", "XM1014", "M4A1", "AK 12", "M60", "M249", "BARRETT 50", "AWP", "INTERVENTION", "KAR98K"]
+var priceArray = [1500, 1600, 2000, 2500, 3000, 3000, 3100, 5500, 6000, 5000, 5000, 5500, 1250]
+var scaleArray = PoolVector2Array([Vector2(1,1), Vector2(.75,.75), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(1,1), Vector2(.9,.9), Vector2(.9,.9), Vector2(1,1), Vector2(.75,.75), Vector2(.75,.75), Vector2(1,1)])
 
 var canBuy = false
 var enoughMoney = false
 onready var gunscript = get_node("../../Player/body/chest/torso/gun")
 signal play_sound(library)
 
-export(int, "MP5", "UMP45", "P90", "SPAS12", "XM1014", "M4A1", "AK12", "M60", "M249", "BARRETT50", "AWP", "INTERVENTION") var Selected_Weapon = 0 
+export(int, "MP5", "UMP45", "P90", "SPAS12", "XM1014", "M4A1", "AK12", "M60", "M249", "BARRETT50", "AWP", "INTERVENTION", "KAR98K") var Selected_Weapon = 0 
 
 #the player can buy a weapon ans sets it to the correct slot
 func _physics_process(_delta):
