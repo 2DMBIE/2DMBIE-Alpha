@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/scripts/TotalAmmoLabel.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/healthbar/progresslayer.png" type="Texture" id=2]
@@ -18,6 +18,18 @@
 [ext_resource path="res://assets/UI/Perks/FireRate.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/Perks/Health.png" type="Texture" id=17]
 [ext_resource path="res://assets/scenes/note_screen.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/UI/Fonts/OpenSans-SemiBold.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://assets/font/BLOODY.TTF" type="DynamicFontData" id=20]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 20 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 1
+outline_color = Color( 0.827451, 0.827451, 0.827451, 1 )
+extra_spacing_bottom = -10
+font_data = ExtResource( 19 )
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -57,12 +69,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -20.0
-margin_top = -7.0
+margin_top = -10.0
 margin_right = 20.0
-margin_bottom = 7.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 2 )
 text = "1000"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="WaveMeter" type="TextureProgress" parent="Interface"]
 anchor_left = 0.5
@@ -415,6 +431,21 @@ margin_bottom = 40.0
 [node name="Sprite" type="Sprite" parent="Interface/Perks/HealthPerk"]
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 17 )
+
+[node name="DebugMode" type="Label" parent="Interface"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 100.0
+margin_right = 100.0
+margin_bottom = 131.0
+grow_horizontal = 2
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.145098, 0.145098, 0.145098, 1 )
+text = "Debug Mode: 
+Restart to set a highscore again"
+align = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 

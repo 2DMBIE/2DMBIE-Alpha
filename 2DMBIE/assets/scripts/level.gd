@@ -26,6 +26,7 @@ func _ready():
 		spawnpoint.connect("zombieSpawned", self, "_on_zombieSpawned")
 	_on_zombieSpawned()
 	SpawnNote()
+	emit_signal("music", "play")
 
 func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
@@ -77,9 +78,6 @@ var waveType = 0
 var prevWaveType = 0
 
 func _on_WaveTimer_timeout(): #stats voor de enemies
-	if not music_playing: #random_round
-		emit_signal("music", "play")
-		music_playing = true
 	if Global.CurrentWaveEnemies != 0:
 		if Global.Currentwave == Global.SpecialWaveNumber:
 			Global.specialWave = true
@@ -100,7 +98,7 @@ func _on_WaveTimer_timeout(): #stats voor de enemies
 		Global.maxHealth += 100
 		Global.EnemyDamage *= 1.05
 		Global.Speed += 4
-		Global.enemiesKilled = 0 
+		Global.enemiesKilled = 0
 		
 		var noteAmount = get_tree().get_nodes_in_group("notes").size()
 		if noteAmount == 1:
@@ -117,7 +115,7 @@ func pause_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$cursor.visible = false
 	emit_signal("music", "pause")
-#	AudioServer.set_bus_mute(0, true)
+	AudioServer.set_bus_mute(0, true)
 
 func unpause_game():
 	get_tree().paused = false
@@ -175,7 +173,6 @@ func escape_options():
 				get_node("PauseMenu/Container").visible = true
 			elif is_gameOver:
 				get_node("GameOver/Container").visible = true
-			get_node("Optionsmenu/Options").visible = false
 
 
 func _on_Options_button_down():
@@ -220,6 +217,7 @@ func enemyWaveStats():
 func resetGameValues():
 	#standaard stats voor de enemies
 	Global.Score = 0
+	Global.TotalScore = 0
 	Global.MaxWaveEnemies = 4
 	Global.CurrentWaveEnemies = 0
 	Global.Currentwave = 1
@@ -229,13 +227,14 @@ func resetGameValues():
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
 	Global.noteCount = 0
+	Global.debug = false
 
 func _on_PlayAgainButton_button_down():
+	get_tree().paused = false
+	restart_game()
 	emit_signal("music", "unpause")
 	AudioServer.set_bus_mute(0, false)
-	get_tree().paused = false
 	Global.randomizeSpecialwave()
-	restart_game()
 
 
 func _on_GameOver_Options_button_down():

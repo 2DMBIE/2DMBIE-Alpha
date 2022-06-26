@@ -302,3 +302,6 @@ position = Vector2( 352, 480 )
 position = Vector2( 243.236, -124.719 )
 
 [node name="cursor" parent="." instance=ExtResource( 3 )]
+
+[connection signal="play_sound" from="logoblock" to="logoblock/sfx" method="play_sound"]
+[connection signal="play_sound" from="Zombie" to="Zombie/sfx" method="play_sound"]

@@ -27,19 +27,21 @@ var is_sliding = false
 var _is_already_crouching = false
 var running_disabled = false
 var _played_crouch_sfx = false
-var debug = false
 var falling = false
 var slideHold = false
 var groundlessjump = true
 var jumpwaspressed = false
 var canBuyMovement2 = true
 
+
 signal play_sound(library)
 
 func _ready():
 	if Settings.debugMode:
+		Global.debug = true
 		maxHealth = 5000
 	elif Global.maia:
+		Global.debug = true
 		maxHealth = 2400
 	else:
 		maxHealth = 1200
@@ -184,6 +186,7 @@ func _physics_process(_delta):
 		get_node("body/chest/torso/gun").shooting_disabled = true # disable shooting
 		is_knifing = true # disable knifing 
 		get_node("Hitbox").set_collision_mask_bit(3, false)
+		get_node("Hitbox").set_collision_mask_bit(8, false)
 		self.set_collision_mask_bit(3, false)
 		self.set_collision_mask_bit(8, false)
 		knifing_hitbox_enabled = false
@@ -359,16 +362,18 @@ func setHealth(value):
 	if health != prevHealth:
 		emit_signal("health_updated", health, maxHealth)
 		if health == 0:
-			if Settings.debugMode:
-				Global.Score = 0
+			if Global.debug:
+				Global.TotalScore = 0
 			Global.setHighscore()
 			Global.saveScore()
 			emit_signal("on_death")
 
 func _on_maxHealth_toggled():
 	if Settings.debugMode:
+		Global.debug = true
 		maxHealth = 5000
 	elif Global.maia:
+		Global.debug = true
 		maxHealth = 2400
 	elif !Settings.debugMode and !Global.maia:
 		maxHealth = 1200
@@ -457,6 +462,7 @@ func on_knife_hit(body):
 		body.Hurt(500)
 		if body.health == 0:
 			Global.Score += 100
+			Global.TotalScore += 100
 		emit_signal("play_sound", "knife_hit")
 		knifing_hitbox_enabled = false
 
@@ -471,6 +477,7 @@ func on_slide_animation_complete():
 			$AnimationTree.set("parameters/torso_reset/blend_amount", 1)
 			get_node("body/chest/torso/gun").shooting_disabled = false
 			get_node("Hitbox").set_collision_mask_bit(3, true)
+			get_node("Hitbox").set_collision_mask_bit(8, true)
 			self.set_collision_mask_bit(3, true)
 			self.set_collision_mask_bit(8, true)
 			knifing_hitbox_enabled = true
@@ -523,7 +530,3 @@ func rememberjumptime():
 func _on_MovementPerk_perkactiveMovement(canBuyMovement):
 	if canBuyMovement == false:
 		canBuyMovement2 = false
-
-
-func _on_FireRatePerk_perkactive(canBuyFasterFireRate):
-	pass # Replace with function body.

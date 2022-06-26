@@ -31,7 +31,6 @@ func _process(_delta):
 	if Global.noteCount > Global.neededNotes:
 		$VBOX/Label.text = "The zombies are now at peace..."
 	$VBOX/HBox/VBox/TotalScore/Score.text = str(Global.TotalScore)
-	$VBOX/HBox/VBox/Score/Score.text = str(Global.Score)
 	$VBOX/HBox/VBox/Wave/Wave.text = str(Global.Currentwave)
 	$VBOX/HBox/VBox/Kills/Kills.text = str(Global.totalEnemiesKilled)
 	

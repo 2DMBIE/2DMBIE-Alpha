@@ -3,7 +3,7 @@ extends Node
 signal changeScore(newScore)
 
 var Score = 0 setget setScore
-var ScoreIncrement = 100
+var ScoreIncrement = 75
 var MaxWaveEnemies = 4
 var CurrentWaveEnemies = 0
 var Currentwave = 1
@@ -16,6 +16,7 @@ var totalEnemiesKilled = 0
 var unlocked_doors = 0
 var game_active = false
 var highScore = 0
+var debug = false
 var maia = false
 var specialWave = false
 var TotalScore = 0
@@ -40,8 +41,8 @@ func loadScore():
 	saveScoreFile.close()
 
 func setHighscore():
-	if Score > highScore:
-		highScore = Score
+	if TotalScore > highScore:
+		highScore = TotalScore
 
 func saveScore():
 	var saveScoreFile = File.new()

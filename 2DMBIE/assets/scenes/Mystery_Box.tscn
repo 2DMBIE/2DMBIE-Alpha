@@ -1,7 +1,7 @@
 [gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://assets/scripts/sfx.gd" type="Script" id=1]
-[ext_resource path="res://assets/scripts/MysteryBox.gd" type="Script" id=2]
+[ext_resource path="res://assets/scripts/mystery_box.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/Lighting/light.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/guns/2DMBIE arcade machine1-sheet1.png" type="Texture" id=4]
 [ext_resource path="res://assets/sounds/arcademachine/Unsettling music box sound 2.wav" type="AudioStream" id=5]
