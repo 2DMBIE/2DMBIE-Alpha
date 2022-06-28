@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m60_holster.wav-eb9242ae06b33f9f709ef47376eb77f5.sample"
+
+[deps]
+
+source_file="res://player/weapons/m60/m60_holster.wav"
+dest_files=[ "res://.import/m60_holster.wav-eb9242ae06b33f9f709ef47376eb77f5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

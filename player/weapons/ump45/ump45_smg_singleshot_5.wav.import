@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ump45_smg_singleshot_5.wav-a0acd8c3c6fc98f7fe614d52d9e72803.sample"
+
+[deps]
+
+source_file="res://player/weapons/ump45/ump45_smg_singleshot_5.wav"
+dest_files=[ "res://.import/ump45_smg_singleshot_5.wav-a0acd8c3c6fc98f7fe614d52d9e72803.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xm1014 reload and pump.wav-82d07bf9cd0549c05911f91c220328f2.sample"
+
+[deps]
+
+source_file="res://player/weapons/xm1014_upgraded/xm1014 reload and pump.wav"
+dest_files=[ "res://.import/xm1014 reload and pump.wav-82d07bf9cd0549c05911f91c220328f2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

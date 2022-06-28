@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/unsettling_music_1.wav-574b532b78dd28cfbbccb1e4b0f0c488.sample"
+
+[deps]
+
+source_file="res://world/interactable_objects/arcade_machine/unsettling_music_1.wav"
+dest_files=[ "res://.import/unsettling_music_1.wav-574b532b78dd28cfbbccb1e4b0f0c488.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

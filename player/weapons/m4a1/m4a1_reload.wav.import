@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m4a1_reload.wav-94ee4b6923991f845cd1d5f65c388ef1.sample"
+
+[deps]
+
+source_file="res://player/weapons/m4a1/m4a1_reload.wav"
+dest_files=[ "res://.import/m4a1_reload.wav-94ee4b6923991f845cd1d5f65c388ef1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

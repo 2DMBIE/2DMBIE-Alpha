@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mp5_smg_single_shot_suppressed.wav-3fb4db7d1d84890d1f6ccd869140f769.sample"
+
+[deps]
+
+source_file="res://player/weapons/mp5_upgraded/mp5_smg_single_shot_suppressed.wav"
+dest_files=[ "res://.import/mp5_smg_single_shot_suppressed.wav-3fb4db7d1d84890d1f6ccd869140f769.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

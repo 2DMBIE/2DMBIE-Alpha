@@ -1,0 +1,11 @@
+2DMBIE-official\player\weapons\awp\ AWP SINGLESHOT 1 -> IS FROM CSGO
+2DMBIE-official\player\weapons\ak12_upgraded AK12 UPGRADED SHOOT -> IS FROM CSGO
+STARWARS LASER SOUNDS ARE ALSO COPYRIGHTED
+
+Delete -> Pathfinder Demo Tileset
+
+Make Juke A Box Official
+Juke A Box -> Optimize Spreet Sheet
+
+intervention -> sniper_bullet
+bullet2 -> shotgun_pellet

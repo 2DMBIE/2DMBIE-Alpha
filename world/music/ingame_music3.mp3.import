@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ingame_music3.mp3-6166804d41e1179f991b3fe269853322.mp3str"
+
+[deps]
+
+source_file="res://world/music/ingame_music3.mp3"
+dest_files=[ "res://.import/ingame_music3.mp3-6166804d41e1179f991b3fe269853322.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

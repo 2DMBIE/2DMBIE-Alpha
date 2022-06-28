@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xm1014_shotgun_pump.wav-8eaa80790b5886c05c46d9338788ca34.sample"
+
+[deps]
+
+source_file="res://player/weapons/xm1014_upgraded/xm1014_shotgun_pump.wav"
+dest_files=[ "res://.import/xm1014_shotgun_pump.wav-8eaa80790b5886c05c46d9338788ca34.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

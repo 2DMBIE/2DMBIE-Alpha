@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/barrett50_laser_sound.wav-8618f8ebe8200c6856383e3005cf616c.sample"
+
+[deps]
+
+source_file="res://player/weapons/barrett50_upgraded/barrett50_laser_sound.wav"
+dest_files=[ "res://.import/barrett50_laser_sound.wav-8618f8ebe8200c6856383e3005cf616c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

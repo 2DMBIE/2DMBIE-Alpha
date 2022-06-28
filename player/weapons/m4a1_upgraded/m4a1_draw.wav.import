@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m4a1_draw.wav-e6d5e7e859f59019b8d6fb94e0958fd5.sample"
+
+[deps]
+
+source_file="res://player/weapons/m4a1_upgraded/m4a1_draw.wav"
+dest_files=[ "res://.import/m4a1_draw.wav-e6d5e7e859f59019b8d6fb94e0958fd5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

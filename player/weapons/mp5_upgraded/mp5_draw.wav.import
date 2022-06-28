@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mp5_draw.wav-f112b52b9261abd0a9a8cc137a245fe1.sample"
+
+[deps]
+
+source_file="res://player/weapons/mp5_upgraded/mp5_draw.wav"
+dest_files=[ "res://.import/mp5_draw.wav-f112b52b9261abd0a9a8cc137a245fe1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

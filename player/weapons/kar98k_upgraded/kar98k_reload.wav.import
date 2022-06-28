@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/kar98k_reload.wav-9585d590d3dfec4cd55c406eadf39b76.sample"
+
+[deps]
+
+source_file="res://player/weapons/kar98k_upgraded/kar98k_reload.wav"
+dest_files=[ "res://.import/kar98k_reload.wav-9585d590d3dfec4cd55c406eadf39b76.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

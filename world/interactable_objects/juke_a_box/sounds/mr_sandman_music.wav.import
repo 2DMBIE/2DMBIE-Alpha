@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mr_sandman_music.wav-1ccaa51f0c37f778a0607e0612166e86.sample"
+
+[deps]
+
+source_file="res://world/interactable_objects/juke_a_box/sounds/mr_sandman_music.wav"
+dest_files=[ "res://.import/mr_sandman_music.wav-1ccaa51f0c37f778a0607e0612166e86.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

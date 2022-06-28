@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world/lights/light.png" type="Texture" id=1]
+[ext_resource path="res://world/lights/uv_tubelight/uv_tubelight.png" type="Texture" id=2]
+
+[node name="UV_light" type="Sprite"]
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 3.5636, -3.56348 )
+texture = ExtResource( 1 )
+color = Color( 0.713726, 0.14902, 1, 1 )
+shadow_enabled = true

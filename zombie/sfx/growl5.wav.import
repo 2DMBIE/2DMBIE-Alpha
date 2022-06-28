@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/growl5.wav-23e62c8452a864349e2a3f3e9d1b3a97.sample"
+
+[deps]
+
+source_file="res://zombie/sfx/growl5.wav"
+dest_files=[ "res://.import/growl5.wav-23e62c8452a864349e2a3f3e9d1b3a97.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

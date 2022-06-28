@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/kar98k_starwars_laser.wav-d3c1bad518811d03e411b337e8c0ac42.sample"
+
+[deps]
+
+source_file="res://player/weapons/kar98k_upgraded/kar98k_starwars_laser.wav"
+dest_files=[ "res://.import/kar98k_starwars_laser.wav-d3c1bad518811d03e411b337e8c0ac42.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

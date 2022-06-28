@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/p90_shot2.wav-02caa3c4e39983d7837c2c7fd3299f58.sample"
+
+[deps]
+
+source_file="res://player/weapons/p90/p90_shot2.wav"
+dest_files=[ "res://.import/p90_shot2.wav-02caa3c4e39983d7837c2c7fd3299f58.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

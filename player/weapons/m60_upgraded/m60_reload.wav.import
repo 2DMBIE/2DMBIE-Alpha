@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m60_reload.wav-58ae801a4bde24471d0e1e555894eea4.sample"
+
+[deps]
+
+source_file="res://player/weapons/m60_upgraded/m60_reload.wav"
+dest_files=[ "res://.import/m60_reload.wav-58ae801a4bde24471d0e1e555894eea4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

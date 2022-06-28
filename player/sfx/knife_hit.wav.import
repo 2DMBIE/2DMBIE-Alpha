@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/knife_hit.wav-23f94885a83cdb119f49be46b0e9506b.sample"
+
+[deps]
+
+source_file="res://player/sfx/knife_hit.wav"
+dest_files=[ "res://.import/knife_hit.wav-23f94885a83cdb119f49be46b0e9506b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

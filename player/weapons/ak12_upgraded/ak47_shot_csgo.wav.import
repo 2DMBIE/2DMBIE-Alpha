@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ak47_shot_csgo.wav-0b02f1729f71e6f83bd8ce2bc5e10ac7.sample"
+
+[deps]
+
+source_file="res://player/weapons/ak12_upgraded/ak47_shot_csgo.wav"
+dest_files=[ "res://.import/ak47_shot_csgo.wav-0b02f1729f71e6f83bd8ce2bc5e10ac7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

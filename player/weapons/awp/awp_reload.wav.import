@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/awp_reload.wav-a54a9d53337611cc7dae0dcac7d4b6f1.sample"
+
+[deps]
+
+source_file="res://player/weapons/awp/awp_reload.wav"
+dest_files=[ "res://.import/awp_reload.wav-a54a9d53337611cc7dae0dcac7d4b6f1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

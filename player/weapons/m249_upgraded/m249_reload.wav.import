@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m249_reload.wav-a4f90de2b8ee38b0d759d86eca05be5a.sample"
+
+[deps]
+
+source_file="res://player/weapons/m249_upgraded/m249_reload.wav"
+dest_files=[ "res://.import/m249_reload.wav-a4f90de2b8ee38b0d759d86eca05be5a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

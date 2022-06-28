@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spas12_draw.wav-f64883e52039df5ac243e586e1c9024c.sample"
+
+[deps]
+
+source_file="res://player/weapons/spas12/spas12_draw.wav"
+dest_files=[ "res://.import/spas12_draw.wav-f64883e52039df5ac243e586e1c9024c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

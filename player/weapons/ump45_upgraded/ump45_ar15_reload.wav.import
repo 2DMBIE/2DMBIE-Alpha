@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ump45_ar15_reload.wav-13b8ad5209fccd8c0f28d5794e5d49d7.sample"
+
+[deps]
+
+source_file="res://player/weapons/ump45_upgraded/ump45_ar15_reload.wav"
+dest_files=[ "res://.import/ump45_ar15_reload.wav-13b8ad5209fccd8c0f28d5794e5d49d7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

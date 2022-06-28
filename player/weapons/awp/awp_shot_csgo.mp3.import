@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/awp_shot_csgo.mp3-97aea65df798821404fecd1b2b986c77.mp3str"
+
+[deps]
+
+source_file="res://player/weapons/awp/awp_shot_csgo.mp3"
+dest_files=[ "res://.import/awp_shot_csgo.mp3-97aea65df798821404fecd1b2b986c77.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

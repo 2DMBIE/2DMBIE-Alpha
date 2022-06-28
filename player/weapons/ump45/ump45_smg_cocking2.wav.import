@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ump45_smg_cocking2.wav-0fc670a8b89237ac97e23cf5a9cfc526.sample"
+
+[deps]
+
+source_file="res://player/weapons/ump45/ump45_smg_cocking2.wav"
+dest_files=[ "res://.import/ump45_smg_cocking2.wav-0fc670a8b89237ac97e23cf5a9cfc526.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

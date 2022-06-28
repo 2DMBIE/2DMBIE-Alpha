@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/intervention_sniper_holster.wav-f91f560fbd30dda2de4f079e9633e54a.sample"
+
+[deps]
+
+source_file="res://player/weapons/intervention/intervention_sniper_holster.wav"
+dest_files=[ "res://.import/intervention_sniper_holster.wav-f91f560fbd30dda2de4f079e9633e54a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

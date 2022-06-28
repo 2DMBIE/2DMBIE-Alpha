@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ak12_draw1.wav-10fb55db6ff869d7014fd3c955aa588e.sample"
+
+[deps]
+
+source_file="res://player/weapons/ak12_upgraded/ak12_draw1.wav"
+dest_files=[ "res://.import/ak12_draw1.wav-10fb55db6ff869d7014fd3c955aa588e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

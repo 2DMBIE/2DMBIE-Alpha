@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/growl4.wav-ea23fd3677207191a7788b24321ac709.sample"
+
+[deps]
+
+source_file="res://zombie/sfx/growl4.wav"
+dest_files=[ "res://.import/growl4.wav-ea23fd3677207191a7788b24321ac709.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

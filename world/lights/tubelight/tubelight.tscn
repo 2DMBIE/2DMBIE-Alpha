@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world/lights/light_cone_tl_feathered_half.png" type="Texture" id=1]
+[ext_resource path="res://world/lights/tubelight/tubelight.png" type="Texture" id=2]
+
+[node name="TL_buis" type="Sprite"]
+scale = Vector2( 2.32882, 1.74808 )
+z_index = -20
+texture = ExtResource( 2 )
+
+[node name="TL_light" type="Light2D" parent="."]
+position = Vector2( 0.320281, -11.1167 )
+scale = Vector2( 0.200051, 0.148258 )
+z_index = -20
+texture = ExtResource( 1 )
+energy = 0.5
+shadow_enabled = true

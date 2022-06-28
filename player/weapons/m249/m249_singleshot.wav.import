@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/m249_singleshot.wav-29bb1f00e3d0a1b974abb2818c8c9e9e.sample"
+
+[deps]
+
+source_file="res://player/weapons/m249/m249_singleshot.wav"
+dest_files=[ "res://.import/m249_singleshot.wav-29bb1f00e3d0a1b974abb2818c8c9e9e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

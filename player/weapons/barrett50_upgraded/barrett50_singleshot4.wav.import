@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/barrett50_singleshot4.wav-1127cbc7cd0d1fc9c3625dcb88e03480.sample"
+
+[deps]
+
+source_file="res://player/weapons/barrett50_upgraded/barrett50_singleshot4.wav"
+dest_files=[ "res://.import/barrett50_singleshot4.wav-1127cbc7cd0d1fc9c3625dcb88e03480.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
