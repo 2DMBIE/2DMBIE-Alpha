@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var pivotScript = preload("res://assets/scripts/pivot.gd")
+var pivotScript = preload("res://player/scripts/pivot.gd")
 
 var velocity = Vector2(0,0)
 

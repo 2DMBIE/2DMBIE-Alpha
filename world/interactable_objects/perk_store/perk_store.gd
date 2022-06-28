@@ -2,10 +2,10 @@ extends Node
 
 
 
-var spriteHealthPerk = preload("res://assets/UI/Perks/Health.png")
-var spriteMovementPerk = preload("res://assets/UI/Perks/Speed.png")
-var spriteReloadPerk = preload ("res://assets/UI/Perks/Reload.png")
-var spriteFasterShootingPerk = preload ("res://assets/UI/Perks/FireRate.png")
+var spriteHealthPerk = preload("res://gui/in_game_ui/perks/health.png")
+var spriteMovementPerk = preload("res://gui/in_game_ui/perks/speed.png")
+var spriteReloadPerk = preload ("res://gui/in_game_ui/perks/reload.png")
+var spriteFasterShootingPerk = preload ("res://gui/in_game_ui/perks/firerate.png")
 var spriteArray = [spriteHealthPerk, spriteMovementPerk, spriteReloadPerk, spriteFasterShootingPerk]
 var healthColor = Color(0.725490, 0, 0, 1)
 var movementColor = Color(1, 0.415686, 0, 1)

@@ -1,6 +1,6 @@
 extends Node2D
 
-var options_menu = preload("res://assets/UI/OptionsMenu.tscn").instance()
+var options_menu = preload("res://gui/options_menu/options_menu.tscn").instance()
 
 var master_bus = AudioServer.get_bus_index("Master")
 var music_bus = AudioServer.get_bus_index("Music")
@@ -43,7 +43,7 @@ func _on_PlayButton_button_down():
 	Global.enemiesKilled = 0 
 	Global.unlocked_doors = 0
 	Global.debug = false
-	var _x = get_tree().change_scene("res://assets/scenes/transitionScene.tscn")
+	var _x = get_tree().change_scene("res://gui/loading_screen/loading_screen.tscn")
 
 
 func _on_OptionsButton_button_down():

@@ -25,9 +25,9 @@ var getClosestPoint
 var showLines = false
 
 # Sprite of pathfinding points
-const FACE = preload("res://assets/scenes/face.tscn")
+const FACE = preload("res://zombie/scenes/face.tscn")
 
-const ammoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+const ammoPouch = preload("res://world/interactable_objects/ammo_pouch/ammo_pouch.tscn")
 var output
 var cache_file_path = "user://pathfinding_cache.ivar"
 

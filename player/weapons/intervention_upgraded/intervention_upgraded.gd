@@ -6,14 +6,14 @@ func _init():
 	name = "Interventionpap" # The name of the gun.
 	offset = Vector2(23.544,-5.8) # The position of the gun.
 	scale = Vector2(.75,.75) # The scale of the gun. Default Scale 1 on 1: Vector2(1,1)
-	texture = load("res://assets/sprites/guns/Intervention_puck_a_panch.png") # The path of the sprite gun.
+	texture = load("res://player/weapons/intervention_upgraded/intervention_upgraded.png") # The path of the sprite gun.
 
 	bulletpoint = Vector2(112.888, -10.474) # Position of the bulletpoint.
 	bulletdelay = float(1.8) # The delay between each bullet. [0.1, 0.2]
 
-	_bullet = Bullet.new(float(2700), float(1700), "res://assets/scenes/bullet_intervention.tscn", int(7)) 
+	_bullet = Bullet.new(float(2700), float(1700), "res://player/weapons/all_bullet_scenes/sniper_bullet/sniper_bullet.tscn", int(7)) 
 	# The scene of the bullet. You can create it with: Bullet.new(bullet_damage [0, 500], bullet_speed [100, 1250], scene_path)
-	_muzzleflash = load("res://assets/scenes/muzzleflash.tscn") # The scene of the muzzleflash
+	_muzzleflash = load("res://player/weapons/all_bullet_scenes/muzzleflash/muzzleflash.tscn") # The scene of the muzzleflash
 	
 	camera_shake = float(1) # Camera shake strength [0, 1] Higher = stronger.
 	camera_decay = float(0.9) # How quickly the shaking of the camera stops [0, 1]. (can be higher than 1 but not lower then zero)

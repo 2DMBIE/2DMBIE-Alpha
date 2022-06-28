@@ -24,8 +24,8 @@ var reload_time: float
 
 # Class Constructor
 func _init(gun_name = "gun", gun_offset = Vector2(0,0), gun_scale = Vector2(1,1), 
-path = "", bpoint = Vector2(0,0), bdelay = float(2), bullet_i = Bullet.new(float(500), float(750), "res://assets/scenes/bullet.tscn"), 
-muzzleflash = load("res://assets/scenes/muzzleflash.tscn"),
+path = "", bpoint = Vector2(0,0), bdelay = float(2), bullet_i = Bullet.new(float(500), float(750), "res://player/weapons/all_bullet_scenes/normal_bullet/bullet.tscn"), 
+muzzleflash = load("res://player/weapons/all_bullet_scenes/muzzleflash/muzzleflash.tscn"),
  c_shake = float(0.25), c_decay = float(1.7), g_recoil = float(1), g_maxclipAmmo = int(44), g_totalAmmo = int(300), g_reload_time = float(2.5)):
 	
 	name = gun_name # The name of the gun.

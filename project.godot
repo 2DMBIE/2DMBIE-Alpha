@@ -189,7 +189,7 @@ _global_script_class_icons={
 [application]
 
 config/name="2DMBIE"
-run/main_scene="res://gui/main_menu_old/scenes/menu_button.tscn"
+run/main_scene="res://gui/main_menu_old/main_menu_old.tscn"
 config/icon="res://gui/project_logo.png"
 
 [audio]

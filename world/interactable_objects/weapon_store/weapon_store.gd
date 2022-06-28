@@ -1,27 +1,27 @@
 extends Node2D
 
 #smg
-var spriteMP5 = preload("res://assets/sprites/guns/mp5.png")
-var spriteUMP45 = preload("res://assets/sprites/guns/UMP45.png")
-var spriteP90 = preload("res://assets/sprites/guns/p90.png")
+var spriteMP5 = preload("res://player/weapons/mp5/mp5.png")
+var spriteUMP45 = preload("res://player/weapons/ump45/ump45.png")
+var spriteP90 = preload("res://player/weapons/p90/p90.png")
 
 #shotgun
-var spriteSPAS12 = preload("res://assets/sprites/guns/spas12.png")
-var spriteXM1014 = preload("res://assets/sprites/guns/XM1014.png")
+var spriteSPAS12 = preload("res://player/weapons/spas12/spas12.png")
+var spriteXM1014 = preload("res://player/weapons/xm1014/xm1014.png")
 
 #assault rifle
-var spriteM4A1 = preload("res://assets/sprites/guns/m4a1.png")
-var spriteAK12 = preload("res://assets/sprites/guns/ak12.png")
+var spriteM4A1 = preload("res://player/weapons/m4a1/m4a1.png")
+var spriteAK12 = preload("res://player/weapons/ak12/ak12.png")
 
 #LMG
-var spriteM60 = preload("res://assets/sprites/guns/M60.png")
-var spriteM249 = preload("res://assets/sprites/guns/M249.png")
+var spriteM60 = preload("res://player/weapons/m60/m60.png")
+var spriteM249 = preload("res://player/weapons/m249/m249.png")
 
 #sniper
-var spriteBARRETT50 = preload("res://assets/sprites/guns/barrett50.png")
-var spriteAWP = preload("res://assets/sprites/guns/AWP.png")
-var spriteIntervention = preload("res://assets/sprites/guns/Intervention.png")
-var spriteKar98k = preload("res://assets/sprites/guns/kar98k.png")
+var spriteBARRETT50 = preload("res://player/weapons/barrett50/barrett50.png")
+var spriteAWP = preload("res://player/weapons/awp/awp.png")
+var spriteIntervention = preload("res://player/weapons/intervention/intervention.png")
+var spriteKar98k = preload("res://player/weapons/kar98k/kar98k.png")
 
 var spriteArray = [spriteMP5, spriteUMP45, spriteP90, spriteSPAS12, spriteXM1014, spriteM4A1, spriteAK12, spriteM60, spriteM249, spriteBARRETT50, spriteAWP, spriteIntervention, spriteKar98k]
 var colorArray = [Color.limegreen, Color.limegreen, Color.limegreen, Color.turquoise, Color.turquoise, Color.red, Color.red, Color.purple, Color.purple, Color.gold, Color.gold, Color.gold, Color.gold]

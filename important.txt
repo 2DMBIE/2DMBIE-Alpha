@@ -9,3 +9,7 @@ Juke A Box -> Optimize Spreet Sheet
 
 intervention -> sniper_bullet
 bullet2 -> shotgun_pellet
+
+Gun Constructor is called, while not really needed
+
+Double Gun bugged. Same instance twice in one array.

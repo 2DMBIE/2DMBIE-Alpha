@@ -322,12 +322,12 @@ color = Color( 1, 0.819608, 0, 1 )
 
 [node name="AnimatedSpriteProcessing" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
-frame = 18
+frame = 13
 playing = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 70 )
-frame = 9
+frame = 28
 playing = true
 
 [node name="Timer" type="Timer" parent="."]

@@ -1,6 +1,6 @@
 extends Node2D
 
-var AmmoPouch = preload("res://assets/scenes/ammoPouch.tscn")
+var AmmoPouch = preload("res://world/interactable_objects/ammo_pouch/ammo_pouch.gd")
 
 var is_paused = false
 var is_gameOver = false
@@ -32,7 +32,7 @@ func _process(_delta):
 	var ammobagamount = get_tree().get_nodes_in_group("ammo").size()
 	if ammobagamount > 1:
 		get_tree().get_nodes_in_group("ammo")[0].queue_free()
-	if get_node_or_null("Player") != null:
+	if get_node_or_null("Player") != null and GraphRandomPoint != null:
 		var MarkerPos = $Player/MarkerPos.global_position
 		var rotationDegree = (GraphRandomPoint.angle_to_point(MarkerPos))
 		$Player/MarkerPos.rotation = (rotationDegree)
@@ -147,13 +147,13 @@ func _on_ExitMenu_button_down():
 	
 	Global.game_active = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var _x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+	var _x = get_tree().change_scene("res://gui/main_menu_old/main_menu_old.gd")
 
 
 func _on_ExitOptions_button_down():
 	$Optionsmenu/Options.saveSettings()
 	if get_tree().get_current_scene().get_name() == 'Optionsmenu':
-		var x = get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		var x = get_tree().change_scene("res://gui/main_menu_old/main_menu_old.tscn")
 		if x != OK:
 			print("ERROR: ", x)
 	else:
@@ -179,7 +179,7 @@ func _on_Options_button_down():
 	get_node("Optionsmenu/Options").visible = true
 	get_node("PauseMenu/Container").visible = false
 
-var enemyhead = preload("res://assets/scenes/enemyhead.tscn")
+var enemyhead = preload("res://zombie/scenes/rolling_zombie_head.tscn")
 
 func rollinghead(bulletPosition, zombie):
 	var enemyHead = enemyhead.instance()
@@ -244,7 +244,7 @@ func _on_GameOver_Options_button_down():
 var allowNotes = true
 
 func SpawnNote():
-	var noteScene = preload("res://assets/scenes/stickyNote.tscn")
+	var noteScene = preload("res://world/interactable_objects/sticky_note/sticky_note.tscn")
 	var Notescene = noteScene.instance()
 	var notePosition
 	if allowNotes:
