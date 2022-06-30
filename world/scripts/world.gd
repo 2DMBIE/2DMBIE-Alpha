@@ -1,6 +1,6 @@
 extends Node2D
 
-var AmmoPouch = preload("res://world/interactable_objects/ammo_pouch/ammo_pouch.gd")
+var AmmoPouch = preload("res://world/interactable_objects/ammo_pouch/ammo_pouch.tscn")
 
 var is_paused = false
 var is_gameOver = false

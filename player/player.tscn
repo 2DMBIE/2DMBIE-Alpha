@@ -3570,6 +3570,7 @@ bus = "Soundeffects"
 stream = ExtResource( 90 )
 bus = "Soundeffects"
 
+[connection signal="play_sound" from="." to="player-sfx" method="play_sound"]
 [connection signal="ammo_ui" from="body/chest/torso/gun" to="." method="on_ammo_ui_update"]
 [connection signal="is_shooting" from="body/chest/torso/gun" to="." method="_on_gun_is_shooting"]
 [connection signal="no_aim_shoot" from="body/chest/torso/gun" to="." method="_on_no_aim_shoot"]

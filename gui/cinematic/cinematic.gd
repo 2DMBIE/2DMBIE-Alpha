@@ -21,5 +21,5 @@ func _on_Timer_timeout():
 func _input(event):
 	if event is InputEvent and !event is InputEventMouseMotion and !event is InputEventJoypadMotion and !event is InputEventScreenDrag:
 	# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://assets/scenes/mainmenu.tscn")
+		get_tree().change_scene("res://gui/main_menu_old/main_menu_old.tscn")
 
